@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="template">
+	<name>Astro Isha 2017</name>
+	<creationDate>2016-12-20</creationDate>
+	<author>Rohan Desai</author>
+	<authorEmail>kopnite@gmail.com</authorEmail>
+	<authorUrl>https://www.astroisha.com</authorUrl>
+	<license>GNU/GPL</license>
+	<version>1.0.0</version>
+	<description>Bootstrap 4.0 Template</description>
+	<files>
+		<filename>index.php</filename>
+		<filename>templateDetails.xml</filename>
+		<folder>images</folder>
+		<folder>css</folder>
+	</files>
+	<positions>
+		<position>breadcrumb</position>
+		<position>articleslider</position>
+		<position>jbanner</position>
+		<position>topmenu</position>
+		<position>userlogin</position>
+		<position>relatedarticles</position>
+		<position>footer</position>
+		<position>footer2</position>
+		<position>sidebar</position>
+		<position>socialplugins</position>
+		<position>quesmenu</position>
+	</positions>
+</extension>

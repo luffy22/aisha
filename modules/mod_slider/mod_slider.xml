@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension
+	type="module"
+	version="3.1"
+	client="site"
+	method="upgrade">
+	<name>Mod Slider</name>
+	<author>Rohan Desai</author>
+	<creationDate>December 2016</creationDate>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>admin@astroisha.com</authorEmail>
+	<version>1.0</version>
+	<description>Bootstrap Based Slider</description>
+	<files>
+		<filename module="mod_slider">mod_slider.php</filename>
+		<folder>tmpl</folder>
+		<filename>helper.php</filename>
+		<filename>index.html</filename>		
+		<filename>mod_slider.xml</filename>
+	</files>
+        <config>
+            <fields name="params">
+                <fieldset name="basic">
+                    <field
+                        name="choice"
+                        type="radio"
+                        default=""
+                        label="Show Category or Article ID"
+                        description="Option to choose between article ID and full category">
+                        <option
+                            value="category" checked="checked">Category</option>
+                        <option
+                            value="article">Article</option>
+                    </field>
+                    <field
+                        name="catid"
+                        type="category"
+                        extension="com_content"
+                        multiple="true"
+                        size="12"
+                        default=""
+                        label="JCATEGORY"
+                        description="MOD_LATEST_NEWS_FIELD_CATEGORY_DESC" >
+                        <option value="">JOPTION_ALL_CATEGORIES</option>
+                    </field>
+                    
+                    <field name ="text" label="Enter Article ID's" description="Enter Article ID's followed by comma">
+                        
+                    </field>
+                </fieldset>
+               </fields>
+        </config>
+</extension>

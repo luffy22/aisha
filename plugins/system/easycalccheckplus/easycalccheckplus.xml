@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="plugin" version="3.2" group="system" method="upgrade">
+    <name>PLG_ECC</name>
+    <version>3.1.4</version>
+    <creationDate>2018-01-31</creationDate>
+    <license>http://www.gnu.org/licenses/gpl</license>
+    <copyright>Copyright 2018 Viktor Vogel. All rights reserved.</copyright>
+    <author>Viktor Vogel</author>
+    <authoremail>admin@kubik-rubik.de</authoremail>
+    <authorurl>https://joomla-extensions.kubik-rubik.de/</authorurl>
+    <description>PLG_ECC_XML_DESCRIPTION</description>
+    <files>
+        <filename plugin="easycalccheckplus">easycalccheckplus.php</filename>
+        <filename plugin="easycalccheckplus">index.html</filename>
+        <folder plugin="easycalccheckplus">bottrap</folder>
+        <folder plugin="easycalccheckplus">easycalccheckplus</folder>
+        <folder plugin="easycalccheckplus">fields</folder>
+    </files>
+    <languages folder="language">
+        <language tag="en-GB">en-GB/en-GB.plg_system_easycalccheckplus.ini</language>
+        <language tag="en-GB">en-GB/en-GB.plg_system_easycalccheckplus.sys.ini</language>
+        <language tag="de-DE">de-DE/de-DE.plg_system_easycalccheckplus.ini</language>
+        <language tag="de-DE">de-DE/de-DE.plg_system_easycalccheckplus.sys.ini</language>
+    </languages>
+    <updateservers>
+        <server type="extension" priority="1" name="PLG_ECC">https://check.kubik-rubik.de/updates/ecc_legacy.xml</server>
+    </updateservers>
+    <config>
+        <fields name="params" addfieldpath="/plugins/system/easycalccheckplus/fields">
+            <fieldset name="settings">
+                <field type="krdonationcodecheck" />
+                <field type="krtitle" name="spacer_internalchecks_output" label="PLG_ECC_SPACER_INTERNALCHECKS_OUTPUT" />
+                <field name="type_calc" type="list" default="1" label="PLG_ECC_CALCCHECK" description="PLG_ECC_CALCCHECK_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="operator" type="list" default="2" label="PLG_ECC_OPERATOR" description="PLG_ECC_OPERATOR_DESC">
+                    <option value="0">+</option>
+                    <option value="1">-</option>
+                    <option value="2">PLG_ECC_RANDOM</option>
+                </field>
+                <field name="operand" type="list" default="2" label="PLG_ECC_OPERAND" description="PLG_ECC_OPERAND_DESC">
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </field>
+                <field name="negative" type="list" default="0" label="PLG_ECC_NEGATIVE" description="PLG_ECC_NEGATIVE_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="converttostring" type="list" default="0" label="PLG_ECC_CONVERT" description="PLG_ECC_CONVERT_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="max_value" type="text" default="20" label="PLG_ECC_MAXIMUMVALUE" description="PLG_ECC_MAXIMUMVALUE_DESC" />
+                <field name="type_hidden" type="list" default="1" label="PLG_ECC_HIDDENFIELD" description="PLG_ECC_HIDDENFIELD_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="type_time" type="list" default="1" label="PLG_ECC_TIMEHIDDEN" description="PLG_ECC_TIMEHIDDEN_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="type_time_sec" type="text" default="5" label="PLG_ECC_TIMEHIDDENSEC" description="PLG_ECC_TIMEHIDDENSEC_DESC" />
+                <field name="question" type="list" default="0" label="PLG_ECC_QUESTION" description="PLG_ECC_QUESTION_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="question_q" type="text" default="" size="40" label="PLG_ECC_QUESTIONQ" description="PLG_ECC_QUESTIONQ_DESC" />
+                <field name="question_a" type="text" default="" size="40" label="PLG_ECC_QUESTIONA" description="PLG_ECC_QUESTIONA_DESC" />
+                <field type="krtitle" name="spacer_recaptcha" label="PLG_ECC_SPACER_RECAPTCHA" />
+                <field name="recaptcha" type="list" default="0" label="PLG_ECC_RECAPTCHA" description="PLG_ECC_RECAPTCHA_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="recaptcha_theme" type="list" default="0" label="PLG_ECC_RECAPTCHATHEME" description="PLG_ECC_RECAPTCHATHEME_DESC">
+                    <option value="0">Light</option>
+                    <option value="1">Dark</option>
+                </field>
+                <field name="recaptcha_publickey" type="text" default="" size="40" label="PLG_ECC_RECAPTCHAPUBLICKEY" description="PLG_ECC_RECAPTCHAPUBLICKEY_DESC" />
+                <field name="recaptcha_privatekey" type="text" default="" size="40" label="PLG_ECC_RECAPTCHAPRIVATEKEY" description="PLG_ECC_RECAPTCHAPRIVATEKEY_DESC" />
+            </fieldset>
+            <fieldset name="PLG_ECC_EXTRA">
+                <field type="krdonationcodecheck" />
+                <field type="krtitle" name="spacer_core" label="PLG_ECC_SPACER_CORE" />
+                <field name="user_reg" type="list" default="1" label="PLG_ECC_USERREGISTRATION" description="PLG_ECC_USERREGISTRATION_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="user_login" type="list" default="1" label="PLG_ECC_USERLOGIN" description="PLG_ECC_USERLOGIN_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="user_login_attempts" type="text" default="3" size="10" label="PLG_ECC_USERLOGINATTEMPTS" description="PLG_ECC_USERLOGINATTEMPTS_DESC" />
+                <field name="contact" type="list" default="1" label="PLG_ECC_CONTACTFORM" description="PLG_ECC_CONTACTFORM_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field type="krtitle" name="spacer_3rdparty" label="PLG_ECC_SPACER_3RDPARTY" />
+                <field name="aicontactsafe" type="list" default="0" label="PLG_ECC_AICONTACTSAFE" description="PLG_ECC_AICONTACTSAFE_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="alfcontact" type="list" default="0" label="PLG_ECC_ALFCONTACT" description="PLG_ECC_ALFCONTACT_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="communitybuilder" type="list" default="0" label="PLG_ECC_COMMUNITYBUILDER" description="PLG_ECC_COMMUNITYBUILDER_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="dfcontact" type="list" default="0" label="PLG_ECC_DFCONTACT" description="PLG_ECC_DFCONTACT_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="easybookreloaded" type="list" default="0" label="PLG_ECC_EASYBOOKRELOADED" description="PLG_ECC_EASYBOOKRELOADED_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="foxcontact" type="list" default="0" label="PLG_ECC_FOXCONTACT" description="PLG_ECC_FOXCONTACT_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="flexicontact" type="list" default="0" label="PLG_ECC_FLEXICONTACT" description="PLG_ECC_FLEXICONTACT_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="flexicontactplus" type="list" default="0" label="PLG_ECC_FLEXICONTACTPLUS" description="PLG_ECC_FLEXICONTACTPLUS_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="iproperty" type="list" default="0" label="PLG_ECC_IPROPERTY" description="PLG_ECC_IPROPERTY_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="jomsocial" type="list" default="0" label="PLG_ECC_JOMSOCIAL" description="PLG_ECC_JOMSOCIAL_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="kunena" type="list" default="0" label="PLG_ECC_KUNENA" description="PLG_ECC_KUNENA_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="phocaguestbook" type="list" default="0" label="PLG_ECC_PHOCAGUESTBOOK" description="PLG_ECC_PHOCAGUESTBOOK_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="virtuemart" type="list" default="0" label="PLG_ECC_VIRTUEMART" description="PLG_ECC_VIRTUEMART_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field type="krtitle" name="spacer_output" label="PLG_ECC_SPACER_OUTPUT" />
+                <field name="autofill_values" type="list" default="1" label="PLG_ECC_KEEPVALUES" description="PLG_ECC_KEEPVALUES_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="warn_ref" type="list" default="0" label="PLG_ECC_WARNINGREFERENCE" description="PLG_ECC_WARNINGREFERENCE_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="encode" type="list" default="1" label="PLG_ECC_ENCODE" description="PLG_ECC_ENCODE_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="onlyguests" type="list" default="1" label="PLG_ECC_ONLYGUESTS" description="PLG_ECC_ONLYGUESTS_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="poweredby" type="list" default="1" label="PLG_ECC_POWEREDBY" description="PLG_ECC_POWEREDBY_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="string_alternative" type="textarea" default="" filter="raw" label="PLG_ECC_STRINGALTERNATIVE" description="PLG_ECC_STRINGALTERNATIVE_DESC" rows="3" cols="25" />
+                <field name="custom_call" type="list" default="0" label="PLG_ECC_CUSTOMCALL" description="PLG_ECC_CUSTOMCALL_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field type="krtitle" name="spacer_backend" label="PLG_ECC_SPACER_BACKEND" />
+                <field name="backendprotection" type="list" default="0" label="PLG_ECC_BACKENDPROTECTION" description="PLG_ECC_BACKENDPROTECTION_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="token" type="text" default="" label="PLG_ECC_TOKEN" description="PLG_ECC_TOKEN_DESC" />
+                <field name="urlfalsetoken" type="text" default="" size="40" label="PLG_ECC_URLFALSETOKEN" description="PLG_ECC_URLFALSETOKEN_DESC" />
+                <field type="krtitle" name="spacer_internalchecks" label="PLG_ECC_SPACER_INTERNALCHECKS" />
+                <field name="sqlinjection-lfi" type="list" default="0" label="PLG_ECC_SQLINJECTIONANDLOCALFILEINCLUSION" description="PLG_ECC_SQLINJECTIONANDLOCALFILEINCLUSION_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+            </fieldset>
+            <fieldset name="PLG_ECC_ANTISPAMSERVICES">
+                <field type="krdonationcodecheck" />
+                <field type="krtitle" name="spacer_antispam_noregistration" label="PLG_ECC_SPACER_ANTISPAM_NOREGISTRATION" />
+                <field name="stopforumspam" type="list" default="0" label="PLG_ECC_STOPFORUMSPAM" description="PLG_ECC_STOPFORUMSPAM_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field type="krtitle" name="spacer_antispam_freeregistration" label="PLG_ECC_SPACER_ANTISPAM_FREEREGISTRATION" />
+                <field name="honeypot" type="list" default="0" label="PLG_ECC_HONEYPOT" description="PLG_ECC_HONEYPOT_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="honeypot_key" type="text" default="" label="PLG_ECC_HONEYPOTKEY" description="PLG_ECC_HONEYPOTKEY_DESC" />
+                <field name="akismet" type="list" default="0" label="PLG_ECC_AKISMET" description="PLG_ECC_AKISMET_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="akismet_key" type="text" default="" label="PLG_ECC_AKISMETKEY" description="PLG_ECC_AKISMETKEY_DESC" />
+                <field name="mollom" type="list" default="0" label="PLG_ECC_MOLLOM" description="PLG_ECC_MOLLOM_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="mollom_publickey" type="text" default="" size="40" label="PLG_ECC_MOLLOMPUBLICKEY" description="PLG_ECC_MOLLOMPUBLICKEY_DESC" />
+                <field name="mollom_privatekey" type="text" default="" size="40" label="PLG_ECC_MOLLOMPRIVATEKEY" description="PLG_ECC_MOLLOMPRIVATEKEY_DESC" />
+                <field name="botscout" type="list" default="0" label="PLG_ECC_BOTSCOUT" description="PLG_ECC_BOTSCOUT_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="botscout_key" type="text" default="" label="PLG_ECC_BOTSCOUTKEY" description="PLG_ECC_BOTSCOUTKEY_DESC" />
+                <field type="krtitle" name="spacer_antispam_bottrap" label="PLG_ECC_SPACER_ANTISPAM_BOTTRAPDEFAULT" />
+                <field name="bottrap" type="list" default="0" label="PLG_ECC_BOTTRAP" description="PLG_ECC_BOTTRAP_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="btWhitelistIP" type="textarea" default="" label="PLG_ECC_BTWHITELISTIP" description="PLG_ECC_BTWHITELISTIP_DESC" rows="3" cols="25" />
+                <field name="btWhitelistIPRange" type="textarea" default="" label="PLG_ECC_BTWHITELISTIPRANGE" description="PLG_ECC_BTWHITELISTIPRANGE_DESC" rows="3" cols="25" />
+                <field name="btWhitelistUA" type="textarea" default="" label="PLG_ECC_BTWHITELISTUA" description="PLG_ECC_BTWHITELISTUA_DESC" rows="3" cols="25" />
+                <field name="btBlacklistIP" type="textarea" default="" label="PLG_ECC_BTBLACKLISTIP" description="PLG_ECC_BTBLACKLISTIP_DESC" rows="3" cols="25" />
+                <field name="btBlacklistIPRange" type="textarea" default="" label="PLG_ECC_BTBLACKLISTIPRANGE" description="PLG_ECC_BTBLACKLISTIPRANGE_DESC" rows="3" cols="25" />
+                <field name="btBlacklistUA" type="textarea" default="" label="PLG_ECC_BTBLACKLISTUA" description="PLG_ECC_BTBLACKLISTUA_DESC" rows="3" cols="25" />
+            </fieldset>
+            <fieldset name="donation">
+                <field type="krdonationcodecheck" name="donation" />
+                <field name="donation_code" type="text" default="" size="40" label="KR_DONATION_CODE" description="KR_DONATION_CODE_DESC" />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

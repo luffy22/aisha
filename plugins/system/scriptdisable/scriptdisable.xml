@@ -1,0 +1,16 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+<extension version="3.1" type="plugin" group="system">
+	<name>plg_system_scriptdisable</name>
+	<author>Rohan Desai</author>
+	<creationDate>January 2017</creationDate>
+	<licence>GNU General Public License version 2 or later</licence>
+	<authorEmail>kopnite@gmail.com</authorEmail>
+	<authorUrl>https://www.facebook.com/rohandesai22</authorUrl>
+	<version>1.0</version>
+	<description>Disable Startup Scripts</description>
+	<files>
+		<filename plugin="scriptdisable">scriptdisable.php</filename>
+		<filename>scriptdisable.xml</filename>
+		<filename>index.html</filename>
+	</files>
+</extension>

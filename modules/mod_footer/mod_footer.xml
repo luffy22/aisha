@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1.0" client="site" method="upgrade">
+    <name>AstroIsha Footer</name>
+    <author>Mugiwara Luffy</author>
+    <version>1.0</version>
+    <description>Module for footer links</description>
+    <files>
+        <filename>mod_footer.xml</filename>
+        <filename module="mod_footer">mod_footer.php</filename>
+        <filename>index.html</filename>
+        <filename>helper.php</filename>
+        <filename>tmpl/default.php</filename>
+        <filename>tmpl/index.html</filename>
+    </files>
+    <config>
+    </config>
+</extension>

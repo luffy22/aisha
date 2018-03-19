@@ -1,0 +1,9 @@
+[07-Apr-2017 07:05:48 Etc/GMT] PHP Notice:  Undefined variable: server in /home/astroxou/public_html/vendor/executepayment.php on line 42
+[01-Aug-2017 06:51:22 Etc/GMT] PHP Notice:  Undefined variable: server in /home/astroxou/public_html/vendor/executepayment.php on line 42
+[27-Aug-2017 15:04:16 Etc/GMT] PHP Fatal error:  Uncaught exception 'PayPal\Exception\PayPalConnectionException' with message 'Got Http response code 400 when accessing https://api.paypal.com/v1/payments/payment/PAY-2TS660925E097654DLGRN55I/execute.' in /home/astroxou/public_html/vendor/paypal/rest-api-sdk-php/lib/PayPal/Core/PayPalHttpConnection.php:174
+Stack trace:
+#0 /home/astroxou/public_html/vendor/paypal/rest-api-sdk-php/lib/PayPal/Transport/PayPalRestCall.php(74): PayPal\Core\PayPalHttpConnection->execute('{"payer_id":"BA...')
+#1 /home/astroxou/public_html/vendor/paypal/rest-api-sdk-php/lib/PayPal/Common/PayPalResourceModel.php(102): PayPal\Transport\PayPalRestCall->execute(Array, '/v1/payments/pa...', 'POST', '{"payer_id":"BA...', NULL)
+#2 /home/astroxou/public_html/vendor/paypal/rest-api-sdk-php/lib/PayPal/Api/Payment.php(653): PayPal\Common\PayPalResourceModel::executeCall('/v1/payments/pa...', 'POST', '{"payer_id":"BA...', NULL, Object(PayPal\Rest\ApiContext), NULL)
+#3 /home/astroxou/public_html/vendor/executepayment.php(22): PayPal\Api\Payment-> in /home/astroxou/public_html/vendor/paypal/rest-api-sdk-php/lib/PayPal/Core/PayPalHttpConnection.php on line 174
+[01-Jan-2018 06:11:03 Etc/GMT] PHP Notice:  Undefined variable: server in /home/astroxou/public_html/vendor/executepayment.php on line 42
