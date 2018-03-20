@@ -19,47 +19,25 @@ class HoroscopeModelLagna extends JModelItem
         $lat            = $user_details['lat'];
         $tmz            = $user_details['tmz'];
         $dst            = $user_details['dst'];
+        $uniq_id        = uniqid('horo_');
+        
         $now            = date('Y-m-d_H:i:s');
         $db             = JFactory::getDbo();  // Get db connection
         $query          = $db->getQuery(true);
-        $columns        = array('fname','gender','dob','tob','pob','lon','lat','timezone','dst','query_date');
-        $values         = array($db->quote($fname),$db->quote($gender),$db->quote($dob),$db->quote($tob),
+        $columns        = array('uniq_id','fname','gender','dob','tob','pob','lon','lat','timezone','dst','query_date');
+        $values         = array($db->quote($uniq_id),$db->quote($fname),$db->quote($gender),$db->quote($dob),$db->quote($tob),
                                 $db->quote($pob),$db->quote($lon),$db->quote($lat),$db->quote($tmz),$db->quote($dst),$db->quote($now));
-        $query    ->insert($db->quoteName('#__horo_query'))
-                    ->columns($db->quoteName($columns))
-                    ->values(implode(',', $values));
+        $query          ->insert($db->quoteName('#__horo_query'))
+                        ->columns($db->quoteName($columns))
+                        ->values(implode(',', $values));
         // Set the query using our newly populated query object and execute it
         $db             ->setQuery($query);
         $result          = $db->query();
         
         // fetches the Indian standard time and Indian Date for the given time and birth
-        $ind_det       = explode("_",$this->getISTTime($dob, $tob, $tmz, $dst));
-        $ind_date       = $ind_det[0];
-        $ind_time       = $ind_det[1];
-        $ind_str        = strtotime($ind_time);
-        if($year <= 2000)
-        {
-            $gmt        = '17:30:00';
-            $gmt_str    = strtotime($gmt);
-        }
-        else
-        {
-            $gmt        = '00:00:00';
-            $gmt_str    = strtotime($gmt);
-        }
-        $datetime1      = date_create(str_replace("/","-",$dob));
-        $datetime2      = date_create($ind_date);
-        $interval = date_diff($datetime1, $datetime2);
-        $ind_sign       = $interval->format('%R:%a');
-        if($ind_str>$gmt_str)
-        {
-            $diff       = "+".$this->getAddSubTime($dob,$ind_str,$gmt_str,"-");
-
-        }
-        else if($ind_str<$gmt_str)
-        {
-            $diff       = "-".$this->getAddSubTime($dob,$gmt_str,$ind_str,"-");
-        }
+        $getGMT         = explode("_",$this->getGMTTime($dob, $tob, $tmz, $dst));
+        $gmt_date       = $getGMT[0];
+        $gmt_time       = $getGMT[1];
 
         /* 
         *  @param fullname, gender, date of birth, time of birth, 
@@ -69,19 +47,18 @@ class HoroscopeModelLagna extends JModelItem
         $data  = array(
                         "fname"=>$fname,"gender"=>$gender,"dob"=>$dob,
                         "tob"=>$tob,"pob"=>$pob,"lon"=>$lon,"lat"=>$lat,"tmz"=>$tmz,
-                        "tmz_hr"=>$gmt,"time_diff"=>$diff,"dst"=>$dst, 
-                        "ind_date"=>$ind_date,"ind_time"=>$ind_time
+                        "dst"=>$dst,"gmt_date"=>$gmt_date,"gmt_time"=>$gmt_time
                     );
-        //print_r($data);exit;
-        if($year <= 2000)
-        {
-            $this->data     = $this->getBudh($data);
-        }
-        else
-        {
+        ///print_r($data);exit;
+        //if($year <= 2000)
+        //{
+            //$this->data     = $this->getBudh($data);
+        //}
+        //else
+        //{
             $this->data     = $this->getRaman2050($data);
-        }
-        return $this->data;
+        //}
+        //return $this->data;
     }
     /*
      * Get The Indian Standard Time from foreign time
@@ -90,70 +67,29 @@ class HoroscopeModelLagna extends JModelItem
      * @param tmz  Default Time Zone of the place
      * @param dst If any daylight saving time is to be applied
      */
-    public function getISTTime($dob,$tob,$tmz, $dst)
+    public function getGMTTime($dob,$tob,$tmz, $dst)
     {
         //echo $dob." : ".$tob." : ".$tmz." : ".$dst;exit;
         $dst        = explode(":", $dst);
         $tmz_sign   = substr($tmz,0 ,1);
         $tmz_val    = substr($tmz.":00",1);
+        
         $tmz_str    = strtotime($tmz_val);
         $tmz_val    = explode(":", $tmz_val);
         $dob        = str_replace("/","-",$dob);
+       
         $dob        = $dob." ".$tob;
         $date       = new DateTime();
         $date       ->setTimestamp(strtotime($dob));
-        
-        $ist        = '+05:30';
-        $ist_sign   = substr($ist,0, 1);
-        $ist_val    = substr($ist.":00",1);
-        $ist_str    = strtotime($ist_val);
-        $ist_val    = explode(":", $ist_val);
-        if($tmz_sign == '-')
+        if($tmz_str == "-")
         {
-            $min        = $tmz_val[1] +$ist_val[1];
-            $hr         = $tmz_val[0] + $ist_val[0];
-            if($min >= 60)
-            {
-                $min    = $min - 60;
-                $hr     = $hr + 1;
-            }
-            $date       ->add(new DateInterval('PT'.$hr.'H'.$min.'M0S'));
+            //$date       ->add(new DateInterval('PT'.$hr.'H'.$min.'M0S'));
+            $date       ->add(new DateInterval('PT'.$tmz_val[0].'H'.$tmz_val[1].'M'.$tmz_val[2].'S'));
         }
-        else if($tmz_sign == '+' && $tmz !== $ist && $ist_str < $tmz_str)
+        else
         {
-            // timezeon is positive, timezone is not equal to indian time and indian time is less then timezone time
-            if($tmz_val[1] >= $ist_val[1])
-            {
-                $min    = $tmz_val[1]   - $ist_val[1];
-                $hr     = $tmz_val[0]   - $ist_val[0];
-            }
-            else
-            {
-                $min    = ($tmz_val[1]+60)  - $ist_val[1];
-                $hr     = ($tmz_val[0] -1 ) - $ist_val[0];
-            }
-            $date       ->sub(new DateInterval('PT'.$hr.'H'.$min.'M0S'));
+            $date       ->sub(new DateInterval('PT'.$tmz_val[0].'H'.$tmz_val[1].'M'.$tmz_val[2].'S'));
         }
-        else if($tmz_sign == '+' && $tmz !== $ist && $ist_str > $tmz_str)
-        {
-            // timezone is positive, timezone is not equal to indian time and indian time is greater then timezone time
-            if($ist_val[1] >= $tmz_val[1])
-            {
-                $min    = $ist_val[1]   - $tmz_val[1];
-                $hr     = $ist_val[0]   - $tmz_val[0];
-            }
-            else
-            {
-                $min    = ($ist_val[1]+60)  - $tmz_val[1];
-                $hr     = ($ist_val[0] -1 ) - $tmz_val[0];
-            }
-            $date       ->sub(new DateInterval('PT'.$hr.'H'.$min.'M0S'));
-        }
-        else if ($tmz_sign == '+' && $tmz == $ist && $ist_str == $tmz_str)
-        {
-            $date       ->sub(new DateInterval('PT0H0M0S'));
-        }
-        $date           ->sub(new DateInterval('PT'.$dst[0].'H'.$dst[1].'M'.$dst[2].'S'));
         return $date->format('Y-m-d_H:i:s');
     }
     // function checks seconds, minutes and degrees 
