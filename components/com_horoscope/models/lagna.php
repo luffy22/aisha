@@ -275,64 +275,17 @@ class HoroscopeModelLagna extends JModelItem
     {
         //print_r($data);exit;
         $lon            = explode(":", $data['lon']);
-        $dob            = explode("-",$data['dob']);
-        $monthNum       = $dob[1];  // The month in number format (ex. 06 for June)
-        $year           = $dob[0];
-        $monthName      = date("F", mktime(0, 0, 0, $monthNum, 10));		// month in word format (ex. June/July/August)
-        $leap           = date("L", mktime(0,0,$dob[2], $monthNum, $year));
+        $dob            = $data['dob'];
         
         $db             = JFactory::getDbo();  // Get db connection
         $query          = $db->getQuery(true);
-        $query          -> select($db->quoteName('Sidereal'));
-        $query          -> from($db->quoteName('#__lahiri_1'));
-        $query          -> where($db->quoteName('Month').'='.$db->quote($monthName).'AND'.
-                                 $db->quoteName('Date')."=".$db->quote($dob[2]));
+        $query          -> select($db->quoteName('sid_time'));
+        $query          -> from($db->quoteName('#__ephemeris'));
+        $query          -> where($db->quoteName('full_year').'='.$db->quote($dob));
         $db             ->setQuery($query);
         $count          = count($db->loadResult());
         $row            =$db->loadAssoc();
-        //echo $row['Sidereal'];exit;
-        if($count>0)
-        {
-            $get_sidetime_year      = strtotime($row['Sidereal']);
-            $query      ->clear();
-            if(($monthName == "January" || $monthName == "February")&&($leap=="1"))
-            {
-                $query      ->select($db->quoteName('corr_time'));
-                $query      ->from($db->quoteName('#__lahiri_2'));
-                $query      ->where($db->quoteName('Year').'='.$db->quote($dob[0]).' AND '.
-                                    $db->quote('leap').'='.'leap');
-            }
-            else
-            {
-                $query      ->select($db->quoteName('corr_time'));
-                $query      ->from($db->quoteName('#__lahiri_2'));
-                $query      ->where($db->quoteName('Year').'='.$db->quote($dob[0]));
-                //$query_sideyear			= mysqli_query($con, "SELECT corr_time FROM jv_sidereal_2 WHERE Year='".$dob_split[0]."'");
-            }
-            $db                 ->setQuery($query);
-            unset($count);
-            $count              = count($db->loadResult());
-            
-            $time_diff          = $db->loadAssoc();
-            $correction         = $time_diff['corr_time'];      // correction time diff using sidereal_2 table
-            $corr_diff          = substr($correction, 0,1);     // the positive/negative sign
-            $corr_time		= substr($correction,1);        // the time diff in mm:ss format
-            $corr_time          = strtotime("00:".$corr_time);        // corr_time string_to_time    
-            $sid_time           = strtotime($this->getAddSubTime($data['dob'],$get_sidetime_year ,$corr_time,$corr_diff));
-            //echo date('G:i:s',$sid_time);exit;
-            $query              ->clear();
-            $query              = "select corr_sign, st_correction FROM jv_sidereal_3 WHERE longitude >= '".($lon[0].'.'.$lon[1])."'
-                                    order by abs(longitude - '".($lon[0].'.'.$lon[1])."') limit 1";
-            $db                 ->setQuery($query);
-            unset($count);
-            $count              = count($db->loadResult());
-            $sid_corr           = $db->loadAssoc();     // sidereal correction in seconds
-            $corr_time          = str_replace(".",":",$sid_corr['st_correction']);
-            $sign               = $sid_corr['corr_sign'];
-            $corr_time          = strtotime("00:".$corr_time);
-            $sidereal           = $this->getAddSubTime($data['dob'],$sid_time,$corr_time,$sign);           
-        }
-       return $sidereal;
+        print_r($row);exit;
     }
     public function getLmt($data)
     {
