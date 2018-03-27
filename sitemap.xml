@@ -857,6 +857,10 @@
 	<changefreq>weekly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/case/376-deceit-horoscope</loc>
+	<changefreq>weekly</changefreq>
+</url>
+<url>
   <loc>https://www.astroisha.com/planet-bhavas</loc>
   <changefreq>weekly</changefreq>
 </url>
@@ -1193,6 +1197,18 @@
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/374-venus-5th-house</loc>
+	<changefreq>weekly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/planet-bhavas/377-venus-6th-house</loc>
+	<changefreq>weekly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/planet-bhavas/379-venus-7th-house</loc>
+	<changefreq>weekly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/planet-bhavas/380-venus-8th-house</loc>
 	<changefreq>weekly</changefreq>
 </url>
 <url>

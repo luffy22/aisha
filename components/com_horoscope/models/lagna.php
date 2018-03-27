@@ -270,26 +270,56 @@ class HoroscopeModelLagna extends JModelItem
                                 $planet."_nakshatra_lord"=>$result['nakshatra_lord']);
         return $data;
     }
-    // Method to get the sidereal Time
+    // Method to get the sidereal Time. New method converts time to gmt as sidereal time is for gmt 00:00:00 hrs
     public function getSiderealTime($data)
     {
         //print_r($data);exit;
-        $lon            = explode(":", $data['lon']);
-        $dob            = $data['dob'];
+        $lon                = explode(":", $data['lon']);
+        $dob                = $data['dob'];
+        $gmt_time           = explode(':',$data['gmt_time']);
+
+        $db                 = JFactory::getDbo();  // Get db connection
+        $query              = $db->getQuery(true);
+        $query              -> select($db->quoteName('sid_time'));
+        $query              -> from($db->quoteName('#__ephemeris'));
+        $query              -> where($db->quoteName('full_year').'='.$db->quote($dob));
+        $db                 ->setQuery($query);
+        $count              = count($db->loadResult());
+        $sidereal_12am      =$db->loadAssoc();
         
-        $db             = JFactory::getDbo();  // Get db connection
-        $query          = $db->getQuery(true);
-        $query          -> select($db->quoteName('sid_time'));
-        $query          -> from($db->quoteName('#__ephemeris'));
-        $query          -> where($db->quoteName('full_year').'='.$db->quote($dob));
-        $db             ->setQuery($query);
-        $count          = count($db->loadResult());
-        $row            =$db->loadAssoc();
-        print_r($row);exit;
+        $date               = new DateTime($dob);
+        $date               ->setTime('00','00','00');
+        $date1              = new DateTime($dob);
+        $date1              ->setTime($gmt_time[0],$gmt_time[1],$gmt_time[2]);
+        
+        $interval           = $date->diff($date1);
+        $interval           = explode(":", $interval->format('%H:%i'));
+        $diff_hr            = $interval[0];$diff_min    = $interval[1];
+        
+        $query              ->clear();
+        $query              ->select($db->quoteName('min'));
+        $query              ->from($db->quoteName('#__sidereal_4'));
+        $query              ->where($db->quoteName('hour').'='.$db->quote($diff_hr));
+        $db                 ->setQuery($query);
+        $result             = $db->loadAssoc();
+        $diff               = explode(":",$result['min']);
+        
+        $date1               ->add(new DateInterval('PT'.$diff[0].'M'.$diff[1].'S'));
+        //echo $date1->format('Y-m-d H:i:s');exit;
+        $query                  ->clear();
+        $query                  ->select($db->quoteName('diff'));
+        $query                  ->from($db->quoteName('#__sidereal_5'));
+        $query                  ->where($db->quoteName('min').'>='.$db->quote($diff_min));
+        $db                     ->setQuery($query);
+        unset($result);
+        $result                 = $db->loadAssoc();
+        $diff                   = explode(":",$result['diff']);
+        $date1                  ->add(new DateInterval('PT'.$diff[1].'S'));
+        return $date1;
     }
     public function getLmt($data)
     {
-        //print_r($data);exit;
+        print_r($data);exit;
         $lon        = explode(":", $data['lon']);
         $lat        = explode(":", $data['lat']);
         $gmt        = substr($data['tmz'],1);
