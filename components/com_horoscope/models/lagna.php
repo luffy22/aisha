@@ -319,20 +319,24 @@ class HoroscopeModelLagna extends JModelItem
     }
     public function getLmt($data)
     {
-        print_r($data);exit;
-        $lon        = explode(":", $data['lon']);
-        $lat        = explode(":", $data['lat']);
-        $gmt        = substr($data['tmz'],1);
+        //print_r($data);exit;
+        $lon        = explode(":", $data['lon']);        // longitude
+        $lat        = explode(":", $data['lat']);       // latititude
+        $tmz        = substr($data['tmz'],1);           // timezone to calculate
         $dob        = $data['dob'];
-        $tob        = strtotime($data['tob']);
+        $tob        = explode(":",$data['tob']);
+        $tmz        = explode(":",$tmz);
+        $date       = new DateTime($dob);
+        $date       ->setTime($tob[0],$tob[1],$tob[2]);
         
-        $gmt        = explode(":",$gmt);
-       
-        $gmt_meridian       = $gmt[0] + number_format(($gmt[1]/60),2);
+        // Next 5 lines get the prime meridian for place
+        // For example 82:30 for India. 
+        $gmt_meridian       = $tmz[0] + number_format(($tmz[1]/60),2);
         $gmt_meridian       = $gmt_meridian*15;
         $gmt_meridian1      = intval($gmt_meridian);
         $gmt_meridian2      = ($gmt_meridian - $gmt_meridian1)*60;
         $gmt_meridian       = $gmt_meridian1.":".$gmt_meridian2;
+        
         $std_meridian       = explode(":",$gmt_meridian);
         
         $std_lon_sec	= $this->convertDegMinToSec($std_meridian[0], $std_meridian[1]);		// convert minutes into seconds & multiply by 4 then add to seconds multiplied by 4
@@ -340,61 +344,13 @@ class HoroscopeModelLagna extends JModelItem
         if($std_lon_sec > $loc_lon_sec)
         {
             $new_diff	= $std_lon_sec - $loc_lon_sec;
-            //$new_diff	= gmdate('H:i:s', $new_diff);
-            $diff           = strtotime(gmdate("G:i:s",$new_diff));     // gmdate is used for value below 24 hr
-            $date           = strtotime($this->getAddSubTime($dob,$tob,$diff,"-"));
+            $date       ->sub(new DateInterval('PT'.$new_diff.'S'));
         }
         else
         {
             $new_diff	= $loc_lon_sec	- $std_lon_sec;
-            //$new_diff	= gmdate('H:i:s', $new_diff);
-            $diff           = strtotime(gmdate("G:i:s",$new_diff));     // gmdate is used for value below 24 hr
-            $date           = strtotime($this->getAddSubTime($dob,$tob,$diff,"+"));
+            $date       ->add(new DateInterval('PT'.$new_diff.'S'));
         }
-        //echo $new_diff;exit;
-        $dateObject		= new DateTime($dob);		// Datetime object with user date of birth
-        $dateObject		->setTimeStamp($date);		// time of birth for user
-        $tob_format		= $dateObject->format('g:i a');
-        $noon_time          = strtotime('12:00:00');
-        if(strpos($tob_format, "am"))
-        {
-            // if lmt is am then subtract that time from 12 at noon
-            $date           = $this->getAddSubTime($dob,$noon_time,$date,"-");
-        }
-        else
-        {
-            $date           = $dateObject->format('G:i:s');
-        }
-        //echo $date;exit;
-        $dateObject         = (strtotime($date));
-        $lmt                = explode(":",$date);
-        $lmt_hr             = $lmt[0];
-        $lmt_min            = $lmt[1];
-        $lmt_sec            = $lmt[2];
-        //$lmt                = $lmt_hr*3600+$lmt_min*60+$lmt_sec;
-        $db                 = JFactory::getDbo();  // Get db connection
-        $query              = $db->getQuery(true);
-        $query                  ->select($db->quoteName('min'));
-        $query                  ->from($db->quoteName('#__sidereal_4'));
-        $query                  ->where($db->quoteName('hour').'='.$db->quote($lmt_hr));
-        $db                     ->setQuery($query);
-        $result                 = $db->loadAssoc();
-        $count                  = count($result);
-        //echo $count;exit;
-        //echo $result['min'];exit;
-        $min                    = strtotime("00:".$result['min']);
-        $lmt                    = strtotime($this->getAddSubTime($dob,$dateObject,$min,"+"));
-        $query                  ->clear();
-        $query                  ->select($db->quoteName('diff'));
-        $query                  ->from($db->quoteName('#__sidereal_5'));
-        $query                  ->where($db->quoteName('min').'>='.$db->quote($lmt_min));
-        $db                     ->setQuery($query);
-        unset($result);
-        $result                 = $db->loadAssoc();
-        $diff                   = "00:".$result['diff'];
-        $sec                    = strtotime($diff);
-        $date                   = strtotime($this->getAddSubTime($dob,$lmt,$sec,"+"));
-        $date                   = date('g:i:s',$lmt);
         return $date;
         
     }
