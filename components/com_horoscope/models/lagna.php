@@ -356,20 +356,90 @@ class HoroscopeModelLagna extends JModelItem
     }
     protected function convertPlanets($data)
     {
-        print_r($data);exit;
+       //print_r($data);exit;
        $key        = array_keys($data);
        $planets    = array();
        for($i=1;$i<=count($data);$i++)
        {
            $value           = $data[$key[$i]];
-           if(strpos($value, "LE"))
+           if(strpos($value, "AR"))
+           {
+               $value       = "1.".str_replace("AR",".",$value);
+               $val         = array($key[$i] => $value);
+               $planets     = array_merge($planets, $val);
+           }
+           else if(strpos($value, "TA"))
+           {
+               $value       = "2.".str_replace("TA",".",$value);
+               $val         = array($key[$i] => $value);
+               $planets     = array_merge($planets, $val);
+           }
+           else if(strpos($value, "GE"))
+           {
+               $value       = "3.".str_replace("GE",".",$value);
+               $val         = array($key[$i] => $value);
+               $planets     = array_merge($planets, $val);
+           }
+           else if(strpos($value, "CN"))
+           {
+               $value       = "4.".str_replace("CN",".",$value);
+               $val         = array($key[$i] => $value);
+               $planets     = array_merge($planets, $val);
+           }
+           else if(strpos($value, "LE"))
            {
                $value       = "5.".str_replace("LE",".",$value);
                $val         = array($key[$i] => $value);
                $planets     = array_merge($planets, $val);
            }
+           else if(strpos($value, "VI"))
+           {
+               $value       = "6.".str_replace("VI",".",$value);
+               $val         = array($key[$i] => $value);
+               $planets     = array_merge($planets, $val);
+           }
+           else if(strpos($value, "LI"))
+           {
+               $value       = "7.".str_replace("LI",".",$value);
+               $val         = array($key[$i] => $value);
+               $planets     = array_merge($planets, $val);
+           }
+           else if(strpos($value, "SC"))
+           {
+               $value       = "8.".str_replace("SC",".",$value);
+               $val         = array($key[$i] => $value);
+               $planets     = array_merge($planets, $val);
+           }
+           else if(strpos($value, "SG"))
+           {
+               $value       = "9.".str_replace("SG",".",$value);
+               $val         = array($key[$i] => $value);
+               $planets     = array_merge($planets, $val);
+           }
+           else if(strpos($value, "CP"))
+           {
+               $value       = "10.".str_replace("CP",".",$value);
+               $val         = array($key[$i] => $value);
+               $planets     = array_merge($planets, $val);
+           }
+           else if(strpos($value, "AQ"))
+           {
+               $value       = "11.".str_replace("AQ",".",$value);
+               $val         = array($key[$i] => $value);
+               $planets     = array_merge($planets, $val);
+           }
+           else if(strpos($value, "PI"))
+           {
+               $value       = "12.".str_replace("PI",".",$value);
+               $val         = array($key[$i] => $value);
+               $planets     = array_merge($planets, $val);
+           }
+           else
+           {
+               //echo "Something went wrong. Please contact admin@astroisha.com";
+           }
        }
-       print_r($planets);exit;
+      return $planets;
     }
     public function calculatelagna($data)
     {
@@ -547,7 +617,7 @@ class HoroscopeModelLagna extends JModelItem
         $db             ->setQuery($query);
         $result1        = $db->loadAssoc();
         $result1        = $this->convertPlanets($result1);
-        exit;
+        
         $query          ->clear();
         $query          ->select($db->quoteName($planets));
         $query          ->from($db->quoteName('#__ephemeris'));
@@ -557,6 +627,7 @@ class HoroscopeModelLagna extends JModelItem
         $db             ->setQuery($query);
         $result2        = $db->loadAssoc();
         $result2        = $this->convertPlanets($result2);
+        //print_r($result2);exit;
         for($i=1;$i<$count;$i++)
         {
             $planet         = $planets[$i];
