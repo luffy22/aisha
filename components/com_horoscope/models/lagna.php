@@ -725,7 +725,9 @@ class HoroscopeModelLagna extends JModelItem
             
             $grahas             = array_merge($grahas, $graha);                 
         }   
-       $details                 = $this->getAyanamshaCorrection($dob, $grahas);
+       $grahas                 = $this->getAyanamshaCorrection($dob, $grahas);
+       $data                    = array_merge($data, $grahas);
+       print_r($data);exit;
     }
     protected function getAyanamshaCorrection($dob, $data)
     {
@@ -742,25 +744,24 @@ class HoroscopeModelLagna extends JModelItem
         $query                  ->setLimit('1');
         $db                     ->setQuery($query);
         $corr                   = $db->loadAssoc();     // the ayanamsha correction
+        $corr                   = explode(":",$corr['ayanamsha']);
         //print_r($corr);exit;
-        foreach($data as $planets)
+        foreach($data as $key=>$planets)
         {
-            $key            = key($data);
             $planet         = explode(":", $planets);
-            $corr           = explode(":",$corr['ayanamsha']);
-            // below line gets the ayanamsha(Indian) value after 
+             // below line gets the ayanamsha(Indian) value after 
             // subtracting ayanamsha correction from western value
             $ayan_val       = $this->subDegMinSec($planet[0], $planet[1], $planet[2], $corr[0], $corr[1],0);
             $sign           = $this->calcDetails($ayan_val);
             $sign_det           = array($key."_sign"=>$sign);
             $dist           = $this->calcDistance($ayan_val);
             $dist_det           = array($key."_dist"=>$dist);
-            $details        = $this->getPlanetaryDetails($key, $sign, $distance);
-            $grahas         = array_merge($grahas, $sign_det,$dist_det,$details);
-            //print_r($grahas);exit;
+            //echo $key." ".$sign." ".$dist."<br/>";
+            $details        = $this->getPlanetaryDetails($key, $sign, $dist);
+            $graha[]          = array_merge($sign_det,$dist_det,$details);
         }
-        
-        print_r($grahas);exit;
+        //exit;
+        return $graha;
     }
     protected function getRaman2050_Moon($data)
     {
