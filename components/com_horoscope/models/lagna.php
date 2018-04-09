@@ -56,7 +56,7 @@ class HoroscopeModelLagna extends JModelItem
         //}
         //else
         //{
-            $this->data     = $this->getRaman2050($data);
+            $this->data     = $this->getWesternHoro($data);
         //}
         //return $this->data;
     }
@@ -443,7 +443,7 @@ class HoroscopeModelLagna extends JModelItem
     }
     public function calculatelagna($data)
     {
-        $this->getRaman2050($data);   
+        $this->getWesternHoro($data);   
         /*$lat            = explode(":",$data['lat']);
         $dir            = $lat[2];
         $lat            = $lat[0].'.'.$lat[1];
@@ -597,15 +597,15 @@ class HoroscopeModelLagna extends JModelItem
         return $lagna;*/
     }
     
-    protected function getRaman2050($data)
+    protected function getWesternHoro($data)
     {
         //print_r($data);exit;
         //$lagna          = $this->calculatelagna($data);
         $dob            = $data['gmt_date'];
         $tob            = strtotime($data['gmt_time']);
         $tob            = explode(":",date('G:i:s', $tob));
-
-        $planets        = array("full_year","sun","moon","mercury","venus","mars","jupiter","saturn","rahu");
+        $grahas         = array();
+        $planets        = array("full_year","sun","moon","mercury","venus","mars","jupiter","saturn","rahu","uranus","neptune","pluto");
         $count          = count($planets);
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
@@ -710,14 +710,7 @@ class HoroscopeModelLagna extends JModelItem
                 $distance       = $this->convertDegMinSec($dist[0], $dist[1], 0);
                 $graha          = array($planet=>$distance);
             }
-            //$sign               = $planet."_sign";$distance=$planet."_distance";
-            $sign               = $this->calcDetails($distance);
-            $sign_det           = array($planet."_sign"=>$sign);
-            $dist               = $this->calcDistance($distance);
-            $dist_det           = array($planet."_distance"=>$dist);
-            $details            = $this->getPlanetaryDetails($planet,$sign,$dist);
-            $graha              = array_merge($graha,$sign_det,$dist_det,$details);
-            
+                                  
             if($i==8)
             {
                 $distance       = str_replace(":",".",$distance);
@@ -726,20 +719,48 @@ class HoroscopeModelLagna extends JModelItem
                 {
                     $ketu       = $ketu-360;
                 }
-                $sign               = $this->calcDetails(str_replace(".", ":", $ketu));
-                $sign_det           = array("ketu_sign"=>$sign);
-                $distance           = $this->calcDistance(str_replace(".", ":", $ketu));
-                $distance_det       = array("ketu_distance"=>$distance);
-                $details            = $this->getPlanetaryDetails("ketu",$sign,$distance);
-                $ketu               = array("ketu"=>str_replace(".",":",$ketu));
-                $ketu               = array_merge($ketu,$sign_det,$distance_det,$details);
+                $ketu               = array("ketu"=>str_replace(".",":",$ketu.":r"));
                 $graha              = array_merge($graha, $ketu);
             }  
             
-            $data           = array_merge($data, $graha);
-                       
+            $grahas             = array_merge($grahas, $graha);                 
         }   
-       print_r($data);exit;
+       $details                 = $this->getAyanamshaCorrection($dob, $grahas);
+    }
+    protected function getAyanamshaCorrection($dob, $data)
+    {
+        //echo "ayanamsha correction";exit;
+        //print_r($data);exit;
+        $grahas                 = array();
+        $year                   = substr($dob,0,4);       // get the year from dob. For example 2001
+        $db                     = JFactory::getDbo();
+        $query                  = $db->getQuery(true);
+        $query                  ->select($db->quoteName('ayanamsha'));
+        $query                  ->from($db->quoteName('#__lahiri_ayanamsha'));
+        $query                  ->where($db->quoteName('year').'<='.$db->quote($year));
+        $query                  ->order($db->quoteName('year').' desc');
+        $query                  ->setLimit('1');
+        $db                     ->setQuery($query);
+        $corr                   = $db->loadAssoc();     // the ayanamsha correction
+        //print_r($corr);exit;
+        foreach($data as $planets)
+        {
+            $key            = key($data);
+            $planet         = explode(":", $planets);
+            $corr           = explode(":",$corr['ayanamsha']);
+            // below line gets the ayanamsha(Indian) value after 
+            // subtracting ayanamsha correction from western value
+            $ayan_val       = $this->subDegMinSec($planet[0], $planet[1], $planet[2], $corr[0], $corr[1],0);
+            $sign           = $this->calcDetails($ayan_val);
+            $sign_det           = array($key."_sign"=>$sign);
+            $dist           = $this->calcDistance($ayan_val);
+            $dist_det           = array($key."_dist"=>$dist);
+            $details        = $this->getPlanetaryDetails($key, $sign, $distance);
+            $grahas         = array_merge($grahas, $sign_det,$dist_det,$details);
+            //print_r($grahas);exit;
+        }
+        
+        print_r($grahas);exit;
     }
     protected function getRaman2050_Moon($data)
     {

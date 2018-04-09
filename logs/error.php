@@ -12175,3 +12175,5 @@
 2018-01-09T03:08:45+00:00	INFO 65.99.177.125	joomlafailure	Username and password do not match or you do not have an account yet.
 2018-01-25T18:00:45+00:00	INFO 80.122.98.69	joomlafailure	Username and password do not match or you do not have an account yet.
 2018-03-16T06:43:05+00:00	INFO ::1	joomlafailure	Username and password do not match or you do not have an account yet.
+2018-04-06T06:15:10+00:00	INFO ::1	joomlafailure	Username and password do not match or you do not have an account yet.
+2018-04-06T06:39:11+00:00	INFO ::1	joomlafailure	Username and password do not match or you do not have an account yet.
