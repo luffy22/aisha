@@ -49,19 +49,11 @@ class HoroscopeModelLagna extends JModelItem
                         "tob"=>$tob,"pob"=>$pob,"lon"=>$lon,"lat"=>$lat,"tmz"=>$tmz,
                         "dst"=>$dst,"gmt_date"=>$gmt_date,"gmt_time"=>$gmt_time
                     );
-        ///print_r($data);exit;
-        //if($year <= 2000)
-        //{
-            //$this->data     = $this->getBudh($data);
-        //}
-        //else
-        //{
+        
             $this->data     = $this->getWesternHoro($data);
-        //}
-        //return $this->data;
     }
     /*
-     * Get The Indian Standard Time from foreign time
+     * Get The Greenwich Mean Time from given time
      * @param dob  Date Of Birth
      * @param tob Time Of Birth
      * @param tmz  Default Time Zone of the place
@@ -739,11 +731,11 @@ class HoroscopeModelLagna extends JModelItem
         $query                  = $db->getQuery(true);
         $query                  ->select($db->quoteName('ayanamsha'));
         $query                  ->from($db->quoteName('#__lahiri_ayanamsha'));
-        $query                  ->where($db->quoteName('year').'<='.$db->quote($year));
-        $query                  ->order($db->quoteName('year').' desc');
+        $query                  ->where($db->quoteName('year').'='.$db->quote($year));
         $query                  ->setLimit('1');
         $db                     ->setQuery($query);
         $corr                   = $db->loadAssoc();     // the ayanamsha correction
+        //print_r($corr);exit;
         $corr                   = explode(":",$corr['ayanamsha']);
         //print_r($corr);exit;
         foreach($data as $key=>$planets)
@@ -751,7 +743,7 @@ class HoroscopeModelLagna extends JModelItem
             $planet         = explode(":", $planets);
              // below line gets the ayanamsha(Indian) value after 
             // subtracting ayanamsha correction from western value
-            $ayan_val       = $this->subDegMinSec($planet[0], $planet[1], $planet[2], $corr[0], $corr[1],0);
+            $ayan_val       = $this->subDegMinSec($planet[0], $planet[1], $planet[2], $corr[0], $corr[1],$corr[2]);
             $sign           = $this->calcDetails($ayan_val);
             $sign_det           = array($key."_sign"=>$sign);
             $dist           = $this->calcDistance($ayan_val);
