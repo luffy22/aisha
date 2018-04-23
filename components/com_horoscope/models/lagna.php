@@ -719,8 +719,9 @@ class HoroscopeModelLagna extends JModelItem
             $grahas             = array_merge($grahas, $graha);                 
         }   
        $grahas                 = $this->getAyanamshaCorrection($dob, $grahas);
-       print_r($grahas);exit;
-       $data                    = array_merge($data, $grahas);
+       //print_r($grahas);exit;
+       return $grahas;exit;
+       //$data                    = array_merge($data, $grahas);
       
     }
     protected function getAyanamshaCorrection($dob, $data)
@@ -751,8 +752,8 @@ class HoroscopeModelLagna extends JModelItem
             $dist           = $this->calcDistance($ayan_val);
             $dist_det           = array($key."_dist"=>$dist);
             //echo $key." ".$sign." ".$dist."<br/>";
-            $details        = $this->getPlanetaryDetails($key, $sign, $dist);
-            $graha[]          = array_merge($sign_det,$dist_det,$details);
+            //$details        = $this->getPlanetaryDetails($key, $sign, $dist);
+            $graha[]          = array_merge($sign_det,$dist_det/*,$details*/);
         }
         //exit;
         return $graha;
@@ -1123,16 +1124,28 @@ class HoroscopeModelLagna extends JModelItem
     public function getNavamsha($data)
     {
         $alldata        = $this->getWesternHoro($data);
+        $array          = array();
         print_r($alldata);exit;
-        $planet         = array("lagna","moon","surya","mangal","budh",
-                                "guru","shukra","shani","rahu","ketu");
+        /*for($i=0;$i<count($alldata);$i++)
+        {
+            $values      = array_values($alldata[$i]);
+            $array       = array_merge($array, $key=>$values);
+        }
+        print_r($array);exit;*/
+        foreach($alldata as $key=>$value)
+        {
+            
+        }
+        $planet         = array("sun","moon","mercury","venus","mars","jupiter",
+                                "saturn","rahu","ketu","uranus","neptune","pluto");
         $array          = array();
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
-        foreach($planet as $key)
+        foreach($planet as $key=>$sign)
         {
             $query      ->clear();
             $sign       = $alldata[$key.'_sign'];
+            echo $sign;exit;
             $dist       = str_replace("&deg;",".",$alldata[$key."_distance"]);
             $dist       = str_replace("'","",$dist);
             
