@@ -33,7 +33,12 @@ class HoroscopeModelLagna extends JModelItem
         // Set the query using our newly populated query object and execute it
         $db             ->setQuery($query);
         $result          = $db->query();
-        
+        if($result)
+        {
+            $app        = JFactory::getApplication();
+            $link       = JURI::base().'ascendant?chart='.str_replace("horo","chart",$uniq_id);
+            $app        ->redirect($link);
+        }
         // fetches the Indian standard time and Indian Date for the given time and birth
         $getGMT         = explode("_",$this->getGMTTime($dob, $tob, $tmz, $dst));
         $gmt_date       = $getGMT[0];
@@ -753,7 +758,7 @@ class HoroscopeModelLagna extends JModelItem
             $dist_det           = array($key."_dist"=>$dist);
             //echo $key." ".$sign." ".$dist."<br/>";
             //$details        = $this->getPlanetaryDetails($key, $sign, $dist);
-            $graha[]          = array_merge($sign_det,$dist_det/*,$details*/);
+            $graha[]          = array_merge($sign_det,$dist_det,$details);
         }
         //exit;
         return $graha;
