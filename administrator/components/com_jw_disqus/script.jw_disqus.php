@@ -130,7 +130,7 @@ class Com_jw_disqusInstallerScript
 		
 		?>
 		<style>
-			<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css" />
+			@import url("http://yui.yahooapis.com/pure/0.5.0/pure-min.css");
 			.pure-table {width:80%;}
 		</style>
 		
