@@ -8,11 +8,11 @@ jimport('joomla.application.component.controller');
 /**
  * HTML View class for the HelloWorld Component
  */
-class HoroscopeViewLagna extends JViewLegacy
+class HoroscopeViewNavamsha extends JViewLegacy
 {
     public $data;
     function display($tpl = null) 
-    {
+    { 
         if (count($errors   = $this->get('Errors')))
         {
 			JError::raiseError(500, implode('<br />', $errors));
@@ -20,14 +20,12 @@ class HoroscopeViewLagna extends JViewLegacy
         }
         if(isset($_GET['chart']))
         {
-            $this->data         = $this->get('Data');
-            $tpl    = 'lagna';
+            $this->data		= $this->get('Data');
         }
-        else
-        {
-            $tpl        = null;
-        }
+        $tpl 				= null;
         //echo gettype($this->data);
         parent::display($tpl);
+        
     }
+    
 }

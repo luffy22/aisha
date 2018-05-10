@@ -36,9 +36,33 @@ class HoroscopeModelLagna extends JModelItem
         if($result)
         {
             $app        = JFactory::getApplication();
-            $link       = JURI::base().'ascendant?chart='.str_replace("horo","chart",$uniq_id);
+            $link       = JURI::base().'horoscope?chart='.str_replace("horo","chart",$uniq_id);
             $app        ->redirect($link);
         }
+    }
+    public function getData()
+    {
+        $jinput         = JFactory::getApplication()->input;
+        $horo_id        = $jinput->get('chart', 'default_value', 'filter');
+        $horo_id        = str_replace("chart","horo",$horo_id);
+        
+        $db             = JFactory::getDbo();  // Get db connection
+        $query          = $db->getQuery(true);
+        $query          ->select($db->quoteName(array('fname','gender','dob','tob','pob','lon','lat','timezone','dst')));
+        $query          ->from($db->quoteName('#__horo_query'));
+        $query          ->where($db->quoteName('uniq_id').' = '.$db->quote($horo_id));
+        $db             ->setQuery($query);
+        $db->execute();
+        $result         = $db->loadAssoc();
+        $fname          = $result['fname'];
+        $gender         = $result['gender'];
+        $dob            = $result['dob'];
+        $tob            = $result['tob'];
+        $pob            = $result['pob'];
+        $lat            = $result['lat'];
+        $lon            = $result['lon'];
+        $tmz            = $result['timezone'];
+        $dst            = $result['dst'];
         // fetches the Indian standard time and Indian Date for the given time and birth
         $getGMT         = explode("_",$this->getGMTTime($dob, $tob, $tmz, $dst));
         $gmt_date       = $getGMT[0];
@@ -54,9 +78,11 @@ class HoroscopeModelLagna extends JModelItem
                         "tob"=>$tob,"pob"=>$pob,"lon"=>$lon,"lat"=>$lat,"tmz"=>$tmz,
                         "dst"=>$dst,"gmt_date"=>$gmt_date,"gmt_time"=>$gmt_time
                     );
+        //print_r($data);exit;
         
-            //$this->data     = $this->getWesternHoro($data);
-        $this->data           = $this->getNavamsha($data);
+        $this->data     = $this->getWesternHoro($data);
+        //$this->data           = $this->getNavamsha($data);
+        return $this->data;
     }
     /*
      * Get The Greenwich Mean Time from given time
@@ -600,8 +626,8 @@ class HoroscopeModelLagna extends JModelItem
         //print_r($data);exit;
         //$lagna          = $this->calculatelagna($data);
         $dob            = $data['gmt_date'];
-        $tob            = strtotime($data['gmt_time']);
-        $tob            = explode(":",date('G:i:s', $tob));
+        $tob            = explode(":",$data['gmt_time']);
+        
         $grahas         = array();
         $planets        = array("full_year","sun","moon","mercury","venus","mars","jupiter","saturn","rahu","uranus","neptune","pluto");
         $count          = count($planets);
@@ -724,10 +750,9 @@ class HoroscopeModelLagna extends JModelItem
             $grahas             = array_merge($grahas, $graha);                 
         }   
        $grahas                 = $this->getAyanamshaCorrection($dob, $grahas);
-       //print_r($grahas);exit;
-       return $grahas;exit;
-       //$data                    = array_merge($data, $grahas);
-      
+              
+       $data                    = array_merge($data, $grahas);
+       return $data;
     }
     protected function getAyanamshaCorrection($dob, $data)
     {
@@ -735,6 +760,7 @@ class HoroscopeModelLagna extends JModelItem
         //print_r($data);exit;
         $grahas                 = array();
         $year                   = substr($dob,0,4);       // get the year from dob. For example 2001
+
         $db                     = JFactory::getDbo();
         $query                  = $db->getQuery(true);
         $query                  ->select($db->quoteName('ayanamsha'));
@@ -749,6 +775,7 @@ class HoroscopeModelLagna extends JModelItem
         foreach($data as $key=>$planets)
         {
             $planet         = explode(":", $planets);
+            
              // below line gets the ayanamsha(Indian) value after 
             // subtracting ayanamsha correction from western value
             $ayan_val       = $this->subDegMinSec($planet[0], $planet[1], $planet[2], $corr[0], $corr[1],$corr[2]);
@@ -756,11 +783,12 @@ class HoroscopeModelLagna extends JModelItem
             $sign_det           = array($key."_sign"=>$sign);
             $dist           = $this->calcDistance($ayan_val);
             $dist_det           = array($key."_dist"=>$dist);
+            
             //echo $key." ".$sign." ".$dist."<br/>";
-            //$details        = $this->getPlanetaryDetails($key, $sign, $dist);
+            $details        = $this->getPlanetaryDetails($key, $sign, $dist);
             $graha[]          = array_merge($sign_det,$dist_det,$details);
         }
-        //exit;
+        
         return $graha;
     }
     protected function getRaman2050_Moon($data)
