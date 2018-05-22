@@ -9,7 +9,7 @@
 
 // no direct access
 defined('_JEXEC') or die;
-
+$url =  JURI::current();
 ?>
 
 <a id="startOfPage"></a>
@@ -23,9 +23,21 @@ defined('_JEXEC') or die;
 	<div class="clr"></div>
 </div>
 <?php endif; ?>
-
 <?php echo $row->text; ?>
-
+<div class="mb-2"></div>
+<ul class="nav nav-pills" role="tablist">
+<li class="nav-item"><a class="nav-link" href="#fb" role="tab" data-toggle="tab">Facebook</a></li>
+<li class="nav-item active"><a class="nav-link" href="#disqus" role="tab" data-toggle="tab">Disqus</a></li>
+</ul>
+<div class="mb-1"></div>
+<p><small>If you wish for a reply use Disqus. Facebook does not notify about comments posted.</small></p>
+<!-- Tab panes -->
+<div class="tab-content">
+<div class="mt-1"></div>
+<div id="fb" class="tab-pane" role="tabpanel">
+<div class="fb-comments" data-href="<?php echo $url; ?>" data-numposts="2"></div>
+</div>
+<div id="disqus" class="tab-pane active" role="tabpanel">
 <!-- DISQUS comments block -->
 <div class="jwDisqusForm">
 	<?php echo $output->comments; ?>
@@ -39,5 +51,6 @@ defined('_JEXEC') or die;
 		<div class="clr"></div>
 	</div>
 </div>
-
+</div>
+</div>
 <div class="clr"></div>
