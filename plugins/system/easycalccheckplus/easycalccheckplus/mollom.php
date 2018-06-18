@@ -3,7 +3,7 @@
  * @Copyright
  * @package     EasyCalcCheck Plus - ECC+ for Joomla! 3
  * @author      Viktor Vogel <admin@kubik-rubik.de>
- * @version     3.1.4 - 2018-01-31
+ * @version     3.1.5 - 2018-05-20
  * @link        https://joomla-extensions.kubik-rubik.de/ecc-easycalccheck-plus
  *
  * Mollom class
