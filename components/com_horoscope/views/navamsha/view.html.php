@@ -21,6 +21,7 @@ class HoroscopeViewNavamsha extends JViewLegacy
         if(isset($_GET['chart']))
         {
             $this->data		= $this->get('Data');
+            //echo "calls";exit;
         }
         $tpl 				= null;
         //echo gettype($this->data);

@@ -1,4 +1,4 @@
-    <?php
+<?php
 defined('_JEXEC') or die;  // No direct Access
 // import Joomla modelitem library
 jimport('joomla.application.component.modelitem');
@@ -6,6 +6,10 @@ require_once JPATH_COMPONENT.'/controller.php';
 class HoroscopeModelLagna extends JModelItem
 {
     public $data;
+    public function justcall()
+    {
+        echo "calling successful";
+    }
     public function getLagna($user_details)
     {
         // Assigning the variables
@@ -93,6 +97,7 @@ class HoroscopeModelLagna extends JModelItem
      */
     public function getGMTTime($dob,$tob,$tmz, $dst)
     {
+
         //echo $dob." : ".$tob." : ".$tmz." : ".$dst;exit;
         $dst        = explode(":", $dst);
         $tmz_sign   = substr($tmz,0 ,1);
@@ -749,10 +754,10 @@ class HoroscopeModelLagna extends JModelItem
             
             $grahas             = array_merge($grahas, $graha);                 
         }   
-       $grahas                 = $this->getAyanamshaCorrection($dob, $grahas);
-              
-       $data                    = array_merge($data, $grahas);
-       return $data;
+       //$grahas                 = $this->getAyanamshaCorrection($dob, $grahas);
+       return $grahas;       
+       //$data                    = array_merge($data, $grahas);
+       //return $data;
     }
     protected function getAyanamshaCorrection($dob, $data)
     {

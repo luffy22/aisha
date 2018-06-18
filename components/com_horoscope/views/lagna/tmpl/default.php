@@ -7,7 +7,7 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die();
-	
+echo $this->data;	
 ?>
 <div class="mb-1"></div>
 <h2>Calculate Horoscope</h2>
