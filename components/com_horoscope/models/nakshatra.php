@@ -5,13 +5,13 @@ jimport('joomla.application.component.modelitem');
 JModelLegacy::addIncludePath(JPATH_SITE.'/components/com_horoscope/models/');
 $model = JModelLegacy::getInstance('lagna', 'horoscopeModel');
 
-class HoroscopeModelNavamsha extends HoroscopeModelLagna
+class HoroscopeModelNakshatra extends HoroscopeModelLagna
 {
     public function getData()
     {
-        $jinput     = JFactory::getApplication()->input;
-        $navamsha   = $jinput->get('chart', 'default_value', 'filter');
-        $navamsha   = str_replace("chart","horo", $navamsha);
+        $jinput         = JFactory::getApplication()->input;
+        $chart_id       = $jinput->get('chart', 'default_value', 'filter');
+        $chart_id       = str_replace("chart","horo", $chart_id);
         
         $db         = JFactory::getDbo();
         $query      = $db->getQuery(true);
@@ -19,7 +19,7 @@ class HoroscopeModelNavamsha extends HoroscopeModelLagna
 
         $query      ->select($db->quoteName(array('fname','gender','dob','tob','pob','lon','lat','timezone','dst')));
         $query      ->from($db->quoteName('#__horo_query'));
-        $query      ->where($db->quoteName('uniq_id') . ' = '. $db->quote($navamsha));
+        $query      ->where($db->quoteName('uniq_id') . ' = '. $db->quote($chart_id));
         $db         ->setQuery($query);
         $result     = $db->loadAssoc();
         
@@ -48,7 +48,7 @@ class HoroscopeModelNavamsha extends HoroscopeModelLagna
                         "tob"=>$tob,"pob"=>$pob,"lon"=>$lon,"lat"=>$lat,"tmz"=>$tmz,
                         "dst"=>$dst,"gmt_date"=>$gmt_date,"gmt_time"=>$gmt_time
                     );
-        //print_r($data);exit;
+        print_r($data);exit;
        $horo                = $this->getWesternHoro($data);
        $ayanamsha           = $this->applyAyanamsha($dob, $horo); 
     }
@@ -130,6 +130,6 @@ class HoroscopeModelNavamsha extends HoroscopeModelLagna
             $array          = array_merge($array,$planet);
             //print_r($array);exit;
         }
-       print_r($array);exit;
+       return $array;
     }
 }

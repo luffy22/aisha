@@ -1160,47 +1160,6 @@ class HoroscopeModelLagna extends JModelItem
         $data           = array_merge($user_details,$moon, $result);
         return $data;
     }
-    public function getNavamsha($data)
-    {
-        $alldata        = $this->getWesternHoro($data);
-        $array          = array();
-        print_r($alldata);exit;
-        /*for($i=0;$i<count($alldata);$i++)
-        {
-            $values      = array_values($alldata[$i]);
-            $array       = array_merge($array, $key=>$values);
-        }
-        print_r($array);exit;*/
-        foreach($alldata as $key=>$value)
-        {
-            
-        }
-        $planet         = array("sun","moon","mercury","venus","mars","jupiter",
-                                "saturn","rahu","ketu","uranus","neptune","pluto");
-        $array          = array();
-        $db             = JFactory::getDbo();
-        $query          = $db->getQuery(true);
-        foreach($planet as $key=>$sign)
-        {
-            $query      ->clear();
-            $sign       = $alldata[$key.'_sign'];
-            echo $sign;exit;
-            $dist       = str_replace("&deg;",".",$alldata[$key."_distance"]);
-            $dist       = str_replace("'","",$dist);
-            
-            $query          ->select($db->quoteName('navamsha_sign'));
-            $query          ->from($db->quoteName('#__navamsha'));
-            $query          ->where($db->quoteName('sign').'='.$db->quote($sign).' AND '.
-                                $db->quote($dist).' BETWEEN '.
-                                $db->quoteName('low_deg').' AND '.
-                                $db->quoteName('up_deg')); 
-            $db             ->setQuery($query);
-            $result         = $db->loadAssoc();
-            $planet         = array($key."_nav_sign"=>$result['navamsha_sign']);
-            $array          = array_merge($array,$planet);
-            
-        }
-       print_r($array);exit;
-    }
+    
 }
 ?>
