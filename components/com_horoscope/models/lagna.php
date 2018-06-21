@@ -84,8 +84,9 @@ class HoroscopeModelLagna extends JModelItem
                     );
         //print_r($data);exit;
         
-        $this->data     = $this->getWesternHoro($data);
-        //$this->data           = $this->getNavamsha($data);
+        $westernHoro            = $this->getWesternHoro($data);        // get the western based horoscope date(sayana values)
+        $getAyanamsha           = $this->getAyanamshaCorrection($dob, $westernHoro);
+        $this->data             = array_merge($data, $getAyanamsha);
         return $this->data;
     }
     /*

@@ -15,7 +15,9 @@ $planets        = array("sun","moon","mercury","venus","mars","jupiter","saturn"
         </tr>
         <tr>
             <th>Date Of Birth</th>
-            <td><?php echo $this->data['dob']; ?></td>
+            <td><?php 
+                $date   = new DateTime($this->data['dob']);
+            echo $date->format('dS F Y'); ?></td>
         </tr>
         <tr>
             <th>Time Of Birth</th>

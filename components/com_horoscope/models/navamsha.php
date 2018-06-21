@@ -50,7 +50,43 @@ class HoroscopeModelNavamsha extends HoroscopeModelLagna
                     );
         //print_r($data);exit;
        $horo                = $this->getWesternHoro($data);
-       print_r($horo);exit;
+       //$ayanamsha          
     }
-    
+    public function applyAyanamsha($data)
+    {
+     //echo "ayanamsha correction";exit;
+        //print_r($data);exit;
+        $grahas                 = array();
+        $year                   = substr($dob,0,4);       // get the year from dob. For example 2001
+
+        $db                     = JFactory::getDbo();
+        $query                  = $db->getQuery(true);
+        $query                  ->select($db->quoteName('ayanamsha'));
+        $query                  ->from($db->quoteName('#__lahiri_ayanamsha'));
+        $query                  ->where($db->quoteName('year').'='.$db->quote($year));
+        $query                  ->setLimit('1');
+        $db                     ->setQuery($query);
+        $corr                   = $db->loadAssoc();     // the ayanamsha correction
+        //print_r($corr);exit;
+        $corr                   = explode(":",$corr['ayanamsha']);
+        //print_r($corr);exit;
+        foreach($data as $key=>$planets)
+        {
+            $planet         = explode(":", $planets);
+            
+             // below line gets the ayanamsha(Indian) value after 
+            // subtracting ayanamsha correction from western value
+            $ayan_val       = $this->subDegMinSec($planet[0], $planet[1], $planet[2], $corr[0], $corr[1],$corr[2]);
+            $sign           = $this->calcDetails($ayan_val);
+            $sign_det           = array($key."_sign"=>$sign);
+            $dist           = $this->calcDistance($ayan_val);
+            $dist_det           = array($key."_dist"=>$dist);
+            
+            //echo $key." ".$sign." ".$dist."<br/>";
+            $details        = $this->getPlanetaryDetails($key, $sign, $dist);
+            $graha[]          = array_merge($sign_det,$dist_det,$details);
+        }
+        
+        return $graha;
+    }
 }

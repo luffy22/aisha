@@ -12,18 +12,18 @@ class PlgContentAskExpert extends JPlugin
             $app                = JFactory::getApplication();
             $view               = $app->input->get('view');
             $path               = JPluginHelper::getLayoutPath('content', 'askexpert');
-            //include_once "/home/astroxou/php/Net/GeoIP.php";
-            //$geoip                  = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoLiteCity.dat");
-            $ip                         = '117.196.1.11';
+            include_once "/home/astroxou/php/Net/GeoIP.php";
+            $geoip                  = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoLiteCity.dat");
+            //$ip                         = '117.196.1.11';
             
             //$ip                         = '157.55.39.123';  // ip address
-            //$ip                       = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
+            $ip                       = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
           
-            $info                       = geoip_country_code_by_name($ip);
-            $country                    = geoip_country_name_by_name($ip);
-            //$location               = $geoip->lookupLocation($ip);
-            //$info                   = $location->countryCode;
-            //$country                = $location->countryName;
+            //$info                       = geoip_country_code_by_name($ip);
+            //$country                    = geoip_country_name_by_name($ip);
+            $location               = $geoip->lookupLocation($ip);
+            $info                   = $location->countryCode;
+            $country                = $location->countryName;
             
             if(($context === 'com_content.article')&&($view=='article'))
             {
@@ -206,10 +206,10 @@ class PlgContentAskExpert extends JPlugin
                     $content            .= "<label for='expert_choice' class='control-label'>Payment Type: </label>";
                     if($details['currency'] == 'INR')
                     {
-                        $content            .= "<input type='radio' name='expert_choice' id='expert_choice1' value='ccavenue' checked /> <i class='fa fa-credit-card'></i> Credit/Debit Card/Netbanking
+                        $content            .= "<input type='radio' name='expert_choice' id='expert_choice1' value='ccavenue' /> <i class='fa fa-credit-card'></i> Credit/Debit Card/Netbanking
                                                 <input type='radio' name='expert_choice' id='expert_choice2' value='cheque' /> Cheque
                                                 <input type='radio' name='expert_choice' id='expert_choice3' value='direct' /> Direct Transfer
-                                                <input type='radio' name='expert_choice' id='expert_choice4' value='paytm' />  <img src='".JURi::base()."images/paytm.png' />";
+                                                <input type='radio' name='expert_choice' id='expert_choice4' value='paytm' checked />  <img src='".JURi::base()."images/paytm.png' />";
                         $content            .=  " <input type='radio' name='expert_choice' id='expert_choice5' value='bhim' /> <img src='".JURi::base()."images/bhim.png' /> Bhim App";
                         $content            .=  " <input type='radio' name='expert_choice' id='expert_choice6' value='phonepe' /> <img src='".JURi::base()."images/phonepe.png' /> PhonePe";
        
