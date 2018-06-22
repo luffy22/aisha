@@ -5,7 +5,7 @@ jimport('joomla.application.component.modelitem');
 JModelLegacy::addIncludePath(JPATH_SITE.'/components/com_horoscope/models/');
 $model = JModelLegacy::getInstance('lagna', 'horoscopeModel');
 
-class HoroscopeModelNakshatra extends HoroscopeModelLagna
+class HoroscopeModelMoon extends HoroscopeModelLagna
 {
     public function getData()
     {
@@ -52,7 +52,7 @@ class HoroscopeModelNakshatra extends HoroscopeModelLagna
        $horo                = $this->getMoonData($data);
        //$ayanamsha           = $this->applyAyanamsha($dob, $horo); 
     }
-       
+      
     protected function getMoonData($data)
     {
         //print_r($data);exit;

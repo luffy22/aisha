@@ -50,7 +50,7 @@ class HoroscopeModelNavamsha extends HoroscopeModelLagna
                     );
         //print_r($data);exit;
        $horo                = $this->getWesternHoro($data);
-       $ayanamsha           = $this->applyAyanamsha($dob, $horo); 
+       $navamsha           = $this->getNavamsha($data, $horo); 
     }
     public function calcDistance($planet)
     {
@@ -59,46 +59,12 @@ class HoroscopeModelNavamsha extends HoroscopeModelLagna
         $sign_num       = intval($details[0]%30);
         return $sign_num.".".$details[1];
     }
-    public function applyAyanamsha($dob, $data)
+    
+    public function getNavamsha($data, $horo)
     {
-     //echo "ayanamsha correction";exit;
-        //print_r($data);exit;
-        $grahas                 = array();
-        $year                   = substr($dob,0,4);       // get the year from dob. For example 2001
-
-        $db                     = JFactory::getDbo();
-        $query                  = $db->getQuery(true);
-        $query                  ->select($db->quoteName('ayanamsha'));
-        $query                  ->from($db->quoteName('#__lahiri_ayanamsha'));
-        $query                  ->where($db->quoteName('year').'='.$db->quote($year));
-        $query                  ->setLimit('1');
-        $db                     ->setQuery($query);
-        $corr                   = $db->loadAssoc();     // the ayanamsha correction
-        //print_r($corr);exit;
-        $corr                   = explode(":",$corr['ayanamsha']);
-        //print_r($corr);exit;
-        foreach($data as $key=>$planets)
-        {
-            $planet         = explode(":", $planets);
-            
-             // below line gets the ayanamsha(Indian) value after 
-            // subtracting ayanamsha correction from western value
-            $ayan_val       = $this->subDegMinSec($planet[0], $planet[1], $planet[2], $corr[0], $corr[1],$corr[2]);
-            $sign           = $this->calcDetails($ayan_val);
-            $sign_det           = array($key."_sign"=>$sign);
-            $dist           = $this->calcDistance($ayan_val);
-            $dist_det           = array($key."_dist"=>$dist);
-            
-            //echo $key." ".$sign." ".$dist."<br/>";
-            $details        = $this->getPlanetaryDetails($key, $sign, $dist);
-            $graha[]          = array_merge($sign_det,$dist_det);
-        }
-        
-        $this->getNavamsha($graha);
-    }
-    public function getNavamsha($data)
-    {
-        //print_r($data);exit;
+        $dob        = $data['dob'];
+        $ayanamsha          = $this->getAyanamshaCorrection($dob, $horo);
+        //print_r($ayanamsha);exit;
         /*for($i=0;$i<count($alldata);$i++)
         {
             $values      = array_values($alldata[$i]);
@@ -111,11 +77,11 @@ class HoroscopeModelNavamsha extends HoroscopeModelLagna
         $array          = array();
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
-        for($i=0;$i<count($data);$i++)
+        for($i=0;$i<count($horo);$i++)
         {
             $query      ->clear();
-            $key        = array_keys($data[$i]);
-            $val        = array_values($data[$i]);
+            $key        = array_keys($ayanamsha[$i]);
+            $val        = array_values($ayanamsha[$i]);
             $sign       = $val[0];$dist     = $val[1];
             
             $query          ->select($db->quoteName('navamsha_sign'));
