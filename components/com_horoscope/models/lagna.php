@@ -139,25 +139,7 @@ class HoroscopeModelLagna extends JModelItem
         
         return $deg.":".$min.":".$sec;
     }
-    // getting the differential transit when only hours and 
-    // minutes are specified. Return value in Degree, Hours and Minute Format.
-    public function getDiffTransit($hr,$min ,$intval, $intval2)
-    {
-        $transit    = ($hr*60*4)+($min*4);
-        $intval     = $intval;
-        $intval2    = $intval2;
-        $transit    = round((($transit*$intval2)/$intval),2);
-        $value      = $this->convertDecimalToDegree($transit);
-        return $value;
-    }
-    // This one is for values which are already described in seconds
-    // without converting values into seconds
-    public function getDiffTransit2($val1, $val2, $intval)
-    {
-        $transit    = abs((($val1*$val2)/$intval));
-        $value      = $this->convertDecimalToDegree($transit);
-        return $value;
-    }
+       
     // converting decimal to degree for example 12.22 = 12 deg 22 min 30 sec
     public function convertDecimalToDegree($decimal)
     {
@@ -200,20 +182,7 @@ class HoroscopeModelLagna extends JModelItem
         $value          = $deg.":".$min.":".$sec;
         return $value;
     }
-    // divinding degree, minute and second by divisor
-    public function divideDegMinSec($deg,$min,$sec,$divisor)
-    {
-        $new_deg        = intval($deg/$divisor);
-        $deg_mod        = $deg%$divisor;
-        $new_min        = $min+($deg_mod*60);
-        $new_min        = intval($new_min/$divisor);
-        $min_mod        = $min%$divisor;
-        $sec            = $sec+($min_mod*60);
-        $new_sec        = intval($sec/$divisor);
-        
-        $value          = $this->convertDegMinSec($new_deg, $new_min, $new_sec);
-        return $value;
-    }
+    
     public function getAddSubTime($date,$val1,$val2,$sign)
     {
 
@@ -897,8 +866,9 @@ class HoroscopeModelLagna extends JModelItem
         }
         return $id;
     }
-    public function getAscendant($details)
+    public function getArticle($title, $type)
     {
+        $type               = trim($type);
         //print_r($details);exit;
         $gender             = $details['gender'];
         $lagna              = $this->calculatelagna($details);
@@ -906,14 +876,20 @@ class HoroscopeModelLagna extends JModelItem
         $id                 = $this->getAscendantId($gender,$sign);
         $db                 = JFactory::getDbo();
         $query              = $db->getQuery(true);
-        $query              ->select($db->quoteName(array('id','introtext')));
+        $query              ->select($db->quoteName(array('id','title','introtext')));
         $query              ->from($db->quoteName('#__content'));
-        $query              ->where($db->quoteName('id').'='.$db->quote($id)); 
+        if($type=="Moon")
+        {
+            $query              ->where($db->quoteName('title').'='.$db->quote($title." Sign"));
+        }
+        else if($type=="Nakshatra")
+        {
+            $query              ->where($db->quoteName('title').'='.$db->quote($title." Nakshatra")); 
+        }
         $db                 ->setQuery($query);
         $result             = $db->loadAssoc();
         
-        $data           = array_merge($details,$lagna,$result);
-        return $data;
+        return $result;
     }
    
     

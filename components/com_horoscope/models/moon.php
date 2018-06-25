@@ -51,6 +51,7 @@ class HoroscopeModelMoon extends HoroscopeModelLagna
        //print_r($data);exit;
        $horo                = $this->getMoonData($data);
        //$ayanamsha           = $this->applyAyanamsha($dob, $horo); 
+       return $horo;
     }
       
     protected function getMoonData($data)
@@ -148,10 +149,13 @@ class HoroscopeModelMoon extends HoroscopeModelLagna
         $dist           = explode(".",$distance);
         $distance       = $this->convertDegMinSec($dist[0], $dist[1], 0);
         $graha          = array('moon'=>$distance);
-        $moon                = $this->getAyanamshaCorrection($dob, $graha);
-        print_r($moon);exit;
+        $moon           = $this->getAyanamshaCorrection($dob, $graha);
+        $sign           = $moon[0]['moon_sign'];
+        
        //$data                    = array_merge($data, $grahas);
        //return $data;
+        $text           = $this->getArticle($sign,"Moon");
+        return $text;
     }
     
 }

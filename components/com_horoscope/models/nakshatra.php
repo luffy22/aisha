@@ -51,6 +51,7 @@ class HoroscopeModelNakshatra extends HoroscopeModelLagna
        //print_r($data);exit;
        $horo                = $this->getMoonData($data);
        //$ayanamsha           = $this->applyAyanamsha($dob, $horo); 
+       return $horo;
     }
        
     protected function getMoonData($data)
@@ -149,9 +150,12 @@ class HoroscopeModelNakshatra extends HoroscopeModelLagna
         $distance       = $this->convertDegMinSec($dist[0], $dist[1], 0);
         $graha          = array('moon'=>$distance);
         $moon                = $this->getAyanamshaCorrection($dob, $graha);
-        print_r($moon);exit;
+        $sign           = $moon[0]['moon_nakshatra'];
+        
        //$data                    = array_merge($data, $grahas);
        //return $data;
+        $text           = $this->getArticle($sign,"Nakshatra");
+        return $text;
     }
     
 }
