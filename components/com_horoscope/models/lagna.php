@@ -285,7 +285,7 @@ class HoroscopeModelLagna extends JModelItem
         $db                 ->setQuery($query);
         $count              = count($db->loadResult());
         $sidereal_12am      =$db->loadAssoc();
-        
+        //print_r($sidereal_12am);exit;
         $date               = new DateTime($dob);
         $date               ->setTime('00','00','00');
         $date1              = new DateTime($dob);
@@ -314,6 +314,7 @@ class HoroscopeModelLagna extends JModelItem
         $result                 = $db->loadAssoc();
         $diff                   = explode(":",$result['diff']);
         $date1                  ->add(new DateInterval('PT'.$diff[1].'S'));
+        print_r($date1);exit;
         return $date1;
     }
     public function getLmt($data)
@@ -442,7 +443,7 @@ class HoroscopeModelLagna extends JModelItem
     }
     public function calculatelagna($data)
     {
-        $this->getWesternHoro($data);   
+        $sid_time       = $this->getSiderealTime($data);
         /*$lat            = explode(":",$data['lat']);
         $dir            = $lat[2];
         $lat            = $lat[0].'.'.$lat[1];
@@ -599,7 +600,7 @@ class HoroscopeModelLagna extends JModelItem
     protected function getWesternHoro($data)
     {
         //print_r($data);exit;
-        //$lagna          = $this->calculatelagna($data);
+        $lagna          = $this->calculatelagna($data);
         $dob            = $data['gmt_date'];
         $tob            = explode(":",$data['gmt_time']);
         
