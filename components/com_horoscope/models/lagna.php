@@ -272,7 +272,7 @@ class HoroscopeModelLagna extends JModelItem
     // Method to get the sidereal Time. New method converts time to gmt as sidereal time is for gmt 00:00:00 hrs
     public function getSiderealTime($data)
     {
-        //print_r($data);exit;
+        print_r($data);exit;
         $lon                = explode(":", $data['lon']);
         $dob                = $data['dob'];
         $gmt_time           = explode(':',$data['gmt_time']);
