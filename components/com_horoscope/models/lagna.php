@@ -3,13 +3,14 @@ defined('_JEXEC') or die;  // No direct Access
 // import Joomla modelitem library
 jimport('joomla.application.component.modelitem');
 require_once JPATH_COMPONENT.'/controller.php';
+//require_once JPATH;
+
+$libPath = JPATH_BASE.'/sweph/';
+putenv("PATH=$libPath");
 class HoroscopeModelLagna extends JModelItem
 {
     public $data;
-    public function justcall()
-    {
-        echo "calling successful";
-    }
+   
     public function getLagna($user_details)
     {
         // Assigning the variables
@@ -46,6 +47,7 @@ class HoroscopeModelLagna extends JModelItem
     }
     public function getData()
     {
+        $libPath        = JPATH_BASE.'/sweph/';
         $jinput         = JFactory::getApplication()->input;
         $horo_id        = $jinput->get('chart', 'default_value', 'filter');
         $horo_id        = str_replace("chart","horo",$horo_id);
@@ -66,28 +68,31 @@ class HoroscopeModelLagna extends JModelItem
         $lat            = $result['lat'];
         $lon            = $result['lon'];
         $tmz            = $result['timezone'];
-        $dst            = $result['dst'];
-        // fetches the Indian standard time and Indian Date for the given time and birth
-        $getGMT         = explode("_",$this->getGMTTime($dob, $tob, $tmz, $dst));
-        $gmt_date       = $getGMT[0];
-        $gmt_time       = $getGMT[1];
 
-        /* 
-        *  @param fullname, gender, date of birth, time of birth, 
-        *  @param longitude, latitude, timezone and
-        *  @param timezone in hours:minutes:seconds format
-        */ 
-        $data  = array(
-                        "fname"=>$fname,"gender"=>$gender,"dob"=>$dob,
-                        "tob"=>$tob,"pob"=>$pob,"lon"=>$lon,"lat"=>$lat,"tmz"=>$tmz,
-                        "dst"=>$dst,"gmt_date"=>$gmt_date,"gmt_time"=>$gmt_time
-                    );
-        //print_r($data);exit;
-        
-        $westernHoro            = $this->getWesternHoro($data);        // get the western based horoscope date(sayana values)
-        $getAyanamsha           = $this->getAyanamshaCorrection($dob, $westernHoro);
-        $this->data             = array_merge($data, $getAyanamsha);
-        return $this->data;
+        $birthDate = new DateTime( '1985-08-22 18:30:00');
+        //echo $birthDate->format('Y-m-d H:i:s'); echo '<br>';
+        $timezone = 5.50; 
+
+        /**
+         * Converting birth date/time to UTC
+         */
+        $offset = $timezone * (60 * 60);
+        $birthTimestamp = strtotime($birthDate->format('Y-m-d H:i:s'));
+        $utcTimestamp = $birthTimestamp - $offset;
+        //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
+
+        $date = date('d.m.Y', $utcTimestamp);
+        $time = date('H:i:s', $utcTimestamp);
+
+        $h_sys = 'P';
+
+// More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
+        exec ("swetest -edir$libPath -b$date -ut$time -p0123456789DAmt -sid1 -eswe -house$lon,$lat,$h_sys -fPls -g, -head", $output);
+
+
+        # OUTPUT ARRAY
+        # Planet Name, Planet Degree, Planet Speed per day
+        return $output;
     }
     /*
      * Get The Greenwich Mean Time from given time
@@ -443,7 +448,7 @@ class HoroscopeModelLagna extends JModelItem
     }
     public function calculatelagna($data)
     {
-        $sid_time       = $this->getSiderealTime($data);
+        $sid_time       = $this->justcall();
         /*$lat            = explode(":",$data['lat']);
         $dir            = $lat[2];
         $lat            = $lat[0].'.'.$lat[1];
