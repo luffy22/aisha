@@ -92,7 +92,21 @@ class HoroscopeModelLagna extends JModelItem
 
         # OUTPUT ARRAY
         # Planet Name, Planet Degree, Planet Speed per day
-        return $output;
+        $planets        = $this->getPlanets($output);
+    }
+    
+    public function getPlanets($data)
+    {
+        $planets        = array();
+        for($i=0;$i<count($data);$i++)
+        {
+            $planet         = $data[0];
+            $planet         = explode(",", $planet);
+
+            $deg            = $this->convertDecimalToDegree($planet[1]);
+            echo $deg;exit;
+            
+        }
     }
     /*
      * Get The Greenwich Mean Time from given time
@@ -146,15 +160,18 @@ class HoroscopeModelLagna extends JModelItem
     }
        
     // converting decimal to degree for example 12.22 = 12 deg 22 min 30 sec
-    public function convertDecimalToDegree($decimal)
+    public function convertDecimalToDegree($dec)
     {
-        $deg        = round(($decimal/(60*4)),4);
-        $real_deg   = explode(".",$deg);
-        $min        = abs(($deg-$real_deg[0])*60);
-        $real_min   = explode(".", $min);
-        $sec        = abs(($deg-$real_deg[0]-($real_min[0]/60))*3600);
-        $real_sec   = explode(".", $sec);
-        return $real_deg[0].":".$real_min[0].":".$real_sec[0];
+         // Converts decimal format to DMS ( Degrees / minutes / seconds ) 
+        $vars = explode(".",$dec);
+        $deg = $vars[0];
+        $tempma = "0.".$vars[1];
+
+        $tempma = $tempma * 3600;
+        $min = floor($tempma / 60);
+        $sec = round($tempma - ($min*60),0);
+
+        return $deg.":".$min.":".$sec;
     }
     // adding degree, minutes seconds
     public function addDegMinSec($deg1,$min1,$sec1,$deg2,$min2,$sec2)
