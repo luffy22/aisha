@@ -64,28 +64,48 @@ class HoroscopeModelLagna extends JModelItem
         $gender         = $result['gender'];
         $dob            = $result['dob'];
         $tob            = $result['tob'];
+        //echo $tob;exit;
         $pob            = $result['pob'];
-        $lat            = $result['lat'];
-        $lon            = $result['lon'];
-        $tmz            = $result['timezone'];
+        $lat            = explode(":",$result['lat']);
+        if($lat[2]=="N")
+        {
+            $lat        = $lat[0].".".$lat[1];
+        }
+        else if($lat[2]=="S")
+        {
+            $lat        = "-".$lat[0].".".$lat[1];
+        }
+        $lon            = explode(":",$result['lon']);
+        if($lon[2]=="E")
+        {
+            $lon        = $lon[0].".".$lon[1];
+        }
+        else if($lon[2]=="W")
+        {
+            $lon        = "-".$lon[0].".".$lon[1];
+        }
+        
+        $tmz            = explode(":",$result['timezone']);
+        $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
+        
 
-        $birthDate = new DateTime( '1985-08-22 18:30:00');
-        //echo $birthDate->format('Y-m-d H:i:s'); echo '<br>';
-        $timezone = 5.50; 
+        $birthDate = new DateTime($dob." ".$tob);
+        //echo $birthDate->format('Y-m-d H:i:s'); exit;;
+        //$timezone = +5.50; 
 
         /**
          * Converting birth date/time to UTC
          */
-        $offset = $timezone * (60 * 60);
+        $offset = $tmz * (60 * 60);
         $birthTimestamp = strtotime($birthDate->format('Y-m-d H:i:s'));
         $utcTimestamp = $birthTimestamp - $offset;
         //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
 
         $date = date('d.m.Y', $utcTimestamp);
         $time = date('H:i:s', $utcTimestamp);
-
+        
         $h_sys = 'P';
-
+        $output = "";
 // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
         exec ("swetest -edir$libPath -b$date -ut$time -p0123456789DAmt -sid1 -eswe -house$lon,$lat,$h_sys -fPls -g, -head", $output);
 
@@ -93,20 +113,34 @@ class HoroscopeModelLagna extends JModelItem
         # OUTPUT ARRAY
         # Planet Name, Planet Degree, Planet Speed per day
         $planets        = $this->getPlanets($output);
+        $results         = array_merge($result, $planets);
+        return $results;
+        //var_dump($output);
     }
     
     public function getPlanets($data)
     {
-        $planets        = array();
+        //print_r($data);exit;
+        $graha_12           = array("Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn","Uranus","Neptune","Pluto","mean Node","Ascendant");
+        $planets             = array();
         for($i=0;$i<count($data);$i++)
         {
-            $planet         = $data[0];
-            $planet         = explode(",", $planet);
-
-            $deg            = $this->convertDecimalToDegree($planet[1]);
-            echo $deg;exit;
+            $planet         = $data[$i];
+            $var            = explode(",", $planet);
+            $planet         = trim($var[0]);
             
+            if(in_array($planet, $graha_12))
+            {
+                //echo $planet;exit;
+                $sign           = $this->calcDetails($var[1]);
+                
+                $distance       = $this->convertDecimalToDegree($var[1]);
+                $planet_data    = $this->getPlanetaryDetails($planet, $sign, $distance);
+                $planet         = array($sign,$distance,$planet_data);
+                $planets        = array_merge($planets,$planet);
+            }
         }
+        return $planets;
     }
     /*
      * Get The Greenwich Mean Time from given time
@@ -164,14 +198,14 @@ class HoroscopeModelLagna extends JModelItem
     {
          // Converts decimal format to DMS ( Degrees / minutes / seconds ) 
         $vars = explode(".",$dec);
-        $deg = $vars[0];
+        $deg = $vars[0]%30;
         $tempma = "0.".$vars[1];
 
         $tempma = $tempma * 3600;
         $min = floor($tempma / 60);
         $sec = round($tempma - ($min*60),0);
 
-        return $deg.":".$min.":".$sec;
+        return $deg."&deg;".$min."'".$sec."''";
     }
     // adding degree, minutes seconds
     public function addDegMinSec($deg1,$min1,$sec1,$deg2,$min2,$sec2)
@@ -229,7 +263,7 @@ class HoroscopeModelLagna extends JModelItem
     // Get planet sign
     public function calcDetails($planet)
     {
-        $details        = explode(":", $planet);
+        $details        = explode(".", $planet);
         $sign_num       = intval($details[0]/30);
         switch($sign_num)
         {
@@ -622,7 +656,7 @@ class HoroscopeModelLagna extends JModelItem
     protected function getWesternHoro($data)
     {
         //print_r($data);exit;
-        $lagna          = $this->calculatelagna($data);
+        //$lagna          = $this->calculatelagna($data);
         $dob            = $data['gmt_date'];
         $tob            = explode(":",$data['gmt_time']);
         

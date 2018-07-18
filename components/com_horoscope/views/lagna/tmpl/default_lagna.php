@@ -1,6 +1,6 @@
 <?php
 defined('_JEXEC') or die();
-//print_r($this->data);exit;
+print_r($this->data);exit;
 $planets        = array("sun","moon","mercury","venus","mars","jupiter","saturn","rahu","ketu","uranus","neptune","pluto");
 ?>
 <div class="container-fluid">
