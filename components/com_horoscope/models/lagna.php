@@ -121,26 +121,46 @@ class HoroscopeModelLagna extends JModelItem
     public function getPlanets($data)
     {
         //print_r($data);exit;
-        $graha_12           = array("Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn","Uranus","Neptune","Pluto","mean Node","Ascendant");
-        $planets             = array();
+        $graha_12               = array("Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn","Uranus","Neptune","Pluto","mean Node","Ascendant");
+        $planets                = array();
         for($i=0;$i<count($data);$i++)
         {
-            $planet         = $data[$i];
-            $var            = explode(",", $planet);
-            $planet         = trim($var[0]);
+            $planet             = $data[$i];
+            $var                = explode(",", $planet);
+            $planet             = trim($var[0]);
+            $dist               = $var[1];
             
             if(in_array($planet, $graha_12))
             {
-                //echo $planet;exit;
-                $sign           = $this->calcDetails($var[1]);
-                
-                $distance       = $this->convertDecimalToDegree($var[1]);
-                $planet_data    = $this->getPlanetaryDetails($planet, $sign, $distance);
-                $planet         = array($sign,$distance,$planet_data);
-                $planets        = array_merge($planets,$planet);
+                if(strpos($var[2],"-"))
+                {
+                    if($planet == "mean Node")
+                    {
+                        $planet     = str_replace("mean Node","Rahu", $planet);
+                        $ketu           = $dist+180;
+                        if($ketu>359)
+                        {
+                            $ketu       = $ketu-360;
+                        }
+                        $ketu               = array("Ketu"=>$ketu.":r");
+                       
+                    }
+                    $dist           = $dist.":r";
+                    $details        = array($planet => $dist);
+                    if($planet == "Rahu")
+                    {
+                        $details    = array_merge($details, $ketu);
+                    }
+                }
+                else
+                {
+                    $details        = array($planet => $dist);
+                }
+                $planets        = array_merge($planets, $details);
             }
         }
-        return $planets;
+        $planet_details             = $this->getDetails($planets);
+        return $planet_details;
     }
     /*
      * Get The Greenwich Mean Time from given time
@@ -786,39 +806,27 @@ class HoroscopeModelLagna extends JModelItem
        //$data                    = array_merge($data, $grahas);
        //return $data;
     }
-    protected function getAyanamshaCorrection($dob, $data)
+    protected function getDetails($data)
     {
-        //echo "ayanamsha correction";exit;
         //print_r($data);exit;
-        $grahas                 = array();
-        $year                   = substr($dob,0,4);       // get the year from dob. For example 2001
-
-        $db                     = JFactory::getDbo();
-        $query                  = $db->getQuery(true);
-        $query                  ->select($db->quoteName('ayanamsha'));
-        $query                  ->from($db->quoteName('#__lahiri_ayanamsha'));
-        $query                  ->where($db->quoteName('year').'='.$db->quote($year));
-        $query                  ->setLimit('1');
-        $db                     ->setQuery($query);
-        $corr                   = $db->loadAssoc();     // the ayanamsha correction
-        //print_r($corr);exit;
-        $corr                   = explode(":",$corr['ayanamsha']);
-        //print_r($corr);exit;
-        foreach($data as $key=>$planets)
+        foreach($data as $key=>$distance)
         {
-            $planet         = explode(":", $planets);
-            
-             // below line gets the ayanamsha(Indian) value after 
-            // subtracting ayanamsha correction from western value
-            $ayan_val       = $this->subDegMinSec($planet[0], $planet[1], $planet[2], $corr[0], $corr[1],$corr[2]);
-            $sign           = $this->calcDetails($ayan_val);
-            $sign_det           = array($key."_sign"=>$sign);
-            $dist           = $this->calcDistance($ayan_val);
+            if(strpos($distance,":r"))
+            {
+                $status     = array("status"=>"retro");
+            }
+            else
+            {
+                $status     = array("status"=>"normal");
+            }
+            $sign           = $this->calcDetails($distance);
+            $sign_det       = array($key."_sign"=>$sign);
+            $dist           = $this->convertDecimalToDegree(str_replace(":r","",$distance));
             $dist_det           = array($key."_dist"=>$dist);
             
             //echo $key." ".$sign." ".$dist."<br/>";
             $details        = $this->getPlanetaryDetails($key, $sign, $dist);
-            $graha[]          = array_merge($sign_det,$dist_det,$details);
+            $graha[]          = array_merge($sign_det,$dist_det,$status,$details);
         }
         return $graha;
     }

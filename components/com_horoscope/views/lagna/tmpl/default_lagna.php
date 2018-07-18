@@ -1,7 +1,7 @@
 <?php
 defined('_JEXEC') or die();
-print_r($this->data);exit;
-$planets        = array("sun","moon","mercury","venus","mars","jupiter","saturn","rahu","ketu","uranus","neptune","pluto");
+//print_r($this->data);exit;
+$planets        = array("Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn","Uranus","Neptune","Pluto","Rahu","Ketu","Ascendant");
 ?>
 <div class="container-fluid">
     <table class="table table-bordered table-hover">
@@ -37,7 +37,7 @@ $planets        = array("sun","moon","mercury","venus","mars","jupiter","saturn"
         </tr>
         <tr>
             <th>Timezone</th>
-            <td><?php echo "GMT&nbsp;".$this->data['tmz']; ?></td>
+            <td><?php echo "GMT&nbsp;".$this->data['timezone']; ?></td>
         </tr>
         <tr>
         <th>Daylight Savings</th>
@@ -56,15 +56,17 @@ $planets        = array("sun","moon","mercury","venus","mars","jupiter","saturn"
             <th>Distance</th>
             <th>Nakshatra</th>
             <th>Nakshatra Lord</th>
+            
         </tr>
     <?php 
-           for($i=0;$i<13;$i++)
+           for($i=0;$i<count($planets);$i++)
            {
-                $sign    = $planets[$i]."_sign";
-                $sign_lord       = $planets[$i]."_sign_lord";
-                $dist    = $planets[$i]."_dist";
-                $nakshatra       = $planets[$i]."_nakshatra";
-                $nakshatra_lord  = $planets[$i]."_nakshatra_lord";
+                $sign           = $planets[$i]."_sign";
+                $sign_lord      = $planets[$i]."_sign_lord";
+                $dist           = $planets[$i]."_dist";
+                $nakshatra      = $planets[$i]."_nakshatra";
+                $nakshatra_lord = $planets[$i]."_nakshatra_lord";
+                
     ?>
         <tr>
             <td><?php echo ucfirst($planets[$i]);  ?></td>
