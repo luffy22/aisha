@@ -69,7 +69,7 @@ $planets        = array("Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn"
                 
     ?>
         <tr>
-            <td><?php echo ucfirst($planets[$i]);  ?></td>
+            <td><?php echo $planets[$i];  ?></td>
             <td><?php echo $this->data[$i][$sign]; ?></td>
             <td><?php echo $this->data[$i][$sign_lord]; ?></td>
             <td><?php echo $this->data[$i][$dist]; ?></td>

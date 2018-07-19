@@ -33,10 +33,7 @@ class HoroscopeModelMoon extends HoroscopeModelLagna
         $tmz            = $result['timezone'];
         $dst            = $result['dst'];
         
-        // fetches the Indian standard time and Indian Date for the given time and birth
-        $getGMT         = explode("_",$this->getGMTTime($dob, $tob, $tmz, $dst));
-        $gmt_date       = $getGMT[0];
-        $gmt_time       = $getGMT[1];
+        
 
         /* 
         *  @param fullname, gender, date of birth, time of birth, 
