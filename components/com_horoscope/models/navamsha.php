@@ -4,11 +4,13 @@ defined('_JEXEC') or die;  // No direct Access
 jimport('joomla.application.component.modelitem');
 JModelLegacy::addIncludePath(JPATH_SITE.'/components/com_horoscope/models/');
 $model = JModelLegacy::getInstance('lagna', 'horoscopeModel');
-
+$libPath = JPATH_BASE.'/sweph/';
+putenv("PATH=$libPath");
 class HoroscopeModelNavamsha extends HoroscopeModelLagna
 {
     public function getData()
     {
+        $libPath        = JPATH_BASE.'/sweph/';
         $jinput     = JFactory::getApplication()->input;
         $navamsha   = $jinput->get('chart', 'default_value', 'filter');
         $navamsha   = str_replace("chart","horo", $navamsha);
@@ -28,29 +30,51 @@ class HoroscopeModelNavamsha extends HoroscopeModelLagna
         $dob            = $result['dob'];
         $tob            = $result['tob'];
         $pob            = $result['pob'];
-        $lat            = $result['lat'];
-        $lon            = $result['lon'];
-        $tmz            = $result['timezone'];
-        $dst            = $result['dst'];
+        $lat            = explode(":",$result['lat']);
+        if($lat[2]=="N")
+        {
+            $lat        = $lat[0].".".$lat[1];
+        }
+        else if($lat[2]=="S")
+        {
+            $lat        = "-".$lat[0].".".$lat[1];
+        }
+        $lon            = explode(":",$result['lon']);
+        if($lon[2]=="E")
+        {
+            $lon        = $lon[0].".".$lon[1];
+        }
+        else if($lon[2]=="W")
+        {
+            $lon        = "-".$lon[0].".".$lon[1];
+        }
         
-        // fetches the Indian standard time and Indian Date for the given time and birth
-        $getGMT         = explode("_",$this->getGMTTime($dob, $tob, $tmz, $dst));
-        $gmt_date       = $getGMT[0];
-        $gmt_time       = $getGMT[1];
+        $tmz            = explode(":",$result['timezone']);
+        $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
+        
 
-        /* 
-        *  @param fullname, gender, date of birth, time of birth, 
-        *  @param longitude, latitude, timezone and
-        *  @param timezone in hours:minutes:seconds format
-        */ 
-        $data  = array(
-                        "fname"=>$fname,"gender"=>$gender,"dob"=>$dob,
-                        "tob"=>$tob,"pob"=>$pob,"lon"=>$lon,"lat"=>$lat,"tmz"=>$tmz,
-                        "dst"=>$dst,"gmt_date"=>$gmt_date,"gmt_time"=>$gmt_time
-                    );
-        //print_r($data);exit;
-       $horo                = $this->getWesternHoro($data);
-       $navamsha           = $this->getNavamsha($data, $horo); 
+        $birthDate = new DateTime($dob." ".$tob);
+
+         //echo $birthDate->format('Y-m-d H:i:s'); exit;;
+        //$timezone = +5.50; 
+
+        /**
+         * Converting birth date/time to UTC
+         */
+        $offset = $tmz * (60 * 60);
+        $birthTimestamp = strtotime($birthDate->format('Y-m-d H:i:s'));
+        $utcTimestamp = $birthTimestamp - $offset;
+        //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
+
+        $date = date('d.m.Y', $utcTimestamp);
+        $time = date('H:i:s', $utcTimestamp);
+        
+        $h_sys = 'P';
+        $output = "";
+        // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
+        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -house$lon,$lat,$h_sys -fPls -p0123456789m -g, -head", $output);
+        $planets        = $this->getPlanets($output);
+        $navamsha       = $this->getNavamsha($planets);
     }
     public function calcDistance($planet)
     {
@@ -60,27 +84,19 @@ class HoroscopeModelNavamsha extends HoroscopeModelLagna
         return $sign_num.".".$details[1];
     }
     
-    public function getNavamsha($data, $horo)
+    public function getNavamsha($horo)
     {
-        $dob        = $data['dob'];
-        $ayanamsha          = $this->getAyanamshaCorrection($dob, $horo);
-        //print_r($ayanamsha);exit;
-        /*for($i=0;$i<count($alldata);$i++)
-        {
-            $values      = array_values($alldata[$i]);
-            $array       = array_merge($array, $key=>$values);
-        }
-        print_r($array);exit;*/
+        print_r($horo);exit;
         
-        $planet         = array("sun","moon","mercury","venus","mars","jupiter",
-                                "saturn","rahu","ketu","uranus","neptune","pluto");
+        $planet         = array("Ascendant","Sun","Moon","Mercury","Venus","Mars","Jupiter",
+                                "Saturn","Uranus","Neptune","Pluto","Rahu","Ketu",);
         $array          = array();
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
         for($i=0;$i<count($horo);$i++)
         {
             $query      ->clear();
-            $key        = array_keys($ayanamsha[$i]);
+            $key        = array_keys($horo[$i]);
             $val        = array_values($ayanamsha[$i]);
             $sign       = $val[0];$dist     = $val[1];
             

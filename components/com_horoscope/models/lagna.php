@@ -107,8 +107,8 @@ class HoroscopeModelLagna extends JModelItem
         $h_sys = 'P';
         $output = "";
 // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
-        exec ("swetest -edir$libPath -b$date -ut$time -p0123456789DAmt -sid1 -eswe -house$lon,$lat,$h_sys -fPls -g, -head", $output);
-
+        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -house$lon,$lat,$h_sys -fPls -p0123456789m -g, -head", $output);
+        //print_r($output);exit;
 
         # OUTPUT ARRAY
         # Planet Name, Planet Degree, Planet Speed per day
@@ -196,8 +196,13 @@ class HoroscopeModelLagna extends JModelItem
         }
         return $date->format('Y-m-d_H:i:s');
     }
-    
-    public function convertDecimalToDegree($dec)
+    /* 
+     * Converts the decimal version to degree, mins & sec for planetary transits
+     * @param string The decimal version of planetary transit
+     * @param string usage Check what's the purpose of query
+     * @return string Planetary transit in degree:minute:second format
+    */
+    public function convertDecimalToDegree($dec, $usage)
     {
          // Converts decimal format to DMS ( Degrees / minutes / seconds ) 
         $vars = explode(".",$dec);
@@ -207,8 +212,16 @@ class HoroscopeModelLagna extends JModelItem
         $tempma = $tempma * 3600;
         $min = floor($tempma / 60);
         $sec = round($tempma - ($min*60),0);
-
-        return $deg."&deg;".$min."'".$sec."''";
+        
+        if($usage == "details")
+        {
+            if($min < 10){$min  = "0".$min;}
+            return $deg.".".$min;
+        }
+        else
+        {
+            return $deg."&deg;".$min."'".$sec."''";
+        }
     }
    
     public function convertDegMinToSec($deg,$min)
@@ -251,25 +264,17 @@ class HoroscopeModelLagna extends JModelItem
             return "Aries";break;
         }
     }
-    
     // method to get planet details
     // planetary lord, nakshatra, nakshatra lord
-    public function getPlanetaryDetails($planet,$sign,$distance)
+    public function getPlanetaryDetails($planet,$sign,$dist)
     {
-        $distance       = str_replace("&deg;",".",$distance);
-        $distance       = substr($distance, 0, strpos($distance, "'"));
-        $min            = explode(".",$distance);
-        if(strlen($min[1]) == "1")
-        {
-            $distance   = str_replace(".",".0",$distance);
-        }
-        //echo $planet." ".$sign." ".$distance."<br/>";
+        //echo $planet." ".$sign." ".$dist;exit;
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
         $query          ->select($db->quoteName(array('sign_lord','nakshatra','nakshatra_lord')));
         $query          ->from($db->quoteName('#__nakshatras'));
         $query          ->where($db->quoteName('sign').'='.$db->quote($sign).' AND '.
-                                $db->quote($distance).' BETWEEN '.
+                                $db->quote($dist).' BETWEEN '.
                                 $db->quoteName('down_deg').' AND '.
                                 $db->quoteName('up_deg'));
         $db             ->setQuery($query);
@@ -284,6 +289,13 @@ class HoroscopeModelLagna extends JModelItem
     protected function getDetails($data)
     {
         //print_r($data);exit;
+        $ascendant      = end($data);       // get the last element(ascendant)
+        $key            = key($data);       // get key to last element
+        $asc            = array($key=>$ascendant);      // adding last element(ascendant) in separate array
+        $dump           = array_pop($data);         // remove last element(ascendant)
+        unset($dump);       // deleting the last element ascendant
+        $data           = array_merge($asc,$data);      // adding ascendant as first value
+        //print_r($data);exit;
         foreach($data as $key=>$distance)
         {
             if(strpos($distance,":r"))
@@ -296,15 +308,15 @@ class HoroscopeModelLagna extends JModelItem
             }
             $sign           = $this->calcDetails($distance);
             $sign_det       = array($key."_sign"=>$sign);
-            $dist           = $this->convertDecimalToDegree(str_replace(":r","",$distance));
+            $dist           = $this->convertDecimalToDegree(str_replace(":r","",$distance),"none");        // This is for getting actual distance of planetary transits
+            $dist2          = $this->convertDecimalToDegree(str_replace(":r","",$distance),"details");       // This is for getting nakshatra details
             $dist_det           = array($key."_dist"=>$dist);
             
-            //echo $key." ".$sign." ".$dist."<br/>";
-            $details        = $this->getPlanetaryDetails($key, $sign, $dist);
+            //echo $key." ".$sign." ".$dist." ".$dist2."<br/>";
+            $details        = $this->getPlanetaryDetails($key, $sign, $dist2);
             $graha[]          = array_merge($sign_det,$dist_det,$status,$details);
         }
         return $graha;
-        
     }
 
     public function getAscendantId($gender,$sign)
@@ -410,11 +422,7 @@ class HoroscopeModelLagna extends JModelItem
     public function getArticle($title, $type)
     {
         $type               = trim($type);
-        //print_r($details);exit;
-        $gender             = $details['gender'];
-        $lagna              = $this->calculatelagna($details);
-        $sign               = $lagna['lagna_sign'];
-        $id                 = $this->getAscendantId($gender,$sign);
+        //echo $title." ".$type;exit;
         $db                 = JFactory::getDbo();
         $query              = $db->getQuery(true);
         $query              ->select($db->quoteName(array('id','title','introtext')));

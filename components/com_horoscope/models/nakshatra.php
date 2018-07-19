@@ -4,11 +4,13 @@ defined('_JEXEC') or die;  // No direct Access
 jimport('joomla.application.component.modelitem');
 JModelLegacy::addIncludePath(JPATH_SITE.'/components/com_horoscope/models/');
 $model = JModelLegacy::getInstance('lagna', 'horoscopeModel');
-
+$libPath = JPATH_BASE.'/sweph/';
+putenv("PATH=$libPath");
 class HoroscopeModelNakshatra extends HoroscopeModelLagna
 {
     public function getData()
     {
+        $libPath        = JPATH_BASE.'/sweph/';
         $jinput         = JFactory::getApplication()->input;
         $chart_id       = $jinput->get('chart', 'default_value', 'filter');
         $chart_id       = str_replace("chart","horo", $chart_id);
@@ -28,30 +30,58 @@ class HoroscopeModelNakshatra extends HoroscopeModelLagna
         $dob            = $result['dob'];
         $tob            = $result['tob'];
         $pob            = $result['pob'];
-        $lat            = $result['lat'];
-        $lon            = $result['lon'];
-        $tmz            = $result['timezone'];
-        $dst            = $result['dst'];
+        $lat            = explode(":",$result['lat']);
+        if($lat[2]=="N")
+        {
+            $lat        = $lat[0].".".$lat[1];
+        }
+        else if($lat[2]=="S")
+        {
+            $lat        = "-".$lat[0].".".$lat[1];
+        }
+        $lon            = explode(":",$result['lon']);
+        if($lon[2]=="E")
+        {
+            $lon        = $lon[0].".".$lon[1];
+        }
+        else if($lon[2]=="W")
+        {
+            $lon        = "-".$lon[0].".".$lon[1];
+        }
         
-        // fetches the Indian standard time and Indian Date for the given time and birth
-        $getGMT         = explode("_",$this->getGMTTime($dob, $tob, $tmz, $dst));
-        $gmt_date       = $getGMT[0];
-        $gmt_time       = $getGMT[1];
+        $tmz            = explode(":",$result['timezone']);
+        $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
+        
 
-        /* 
-        *  @param fullname, gender, date of birth, time of birth, 
-        *  @param longitude, latitude, timezone and
-        *  @param timezone in hours:minutes:seconds format
-        */ 
-        $data  = array(
-                        "fname"=>$fname,"gender"=>$gender,"dob"=>$dob,
-                        "tob"=>$tob,"pob"=>$pob,"lon"=>$lon,"lat"=>$lat,"tmz"=>$tmz,
-                        "dst"=>$dst,"gmt_date"=>$gmt_date,"gmt_time"=>$gmt_time
-                    );
-       //print_r($data);exit;
-       $horo                = $this->getMoonData($data);
-       //$ayanamsha           = $this->applyAyanamsha($dob, $horo); 
-       return $horo;
+        $birthDate = new DateTime($dob." ".$tob);
+
+         //echo $birthDate->format('Y-m-d H:i:s'); exit;;
+        //$timezone = +5.50; 
+
+        /**
+         * Converting birth date/time to UTC
+         */
+        $offset = $tmz * (60 * 60);
+        $birthTimestamp = strtotime($birthDate->format('Y-m-d H:i:s'));
+        $utcTimestamp = $birthTimestamp - $offset;
+        //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
+
+        $date = date('d.m.Y', $utcTimestamp);
+        $time = date('H:i:s', $utcTimestamp);
+        
+       
+        $output = "";
+        // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
+        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p1 -g, -head", $output);
+        $data           = explode(",",$output[0]);
+        $planet         = $data[0];
+        $dist           = $data[1];
+        $sign           = $this->calcDetails($dist);
+        $dist2          = $this->convertDecimalToDegree($dist,"details");  
+        
+        $details        = $this->getPlanetaryDetails($planet, $sign, $dist2);
+        $nakshatra      = $details[$planet.'_nakshatra'];
+        return $this->getArticle($nakshatra, "Nakshatra");
     }
        
     protected function getMoonData($data)
