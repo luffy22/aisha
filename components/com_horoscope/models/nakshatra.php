@@ -15,15 +15,8 @@ class HoroscopeModelNakshatra extends HoroscopeModelLagna
         $chart_id       = $jinput->get('chart', 'default_value', 'filter');
         $chart_id       = str_replace("chart","horo", $chart_id);
         
-        $db         = JFactory::getDbo();
-        $query      = $db->getQuery(true);
-        
-
-        $query      ->select($db->quoteName(array('fname','gender','dob','tob','pob','lon','lat','timezone','dst')));
-        $query      ->from($db->quoteName('#__horo_query'));
-        $query      ->where($db->quoteName('uniq_id') . ' = '. $db->quote($chart_id));
-        $db         ->setQuery($query);
-        $result     = $db->loadAssoc();
+       
+        $result         = $this->getUserData($chart_id);
         
         $fname          = $result['fname'];
         $gender         = $result['gender'];

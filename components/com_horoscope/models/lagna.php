@@ -52,14 +52,7 @@ class HoroscopeModelLagna extends JModelItem
         $horo_id        = $jinput->get('chart', 'default_value', 'filter');
         $horo_id        = str_replace("chart","horo",$horo_id);
         
-        $db             = JFactory::getDbo();  // Get db connection
-        $query          = $db->getQuery(true);
-        $query          ->select($db->quoteName(array('fname','gender','dob','tob','pob','lon','lat','timezone','dst')));
-        $query          ->from($db->quoteName('#__horo_query'));
-        $query          ->where($db->quoteName('uniq_id').' = '.$db->quote($horo_id));
-        $db             ->setQuery($query);
-        $db->execute();
-        $result         = $db->loadAssoc();
+        $result         = $this->getUserData($horo_id);
         $fname          = $result['fname'];
         $gender         = $result['gender'];
         $dob            = $result['dob'];
@@ -117,7 +110,18 @@ class HoroscopeModelLagna extends JModelItem
         return $results;
         //var_dump($output);
     }
-    
+    protected function getUserData($horo_id)
+    {
+        $db             = JFactory::getDbo();  // Get db connection
+        $query          = $db->getQuery(true);
+        $query          ->select($db->quoteName(array('fname','gender','dob','tob','pob','lon','lat','timezone','dst')));
+        $query          ->from($db->quoteName('#__horo_query'));
+        $query          ->where($db->quoteName('uniq_id').' = '.$db->quote($horo_id));
+        $db             ->setQuery($query);
+        $db->execute();
+        $result         = $db->loadAssoc();
+        return $result;
+    }
     public function getPlanets($data)
     {
         //print_r($data);exit;
@@ -169,6 +173,7 @@ class HoroscopeModelLagna extends JModelItem
      * @param tob Time Of Birth
      * @param tmz  Default Time Zone of the place
      * @param dst If any daylight saving time is to be applied
+     * @return datetime The datetime in YYYY-mm-dd_hh:mm:ss format
      */
     public function getGMTTime($dob,$tob,$tmz, $dst)
     {
@@ -285,7 +290,23 @@ class HoroscopeModelLagna extends JModelItem
         
         return $data;
     }
-
+    protected function getNavamsha($planet,$sign,$dist)
+    {
+        //echo $planet." ".$sign." ".$dist;exit;
+        $db                     = JFactory::getDbo();
+        $query                  = $db->getQuery(true);
+        $query                  ->select($db->quoteName('navamsha_sign'));
+        $query                  ->from($db->quoteName('#__navamsha'));
+        $query                  ->where($db->quoteName('sign').'='.$db->quote($sign).' AND '.
+                                        $db->quote($dist).' BETWEEN '.
+                                        $db->quoteName('low_deg').' AND '.
+                                        $db->quoteName('up_deg')); 
+        $db                     ->setQuery($query);
+        $result                 = $db->loadAssoc();
+        $navamsha_sign      = $result['navamsha_sign'];
+        $navamsha           = array($planet."_navamsha_sign"=>$navamsha_sign);
+        return $navamsha;
+    }
     protected function getDetails($data)
     {
         //print_r($data);exit;
@@ -314,111 +335,12 @@ class HoroscopeModelLagna extends JModelItem
             
             //echo $key." ".$sign." ".$dist." ".$dist2."<br/>";
             $details        = $this->getPlanetaryDetails($key, $sign, $dist2);
-            $graha[]          = array_merge($sign_det,$dist_det,$status,$details);
+            $navamsha       = $this->getNavamsha($key, $sign, $dist2);
+            $graha[]          = array_merge($sign_det,$dist_det,$navamsha, $status,$details);
         }
         return $graha;
     }
 
-    public function getAscendantId($gender,$sign)
-    {
-        if($sign=="Aries"&&$gender=="female")
-        {
-           $id      =   103;
-        }
-        else if($sign=="Aries"&&$gender=="male")
-        {
-            $id     =   102;
-        }
-        else if($sign=="Taurus"&&$gender=="female")
-        {
-            $id     =   104;
-        }
-        else if($sign=="Taurus"&&$gender=="male")
-        {
-            $id     =   105;
-        }
-        else if($sign=="Gemini"&&$gender=="female")
-        {
-            $id     =   106;
-        }
-        else if($sign=="Gemini"&&$gender=="male")
-        {
-            $id     =   107;
-        }
-        else if($sign=="Cancer"&&$gender=="female")
-        {
-            $id     =   108;
-        }
-        else if($sign=="Cancer"&&$gender=="male")
-        {
-            $id     =   109;
-        }
-        else if($sign=="Leo"&&$gender=="female")
-        {
-            $id     =   110;
-        }
-        else if($sign=="Leo"&&$gender=="male")
-        {
-            $id     =   111;
-        }
-        else if($sign=="Virgo"&&$gender=="female")
-        {
-            $id     =   114;
-        }
-        else if($sign=="Virgo"&&$gender=="male")
-        {
-            $id     =   115;
-        }
-        else if($sign=="Libra"&&$gender=="female")
-        {
-            $id     =   116;
-        }
-        else if($sign=="Libra"&&$gender=="male")
-        {
-            $id     =   117;
-        }
-        else if($sign=="Scorpio"&&$gender=="female")
-        {
-            $id     =   118;
-        }
-        else if($sign=="Scorpio"&&$gender=="male")
-        {
-            $id     =   119;
-        }
-        else if($sign=="Sagittarius"&&$gender=="female")
-        {
-            $id     =   120;
-        }
-        else if($sign=="Sagittarius"&&$gender=="male")
-        {
-            $id     =   121;
-        }
-        else if($sign=="Capricorn"&&$gender=="female")
-        {
-            $id     =   123;
-        }
-        else if($sign=="Capricorn"&&$gender=="male")
-        {
-            $id     =   124;
-        }
-        else if($sign=="Aquarius"&&$gender=="female")
-        {
-            $id     =   125;
-        }
-        else if($sign=="Aquarius"&&$gender=="male")
-        {
-            $id     =   126;
-        }
-        else if($sign=="Pisces"&&$gender=="female")
-        {
-            $id     =   127;
-        }
-        else if($sign=="Pisces"&&$gender=="male")
-        {
-            $id     =   128;
-        }
-        return $id;
-    }
     public function getArticle($title, $type)
     {
         $type               = trim($type);
@@ -435,9 +357,17 @@ class HoroscopeModelLagna extends JModelItem
         {
             $query              ->where($db->quoteName('title').'='.$db->quote($title." Nakshatra")); 
         }
+        else if($type=="male")
+        {
+            $query              ->where($db->quoteName('title').'='.$db->quote($title." Ascendant Males")); 
+        }
+        else if($type=="female")
+        {
+            $query              ->where($db->quoteName('title').'='.$db->quote($title." Ascendant Females")); 
+        }
         $db                 ->setQuery($query);
         $result             = $db->loadAssoc();
-        
+
         return $result;
     }
    

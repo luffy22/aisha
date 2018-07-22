@@ -11,19 +11,11 @@ class HoroscopeModelNavamsha extends HoroscopeModelLagna
     public function getData()
     {
         $libPath        = JPATH_BASE.'/sweph/';
-        $jinput     = JFactory::getApplication()->input;
-        $navamsha   = $jinput->get('chart', 'default_value', 'filter');
-        $navamsha   = str_replace("chart","horo", $navamsha);
+        $jinput         = JFactory::getApplication()->input;
+        $navamsha       = $jinput->get('chart', 'default_value', 'filter');
+        $navamsha       = str_replace("chart","horo", $navamsha);
         
-        $db         = JFactory::getDbo();
-        $query      = $db->getQuery(true);
-        
-
-        $query      ->select($db->quoteName(array('fname','gender','dob','tob','pob','lon','lat','timezone','dst')));
-        $query      ->from($db->quoteName('#__horo_query'));
-        $query      ->where($db->quoteName('uniq_id') . ' = '. $db->quote($navamsha));
-        $db         ->setQuery($query);
-        $result     = $db->loadAssoc();
+        $result         = $this->getUserData($navamsha);
         
         $fname          = $result['fname'];
         $gender         = $result['gender'];
@@ -74,44 +66,9 @@ class HoroscopeModelNavamsha extends HoroscopeModelLagna
         // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
         exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -house$lon,$lat,$h_sys -fPls -p0123456789m -g, -head", $output);
         $planets        = $this->getPlanets($output);
-        $navamsha       = $this->getNavamsha($planets);
+        print_r($planets);exit;
     }
-    public function calcDistance($planet)
-    {
-        
-        $details        = explode(":", $planet);
-        $sign_num       = intval($details[0]%30);
-        return $sign_num.".".$details[1];
-    }
+   
     
-    public function getNavamsha($horo)
-    {
-        print_r($horo);exit;
-        
-        $planet         = array("Ascendant","Sun","Moon","Mercury","Venus","Mars","Jupiter",
-                                "Saturn","Uranus","Neptune","Pluto","Rahu","Ketu",);
-        $array          = array();
-        $db             = JFactory::getDbo();
-        $query          = $db->getQuery(true);
-        for($i=0;$i<count($horo);$i++)
-        {
-            $query      ->clear();
-            $key        = array_keys($horo[$i]);
-            $val        = array_values($ayanamsha[$i]);
-            $sign       = $val[0];$dist     = $val[1];
-            
-            $query          ->select($db->quoteName('navamsha_sign'));
-            $query          ->from($db->quoteName('#__navamsha'));
-            $query          ->where($db->quoteName('sign').'='.$db->quote($sign).' AND '.
-                                $db->quote($dist).' BETWEEN '.
-                                $db->quoteName('low_deg').' AND '.
-                                $db->quoteName('up_deg')); 
-            $db             ->setQuery($query);
-            $result         = $db->loadAssoc();
-            $planet         = array(str_replace("_sign","",$key[0])."_nav_sign"=>$result['navamsha_sign']);
-            $array          = array_merge($array,$planet);
-            //print_r($array);exit;
-        }
-       print_r($array);exit;
-    }
+    
 }

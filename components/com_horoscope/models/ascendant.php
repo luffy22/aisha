@@ -6,16 +6,17 @@ JModelLegacy::addIncludePath(JPATH_SITE.'/components/com_horoscope/models/');
 $model = JModelLegacy::getInstance('lagna', 'horoscopeModel');
 $libPath = JPATH_BASE.'/sweph/';
 putenv("PATH=$libPath");
-class HoroscopeModelMoon extends HoroscopeModelLagna
+class HoroscopeModelAscendant extends HoroscopeModelLagna
 {
     public function getData()
     {
         $libPath        = JPATH_BASE.'/sweph/';
         $jinput         = JFactory::getApplication()->input;
-        $chart_id       = $jinput->get('chart', 'default_value', 'filter');
-        $chart_id       = str_replace("chart","horo", $chart_id);
+        $asc            = $jinput->get('chart', 'default_value', 'filter');
+        $asc            = str_replace("chart","horo", $asc);
         
-        $result         = $this->getUserData($chart_id);
+        
+        $result         = $this->getUserData($asc);
         
         $fname          = $result['fname'];
         $gender         = $result['gender'];
@@ -61,22 +62,18 @@ class HoroscopeModelMoon extends HoroscopeModelLagna
         $date = date('d.m.Y', $utcTimestamp);
         $time = date('H:i:s', $utcTimestamp);
         
-       
+        $h_sys = 'P';
         $output = "";
         // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
-        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p1 -g, -head", $output);
+        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -house$lon,$lat,$h_sys -p -fPls -g, -head", $output);
+        //$planets        = $this->getPlanets($output);
+        $ascendant          = explode(",",$output[12]);
+        $asc_sign           = $this->calcDetails($ascendant[1]);
         
-        $data           = explode(",",$output[0]);
-        $planet         = $data[0];
-        $dist           = $data[1];
-        $sign           = $this->calcDetails($dist);
-        
-        return $this->getArticle($sign, $planet);
-       //$ayanamsha           = $this->applyAyanamsha($dob, $horo); 
-       //return $horo;
+        $asc_details        = $this->getArticle($asc_sign, $gender);
+        return $asc_details;
     }
       
-  
+    
     
 }
-?>
