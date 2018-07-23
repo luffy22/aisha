@@ -10,8 +10,16 @@ defined('_JEXEC') or die();
 //print_r($this->data);exit;
 $id         = $this->data['id'];
 $title      = $this->data['title'];
+if(strpos($title, "Females"))
+{
+    $title      = str_replace(" Ascendant Females", "", $title);
+}
+else
+{
+    $title      = str_replace(" Ascendant Males","", $title);
+}
 $text       = $this->data['introtext'];
 ?>
 <div id="<?php echo $this->data['id']; ?>" class="accordion-id"></div>
-<h3><?php echo "Your Ascendant is ".str_replace(" Ascendant Males","", $title) ?></h3>
+<h3><?php echo "Your Ascendant is ".$title; ?></h3>
 <?php echo $text; ?>
