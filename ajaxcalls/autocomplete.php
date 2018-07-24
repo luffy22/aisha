@@ -24,13 +24,14 @@ else
             $city       = $row['city'].", ".$row['state'].", ".$row['country'];
         }
         $lat        = $row['latitude'];
-        $lon        = $row['longitude'];
-        $tmz        = $row['timezone'];
-        
-        $json[]     = array('label'=>$city, 'lat'=>$lat, 'lon'=>$lon,'tmz'=>$tmz);
+        $lon        = $row['longitude'];       
+        $json[]     = array('label'=>$city, 'lat'=>$lat, 'lon'=>$lon);
+ 
    }
-
     $data       = json_encode($json);
     echo $data;
+    
+    
+    
 }
 ?>

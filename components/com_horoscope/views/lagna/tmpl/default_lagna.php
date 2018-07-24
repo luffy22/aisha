@@ -1,7 +1,7 @@
 <?php
 defined('_JEXEC') or die();
 //print_r($this->data);exit;
-$planets        = array("Ascendant","Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn","Uranus","Neptune","Pluto","Rahu","Ketu");
+$planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu","Uranus","Neptune","Pluto");
 ?>
 <div class="container-fluid">
     <table class="table table-bordered table-hover">

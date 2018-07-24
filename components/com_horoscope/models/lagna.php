@@ -100,7 +100,7 @@ class HoroscopeModelLagna extends JModelItem
         $h_sys = 'P';
         $output = "";
 // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
-        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -house$lon,$lat,$h_sys -fPls -p0123456789m -g, -head", $output);
+        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -house$lon,$lat,$h_sys -fPls -p0142536m789 -g, -head", $output);
         //print_r($output);exit;
 
         # OUTPUT ARRAY
