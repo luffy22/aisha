@@ -48,14 +48,14 @@ $(function()
       {
             var lat           = response.item.lat;
             var lon           = response.item.lon;
-            
+            var tmz           = response.item.tmz;
             var lat_dir       = lat.substring(0,1);
             var lat_deg       = lat.split(".")[0];
             var lat_min       = lat.split(".")[1].substr(0,2);
             var lon_dir       = lon.substring(0,1);
             var lon_deg       = lon.split(".")[0];
             var lon_min       = lon.split(".")[1].substr(0,2);
-            
+            document.getElementById("lagna_tmz").value  = tmz;
             if(lon_dir == "-")
             {
                 document.getElementById("lagna_long_direction").value = "W";

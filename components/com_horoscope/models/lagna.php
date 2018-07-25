@@ -130,7 +130,7 @@ class HoroscopeModelLagna extends JModelItem
     {
         $db             = JFactory::getDbo();  // Get db connection
         $query          = $db->getQuery(true);
-        $query          ->select($db->quoteName(array('fname','gender','dob','tob','pob','lon','lat','timezone','dst')));
+        $query          ->select($db->quoteName(array('fname','gender','dob','tob','pob','lon','lat','timezone')));
         $query          ->from($db->quoteName('#__horo_query'));
         $query          ->where($db->quoteName('uniq_id').' = '.$db->quote($horo_id));
         $db             ->setQuery($query);

@@ -84,8 +84,7 @@ echo $this->data;
                 }
             }
         ?>
-        </select>
-        
+        </select>    
     </div>
     <div class="form-group" id="lagna_grp_4">
         <label for="dob" class="control-label">Place Of Birth</label>
@@ -93,6 +92,7 @@ echo $this->data;
         <input type="text" id="lagna_pob" name="lagna_pob" class="form-control ui-autocomplete-input" placeholder="Enter text for list of places" />
         </div>
     </div>
+    <input type="hidden" id="lagna_tmz" name="tmz"  />
     <div class="form-group">
         <label for="longitude" class="control-label">Longitude</label><br/>
         <input type="text" id="lagna_long_1" class="form-text1" name="lon_deg"  />
@@ -101,7 +101,6 @@ echo $this->data;
             <option>E</option>
             <option>W</option>
         </select>
-
     </div>
     <div class="form-group">
         <label for="latitude" class="control-label">Latitude</label><br/>
@@ -111,8 +110,8 @@ echo $this->data;
             <option>N</option>
             <option>S</option>
         </select>
+        
     </div>
-    
     <div class="form-group">
             <button type="submit" class="btn btn-primary btn-lg" name="lagnasubmit" onclick="javascript:getLagna();return false;">Get Horoscope</button>
              <button type="reset" class="btn btn-danger btn-lg">Reset Form</button>
