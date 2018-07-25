@@ -13,6 +13,7 @@ class HoroscopeModelLagna extends JModelItem
    
     public function getLagna($user_details)
     {
+        //print_r($user_details);exit;
         // Assigning the variables
         $fname          = $user_details['fname'];
         $gender         = $user_details['gender'];
@@ -78,14 +79,12 @@ class HoroscopeModelLagna extends JModelItem
             $lon        = "-".$lon[0].".".$lon[1];
         }
         
-        $tmz            = explode(":",$result['timezone']);
-        $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
-        
-
         $birthDate = new DateTime($dob." ".$tob);
+        $timestamp  = $birthDate->format('U');
         //echo $birthDate->format('Y-m-d H:i:s'); exit;;
         //$timezone = +5.50; 
-
+        $tmz            = $this->getTimezone($lat, $lon, $timestamp);
+        // $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
         /**
          * Converting birth date/time to UTC
          */
@@ -109,6 +108,23 @@ class HoroscopeModelLagna extends JModelItem
         $results         = array_merge($result, $planets);
         return $results;
         //var_dump($output);
+    }
+    protected function getTimeZone($lat, $lon, $tmz)
+    {
+        $url = "https://maps.googleapis.com/maps/api/timezone/json?location=$lat,$lon&timestamp=$tmz&key=AIzaSyDhhAMyimT-tgWJM6w8Aa7awXb73NrYsVA";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $responseJson = curl_exec($ch);
+        curl_close($ch);
+
+        $response = json_decode($responseJson);
+        //var_dump($response);
+        $tmz_in_words   =  $response->timeZoneId;
+        $date           = date('Y-m-d H:i:s', $tmz);
+        $datetime       = new DateTime($date, new DateTimeZone($tmz_in_words));
+
+        echo $datetime->format('O');exit;
     }
     protected function getUserData($horo_id)
     {
