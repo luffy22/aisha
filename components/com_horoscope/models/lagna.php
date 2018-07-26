@@ -17,22 +17,33 @@ class HoroscopeModelLagna extends JModelItem
         // Assigning the variables
         $fname          = $user_details['fname'];
         $gender         = $user_details['gender'];
-        $dob            = str_replace("/","-",$user_details['dob']);
-        $year           = date("Y",strtotime($dob));
+        $dob            = $user_details['dob'];
         $tob            = $user_details['tob'];
         $pob            = $user_details['pob'];
         $lon            = $user_details['lon'];
         $lat            = $user_details['lat'];
         $tmz            = $user_details['tmz'];
-        $dst            = $user_details['dst'];
+        if($tmz == "none")
+        {
+            $date           = new DateTime($dob." ".$tob);
+            $timestamp      = $date->format('U');
+            $tmz            = $this->getTimeZone($lat, $lon, $timestamp);
+            $newdate        = new DateTime($dob." ".$tob, new DateTimeZone($tmz));
+            $dob_tob        = $newdate->format('Y-m-d H:i:s');
+        }
+        else
+        {
+            $date       = new DateTime($dob." ".$tob, new DateTimeZone($tmz));
+            $dob_tob    = $date->format('Y-m-d H:i:s');
+        }
         $uniq_id        = uniqid('horo_');
         
-        $now            = date('Y-m-d_H:i:s');
+        $now            = date('Y-m-d H:i:s');
         $db             = JFactory::getDbo();  // Get db connection
         $query          = $db->getQuery(true);
-        $columns        = array('uniq_id','fname','gender','dob','tob','pob','lon','lat','timezone','dst','query_date');
-        $values         = array($db->quote($uniq_id),$db->quote($fname),$db->quote($gender),$db->quote($dob),$db->quote($tob),
-                                $db->quote($pob),$db->quote($lon),$db->quote($lat),$db->quote($tmz),$db->quote($dst),$db->quote($now));
+        $columns        = array('uniq_id','fname','gender','dob_tob','pob','lon','lat','timezone','query_date');
+        $values         = array($db->quote($uniq_id),$db->quote($fname),$db->quote($gender),$db->quote($dob_tob),
+                                $db->quote($pob),$db->quote($lon),$db->quote($lat),$db->quote($tmz),$db->quote($now));
         $query          ->insert($db->quoteName('#__horo_query'))
                         ->columns($db->quoteName($columns))
                         ->values(implode(',', $values));
@@ -54,48 +65,32 @@ class HoroscopeModelLagna extends JModelItem
         $horo_id        = str_replace("chart","horo",$horo_id);
         
         $result         = $this->getUserData($horo_id);
+        //print_r($result);exit;
         $fname          = $result['fname'];
         $gender         = $result['gender'];
-        $dob            = $result['dob'];
-        $tob            = $result['tob'];
-        //echo $tob;exit;
+        $dob_tob        = $result['dob_tob'];
         $pob            = $result['pob'];
-        $lat            = explode(":",$result['lat']);
-        if($lat[2]=="N")
-        {
-            $lat        = $lat[0].".".$lat[1];
-        }
-        else if($lat[2]=="S")
-        {
-            $lat        = "-".$lat[0].".".$lat[1];
-        }
-        $lon            = explode(":",$result['lon']);
-        if($lon[2]=="E")
-        {
-            $lon        = $lon[0].".".$lon[1];
-        }
-        else if($lon[2]=="W")
-        {
-            $lon        = "-".$lon[0].".".$lon[1];
-        }
+        $lat            = $result['lat'];
+        $lon            = $result['lon'];
+        $timezone       = $result['timezone'];
         
-        $birthDate = new DateTime($dob." ".$tob);
-        $timestamp  = $birthDate->format('U');
-        //echo $birthDate->format('Y-m-d H:i:s'); exit;;
-        //$timezone = +5.50; 
-        $tmz            = $this->getTimezone($lat, $lon, $timestamp);
+        $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
+        
+        $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
+        $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
+        //echo $timestamp." ".$offset;exit;
         // $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
         /**
          * Converting birth date/time to UTC
          */
-        $offset = $tmz * (60 * 60);
-        $birthTimestamp = strtotime($birthDate->format('Y-m-d H:i:s'));
-        $utcTimestamp = $birthTimestamp - $offset;
+        $utcTimestamp = $timestamp - $offset;
+
+        //echo $utcTimestamp;exit;
         //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
 
         $date = date('d.m.Y', $utcTimestamp);
         $time = date('H:i:s', $utcTimestamp);
-        
+        //echo $date." ".$time;exit;
         $h_sys = 'P';
         $output = "";
 // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
@@ -109,9 +104,9 @@ class HoroscopeModelLagna extends JModelItem
         return $results;
         //var_dump($output);
     }
-    protected function getTimeZone($lat, $lon, $tmz)
+    protected function getTimeZone($lat, $lon, $timestamp)
     {
-        $url = "https://maps.googleapis.com/maps/api/timezone/json?location=$lat,$lon&timestamp=$tmz&key=AIzaSyDhhAMyimT-tgWJM6w8Aa7awXb73NrYsVA";
+        $url = "https://maps.googleapis.com/maps/api/timezone/json?location=$lat,$lon&timestamp=$timestamp&key=AIzaSyDhhAMyimT-tgWJM6w8Aa7awXb73NrYsVA";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -121,16 +116,13 @@ class HoroscopeModelLagna extends JModelItem
         $response = json_decode($responseJson);
         //var_dump($response);
         $tmz_in_words   =  $response->timeZoneId;
-        $date           = date('Y-m-d H:i:s', $tmz);
-        $datetime       = new DateTime($date, new DateTimeZone($tmz_in_words));
-
-        echo $datetime->format('O');exit;
+        return $tmz_in_words;
     }
     protected function getUserData($horo_id)
     {
         $db             = JFactory::getDbo();  // Get db connection
         $query          = $db->getQuery(true);
-        $query          ->select($db->quoteName(array('fname','gender','dob','tob','pob','lon','lat','timezone')));
+        $query          ->select($db->quoteName(array('fname','gender','dob_tob','pob','lon','lat','timezone')));
         $query          ->from($db->quoteName('#__horo_query'));
         $query          ->where($db->quoteName('uniq_id').' = '.$db->quote($horo_id));
         $db             ->setQuery($query);

@@ -15,76 +15,20 @@ echo $this->data;
       action="<?php echo JRoute::_('index.php?option=com_horoscope&task=lagna.findlagna'); ?>">
     <div class="form-group" id="lagna_grp_1">
         <label for="inputName" class="control-label">Name:</label>
-        <input type="text" name="fname" class="form-control" id="lagna_1" placeholder="Enter your name..." />
+        <input type="text" name="lagna_fname" class="form-control" id="lagna_1" placeholder="Enter your name..." />
     </div>
     <div class="form-group">
         <label for="inputGender" class="control-label">Gender:</label>
-         <input type="radio" name="gender" value="male" id="lagna_gender1"> Male
-        <input type="radio" name="gender" value="female" id="lagna_gender2" checked> Female
+         <input type="radio" name="lagna_gender" value="male" id="lagna_gender1"> Male
+        <input type="radio" name="lagna_gender" value="female" id="lagna_gender2" checked> Female
     </div>
     <div class="form-group" id="lagna_grp_3">
         <label for="dob" class="control-label">Date Of Birth:</label>
-        <input type="date" name="dob" id="datepicker" class="form-control" placeholder="25/03/1984" />
+        <input type="date" name="lagna_dob" id="datepicker" class="form-control" placeholder="25/03/1984" />
     </div>
     <div class="form-group">
         <label for="dob" class="control-label">Time Of Birth(24 Hour Format):</label><br/>
-        <select class="select2" id="lagna_tob_hr" name="lagna_hr">
-        <?php
-             for($i=0;$i<24;$i++)
-             {
-                 if($i<10)
-                 {
-        ?>
-                <option><?php echo "0".$i; ?></option>
-        <?php
-                 }
-                else
-                {
-        ?>
-                <option><?php echo $i; ?></option>
-        <?php
-                }
-             }
-        ?>
-        </select>
-        <select class="select2" id="lagna_tob_min" name="lagna_min">
-        <?php
-            for($i=0;$i<60;$i++)
-            {
-               if($i<10)
-               {
-                ?>
-                <option><?php echo "0".$i; ?></option>
-                <?php    
-               }
-               else
-                {
-        ?>
-                <option><?php echo $i; ?></option>
-        <?php
-                }
-            }
-        ?>
-        </select>
-        <select class="select2" id="lagna_tob_sec" name="lagna_sec">
-        <?php
-            for($i=0;$i<60;$i++)
-            {
-               if($i<10)
-               {
-                ?>
-                <option><?php echo "0".$i; ?></option>
-                <?php    
-               }
-               else
-                {
-        ?>
-                <option><?php echo $i; ?></option>
-        <?php
-                }
-            }
-        ?>
-        </select>    
+        <input type="time" name="lagna_tob" id="time" class="form-control" placeholder="18:30:00" />
     </div>
     <div class="form-group" id="lagna_grp_4">
         <label for="dob" class="control-label">Place Of Birth</label>
@@ -92,7 +36,9 @@ echo $this->data;
         <input type="text" id="lagna_pob" name="lagna_pob" class="form-control ui-autocomplete-input" placeholder="Enter text for list of places" />
         </div>
     </div>
-    <input type="hidden" id="lagna_tmz" name="tmz"  />
+    <input type="hidden" id="lagna_lat" name="lagna_lat"  />
+    <input type="hidden" id="lagna_lon" name="lagna_lon"  />
+    <input type="hidden" id="lagna_tmz" name="lagna_tmz"  />
     <div class="form-group">
         <label for="longitude" class="control-label">Longitude</label><br/>
         <input type="text" id="lagna_long_1" class="form-text1" name="lon_deg"  />

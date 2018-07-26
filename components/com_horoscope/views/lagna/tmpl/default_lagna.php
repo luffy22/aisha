@@ -16,12 +16,12 @@ $planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Ven
         <tr>
             <th>Date Of Birth</th>
             <td><?php 
-                $date   = new DateTime($this->data['dob']);
-            echo $date->format('dS F Y'); ?></td>
+                $date   = new DateTime($this->data['dob_tob'], new DateTimeZone($this->data['timezone']));
+                echo $date->format('dS F Y'); ?></td>
         </tr>
         <tr>
             <th>Time Of Birth</th>
-            <td><?php echo $this->data['tob']; ?></td>
+            <td><?php echo $date->format('H:i:s'); ?></td>
         </tr>
         <tr>
             <th>Place Of Birth</th>
@@ -37,14 +37,14 @@ $planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Ven
         </tr>
         <tr>
             <th>Timezone</th>
-            <td><?php echo "GMT&nbsp;".$this->data['timezone']; ?></td>
+            <td><?php echo "GMT".$date->format('P'); ?></td>
         </tr>
         <tr>
-        <th>Daylight Savings</th>
-        <td><?php if($this->data['dst'] == '00:00:00')
-                    { echo "None"; }
+        <th>Apply DST</th>
+        <td><?php if($date->format('I') == '1')
+                    { echo "Yes"; }
                   else
-                  { echo $this->data['dst']; } ?></td>
+                  { echo "No"; } ?></td>
         </tr>
     </table>
     <div class="mb-2"></div>
