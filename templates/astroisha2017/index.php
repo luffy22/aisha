@@ -98,14 +98,6 @@ endif;
      js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
 </script>
-<script>
-  (function() {
-    var cx = '006812877761787834600:vf6wtd5lcuk';var gcse = document.createElement('script');
-    gcse.type = 'text/javascript';gcse.async = true;
-    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//cse.google.com/cse.js?cx=' + cx;
-    var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(gcse, s);
-  })();
-</script>
 <?php
 include_once (JPATH_ROOT.DS.'analyticstracking.php');
 ?>
