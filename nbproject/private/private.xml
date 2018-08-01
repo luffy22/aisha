@@ -4,11 +4,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/html/aisha/components/com_horoscope/controllers/lagna.php</file>
-            <file>file:/var/www/html/aisha/templates/astroisha2017/js/common.js</file>
-            <file>file:/var/www/html/aisha/components/com_horoscope/views/lagna/tmpl/default.php</file>
-            <file>file:/var/www/html/aisha/ajaxcalls/autocomplete.php</file>
+            <file>file:/var/www/html/aisha/components/com_horoscope/models/moon.php</file>
+            <file>file:/var/www/html/aisha/components/com_horoscope/views/lagna/tmpl/default_lagna.php</file>
+            <file>file:/var/www/html/aisha/components/com_horoscope/models/nakshatra.php</file>
             <file>file:/var/www/html/aisha/components/com_horoscope/models/lagna.php</file>
+            <file>file:/var/www/html/aisha/components/com_horoscope/models/navamsha.php</file>
         </group>
     </open-files>
 </project-private>

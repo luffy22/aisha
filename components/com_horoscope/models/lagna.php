@@ -93,16 +93,60 @@ class HoroscopeModelLagna extends JModelItem
         //echo $date." ".$time;exit;
         $h_sys = 'P';
         $output = "";
-// More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
-        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -house$lon,$lat,$h_sys -fPls -p0142536m789 -g, -head", $output);
+        // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
+        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p0142536m789 -g, -head", $output);
         //print_r($output);exit;
 
         # OUTPUT ARRAY
         # Planet Name, Planet Degree, Planet Speed per day
+        $asc            = $this->getAscendant($result);
         $planets        = $this->getPlanets($output);
-        $results         = array_merge($result, $planets);
+        $data           = array_merge($asc,$planets);
+        $details        = $this->getDetails($data);
+        //print_r($details);exit;
+        $results         = array_merge($result, $details);
         return $results;
         //var_dump($output);
+    }
+    public function getAscendant($data)
+    {
+        $libPath        = JPATH_BASE.'/sweph/';
+        $fname          = $data['fname'];
+        $gender         = $data['gender'];
+        $dob_tob        = $data['dob_tob'];
+        $pob            = $data['pob'];
+        $lat            = $data['lat'];
+        $lon            = $data['lon'];
+        $timezone       = $data['timezone'];
+        
+        $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
+        
+        $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
+        $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
+        //echo $timestamp." ".$offset;exit;
+        // $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
+        /**
+         * Converting birth date/time to UTC
+         */
+        $utcTimestamp = $timestamp - $offset;
+
+        //echo $utcTimestamp;exit;
+        //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
+
+        $date = date('d.m.Y', $utcTimestamp);
+        $time = date('H:i:s', $utcTimestamp);
+        //echo $date." ".$time;exit;
+        $h_sys = 'P';
+        $output = "";
+// More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
+        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -house$lon,$lat,$h_sys -fPls -p -g, -head", $output);
+        //print_r($output);exit;
+        $val            = explode(",",$output[12]);
+        $key            = trim($val[0]);
+        $value          = $val[1];
+        $asc            = array($key=>$value);
+        //print_r($asc);exit;
+        return $asc;
     }
     protected function getTimeZone($lat, $lon, $timestamp)
     {
@@ -133,7 +177,7 @@ class HoroscopeModelLagna extends JModelItem
     public function getPlanets($data)
     {
         //print_r($data);exit;
-        $graha_12               = array("Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn","Uranus","Neptune","Pluto","mean Node","Ascendant");
+        $graha_12               = array("Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn","Uranus","Neptune","Pluto","mean Node");
         $planets                = array();
         for($i=0;$i<count($data);$i++)
         {
@@ -172,8 +216,7 @@ class HoroscopeModelLagna extends JModelItem
                 $planets        = array_merge($planets, $details);
             }
         }
-        $planet_details             = $this->getDetails($planets);
-        return $planet_details;
+        return $planets;
     }
     /*
      * Get The Greenwich Mean Time from given time
@@ -318,12 +361,7 @@ class HoroscopeModelLagna extends JModelItem
     protected function getDetails($data)
     {
         //print_r($data);exit;
-        $ascendant      = end($data);       // get the last element(ascendant)
-        $key            = key($data);       // get key to last element
-        $asc            = array($key=>$ascendant);      // adding last element(ascendant) in separate array
-        $dump           = array_pop($data);         // remove last element(ascendant)
-        unset($dump);       // deleting the last element ascendant
-        $data           = array_merge($asc,$data);      // adding ascendant as first value
+        
         //print_r($data);exit;
         foreach($data as $key=>$distance)
         {
