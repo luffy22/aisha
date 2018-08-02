@@ -14,56 +14,37 @@ class HoroscopeModelAscendant extends HoroscopeModelLagna
         $jinput         = JFactory::getApplication()->input;
         $asc            = $jinput->get('chart', 'default_value', 'filter');
         $asc            = str_replace("chart","horo", $asc);
-        
-        
+       
         $result         = $this->getUserData($asc);
         
         $fname          = $result['fname'];
         $gender         = $result['gender'];
-        $dob            = $result['dob'];
-        $tob            = $result['tob'];
+        $dob_tob        = $result['dob_tob'];
         $pob            = $result['pob'];
-        $lat            = explode(":",$result['lat']);
-        if($lat[2]=="N")
-        {
-            $lat        = $lat[0].".".$lat[1];
-        }
-        else if($lat[2]=="S")
-        {
-            $lat        = "-".$lat[0].".".$lat[1];
-        }
-        $lon            = explode(":",$result['lon']);
-        if($lon[2]=="E")
-        {
-            $lon        = $lon[0].".".$lon[1];
-        }
-        else if($lon[2]=="W")
-        {
-            $lon        = "-".$lon[0].".".$lon[1];
-        }
+        $lat            = $result['lat'];
+        $lon            = $result['lon'];
+        $timezone       = $result['timezone'];
         
-        $tmz            = explode(":",$result['timezone']);
-        $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
+        $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
         
-
-        $birthDate = new DateTime($dob." ".$tob);
-
-         //echo $birthDate->format('Y-m-d H:i:s'); exit;;
-        //$timezone = +5.50; 
-
+        $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
+        $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
+        //echo $timestamp." ".$offset;exit;
+        // $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
         /**
          * Converting birth date/time to UTC
          */
-        $offset = $tmz * (60 * 60);
-        $birthTimestamp = strtotime($birthDate->format('Y-m-d H:i:s'));
-        $utcTimestamp = $birthTimestamp - $offset;
+        $utcTimestamp = $timestamp - $offset;
+
+        //echo $utcTimestamp;exit;
         //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
 
         $date = date('d.m.Y', $utcTimestamp);
         $time = date('H:i:s', $utcTimestamp);
-        
+        //echo $date." ".$time;exit;
         $h_sys = 'P';
         $output = "";
+        
         // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
         exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -house$lon,$lat,$h_sys -p -fPls -g, -head", $output);
         //$planets        = $this->getPlanets($output);
