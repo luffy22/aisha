@@ -12,17 +12,17 @@ class PlgContentAskExpert extends JPlugin
             $app                = JFactory::getApplication();
             $view               = $app->input->get('view');
             $path               = JPluginHelper::getLayoutPath('content', 'askexpert');
-           // include_once "/home/astroxou/php/Net/GeoIP.php";
-            //$geoip                  = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoLiteCity.dat");
+            include_once "/home/astroxou/php/Net/GeoIP.php";
+            $geoip              = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoLiteCity.dat");
             //$ip                         = '117.196.1.11';
-            $ip                         = '157.55.39.123';  // ip address
-            //$ip                     = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
+            //$ip                         = '157.55.39.123';  // ip address
+            $ip                 = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
           
-            $info                       = geoip_country_code_by_name($ip);
-            $country                    = geoip_country_name_by_name($ip);
-            //$location               = $geoip->lookupLocation($ip);
-            //$info                   = $location->countryCode;
-            //$country                = $location->countryName;
+            //$info                       = geoip_country_code_by_name($ip);
+            //$country                    = geoip_country_name_by_name($ip);
+            $location           = $geoip->lookupLocation($ip);
+            $info               = $location->countryCode;
+            $country            = $location->countryName;
             
             if(($context === 'com_content.article')&&($view=='article'))
             {
@@ -172,52 +172,27 @@ class PlgContentAskExpert extends JPlugin
                     }
                     $content        .= "</select>";
                     $content        .= "</div>";
-                    if($result->phone_or_report=='phone')
-                    {
-                        $content        .= "<div class='form-group'><label for='phone_or_report'>Order Type: </label> <i class='fa fa-phone'></i> ".ucfirst($result->phone_or_report)."</div>";
-                        $content        .= "<input type='hidden' name='expert_order_type' id='expert_order_type' value='phone' />";
-                    }
-                    else if($result->phone_or_report=='report')
-                    {
-                        $content        .= "<div class='form-group'><label for='phone_or_report'>Order Type: </label> <i class='fa fa-file-pdf-o'></i> ".ucfirst($result->phone_or_report)."</div>";
-                        $content        .= "<input type='hidden' name='expert_order_type' id='expert_order_type' value='report' />";
-                    }
-                    else if($result->phone_or_report=='both')
-                    {
-                        $content        .= "<div class='form-group'><label>Order Type: </label>";
-                        $content        .= " <input type='radio' name='expert_order_type' id='expert_order_type' value='phone' /> <i class='fa fa-phone'></i> Phone";
-                        $content        .= " <input type='radio' name='expert_order_type' id='expert_order_type' value='report' checked /> <i class='fa fa-file-pdf-o'></i> Report";
-                        $content        .= "</div>";
-                    }
-                    else 
-                    {
-                        $content        .= "<div class='form-group'><label for='phone_or_report'>Order Type: </label> <i class='fa fa-file-pdf-o'></i> Report</div>";
-                        $content        .= "<input type='hidden' name='expert_order_type' id='expert_order_type' value='report' />";
-   
-                    }
-                    $content            .= "<input type='hidden' name='expert_fees' id='expert_fees' value='".$details['amount']."' />";
-                    $content            .= "<input type='hidden' name='expert_curr_code' id='expert_curr_code' value='".$details['curr_code']."' />";
-                    $content            .= "<input type='hidden' name='expert_currency' id='expert_currency' value='".$details['currency']."' />";
-                    $content            .= "<input type='hidden' name='expert_curr_full' id='expert_curr_full' value='".$details['curr_full']."' />";
-                    $content            .= "<input type='hidden' name='expert_final_fees' id='expert_final_fees' value='".$details['amount']."' />";
-                    $content            .= "<div class='form-group'><label>Fees:</label> <div id='fees_id'>".$details['amount']."&nbsp;".$details['curr_code']."(".$details['currency'].'-'.$details['curr_full'].')'."</div></div>";
-                    $content            .= "<div class='form-group'>";
-                    $content            .= "<label for='expert_choice' class='control-label'>Payment Type: </label>";
+                 
+                    $content        .= "<div class='form-group'><label for='phone_or_report'>Order Type: </label> <i class='fa fa-file-pdf-o'></i> Report</div>";
+                    $content        .= "<input type='hidden' name='expert_order_type' id='expert_order_type' value='report' />";
+                    
+                    $content        .= "<input type='hidden' name='expert_fees' id='expert_fees' value='".$details['amount']."' />";
+                    $content        .= "<input type='hidden' name='expert_curr_code' id='expert_curr_code' value='".$details['curr_code']."' />";
+                    $content        .= "<input type='hidden' name='expert_currency' id='expert_currency' value='".$details['currency']."' />";
+                    $content        .= "<input type='hidden' name='expert_curr_full' id='expert_curr_full' value='".$details['curr_full']."' />";
+                    $content        .= "<input type='hidden' name='expert_final_fees' id='expert_final_fees' value='".$details['amount']."' />";
+                    $content        .= "<div class='form-group'><label>Fees:</label> <div id='fees_id'>".$details['amount']."&nbsp;".$details['curr_code']."(".$details['currency'].'-'.$details['curr_full'].')'."</div></div>";
+                    $content        .= "<div class='form-group'>";
+                    $content        .= "<label for='expert_choice' class='control-label'>Payment Type: </label>";
                     if($details['currency'] == 'INR')
                     {
-                        $content            .= "<input type='radio' name='expert_choice' id='expert_choice1' value='ccavenue' /> <i class='fa fa-credit-card'></i> Credit/Debit Card/Netbanking
-                                                <input type='radio' name='expert_choice' id='expert_choice2' value='cheque' /> Cheque
-                                                <input type='radio' name='expert_choice' id='expert_choice3' value='direct' /> Direct Transfer
-                                                <input type='radio' name='expert_choice' id='expert_choice4' value='paytm' checked />  <img src='".JURi::base()."images/paytm.png' />";
-                        $content            .=  " <input type='radio' name='expert_choice' id='expert_choice5' value='bhim' /> <img src='".JURi::base()."images/bhim.png' /> Bhim App";
-                        $content            .=  " <input type='radio' name='expert_choice' id='expert_choice6' value='phonepe' /> <img src='".JURi::base()."images/phonepe.png' /> PhonePe";
+                        $content            .= "&nbsp;<input type='radio' name='expert_choice' id='expert_choice1' value='ccavenue' checked /> <i class='fa fa-credit-card'></i> Credit/Debit Card/Netbanking
+                                                <input type='radio' name='expert_choice' id='expert_choice4' value='paytm'  />  <img src='".JURi::base()."images/paytm.png' />";
        
                     }
                     else
                     {
-                        $content            .= "<input type='radio' name='expert_choice' id='expert_choice7' value='paypal' checked /> <i class='fa fa-paypal'></i> Paypal";
-                        $content            .= " <input type='radio' name='expert_choice' id='expert_choice9' value='paypalme' /> <img src='".JURi::base()."images/paypal.png' /> PaypalMe";
-                        $content            .= " <input type='radio' name='expert_choice' id='expert_choice8' value='directint' /> Direct Transfer";
+                        $content            .= "&nbsp;<input type='radio' name='expert_choice' id='expert_choice7' value='paypal' checked /> <i class='fa fa-paypal'></i> Paypal";
 
                     }
                     $content                .= "</div>";

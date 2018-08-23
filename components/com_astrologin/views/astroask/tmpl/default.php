@@ -3,8 +3,8 @@
 defined('_JEXEC') or die('Restricted access');
 //include_once "/home/astroxou/php/Net/GeoIP.php";
 //$geoip                  = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoLiteCity.dat");
-$ip                         = '117.196.1.11';
-//$ip                         = '157.55.39.123';  // ip address
+//$ip                         = '117.196.1.11';
+ $ip                         = '157.55.39.123';  // ip address
 //$ip                       = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
 
 $info                       = geoip_country_code_by_name($ip);
@@ -47,38 +47,9 @@ $details                    = $this->msg;
 </div>
 <div class="mb-2"></div>
 <div class="form-group" id="order_type">
-<?php
-if($details['phone_or_report']=='phone')
-{
-?>
-    <div class='form-control'><label for='phone_or_report'>Order Type: </label> <i class='fa fa-phone'></i><?php echo ucfirst($details['phone_or_report']) ?></div>
-        <input type='hidden' name='expert_order_type' id='expert_order_type' value='phone' />";
-<?php
-}
-else if($details['phone_or_report']=='report')
-{
-?>
-<div class='form-control'><label for='phone_or_report'>Order Type: </label> <i class='fa fa-file-pdf-o'></i><?php echo ucfirst($details['phone_or_report']) ?></div>
-<input type='hidden' name='expert_order_type' id='expert_order_type' value='report' />
-<?php
-}
-else if($details['phone_or_report']=='both')
-{
-?>
-<div class='form-control'><label>Order Type: </label>
-<input type='radio' name='expert_order_type' id='expert_order_type' value='phone' /> <i class='fa fa-phone'></i> Phone
-<input type='radio' name='expert_order_type' id='expert_order_type' value='report' checked /> <i class='fa fa-file-pdf-o'></i> Report
-</div>
-<?php
-}
-else 
-{
-?>
+
 <div class='form-control'><label for='phone_or_report'>Order Type: </label> <i class='fa fa-file-pdf-o'></i> Report</div>
 <input type='hidden' name='expert_order_type' id='expert_order_type' value='report' />
-<?php   
-}
-?>
 </div>
 <input type="hidden" name="expert_fees" id="expert_fees" value="<?php echo $details['amount'] ?>" />
 <input type="hidden" name="expert_curr_code" id="expert_curr_code" value="<?php echo $details['curr_code'] ?>" />
@@ -96,19 +67,14 @@ if($details['currency'] == 'INR')
 {
 ?>
     <input type='radio' name='expert_choice' id='expert_choice1' value='ccavenue' checked /> <i class='fa fa-credit-card'></i> Credit/Debit Card/Netbanking
-    <input type='radio' name='expert_choice' id='expert_choice2' value='cheque' /> Cheque
-    <input type='radio' name='expert_choice' id='expert_choice3' value='direct' /> Direct Transfer
     <input type='radio' name='expert_choice' id='expert_choice4' value='paytm' />  <img src="<?php echo JURi::base() ?>images/paytm.png" />
-    <input type='radio' name='expert_choice' id='expert_choice5' value='bhim' /> <img src="<?php echo JURi::base() ?>images/bhim.png" /> Bhim App
-    <input type='radio' name='expert_choice' id='expert_choice6' value='phonepe' /> <img src="<?php echo JURi::base() ?>images/phonepe.png" /> PhonePe
 <?php       
 }
 else
 {
 ?>
     <input type='radio' name='expert_choice' id='expert_choice7' value='paypal' checked /> <i class='fa fa-paypal'></i> Paypal
-    <input type='radio' name='expert_choice' id='expert_choice9' value='paypalme' /> <img src="<?php echo JURi::base() ?>images/paypal.png" /> PaypalMe
-    <input type='radio' name='expert_choice' id='expert_choice8' value='directint' /> Direct Transfer
+    
 <?php
 }
 ?>
