@@ -11,7 +11,7 @@ function draw_horoscope()
     var ctx =c.getContext("2d");
     // horoscope boundary
     ctx.beginPath();
-    ctx.rect(5,5,120,120);
+    ctx.rect(5,5,145,145);
     ctx.strokeStyle='black';
     ctx.lineWidth=1;
     ctx.stroke();
@@ -19,19 +19,19 @@ function draw_horoscope()
     // vishnu sthanas
     ctx.beginPath();
     ctx.rotate(45*Math.PI/180);
-    ctx.rect(51,-41,83,83);
+    ctx.rect(60,-50,101,101);
     ctx.strokeStyle='black';
     ctx.lineWidth=1;
     ctx.stroke();
 
     ctx.beginPath();
     ctx.moveTo(8,0);
-    ctx.lineTo(177,0);
+    ctx.lineTo(212,0);
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.moveTo(92,-84);
-    ctx.lineTo(92,84);
+    ctx.moveTo(109,-102);
+    ctx.lineTo(109,102);
     ctx.stroke();
 
     /*ctx.beginPath();
@@ -149,7 +149,7 @@ function house_1(y)
     ctx.beginPath();
 
     ctx.font='33% Arial';
-    ctx.fillText(x,62,62);
+    ctx.fillText(x,74,73);
     var y = calc_next_value(x);
     house_2(y);
 }
@@ -160,7 +160,7 @@ function house_2(y)
     var ctx =c.getContext("2d");
     ctx.beginPath();
     ctx.font='33%';
-    ctx.fillText(x,35,32);
+    ctx.fillText(x,40,38);
     var y = calc_next_value(x);
     house_3(y);
 }
@@ -171,7 +171,7 @@ function house_3(y)
     var ctx =c.getContext("2d");
     ctx.beginPath();
     ctx.font='33%';
-    ctx.fillText(x,27,38);
+    ctx.fillText(x,33,45);
     var y = calc_next_value(x);
     house_4(y);
 }
@@ -182,7 +182,7 @@ function house_4(y)
     var ctx =c.getContext("2d");
     ctx.beginPath();
     ctx.font='33%';
-    ctx.fillText(x,59,67);
+    ctx.fillText(x,68,79);
     var y = calc_next_value(x);
     house_5(y);
 }
@@ -193,7 +193,7 @@ function house_5(y)
     var ctx =c.getContext("2d");
     ctx.beginPath();
     ctx.font='33%';
-    ctx.fillText(x,28,97);
+    ctx.fillText(x,33,115);
     var y = calc_next_value(x);
     house_6(y);
 }
@@ -204,7 +204,7 @@ function house_6(y)
     var ctx =c.getContext("2d");
     ctx.beginPath();
     ctx.font='33% Arial';
-    ctx.fillText(x,34,102);
+    ctx.fillText(x,38,122);
     var y = calc_next_value(x);
     house_7(y);
 }
@@ -215,7 +215,7 @@ function house_7(y)
     var ctx =c.getContext("2d");
     ctx.beginPath();
     ctx.font='33% Arial';
-    ctx.fillText(x,63,72);
+    ctx.fillText(x,75,85);
     var y = calc_next_value(x);
     house_8(y);
 }
@@ -227,7 +227,7 @@ function house_8(y)
     
     ctx.beginPath();
     ctx.font='33% Arial';
-    ctx.fillText(x,93,102);
+    ctx.fillText(x,112,122);
     
     var y = calc_next_value(x);
     house_9(y);
@@ -239,7 +239,7 @@ function house_9(y)
     var ctx =c.getContext("2d");
     ctx.beginPath();
     ctx.font='33% Arial';
-    ctx.fillText(x,98,97);
+    ctx.fillText(x,118,116);
     var y = calc_next_value(x);
     house_10(y);
 }
@@ -250,7 +250,7 @@ function house_10(y)
     var ctx =c.getContext("2d");
     ctx.beginPath();
     ctx.font='33% Arial';
-    ctx.fillText(x,68,67);
+    ctx.fillText(x,82,79);
     var y = calc_next_value(x);
     house_11(y);
 }  
@@ -261,7 +261,7 @@ function house_11(y)
     var ctx =c.getContext("2d");
     ctx.beginPath();
     ctx.font='33% Arial';
-    ctx.fillText(x,97,38);
+    ctx.fillText(x,117,44);
     var y = calc_next_value(x);
     house_12(y);
 }
@@ -272,7 +272,7 @@ function house_12(y)
     var ctx =c.getContext("2d");
     ctx.beginPath();
     ctx.font='33% Arial';
-    ctx.fillText(x,91,32);
+    ctx.fillText(x,110,38);
     house_1_planets();
 }
 function calc_next_value(x)
@@ -294,15 +294,324 @@ function calc_next_value(x)
     var neptune     = document.getElementById("neptune_sign").getAttribute('value');
     var pluto       = document.getElementById("pluto_sign").getAttribute('value');
     
-    
+function get_next_sign(z)
+{
+    var signs       = ["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"];
+    var y;
+    for(var i=0; i<signs.length;i++)
+    {
+        if(signs[i] == z)
+        {
+            y  = signs[i+1];
+            if(z == "Pisces")
+            {
+                y = signs[0];
+            }
+            continue;
+        }
+        
+    }
+    return y;
+}
     
 function house_1_planets()
 {
     var ascendant   = document.getElementById("ascendant_sign").getAttribute('value');
     var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
     //alert(document.getElementById("sun_sign").getAttribute('value'));
-    var name = planets[0];
-   alert(name);
+    //var name = planets[0];
+    //alert(name);
+    var x;var y=0;
+    for(var i=0;i<planets.length; i++)
+    {
+       if(ascendant == document.getElementById(planets[i]+"_sign").getAttribute('value'))
+       {
+            x       = planets[i]+" ";
+            var c=document.getElementById("horo_canvas");
+            var ctx =c.getContext("2d");
+            ctx.beginPath();
+
+            ctx.font='38% verdana';
+            ctx.fillText(x,65,25);
+       }
+    }
+    var z  = get_next_sign(ascendant);
+    house_2_planets(z);
+}
+function house_2_planets(z)
+{
+    //alert(z);
+    var sign_2   = z;
+    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
+    //alert(document.getElementById("sun_sign").getAttribute('value'));
+    //var name = planets[0];
+    //alert(name);
+    var x;var y=0;
+    for(var i=0;i<planets.length; i++)
+    {
+       if(sign_2 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
+       {
+            x       = planets[i]+" ";
+            var c=document.getElementById("horo_canvas");
+            var ctx =c.getContext("2d");
+            ctx.beginPath();
+
+            ctx.font='38% verdana';
+            ctx.fillText(x,35,12);
+       }
+    }
+    var z  = get_next_sign(sign_2);
+    house_3_planets(z);
+}
+function house_3_planets(z)
+{
+    //alert(z);
+    var sign_3      = z
+    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
+    //alert(document.getElementById("sun_sign").getAttribute('value'));
+    //var name = planets[0];
+    //alert(name);
+    var x;var y=0;
+    for(var i=0;i<planets.length; i++)
+    {
+       if(sign_3 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
+       {
+            x       = planets[i]+" ";
+            var c=document.getElementById("horo_canvas");
+            var ctx =c.getContext("2d");
+            ctx.beginPath();
+
+            ctx.font='38% verdana';
+            ctx.fillText(x,20,12);
+       }
+       y++;
+    }
+
+    var z  = get_next_sign(sign_3);
+    house_4_planets(z);
+}
+function house_4_planets(z)
+{
+    var sign_4   = z;
+    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
+    //alert(document.getElementById("sun_sign").getAttribute('value'));
+    //var name = planets[0];
+    //alert(name);
+    var x;var y=0;
+    for(var i=0;i<planets.length; i++)
+    {
+       if(sign_4 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
+       {
+            x       = planets[i]+" ";
+            var c=document.getElementById("horo_canvas");
+            var ctx =c.getContext("2d");
+            ctx.beginPath();
+
+            ctx.font='38% verdana';
+            ctx.fillText(x,36,62);
+       }
+       y++;
+    }
+    var z  = get_next_sign(sign_4);
+    house_5_planets(z);
+}
+function house_5_planets(z)
+{
+    var sign_5   = z;
+    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
+    //alert(document.getElementById("sun_sign").getAttribute('value'));
+    //var name = planets[0];
+    //alert(name);
+    var x;var y=0;
+    for(var i=0;i<planets.length; i++)
+    {
+       if(sign_5 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
+       {
+            x       = planets[i]+" ";
+            var c=document.getElementById("horo_canvas");
+            var ctx =c.getContext("2d");
+            ctx.beginPath();
+
+            ctx.font='38% verdana';
+            ctx.fillText(x,36,72);
+       }
+       y++;
+    }
+    var z  = get_next_sign(sign_5);
+    house_6_planets(z);
+}
+function house_6_planets(z)
+{
+    var sign_6   = z;
+    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
+    //alert(document.getElementById("sun_sign").getAttribute('value'));
+    //var name = planets[0];
+    //alert(name);
+    var x;var y=0;
+    for(var i=0;i<planets.length; i++)
+    {
+       if(sign_6 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
+       {
+            x       = planets[i]+" ";
+            var c=document.getElementById("horo_canvas");
+            var ctx =c.getContext("2d");
+            ctx.beginPath();
+
+            ctx.font='38% verdana';
+            ctx.fillText(x,30,128);
+       }
+       y++;
+    }
+    var z  = get_next_sign(sign_6);
+    house_7_planets(z);
+}
+function house_7_planets(z)
+{
+    var sign_7   = z;
+    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
+    //alert(document.getElementById("sun_sign").getAttribute('value'));
+    //var name = planets[0];
+    //alert(name);
+    var x;var y=0;
+    for(var i=0;i<planets.length; i++)
+    {
+       if(sign_7 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
+       {
+            x       = planets[i]+" ";
+            var c=document.getElementById("horo_canvas");
+            var ctx =c.getContext("2d");
+            ctx.beginPath();
+                          
+            ctx.font='38% verdana';
+            ctx.fillText(x,65,100);
+       }
+       y++;
+    }
+    var z  = get_next_sign(sign_7);
+    house_8_planets(z);
+}
+function house_8_planets(z)
+{
+    var sign_8   = z;
+    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
+    //alert(document.getElementById("sun_sign").getAttribute('value'));
+    //var name = planets[0];
+    //alert(name);
+    var x;var y=0;
+    for(var i=0;i<planets.length; i++)
+    {
+       if(sign_8 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
+       {
+            x       = planets[i]+" ";
+            var c=document.getElementById("horo_canvas");
+            var ctx =c.getContext("2d");
+            ctx.beginPath();
+                          
+            ctx.font='38% verdana';
+            ctx.fillText(x,105,130);
+       }
+       y++;
+    }
+    var z  = get_next_sign(sign_8);
+    house_9_planets(z);
+}
+function house_9_planets(z)
+{
+    var sign_9   = z;
+    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
+    //alert(document.getElementById("sun_sign").getAttribute('value'));
+    //var name = planets[0];
+    //alert(name);
+    var x;var y=0;
+    for(var i=0;i<planets.length; i++)
+    {
+       if(sign_9 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
+       {
+            x       = planets[i]+" ";
+            var c=document.getElementById("horo_canvas");
+            var ctx =c.getContext("2d");
+            ctx.beginPath();
+                          
+            ctx.font='38% verdana';
+            ctx.fillText(x,105,110);
+       }
+       y++;
+    }
+    var z  = get_next_sign(sign_9);
+    house_10_planets(z);
+}
+function house_10_planets(z)
+{
+    var sign_10   = z;
+    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
+    //alert(document.getElementById("sun_sign").getAttribute('value'));
+    //var name = planets[0];
+    //alert(name);
+    var x;var y=0;
+    for(var i=0;i<planets.length; i++)
+    {
+       if(sign_10 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
+       {
+            x       = planets[i]+" ";
+            var c=document.getElementById("horo_canvas");
+            var ctx =c.getContext("2d");
+            ctx.beginPath();
+                          
+            ctx.font='38% verdana';
+            ctx.fillText(x,100,62);
+       }
+       y++;
+    }
+    var z  = get_next_sign(sign_10);
+    house_11_planets(z);
+}
+function house_11_planets(z)
+{
+    var sign_11   = z;
+    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
+    //alert(document.getElementById("sun_sign").getAttribute('value'));
+    //var name = planets[0];
+    //alert(name);
+    var x;var y=0;
+    for(var i=0;i<planets.length; i++)
+    {
+       if(sign_11 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
+       {
+            x       = planets[i]+" ";
+            var c=document.getElementById("horo_canvas");
+            var ctx =c.getContext("2d");
+            ctx.beginPath();
+                          
+            ctx.font='38% verdana';
+            ctx.fillText(x,125,50);
+       }
+       y++;
+    }
+    var z  = get_next_sign(sign_11);
+    house_12_planets(z);
+}
+function house_12_planets(z)
+{
+    var sign_12   = z;
+    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
+    //alert(document.getElementById("sun_sign").getAttribute('value'));
+    //var name = planets[0];
+    //alert(name);
+    var x;var y=0;
+    for(var i=0;i<planets.length; i++)
+    {
+       if(sign_12 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
+       {
+            x       = planets[i]+" ";
+            var c=document.getElementById("horo_canvas");
+            var ctx =c.getContext("2d");
+            ctx.beginPath();
+                          
+            ctx.font='38% verdana';
+            ctx.fillText(x,105,20);
+       }
+       y++;
+    }
 }
 </script>
 </head>
