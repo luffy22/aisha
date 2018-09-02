@@ -44,14 +44,23 @@ class HoroscopeModelMoon extends HoroscopeModelLagna
        
         $output = "";
         // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
-        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p1 -g, -head", $output);
+        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p1042536789m -g, -head", $output);
+        //print_r($output);exit;
+        $result         = array();
+        $planets        = $this->getPlanets($output);
         
-        $data           = explode(",",$output[0]);
-        $planet         = $data[0];
-        $dist           = $data[1];
-        $sign           = $this->calcDetails($dist);
-        
-        return $this->getArticle($sign, $planet);
+        foreach($planets as $planet=>$dist)
+        {
+            $sign           = $this->calcDetails($dist);
+            $details        = array($planet=>$sign);
+            $result         = array_merge($result, $details);
+        }
+        //print_r($result);exit;
+        $planet             = key($result);
+        $moon_sign          = $result[$planet];
+        $moon_details   = $this->getArticle($sign, $planet);
+        $result         = array_merge($result, $moon_details);
+        return $result;
        //$ayanamsha           = $this->applyAyanamsha($dob, $horo); 
        //return $horo;
     }

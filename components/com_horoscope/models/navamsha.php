@@ -48,13 +48,20 @@ class HoroscopeModelNavamsha extends HoroscopeModelLagna
 
         # OUTPUT ARRAY
         # Planet Name, Planet Degree, Planet Speed per day
-        $asc            = $this->getAscendant($result);
+        //$asc            = $this->getAscendant($result);
         $planets        = $this->getPlanets($output);
-        $data           = array_merge($asc,$planets);
-        $details        = $this->getDetails($data);
-        //print_r($details);exit;
-        $results         = array_merge($result, $details);
-        print_r($results);exit;
+        $asc            = $this->getAscendant($result);
+        $planets        = array_merge($asc, $planets);
+        $data           = array();
+        foreach($planets as $planet=>$dist)
+        {
+            $dist2          = $this->convertDecimalToDegree($dist, "details");
+            $sign           = $this->calcDetails($dist);
+            $details        = array($planet=>$sign);
+            $navamsha       = $this->getNavamsha($planet, $sign, $dist2);
+            $data           = array_merge($data, $details, $navamsha);
+        }
+        return $data;
     }
    
     
