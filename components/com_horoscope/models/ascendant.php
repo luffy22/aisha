@@ -49,12 +49,58 @@ class HoroscopeModelAscendant extends HoroscopeModelLagna
         exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -house$lon,$lat,$h_sys -p -fPls -g, -head", $output);
         //$planets        = $this->getPlanets($output);
         $ascendant          = explode(",",$output[12]);
+        $planets            = $this->calcPlanets($result);
         $asc_sign           = $this->calcDetails($ascendant[1]);
         
-        $asc_details        = $this->getArticle($asc_sign, $gender);
-        return $asc_details;
+        $asc_details        = $this->getArticle($asc_sign, $gender,$planets);
+        $all_details        = array_merge($planets, $asc_details);
+        return $all_details;
     }
-      
+    protected function calcPlanets($result)
+    {
+        //print_r($ascendant);exit;
+        $libPath        = JPATH_BASE.'/sweph/';
+        $fname          = $result['fname'];
+        $gender         = $result['gender'];
+        $dob_tob        = $result['dob_tob'];
+        $pob            = $result['pob'];
+        $lat            = $result['lat'];
+        $lon            = $result['lon'];
+        $timezone       = $result['timezone'];
+        
+        $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
+        
+        $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
+        $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
+        //echo $timestamp." ".$offset;exit;
+        // $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
+        /**
+         * Converting birth date/time to UTC
+         */
+        $utcTimestamp = $timestamp - $offset;
+
+        //echo $utcTimestamp;exit;
+        //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
+
+        $date = date('d.m.Y', $utcTimestamp);
+        $time = date('H:i:s', $utcTimestamp);
+        //echo $date." ".$time;exit;
+        $h_sys = 'P';
+        $output = "";
+        
+        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p0142536m789 -g, -head", $output);
+        //$output         = array_unshift($output, $ascendant);
+        $asc            = $this->getAscendant($result);
+        $planets        = $this->getPlanets($output);
+        $data           = array_merge($asc, $planets);
+        foreach($data as $planet=>$dist)
+        {
+            $sign       = $this->calcDetails($dist);
+            $details    = array($planet =>$sign);
+            $data       = array_merge($data, $details);
+        }
+        return $data;
+    }
     
     
 }
