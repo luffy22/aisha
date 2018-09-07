@@ -20,7 +20,6 @@ $doc->setGenerator("Astro Isha Inc.");
 <link rel="shortcut icon" href="<?php echo $this->baseurl ?>/favicon.ico" type="image/x-icon" />
 <link rel="icon" href="<?php echo $this->baseurl ?>/logo.png" type="image/x-icon">
 <meta name="msvalidate.01" content="E689BB58897C0A89BDC88E5DF8800B2F" />
-<jdoc:include type="head" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/template.css" type="text/css" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/bootstrap.min.css" type="text/css" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/jquery-ui.min.css" type="text/css" />
@@ -32,6 +31,7 @@ $doc->setGenerator("Astro Isha Inc.");
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/jquery-ui.min.js" type="text/javascript" language="javascript"></script>
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/bootstrap.min.js"></script>
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/common.js" type="text/javascript" language="javascript"></script>
+<jdoc:include type="head" />
 </head>
 <body>
     <?php
