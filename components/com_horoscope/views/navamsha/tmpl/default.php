@@ -776,6 +776,24 @@ function house_12_canvas(y)
 </script>
  </head>
  <body onload="javascript:draw_horoscope();getNavamsha();">
+ <?php $chart_id = $_GET['chart']; ?>
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <a class="nav-link" href="<?php echo JURi::base() ?>horoscope?chart=<?php echo $chart_id ?>">Horo Details</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="<?php echo JURi::base() ?>getasc?chart=<?php echo $chart_id ?>">Ascendant</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="<?php echo JURi::base() ?>getmoon?chart=<?php echo $chart_id ?>">Moon Sign</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="<?php echo JURi::base() ?>getnakshatra?chart=<?php echo $chart_id ?>">Nakshatra</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active">Navamsha</a>
+  </li>
+</ul><div class="mb-2"></div>
 <canvas id="navamsha_canvas">
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-2"></div>

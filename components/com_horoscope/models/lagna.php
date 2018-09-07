@@ -27,7 +27,11 @@ class HoroscopeModelLagna extends JModelItem
         {
             $date           = new DateTime($dob." ".$tob);
             $timestamp      = $date->format('U');
-            $tmz            = $this->getTimeZone($lat, $lon, $timestamp);
+            $tmz            = $this->getTimeZone($lat, $lon, "rohdes");
+            if($tmz == "error")
+            {
+                $tmz        = "UTC";        // if timezone not available use UTC(Universal Time Cooridnated)
+            }
             $newdate        = new DateTime($dob." ".$tob, new DateTimeZone($tmz));
             $dob_tob        = $newdate->format('Y-m-d H:i:s');
         }
@@ -148,19 +152,32 @@ class HoroscopeModelLagna extends JModelItem
         //print_r($asc);exit;
         return $asc;
     }
-    protected function getTimeZone($lat, $lon, $timestamp)
+    protected function getTimeZone($lat, $lon, $username)
     {
-        $url = "https://maps.googleapis.com/maps/api/timezone/json?location=$lat,$lon&timestamp=$timestamp&key=AIzaSyDhhAMyimT-tgWJM6w8Aa7awXb73NrYsVA";
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $responseJson = curl_exec($ch);
-        curl_close($ch);
+        
+        	//error checking
+	if (!is_numeric($lat)) { custom_die('A numeric latitude is required.'); }
+	if (!is_numeric($lon)) { custom_die('A numeric longitude is required.'); }
+	if (!$username) { custom_die('A GeoNames user account is required. You can get one here: http://www.geonames.org/login'); }
 
-        $response = json_decode($responseJson);
-        //var_dump($response);
-        $tmz_in_words   =  $response->timeZoneId;
-        return $tmz_in_words;
+	//connect to web service
+	$url = 'http://ws.geonames.org/timezone?lat='.$lat.'&lng='.$lon.'&style=full&username='.urlencode($username);
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_HEADER, false);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$xml = curl_exec($ch);
+	curl_close($ch);
+	if (!$xml) { $GLOBALS['error'] = 'The GeoNames service did not return any data: '.$url; return false; }
+
+	//parse XML response
+	$data = new SimpleXMLElement($xml);
+	//echo '<pre>'.print_r($data,true).'</pre>'; exit;
+	$timezone = trim(strip_tags($data->timezone->timezoneId));
+        
+	if ($timezone) { return $timezone; }
+	else { return "error"; }
+
     }
     protected function getUserData($horo_id)
     {

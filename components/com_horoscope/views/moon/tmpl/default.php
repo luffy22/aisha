@@ -672,6 +672,19 @@ function house_7_canvas(y)
         ctx.fillText(y[0],65,100);
         ctx.fillText(y[1],65,105);
     }
+    else if(len == "3")
+    {
+        ctx.fillText(y[0],65,100);
+        ctx.fillText(y[1],65,107);
+        ctx.fillText(y[0],65,113);
+    }
+    else if(len == "4")
+    {
+        ctx.fillText(y[0],65,100);
+        ctx.fillText(y[1],65,107);
+        ctx.fillText(y[0],65,113);
+        ctx.fillText(y[1],65,120);
+    }
 }
 function house_8_canvas(y)
 {
@@ -765,6 +778,24 @@ function house_12_canvas(y)
 </script>
 </head>
 <body onload="javascript:draw_horoscope();getMoon();">
+<?php $chart_id = $_GET['chart']; ?>
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <a class="nav-link" href="<?php echo JURi::base() ?>horoscope?chart=<?php echo $chart_id ?>">Horo Details</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="<?php echo JURi::base() ?>getasc?chart=<?php echo $chart_id ?>">Ascendant</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active">Moon Sign</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="<?php echo JURi::base() ?>getnakshatra?chart=<?php echo $chart_id ?>">Nakshatra</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="<?php echo JURi::base() ?>getnavamsha?chart=<?php echo $chart_id ?>">Navamsha</a>
+  </li>
+</ul><div class="mb-2"></div>
 <?php
 /**
  * @package     Joomla.Site
@@ -783,7 +814,7 @@ $text       = $this->data['introtext'];
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-2"></div>
 <div id="<?php echo $this->data['id']; ?>" class="accordion-id"></div>
-<p class="lead"><?php echo "Your Moon Sign is ".str_replace(" Sign","", $title) ?></p>
+<div class="lead alert-info breadcrumb"><?php echo "Your Moon Sign is ".str_replace(" Sign","", $title) ?></div>
 <div class="mb-2"></div>
 <?php echo $text; 
 for($i=0;$i<3;$i++)  // remove the last 3 elements from the array to avoid confusion

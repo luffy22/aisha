@@ -751,6 +751,24 @@ function house_12_canvas(y)
 </script>
 </head>
 <body onload="javascript:draw_horoscope();getAscendant()">
+<?php $chart_id = $_GET['chart']; ?>
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <a class="nav-link active">Horo Details</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="<?php echo JURi::base() ?>getasc?chart=<?php echo $chart_id ?>">Ascendant</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="<?php echo JURi::base() ?>getmoon?chart=<?php echo $chart_id ?>">Moon Sign</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="<?php echo JURi::base() ?>getnakshatra?chart=<?php echo $chart_id ?>">Nakshatra</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="<?php echo JURi::base() ?>getnavamsha?chart=<?php echo $chart_id ?>">Navamsha</a>
+  </li>
+</ul><div class="mb-2"></div>
 <?php
 defined('_JEXEC') or die();
 //print_r($this->data);exit;

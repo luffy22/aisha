@@ -665,12 +665,25 @@ function house_7_canvas(y)
     ctx.font='38% verdana';
     if(len == "1")
     {
-        ctx.fillText(y[0],65,95);
+        ctx.fillText(y[0],65,100);
     }
     else if(len == "2")
     {
-        ctx.fillText(y[0],65,95);
-        ctx.fillText(y[1],65,102);
+        ctx.fillText(y[0],65,100);
+        ctx.fillText(y[1],65,105);
+    }
+    else if(len == "3")
+    {
+        ctx.fillText(y[0],65,100);
+        ctx.fillText(y[1],65,107);
+        ctx.fillText(y[2],65,113);
+    }
+    else if(len == "4")
+    {
+        ctx.fillText(y[0],65,100);
+        ctx.fillText(y[1],65,107);
+        ctx.fillText(y[2],65,113);
+        ctx.fillText(y[3],65,120);
     }
 }
 function house_8_canvas(y)
@@ -730,8 +743,8 @@ function house_10_canvas(y)
     else if(len == "3")
     {
         ctx.fillText(y[0],100,62);
-        ctx.fillText(y[1],100,67);
-        ctx.fillText(y[2],100,72);
+        ctx.fillText(y[1],100,70);
+        ctx.fillText(y[2],100,78);
     }
     else if(len == "4")
     {
@@ -765,6 +778,24 @@ function house_12_canvas(y)
 </script>
 </head>
 <body onload="javascript:draw_horoscope();getAscendant();">
+<?php $chart_id = $_GET['chart']; ?>
+<ul class="nav nav-pills">
+  <li class="nav-item">
+     <a class="nav-link" href="<?php echo JURi::base() ?>horoscope?chart=<?php echo $chart_id ?>">Horo Details</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active">Ascendant</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="<?php echo JURi::base() ?>getmoon?chart=<?php echo $chart_id ?>">Moon Sign</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="<?php echo JURi::base() ?>getnakshatra?chart=<?php echo $chart_id ?>">Nakshatra</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="<?php echo JURi::base() ?>getnavamsha?chart=<?php echo $chart_id ?>">Navamsha</a>
+  </li>
+</ul><div class="mb-2"></div>
 <?php
 /**
  * @package     Joomla.Site
@@ -795,7 +826,7 @@ else
 $text       = $this->data['introtext'];
 ?>
 <div id="<?php echo $this->data['id']; ?>" class="accordion-id"></div>
-<h3><?php echo "Your Ascendant is ".$title; ?></h3>
+<div class="breadcrumb lead alert-info"><?php echo "Your Ascendant is ".$title; ?></div>
 <?php echo $text; 
 for($i=0;$i<3;$i++)  // remove the last 3 elements from the array to avoid confusion
 { array_pop($this->data); } ?>
