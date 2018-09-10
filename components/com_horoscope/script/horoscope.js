@@ -1,15 +1,29 @@
+var c   = {};var ctx = {};
 function get_canvas()
 {
-    var obj = document.getElementsByClassName("canvas");
-    alert(obj[0].id);
+    var url     = window.location.href;
+    if(url.includes("horoscope"))
+    {
+        c           =   document.getElementById("horo_canvas");
+    }
+    else if(url.includes("getasc"))
+    {
+        c           =   document.getElementById("asc_canvas");
+    }
+    else if(url.includes("getmoon"))
+    {
+        c           =   document.getElementById("moon_canvas");
+    }
+    else if(url.includes("getnavamsha"))
+    {
+        c           =   document.getElementById("navamsha_canvas");
+    }
+    ctx     =       c.getContext("2d");
+    ctx.beginPath();
 }
 function draw_horoscope()
 {
-    //alert("calls");
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    // horoscope boundary
-    ctx.beginPath();
+    get_canvas();
     ctx.rect(5,5,145,145);
     ctx.strokeStyle='black';
     ctx.lineWidth=1;
@@ -138,15 +152,43 @@ function getAscendant()
     else if(x == "Aquarius"){y = 11;} else if(x == "Pisces"){y = 12;} else{y=1;}
     house_1(y);
 }
+function getAsc()
+{
+    var x = document.getElementById("Ascendant_sign").getAttribute('value');
+    if(x == "Aries"){ y = 1;} else if(x == "Taurus"){y = 2;}
+    else if(x == "Gemini"){y = 3;} else if(x == "Cancer"){y = 4;}
+    else if(x == "Leo"){y = 5;} else if(x == "Virgo"){y = 6;}
+    else if(x == "Libra"){y = 7;} else if(x == "Scorpio"){y = 8;}
+    else if(x == "Sagittarius"){y = 9;} else if(x == "Capricorn"){y = 10;}
+    else if(x == "Aquarius"){y = 11;} else if(x == "Pisces"){y = 12;} else{y=1;}
+    house_1(y);
+}
+function getMoon()
+{
+    var x = document.getElementById("moon_sign").getAttribute('value');
+    if(x == "Aries"){ y = 1;} else if(x == "Taurus"){y = 2;}
+    else if(x == "Gemini"){y = 3;} else if(x == "Cancer"){y = 4;}
+    else if(x == "Leo"){y = 5;} else if(x == "Virgo"){y = 6;}
+    else if(x == "Libra"){y = 7;} else if(x == "Scorpio"){y = 8;}
+    else if(x == "Sagittarius"){y = 9;} else if(x == "Capricorn"){y = 10;}
+    else if(x == "Aquarius"){y = 11;} else if(x == "Pisces"){y = 12;} else{y=1;}
+    house_1(y);
+}
+function getNavamsha()
+{
+    var x = document.getElementById("ascendant_sign").getAttribute('value');
+    if(x == "Aries"){ y = 1;} else if(x == "Taurus"){y = 2;}
+    else if(x == "Gemini"){y = 3;} else if(x == "Cancer"){y = 4;}
+    else if(x == "Leo"){y = 5;} else if(x == "Virgo"){y = 6;}
+    else if(x == "Libra"){y = 7;} else if(x == "Scorpio"){y = 8;}
+    else if(x == "Sagittarius"){y = 9;} else if(x == "Capricorn"){y = 10;}
+    else if(x == "Aquarius"){y = 11;} else if(x == "Pisces"){y = 12;} else{y=1;}
+    house_1(y);
+}
 function house_1(y)
 {
-    //alert(z);
     var x = y;
-    //alert("calls");
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
-
+    get_canvas();       // get the canvas in 2d
     ctx.font='33% Arial';
     ctx.fillText(x,74,73);
     var y = calc_next_value(x);
@@ -155,8 +197,7 @@ function house_1(y)
 function house_2(y)
 {
     var x = y;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
+    get_canvas();       // get the canvas in 2d
     ctx.beginPath();
     ctx.font='33%';
     ctx.fillText(x,40,38);
@@ -166,9 +207,7 @@ function house_2(y)
 function house_3(y)
 {
     var x = y;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
+    get_canvas();       // get the canvas in 2d
     ctx.font='33%';
     ctx.fillText(x,33,45);
     var y = calc_next_value(x);
@@ -177,9 +216,7 @@ function house_3(y)
 function house_4(y)
 {
     var x = y;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
+    get_canvas();       // get the canvas in 2d
     ctx.font='33%';
     ctx.fillText(x,68,79);
     var y = calc_next_value(x);
@@ -188,9 +225,7 @@ function house_4(y)
 function house_5(y)
 {
     var x = y;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
+    get_canvas();       // get the canvas in 2d
     ctx.font='33%';
     ctx.fillText(x,33,115);
     var y = calc_next_value(x);
@@ -199,9 +234,7 @@ function house_5(y)
 function house_6(y)
 {
     var x = y;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
+    get_canvas();       // get the canvas in 2d
     ctx.font='33% Arial';
     ctx.fillText(x,38,122);
     var y = calc_next_value(x);
@@ -210,9 +243,7 @@ function house_6(y)
 function house_7(y)
 {
     var x = y;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
+    get_canvas();       // get the canvas in 2d
     ctx.font='33% Arial';
     ctx.fillText(x,75,85);
     var y = calc_next_value(x);
@@ -221,10 +252,7 @@ function house_7(y)
 function house_8(y)
 {
     var x = y;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    
-    ctx.beginPath();
+    get_canvas();       // get the canvas in 2d
     ctx.font='33% Arial';
     ctx.fillText(x,112,122);
     
@@ -234,9 +262,7 @@ function house_8(y)
 function house_9(y)
 {
     var x = y;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
+    get_canvas();       // get the canvas in 2d
     ctx.font='33% Arial';
     ctx.fillText(x,118,116);
     var y = calc_next_value(x);
@@ -245,9 +271,7 @@ function house_9(y)
 function house_10(y)
 {
     var x = y;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
+    get_canvas();       // get the canvas in 2d
     ctx.font='33% Arial';
     ctx.fillText(x,82,79);
     var y = calc_next_value(x);
@@ -256,9 +280,7 @@ function house_10(y)
 function house_11(y)
 {
     var x = y;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
+    get_canvas();       // get the canvas in 2d
     ctx.font='33% Arial';
     ctx.fillText(x,117,44);
     var y = calc_next_value(x);
@@ -267,9 +289,7 @@ function house_11(y)
 function house_12(y)
 {
     var x = y;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
+    get_canvas();       // get the canvas in 2d
     ctx.font='33% Arial';
     ctx.fillText(x,110,38);
     house_1_planets();
@@ -297,14 +317,53 @@ function get_next_sign(z)
     }
     return y;
 }
-    
-function house_1_planets()
+function get_planets(a,z)
 {
-    var ascendant   = document.getElementById("ascendant_sign").getAttribute('value');
+    var sign        = z;
     var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
     //alert(document.getElementById("sun_sign").getAttribute('value'));
     //var name = planets[0];
     //alert(name);
+    var x;var y=[];
+    for(var i=0;i<planets.length; i++)
+    {
+       if(sign == document.getElementById(planets[i]+"_sign").getAttribute('value'))
+       {
+            x       = planets[i];
+            y.push(x);           
+       }
+    }
+    var canvas      = "house_"+a+"_canvas";
+    if(y.length > 0)        // check if there are any planets in house
+    {
+        return y;
+    }
+    else
+    {
+        return "0";
+    }
+}
+function house_1_planets()
+{
+    var url     = window.location.href;
+    if(url.includes("horoscope"))
+    {
+        var ascendant   = document.getElementById("ascendant_sign").getAttribute('value');
+    }
+    else if(url.includes("getasc"))
+    {
+        var ascendant   = document.getElementById("ascendant_sign").getAttribute('value');
+    }
+    else if(url.includes("getmoon"))
+    {
+        var ascendant   = document.getElementById("moon_sign").getAttribute('value');
+    }
+    else if(url.includes("getnavamsha"))
+    {     
+        var ascendant   = document.getElementById("ascendant_sign").getAttribute('value');
+    }
+    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
+    
     var x;var y=[];
     for(var i=0;i<planets.length; i++)
     {
@@ -319,314 +378,139 @@ function house_1_planets()
         house_1_canvas(y);      // execute only if there are planets
     }
     var z  = get_next_sign(ascendant);
+
     house_2_planets(z);
 }
 function house_2_planets(z)
 {
-    //alert(z);
-    var sign_2   = z;
-    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
-    //alert(document.getElementById("sun_sign").getAttribute('value'));
-    //var name = planets[0];
-    //alert(name);
-    var x;var y=[];
-    for(var i=0;i<planets.length; i++)
-    {
-       if(sign_2 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
-       {
-            x       = planets[i];
-            y.push(x);           
-       }
-    }
-    if(y.length > 0)        // check if there are any planets in house
-    {
-        house_2_canvas(y);      // execute only if there are planets
-    }
-    var z  = get_next_sign(sign_2);
+    var y   = get_planets(2, z);
+    if(y== "0"){}else{house_2_canvas(y);}
+    var z   = get_next_sign(z);
     house_3_planets(z);
 }
 function house_3_planets(z)
 {
-    //alert(z);
-    var sign_3      = z
-    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
-    //alert(document.getElementById("sun_sign").getAttribute('value'));
-    //var name = planets[0];
-    //alert(name);
-    var x;var y=[];
-    for(var i=0;i<planets.length; i++)
-    {
-       if(sign_3 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
-       {
-            x       = planets[i];
-            y.push(x);
-       }
-    }
-    if(y.length > 0)        // check if there are any planets in house
-    {
-        house_3_canvas(y);      // execute only if there are planets
-    }
-    var z  = get_next_sign(sign_3);
+    var y   = get_planets(3, z);
+    if(y== "0"){}else{house_3_canvas(y);}
+    var z  = get_next_sign(z);
     house_4_planets(z);
 }
 function house_4_planets(z)
 {
-    var sign_4   = z;
-    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
-    //alert(document.getElementById("sun_sign").getAttribute('value'));
-    //var name = planets[0];
-    //alert(name);
-    var x;var y=[];
-    for(var i=0;i<planets.length; i++)
-    {
-       if(sign_4 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
-       {
-            x       = planets[i];
-            y.push(x);
-       }
-    }
-    if(y.length > 0)        // check if there are any planets in house
-    {
-        house_4_canvas(y);      // execute only if there are planets
-    }
-    var z  = get_next_sign(sign_4);
+    var y   = get_planets(4, z);
+    if(y== "0"){}else{house_4_canvas(y);}
+    var z  = get_next_sign(z);
     house_5_planets(z);
 }
 function house_5_planets(z)
 {
-    var sign_5   = z;
-    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
-    //alert(document.getElementById("sun_sign").getAttribute('value'));
-    //var name = planets[0];
-    //alert(name);
-    var x;var y=[];
-    for(var i=0;i<planets.length; i++)
-    {
-       if(sign_5 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
-       {
-            x       = planets[i];
-            y.push(x);
-       }
-    }
-    if(y.length > 0)        // check if there are any planets in house
-    {
-        house_5_canvas(y);      // execute only if there are planets
-    }
-    var z  = get_next_sign(sign_5);
+    var y   = get_planets(5, z);
+    if(y== "0"){}else{house_5_canvas(y);}
+    var z  = get_next_sign(z);
     house_6_planets(z);
 }
 function house_6_planets(z)
 {
-    var sign_6   = z;
-    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
-    //alert(document.getElementById("sun_sign").getAttribute('value'));
-    //var name = planets[0];
-    //alert(name);
-    var x;var y=[];
-    for(var i=0;i<planets.length; i++)
-    {
-       if(sign_6 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
-       {
-            x       = planets[i];
-            y.push(x);
-       }
-    }
-    if(y.length > 0)        // check if there are any planets in house
-    {
-        house_6_canvas(y);      // execute only if there are planets
-    }
-    var z  = get_next_sign(sign_6);
+    var y   = get_planets(6, z);
+    if(y== "0"){}else{house_6_canvas(y);}
+    var z  = get_next_sign(z);
     house_7_planets(z);
 }
 function house_7_planets(z)
 {
-    var sign_7   = z;
-    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
-    //alert(document.getElementById("sun_sign").getAttribute('value'));
-    //var name = planets[0];
-    //alert(name);
-    var x;var y=[];
-    for(var i=0;i<planets.length; i++)
-    {
-       if(sign_7 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
-       {
-            x       = planets[i];
-            y.push(x);
-       }
-
-    }
-    if(y.length > 0)        // check if there are any planets in house
-    {
-        house_7_canvas(y);      // execute only if there are planets
-    }
-    var z  = get_next_sign(sign_7);
+    var y   = get_planets(7, z);
+    if(y== "0"){}else{house_7_canvas(y);}
+    var z  = get_next_sign(z);
     house_8_planets(z);
 }
 function house_8_planets(z)
 {
-    var sign_8   = z;
-    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
-    //alert(document.getElementById("sun_sign").getAttribute('value'));
-    //var name = planets[0];
-    //alert(name);
-    var x;var y=[];
-    for(var i=0;i<planets.length; i++)
-    {
-       if(sign_8 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
-       {
-            x       = planets[i];
-            y.push(x);
-       }
-    }
-    if(y.length > 0)        // check if there are any planets in house
-    {
-        house_8_canvas(y);      // execute only if there are planets
-    }
-    var z  = get_next_sign(sign_8);
+    var y   = get_planets(8, z);
+    if(y== "0"){}else{house_8_canvas(y);}
+    var z  = get_next_sign(z);
     house_9_planets(z);
 }
 function house_9_planets(z)
 {
-    var sign_9   = z;
-    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
-    //alert(document.getElementById("sun_sign").getAttribute('value'));
-    //var name = planets[0];
-    //alert(name);
-    var x;var y=[];
-    for(var i=0;i<planets.length; i++)
-    {
-       if(sign_9 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
-       {
-            x       = planets[i];
-            y.push(x);
-       }
-    }
-    if(y.length > 0)        // check if there are any planets in house
-    {
-        house_9_canvas(y);      // execute only if there are planets
-    }
-    var z  = get_next_sign(sign_9);
+    var y    = get_planets(9, z);
+    if(y== "0"){}else{house_9_canvas(y);}
+    var z  = get_next_sign(z);
     house_10_planets(z);
 }
 function house_10_planets(z)
 {
-    var sign_10   = z;
-    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
-    //alert(document.getElementById("sun_sign").getAttribute('value'));
-    //var name = planets[0];
-    //alert(name);
-    var x;var y=[];
-    for(var i=0;i<planets.length; i++)
-    {
-       if(sign_10 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
-       {
-            x       = planets[i];
-            y.push(x);
-       }
-    }
-    if(y.length > 0)        // check if there are any planets in house
-    {
-        house_10_canvas(y);      // execute only if there are planets
-    }
-    var z  = get_next_sign(sign_10);
+    var y   = get_planets(10, z);
+    if(y== "0"){}else{house_10_canvas(y);}
+    var z  = get_next_sign(z);
     house_11_planets(z);
 }
 function house_11_planets(z)
 {
-    var sign_11   = z;
-    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
-    //alert(document.getElementById("sun_sign").getAttribute('value'));
-    //var name = planets[0];
-    //alert(name);
-    var x;var y=[];
-    for(var i=0;i<planets.length; i++)
-    {
-       if(sign_11 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
-       {
-            x       = planets[i];
-            y.push(x);
-       }
-    }
-    if(y.length > 0)        // check if there are any planets in house
-    {
-        house_11_canvas(y);      // execute only if there are planets
-    }
-    var z  = get_next_sign(sign_11);
+    var y   = get_planets(11, z);
+    if(y== "0"){}else{house_11_canvas(y);}
+    var z  = get_next_sign(z);
     house_12_planets(z);
 }
 function house_12_planets(z)
 {
-    var sign_12   = z;
-    var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
-    //alert(document.getElementById("sun_sign").getAttribute('value'));
-    //var name = planets[0];
-    //alert(name);
-    var x;var y=[];
-    for(var i=0;i<planets.length; i++)
-    {
-       if(sign_12 == document.getElementById(planets[i]+"_sign").getAttribute('value'))
-       {
-            x       = planets[i];
-            y.push(x);
-       }
-    }
-    if(y.length > 0)        // check if there are any planets in house
-    {
-        house_12_canvas(y);      // execute only if there are planets
-    }
+    var y   = get_planets(12, z);
+    if(y== "0"){}else{house_12_canvas(y);}
 }
 function house_1_canvas(y)
 {
     var len     = y.length;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
+    get_canvas();
+    
     ctx.font='38% verdana';
     if(len=="1")
     { 
-        ctx.fillText(y[0],65,35);
+        ctx.fillText(y[0],68,45);
     }
     else if(len=="2")
     {
-        ctx.fillText(y[0],65,25);
-        ctx.fillText(y[0],65,30);
+        ctx.fillText(y[0],65,35);
+        ctx.fillText(y[1],65,42);
+    }
+    else if(len=="3")
+    {
+        ctx.fillText(y[0],65,35);
+        ctx.fillText(y[1],65,42);
+        ctx.fillText(y[2],65,49);
+    }
+    else if(len=="4")
+    {
+        ctx.fillText(y[0],65,35);
+        ctx.fillText(y[1],65,42);
+        ctx.fillText(y[2],65,49);
+        ctx.fillText(y[3],65,56);
     }
 }
 function house_2_canvas(y)
 {
     var len     = y.length;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
-
+    get_canvas();
     ctx.font='38% verdana';
-    ctx.fillText(x,35,12);
+    ctx.fillText(y[0],35,22);
 }
 function house_3_canvas(y)
 {
     var len     = y.length;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
+    get_canvas();
     ctx.font='38% verdana';
-    ctx.fillText(x,20,12);
+    ctx.fillText(y[0],7,36);
 }
 
 function house_4_canvas(y)
 {
     var len     = y.length;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
+    get_canvas();
     ctx.font='38% verdana';
-    ctx.fillText(y[0],36,62);
+    ctx.fillText(y[0],36,72);
 }
 function house_5_canvas(y)
 {
     var len     = y.length;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
+    get_canvas();
 
     ctx.font='38% verdana';
     ctx.fillText(y[0],36,72);
@@ -634,19 +518,15 @@ function house_5_canvas(y)
 function house_6_canvas(y)
 {
     var len     = y.length;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
+    get_canvas();
 
     ctx.font='38% verdana';
-    ctx.fillText(y[0],30,128);
+    ctx.fillText(y[0],30,137);
 }
 function house_7_canvas(y)
 {
     var len     = y.length;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
+    get_canvas();
 
     ctx.font='38% verdana';
     if(len == "1")
@@ -655,21 +535,25 @@ function house_7_canvas(y)
     }
     else if(len == "2")
     {
-        ctx.fillText(y[0],65,100);
-        ctx.fillText(y[1],65,105);
+        ctx.fillText(y[0],68,100);
+        ctx.fillText(y[1],65,107);
+    }
+    else if(len == "3")
+    {
+        ctx.fillText(y[0],68,97);
+        ctx.fillText(y[1],68,104);
+        ctx.fillText(y[1],68,111);
     }
 }
 function house_8_canvas(y)
 {
     var len     = y.length;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
+    get_canvas();
 
     ctx.font='38% verdana';
     if(len == "1")
     {
-        ctx.fillText(y[0],105,130);
+        ctx.fillText(y[0],105,137);
     }
     else if(len == "2")
     {
@@ -680,37 +564,33 @@ function house_8_canvas(y)
 function house_9_canvas(y)
 {   
     var len     = y.length;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
+    get_canvas();
 
     ctx.font='38% verdana';
     if(len == "1")
     {
-        ctx.fillText(y[0],105,120);
+        ctx.fillText(y[0],125,115);
     }
     else if(len == "2")
     {
-        ctx.fillText(y[0],105,120);
-        ctx.fillText(y[1],105,125);
+        ctx.fillText(y[0],125,115);
+        ctx.fillText(y[1],125,122);
     }
 }
 function house_10_canvas(y)
 {
     var len     = y.length;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
-
+    get_canvas();
+    
     ctx.font='38% verdana';
     if(len == "1")
     {
-        ctx.fillText(y[0],100,62);
+        ctx.fillText(y[0],100,72);
     }
     else if(len == "2")
     {
-        ctx.fillText(y[0],100,62);
-        ctx.fillText(y[1],100,67);
+        ctx.fillText(y[0],100,72);
+        ctx.fillText(y[1],100,79);
     }
     else if(len == "3")
     {
@@ -730,20 +610,38 @@ function house_10_canvas(y)
 function house_11_canvas(y)
 {
     var len     = y.length;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
+    get_canvas();
 
     ctx.font='38% verdana';
-    ctx.fillText(y[0],125,50);
+    if(len=="1")
+    { 
+         ctx.fillText(y[0],125,40);
+    }
+    else if(len=="2")
+    {
+        ctx.fillText(y[0],125,40);
+         ctx.fillText(y[0],125,48);
+    }
+    else if(len=="3")
+    {
+        ctx.fillText(y[0],125,35);
+        ctx.fillText(y[1],125,42);
+        ctx.fillText(y[2],125,49);
+    }
+    else if(len=="4")
+    {
+        ctx.fillText(y[0],125,32);
+        ctx.fillText(y[1],125,40);
+        ctx.fillText(y[2],125,48);
+        ctx.fillText(y[3],125,54);
+    }
+   
 }
 function house_12_canvas(y)
 {
     var len     = y.length;
-    var c=document.getElementById("horo_canvas");
-    var ctx =c.getContext("2d");
-    ctx.beginPath();
-
+    get_canvas();
+    
     ctx.font='38% verdana';
     ctx.fillText(y[0],105,20);
 }
