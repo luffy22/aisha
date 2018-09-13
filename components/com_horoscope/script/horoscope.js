@@ -200,7 +200,7 @@ function house_2(y)
     get_canvas();       // get the canvas in 2d
     ctx.beginPath();
     ctx.font='33%';
-    ctx.fillText(x,40,38);
+    ctx.fillText(x,40,39);
     var y = calc_next_value(x);
     house_3(y);
 }
@@ -209,7 +209,7 @@ function house_3(y)
     var x = y;
     get_canvas();       // get the canvas in 2d
     ctx.font='33%';
-    ctx.fillText(x,33,45);
+    ctx.fillText(x,34,45);
     var y = calc_next_value(x);
     house_4(y);
 }
@@ -464,7 +464,7 @@ function house_1_canvas(y)
     ctx.font='38% verdana';
     if(len=="1")
     { 
-        ctx.fillText(y[0],68,45);
+        ctx.fillText(y[0],68,42);
     }
     else if(len=="2")
     {
@@ -474,15 +474,66 @@ function house_1_canvas(y)
     else if(len=="3")
     {
         ctx.fillText(y[0],65,35);
-        ctx.fillText(y[1],65,42);
+        ctx.fillText(y[1],58,42);
         ctx.fillText(y[2],65,49);
     }
     else if(len=="4")
     {
         ctx.fillText(y[0],65,35);
         ctx.fillText(y[1],65,42);
-        ctx.fillText(y[2],65,49);
+        ctx.fillText(y[2],65,48);
         ctx.fillText(y[3],65,56);
+    }
+    else if(len=="5")
+    {
+        ctx.fillText(y[0],65,24);
+        ctx.fillText(y[1],65,30);
+        ctx.fillText(y[2],65,36);
+        ctx.fillText(y[3],65,42);
+        ctx.fillText(y[4],65,48);
+    }
+     else if(len=="6")
+    {
+        ctx.fillText(y[0],65,24);
+        ctx.fillText(y[1],65,30);
+        ctx.fillText(y[2],65,36);
+        ctx.fillText(y[3],65,42);
+        ctx.fillText(y[4],65,48);
+        ctx.fillText(y[5],65,54);
+    }
+    else if(len=="7")
+    {
+        ctx.fillText(y[0],65,24);
+        ctx.fillText(y[1],65,30);
+        ctx.fillText(y[2],65,36);
+        ctx.fillText(y[3],65,42);
+        ctx.fillText(y[4],65,48);
+        ctx.fillText(y[5],65,54);
+        ctx.fillText(y[6],65,60);
+    }
+    
+    else if(len=="8")
+    {
+        ctx.fillText(y[0],65,24);
+        ctx.fillText(y[1],65,30);
+        ctx.fillText(y[2],65,36);
+        ctx.fillText(y[3],52,42);
+        ctx.fillText(y[4],75,42);
+        ctx.fillText(y[5],52,48);
+        ctx.fillText(y[6],75,48);
+        ctx.fillText(y[7],65,54);
+    }
+    else if(len=="9")
+    {
+        ctx.fillText(y[0],65,24);
+        ctx.fillText(y[1],65,30);
+        ctx.fillText(y[2],65,36);
+        ctx.fillText(y[3],52,42);
+        ctx.fillText(y[4],75,42);
+        ctx.fillText(y[5],52,48);
+        ctx.fillText(y[6],75,48);
+        ctx.fillText(y[7],65,54);
+        ctx.fillText(y[8],65,60);
     }
 }
 function house_2_canvas(y)
@@ -490,14 +541,88 @@ function house_2_canvas(y)
     var len     = y.length;
     get_canvas();
     ctx.font='38% verdana';
-    ctx.fillText(y[0],35,22);
+    if(len=="1")
+    { 
+        ctx.fillText(y[0],30,22);
+    }
+    else if(len=="2")
+    { 
+        ctx.fillText(y[0],30,15);
+        ctx.fillText(y[1],30,21);
+    }
+    else if(len=="3")
+    { 
+        ctx.fillText(y[0],30,15);
+        ctx.fillText(y[1],30,21);
+        ctx.fillText(y[2],30,27);
+    }
+    else if(len=="4")
+    { 
+        ctx.fillText(y[0],15,12);
+        ctx.fillText(y[1],35,12);
+        ctx.fillText(y[2],35,18);
+        ctx.fillText(y[3],35,24);
+    }
+    else if(len=="5")
+    { 
+        ctx.fillText(y[0],15,12);
+        ctx.fillText(y[1],35,12);
+        ctx.fillText(y[2],35,18);
+        ctx.fillText(y[3],35,24);
+        ctx.fillText(y[4],35,30);
+    }
+    else if(len=="6")
+    { 
+    
+    }
+    else if(len=="7")
+    { 
+    
+    }
+    else if(len=="8")
+    { 
+    
+    }
+    else if(len=="9")
+    { 
+    
+    }
 }
 function house_3_canvas(y)
 {
     var len     = y.length;
     get_canvas();
     ctx.font='38% verdana';
-    ctx.fillText(y[0],7,36);
+    if(len == "1")
+    {
+        ctx.fillText(y[0],7,42);
+    }
+    else if(len == "2")
+    {
+        ctx.fillText(y[0],7,35);
+        ctx.fillText(y[1],7,42);
+    }
+    else if(len == "3")
+    {
+        ctx.fillText(y[0],7,35);
+        ctx.fillText(y[1],7,42);
+        ctx.fillText(y[2],7,49);
+    }
+    else if(len == "4")
+    {
+        ctx.fillText(y[0],7,35);
+        ctx.fillText(y[1],7,42);
+        ctx.fillText(y[2],7,49);
+        ctx.fillText(y[3],7,55);
+    }
+    else if(len == "5")
+    {
+        ctx.fillText(y[0],7,35);
+        ctx.fillText(y[1],7,42);
+        ctx.fillText(y[2],7,49);
+        ctx.fillText(y[3],7,55);
+        ctx.fillText(y[4],7,61);
+    }
 }
 
 function house_4_canvas(y)
@@ -505,15 +630,83 @@ function house_4_canvas(y)
     var len     = y.length;
     get_canvas();
     ctx.font='38% verdana';
-    ctx.fillText(y[0],36,72);
+    if(len == "1")
+    {
+        ctx.fillText(y[0],36,78);
+    }
+    else if(len == "2")
+    {
+        ctx.fillText(y[0],36,72);
+        ctx.fillText(y[1],36,78);
+    }
+    else if(len == "3")
+    {
+        ctx.fillText(y[0],36,62);
+        ctx.fillText(y[1],36,67);
+        ctx.fillText(y[2],36,72);
+    }
+    else if(len == "4")
+    {
+        ctx.fillText(y[0],36,62);
+        ctx.fillText(y[1],36,67);
+        ctx.fillText(y[2],36,72);
+        ctx.fillText(y[3],36,78);
+    }
+    else if(len == "5")
+    {
+        ctx.fillText(y[0],36,62);
+        ctx.fillText(y[1],36,67);
+        ctx.fillText(y[2],36,72);
+        ctx.fillText(y[3],36,78);
+        ctx.fillText(y[4],36,84);
+    }
+    else if(len == "6")
+    {
+        ctx.fillText(y[0],36,62);
+        ctx.fillText(y[1],36,67);
+        ctx.fillText(y[2],36,72);
+        ctx.fillText(y[3],36,78);
+        ctx.fillText(y[4],36,84);
+        ctx.fillText(y[5],36,90);
+    }
+    else if(len == "7")
+    {
+        ctx.fillText(y[0],36,62);
+        ctx.fillText(y[1],36,67);
+        ctx.fillText(y[2],36,72);
+        ctx.fillText(y[3],36,78);
+        ctx.fillText(y[4],36,84);
+        ctx.fillText(y[5],36,90);
+        ctx.fillText(y[6],36,96);
+    }
+    else if(len == "8")
+    {
+        ctx.fillText(y[0],36,62);
+        ctx.fillText(y[1],36,67);
+        ctx.fillText(y[2],36,72);
+        ctx.fillText(y[3],36,78);
+        ctx.fillText(y[4],36,84);
+        ctx.fillText(y[5],36,90);
+        ctx.fillText(y[6],36,96);
+        ctx.fillText(y[7],36,102);
+    }
 }
 function house_5_canvas(y)
 {
+    
     var len     = y.length;
     get_canvas();
 
     ctx.font='38% verdana';
-    ctx.fillText(y[0],36,72);
+    if(len == "1")
+    {
+        ctx.fillText(y[0],7,72);
+    }
+    else if(len == "2")
+    {
+        ctx.fillText(y[0],7,112);
+        ctx.fillText(y[1],7,119);
+    }
 }
 function house_6_canvas(y)
 {
@@ -521,7 +714,66 @@ function house_6_canvas(y)
     get_canvas();
 
     ctx.font='38% verdana';
-    ctx.fillText(y[0],30,137);
+    if(len == "1")
+    {
+        ctx.fillText(y[0],30,137);
+    }
+    else if(len == "2")
+    {
+        ctx.fillText(y[0],30,130);
+        ctx.fillText(y[1],30,137);
+    }
+    else if(len == "3")
+    {
+        ctx.fillText(y[0],30,128);
+        ctx.fillText(y[1],30,134);
+        ctx.fillText(y[2],30,140);
+    }
+    else if(len == "4")
+    {
+        ctx.fillText(y[0],30,128);
+        ctx.fillText(y[1],30,134);
+        ctx.fillText(y[2],30,140);
+        ctx.fillText(y[3],30,148);
+    }
+    else if(len == "5")
+    {
+        ctx.fillText(y[0],30,128);
+        ctx.fillText(y[1],30,134);
+        ctx.fillText(y[2],18,140);
+        ctx.fillText(y[3],40,140);
+        ctx.fillText(y[4],30,148);
+    }
+    else if(len == "6")
+    {
+        ctx.fillText(y[0],30,128);
+        ctx.fillText(y[1],30,134);
+        ctx.fillText(y[2],18,140);
+        ctx.fillText(y[3],40,140);
+        ctx.fillText(y[4],12,148);
+        ctx.fillText(y[5],36,148);
+    }
+    else if(len == "7")
+    {
+        ctx.fillText(y[0],30,128);
+        ctx.fillText(y[1],30,134);
+        ctx.fillText(y[2],18,140);
+        ctx.fillText(y[3],40,140);
+        ctx.fillText(y[4],12,148);
+        ctx.fillText(y[5],32,148);
+        ctx.fillText(y[6],52,148);
+    }
+    else if(len == "8")
+    {
+        ctx.fillText(y[0],30,128);
+        ctx.fillText(y[1],30,134);
+        ctx.fillText(y[2],18,140);
+        ctx.fillText(y[3],40,140);
+        ctx.fillText(y[4],12,148);
+        ctx.fillText(y[5],32,148);
+        ctx.fillText(y[6],52,148);
+        ctx.fillText(y[7],50,134);
+    }
 }
 function house_7_canvas(y)
 {
@@ -531,18 +783,63 @@ function house_7_canvas(y)
     ctx.font='38% verdana';
     if(len == "1")
     {
-        ctx.fillText(y[0],65,100);
+        ctx.fillText(y[0],65,110);
     }
     else if(len == "2")
     {
-        ctx.fillText(y[0],68,100);
-        ctx.fillText(y[1],65,107);
+        ctx.fillText(y[0],68,110);
+        ctx.fillText(y[1],65,116);
     }
     else if(len == "3")
     {
         ctx.fillText(y[0],68,97);
         ctx.fillText(y[1],68,104);
-        ctx.fillText(y[1],68,111);
+        ctx.fillText(y[2],68,111);
+    }
+    else if(len == "4")
+    {
+        ctx.fillText(y[0],68,97);
+        ctx.fillText(y[1],68,104);
+        ctx.fillText(y[2],68,111);
+        ctx.fillText(y[3],68,119);
+    }
+    else if(len == "5")
+    {
+        ctx.fillText(y[0],68,97);
+        ctx.fillText(y[1],68,104);
+        ctx.fillText(y[2],68,111);
+        ctx.fillText(y[3],68,119);
+        ctx.fillText(y[4],68,126);
+    }
+    else if(len == "6")
+    {
+        ctx.fillText(y[0],68,97);
+        ctx.fillText(y[1],68,104);
+        ctx.fillText(y[2],68,111);
+        ctx.fillText(y[3],68,119);
+        ctx.fillText(y[4],68,126);
+        ctx.fillText(y[5],68,132);
+    }
+     else if(len == "7")
+    {
+        ctx.fillText(y[0],68,97);
+        ctx.fillText(y[1],68,104);
+        ctx.fillText(y[2],48,111);
+        ctx.fillText(y[3],68,111);
+        ctx.fillText(y[4],48,126);
+        ctx.fillText(y[5],68,126);
+        ctx.fillText(y[6],68,132);
+    }
+    else if(len == "8")
+    {
+        ctx.fillText(y[0],68,97);
+        ctx.fillText(y[1],68,104);
+        ctx.fillText(y[2],48,111);
+        ctx.fillText(y[3],68,111);
+        ctx.fillText(y[4],48,126);
+        ctx.fillText(y[5],68,126);
+        ctx.fillText(y[6],68,132);
+        ctx.fillText(y[7],68,139);
     }
 }
 function house_8_canvas(y)
@@ -558,7 +855,58 @@ function house_8_canvas(y)
     else if(len == "2")
     {
         ctx.fillText(y[0],105,130);
-        ctx.fillText(y[1],105,135);
+        ctx.fillText(y[1],105,137);
+    }
+    else if(len == "3")
+    {
+        ctx.fillText(y[0],105,130);
+        ctx.fillText(y[1],105,136);
+        ctx.fillText(y[2],105,142);
+    }
+    else if(len == "4")
+    {
+        ctx.fillText(y[0],105,130);
+        ctx.fillText(y[1],105,136);
+        ctx.fillText(y[2],105,142);
+        ctx.fillText(y[3],105,148);
+    }
+    else if(len == "5")
+    {
+        ctx.fillText(y[0],105,130);
+        ctx.fillText(y[1],105,136);
+        ctx.fillText(y[2],105,142);
+        ctx.fillText(y[3],105,148);
+        ctx.fillText(y[4], 85,148);
+    }
+    else if(len == "6")
+    {
+        ctx.fillText(y[0],105,130);
+        ctx.fillText(y[1],105,136);
+        ctx.fillText(y[2],105,142);
+        ctx.fillText(y[3],105,148);
+        ctx.fillText(y[4], 85,148);
+        ctx.fillText(y[5], 125,148);
+    }
+    else if(len == "7")
+    {
+        ctx.fillText(y[0],105,130);
+        ctx.fillText(y[1],105,136);
+        ctx.fillText(y[2],105,142);
+        ctx.fillText(y[3],85,142);
+        ctx.fillText(y[4],105,148);
+        ctx.fillText(y[5],85,148);
+        ctx.fillText(y[6],125,148);
+    }
+     else if(len == "8")
+    {
+        ctx.fillText(y[0],105,130);
+        ctx.fillText(y[1],105,136);
+        ctx.fillText(y[2],105,142);
+        ctx.fillText(y[3],85,142);
+        ctx.fillText(y[4],105,148);
+        ctx.fillText(y[5],85,148);
+        ctx.fillText(y[6],125,148);
+        ctx.fillText(y[7],130,142);
     }
 }
 function house_9_canvas(y)
@@ -575,6 +923,46 @@ function house_9_canvas(y)
     {
         ctx.fillText(y[0],125,115);
         ctx.fillText(y[1],125,122);
+    }
+    else if(len == "3")
+    {
+        ctx.fillText(y[0],125,105);
+        ctx.fillText(y[1],125,112);
+        ctx.fillText(y[2],127,122);
+    }
+    else if(len == "4")
+    {
+        ctx.fillText(y[0],135,95);
+        ctx.fillText(y[1],125,122);
+        ctx.fillText(y[2],127,127);
+        ctx.fillText(y[3],133,133);
+    }
+     else if(len == "5")
+    {
+        ctx.fillText(y[0],135,95);
+        ctx.fillText(y[1],125,122);
+        ctx.fillText(y[2],127,127);
+        ctx.fillText(y[3],133,133);
+        ctx.fillText(y[4],133,102);
+    }
+     else if(len == "6")
+    {
+        ctx.fillText(y[0],135,95);
+        ctx.fillText(y[1],125,122);
+        ctx.fillText(y[2],127,127);
+        ctx.fillText(y[3],133,133);
+        ctx.fillText(y[4],133,102);
+        ctx.fillText(y[5],131,109);
+    }
+     else if(len == "7")
+    {
+        ctx.fillText(y[0],135,95);
+        ctx.fillText(y[1],125,122);
+        ctx.fillText(y[2],127,127);
+        ctx.fillText(y[3],133,133);
+        ctx.fillText(y[4],133,102);
+        ctx.fillText(y[5],131,109);
+        ctx.fillText(y[6],125,115);
     }
 }
 function house_10_canvas(y)
@@ -605,6 +993,44 @@ function house_10_canvas(y)
         ctx.fillText(y[2],100,78);
         ctx.fillText(y[3],100,86);
     }
+    else if(len == "5")
+    {
+        ctx.fillText(y[0],100,62);
+        ctx.fillText(y[1],100,70);
+        ctx.fillText(y[2],100,78);
+        ctx.fillText(y[3],100,84);
+        ctx.fillText(y[4],100,90);
+    }
+    else if(len == "6")
+    {
+        ctx.fillText(y[0],100,62);
+        ctx.fillText(y[1],100,70);
+        ctx.fillText(y[2],100,78);
+        ctx.fillText(y[3],100,84);
+        ctx.fillText(y[4],100,90);
+        ctx.fillText(y[5],100,96);
+    }
+    else if(len == "7")
+    {
+        ctx.fillText(y[0],100,62);
+        ctx.fillText(y[1],100,70);
+        ctx.fillText(y[2],100,78);
+        ctx.fillText(y[3],100,84);
+        ctx.fillText(y[4],100,90);
+        ctx.fillText(y[5],100,96);
+        ctx.fillText(y[6],100,102);
+    }
+    else if(len == "8")
+    {
+        ctx.fillText(y[0],100,62);
+        ctx.fillText(y[1],100,70);
+        ctx.fillText(y[2],100,78);
+        ctx.fillText(y[3],100,84);
+        ctx.fillText(y[4],100,90);
+        ctx.fillText(y[5],100,96);
+        ctx.fillText(y[6],100,102);
+        ctx.fillText(y[7],102,54);
+    }
     
 }
 function house_11_canvas(y)
@@ -620,7 +1046,7 @@ function house_11_canvas(y)
     else if(len=="2")
     {
         ctx.fillText(y[0],125,40);
-         ctx.fillText(y[0],125,48);
+        ctx.fillText(y[1],125,48);
     }
     else if(len=="3")
     {
@@ -633,7 +1059,45 @@ function house_11_canvas(y)
         ctx.fillText(y[0],125,32);
         ctx.fillText(y[1],125,40);
         ctx.fillText(y[2],125,48);
-        ctx.fillText(y[3],125,54);
+        ctx.fillText(y[3],127,56);
+    }
+     else if(len=="5")
+    {
+        ctx.fillText(y[0],130,26);
+        ctx.fillText(y[1],125,32);
+        ctx.fillText(y[2],125,38);
+        ctx.fillText(y[3],125,44);
+        ctx.fillText(y[4],130,50);
+    }
+    else if(len=="6")
+    {
+        ctx.fillText(y[0],130,26);
+        ctx.fillText(y[1],125,32);
+        ctx.fillText(y[2],125,38);
+        ctx.fillText(y[3],125,44);
+        ctx.fillText(y[4],125,50);
+        ctx.fillText(y[5],127,56);
+    }
+    else if(len=="7")
+    {
+        ctx.fillText(y[0],130,26);
+        ctx.fillText(y[1],125,32);
+        ctx.fillText(y[2],125,38);
+        ctx.fillText(y[3],125,44);
+        ctx.fillText(y[4],125,50);
+        ctx.fillText(y[5],127,56);
+        ctx.fillText(y[6],132,62);
+    }
+    else if(len=="8")
+    {
+        ctx.fillText(y[0],130,26);
+        ctx.fillText(y[1],125,32);
+        ctx.fillText(y[2],125,38);
+        ctx.fillText(y[3],125,44);
+        ctx.fillText(y[4],125,50);
+        ctx.fillText(y[5],127,56);
+        ctx.fillText(y[6],132,62);
+        ctx.fillText(y[7],138,68);
     }
    
 }
@@ -643,5 +1107,53 @@ function house_12_canvas(y)
     get_canvas();
     
     ctx.font='38% verdana';
-    ctx.fillText(y[0],105,20);
+    if(len == "1")
+    {
+        ctx.fillText(y[0],105,26);
+    }
+    else if(len == "2")
+    {
+        ctx.fillText(y[0],105,20);
+        ctx.fillText(y[1],105,26);
+    }
+    else if(len == "3")
+    {
+        ctx.fillText(y[0],105,14);
+        ctx.fillText(y[1],105,20);
+        ctx.fillText(y[2],105,26);
+    }
+    else if(len == "4")
+    {
+        ctx.fillText(y[0],85,14);
+        ctx.fillText(y[1],105,20);
+        ctx.fillText(y[2],105,26);
+        ctx.fillText(y[3],105,14);
+    }
+    else if(len == "5")
+    {
+        ctx.fillText(y[0],85,14);
+        ctx.fillText(y[1],105,14);
+        ctx.fillText(y[2],90,20);
+        ctx.fillText(y[3],110,20);
+        ctx.fillText(y[4],105,26);
+    }
+     else if(len == "6")
+    {
+        ctx.fillText(y[0],85,14);
+        ctx.fillText(y[1],105,14);
+        ctx.fillText(y[2],90,20);
+        ctx.fillText(y[3],110,20);
+        ctx.fillText(y[4],105,26);
+        ctx.fillText(y[5],105,32);
+    }
+     else if(len == "7")
+    {
+        ctx.fillText(y[0],85,14);
+        ctx.fillText(y[1],105,14);
+        ctx.fillText(y[2],90,20);
+        ctx.fillText(y[3],110,20);
+        ctx.fillText(y[4],105,26);
+        ctx.fillText(y[5],105,32);
+        ctx.fillText(y[6],130,14);
+    }
 }

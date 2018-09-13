@@ -40,6 +40,7 @@ $a = 0;
 <canvas id="navamsha_canvas">
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-2"></div>
+<p class="float-sm-right">Vargottama planet gives good results in its <a href="<?php echo JURi::base() ?>main/336-vimshottari-dasha" target="_blank">Vimshottari Dasha</a> Period</p>
 <table class="table table-bordered table-striped">
     <tr>
         <th>Planet</th>
