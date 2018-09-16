@@ -1,7 +1,7 @@
 <html>
  <head>
 <style type="text/css">
-#moon_canvas{width: 100%;height: auto;}
+#moon_canvas{width: 100%;}
 </style>
 <script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/horoscope.js' ?>">
 </script>
@@ -39,7 +39,7 @@ $id         = $this->data['id'];
 $title      = $this->data['title'];
 $text       = $this->data['introtext'];
 ?>
-<canvas id="moon_canvas">
+<canvas id="moon_canvas" height="200">
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-2"></div>
 <div id="<?php echo $this->data['id']; ?>" class="accordion-id"></div>

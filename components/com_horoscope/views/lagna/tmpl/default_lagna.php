@@ -1,7 +1,7 @@
 <html>
  <head>
 <style type="text/css">
-#horo_canvas{width: 100%;height: auto;}
+#horo_canvas{width: 100%;padding: 0 !important;margin: 0 !important;}
 </style>
 <script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/horoscope.js' ?>">
 </script>
@@ -31,7 +31,7 @@ defined('_JEXEC') or die();
 //print_r($this->data);exit;
 $planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu","Uranus","Neptune","Pluto");
 ?>
-<div class="container-fluid">
+
     <table class="table table-bordered table-hover table-striped">
         <tr>
             <th>Name</th>
@@ -75,9 +75,10 @@ $planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Ven
                   { echo "No"; } ?></td>
         </tr>
     </table>
-<canvas id="horo_canvas" class="canvas">
+<div class="mh-100 m-0 p-0">    
+<canvas id="horo_canvas" height="200">
 Your browser does not support the HTML5 canvas tag.
-</canvas>
+</canvas></div>
     <div class="mb-2"></div>
     <p class="float-sm-right">(R) signifies that planet is retrograde at time of birth</p>
     <table class="table table-bordered table-striped table-responsive">
@@ -115,5 +116,5 @@ Your browser does not support the HTML5 canvas tag.
     ?>
     </table>
     <?php unset($this->data); ?>
-</div>
+
 </html>

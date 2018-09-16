@@ -39,7 +39,7 @@ $id         = $this->data['id'];
 $title      = $this->data['title'];
 $text       = $this->data['introtext'];
 ?>
-<canvas id="asc_canvas">
+<canvas id="asc_canvas" height="200">
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-2"></div>
 <?php

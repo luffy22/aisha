@@ -58,8 +58,8 @@ class HoroscopeModelMoon extends HoroscopeModelLagna
         //print_r($result);exit;
         $planet             = key($result);
         $moon_sign          = $result[$planet];
-        $moon_details   = $this->getArticle($sign, $planet);
-        $result         = array_merge($result, $moon_details);
+        $moon_details       = $this->getArticle($moon_sign, $planet);
+        $result             = array_merge($result, $moon_details);
         return $result;
        //$ayanamsha           = $this->applyAyanamsha($dob, $horo); 
        //return $horo;
