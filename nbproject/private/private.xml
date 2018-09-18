@@ -7,7 +7,7 @@
             <file>file:/var/www/html/aisha/components/com_horoscope/script/horoscope.js</file>
             <file>file:/var/www/html/aisha/components/com_horoscope/views/lagna/tmpl/default_lagna.php</file>
             <file>file:/var/www/html/aisha/components/com_horoscope/views/navamsha/tmpl/default.php</file>
-            <file>file:/var/www/html/aisha/templates/astroisha2017/index.php</file>
+            <file>file:/var/www/html/aisha/components/com_horoscope/views/nakshatra/tmpl/default.php</file>
             <file>file:/var/www/html/aisha/components/com_horoscope/views/ascendant/tmpl/default.php</file>
             <file>file:/var/www/html/aisha/components/com_horoscope/views/moon/tmpl/default.php</file>
         </group>

@@ -37,6 +37,8 @@ $a = 0;
     <a class="nav-link active">Navamsha</a>
   </li>
 </ul><div class="mb-2"></div>
+<div class="alert alert-info">
+    <strong>Horoscope feature is in testing phase</strong></div><div class="mb-2"></div>
 <canvas id="navamsha_canvas" height="200">
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-2"></div>

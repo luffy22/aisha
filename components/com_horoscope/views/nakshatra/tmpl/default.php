@@ -30,6 +30,8 @@ $text       = $this->data['introtext'];
     <a class="nav-link" href="<?php echo JURi::base() ?>getnavamsha?chart=<?php echo $chart_id ?>">Navamsha</a>
   </li>
 </ul><div class="mb-2"></div>
+<div class="alert alert-info">
+    <strong>Horoscope feature is in testing phase</strong></div><div class="mb-2"></div>
 <div id="<?php echo $this->data['id']; ?>" class="accordion-id"></div>
 <div class="alert-info lead breadcrumb"><?php echo "You are born with Moon in ".$title ?></div>
 <div class="mb-2"></div>

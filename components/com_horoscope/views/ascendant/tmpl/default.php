@@ -25,6 +25,8 @@
     <a class="nav-link" href="<?php echo JURi::base() ?>getnavamsha?chart=<?php echo $chart_id ?>">Navamsha</a>
   </li>
 </ul><div class="mb-2"></div>
+<div class="alert alert-info">
+    <strong>Horoscope feature is in testing phase</strong></div><div class="mb-2"></div>
 <?php
 /**
  * @package     Joomla.Site
