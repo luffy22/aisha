@@ -78,7 +78,7 @@ $planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Ven
         </tr>
     </table>
 <div class="mh-100 m-0 p-0">    
-<canvas id="horo_canvas" height="200">
+<canvas id="horo_canvas" height="220">
 Your browser does not support the HTML5 canvas tag.
 </canvas></div>
     <div class="mb-2"></div>
