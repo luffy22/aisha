@@ -3,8 +3,6 @@
 <style type="text/css">
 #horo_canvas{width: 100%;padding: 0 !important;margin: 0 !important;}
 </style>
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/horoscope.js' ?>">
-</script>
 </head>
 <body onload="javascript:draw_horoscope();getAscendant()">
 <?php $chart_id = $_GET['chart']; ?>
@@ -25,8 +23,6 @@
     <a class="nav-link" href="<?php echo JURi::base() ?>getnavamsha?chart=<?php echo $chart_id ?>">Navamsha</a>
   </li>
 </ul><div class="mb-2"></div>
-<div class="alert alert-info">
-    <strong>Horoscope feature is in testing phase</strong></div><div class="mb-2"></div>
 <?php
 defined('_JEXEC') or die();
 //echo JPATH_COMPONENT.DS.'script/horoscope.js';exit;
@@ -117,6 +113,8 @@ Your browser does not support the HTML5 canvas tag.
            }
     ?>
     </table>
-    <?php unset($this->data); ?>
-
+<?php unset($this->data); ?>
+<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/horoscope.js' ?>">
+</script>
+</body>
 </html>

@@ -3,8 +3,6 @@
 <style type="text/css">
 #asc_canvas{width: 100%;height: auto;}
 </style>
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/horoscope.js' ?>">
-</script>
 </head>
 <body onload="javascript:draw_horoscope();getAscendant();">
 <?php $chart_id = $_GET['chart']; ?>
@@ -25,8 +23,6 @@
     <a class="nav-link" href="<?php echo JURi::base() ?>getnavamsha?chart=<?php echo $chart_id ?>">Navamsha</a>
   </li>
 </ul><div class="mb-2"></div>
-<div class="alert alert-info">
-    <strong>Horoscope feature is in testing phase</strong></div><div class="mb-2"></div>
 <?php
 /**
  * @package     Joomla.Site
@@ -72,3 +68,7 @@ for($i=0;$i<3;$i++)  // remove the last 3 elements from the array to avoid confu
     }
 ?>
 </form>
+<?php unset($this->data); ?>
+<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/horoscope.js' ?>">
+</script>
+</body>

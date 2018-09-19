@@ -15,8 +15,6 @@ $a = 0;
 <style type="text/css">
 #navamsha_canvas{width: 100%;height: auto;}
 </style>
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/horoscope.js' ?>">
-</script>
  </head>
  <body onload="javascript:draw_horoscope();getNavamsha();">
  <?php $chart_id = $_GET['chart']; ?>
@@ -37,8 +35,6 @@ $a = 0;
     <a class="nav-link active">Navamsha</a>
   </li>
 </ul><div class="mb-2"></div>
-<div class="alert alert-info">
-    <strong>Horoscope feature is in testing phase</strong></div><div class="mb-2"></div>
 <canvas id="navamsha_canvas" height="220">
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-2"></div>
@@ -93,3 +89,7 @@ Your browser does not support the HTML5 canvas tag.
     }
 ?>
 </table>
+<?php unset($this->data); ?>
+<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/horoscope.js' ?>">
+</script>
+ </body>
