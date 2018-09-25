@@ -20,11 +20,14 @@ class HoroscopeViewFindSpouse extends JViewLegacy
         }
         if(isset($_GET['chart']))
         {
+            
             $this->data         = $this->get('Data');
-            $tpl    = '2';
+            //print_r($this->data);exit;
+            $tpl    = 'spouse';
         }
         else
         {
+            
             $tpl        = null;
         }
         //echo gettype($this->data);

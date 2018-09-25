@@ -2,17 +2,17 @@
 defined('_JEXEC') or die;  // No direct Access
 // import Joomla modelitem library
 jimport('joomla.application.component.modelitem');
-require_once JPATH_COMPONENT.'/controller.php';
-//require_once JPATH;
-
+JModelLegacy::addIncludePath(JPATH_SITE.'/components/com_horoscope/models/');
+$model = JModelLegacy::getInstance('lagna', 'horoscopeModel');
 $libPath = JPATH_BASE.'/sweph/';
 putenv("PATH=$libPath");
-class HoroscopeModelFindSpouse extends JModelItem
+class HoroscopeModelFindSpouse extends HoroscopeModelLagna
 {
     public $data;
  
     public function findspouse($details)
     {
+        //print_r($details);exit;
         $fname          = $details['fname'];
         $gender         = $details['gender'];
         $dob            = $details['dob'];
@@ -43,9 +43,9 @@ class HoroscopeModelFindSpouse extends JModelItem
         $now            = date('Y-m-d H:i:s');
         $db             = JFactory::getDbo();  // Get db connection
         $query          = $db->getQuery(true);
-        $columns        = array('uniq_id','fname','gender','dob_tob','pob','lon','lat','timezone','query_date');
+        $columns        = array('uniq_id','fname','gender','dob_tob','pob','lon','lat','timezone','query_date','query_cause');
         $values         = array($db->quote($uniq_id),$db->quote($fname),$db->quote($gender),$db->quote($dob_tob),
-                                $db->quote($pob),$db->quote($lon),$db->quote($lat),$db->quote($tmz),$db->quote($now));
+                                $db->quote($pob),$db->quote($lon),$db->quote($lat),$db->quote($tmz),$db->quote($now),$db->quote('fspouse'));
         $query          ->insert($db->quoteName('#__horo_query'))
                         ->columns($db->quoteName($columns))
                         ->values(implode(',', $values));
@@ -54,10 +54,22 @@ class HoroscopeModelFindSpouse extends JModelItem
         $result          = $db->query();
         if($result)
         {
+            //echo "query inserted";exit;
             $app        = JFactory::getApplication();
             $link       = JURI::base().'findspouse?chart='.str_replace("horo","chart",$uniq_id);
             $app        ->redirect($link);
         }
+    }
+    public function getData()
+    {
+        $libPath        = JPATH_BASE.'/sweph/';
+        $jinput         = JFactory::getApplication()->input;
+        $chart_id       = $jinput->get('chart', 'default_value', 'filter');
+        $chart_id       = str_replace("chart","horo", $chart_id);
+        
+        $result         = $this->getUserData($chart_id);
+        
+        print_r($result);exit;
     }
 }
 ?>
