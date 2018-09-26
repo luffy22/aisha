@@ -69,7 +69,126 @@ class HoroscopeModelFindSpouse extends HoroscopeModelLagna
         
         $result         = $this->getUserData($chart_id);
         
-        print_r($result);exit;
+        $fname          = $result['fname'];
+        $gender         = $result['gender'];
+        $dob_tob        = $result['dob_tob'];
+        $pob            = $result['pob'];
+        $lat            = $result['lat'];
+        $lon            = $result['lon'];
+        $timezone       = $result['timezone'];
+        
+        $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
+        
+        $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
+        $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
+        //echo $timestamp." ".$offset;exit;
+        // $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
+        /**
+         * Converting birth date/time to UTC
+         */
+        $utcTimestamp = $timestamp - $offset;
+
+        //echo $utcTimestamp;exit;
+        //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
+
+        $date = date('d.m.Y', $utcTimestamp);
+        $time = date('H:i:s', $utcTimestamp);
+        //echo $date." ".$time;exit;
+        $h_sys = 'P';
+        $output = "";
+        if($gender == "female")
+        {
+            // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
+            exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p15 -g, -head", $output);
+        }
+        else
+        {
+            exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p13 -g, -head", $output);
+        }
+        //print_r($output);exit;
+
+        # OUTPUT ARRAY
+        # Planet Name, Planet Degree, Planet Speed per day
+        $asc            = $this->getAscendant($result);
+        $planets        = $this->getPlanets($output);
+        $data           = array_merge($asc,$planets);
+        //print_r($data);exit;
+        //$details        = $this->getDetails($data);
+        $newdata        = array();
+        foreach($data as $key=>$distance)
+        {
+            // this loop gets the horoscope sign of Ascendant, Moon & Jupiter or Venus
+            $dist           = str_replace(":r","",$distance);
+            $sign           = $this->calcDetails($dist);
+            $sign_num       = array($key."_num"=>$this->getSignNum($sign));
+            $getsign        = array($key."_sign"=>$sign);
+            $newdata        = array_merge($newdata,$getsign,$sign_num);
+        }
+        $jup_ven_house      = $this->getHouse($gender, $newdata);
+    }
+    protected function getSignNum($sign)
+    {
+        switch($sign)
+        {
+            case "Aries":
+            return "1";break;
+            case "Taurus":
+            return "2";break;
+            case "Gemini":
+            return "3";break;
+            case "Cancer":
+            return "4";break;
+            case "Leo":
+            return "5";break;
+            case "Virgo":
+            return "6";break;
+            case "Libra":
+            return "7";break;
+            case "Scorpio":
+            return "8";break;
+            case "Sagittarius":
+            return "9";break;
+            case "Capricorn":
+            return "10";break;
+            case "Aquarius":
+            return "11";break;
+            case "Pisces":
+            return "12";break;
+            default:
+            return "1";break;
+        }
+   
+    }
+    protected function getHouse($gender, $data)
+    {
+       $j = 1;
+       if($gender == "female")
+       {
+           $asc_num     = $data['Ascendant_num'];
+           $jup_num     = $data['Jupiter_num'];
+           if($asc_num > $jup_num)
+           {
+               $jup_num     = $jup_num + 12;
+           }
+           for($i=$asc_num;$i <$jup_num;$i++)
+           {
+               $j++;       
+           }
+       }
+       else
+       {
+           $asc_num     = $data['Ascendant_num'];
+           $ven_num     = $data['Venus_num'];
+           if($asc_num > $ven_num)
+           {
+               $ven_num     = $ven_num + 12;
+           }
+           for($i=$asc_num;$i <$ven_num;$i++)
+           {
+               $j++;       
+           }
+       }
+       echo $j;exit;
     }
 }
 ?>
