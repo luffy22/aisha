@@ -125,6 +125,7 @@ class HoroscopeModelFindSpouse extends HoroscopeModelLagna
             $newdata        = array_merge($newdata,$getsign,$sign_num);
         }
         $jup_ven_house      = $this->getHouse($gender, $newdata);
+        return $jup_ven_house;
     }
     protected function getSignNum($sign)
     {
@@ -188,7 +189,22 @@ class HoroscopeModelFindSpouse extends HoroscopeModelLagna
                $j++;       
            }
        }
-       echo $j;exit;
+       //echo $j;exit;
+       $details         = $this->getSpouseDetails($j);
+       return $details;
+       
+    }
+    protected function getSpouseDetails($house)
+    {
+        $db             = JFactory::getDbo();  // Get db connection
+        $query          = $db->getQuery(true);
+        $query          ->select($db->quoteName('spouse_text'));
+        $query          ->from($db->quoteName('#__find_spouse'));
+        $query          ->where($db->quoteName('spouse_id').' = '.$db->quote($house));
+        $db             ->setQuery($query);
+        $db->execute();
+        $result         = $db->loadAssoc();
+        return $result;
     }
 }
 ?>
