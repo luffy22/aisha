@@ -55,7 +55,8 @@ if($house_7=="1"){$house_7 = $house_7."st";}else if($house_7=="2"){$house_7 = $h
 	</tr>
 </table>
 <div class="mb-2"></div>
-<p class="lead strong">For <?php echo $gender.'s' ?> position of <?php echo $planet ?> is used to know more about future spouse.</p>
+<div class="alert alert-info">
+<p class="lead strong">For <?php echo $gender.'s' ?> position of <?php echo $planet ?> is used to know more about future spouse.</p></div>
 <ul class="nav nav-pills mb-2" id="pills-tab" role="tablist">
   <li class="nav-item">
     <a class="nav-link" id="pills-1st-tab" data-toggle="pill" href="#pills-1st" role="tab" aria-controls="pills-1st" aria-selected="true">1st House</a>
