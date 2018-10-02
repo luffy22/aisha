@@ -125,7 +125,12 @@ class HoroscopeModelFindSpouse extends HoroscopeModelLagna
             $newdata        = array_merge($newdata,$getsign,$sign_num);
         }
         $jup_ven_house      = $this->getHouse($gender, $newdata);
-        return $jup_ven_house;
+        $house              = array("house"=>$jup_ven_house);
+        $details         = $this->getSpouseDetails($jup_ven_house);
+       
+        $array              = array();
+        $array              = array_merge($array,$result,$house, $details);
+        return $array;
     }
     protected function getSignNum($sign)
     {
@@ -190,20 +195,29 @@ class HoroscopeModelFindSpouse extends HoroscopeModelLagna
            }
        }
        //echo $j;exit;
-       $details         = $this->getSpouseDetails($j);
-       return $details;
+       return $j;
        
     }
     protected function getSpouseDetails($house)
     {
+        if($house < 7)
+        {
+            $house_7    = $house + 6;
+        }
+        else
+        {
+            $house_7    = $house - 6;
+        }
+        
         $db             = JFactory::getDbo();  // Get db connection
         $query          = $db->getQuery(true);
         $query          ->select($db->quoteName('spouse_text'));
         $query          ->from($db->quoteName('#__find_spouse'));
-        $query          ->where($db->quoteName('spouse_id').' = '.$db->quote($house));
+        $query          ->where($db->quoteName('spouse_id').' = '.$db->quote($house).' OR '.
+                                $db->quoteName('spouse_id').' = '.$db->quote($house_7));
         $db             ->setQuery($query);
         $db->execute();
-        $result         = $db->loadAssoc();
+        $result         = $db->loadAssocList();
         return $result;
     }
 }
