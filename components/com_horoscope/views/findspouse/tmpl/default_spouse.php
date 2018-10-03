@@ -3,13 +3,13 @@ defined('_JEXEC') or die();
 //echo JPATH_COMPONENT.DS.'script/horoscope.js';exit;
 //print_r($this->data);exit;
 $gender = $this->data['gender'];if($gender == "male"){$planet = "Venus";}else if($gender == "female"){$planet = "Jupiter";}
-$text_1 = $this->data['0']['spouse_text'];
-$text_2 = $this->data['1']['spouse_text'];
-$house  = $this->data['house'];if($house < 7){$house_7 = (int)$house + 6;}else{$house_7 = (int)$house-6;}
-$text_2 = str_replace("planet", $planet, $text_2); 
-if($house=="1"){$house = $house."st";}else if($house=="2"){$house = $house."nd";}else if($house=="3"){$house= $house."rd";}else{$house= $house."th";}
-if($house_7=="1"){$house_7 = $house_7."st";}else if($house_7=="2"){$house_7 = $house_7."nd";}else if($house_7=="3"){$house_7= $house_7."rd";}else{$house_7= $house_7."th";}
+if($gender == "male"){$spouse = "wife";}else if($gender == "female"){$spouse = "husband";}
+$text = $this->data['spouse_text'];
+$house  = $this->data['house'];
+ if($house=="1"){$house = $house."st";}else if($house=="2"){$house = $house."nd";}else if($house=="3"){$house= $house."rd";}else{$house= $house."th";}
 ?>
+<div class="container">
+    <div class="alert alert-info"><strong>How & Where To find Spouse</strong></div>
 <table class="table table-bordered table-hover table-striped">
 
 	<tr>
@@ -55,23 +55,9 @@ if($house_7=="1"){$house_7 = $house_7."st";}else if($house_7=="2"){$house_7 = $h
 	</tr>
 </table>
 <div class="mb-2"></div>
-<div class="alert alert-info">
-<p class="lead strong">For <?php echo $gender.'s' ?> position of <?php echo $planet ?> is used to know more about future spouse.</p></div>
-<ul class="nav nav-pills mb-2" id="pills-tab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link" id="pills-1st-tab" data-toggle="pill" href="#pills-1st" role="tab" aria-controls="pills-1st" aria-selected="true">1st House</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="pills-7th-tab" data-toggle="pill" href="#pills-7th" role="tab" aria-controls="pills-7th" aria-selected="false">7th House</a>
-  </li>
-</ul>
-<div class="tab-content">
-  <div class="tab-pane show active" id="pills-1st" role="tabpanel" aria-labelledby="pills-1st-tab">
-    <p class="lead strong"><?php echo $planet ?> is located in your <?php echo trim($house) ?> house counted from Ascendant(1st House).</p>
+    <p class="lead strong">For <?php echo $gender.'s' ?> position of <?php echo $planet ?> is used to know more about future <?php echo $spouse ?>. <?php echo $planet ?> is located in your <?php echo trim($house) ?> house counted from Ascendant(1st House).</p>
     <div class="mb-2"></div>  
-    <?php echo str_replace("planet", $planet, $text_1); ?></div>
-    <div class="tab-pane" id="pills-7th" role="tabpanel" aria-labelledby="pills-7th-tab">
-        <div class="lead strong">Counted from 7th House, <?php echo $planet ?> is located in your <?php echo trim($house_7) ?> house.</div>
-        <div class="mb-2"></div>  
-        <?php echo str_replace("future spouse can be found","counted from 7th House, future spouse can be found", $text_2); ?></div>
+    <?php echo str_replace("planet", $planet, $text); ?>
+<div class="mb-2"></div>
+    <p class="lead strong">Portfolio associated with <?php echo trim($house); ?> house is the deciding factor for your future <?php echo $spouse ?> to choose you over others.</p>
 </div>

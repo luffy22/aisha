@@ -200,24 +200,15 @@ class HoroscopeModelFindSpouse extends HoroscopeModelLagna
     }
     protected function getSpouseDetails($house)
     {
-        if($house < 7)
-        {
-            $house_7    = $house + 6;
-        }
-        else
-        {
-            $house_7    = $house - 6;
-        }
-        
+                
         $db             = JFactory::getDbo();  // Get db connection
         $query          = $db->getQuery(true);
         $query          ->select($db->quoteName('spouse_text'));
         $query          ->from($db->quoteName('#__find_spouse'));
-        $query          ->where($db->quoteName('spouse_id').' = '.$db->quote($house).' OR '.
-                                $db->quoteName('spouse_id').' = '.$db->quote($house_7));
+        $query          ->where($db->quoteName('spouse_id').' = '.$db->quote($house));
         $db             ->setQuery($query);
         $db->execute();
-        $result         = $db->loadAssocList();
+        $result         = $db->loadAssoc();
         return $result;
     }
 }
