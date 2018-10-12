@@ -9,11 +9,7 @@
 defined('_JEXEC') or die();
 echo $this->data;	
 ?>
-<div class="alert alert-info"><i class="fa fa-info-circle fa-2x"></i> <strong>Kindly Note: </strong> This program is not 100% accurate. But it does give 
-    a general idea where to find potential future spouse. Program uses placement of Jupiter for males and Venus for females 
-    to predict where and how to find future spouse.</div>
-<div class="mb-1"></div>
-<h2>Where To Find Spouse?</h2>
+<h3>Enter Your Birth Details</h3>
 <form role="form" enctype="application/x-www-form-urlencoded" method="post" 
       action="<?php echo JRoute::_('index.php?option=com_horoscope&task=findspouse.findspouse'); ?>">
     <div class="form-group" id="lagna_grp_1">

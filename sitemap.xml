@@ -437,19 +437,11 @@
   <changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>https://www.astroisha.com/main/266-jupiter-virgo</loc>
-  <changefreq>weekly</changefreq>
-</url>
-<url>
   <loc>https://www.astroisha.com/main/303-saturnxmars</loc>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/main/304-moon-association</loc>
-  <changefreq>weekly</changefreq>
-</url>
-<url>
-  <loc>https://www.astroisha.com/main/308-saturn-sagittarius</loc>
   <changefreq>weekly</changefreq>
 </url>
 <url>
@@ -462,10 +454,6 @@
 </url>
 <url>
 	<loc>https://www.astroisha.com/main/338-vargottama</loc>
-	<changefreq>weekly</changefreq>
-</url>
-<url>
-	<loc>https://www.astroisha.com/main/340-saturn-scorpio-return</loc>
 	<changefreq>weekly</changefreq>
 </url>
 <url>
@@ -609,10 +597,6 @@
 	<changefreq>weekly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/featured/396-poverty-horoscope</loc>
-	<changefreq>weekly</changefreq>
-</url>
-<url>
 	<loc>https://www.astroisha.com/transits</loc>
 	<changefreq>weekly</changefreq>
 </url>
@@ -626,6 +610,10 @@
 </url>
 <url>
 	<loc>https://www.astroisha.com/transits/355-jupiter-libra-transit</loc>
+	<changefreq>weekly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/transits/399-jupiter-scorpio</loc>
 	<changefreq>weekly</changefreq>
 </url>
 <url>
@@ -898,6 +886,10 @@
 </url>
 <url>
 	<loc>https://www.astroisha.com/case/394-horoscope-of-billionaires-2</loc>
+	<changefreq>weekly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/case/397-modi-2019</loc>
 	<changefreq>weekly</changefreq>
 </url>
 <url>
@@ -1268,6 +1260,10 @@
 	<changefreq>weekly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/planet-bhavas/401-rahu-1st-house</loc>
+	<changefreq>weekly</changefreq>
+</url>
+<url>
   <loc>https://www.astroisha.com/yearly</loc>
   <changefreq>weekly</changefreq>
 </url>
@@ -1473,6 +1469,18 @@
 </url>
 <url>
 	<loc>https://www.astroisha.com/career/316-career-benefics</loc>
+	<changefreq>weekly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/finance</loc>
+	<changefreq>weekly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/finance/396-poverty-horoscope</loc>
+	<changefreq>weekly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/finance/398-rahu-losses</loc>
 	<changefreq>weekly</changefreq>
 </url>
 <url>
