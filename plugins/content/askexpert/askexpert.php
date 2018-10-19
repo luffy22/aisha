@@ -11,9 +11,9 @@ class PlgContentAskExpert extends JPlugin
 	{
             $app                = JFactory::getApplication();
             $view               = $app->input->get('view');
-            $path               = JPluginHelper::getLayoutPath('content', 'askexpert');
-            //include_once "/home/astroxou/php/Net/GeoIP.php";
-            //$geoip              = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoLiteCity.dat");
+            ////$path               = JPluginHelper::getLayoutPath('content', 'askexpert');
+            //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
+            //$geoip              = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
             //$ip                         = '117.196.1.11';
             $ip                         = '157.55.39.123';  // ip address
             //$ip                 = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
@@ -23,7 +23,7 @@ class PlgContentAskExpert extends JPlugin
             //$location           = $geoip->lookupLocation($ip);
             //$info               = $location->countryCode;
             //$country            = $location->countryName;
-            
+            //echo $info;exit;
             if(($context === 'com_content.article')&&($view=='article'))
             {
                 $text           = $article->introtext;
@@ -43,7 +43,8 @@ class PlgContentAskExpert extends JPlugin
                 $result         = $db->loadObject();
                 $u_id           = $result->id;
                 //echo $u_id;exit;
-                $service        = 'expert_fees';
+                $service1        = 'long_ans_fees';
+                $service2        = 'short_ans_fees';
                
                 if($info == "US")
                 {
@@ -51,7 +52,9 @@ class PlgContentAskExpert extends JPlugin
                                     ->from($db->quoteName('#__expert_charges','a'))
                                     ->join('INNER', $db->quoteName('#__user_currency', 'b') . ' ON (' . $db->quoteName('a.currency_ref') . ' = ' . $db->quoteName('b.Curr_ID') . ')')
                                     ->where($db->quoteName('user_id').' = '.$db->quote($u_id).' AND '.
-                                            $db->quoteName('service_for_charge').' = '.$db->quote($service).' AND '.
+                                            $db->quoteName('service_for_charge').' = '.$db->quote($service1).' AND '.
+                                            $db->quoteName('country').' = '.$db->quote('US').' OR '.
+                                            $db->quoteName('service_for_charge').' = '.$db->quote($service2).' AND '.
                                             $db->quoteName('country').' = '.$db->quote('US'));
 
                 }
@@ -61,16 +64,20 @@ class PlgContentAskExpert extends JPlugin
                                     ->from($db->quoteName('#__expert_charges','a'))
                                     ->join('INNER', $db->quoteName('#__user_currency', 'b') . ' ON (' . $db->quoteName('a.currency_ref') . ' = ' . $db->quoteName('b.Curr_ID') . ')')
                                     ->where($db->quoteName('user_id').' = '.$db->quote($u_id).' AND '.
-                                            $db->quoteName('service_for_charge').' = '.$db->quote($service).' AND '.
+                                            $db->quoteName('service_for_charge').' = '.$db->quote($service1).' AND '.
+                                            $db->quoteName('country').' = '.$db->quote('IN').' OR '.
+                                            $db->quoteName('service_for_charge').' = '.$db->quote($service2).' AND '.
                                             $db->quoteName('country').' = '.$db->quote('IN'));
                 }
                 else if($info=='UK')
                 {
-                    $query1          ->select($db->quoteName(array('a.country','a.amount','b.currency','b.curr_code','b.curr_full')))
+                   $query1          ->select($db->quoteName(array('a.country','a.amount','b.currency','b.curr_code','b.curr_full')))
                                     ->from($db->quoteName('#__expert_charges','a'))
                                     ->join('INNER', $db->quoteName('#__user_currency', 'b') . ' ON (' . $db->quoteName('a.currency_ref') . ' = ' . $db->quoteName('b.Curr_ID') . ')')
                                     ->where($db->quoteName('user_id').' = '.$db->quote($u_id).' AND '.
-                                            $db->quoteName('service_for_charge').' = '.$db->quote($service).' AND '.
+                                            $db->quoteName('service_for_charge').' = '.$db->quote($service1).' AND '.
+                                            $db->quoteName('country').' = '.$db->quote('UK').' OR '.
+                                            $db->quoteName('service_for_charge').' = '.$db->quote($service2).' AND '.
                                             $db->quoteName('country').' = '.$db->quote('UK'));
                 }
                 else if($info=='NZ')
@@ -79,7 +86,9 @@ class PlgContentAskExpert extends JPlugin
                                     ->from($db->quoteName('#__expert_charges','a'))
                                     ->join('INNER', $db->quoteName('#__user_currency', 'b') . ' ON (' . $db->quoteName('a.currency_ref') . ' = ' . $db->quoteName('b.Curr_ID') . ')')
                                     ->where($db->quoteName('user_id').' = '.$db->quote($u_id).' AND '.
-                                            $db->quoteName('service_for_charge').' = '.$db->quote($service).' AND '.
+                                            $db->quoteName('service_for_charge').' = '.$db->quote($service1).' AND '.
+                                            $db->quoteName('country').' = '.$db->quote('NZ').' OR '.
+                                            $db->quoteName('service_for_charge').' = '.$db->quote($service2).' AND '.
                                             $db->quoteName('country').' = '.$db->quote('NZ'));
                 }
                 else if($info=='CA')
@@ -88,7 +97,9 @@ class PlgContentAskExpert extends JPlugin
                                     ->from($db->quoteName('#__expert_charges','a'))
                                     ->join('INNER', $db->quoteName('#__user_currency', 'b') . ' ON (' . $db->quoteName('a.currency_ref') . ' = ' . $db->quoteName('b.Curr_ID') . ')')
                                     ->where($db->quoteName('user_id').' = '.$db->quote($u_id).' AND '.
-                                            $db->quoteName('service_for_charge').' = '.$db->quote($service).' AND '.
+                                            $db->quoteName('service_for_charge').' = '.$db->quote($service1).' AND '.
+                                            $db->quoteName('country').' = '.$db->quote('CA').' OR '.
+                                            $db->quoteName('service_for_charge').' = '.$db->quote($service2).' AND '.
                                             $db->quoteName('country').' = '.$db->quote('CA'));
                 }
                 else if($info=='SG')
@@ -97,16 +108,20 @@ class PlgContentAskExpert extends JPlugin
                                     ->from($db->quoteName('#__expert_charges','a'))
                                     ->join('INNER', $db->quoteName('#__user_currency', 'b') . ' ON (' . $db->quoteName('a.currency_ref') . ' = ' . $db->quoteName('b.Curr_ID') . ')')
                                     ->where($db->quoteName('user_id').' = '.$db->quote($u_id).' AND '.
-                                            $db->quoteName('service_for_charge').' = '.$db->quote($service).' AND '.
+                                            $db->quoteName('service_for_charge').' = '.$db->quote($service1).' AND '.
+                                            $db->quoteName('country').' = '.$db->quote('SG').' OR '.
+                                            $db->quoteName('service_for_charge').' = '.$db->quote($service2).' AND '.
                                             $db->quoteName('country').' = '.$db->quote('SG'));
                 }
                 else if($info=='AU')
                 {
-                     $query1          ->select($db->quoteName(array('a.country','a.amount','b.currency','b.curr_code','b.curr_full')))
+                    $query1          ->select($db->quoteName(array('a.country','a.amount','b.currency','b.curr_code','b.curr_full')))
                                     ->from($db->quoteName('#__expert_charges','a'))
                                     ->join('INNER', $db->quoteName('#__user_currency', 'b') . ' ON (' . $db->quoteName('a.currency_ref') . ' = ' . $db->quoteName('b.Curr_ID') . ')')
                                     ->where($db->quoteName('user_id').' = '.$db->quote($u_id).' AND '.
-                                            $db->quoteName('service_for_charge').' = '.$db->quote($service).' AND '.
+                                            $db->quoteName('service_for_charge').' = '.$db->quote($service1).' AND '.
+                                            $db->quoteName('country').' = '.$db->quote('AU').' OR '.
+                                            $db->quoteName('service_for_charge').' = '.$db->quote($service2).' AND '.
                                             $db->quoteName('country').' = '.$db->quote('AU'));
                 }
                 else if($info=='FR'||$info=='DE'||$info=='IE'||$info=='NL'||$info=='CR'||$info=='BE'
@@ -116,7 +131,9 @@ class PlgContentAskExpert extends JPlugin
                                     ->from($db->quoteName('#__expert_charges','a'))
                                     ->join('INNER', $db->quoteName('#__user_currency', 'b') . ' ON (' . $db->quoteName('a.currency_ref') . ' = ' . $db->quoteName('b.Curr_ID') . ')')
                                     ->where($db->quoteName('user_id').' = '.$db->quote($u_id).' AND '.
-                                            $db->quoteName('service_for_charge').' = '.$db->quote($service).' AND '.
+                                            $db->quoteName('service_for_charge').' = '.$db->quote($service1).' AND '.
+                                            $db->quoteName('country').' = '.$db->quote('EU').' OR '.
+                                            $db->quoteName('service_for_charge').' = '.$db->quote($service2).' AND '.
                                             $db->quoteName('country').' = '.$db->quote('EU'));
                 }
                 else if($info =='RU')
@@ -125,7 +142,9 @@ class PlgContentAskExpert extends JPlugin
                                     ->from($db->quoteName('#__expert_charges','a'))
                                     ->join('INNER', $db->quoteName('#__user_currency', 'b') . ' ON (' . $db->quoteName('a.currency_ref') . ' = ' . $db->quoteName('b.Curr_ID') . ')')
                                     ->where($db->quoteName('user_id').' = '.$db->quote($u_id).' AND '.
-                                            $db->quoteName('service_for_charge').' = '.$db->quote($service).' AND '.
+                                            $db->quoteName('service_for_charge').' = '.$db->quote($service1).' AND '.
+                                            $db->quoteName('country').' = '.$db->quote('RU').' OR '.
+                                            $db->quoteName('service_for_charge').' = '.$db->quote($service2).' AND '.
                                             $db->quoteName('country').' = '.$db->quote('RU'));
                 }
                  else
@@ -134,12 +153,15 @@ class PlgContentAskExpert extends JPlugin
                                     ->from($db->quoteName('#__expert_charges','a'))
                                     ->join('INNER', $db->quoteName('#__user_currency', 'b') . ' ON (' . $db->quoteName('a.currency_ref') . ' = ' . $db->quoteName('b.Curr_ID') . ')')
                                     ->where($db->quoteName('user_id').' = '.$db->quote($u_id).' AND '.
-                                            $db->quoteName('service_for_charge').' = '.$db->quote($service).' AND '.
+                                            $db->quoteName('service_for_charge').' = '.$db->quote($service1).' AND '.
+                                            $db->quoteName('country').' = '.$db->quote('ROW').' OR '.
+                                            $db->quoteName('service_for_charge').' = '.$db->quote($service2).' AND '.
                                             $db->quoteName('country').' = '.$db->quote('ROW'));
                 }
                 $db                 ->setQuery($query1);
                 $country            = array("country_full"=>$country);
-                $result1            = $db->loadAssoc();
+                $result1            = $db->loadAssocList();
+                //print_r($result1);exit;
                 $details            = array_merge($result1,$country);
                 $content            = "<div class='card card-outline-info mb-3 text-center'>";
                 $content            .= "<div class='card-block'>";
@@ -164,6 +186,11 @@ class PlgContentAskExpert extends JPlugin
                     $content        .= "<form name='askexpert' method='post' enctype='application/x-www-form-urlencoded' action='".JRoute::_('?option=com_astrologin&task=astroask.askExpert')."'>";
                     $content        .= "<input type='hidden' value='".$result->username."' name='expert_uname' />";
                     $content        .=  "<div class='form-group'>";
+                    $content        .= "<label for='ques_type'>Answer Type:</label> ";
+                    $content        .= "<input type='radio' id='ques_type1' name='ques_type' value='long_ans' checked  onchange='javascript:changefees();' /> Detailed Report";
+                    $content        .= "&nbsp;&nbsp;&nbsp;<input type='radio' id='ques_type2' name='ques_type' value='short_ans' onchange='javascript:changefees();' /> Short Answer";
+                    $content        .= "</div>";
+                    $content        .=  "<div class='form-group'>";
                     $content        .= "<label for='max_ques'>Number Of Questions:</label> ";
                     $content        .= "<select class='select2' name='expert_max_ques' id='max_ques' onchange='javascript:changefees();'>";
                     for($i=1;$i<=$result->max_no_ques;$i++)
@@ -171,23 +198,21 @@ class PlgContentAskExpert extends JPlugin
                         $content    .= "<option value='".$i."'>".$i."</option>";
                     }
                     $content        .= "</select>";
-                    $content        .= "</div>";
-                 
-                    $content        .= "<div class='form-group'><label for='phone_or_report'>Order Type: </label> <i class='fa fa-file-pdf-o'></i> Report</div>";
-                    $content        .= "<input type='hidden' name='expert_order_type' id='expert_order_type' value='report' />";
-                    
-                    $content        .= "<input type='hidden' name='expert_fees' id='expert_fees' value='".$details['amount']."' />";
-                    $content        .= "<input type='hidden' name='expert_curr_code' id='expert_curr_code' value='".$details['curr_code']."' />";
-                    $content        .= "<input type='hidden' name='expert_currency' id='expert_currency' value='".$details['currency']."' />";
-                    $content        .= "<input type='hidden' name='expert_curr_full' id='expert_curr_full' value='".$details['curr_full']."' />";
-                    $content        .= "<input type='hidden' name='expert_final_fees' id='expert_final_fees' value='".$details['amount']."' />";
-                    $content        .= "<div class='form-group'><label>Fees:</label> <div id='fees_id'>".$details['amount']."&nbsp;".$details['curr_code']."(".$details['currency'].'-'.$details['curr_full'].')'."</div></div>";
+                    $content        .= "</div>";         
+                    $content        .= "<input type='hidden' name='long_ans_fees' id='long_ans_fees' value='".$details[0]['amount']."' />";
+                    $content        .= "<input type='hidden' name='short_ans_fees' id='short_ans_fees' value='".$details[1]['amount']."' />";
+                    $content        .= "<input type='hidden' name='expert_fees' id='expert_fees' value='".$details[0]['amount']."' />";
+                    $content        .= "<input type='hidden' name='expert_curr_code' id='expert_curr_code' value='".$details[0]['curr_code']."' />";
+                    $content        .= "<input type='hidden' name='expert_currency' id='expert_currency' value='".$details[0]['currency']."' />";
+                    $content        .= "<input type='hidden' name='expert_curr_full' id='expert_curr_full' value='".$details[0]['curr_full']."' />";
+                    $content        .= "<input type='hidden' name='expert_final_fees' id='expert_final_fees' value='".$details[0]['amount']."' />";
+                    $content        .= "<div class='form-group'><label>Fees:</label> <div id='fees_id'>".$details[0]['amount']."&nbsp;".$details[0]['curr_code']."(".$details[0]['currency'].'-'.$details[0]['curr_full'].')'."</div></div>";
                     $content        .= "<div class='form-group'>";
                     $content        .= "<label for='expert_choice' class='control-label'>Payment Type: </label>";
-                    if($details['currency'] == 'INR')
+                    if($details[0]['currency'] == 'INR')
                     {
-                        $content            .= "&nbsp;<input type='radio' name='expert_choice' id='expert_choice1' value='ccavenue' checked /> <i class='fa fa-credit-card'></i> Credit/Debit Card/Netbanking
-                                                <input type='radio' name='expert_choice' id='expert_choice4' value='paytm'  />  <img src='".JURi::base()."images/paytm.png' />";
+                        $content            .= "&nbsp;<input type='radio' name='expert_choice' id='expert_choice1' value='ccavenue' /> <i class='fa fa-credit-card'></i> Credit/Debit Card/Netbanking
+                                                <input type='radio' name='expert_choice' id='expert_choice4' value='paytm'  checked />  <img src='".JURi::base()."images/paytm.png' />";
        
                     }
                     else

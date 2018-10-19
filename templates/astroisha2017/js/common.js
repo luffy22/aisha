@@ -215,7 +215,20 @@ function addSubscriptionFees()
 }
 function changefees()
 {
-    var fees            = document.getElementById("expert_fees").value;
+    var long_ans        = document.getElementById("long_ans_fees").value;
+    var short_ans        = document.getElementById("short_ans_fees").value;
+    if(document.getElementById("ques_type1").checked)
+    {
+        var fees        = long_ans;
+    }
+    else if(document.getElementById("ques_type2").checked)
+    {
+        var fees        = short_ans;
+    }
+    else
+    {
+        var fees        = document.getElementById("expert_fees").value;
+    }
     var no_of_ques      = document.getElementById("max_ques").value;
     var curr_code       = document.getElementById("expert_curr_code").value;
     var currency        = document.getElementById("expert_currency").value;

@@ -6,16 +6,16 @@ class AstrologinModelAstroask extends JModelItem
 {
     function getData()
     {
-        include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
-        $geoip                  = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
-        //$ip                         = '117.196.1.11';
+        //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
+        //$geoip                  = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
+        $ip                         = '117.196.1.11';
         //$ip                         = '157.55.39.123';  // ip address
-        $ip                       	= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
-        //$info                       = geoip_country_code_by_name($ip);
-        //$country                    = geoip_country_name_by_name($ip);
-        $location               	= $geoip->lookupLocation($ip);
-        $info                   	= $location->countryCode;
-        $country                	= $location->countryName;
+        //$ip                       	= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
+        $info                       = geoip_country_code_by_name($ip);
+        $country                    = geoip_country_name_by_name($ip);
+        //$location               	= $geoip->lookupLocation($ip);
+        //$info                   	= $location->countryCode;
+        //$country                	= $location->countryName;
         $u_id           = '754';
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
@@ -146,11 +146,11 @@ public function insertDetails($details)
     $pob                = $details['pob'];
     $expert             = $details['expert'];
     $no_of_ques         = $details['no_of_ques'];
-    $order_type         = $details['order_type'];
+    $ques_type         = $details['ques_type'];
     $pay_mode           = $details['pay_mode'];
     
     $date               = new DateTime($dob);
-    $date               ->setTime($tob[0],$tob[1],$tob[2]);
+    $date               ->setTime($tob[0],$tob[1],"00");
     $dob_tob            = strtotime($date->format('Y-m-d H:i:s'));
     $date1              = new DateTime('now');
     $date1              ->setTimezone('Asia/Kolkata');
@@ -172,7 +172,7 @@ public function insertDetails($details)
                             $db->quote($token),$db->quote($expert_id),$db->quote($no_of_ques),
                             $db->quote($fees),$db->quote($currency),$db->quote($pay_mode),
                             $db->quote($name), $db->quote($email),$db->quote($gender), 
-                            $db->quote($dob_tob),$db->quote($pob),$db->quote($order_type),$db->quote($ques_ask_date)
+                            $db->quote($dob_tob),$db->quote($pob),$db->quote($ques_type),$db->quote($ques_ask_date)
                             );
     // Prepare the insert query
     $query          ->insert($db->quoteName('#__question_details'))
@@ -459,63 +459,35 @@ function sendMail($data)
     $mailer     ->addBcc('kopnite@gmail.com');
     $subject    = "AstroIsha Ask-Expert Order: ".$data->UniqueID;
     $mailer     ->setSubject($subject);
-    if($data->pay_mode == "bhim"||$data->pay_mode=="phonepe")
-    {
-        $pay_mode   = ucfirst($data->pay_mode)." App";
-    }
-    else if($data->pay_mode=="direct"||$data->pay_mode=="directint")
-    {
-        $pay_mode   = "Direct Tranfer";
-    }
-    else if($data->pay_mode=="paypalme")
-    {
-        $pay_mode   = "<strong>PayPal.Me</strong>";
-    }
-    else
-    {
-        $pay_mode   = ucfirst($data->pay_mode);
-    }
-    if($data->pay_mode=="paytm"||$data->pay_mode=="paypal"||$data->pay_mode=="ccavenue")
-    {
-        $body       .= "<p>Dear ".$data->name.",</p>";
-        if($data->paid=="no")
-        {
-            $body       .= "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Online Payment to AstroIsha(https://www.astroisha.com) has failed. Kindly retry again if you wish your an answer to your questions. If you have Cancelled the Order then kindly ignore this email.</p>";
-        }
-        else if($data->paid =="yes")
-        {
-            $body       .= "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Online Payment to AstroIsha(https://www.astroisha.com) is successful. The answers to your questions would be resolved and mailed to you in ten working days.</p><br/>"; 
-        }
-        else
-        {
-            $body       .= "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Online Payment to AstroIsha(https://www.astroisha.com) has failed. Kindly retry again if you wish your an answer to your questions. If you have Cancelled the Order then kindly ignore this email.</p>";
-        }
-    }
-    else
-    {
-        $body       .= "<p>Dear ".$data->name.",</p>";
-        $body       .= "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your have placed an Order with AstroIsha(https://www.astroisha.com). 
-                        You have applied to pay via: ".$pay_mode.". Kindly pay the amount: ".$data->fees." ".$data->currency." and notify 
-                        to admin@astroisha.com once payment is completed. <strong>Kindly keep some reference of your payment to avoid issues later.</strong></p><br/>"; 
 
-    }  
+	$body       .= "<p>Dear ".$data->name.",</p>";
+	if($data->paid=="no")
+	{
+		$body       .= "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Online Payment to AstroIsha(https://www.astroisha.com) has failed. Kindly retry again if you wish your an answer to your questions. If you have Cancelled the Order then kindly ignore this email.</p>";
+	}
+	else if($data->paid =="yes")
+	{
+		$body       .= "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Online Payment to AstroIsha(https://www.astroisha.com) is successful. The answers to your questions would be resolved and mailed to you in ten working days.</p><br/>"; 
+	}
+	else
+	{
+		$body       .= "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Online Payment to AstroIsha(https://www.astroisha.com) has failed. Kindly retry again if you wish your an answer to your questions. If you have Cancelled the Order then kindly ignore this email.</p>";
+	}
     $body           .= "<p><strong>Details Of Your Order Are As Below: </strong></p>";
     $body           .= "<p>Order ID: ".$data->UniqueID."</p>";
     $link           = "https://www.astroisha.com/astro/".$data->username;
     $body           .=  "<p>Who Would Answer: <a href=".$link." target='_blank'>".$data->expertname."</a></p>";
+    if($data->order_type == "short_ans")
+    {
+		$body 			.= "<p>Answer Type: Short Answer</p>";
+	}
+	else
+	{
+		$body 			.= "<p>Answer Type: Detailed Report</p>";
+	}
     $body           .= "<p>Number Of Questions: ".$data->no_of_ques."</p>";
-    if($data->order_type=="phone")
-    {
-        $body       .= "<p>You have applied to get your query resolved on Phone. Please email ".
-                        $data->expertemail." to get details of phone/mobile and suitable time to call.</p>";
-        $body       .= "<p><strong>In case you are unable to contact the expert kindly notify admin@astroisha.com so we can Cancel Your Order and Refund Your Amount. Kindly keep screenshot of any phone calls made  
-                        to avoid issues later.</strong></p><br/>";
-    }
-    else
-    {
-        $order_link           = "https://www.astroisha.com/getanswer?order=".$data->UniqueID."&ref=".$data->email;
-        $body               .= "<p>You have applied to get your query resolved via Report. Once your report is finished you would be notified via email. You can view your report here: <a href='".$order_link."' title='Click to get report'>Click For Report</a></p><br/>";
-    }
+    $order_link           = "https://www.astroisha.com/getanswer?order=".$data->UniqueID."&ref=".$data->email;
+    $body               .= "<p>Once your report is finished you would be notified via email. You can view your report here: <a href='".$order_link."' title='Click to get report'>Click For Report</a></p><br/>";
     $body           .= "<p><strong>Below Are Your Personal Details: </strong></p>";
     $body           .= "<p>Name: ".$data->name."</p>";
     $body           .= "<p>Email: ".$data->email."</p>";
@@ -525,43 +497,9 @@ function sendMail($data)
     $body           .= "<p>Place Of Birth: ".$data->pob."</p><br/>";
     $body           .= "<p><strong>Below Are The Payment Details:</strong></p>";
     $body           .= "<p>Fees: ".$data->fees."&nbsp;".$data->currency."</p>";
-    $body           .= "<p>Payment Via: ".$pay_mode."</p>";
-    if($data->pay_mode == "bhim")
-    {
-
-        $body       .= "<p>Pay To: astroisha@upi or 9727841461</p>";
-        
-    }
-    else if($data->pay_mode == "phonepe")
-    {
-        $body       .= "<p>Pay To: astroisha@ybl or 9727841461</p>";
-        $body       .= "<p>Alternatively you can open PhonePe App and scan the attached image to make payment.</p>";
-    }
-    else if($data->pay_mode == "direct")
-    {
-        $body       .= "<p>Payable To: Astro Isha</p>";
-        $body       .= "<p>Account Number: 915020051554614</p>";
-        $body       .= "<p>Bank Name: Axis Bank</p>";
-        $body       .= "<p>IFSC Code: UTIB0000080</p>";                  
-    }
-    else if($data->pay_mode == "cheque")
-    {
-        $body       .= "<p>Write a Cheque to <strong>Astro Isha</strong> and submit it to your near Axis Bank. Keep Cheque Number as reference.</p>";
-    }
-    else if($data->pay_mode == "paypalme")
-    {
-        $paylink       = "https://www.paypal.me/AstroIsha/".$data->fees.$data->currency;
-        $body       .=  "<a href=".$paylink.">Pay Using Paypal.Me</a>";
-        $body       .= "<p>Click On The Above Link to finish payment. Send the payment confirmation email from Paypal to admin@astroisha.com in order to verify payment.</p>";
-    }
-    else if($data->pay_mode == "directint")
-    {
-        $body       .= "<p>Payable To: Astro Isha</p>";
-        $body       .= "<p>Account Number: 915020051554614</p>";
-        $body       .= "<p>Bank Name: Axis Bank</p>";
-        $body       .= "<p>Swift Code: AXISINBB080</p>";
-    }
-    else if(($data->pay_mode=="paytm"||$data->pay_mode=="ccavenue"||$data->pay_mode=="paypal")&&$data->paid=="no")
+    $body           .= "<p>Payment Via: ".$data->pay_mode."</p>";
+    
+    if(($data->pay_mode=="paytm"||$data->pay_mode=="ccavenue"||$data->pay_mode=="paypal")&&$data->paid=="no")
     {
         $body       .= "<p>Payment Status: </strong>Failed</p>";
 
@@ -595,14 +533,7 @@ function sendMail($data)
     $mailer->isHtml(true);
     $mailer->Encoding = 'base64';
     $mailer->setBody($body);
-    if($data->pay_mode=="phonepe")
-    {
-        $mailer->addAttachment(JPATH_BASE.'/images/phonepe_pay.png');
-    }
-    else if($data->pay_mode == "direct"||$data->pay_mode =="directint")
-    {
-        $mailer->addAttachment(JPATH_BASE.'/images/bank_details.pdf');
-    }
+    
     $send = $mailer->Send();
     $link       = JUri::base().'getanswer?order='.$data->UniqueID.'&ref='.$data->email;
     if ( $send !== true ) {

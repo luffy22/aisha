@@ -50,7 +50,7 @@ if(isset($_GET['ref']))
     <li class="list-group-item">Date Of Birth: <?php echo $date->format('d-m-Y'); ?></li>
     <li class="list-group-item">Time Of Birth: <?php echo $date->format('h:i:s a');?></li>
     <li class="list-group-item">Place Of Birth: <?php echo $this->order->pob; ?></li>
-    <li class="list-group-item">Order Type: <?php echo ucfirst($this->order->order_type); ?></li>
+    <li class="list-group-item">Answer Type: <?php if($this->order->order_type=="short_ans"){echo "Short Answer";}else{echo "Detailed Report";} ?></li>
   </ul>
 </div>
 <div class="mb-2"></div>

@@ -6,8 +6,8 @@ class AstrologinControllerAstroask extends AstroLoginController
     public function askQuestions()
     { 
             $expert         = $_POST['ques_expert'];
+            $ques_type      = $_POST['ques_type'];
             $no_of_ques     = $_POST['ques_no'];
-            $order_type     = $_POST['ques_order_type'];
             $fees           = $_POST['ques_fees'];
             $currency       = $_POST['ques_currency'];
             $name           = $_POST['ques_name'];
@@ -15,12 +15,12 @@ class AstrologinControllerAstroask extends AstroLoginController
             $gender         = $_POST['ques_gender'];
             $dob            = $_POST['ques_dob'];
             $pob            = $_POST['ques_pob'];
-            $tob            = $_POST['lagna_hr'].":".$_POST['lagna_min'].":".$_POST['lagna_sec'];
+            $tob            = $_POST['ques_time'];
             $pay_mode       = $_POST['ques_pay_mode'];
             
             $details    = array(
                                 "expert"=>$expert,"no_of_ques"=>$no_of_ques,"fees"=>$fees,
-                                "currency"=>$currency,"order_type"=>$order_type,
+                                "currency"=>$currency,"ques_type"=>$ques_type,
                                 "name"=>$name,"email"=>$email,"gender"=>$gender,"explain"=>$explain,
                                 "dob"=>$dob,"pob"=>$pob, "tob"=>$tob,"pay_mode"=>$pay_mode
                                 );
@@ -93,14 +93,14 @@ class AstrologinControllerAstroask extends AstroLoginController
         {
             $uname              = $_POST['expert_uname'];
             $ques               = $_POST['expert_max_ques'];
-            $order_type         = $_POST['expert_order_type'];
+            $ques_type          = $_POST['ques_type'];
             $fees               = $_POST['expert_final_fees'];
             $currency           = $_POST['expert_currency'];
             $pay_mode           = $_POST['expert_choice'];
             
         }
         $app                    = JFactory::getApplication();
-        $app        ->redirect(JUri::base().'ask-question?uname='.$uname.'&ques='.$ques.'&type='.$order_type.'&fees='.$fees."_".$currency.'&pay_mode='.$pay_mode);        
+        $app        ->redirect(JUri::base().'ask-question?uname='.$uname.'&ques='.$ques.'&type='.$ques_type.'&fees='.$fees."_".$currency.'&pay_mode='.$pay_mode);        
     }
 }
 ?>

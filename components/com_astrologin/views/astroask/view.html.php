@@ -30,10 +30,14 @@ class AstroLoginViewAstroAsk extends JViewLegacy
         }
         else if((!empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['no_of_ques']))&&(isset($_GET['expert'])))
         {
-            $expert             = $_GET['expert'];
-            $jinput             = JFactory::getApplication()->input;
-            $jinput             ->set('expert',  $expert, 'string');
-            $this->data         = $this->get('Expert');
+            $tpl                = 'details2';
+        }
+       else if(empty($this->msg)&&isset($_GET['uname'])&&isset($_GET['ques'])&&isset($_GET['type']))
+        {
+             $tpl       = 'details';
+        }
+        else if((empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['no_of_ques']))&&(isset($_GET['expert'])))
+        {
             $tpl                = 'details2';
         }
         parent::display($tpl);

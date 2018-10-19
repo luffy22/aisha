@@ -2,7 +2,7 @@
 defined('_JEXEC') or die();
 $uname                  = $_GET['uname'];
 $ques                   = $_GET['ques'];
-$order_type             = $_GET['type'];
+$ques_type              = $_GET['type'];
 $fees                   = explode("_",$_GET['fees']);
 $pay_mode               = $_GET['pay_mode'];
 ?>
@@ -11,7 +11,7 @@ $pay_mode               = $_GET['pay_mode'];
       action="<?php echo JRoute::_('index.php?option=com_astrologin&task=astroask.askQuestions'); ?>">
 <input type="hidden" name="ques_expert" value="<?php echo $uname; ?>" />
 <input type="hidden" name="ques_no" value="<?php echo $ques; ?>" />
-<input type="hidden" name="ques_order_type" value="<?php echo $order_type; ?>" />
+<input type="hidden" name="ques_type" value="<?php echo $ques_type; ?>" />
 <input type="hidden" name="ques_fees" value="<?php echo $fees[0]; ?>" />
 <input type="hidden" name="ques_currency" value="<?php echo $fees[1]; ?>" />
 <input type="hidden" name="ques_pay_mode" value="<?php echo $pay_mode; ?>" />
@@ -34,63 +34,7 @@ $pay_mode               = $_GET['pay_mode'];
 </div>
 <div class="form-group">
     <label>Time Of Birth:</label><br/>
-    <select class="select2" id="lagna_tob_hr" name="lagna_hr">
-    <?php
-         for($i=0;$i<24;$i++)
-         {
-             if($i<10)
-             {
-    ?>
-            <option><?php echo "0".$i; ?></option>
-    <?php
-             }
-            else
-            {
-    ?>
-            <option><?php echo $i; ?></option>
-    <?php
-            }
-         }
-    ?>
-    </select>
-    <select class="select2" id="lagna_tob_min" name="lagna_min">
-    <?php
-        for($i=0;$i<60;$i++)
-        {
-           if($i<10)
-           {
-            ?>
-            <option><?php echo "0".$i; ?></option>
-            <?php    
-           }
-           else
-            {
-    ?>
-            <option><?php echo $i; ?></option>
-    <?php
-            }
-        }
-    ?>
-    </select>
-    <select class="select2" id="lagna_tob_sec" name="lagna_sec">
-    <?php
-        for($i=0;$i<60;$i++)
-        {
-           if($i<10)
-           {
-            ?>
-            <option><?php echo "0".$i; ?></option>
-            <?php    
-           }
-           else
-            {
-    ?>
-            <option><?php echo $i; ?></option>
-    <?php
-            }
-        }
-    ?>
-    </select>
+    <input type="time" name="ques_time"  id="ques_time" class="form-control" placeholder="Enter your Time of Birth"/>
 </div>
 <div class="form-group" id="ques_grp_5">
     <label for="ques_pob">Place Of Birth</label>

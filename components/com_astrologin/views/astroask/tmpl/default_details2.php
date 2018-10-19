@@ -20,29 +20,12 @@ for($i=0;$i<$no_of_ques;$i++)
 <div class="form-group">
     <label>Choose Subject:</label><br/>
     <select name="ques_select_<?php echo $i+1; ?>" class="form-control">
-<?php
-    foreach($this->data as $data)
-    {   
-        if($data->role_super == "0")
-        {
-            $id         = $data->role_id;
-?>
-        <option value="<?php echo $data->role_name ?>" disabled><?php echo "Expertise: ".$data->role_name ?></option>
-        
-<?php
-        foreach($this->data as $sub_data)
-             {
-                if($sub_data->role_super == $id)
-                {
-?>
-                    <option value="<?php echo $sub_data->role_name ?>"><?php echo $sub_data->role_name ?></option>
-<?php
-                }
-                
-             }
-        }
-    }
-?>
+        <option value="marriage">Marriage</option>
+        <option value="divorce">Divorce</option>
+        <option value="career">Career</option>
+        <option value="education">Education</option>
+        <option value="finance">Finance</option>
+        <option value="other">Other</option>
     </select>
 </div>
 <div class="form-group">
