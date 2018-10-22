@@ -20,7 +20,12 @@ $details                    = $this->msg;
 </div></div></div>
 </div></div>
 <form name="ask_expert" method="post" enctype="application/x-www-form-urlencoded" action="<?php echo JRoute::_('?option=com_astrologin&task=astroask.askExpert') ?>">
-<input type='hidden' name='expert_uname' id="expert_uname" value="<?php echo $details['username'] ?>" />
+<input type="hidden" name="expert_uname" id="expert_uname" value="<?php echo $details['username'] ?>" /><div class="mb-2"></div>
+<div class='form-control'>
+<label for="ques_type">Answer Type:</label>
+<input type="radio" name="ques_type" id="ques_type1" value="long_ans" onchange="javascript:changefees2();" checked /> Detailed Report&nbsp;&nbsp;&nbsp;
+<input type="radio" name="ques_type" id="ques_type2" value="short_ans" onchange="javascript:changefees2();" /> Short Answer
+</div><div class="mb-2"></div>
 <div class="form-control" id="choose_ques">
 <label for="select_expert">Choose Number Of Questions</label>
 <select class="form-control" name="expert_max_ques" id="select_ques" onchange="javascript:changefees2();">
@@ -35,28 +40,25 @@ $details                    = $this->msg;
 </select>
 </div>
 <div class="mb-2"></div>
-<div class="form-group" id="order_type">
-
-<div class='form-control'><label for='phone_or_report'>Order Type: </label> <i class='fa fa-file-pdf-o'></i> Report</div>
-<input type='hidden' name='expert_order_type' id='expert_order_type' value='report' />
-</div>
-<input type="hidden" name="expert_fees" id="expert_fees" value="<?php echo $details['amount'] ?>" />
-<input type="hidden" name="expert_curr_code" id="expert_curr_code" value="<?php echo $details['curr_code'] ?>" />
-<input type="hidden" name="expert_currency" id="expert_currency" value="<?php echo $details['currency']; ?>" />
-<input type="hidden" name="expert_curr_full" id="expert_curr_full" value="<?php echo $details['curr_full']; ?>" />
-<input type="hidden" name="expert_final_fees" id="expert_final_fees" value="<?php echo $details['amount'] ?>" />
+<input type="hidden" name="ques_long_fees" id="long_ans_fees" value="<?php echo $details[0]["amount"] ?>" />
+<input type="hidden" name="ques_short_fees" id="short_ans_fees" value="<?php echo $details[1]['amount'] ?>" />
+<input type="hidden" name="expert_fees" id="expert_fees" value="<?php echo $details[0]['amount'] ?>" />
+<input type="hidden" name="expert_curr_code" id="expert_curr_code" value="<?php echo $details[0]['curr_code'] ?>" />
+<input type="hidden" name="expert_currency" id="expert_currency" value="<?php echo $details[0]['currency']; ?>" />
+<input type="hidden" name="expert_curr_full" id="expert_curr_full" value="<?php echo $details[0]['curr_full']; ?>" />
+<input type="hidden" name="expert_final_fees" id="expert_final_fees" value="<?php echo $details[0]['amount'] ?>" />
 <div class="mb-2"></div>
-<div class="form-control" id="fees_type"><label>Fees:</label> <div id='fees_id'><?php echo $details['amount']."&nbsp;".$details['curr_code']."(".$details['currency']."-".$details['curr_full'].")" ?></div></div>
+<div class="form-control" id="fees_type"><label>Fees:</label> <div id='fees_id'><?php echo $details[0]['amount']."&nbsp;".$details[0]['curr_code']."(".$details[0]['currency']."-".$details[0]['curr_full'].")" ?></div></div>
 <div class="mb-2"></div>
 <div class="form-control" id="pay_id">
     <label for='expert_choice' class='control-label'>Payment Type: </label>
     <div id="payment_type">
  <?php
-if($details['currency'] == 'INR')
+if($details[0]['currency'] == 'INR')
 {
 ?>
-    <input type='radio' name='expert_choice' id='expert_choice1' value='ccavenue' checked /> <i class='fa fa-credit-card'></i> Credit/Debit Card/Netbanking
-    <input type='radio' name='expert_choice' id='expert_choice4' value='paytm' />  <img src="<?php echo JURi::base() ?>images/paytm.png" />
+    <input type='radio' name='expert_choice' id='expert_choice1' value='ccavenue'  /> <i class='fa fa-credit-card'></i> Credit/Debit Card/Netbanking
+    <input type='radio' name='expert_choice' id='expert_choice4' value='paytm' checked />  <img src="<?php echo JURi::base() ?>images/paytm.png" />
 <?php       
 }
 else
