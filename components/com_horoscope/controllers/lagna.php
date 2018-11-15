@@ -12,13 +12,46 @@ class HoroscopeControllerLagna extends HoroscopeController
 {
     public function findlagna()
     {
+        //echo "calls lagna";exit;
         if(isset($_POST['lagnasubmit']))
         {
-            $fname  = $_POST['lagna_fname'];$gender   = $_POST['lagna_gender'];
-            $dob     = $_POST['lagna_dob'];$pob    = $_POST['lagna_pob'];
-            $tob    = $_POST['lagna_tob'];$lon    = $_POST['lagna_lon'];
-            $lat    = $_POST['lagna_lat'];$tmz    = $_POST['lagna_tmz'];
-  
+            $fname      = $_POST['lagna_fname'];$gender = $_POST['lagna_gender'];
+            $dob        = $_POST['lagna_dob'];$pob      = $_POST['lagna_pob'];
+            $tob        = $_POST['lagna_tob'];$lon      = $_POST['lagna_lon'];
+            $lat        = $_POST['lagna_lat'];$tmz      = $_POST['lagna_tmz'];
+            if(empty($lat) && empty($lon))
+            {
+                $tmz        = "none";
+                $lon_dir    = $_POST['lon_dir'];
+                $lat_dir    = $_POST['lat_dir'];
+                //echo $lon_dir." ".$lat_dir;exit;
+                if($lon_dir == "E"&& $lat_dir=="N")
+                {
+                    $lon        = $_POST['lon_deg'].".".$_POST['lon_min'];
+                    $lat        = $_POST['lat_deg'].".".$_POST['lat_min'];
+                }
+                else if($lon_dir == "W" && $lat_dir=="N")
+                {
+                    $lon        = "-".$_POST['lon_deg'].".".$_POST['lon_min'];
+                    $lat        = $_POST['lat_deg'].".".$_POST['lat_min'];
+                }
+                else if($lon_dir == "E" && $lat_dir=="S")
+                {
+                    $lon        = $_POST['lon_deg'].".".$_POST['lon_min'];
+                    $lat        = "-".$_POST['lat_deg'].".".$_POST['lat_min'];
+                }
+                else if($lon_dir == "W" && $lat_dir=="S")
+                {
+                    $lon        = "-".$_POST['lon_deg'].".".$_POST['lon_min'];
+                    $lat        = "-".$_POST['lat_deg'].".".$_POST['lat_min'];
+                }
+                else
+                {
+                    $lon        = $_POST['lon_deg'].".".$_POST['lon_min'];
+                    $lat        = $_POST['lat_deg'].".".$_POST['lat_min'];
+                }
+                
+            }
             $user_details   = array(
                                     'fname'=>$fname,'gender'=>$gender,'dob'=>$dob,"pob"=>$pob,
                                     'tob'=>$tob,'lon'=>$lon,'lat'=>$lat,'tmz'=>$tmz

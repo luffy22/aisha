@@ -4,6 +4,11 @@ defined('_JEXEC') or die('Restricted access');
 $details                    = $this->msg;
 //print_r($details);exit;
 ?>
+<div class="alert alert-info fade in alert-dismissible show">
+ <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true" style="font-size:20px">×</span>
+  </button><strong><i class="fa fa-info fa-3x"></i>&nbsp;</strong>AstroIsha is unable to handle client queries till November 25th 2018. We at AstroIsha apologize to our clients for the inconvenience caused.
+</div>
 <div class='card card-outline-info text-center' id="info_expert">
 <div class='card-block'>
 <h3><a title='Click to get more info' href='#' data-toggle='modal' data-target='#astroinfo'><img src=<?php echo JURi::base() ?>images/profiles/<?php echo $details['img_new_name'] ?> height='50px' width='50px' title="<?php echo $details['img_name'];?>" /><?php echo $details['name'] ?></a></h3>
@@ -74,7 +79,7 @@ else
 
 <div class="mb-2"></div>
 <div class="form-group" id="btn_grp">
-    <button type="submit" name="expert_submit" id="ask_submit" class="btn btn-primary" >Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+    <!--<button type="submit" name="expert_submit" id="ask_submit" class="btn btn-primary" >Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>-->
     <button type="reset" name="ask_reset" id="ask_reset" class="btn btn-danger">Reset</button>
 </div>
 </form>

@@ -23,6 +23,7 @@ class HoroscopeModelLagna extends JModelItem
         $lon            = $user_details['lon'];
         $lat            = $user_details['lat'];
         $tmz            = $user_details['tmz'];
+        
         if($tmz == "none")
         {
             $date           = new DateTime($dob." ".$tob);
