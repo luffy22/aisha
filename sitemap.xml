@@ -477,6 +477,10 @@
   <changefreq>weekly</changefreq>
 </url>
 <url>
+  <loc>https://www.astroisha.com/featured?start=30</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
   <loc>https://www.astroisha.com/featured/67-shani-and-superstition</loc>
   <changefreq>weekly</changefreq>
 </url>
@@ -594,6 +598,10 @@
 </url>
 <url>
 	<loc>https://www.astroisha.com/featured/383-court-astrology</loc>
+	<changefreq>weekly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/featured/402-superstitious-astrology</loc>
 	<changefreq>weekly</changefreq>
 </url>
 <url>
@@ -1272,51 +1280,51 @@
   <changefreq>weekly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/360-aries-2018</loc>
+	<loc>https://www.astroisha.com/yearly/404-aries-2019</loc>
 	<changefreq>weekly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/361-taurus-2018</loc>
+	<loc>https://www.astroisha.com/yearly/405-taurus-2019</loc>
 	<changefreq>weekly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/362-gemini-2018</loc>
+	<loc>https://www.astroisha.com/yearly/406-gemini-2019</loc>
 	<changefreq>weekly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/363-cancer-2018</loc>
+	<loc>https://www.astroisha.com/yearly/407-cancer-2019</loc>
 	<changefreq>weekly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/364-leo-2018</loc>
+	<loc>https://www.astroisha.com/yearly/408-leo-2019</loc>
 	<changefreq>weekly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/365-virgo-2018</loc>
+	<loc>https://www.astroisha.com/yearly/409-virgo-2019</loc>
 	<changefreq>weekly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/366-libra-2018</loc>
+	<loc>https://www.astroisha.com/yearly/410-libra-2019</loc>
 	<changefreq>weekly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/367-scorpio-2018</loc>
+	<loc>https://www.astroisha.com/yearly/411-scorpio-2019</loc>
 	<changefreq>weekly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/368-sagittarius-2018</loc>
+	<loc>https://www.astroisha.com/yearly/412-sagittarius-2019</loc>
 	<changefreq>weekly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/369-capricorn-2018</loc>
+	<loc>https://www.astroisha.com/yearly/413-capricorn-2019</loc>
 	<changefreq>weekly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/370-aquarius-2018</loc>
+	<loc>https://www.astroisha.com/yearly/414-aquarius-2019</loc>
 	<changefreq>weekly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/371-pisces-2018</loc>
+	<loc>https://www.astroisha.com/yearly/415-pisces-2019</loc>
 	<changefreq>weekly</changefreq>
 </url>
 <url>
@@ -1481,6 +1489,10 @@
 </url>
 <url>
 	<loc>https://www.astroisha.com/finance/398-rahu-losses</loc>
+	<changefreq>weekly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/finance/403-astro-fincrisis</loc>
 	<changefreq>weekly</changefreq>
 </url>
 <url>

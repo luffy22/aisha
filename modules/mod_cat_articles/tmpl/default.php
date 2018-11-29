@@ -1,3 +1,4 @@
+<div class="row">
 <?php
 defined('_JEXEC') or die;
 //print_r($list);exit;
@@ -22,5 +23,6 @@ $images                 = json_decode($item->images);
 ?>
 <?php endforeach; ?>
 <div class="mb-2"></div>
+</div>
 
 
