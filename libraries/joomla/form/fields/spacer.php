@@ -3,7 +3,7 @@
  * @package     Joomla.Platform
  * @subpackage  Form
  *
- * @copyright   Copyright (C) 2005 - 2016 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2018 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
@@ -13,7 +13,7 @@ defined('JPATH_PLATFORM') or die;
  * Form Field class for the Joomla Platform.
  * Provides spacer markup to be used in form layouts.
  *
- * @since  11.1
+ * @since  1.7.0
  */
 class JFormFieldSpacer extends JFormField
 {
@@ -21,7 +21,7 @@ class JFormFieldSpacer extends JFormField
 	 * The form field type.
 	 *
 	 * @var    string
-	 * @since  11.1
+	 * @since  1.7.0
 	 */
 	protected $type = 'Spacer';
 
@@ -31,7 +31,7 @@ class JFormFieldSpacer extends JFormField
 	 *
 	 * @return  string  The field input markup.
 	 *
-	 * @since   11.1
+	 * @since   1.7.0
 	 */
 	protected function getInput()
 	{
@@ -45,7 +45,7 @@ class JFormFieldSpacer extends JFormField
 	 *
 	 * @return  string  The field label markup.
 	 *
-	 * @since   11.1
+	 * @since   1.7.0
 	 */
 	protected function getLabel()
 	{
@@ -78,7 +78,7 @@ class JFormFieldSpacer extends JFormField
 			if (!empty($this->description))
 			{
 				JHtml::_('bootstrap.tooltip');
-				$label .= ' title="' . JHtml::tooltipText(trim($text, ':'), JText::_($this->description), 0) . '"';
+				$label .= ' title="' . JHtml::_('tooltipText', trim($text, ':'), JText::_($this->description), 0) . '"';
 			}
 
 			// Add the label text and closing tag.
@@ -98,10 +98,26 @@ class JFormFieldSpacer extends JFormField
 	 *
 	 * @return  string  The field title.
 	 *
-	 * @since   11.1
+	 * @since   1.7.0
 	 */
 	protected function getTitle()
 	{
 		return $this->getLabel();
+	}
+
+	/**
+	 * Method to get a control group with label and input.
+	 *
+	 * @param   array  $options  Options to be passed into the rendering of the field
+	 *
+	 * @return  string  A string containing the html for the control group
+	 *
+	 * @since   3.7.3
+	 */
+	public function renderField($options = array())
+	{
+		$options['class'] = empty($options['class']) ? 'field-spacer' : $options['class'] . ' field-spacer';
+
+		return parent::renderField($options);
 	}
 }

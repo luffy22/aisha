@@ -3,11 +3,13 @@
  * @package     Joomla.Administrator
  * @subpackage  com_plugins
  *
- * @copyright   Copyright (C) 2005 - 2016 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2018 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die;
+
+use Joomla\Utilities\ArrayHelper;
 
 /**
  * Methods supporting a list of plugin records.
@@ -73,8 +75,8 @@ class PluginsModelPlugins extends JModelList
 		$folder = $this->getUserStateFromRequest($this->context . '.filter.folder', 'filter_folder', '', 'string');
 		$this->setState('filter.folder', $folder);
 
-		$language = $this->getUserStateFromRequest($this->context . '.filter.language', 'filter_language', '', 'string');
-		$this->setState('filter.language', $language);
+		$element = $this->getUserStateFromRequest($this->context . '.filter.element', 'filter_element', '', 'string');
+		$this->setState('filter.element', $element);
 
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_plugins');
@@ -102,7 +104,7 @@ class PluginsModelPlugins extends JModelList
 		$id .= ':' . $this->getState('filter.access');
 		$id .= ':' . $this->getState('filter.enabled');
 		$id .= ':' . $this->getState('filter.folder');
-		$id .= ':' . $this->getState('filter.language');
+		$id .= ':' . $this->getState('filter.element');
 
 		return parent::getStoreId($id);
 	}
@@ -124,7 +126,7 @@ class PluginsModelPlugins extends JModelList
 		// If "Sort Table By:" is not set, set ordering to name
 		if ($ordering == '')
 		{
-			$ordering = "name";
+			$ordering = 'name';
 		}
 
 		if ($ordering == 'name' || (!empty($search) && stripos($search, 'id:') !== 0))
@@ -148,7 +150,7 @@ class PluginsModelPlugins extends JModelList
 
 			$orderingDirection = strtolower($this->getState('list.direction'));
 			$direction         = ($orderingDirection == 'desc') ? -1 : 1;
-			JArrayHelper::sortObjects($result, $ordering, $direction, true, true);
+			$result = ArrayHelper::sortObjects($result, $ordering, $direction, true, true);
 
 			$total = count($result);
 			$this->cache[$this->getStoreId('getTotal')] = $total;
@@ -159,7 +161,7 @@ class PluginsModelPlugins extends JModelList
 				$this->setState('list.start', 0);
 			}
 
-			return array_slice($result, $limitstart, $limit ? $limit : null);
+			return array_slice($result, $limitstart, $limit ?: null);
 		}
 		else
 		{
@@ -259,6 +261,12 @@ class PluginsModelPlugins extends JModelList
 		if ($folder = $this->getState('filter.folder'))
 		{
 			$query->where('a.folder = ' . $db->quote($folder));
+		}
+
+		// Filter by element.
+		if ($element = $this->getState('filter.element'))
+		{
+			$query->where('a.element = ' . $db->quote($element));
 		}
 
 		// Filter by search in name or id.

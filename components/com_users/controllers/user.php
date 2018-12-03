@@ -3,7 +3,7 @@
  * @package     Joomla.Site
  * @subpackage  com_users
  *
- * @copyright   Copyright (C) 2005 - 2016 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2018 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -27,26 +27,24 @@ class UsersControllerUser extends UsersController
 	 */
 	public function login()
 	{
-		JSession::checkToken('post') or jexit(JText::_('JINVALID_TOKEN'));
+		$this->checkToken('post');
 
-		$app    = JFactory::getApplication();
-		$input  = $app->input;
-		$method = $input->getMethod();
+		$app   = JFactory::getApplication();
+		$input = $app->input->getInputForRequestMethod();
 
 		// Populate the data array:
 		$data = array();
 
-		$data['return']    = base64_decode($app->input->post->get('return', '', 'BASE64'));
-		$data['username']  = $input->$method->get('username', '', 'USERNAME');
-		$data['password']  = $input->$method->get('password', '', 'RAW');
-		$data['secretkey'] = $input->$method->get('secretkey', '', 'RAW');
-                
+		$data['return']    = base64_decode($input->get('return', '', 'BASE64'));
+		$data['username']  = $input->get('username', '', 'USERNAME');
+		$data['password']  = $input->get('password', '', 'RAW');
+		$data['secretkey'] = $input->get('secretkey', '', 'RAW');
+
 		// Check for a simple menu item id
 		if (is_numeric($data['return']))
 		{
 			if (JLanguageMultilang::isEnabled())
 			{
-
 				$db = JFactory::getDbo();
 				$query = $db->getQuery(true)
 					->select('language')
@@ -94,7 +92,8 @@ class UsersControllerUser extends UsersController
 		if (empty($data['return']))
 		{
 			$data['return'] = 'index.php?option=com_users&view=profile';
-		}               
+		}
+
 		// Set the return URL in the user state to allow modification by plugins
 		$app->setUserState('users.login.form.return', $data['return']);
 
@@ -141,14 +140,18 @@ class UsersControllerUser extends UsersController
 	 */
 	public function logout()
 	{
-		JSession::checkToken('request') or jexit(JText::_('JINVALID_TOKEN'));
+		$this->checkToken('request');
 
 		$app = JFactory::getApplication();
 
+		// Prepare the logout options.
+		$options = array(
+			'clientid' => $app->get('shared_session', '0') ? null : 0,
+		);
+
 		// Perform the log out.
-		$error  = $app->logout();
-		$input  = $app->input;
-		$method = $input->getMethod();
+		$error = $app->logout(null, $options);
+		$input = $app->input->getInputForRequestMethod();
 
 		// Check if the log out succeeded.
 		if ($error instanceof Exception)
@@ -156,8 +159,8 @@ class UsersControllerUser extends UsersController
 			$app->redirect(JRoute::_('index.php?option=com_users&view=login', false));
 		}
 
-		// Get the return url from the request and validate that it is internal.
-		$return = $input->$method->get('return', '', 'BASE64');
+		// Get the return URL from the request and validate that it is internal.
+		$return = $input->get('return', '', 'BASE64');
 		$return = base64_decode($return);
 
 		// Check for a simple menu item id
@@ -165,7 +168,6 @@ class UsersControllerUser extends UsersController
 		{
 			if (JLanguageMultilang::isEnabled())
 			{
-
 				$db = JFactory::getDbo();
 				$query = $db->getQuery(true)
 					->select('language')
@@ -209,6 +211,12 @@ class UsersControllerUser extends UsersController
 			}
 		}
 
+		// In case redirect url is not set, redirect user to homepage
+		if (empty($return))
+		{
+			$return = JUri::root();
+		}
+
 		// Redirect the user.
 		$app->redirect(JRoute::_($return, false));
 	}
@@ -216,7 +224,7 @@ class UsersControllerUser extends UsersController
 	/**
 	 * Method to logout directly and redirect to page.
 	 *
-	 * @return  boolean
+	 * @return  void
 	 *
 	 * @since   3.5
 	 */
@@ -283,7 +291,7 @@ class UsersControllerUser extends UsersController
 	}
 
 	/**
-	 * Method to login a user.
+	 * Method to request a username reminder.
 	 *
 	 * @return  boolean
 	 *
@@ -292,7 +300,7 @@ class UsersControllerUser extends UsersController
 	public function remind()
 	{
 		// Check the request token.
-		JSession::checkToken('post') or jexit(JText::_('JINVALID_TOKEN'));
+		$this->checkToken('post');
 
 		$app   = JFactory::getApplication();
 		$model = $this->getModel('User', 'UsersModel');
@@ -349,7 +357,7 @@ class UsersControllerUser extends UsersController
 	}
 
 	/**
-	 * Method to login a user.
+	 * Method to resend a user.
 	 *
 	 * @return  void
 	 *
@@ -358,6 +366,6 @@ class UsersControllerUser extends UsersController
 	public function resend()
 	{
 		// Check for request forgeries
-		JSession::checkToken('post') or jexit(JText::_('JINVALID_TOKEN'));
+		// $this->checkToken('post');
 	}
 }

@@ -3,7 +3,7 @@
  * @package     Joomla.Site
  * @subpackage  mod_articles_latest
  *
- * @copyright   Copyright (C) 2005 - 2016 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2018 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -49,6 +49,9 @@ abstract class ModArticlesLatestHelper
 		$model->setState('list.limit', (int) $params->get('count', 5));
 		$model->setState('filter.published', 1);
 
+		// This module does not use tags data
+		$model->setState('load_tags', false);
+
 		// Access filter
 		$access     = !JComponentHelper::getParams('com_content')->get('show_noauth');
 		$authorised = JAccess::getAuthorisedViewLevels(JFactory::getUser()->get('id'));
@@ -70,6 +73,10 @@ abstract class ModArticlesLatestHelper
 				$model->setState('filter.author_id.include', false);
 				break;
 
+			case 'created_by' :
+				$model->setState('filter.author_id', $params->get('author', array()));
+				break;
+
 			case '0' :
 				break;
 
@@ -81,26 +88,28 @@ abstract class ModArticlesLatestHelper
 		// Filter by language
 		$model->setState('filter.language', $app->getLanguageFilter());
 
-		//  Featured switch
-		switch ($params->get('show_featured'))
+		// Featured switch
+		$featured = $params->get('show_featured', '');
+
+		if ($featured === '')
 		{
-			case '1' :
-				$model->setState('filter.featured', 'only');
-				break;
-			case '0' :
-				$model->setState('filter.featured', 'hide');
-				break;
-			default :
-				$model->setState('filter.featured', 'show');
-				break;
+			$model->setState('filter.featured', 'show');
+		}
+		elseif ($featured)
+		{
+			$model->setState('filter.featured', 'only');
+		}
+		else
+		{
+			$model->setState('filter.featured', 'hide');
 		}
 
 		// Set ordering
 		$order_map = array(
-			'm_asc' => 'a.modified ASC, a.created',
-			'mc_asc' => 'CASE WHEN (a.modified = ' . $db->quote($db->getNullDate()) . ') THEN a.created ELSE a.modified END',
-			'c_asc' => 'a.created',
-			'p_asc' => 'a.publish_up',
+			'm_dsc' => 'a.modified DESC, a.created',
+			'mc_dsc' => 'CASE WHEN (a.modified = ' . $db->quote($db->getNullDate()) . ') THEN a.created ELSE a.modified END',
+			'c_dsc' => 'a.created',
+			'p_dsc' => 'a.publish_up',
 			'random' => $db->getQuery(true)->Rand(),
 		);
 
@@ -115,6 +124,8 @@ abstract class ModArticlesLatestHelper
 		foreach ($items as &$item)
 		{
 			$item->slug    = $item->id . ':' . $item->alias;
+
+			/** @deprecated Catslug is deprecated, use catid instead. 4.0 */
 			$item->catslug = $item->catid . ':' . $item->category_alias;
 
 			if ($access || in_array($item->access, $authorised))

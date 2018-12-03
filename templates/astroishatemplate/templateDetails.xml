@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.9" type="template">
+	<name>AstroIsha Template</name>
+	<creationDate>2018-12-03</creationDate>
+	<author>Rohan Desai</author>
+	<authorEmail>kopnite@gmail.com</authorEmail>
+	<authorUrl>http://www.facebook.com/rohandesai22</authorUrl>
+	<license>GNU/GPL</license>
+	<version>1.0</version>
+	<description>Template For Astro Isha</description>
+	<files>
+		<filename>index.php</filename>
+		<filename>templateDetails.xml</filename>
+		<folder>images</folder>
+		<folder>css</folder>
+		<folder>js</folder>
+	</files>
+	<positions>
+		<position>breadcrumb</position>
+		<position>left</position>
+		<position>right</position>
+		<position>top</position>
+		<position>content1</position>
+		<position>content2</position>
+		<position>menu</position>
+		<position>logo</position>
+		<position>footer</position>
+	</positions>
+</extension>
