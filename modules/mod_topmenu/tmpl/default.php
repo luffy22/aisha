@@ -10,25 +10,40 @@ defined('_JEXEC') or die;
         <a class="navbar-brand"><img src="images/logo.png" alt="logo" /></a>
         <span class="navbar-text">Astro Isha</span>
         <ul class="navbar-nav">
+        <?php
+            foreach($topmenu as $menu)
+            { 
+        ?>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="top-1" href="#">Dropdown </a>
-                <div class="dropdown-menu navbar-dark bg-dark">
-                    <a class="dropdown-item" href="#">PHP Tutorials</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">CSS Tutorials</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">HTML Tutorials</a>
-                </div>
+                <?php
+                if($menu->level == "2")
+                {
+                    $menu_id    = $menu->id;
+                    
+                ?>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="top-1" href="#"><?php echo $menu->title; ?></a>
+                    <div class="dropdown-menu navbar-dark bg-dark">
+                 <?php
+          
+                        if($menu->level == "3" && $menu->parent_id == $menu_id)
+                        {
+                            echo "calls";exit;
+                 ?>
+                        <a class="dropdown-item" href="#"><?php echo $menu->title; ?></a>
+                        <div class="dropdown-divider"></div>                   
+                        <?php   
+                        }
+ 
+                ?>
+                    </div>
+                <?php
+                    
+                }
+                ?>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link 2</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link 3</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link 4</a>
-            </li>
+        <?php
+            }
+        ?>
         </ul>
     </div>
 </nav>

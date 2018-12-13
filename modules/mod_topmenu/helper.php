@@ -19,6 +19,7 @@ class modTopMenuHelper
         // Get active menu item
         $base       = self::getBase($params);
         $result     = $menu->getItems('menutype', $base->menutype);
+        return $result;
         //print_r($result);exit;
         
 ?>
