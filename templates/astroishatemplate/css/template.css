@@ -2190,7 +2190,7 @@ table th[class*="span"],
 .fade.in {
 	opacity: 1;
 }
-.collapse {
+/*.collapse {
 	position: relative;
 	height: 0;
 	overflow: hidden;
@@ -2201,7 +2201,7 @@ table th[class*="span"],
 }
 .collapse.in {
 	height: auto;
-}
+}*/
 .close {
 	float: right;
 	font-size: 20px;
@@ -7814,4 +7814,4 @@ input[type="text"], input[type="password"] {
 input {
 	margin: .5em 0 1em 0;
 }
-.counter{margin-left:0.50em !important;}
+.counter{margin-left:0.50em !important;}.nav-item a{text-decoration: none;}.dropdown-item{color: #fff !important;}.dropdown-item:hover{color:#000 !important;}

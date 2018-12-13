@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1.0" client="site" method="upgrade">
+    <name>Top Menu</name>
+    <author>Rohan Desai</author>
+    <version>1.0</version>
+    <description>Upper Menu for Template Astro Isha 2.0</description>
+    <files>
+        <filename>mod_topmenu.xml</filename>
+        <filename module="mod_topmenu">mod_topmenu.php</filename>
+        <filename>index.html</filename>
+        <filename>helper.php</filename>
+        <filename>tmpl/default.php</filename>
+        <filename>tmpl/index.html</filename>
+    </files>
+    <config>
+    </config>
+<languages>
+        <language tag="en-GB">en-GB.mod_topmenu.ini</language>
+        <language tag="en-GB">en-GB.mod_topmenu.sys.ini</language>
+	</languages>
+	<help key="JHELP_EXTENSIONS_MODULE_MANAGER_MENU" />
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				
+				<field
+					name="base"
+					type="menuitem"
+					label="MOD_MENU_FIELD_ACTIVE_LABEL"
+					description="MOD_MENU_FIELD_ACTIVE_DESC"
+					>
+					<option value="">JCURRENT</option>
+				</field>
+				<field
+					name="startLevel"
+					type="list"
+					default="1"
+					label="MOD_MENU_FIELD_STARTLEVEL_LABEL"
+					description="MOD_MENU_FIELD_STARTLEVEL_DESC"
+				>
+					<option value="1">J1</option>
+					<option value="2">J2</option>
+					<option value="3">J3</option>
+					<option value="4">J4</option>
+					<option value="5">J5</option>
+					<option value="6">J6</option>
+					<option value="7">J7</option>
+					<option value="8">J8</option>
+					<option value="9">J9</option>
+					<option value="10">J10</option>
+				</field>
+
+				<field
+					name="endLevel"
+					type="list"
+					default="0"
+					label="MOD_MENU_FIELD_ENDLEVEL_LABEL"
+					description="MOD_MENU_FIELD_ENDLEVEL_DESC"
+					>
+					<option value="0">JALL</option>
+					<option value="1">J1</option>
+					<option value="2">J2</option>
+					<option value="3">J3</option>
+					<option value="4">J4</option>
+					<option value="5">J5</option>
+					<option value="6">J6</option>
+					<option value="7">J7</option>
+					<option value="8">J8</option>
+					<option value="9">J9</option>
+					<option value="10">J10</option>
+				</field>
+
+				<field
+					name="showAllChildren"
+					type="radio"
+					class="btn-group btn-group-yesno"
+					default="1"
+					label="MOD_MENU_FIELD_ALLCHILDREN_LABEL"
+					description="MOD_MENU_FIELD_ALLCHILDREN_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="showTitle" type="text" label="Title For Menu"
+				description="Default title for the concerned menu">
+				</field>
+			</fieldset>
+
+			
+		</fields>
+	</config>
+</extension>
