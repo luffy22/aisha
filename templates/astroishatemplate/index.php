@@ -20,12 +20,21 @@ defined( '_JEXEC' ) or die( 'Restricted access' );?>
 <script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/jquery-migrate.min.js" language="javascript"></script>
 <script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/bootstrap.min.js" language="javascript"></script>
 <script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/popper.min.js" language="javascript"></script>
+<script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/common.js" language="javascript"></script>
 </head>
 <body>
     <jdoc:include type="modules" name="top" /> 
 <div class="container-fluid">
-<jdoc:include type="modules" name="content1" /> 
-<jdoc:include type="component" />
+<div class="row">
+    <div class="col-md-10 col-sm-9 col-xs-8" id="main">
+        <jdoc:include type="modules" name="content1" /> 
+        <jdoc:include type="component" />
+    </div>
+    <div class="col-md-2 col-sm-3 col-xs-4">
+        
+    </div>
+    
+</div>
 <jdoc:include type="modules" name="footer" />
 </div>
 </body>
