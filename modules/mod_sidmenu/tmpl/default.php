@@ -20,9 +20,9 @@ if ($tagId = $params->get('tag_id', ''))
 //print_r($list);exit;
 ?>
 <div class="dropdown dropright">
-<button class="btn btn-dark"onclick="openNav()">Open </button></div>
+<button class="btn btn-dark"onclick="openNav()" title="Click to open menu"><i class="fas fa-bars"></i></button></div>
 <div id="sidenav">    
-<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="far fa-times-circle"></i></a>
 <nav class="nav navbar-dark bg-dark">    
         <!--<a class="navbar-brand"><img src="images/logo.png" alt="logo" /></a>
         <span class="navbar-text">Astro Isha</span>-->
