@@ -9,4 +9,4 @@
 
 defined('_JEXEC') or die;
 ?>
-<div class="footer"><?php echo $lineone; ?></div>
+<div class="footer text-center navbar-dark bg-dark"><span class="navbar-brand"><?php echo $lineone; ?></span></div>
