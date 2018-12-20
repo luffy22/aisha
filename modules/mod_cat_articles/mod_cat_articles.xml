@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1" client="site" method="upgrade">
+	<name>Category Articles</name>
+	<author>Rohan Desai</author>
+	<creationDate>February 2018</creationDate>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>kopnite@gmail.com</authorEmail>
+	<authorUrl>www.astroisha.com</authorUrl>
+	<version>1.0</version>
+	<description>Articles from a chosen category show-up</description>
+	<files>
+		<filename module="mod_cat_articles">mod_cat_articles.php</filename>
+		<folder>tmpl</folder>
+		<filename>helper.php</filename>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="catid"
+					type="category"
+					label="JCATEGORY"
+					description="MOD_LATEST_NEWS_FIELD_CATEGORY_DESC"
+					extension="com_content"
+					multiple="true"
+					size="10"
+					default=""
+					>
+					<option value="">JOPTION_ALL_CATEGORIES</option>
+				</field>
+
+				<field
+					name="count"
+					type="text"
+					label="Count"
+					description="How many articles You Wish To Have"
+					default="5"
+				/>
+
+				<field
+					name="show_featured"
+					type="list"
+					label="Show Featured"
+					description="Whether to show featured articles or not"
+					default=""
+					>
+					<option value="">Default(Show)</option>
+					<option value="0">Hide</option>
+					<option value="1">Show</option>
+				</field>
+
+				<field
+					name="ordering"
+					type="list"
+					label="Article Ordering"
+					description="How Articles should be ordered"
+					default="published"
+					>
+					<option value="c_asc">Articles in Ascending</option>
+					<option value="m_asc">Modification In Descending</option>
+					<option value="p_asc">Publish Date Ascending</option>
+					<option value="mc_asc">Articles Touched Ascending</option>
+					<option	value="random">Random Articles</option>
+				</field>
+			</fieldset>
+
+			<fieldset name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC"
+				/>
+
+				<field
+					name="moduleclass_sfx"
+					type="textarea" rows="3"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC"
+				/>
+
+				<field
+					name="cache"
+					type="list"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					description="COM_MODULES_FIELD_CACHING_DESC"
+					default="1"
+					>
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+
+				<field
+					name="cache_time"
+					type="text"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					description="COM_MODULES_FIELD_CACHE_TIME_DESC"
+					default="900"
+				/>
+
+				<field
+					name="cachemode"
+					type="hidden"
+					default="static"
+					>
+					<option value="static"></option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
