@@ -7780,7 +7780,7 @@ input {
   padding-top: 2.5%; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
-#display-4{text-decoration: none;}
+#display-4, .content_links{text-decoration: none;color:#0056b3;}
 /* Position and style the close button (top right corner) */
 #sidenav .closebtn {
   position: absolute;
@@ -7790,7 +7790,7 @@ input {
   margin-left: 20%;
   color:#fff;
 }
-.footer2 a{text-decoration:none;color:#212529;}
+.footer2 a{text-decoration:none;}
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
   transition: margin-left .5s;
