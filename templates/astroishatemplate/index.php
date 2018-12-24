@@ -30,12 +30,12 @@ defined( '_JEXEC' ) or die( 'Restricted access' );?>
 <div class="container-fluid">
     <h1 class="display-4"><a id="display-4" href="<?php echo JUri::base(); ?>"><img src="<?php echo JUri::base(); ?>/logo.png" title="Click to navigate to Home Page" />Astro Isha</a></h1>
 <div class="row">
-    <div class="col-md-10 col-sm-9 col-xs-8" id="main">
+    <div class="col-md-9 col-sm-9 col-xs-8" id="main">
         <jdoc:include type="component" />
         <jdoc:include type="modules" name="content1" />
     </div>
-    <div class="col-md-2 col-sm-3 col-xs-4">
-        
+    <div class="col-md-3 col-sm-3 col-xs-4">
+        <jdoc:include type="modules" name="right" />
     </div>
 </div>
 </div>
