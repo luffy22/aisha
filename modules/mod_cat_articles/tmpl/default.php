@@ -14,6 +14,8 @@ if ($module->showtitle)
 //print_r($list);exit;
 foreach ($list as $item)
 {
+    $item->slug    = $item->article_id . ':' . $item->article_alias;
+    $item->link = JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->cat_id, $item->language));
     if($counter % 3 == 0)
     {
 ?>

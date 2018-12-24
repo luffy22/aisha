@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1.0" client="site" method="upgrade">
+    <name>TopContent Module</name>
+    <author>Rohan Desai</author>
+    <version>1.0</version>
+    <description>Shows Max Hit Articles and Top Rated Articles</description>
+    <files>
+        <filename>mod_topcontent.xml</filename>
+        <filename module="mod_topcontent">mod_topcontent.php</filename>
+        <filename>index.html</filename>
+        <filename>helper.php</filename>
+        <filename>tmpl/default.php</filename>
+        <filename>tmpl/index.html</filename>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="advanced">
+                <field
+                        name="layout"
+                        type="modulelayout"
+                        label="Alternative Layout"
+                        description="Try alternative layouts"
+                />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

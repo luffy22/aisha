@@ -31,8 +31,13 @@ defined( '_JEXEC' ) or die( 'Restricted access' );?>
     <h1 class="display-4"><a id="display-4" href="<?php echo JUri::base(); ?>"><img src="<?php echo JUri::base(); ?>/logo.png" title="Click to navigate to Home Page" />Astro Isha</a></h1>
 <div class="row">
     <div class="col-md-9 col-sm-9 col-xs-8" id="main">
+        <jdoc:include type="modules" name="sidemenu" />
         <jdoc:include type="component" />
         <jdoc:include type="modules" name="content1" />
+        ​<picture>
+  
+  <img src="images/astrologer.png" class="img-fluid img-thumbnail" alt="astrologer">
+</picture>
     </div>
     <div class="col-md-3 col-sm-3 col-xs-4">
         <jdoc:include type="modules" name="right" />

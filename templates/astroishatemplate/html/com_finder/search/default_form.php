@@ -68,18 +68,15 @@ jQuery(function() {";
 	<?php endif; ?>
 	<fieldset>
            <div class="input-group input-group-lg">
-            <input type="text" class="form-control" name="q" id="q" size="30" value="<?php echo $this->escape($this->query->input); ?>" />
+            <input type="text" placeholder="Search..." class="form-control" name="q" id="q" size="30" value="<?php echo $this->escape($this->query->input); ?>" />
             <div class="input-group-prepend">
                 <?php if ($this->escape($this->query->input) != '' || $this->params->get('allow_empty_query')) : ?>
                 <button name="Search" type="submit" class="btn btn-primary">
                     <span class="icon-search icon-white"></span>
-                    <?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?>
                 </button>          
             <?php else : ?>
-
                     <button name="Search" type="submit" class="btn btn-primary disabled">
                             <span class="icon-search icon-white"></span>
-                            <?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?>
                     </button>
             <?php endif; ?>
             </div>

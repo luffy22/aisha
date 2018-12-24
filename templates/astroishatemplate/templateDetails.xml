@@ -22,7 +22,7 @@
 		<position>top</position>
 		<position>content1</position>
 		<position>content2</position>
-		<position>menu</position>
+		<position>sidemenu</position>
 		<position>logo</position>
 		<position>footer</position>
 	</positions>
