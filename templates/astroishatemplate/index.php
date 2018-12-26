@@ -27,6 +27,18 @@ defined( '_JEXEC' ) or die( 'Restricted access' );?>
 <script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/common.js" language="javascript"></script>
 </head>
 <body>
+<?php
+ // Get option and view
+$option = JRequest::getVar('option');
+$view = JRequest::getVar('view');
+// Make sure it is a single article
+if ($option == 'com_content' && $view == 'article'):
+  $id = JRequest::getInt('id');
+?>
+<div id="<?php echo $id; ?>" class="accordion-id"></div>
+<?php
+endif;
+?>
 <div class="container-fluid">
     <h1 class="display-4"><a id="display-4" href="<?php echo JUri::base(); ?>"><img src="<?php echo JUri::base(); ?>/logo.png" title="Click to navigate to Home Page" />Astro Isha</a></h1>
 <div class="row">
@@ -34,10 +46,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );?>
         <jdoc:include type="modules" name="sidemenu" />
         <jdoc:include type="component" />
         <jdoc:include type="modules" name="content1" />
-        ​<picture>
-  
-  <img src="images/astrologer.png" class="img-fluid img-thumbnail" alt="astrologer">
-</picture>
+        <jdoc:include type="modules" name="content2" />
     </div>
     <div class="col-md-3 col-sm-3 col-xs-4">
         <jdoc:include type="modules" name="right" />

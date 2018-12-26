@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die;
 ?>
-<div class="footer2 navbar-light bg-light">
+<div class="footer navbar-light bg-light">
 <div class="container">Follow Us<br /> <a href="https://www.facebook.com/AstroIsha" target="_blank" rel="noopener noreferrer" title="Official Facebook Page"><i class="fab fa-facebook fa-2x"></i></a> <a href="https://www.instagram.com/astroisha/" target="_blank" rel="noopener noreferrer" title="Official Instagram Page"><i class="fab fa-instagram fa-2x"></i></a> <a href="https://plus.google.com/+JyotishividyaCoInplus" target="_blank" rel="noopener noreferrer" title="Official Google Plus Page"><i class="far fa-2x fa-google-plus-official"></i></a> <a href="https://twitter.com/astroishaweb" target="_blank" rel="noopener noreferrer" title="Offical Twitter Page"><i class="fab fa-twitter fa-2x"></i></a> <a href="https://www.youtube.com/channel/UCe4znwEsQsyRiTJ-xetbS1A" target="_blank" rel="noopener noreferrer" title="Official Youtube Page"><i class="fab fa-youtube fa-2x"></i></a>  
 <div class="mb-1">&nbsp;</div>
 <div class="row">

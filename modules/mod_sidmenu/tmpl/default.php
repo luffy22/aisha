@@ -20,7 +20,7 @@ if ($tagId = $params->get('tag_id', ''))
 //print_r($list);exit;
 ?>
 <div class="dropdown dropright">
-<button class="btn btn-dark"onclick="openNav()" title="Click to open menu"><i class="fas fa-bars"></i></button></div>
+<button class="btn"onclick="openNav()" title="Click to open menu"><i class="fas fa-bars"></i></button></div>
 <div class="mb-3"></div>
 <div id="sidenav">    
 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="far fa-times-circle"></i></a>
