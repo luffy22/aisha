@@ -9,8 +9,8 @@ $(function() {
 <?php
 defined('_JEXEC') or die('Restricted access');
 ?>
-<p class="lead float-xs-right">The information on this page was last updated on 4th January 2017.</p>
-<h1>AstroIsha.com Privacy Policy</h1>
+<p class="text-right">The information on this page was last updated on 4th January 2017.</p>
+<h3 class="lead alert alert-dark">AstroIsha.com Privacy Policy</h3>
 <div id="privacy" class="mt-1">
 <h3>Privacy Policy</h3>
 <div>

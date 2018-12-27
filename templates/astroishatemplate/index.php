@@ -35,7 +35,7 @@ $view = JRequest::getVar('view');
 if ($option == 'com_content' && $view == 'article'):
   $id = JRequest::getInt('id');
 ?>
-<div id="<?php echo $id; ?>" class="accordion-id"></div>
+    <div id="<?php echo $id; ?>" class="accordion-id"></div>
 <?php
 endif;
 ?>
