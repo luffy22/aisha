@@ -8,6 +8,14 @@
  */
 
 defined('_JEXEC') or die;
+
+$id = '';
+
+if ($tagId = $params->get('tag_id', ''))
+{
+	$id = ' id="' . $tagId . '"';
+}   
+
 // The menu class is deprecated. Use nav instead
 //print_r($list);exit;
 ?>
@@ -15,7 +23,7 @@ defined('_JEXEC') or die;
 <button class="btn"onclick="openNav()" title="Click to open menu"><i class="fas fa-bars"></i></button></div>
 <div class="mb-3"></div>
 <div id="sidenav">    
-<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="far fa-times-circle"></i></a>
+<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" title="close menu"><i class="far fa-times-circle"></i></a>
 <nav class="nav navbar-dark bg-dark">    
         <!--<a class="navbar-brand"><img src="images/logo.png" alt="logo" /></a>
         <span class="navbar-text">Astro Isha</span>-->

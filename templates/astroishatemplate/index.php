@@ -35,15 +35,16 @@ $view = JRequest::getVar('view');
 if ($option == 'com_content' && $view == 'article'):
   $id = JRequest::getInt('id');
 ?>
-    <div id="<?php echo $id; ?>" class="accordion-id"></div>
+<div id="<?php echo $id; ?>" class="accordion-id"></div>
 <?php
 endif;
 ?>
 <div class="container-fluid">
-    <h1 class="display-4"><a id="display-4" href="<?php echo JUri::base(); ?>"><img src="<?php echo JUri::base(); ?>/logo.png" title="Click to navigate to Home Page" />Astro Isha</a></h1>
+    <h1 class="display-4"><a id="display-4" href="<?php echo JUri::base(); ?>" title="Navigate to Home Page"><img src="<?php echo JUri::base(); ?>/logo.png" title="Click to navigate to Home Page" />Astro Isha</a></h1>
 <div class="row">
     <div class="col-md-9 col-sm-9 col-xs-8" id="main">
         <jdoc:include type="modules" name="sidemenu" />
+        <jdoc:include type="modules" name="breadcrumb" />
         <jdoc:include type="component" />
         <jdoc:include type="modules" name="content1" />
         <jdoc:include type="modules" name="content2" />

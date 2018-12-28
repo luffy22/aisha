@@ -899,8 +899,6 @@ input[type="color"],
 .uneditable-input {
 	display: inline-block;
 	height: 18px;
-	padding: 4px 6px;
-	margin-bottom: 9px;
 	font-size: 13px;
 	line-height: 18px;
 	color: #555;
@@ -982,29 +980,7 @@ input[type="radio"],
 input[type="checkbox"] {
 	width: auto;
 }
-select,
-input[type="file"] {
-	height: 28px;
-	*margin-top: 4px;
-	line-height: 28px;
-}
-select {
-	width: 220px;
-	border: 1px solid #ccc;
-	background-color: #fff;
-}
-select[multiple],
-select[size] {
-	height: auto;
-}
-select:focus,
-input[type="file"]:focus,
-input[type="radio"]:focus,
-input[type="checkbox"]:focus {
-	outline: thin dotted #333;
-	outline: 5px auto -webkit-focus-ring-color;
-	outline-offset: -2px;
-}
+
 .uneditable-input,
 .uneditable-textarea {
 	color: #999;

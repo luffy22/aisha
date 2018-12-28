@@ -16,13 +16,16 @@ defined('_JEXEC') or die;
 <div class="col-xs-6 col-sm-3"><a href="about" target="_blank" rel="noopener noreferrer" title="about us">About Us</a></div>
 <div class="col-xs-6 col-sm-3"><a href="disclaimer" target="_blank" rel="noopener noreferrer" title="disclaimer">Disclaimer</a></div>
 <div class="col-xs-6 col-sm-3"><a href="privacy" target="_blank" rel="noopener noreferrer" title="privacy policy">Privacy Policy</a></div>
-<div class="col-xs-6 col-sm-3"><a href="refunds" title="payments and refunds">Payments And Refunds</a></div>
+<div class="col-xs-6 col-sm-3"><a href="terms" target="_blank" rel="noopener noreferrer" title="Terms & Conditions">Terms & Conditions</a></div>
+
+
 </div>
 <div class="row">
+<div class="col-xs-6 col-sm-3"><a href="refunds" target="_blank" title="payments and refunds">Payments And Refunds</a></div>
 <div class="col-xs-6 col-sm-3"><a href="contact" target="_blank" rel="noopener noreferrer" title="contact us">Contact Us</a></div>
 <div class="col-xs-6 col-sm-3"><a href="sitemap.htm" target="_blank" rel="noopener noreferrer" title="Navigate to Sitemap">Sitemap</a></div>
 </div>
 </div>
 <div class="mb-1">&nbsp;</div>
 </div>
-<div class="footer text-center navbar-dark bg-dark"><span class="navbar-brand"><?php echo $csite_name; ?></span></div>
+<div class="footer text-center navbar-dark bg-dark"><a href="<?php echo Juri::base(); ?>" title="Navigate to Home Page"><span class="navbar-brand"><?php echo $csite_name; ?></span></a></div>
