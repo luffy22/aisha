@@ -1,7 +1,7 @@
 <?php
 header('Content-type: application/json');
 $host   = "localhost";$user = "root";
-$pwd    = "Desai_1985";$db   = "astroisha";
+$pwd    = "desai_1985";$db   = "astroisha";
 $mysqli = new mysqli($host, $user, $pwd, $db);
 /* check connection */
 if (mysqli_connect_errno()) {

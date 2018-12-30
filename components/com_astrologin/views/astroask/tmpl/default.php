@@ -4,7 +4,7 @@ defined('_JEXEC') or die('Restricted access');
 $details                    = $this->msg;
 //print_r($details);exit;
 ?>
-<div class='card card-outline-info text-center' id="info_expert">
+<div class='card border-primary mb-3 text-center' id="info_expert">
 <div class='card-block'>
 <h3><a title='Click to get more info' href='#' data-toggle='modal' data-target='#astroinfo'><img src=<?php echo JURi::base() ?>images/profiles/<?php echo $details['img_new_name'] ?> height='50px' width='50px' title="<?php echo $details['img_name'];?>" /><?php echo $details['name'] ?></a></h3>
 <div class='modal fade' id='astroinfo' tabindex='-1' role='dialog' aria-hidden='true' aria-labelledby='astrolabel'>

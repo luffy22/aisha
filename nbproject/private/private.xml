@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/html/aisha/modules/mod_allarticles/tmpl/default.php</file>
             <file>file:/var/www/html/aisha/templates/astroishatemplate/css/template.css</file>
-            <file>file:/var/www/html/aisha/components/com_astrologin/views/payment/tmpl/default.php</file>
+            <file>file:/var/www/html/aisha/components/com_astrologin/models/astroask.php</file>
+            <file>file:/var/www/html/aisha/components/com_astrologin/views/astroask/tmpl/default_details.php</file>
             <file>file:/var/www/html/aisha/templates/astroishatemplate/js/common.js</file>
             <file>file:/var/www/html/aisha/templates/astroishatemplate/index.php</file>
+            <file>file:/var/www/html/aisha/ajaxcalls/autocomplete.php</file>
+            <file>file:/var/www/html/aisha/components/com_astrologin/views/astroask/tmpl/default.php</file>
         </group>
     </open-files>
 </project-private>

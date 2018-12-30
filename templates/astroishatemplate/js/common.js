@@ -366,3 +366,8 @@ function getExpertDetails(country)
         });
     }
 }
+$(function () {
+  $('#astroinfo').popover({
+    container: 'body'
+  })
+})
