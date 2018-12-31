@@ -1,7 +1,7 @@
 <?php
 header('Content-type: application/json');
 $host   = "localhost";$user = "root";
-$pwd    = "desai_1985";$db   = "astroisha";
+$pwd    = "Desai_1985";$db   = "astroisha";
 $mysqli = new mysqli($host, $user, $pwd, $db);
 /* check connection */
 if (mysqli_connect_errno()) {
@@ -10,6 +10,7 @@ if (mysqli_connect_errno()) {
 }
 else
 {
+	//echo "calls ajaxcomplete";exit;
     $search     = ucfirst($_GET['term']);
     ///$query	= "SELECT jv_location.country,jv_location.state, jv_location.city, jv_location.latitude, jv_location.longitude, jv_timezone.tmz_words FROM jv_location, jv_timezone WHERE "
             // "     city LIKE '$search%' OR state LIKE '$search%' AND jv_location.timezone = jv_timezone.tmz_id LIMIT 1";

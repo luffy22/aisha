@@ -25,7 +25,7 @@ $details                    = $this->msg;
 <label for="ques_type">Answer Type:</label>
 <input type="radio" name="ques_type" id="ques_type1" value="long_ans" onchange="javascript:changefees2();" checked /> Detailed Report&nbsp;&nbsp;&nbsp;
 <input type="radio" name="ques_type" id="ques_type2" value="short_ans" onchange="javascript:changefees2();" /> Short Answer
-</div><div class="mb-2"></div>
+</div><div class="mb-3"></div>
 <div class="form-control" id="choose_ques">
 <label for="select_expert">Choose Number Of Questions</label>
 <select class="form-control" name="expert_max_ques" id="select_ques" onchange="javascript:changefees2();">
@@ -39,7 +39,7 @@ $details                    = $this->msg;
 ?>
 </select>
 </div>
-<div class="mb-2"></div>
+<div class="mb-3"></div>
 <input type="hidden" name="ques_long_fees" id="long_ans_fees" value="<?php echo $details[0]["amount"] ?>" />
 <input type="hidden" name="ques_short_fees" id="short_ans_fees" value="<?php echo $details[1]['amount'] ?>" />
 <input type="hidden" name="expert_fees" id="expert_fees" value="<?php echo $details[0]['amount'] ?>" />
@@ -47,9 +47,9 @@ $details                    = $this->msg;
 <input type="hidden" name="expert_currency" id="expert_currency" value="<?php echo $details[0]['currency']; ?>" />
 <input type="hidden" name="expert_curr_full" id="expert_curr_full" value="<?php echo $details[0]['curr_full']; ?>" />
 <input type="hidden" name="expert_final_fees" id="expert_final_fees" value="<?php echo $details[0]['amount'] ?>" />
-<div class="mb-2"></div>
+<div class="mb-3"></div>
 <div class="form-control" id="fees_type"><label>Fees:</label> <div id='fees_id'><?php echo $details[0]['amount']."&nbsp;".$details[0]['curr_code']."(".$details[0]['currency']."-".$details[0]['curr_full'].")" ?></div></div>
-<div class="mb-2"></div>
+<div class="mb-3"></div>
 <div class="form-control" id="pay_id">
     <label for='expert_choice' class='control-label'>Payment Type: </label>
     <div id="payment_type">
@@ -72,7 +72,7 @@ else
     </div>
 </div>
 
-<div class="mb-2"></div>
+<div class="mb-3"></div>
 <div class="form-group" id="btn_grp">
     <button type="submit" name="expert_submit" id="ask_submit" class="btn btn-primary" >Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
     <button type="reset" name="ask_reset" id="ask_reset" class="btn btn-danger">Reset</button>

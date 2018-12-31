@@ -49,5 +49,15 @@ endif;
 </div>
 </div>
 <jdoc:include type="modules" name="footer" />
+<script async src="//www.instagram.com/embed.js"></script>
+<script>
+  window.fbAsyncInit = function() {FB.init({appId      : '220390744824296',xfbml      : true,version    : 'v2.4'});};
+  (function(d, s, id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+</script>
+<?php
+include_once (JPATH_ROOT.DS.'analyticstracking.php');
+?>
 </body>
 </html>

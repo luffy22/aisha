@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="content" method="upgrade">
+	<name>Ask An Expert</name>
+	<author>Rohan Desai</author>
+	<creationDate>March 2017</creationDate>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>kopnite@gmail.com</authorEmail>
+	<authorUrl>www.astroisha.org</authorUrl>
+	<version>3.0.0</version>
+	<description>Ask An Expert</description>
+	<files>
+		<filename plugin="askexpert">askexpert.php</filename>
+		<folder>tmpl</folder>
+	</files>
+	<config></config>
+</extension>

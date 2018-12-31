@@ -12,11 +12,7 @@ class AstroLoginRouter extends JComponentRouterBase
     {
         //print_r($query);exit;
 		 $segments = array();
-       if (isset($query['view']))
-       {
-                $segments[] = $query['astrosearch'];
-                unset($query['view']);
-       }
+     
        if (isset($query['user']))
        {
                 $segments[] = $query['user'];

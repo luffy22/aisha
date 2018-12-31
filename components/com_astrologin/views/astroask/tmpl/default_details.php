@@ -36,7 +36,7 @@ $pay_mode               = $_GET['pay_mode'];
     <label>Time Of Birth:</label><br/>
     <input type="time" name="ques_time"  id="ques_time" class="form-control" placeholder="Enter your Time of Birth"/>
 </div>
-<div class="form-group" id="ques_grp_5">
+<div class="form-group  ui-widget" id="ques_grp_5">
     <label for="ques_pob">Place Of Birth</label>
     <input type="text" id="ques_pob" name="ques_pob" class="form-control" placeholder="Enter full name of city/town, state, country" />
 </div>
