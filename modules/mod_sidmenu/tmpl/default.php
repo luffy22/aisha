@@ -37,7 +37,7 @@ foreach($list as $item)
     if($active_id  == $item->id)
     {
 ?>
-    <li class="nav-item">
+    <li class="nav-item link_2">
     <a class="nav-link active" href="<?php echo $url; ?>"><?php echo $item->title; ?></a>
   </li>
 <?php
@@ -45,7 +45,7 @@ foreach($list as $item)
     else
     {
 ?>
-  <li class="nav-item">
+  <li class="nav-item link_2">
     <a class="nav-link" href="<?php echo $url; ?>"><?php echo $item->title; ?></a>
   </li>
 <?php        

@@ -39,7 +39,7 @@ $(document).ready(function()
 $(function() 
 {
    var result       = "";
-   $( "#lagna_pob" ).add("#pob_profile").autocomplete({
+   $( "#lagna_pob" ).add("#pob_profile").add("#mdosha_pob").autocomplete({
       source: 
        function(request, response) {
         $.ajax({
@@ -98,11 +98,11 @@ $(function()
             }
       },
       open: function() {
-        $('#lagna_pob').add("#pob_profile").removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+        $('#lagna_pob').add("#pob_profile").add("#mdosha_pob").removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
          $(".ui-autocomplete").css("z-index", 1000);
       },
       close: function() {
-        $('#lagna_pob').add("#pob_profile").removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+        $('#lagna_pob').add("#pob_profile").add("#mdosha_pob").removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
       }   
     });
 });

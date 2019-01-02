@@ -64,7 +64,7 @@ if($details[0]['currency'] == 'INR')
 else
 {
 ?>
-    <input type='radio' name='expert_choice' id='expert_choice7' value='paypal' checked /> <i class='fa fa-paypal'></i> Paypal
+    <input type='radio' name='expert_choice' id='expert_choice7' value='paypal' checked /> <i class='fab fa-paypal'></i> Paypal
     
 <?php
 }

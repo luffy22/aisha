@@ -67,7 +67,6 @@ $tableClass = $this->params->get('show_headings') != 1 ? ' table-noheader' : '';
 ?>
 <form action="<?php echo htmlspecialchars(JUri::getInstance()->toString()); ?>" method="post" name="adminForm" id="adminForm">
 <?php if ($this->params->get('filter_field') !== 'hide' || $this->params->get('show_pagination_limit')) : ?>
-	<fieldset class="filters btn-toolbar clearfix">
 		<legend class="hide"><?php echo JText::_('COM_CONTENT_FORM_FILTER_LEGEND'); ?></legend>
 		<?php if ($this->params->get('filter_field') !== 'hide') : ?>
 			<div class="form-group">
@@ -90,7 +89,7 @@ $tableClass = $this->params->get('show_headings') != 1 ? ' table-noheader' : '';
 			</div>
 		<?php endif; ?>
 		<?php if ($this->params->get('show_pagination_limit')) : ?>
-			<div class="btn-group pull-right">
+			<div class="pull-right">
 				<label for="limit" class="element-invisible">
 					<?php echo JText::_('JGLOBAL_DISPLAY_NUM'); ?>
 				</label>
@@ -102,7 +101,6 @@ $tableClass = $this->params->get('show_headings') != 1 ? ' table-noheader' : '';
 		<input type="hidden" name="filter_order_Dir" value="" />
 		<input type="hidden" name="limitstart" value="" />
 		<input type="hidden" name="task" value="" />
-	</fieldset>
 
 	<div class="control-group hide pull-right">
 		<div class="controls">
@@ -111,7 +109,7 @@ $tableClass = $this->params->get('show_headings') != 1 ? ' table-noheader' : '';
 	</div>
 
 <?php endif; ?>
-
+<div class="mt-4"></div>
 <?php if (empty($this->items)) : ?>
 	<?php if ($this->params->get('show_no_articles', 1)) : ?>
 		<p><?php echo JText::_('COM_CONTENT_NO_ARTICLES'); ?></p>

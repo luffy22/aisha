@@ -47,6 +47,13 @@ sup {
 sub {
 	bottom: -0.25em;
 }
+.muted {
+	color: #999;
+}
+a.muted:hover,
+a.muted:focus {
+	color: #808080;
+}
 img {
 	max-width: 100%;
 	width: auto \9;
@@ -2294,12 +2301,7 @@ input[type="submit"].btn.btn-mini {
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
-.nav-pills > .active > a,
-.nav-pills > .active > a:hover,
-.nav-pills > .active > a:focus {
-	color: #fff;
-	background-color: #005e8d;
-}
+
 .nav-stacked > li {
 	float: none;
 }
@@ -6970,7 +6972,7 @@ label {
 input {
 	margin: .5em 0 1em 0;
 }
-.counter{margin-left:0.50em !important;}.nav-item a{text-decoration: none;color: #fff;}.dropdown-item{color: #fff !important;}.dropdown-item:hover{color:#000 !important;}
+.counter{margin-left:0.50em !important;}.link_2 a{text-decoration: none;color: #fff;}.dropdown-item{color: #fff !important;}.dropdown-item:hover{color:#000 !important;}
 /* The side navigation menu */
 #sidenav {
   height: 100%; /* 100% Full-height */

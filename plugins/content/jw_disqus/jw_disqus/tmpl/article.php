@@ -13,7 +13,6 @@ $url =  JURI::current();
 ?>
 
 <a id="startOfPage"></a>
-
 <?php if($disqusArticleCounter): ?>
 <!-- DISQUS comments counter and anchor link -->
 <div class="jwDisqusArticleCounter">
@@ -24,7 +23,7 @@ $url =  JURI::current();
 </div>
 <?php endif; ?>
 <?php echo $row->text; ?>
-<div class="mb-2"></div>
+<div class="mb-4"></div>
 <ul class="nav nav-pills" role="tablist">
 <li class="nav-item"><a class="nav-link" href="#fb" role="tab" data-toggle="tab">Facebook</a></li>
 <li class="nav-item active"><a class="nav-link" href="#disqus" role="tab" data-toggle="tab">Disqus</a></li>
