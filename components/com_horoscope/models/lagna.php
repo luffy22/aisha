@@ -372,6 +372,7 @@ class HoroscopeModelLagna extends JModelItem
                                         $db->quoteName('up_deg')); 
         $db                     ->setQuery($query);
         $result                 = $db->loadAssoc();
+        
         $navamsha_sign      = $result['navamsha_sign'];
         $navamsha           = array($planet."_navamsha_sign"=>$navamsha_sign);
         return $navamsha;

@@ -1,9 +1,17 @@
 <?php 
 //error_reporting(0);       // uncomment on server 
-defined( '_JEXEC' ) or die( 'Restricted access' );?>
+defined( '_JEXEC' ) or die( 'Restricted access' );
+$app             = JFactory::getApplication();
+$doc             = JFactory::getDocument();
+$user            = JFactory::getUser();
+$this->language  = $doc->language;
+$this->direction = $doc->direction;
+$title              = $doc->title;
+?>
 <!DOCTYPE html>
 <html lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
 <head>
+<title><?php echo $title; ?></title>
 <meta name="robots" content="index, follow" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="shortcut icon" href="<?php echo $this->baseurl ?>/favicon.ico" type="image/x-icon" />

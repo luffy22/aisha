@@ -11,7 +11,7 @@ echo $this->data;
 ?>
 <h3>Enter Your Birth Details</h3>
 <form role="form" enctype="application/x-www-form-urlencoded" method="post" 
-      action="<?php echo JRoute::_('index.php?option=com_horoscope&task=mdosha.mdosha'); ?>">
+      action="<?php echo JRoute::_('index.php?option=com_horoscope&task=mangaldosha.mdosha'); ?>">
     <div class="form-group" id="lagna_grp_1">
         <label for="inputName" class="control-label">Name:</label>
         <input type="text" name="mdosha_fname" class="form-control" id="mdosha_name" placeholder="Enter your name..." required />
@@ -63,5 +63,5 @@ echo $this->data;
     </div>
 </form>
 <div class="mb-1"></div>
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/findspouse.js' ?>">
+<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/mangaldosha.js' ?>">
 </script>

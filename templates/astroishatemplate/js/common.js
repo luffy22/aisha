@@ -39,7 +39,7 @@ $(document).ready(function()
 $(function() 
 {
    var result       = "";
-   $( "#lagna_pob" ).add("#pob_profile").add("#mdosha_pob").autocomplete({
+   $( "#lagna_pob" ).add("#pob_profile").autocomplete({
       source: 
        function(request, response) {
         $.ajax({
