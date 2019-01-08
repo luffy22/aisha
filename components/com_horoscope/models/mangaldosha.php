@@ -120,14 +120,17 @@ class HoroscopeModelMangalDosha extends HoroscopeModelLagna
             $newdata                = array_merge($newdata,$getsign,$sign_num,$navamsha, $navamsha_sign_num);
         }
         //print_r($newdata);exit;
-        $asc_house                  = explode("_",$this->getAscHouse($newdata));
-        $moon_house                 = explode("_",$this->getMoonHouse($newdata));
-        $ven_house                  = explode("_",$this->getVenusHouse($newdata));
-        $check_asc_dosha            = $this->checkDosha("asc",$asc_house[0],$asc_house[1]);
-        $check_moon_dosha           = $this->checkDosha("moon",$moon_house[0], $moon_house[1]);
-        $check_ven_dosha            = $this->checkDosha("ven",$ven_house[0],$ven_house[1]);
+        $asc_house                  = $this->getHouse("Ascendant",$newdata);
+        $moon_house                 = $this->getHouse("Moon",$newdata);
+        $ven_house                  = $this->getHouse("Venus",$newdata);
+        $nav_house                  = $this->getHouse("Ascendant_navamsha",$newdata);
+        
+        $check_asc_dosha            = $this->checkDosha("asc",$asc_house);
+        $check_moon_dosha           = $this->checkDosha("moon",$moon_house);
+        $check_ven_dosha            = $this->checkDosha("ven",$ven_house);
+        $check_nav_dosha            = $this->checkDosha("nav",$nav_house);   
         $percent                    = $check_asc_dosha['percent']+$check_moon_dosha['percent']+$check_ven_dosha['percent'];
-        $percent                    = round((100*$percent)/300,0);
+
         $check_co_tenants           = $this->checkCoTenants($newdata);
         print_r($check_co_tenants);exit;
         $array              = array_merge($array,$result,$house, $details);
@@ -166,13 +169,15 @@ class HoroscopeModelMangalDosha extends HoroscopeModelLagna
         }
    
     }
-    protected function getAscHouse($data)
+    protected function getHouse($key, $data)
     {
-       $j = 1;$a=1;
-       $asc_num         = $data['Ascendant_num'];
-       $asc_nav_num     = $data['Ascendant_navamsha_num'];
+       $j = 1;
+       $asc_num         = $data[$key.'_num'];
+       if($key == "Ascendant_navamsha")
+       $mars_num        = $data['Mars_navamsha_num'];
+       else
        $mars_num        = $data['Mars_num'];
-       $mars_nav_num    = $data['Mars_navamsha_num'];
+       
        if($asc_num > $mars_num)
        {
            $mars_num     = $mars_num + 12;
@@ -180,97 +185,24 @@ class HoroscopeModelMangalDosha extends HoroscopeModelLagna
        for($i=$asc_num;$i <$mars_num;$i++)
        {
            $j++;       
-       }
-       if($asc_nav_num > $mars_nav_num)
-       {
-           $mars_nav_num     = $mars_nav_num + 12;
-       }
-       for($i=$asc_nav_num;$i <$mars_nav_num;$i++)
-       {
-           $a++;       
-       }
-       
+       }   
        //echo $j;exit;
-       return $j."_".$a;
-       
+       return $j;
     }
-    protected function getMoonHouse($data)
+    protected function checkDosha($key, $house)
     {
-        $b = 1;$c=1;
-      
-        $moon_num        = $data['Moon_num'];
-        $moon_nav_num    = $data['Moon_navamsha_num'];
-        $mars_num        = $data['Mars_num'];
-        $mars_nav_num    = $data['Mars_navamsha_num'];
-        if($moon_num > $mars_num)
-       {
-           $mars_num     = $mars_num + 12;
-       }
-       for($i=$moon_num;$i <$mars_num;$i++)
-       {
-           $c++;       
-       }
-        if($moon_nav_num > $mars_nav_num)
+        if($house == "1"||$house == "2"||$house=="4"||$house == "7"||$house=="8"||$house=="12")
         {
-            $mars_nav_num     = $mars_nav_num + 12;
-        }
-        for($i=$moon_nav_num;$i <$mars_nav_num;$i++)
-        {
-            $b++;       
-        }
-        return $c."_".$b;
-    }
-    protected function getVenusHouse($data)
-    {
-        $b = 1;$c=1;
-      
-        $venus_num          = $data['Venus_num'];
-        $venus_nav_num      = $data['Venus_navamsha_num'];
-        $mars_num           = $data['Mars_num'];
-        $mars_nav_num       = $data['Mars_navamsha_num'];
-        if($venus_num > $mars_num)
-       {
-           $mars_num     = $mars_num + 12;
-       }
-       for($i=$venus_num;$i <$mars_num;$i++)
-       {
-           $c++;       
-       }
-       if($venus_nav_num > $mars_nav_num)
-        {
-            $mars_nav_num     = $mars_nav_num + 12;
-        }
-        for($i=$venus_nav_num;$i <$mars_nav_num;$i++)
-        {
-            $b++;       
-        }
-        return $c."_".$b;
-    }
-    protected function checkDosha($key, $house1, $house2)
-    {
-        if($house1 == "1"||$house1 == "2"||$house1=="4"||$house1 == "7"||$house1=="8"||$house1=="12")
-        {
-            $dosha1      = array($key."_dosha_asc"=>"yes");
-            $percent1    = 50;
+            $dosha      = array($key."_dosha"=>"yes");
+            $percent    = 25;
         }
         else
         {
-            $dosha1      = array($key."_dosha_asc"=>"no");
-            $percent1    = 0;
+            $dosha      = array($key."_dosha"=>"no");
+            $percent    = 0;
         }
-        if($house2 == "1"||$house2 == "2"||$house2=="4"||$house2 == "7"||$house2=="8"||$house2=="12")
-        {
-            $dosha2      = array($key."_dosha_navamsha"=>"yes");
-            $percent2    = 50;
-        }
-        else
-        {
-            $dosha2      = array($key."_dosha_navamsha"=>"no");
-            $percent2     = 0;
-        }
-        $percent        = $percent1+$percent2;
         $percent        = array("percent"=>$percent);
-        return array_merge($dosha1,$dosha2, $percent);
+        return array_merge($dosha,$percent);
     }
     protected function checkCoTenants($data)
     {
