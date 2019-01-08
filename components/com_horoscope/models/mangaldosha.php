@@ -129,12 +129,13 @@ class HoroscopeModelMangalDosha extends HoroscopeModelLagna
         $check_moon_dosha           = $this->checkDosha("moon",$moon_house);
         $check_ven_dosha            = $this->checkDosha("ven",$ven_house);
         $check_nav_dosha            = $this->checkDosha("nav",$nav_house);   
-        $percent                    = $check_asc_dosha['percent']+$check_moon_dosha['percent']+$check_ven_dosha['percent'];
-
+        //$percent                    = $check_asc_dosha['percent']+$check_moon_dosha['percent']+$check_ven_dosha['percent']+$check_nav_dosha['percent'];
+        //echo $percent;exit;
         $check_co_tenants           = $this->checkCoTenants($newdata);
-        print_r($check_co_tenants);exit;
-        $array              = array_merge($array,$result,$house, $details);
-        return $array;
+        //print_r($check_co_tenants);exit;
+        $array                      = array();
+        $array                      = array_merge($array,$result,$check_asc_dosha,$check_moon_dosha,$check_ven_dosha,$check_nav_dosha, $check_co_tenants);
+        print_r($array);exit;
     }
     protected function getSignNum($sign)
     {
@@ -201,12 +202,13 @@ class HoroscopeModelMangalDosha extends HoroscopeModelLagna
             $dosha      = array($key."_dosha"=>"no");
             $percent    = 0;
         }
-        $percent        = array("percent"=>$percent);
+        $percent        = array($key."_percent"=>$percent);
         return array_merge($dosha,$percent);
     }
     protected function checkCoTenants($data)
     {
-        //print_r($data);exit;
+        $db             = JFactory::getDbo();  // Get db connection
+        $query          = $db->getQuery(true);
         $mars_sign      = $data["Mars_sign"];
         $planets        = array("Sun","Moon","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu");
         $stack          = array();
@@ -214,7 +216,18 @@ class HoroscopeModelMangalDosha extends HoroscopeModelLagna
         {
             if($data[$planets[$i]."_sign"]== $mars_sign)
             {
-                array_push($stack,$planets[$i]);
+                $j       = 0;
+                $planet         = strtolower($planets[$i]);
+                $query          ->select($db->quoteName(array('result')));
+                $query          ->from($db->quoteName('#__planet_cotenant'));
+                $query          ->where($db->quoteName('mars').' = '.$db->quote('yes').' AND'.
+                                        $db->quoteName($planet).' = '.$db->quote('yes'));
+                $db             ->setQuery($query);
+                $result         = $db->loadAssoc();
+                $details        = array("coplanet_".$j."_details" => $result['result']);
+                $planet  = array("coplanet_".$j => $planets[$i],$details);
+                $stack  = array_merge($stack,$planet);
+                $j++;
             }
         }
         return $stack;

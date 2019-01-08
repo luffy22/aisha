@@ -13,7 +13,7 @@ if(isset($_GET['ref']))
 ?>
 <div class="mb-2"></div>
 <div class="card card-outline-info">
-    <div class="card-header"><strong>Get Answer For Order</strong></div>
+    <div class="card-header alert alert-dark">Order Details</div>
    <ul class="list-group list-group-flush">
     <li class="list-group-item">Order ID: <?php echo $this->order->UniqueID; ?></li>
     <li class="list-group-item">
@@ -52,22 +52,25 @@ if(isset($_GET['ref']))
     <li class="list-group-item">Answer Type: <?php if($this->order->order_type=="short_ans"){echo "Short Answer";}else{echo "Detailed Report";} ?></li>
   </ul>
 </div>
-<div class="mb-2"></div>
+<div class="mb-4"></div>
 <?php
 foreach($this->ques as $ques)
 {
 ?>
 <div class="card card-outline-info">
-    <div class="card-header">Topic: <?php echo $ques->ques_topic; ?></div>
-    <div class="card-block">
-        <div class="card-title">Question: <?php echo $ques->ques_ask; ?></div>
+    <div class="card-header alert alert-dark">Question: <?php echo $ques->ques_ask; ?></div>
+    <div class="card-body">
+        <div class="card-title"><strong>Topic: <?php echo $ques->ques_topic; ?></strong></div>
         <p class="card-text"><?php echo $ques->ques_details; ?></p>
-        <div class="card-header"><strong>Answer: </strong></div>
-        <div class="mb-2"></div>
+    </div>
+    <div class="mb-2"></div>
+        <div class="card-header alert alert-dark">Answer: </div>
+    <div class= "card-body">
         <p class="card-text"><?php if(empty($ques->ques_answer)){echo "Not Yet Answered"; }else{echo $ques->ques_answer;} ?></p>
     </div>
 </div>
+<div class="mb-4"></div>
 <?php
 }
 ?>
-<div class="mb-2"></div>
+<div class="mb-4"></div>

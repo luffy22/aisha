@@ -18,6 +18,7 @@ class AstroLoginViewGetAnswer extends JViewLegacy
         }
         else
         {
+			
             $tpl        = "order";
         }
         parent::display($tpl);
