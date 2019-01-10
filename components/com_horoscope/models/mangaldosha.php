@@ -132,6 +132,7 @@ class HoroscopeModelMangalDosha extends HoroscopeModelLagna
         //$percent                    = $check_asc_dosha['percent']+$check_moon_dosha['percent']+$check_ven_dosha['percent']+$check_nav_dosha['percent'];
         //echo $percent;exit;
         $check_co_tenants           = $this->checkCoTenants($newdata);
+        $check_aspects              = $this->checkAspects($newdata);
         //print_r($check_co_tenants);exit;
         $array                      = array();
         $array                      = array_merge($array,$result,$check_asc_dosha,$check_moon_dosha,$check_ven_dosha,$check_nav_dosha, $check_co_tenants);
@@ -212,11 +213,13 @@ class HoroscopeModelMangalDosha extends HoroscopeModelLagna
         $mars_sign      = $data["Mars_sign"];
         $planets        = array("Sun","Moon","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu");
         $stack          = array();
+        $count          = array();
+        $j       = 0;
         for($i=0;$i<count($planets);$i++)
         {
+            
             if($data[$planets[$i]."_sign"]== $mars_sign)
             {
-                $j       = 0;
                 $planet         = strtolower($planets[$i]);
                 $query          ->select($db->quoteName(array('result')));
                 $query          ->from($db->quoteName('#__planet_cotenant'));
@@ -224,13 +227,107 @@ class HoroscopeModelMangalDosha extends HoroscopeModelLagna
                                         $db->quoteName($planet).' = '.$db->quote('yes'));
                 $db             ->setQuery($query);
                 $result         = $db->loadAssoc();
-                $details        = array("coplanet_".$j."_details" => $result['result']);
-                $planet  = array("coplanet_".$j => $planets[$i],$details);
-                $stack  = array_merge($stack,$planet);
+                $details        = array("coplanet_".$j => $planets[$i], "coplanet_".$j."_details" => $result['result']);
+                $stack          = array_merge($stack,$details);
                 $j++;
             }
+            $count              = array("count"=>$j);
+            $stack              = array_merge($stack,$count);
         }
         return $stack;
+    }
+    protected function checkAspects($data)
+    {
+        //print_r($data);exit;
+        //$db             = JFactory::getDbo();  // Get db connection
+        //$query          = $db->getQuery(true);
+        $mars_num       = $data["Mars_num"];
+        $planets        = array("Sun","Moon","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu");
+        $stack          = array();
+        $count          = array();
+        $j       = 0;
+        for($i=0;$i<count($planets);$i++)
+        {
+            if($data[$planets[$i]."_num"]== $mars_num || $planets[$i] == "Ketu")
+            {
+                continue;           // checks if planet is in same sign as mars 
+            }
+            else
+            {
+                if($planets[$i]=="Sun"||$planets[$i]=="Moon"||$planets[$i]=="Mercury"||$planets[$i]=="Venus")
+                {
+                    if($data[$planets[$i]."_num"] < 6)
+                    {
+                        $aspect         = $data[$planets[$i]."_num"] + 6;
+                    }
+                    else 
+                    {
+                        $aspect         = $data[$planets[$i]."_num"] - 6;
+                    }
+                    if($aspect == $mars_num)
+                    {
+                        $planet     = array("aspect_".$j=>$planets[$i]);
+                        $stack      = array_merge($stack, $planet);
+                        $j++;
+                    }
+                }
+                else if($planets[$i]=="Jupiter"||$planets[$i]=="Rahu")
+                {
+                    if($data[$planets[$i]."_num"] < 6)
+                    {
+                        $aspect1         = $data[$planets[$i]."_num"] + 6;
+                    }
+                    else 
+                    {
+                        $aspect1         = $data[$planets[$i]."_num"] - 6;
+                    }
+                    $aspect2             = $data[$planets[$i]."_num"] + 4;
+                    if($aspect2 > 12)
+                    {
+                        $aspect2         = $aspect2 - 12;
+                    }
+                    $aspect3            = $data[$planets[$i]."_num"]  + 8;
+                    if($aspect3  > 12)
+                    {
+                        $aspect3        = $aspect3  - 12;
+                    }
+                    if($aspect1 == $mars_num ||$aspect2 == $mars_num ||$aspect3 == $mars_num)
+                    {
+                        $planet     = array("aspect_".$j=>$planets[$i]);
+                        $stack      = array_merge($stack, $planet);
+                        $j++;
+                    }
+                }
+                else if($planets[$i]=="Saturn")
+                {
+                    if($data[$planets[$i]."_num"] < 6)
+                    {
+                        $aspect1         = $data[$planets[$i]."_num"] + 6;
+                    }
+                    else 
+                    {
+                        $aspect1         = $data[$planets[$i]."_num"] - 6;
+                    }
+                    $aspect2            = $data[$planets[$i]."_num"] + 2;
+                    if($aspect2 > 12)
+                    {
+                        $aspect2         = $aspect2 - 12;
+                    }
+                    $aspect3            = $data[$planets[$i]."_num"] + 9;
+                    if($aspect3 > 12)
+                    {
+                        $aspect3         = $aspect3 - 12;
+                    }
+                    if($aspect1 == $mars_num ||$aspect2 == $mars_num ||$aspect3 == $mars_num)
+                    {
+                        $planet     = array("aspect_".$j=>$planets[$i]);
+                        $stack      = array_merge($stack, $planet);
+                        $j++;
+                    }
+                }
+            }
+        }
+        print_r($stack);exit;
     }
 }
 ?>
