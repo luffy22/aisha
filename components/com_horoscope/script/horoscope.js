@@ -190,7 +190,7 @@ function house_1(y)
 {
     var x = y;
     get_canvas();       // get the canvas in 2d
-    ctx.font='33% Arial';
+    ctx.font='8px Arial';
     ctx.fillText(x,107,105);
     var y = calc_next_value(x);
     house_2(y);
@@ -200,7 +200,7 @@ function house_2(y)
     var x = y;
     get_canvas();       // get the canvas in 2d
     ctx.beginPath();
-    ctx.font='33%';
+    ctx.font='8px';
     ctx.fillText(x,56,54);
     var y = calc_next_value(x);
     house_3(y);
@@ -209,7 +209,7 @@ function house_3(y)
 {
     var x = y;
     get_canvas();       // get the canvas in 2d
-    ctx.font='33%';
+    ctx.font='8px';
     ctx.fillText(x,48,60);
     var y = calc_next_value(x);
     house_4(y);
@@ -218,7 +218,7 @@ function house_4(y)
 {
     var x = y;
     get_canvas();       // get the canvas in 2d
-    ctx.font='33%';
+    ctx.font='8px';
     ctx.fillText(x,101,112);
     var y = calc_next_value(x);
     house_5(y);
@@ -227,7 +227,7 @@ function house_5(y)
 {
     var x = y;
     get_canvas();       // get the canvas in 2d
-    ctx.font='33%';
+    ctx.font='8px';
     ctx.fillText(x,50,164);
     var y = calc_next_value(x);
     house_6(y);
@@ -236,8 +236,8 @@ function house_6(y)
 {
     var x = y;
     get_canvas();       // get the canvas in 2d
-    ctx.font='33% Arial';
-    ctx.fillText(x,56,170);
+    ctx.font='8px Arial';
+    ctx.fillText(x,56,171);
     var y = calc_next_value(x);
     house_7(y);
 }
@@ -245,8 +245,8 @@ function house_7(y)
 {
     var x = y;
     get_canvas();       // get the canvas in 2d
-    ctx.font='33% Arial';
-    ctx.fillText(x,107,118);
+    ctx.font='8px Arial';
+    ctx.fillText(x,106,120);
     var y = calc_next_value(x);
     house_8(y);
 }
@@ -254,8 +254,8 @@ function house_8(y)
 {
     var x = y;
     get_canvas();       // get the canvas in 2d
-    ctx.font='33% Arial';
-    ctx.fillText(x,160,170);
+    ctx.font='8px Arial';
+    ctx.fillText(x,157,171);
     
     var y = calc_next_value(x);
     house_9(y);
@@ -264,8 +264,8 @@ function house_9(y)
 {
     var x = y;
     get_canvas();       // get the canvas in 2d
-    ctx.font='33% Arial';
-    ctx.fillText(x,166,164);
+    ctx.font='8px Arial';
+    ctx.fillText(x,165,164);
     var y = calc_next_value(x);
     house_10(y);
 }
@@ -273,7 +273,7 @@ function house_10(y)
 {
     var x = y;
     get_canvas();       // get the canvas in 2d
-    ctx.font='33% Arial';
+    ctx.font='8px Arial';
     ctx.fillText(x,114,112);
     var y = calc_next_value(x);
     house_11(y);
@@ -282,7 +282,7 @@ function house_11(y)
 {
     var x = y;
     get_canvas();       // get the canvas in 2d
-    ctx.font='33% Arial';
+    ctx.font='8px Arial';
     ctx.fillText(x,165,60);
     var y = calc_next_value(x);
     house_12(y);
@@ -291,7 +291,7 @@ function house_12(y)
 {
     var x = y;
     get_canvas();       // get the canvas in 2d
-    ctx.font='33% Arial';
+    ctx.font='8px Arial';
     ctx.fillText(x,159,54);
     house_1_planets();
 }
@@ -462,7 +462,7 @@ function house_1_canvas(y)
     var len     = y.length;
     get_canvas();
     
-    ctx.font='38% verdana';
+    ctx.font='8px Arial';
     if(len=="1")
     { 
         ctx.fillText(y[0],102,56);
@@ -530,7 +530,7 @@ function house_2_canvas(y)
 {
     var len     = y.length;
     get_canvas();
-    ctx.font='38% verdana';
+    ctx.font='8px Arial';
     if(len=="1")
     { 
         ctx.fillText(y[0],45,32);
@@ -597,7 +597,7 @@ function house_3_canvas(y)
 {
     var len     = y.length;
     get_canvas();
-    ctx.font='38% verdana';
+    ctx.font='8px Arial';
     if(len == "1")
     {
         ctx.fillText(y[0],7,56);
@@ -653,7 +653,7 @@ function house_4_canvas(y)
 {
     var len     = y.length;
     get_canvas();
-    ctx.font='38% verdana';
+    ctx.font='8px Arial';
     if(len == "1")
     {
         ctx.fillText(y[0],50,110);
@@ -720,7 +720,7 @@ function house_5_canvas(y)
     var len     = y.length;
     get_canvas();
 
-    ctx.font='38% verdana';
+    ctx.font='8px Arial';
     if(len == "1")
     {
         ctx.fillText(y[0],7,164);
@@ -787,7 +787,7 @@ function house_6_canvas(y)
     var len     = y.length;
     get_canvas();
 
-    ctx.font='38% verdana';
+    ctx.font='8px Arial';
     if(len == "1")
     {
         ctx.fillText(y[0],45,192);
@@ -854,7 +854,7 @@ function house_7_canvas(y)
     var len     = y.length;
     get_canvas();
 
-    ctx.font='38% verdana';
+    ctx.font='8px Arial';
     if(len == "1")
     {
         ctx.fillText(y[0],102,156);
@@ -921,7 +921,7 @@ function house_8_canvas(y)
     var len     = y.length;
     get_canvas();
 
-    ctx.font='38% verdana';
+    ctx.font='8px Arial';
     if(len == "1")
     {
         ctx.fillText(y[0],155,192);
@@ -988,7 +988,7 @@ function house_9_canvas(y)
     var len     = y.length;
     get_canvas();
 
-    ctx.font='38% verdana';
+    ctx.font='8px Arial';
     if(len == "1")
     {
         ctx.fillText(y[0],175,165);
@@ -1055,7 +1055,7 @@ function house_10_canvas(y)
     var len     = y.length;
     get_canvas();
     
-    ctx.font='38% verdana';
+    ctx.font='8px Arial';
     if(len == "1")
     {
         ctx.fillText(y[0],150,110);
@@ -1122,7 +1122,7 @@ function house_11_canvas(y)
     var len     = y.length;
     get_canvas();
 
-    ctx.font='38% verdana';
+    ctx.font='8px Arial';
     if(len=="1")
     { 
          ctx.fillText(y[0],175,60);
@@ -1189,7 +1189,7 @@ function house_12_canvas(y)
     var len     = y.length;
     get_canvas();
     
-    ctx.font='38% verdana';
+    ctx.font='8px Arial';
     if(len == "1")
     {
         ctx.fillText(y[0],150,32);

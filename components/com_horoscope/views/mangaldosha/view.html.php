@@ -20,10 +20,13 @@ class HoroscopeViewMangalDosha extends JViewLegacy
         }
         if(isset($_GET['chart']))
         {
-            $this->data		= $this->get('Data');
-            //echo "calls";exit;
+            $this->data     = $this->get('Data');
+            $tpl            = 'mangal';
         }
-        $tpl 				= null;
+        else
+        {
+            $tpl            = null;
+        }
         //echo gettype($this->data);
         parent::display($tpl);
         

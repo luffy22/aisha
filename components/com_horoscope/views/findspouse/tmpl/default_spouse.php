@@ -62,3 +62,4 @@ $house  = $this->data['house'];
 <div class="mb-2"></div>
     <p class="lead strong">Portfolio's associated with <?php echo trim($house); ?> house are the deciding factor for your future <?php echo $spouse ?> to choose you over others.</p>
 </div>
+<?php unset($this->data); ?>

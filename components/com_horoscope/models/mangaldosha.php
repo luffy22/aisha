@@ -132,11 +132,12 @@ class HoroscopeModelMangalDosha extends HoroscopeModelLagna
         //$percent                    = $check_asc_dosha['percent']+$check_moon_dosha['percent']+$check_ven_dosha['percent']+$check_nav_dosha['percent'];
         //echo $percent;exit;
         $check_co_tenants           = $this->checkCoTenants($newdata);
-        $check_aspects              = $this->checkAspects($newdata);
         //print_r($check_co_tenants);exit;
+        $check_aspects              = $this->checkAspects($newdata);
+        
         $array                      = array();
-        $array                      = array_merge($array,$result,$check_asc_dosha,$check_moon_dosha,$check_ven_dosha,$check_nav_dosha, $check_co_tenants);
-        print_r($array);exit;
+        $array                      = array_merge($array,$result,$check_asc_dosha,$check_moon_dosha,$check_ven_dosha,$check_nav_dosha, $check_co_tenants, $check_aspects);
+        return $array;
     }
     protected function getSignNum($sign)
     {
@@ -231,7 +232,7 @@ class HoroscopeModelMangalDosha extends HoroscopeModelLagna
                 $stack          = array_merge($stack,$details);
                 $j++;
             }
-            $count              = array("count"=>$j);
+            $count              = array("coten_count"=>$j);
             $stack              = array_merge($stack,$count);
         }
         return $stack;
@@ -239,8 +240,8 @@ class HoroscopeModelMangalDosha extends HoroscopeModelLagna
     protected function checkAspects($data)
     {
         //print_r($data);exit;
-        //$db             = JFactory::getDbo();  // Get db connection
-        //$query          = $db->getQuery(true);
+        $db             = JFactory::getDbo();  // Get db connection
+        $query          = $db->getQuery(true);
         $mars_num       = $data["Mars_num"];
         $planets        = array("Sun","Moon","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu");
         $stack          = array();
@@ -248,7 +249,7 @@ class HoroscopeModelMangalDosha extends HoroscopeModelLagna
         $j       = 0;
         for($i=0;$i<count($planets);$i++)
         {
-            if($data[$planets[$i]."_num"]== $mars_num || $planets[$i] == "Ketu")
+            if($data[$planets[$i]."_num"]== $mars_num || str_replace("_sign","",$data[$planets[$i]."_sign"]) == "Ketu")
             {
                 continue;           // checks if planet is in same sign as mars 
             }
@@ -266,8 +267,17 @@ class HoroscopeModelMangalDosha extends HoroscopeModelLagna
                     }
                     if($aspect == $mars_num)
                     {
-                        $planet     = array("aspect_".$j=>$planets[$i]);
-                        $stack      = array_merge($stack, $planet);
+                        $planet_same    = strtolower($planets[$i]);
+                        $query 		->clear();
+                        $query          ->select($db->quoteName('result'));
+                        $query          ->from($db->quoteName('#__planet_aspects'));
+                        $query          ->where($db->quoteName('planet').' = '.$db->quote('mars').' AND'.
+                                                $db->quoteName('planet_aspecting').' = '.$db->quote($planet_same));
+                        $db             ->setQuery($query);
+                        $result         = $db->loadAssoc();
+                        //print_r($result);exit;
+                        $details        = array("aspect_".$j => $planets[$i], "aspect_".$j."_details" => $result['result']);
+                        $stack          = array_merge($stack,$details);
                         $j++;
                     }
                 }
@@ -293,8 +303,16 @@ class HoroscopeModelMangalDosha extends HoroscopeModelLagna
                     }
                     if($aspect1 == $mars_num ||$aspect2 == $mars_num ||$aspect3 == $mars_num)
                     {
-                        $planet     = array("aspect_".$j=>$planets[$i]);
-                        $stack      = array_merge($stack, $planet);
+                        $planet_same    = strtolower($planets[$i]);
+                        $query 		->clear();
+                        $query          ->select($db->quoteName(array('result')));
+                        $query          ->from($db->quoteName('#__planet_aspects'));
+                        $query          ->where($db->quoteName('planet').' = '.$db->quote('mars').' AND'.
+                                                $db->quoteName('planet_aspecting').' = '.$db->quote($planet_same));
+                        $db             ->setQuery($query);
+                        $result         = $db->loadAssoc();
+                        $details        = array("aspect_".$j => $planets[$i], "aspect_".$j."_details" => $result['result']);
+                        $stack          = array_merge($stack,$details);
                         $j++;
                     }
                 }
@@ -320,14 +338,24 @@ class HoroscopeModelMangalDosha extends HoroscopeModelLagna
                     }
                     if($aspect1 == $mars_num ||$aspect2 == $mars_num ||$aspect3 == $mars_num)
                     {
-                        $planet     = array("aspect_".$j=>$planets[$i]);
-                        $stack      = array_merge($stack, $planet);
+			$query 		->clear();
+                        $planet_same    = strtolower($planets[$i]);
+                        $query          ->select($db->quoteName(array('result')));
+                        $query          ->from($db->quoteName('#__planet_aspects'));
+                        $query          ->where($db->quoteName('planet').' = '.$db->quote('mars').' AND'.
+                                                $db->quoteName('planet_aspecting').' = '.$db->quote($planet_same));
+                        $db             ->setQuery($query);
+                        $result         = $db->loadAssoc();
+                        $details        = array("aspect_".$j => $planets[$i], "aspect_".$j."_details" => $result['result']);
+                        $stack          = array_merge($stack,$details);
                         $j++;
                     }
                 }
             }
         }
-        print_r($stack);exit;
+        $count              = array("asp_count"=>$j);
+        $stack              = array_merge($stack,$count);
+        return $stack;
     }
 }
 ?>
