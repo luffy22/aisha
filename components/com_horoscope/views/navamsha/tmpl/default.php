@@ -35,7 +35,7 @@ $a = 0;
     <a class="nav-link active">Navamsha</a>
   </li>
 </ul><div class="mb-2"></div>
-<canvas id="navamsha_canvas" height="220">
+<canvas id="navamsha_canvas" height="260">
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-2"></div>
 <p class="float-sm-right">Vargottama planet gives good results in its <a href="<?php echo JURi::base() ?>main/336-vimshottari-dasha" target="_blank">Vimshottari Dasha</a> Period</p>

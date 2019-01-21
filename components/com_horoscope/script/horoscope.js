@@ -24,7 +24,7 @@ function get_canvas()
 function draw_horoscope()
 {
     get_canvas();
-    ctx.rect(5,5,210,210);
+    ctx.rect(5,5,250,250);
     ctx.strokeStyle='black';
     ctx.lineWidth=1;
     ctx.stroke();
@@ -32,7 +32,7 @@ function draw_horoscope()
     // vishnu sthanas
     ctx.beginPath();
     ctx.rotate(45*Math.PI/180);
-    ctx.rect(83,-73,146,146);
+    ctx.rect(97,-87,175,175);
     ctx.strokeStyle='black';
     ctx.lineWidth=1;
     ctx.stroke();
@@ -40,12 +40,12 @@ function draw_horoscope()
     ctx.rotate(315*Math.PI/180);
     ctx.beginPath();
     ctx.moveTo(5,5);
-    ctx.lineTo(215,215);
+    ctx.lineTo(255,255);
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.moveTo(215,5);
-    ctx.lineTo(5,215);
+    ctx.moveTo(255,5);
+    ctx.lineTo(5,255);
     ctx.stroke();
 
     /*ctx.beginPath();
@@ -191,7 +191,7 @@ function house_1(y)
     var x = y;
     get_canvas();       // get the canvas in 2d
     ctx.font='8px Arial';
-    ctx.fillText(x,107,105);
+    ctx.fillText(x,125,122);
     var y = calc_next_value(x);
     house_2(y);
 }
@@ -201,7 +201,7 @@ function house_2(y)
     get_canvas();       // get the canvas in 2d
     ctx.beginPath();
     ctx.font='8px';
-    ctx.fillText(x,56,54);
+    ctx.fillText(x,65,62);
     var y = calc_next_value(x);
     house_3(y);
 }
@@ -210,7 +210,7 @@ function house_3(y)
     var x = y;
     get_canvas();       // get the canvas in 2d
     ctx.font='8px';
-    ctx.fillText(x,48,60);
+    ctx.fillText(x,54,70);
     var y = calc_next_value(x);
     house_4(y);
 }
@@ -219,7 +219,7 @@ function house_4(y)
     var x = y;
     get_canvas();       // get the canvas in 2d
     ctx.font='8px';
-    ctx.fillText(x,101,112);
+    ctx.fillText(x,118,132);
     var y = calc_next_value(x);
     house_5(y);
 }
@@ -228,7 +228,7 @@ function house_5(y)
     var x = y;
     get_canvas();       // get the canvas in 2d
     ctx.font='8px';
-    ctx.fillText(x,50,164);
+    ctx.fillText(x,55,194);
     var y = calc_next_value(x);
     house_6(y);
 }
@@ -237,7 +237,7 @@ function house_6(y)
     var x = y;
     get_canvas();       // get the canvas in 2d
     ctx.font='8px Arial';
-    ctx.fillText(x,56,171);
+    ctx.fillText(x,64,202);
     var y = calc_next_value(x);
     house_7(y);
 }
@@ -246,7 +246,7 @@ function house_7(y)
     var x = y;
     get_canvas();       // get the canvas in 2d
     ctx.font='8px Arial';
-    ctx.fillText(x,106,120);
+    ctx.fillText(x,126,142);
     var y = calc_next_value(x);
     house_8(y);
 }
@@ -255,7 +255,7 @@ function house_8(y)
     var x = y;
     get_canvas();       // get the canvas in 2d
     ctx.font='8px Arial';
-    ctx.fillText(x,157,171);
+    ctx.fillText(x,189,202);
     
     var y = calc_next_value(x);
     house_9(y);
@@ -265,7 +265,7 @@ function house_9(y)
     var x = y;
     get_canvas();       // get the canvas in 2d
     ctx.font='8px Arial';
-    ctx.fillText(x,165,164);
+    ctx.fillText(x,197,195);
     var y = calc_next_value(x);
     house_10(y);
 }
@@ -274,7 +274,7 @@ function house_10(y)
     var x = y;
     get_canvas();       // get the canvas in 2d
     ctx.font='8px Arial';
-    ctx.fillText(x,114,112);
+    ctx.fillText(x,135,132);
     var y = calc_next_value(x);
     house_11(y);
 }  
@@ -283,7 +283,7 @@ function house_11(y)
     var x = y;
     get_canvas();       // get the canvas in 2d
     ctx.font='8px Arial';
-    ctx.fillText(x,165,60);
+    ctx.fillText(x,197,70);
     var y = calc_next_value(x);
     house_12(y);
 }
@@ -292,8 +292,8 @@ function house_12(y)
     var x = y;
     get_canvas();       // get the canvas in 2d
     ctx.font='8px Arial';
-    ctx.fillText(x,159,54);
-    house_1_planets();
+    ctx.fillText(x,189,62);
+    //house_1_planets();
 }
 function calc_next_value(x)
 {

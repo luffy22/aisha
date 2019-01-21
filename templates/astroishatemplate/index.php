@@ -1,5 +1,5 @@
 <?php 
-//error_reporting(0);       // uncomment on server 
+error_reporting(0);       // uncomment on server 
 defined( '_JEXEC' ) or die( 'Restricted access' );
 $app             = JFactory::getApplication();
 $doc             = JFactory::getDocument();
@@ -13,7 +13,7 @@ $title              = $doc->title;
 <head>
 <title><?php echo $title; ?></title>
 <meta name="robots" content="index, follow" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" href="<?php echo $this->baseurl ?>/favicon.ico" type="image/x-icon" />
 <link rel="icon" href="<?php echo $this->baseurl ?>/logo.png" type="image/x-icon">
 <meta name="msvalidate.01" content="E689BB58897C0A89BDC88E5DF8800B2F" />

@@ -37,7 +37,7 @@ $id         = $this->data['id'];
 $title      = $this->data['title'];
 $text       = $this->data['introtext'];
 ?>
-<canvas id="moon_canvas" height="220">
+<canvas id="moon_canvas" height="260">
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-2"></div>
 <div id="<?php echo $this->data['id']; ?>" class="accordion-id"></div>
