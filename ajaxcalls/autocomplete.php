@@ -10,13 +10,12 @@ if (mysqli_connect_errno()) {
 }
 else
 {
-	//echo "calls ajaxcomplete";exit;
     $search     = ucfirst($_GET['term']);
     ///$query	= "SELECT jv_location.country,jv_location.state, jv_location.city, jv_location.latitude, jv_location.longitude, jv_timezone.tmz_words FROM jv_location, jv_timezone WHERE "
             // "     city LIKE '$search%' OR state LIKE '$search%' AND jv_location.timezone = jv_timezone.tmz_id LIMIT 1";
-    $query	= "SELECT * FROM jv_location LEFT JOIN jv_timezone ON jv_location.timezone = jv_timezone.tmz_id WHERE city LIKE '$search%' OR state LIKE '$search%' LIMIT 5";
+    $query	= "SELECT * FROM jv_location LEFT JOIN jv_timezone ON jv_location.timezone = jv_timezone.tmz_id WHERE city='$search' OR country='$search' OR city LIKE '$search%' OR state LIKE '$search%' or country LIKE '$search%' LIMIT 25";
     $result	= mysqli_query($mysqli, $query);
-    
+    $json 	= array();
     while($row  = mysqli_fetch_array($result))
     {
         if($row['state'] == 'none' || $row['state']=='')

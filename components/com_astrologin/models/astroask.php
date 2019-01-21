@@ -204,7 +204,14 @@ public function insertDetails($details)
     $result          = $db->query();
     if($result)
     {
-        
+        if($ques_type == "long_ans")
+        {
+            $query1          = "INSERT INTO jv_question_summary(order_id) 
+                               VALUES ('".$token."')";
+            // Set the query using our newly populated query object and execute it
+            $db             ->setQuery($query1);
+            $result          = $db->query();
+        }
         $query          ->clear();
         $query          ->select($db->quoteName(array('UniqueID','no_of_ques')))
                         ->from('#__question_details')

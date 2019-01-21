@@ -7011,3 +7011,15 @@ body .nav-pills > li > a {
     border-radius: 0px;
     line-height: 1.5em;
 }.select2{padding:6px 12px;}.form-text1{padding:6px 12px;width:10%;}.form-text2{padding: 6px 12px;width:20%}
+  .ui-autocomplete {
+    max-height: 100px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+  }
+  /* IE 6 doesn't support max-height
+   * we use height instead, but this forces the menu to always be this tall
+   */
+  * html .ui-autocomplete {
+    height: 100px;
+  }

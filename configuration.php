@@ -84,7 +84,7 @@ class JConfig {
 	public $replyto = '';
 	public $replytoname = '';
 	public $MetaRights = '';
-	public $sitename_pagetitles = '1';
+	public $sitename_pagetitles = '0';
 	public $force_ssl = '0';
 	public $session_memcache_server_host = 'localhost';
 	public $session_memcache_server_port = '11211';
