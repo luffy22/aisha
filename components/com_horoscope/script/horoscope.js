@@ -293,7 +293,7 @@ function house_12(y)
     get_canvas();       // get the canvas in 2d
     ctx.font='8px Arial';
     ctx.fillText(x,189,62);
-    //house_1_planets();
+    house_1_planets();
 }
 function calc_next_value(x)
 {
@@ -387,7 +387,7 @@ function house_2_planets(z)
     var y   = get_planets(2, z);
     if(y== "0"){}else{house_2_canvas(y);}
     var z   = get_next_sign(z);
-    house_3_planets(z);
+    //house_3_planets(z);
 }
 function house_3_planets(z)
 {
@@ -462,67 +462,67 @@ function house_1_canvas(y)
     var len     = y.length;
     get_canvas();
     
-    ctx.font='8px Arial';
+    ctx.font='10px Arial';
     if(len=="1")
     { 
-        ctx.fillText(y[0],102,56);
+        ctx.fillText(y[0],117,66);
     }
     else if(len=="2")
     {
-        ctx.fillText(y[0],102,48);
-        ctx.fillText(y[1],102,56);
+        ctx.fillText(y[0],117,56);
+        ctx.fillText(y[1],117,66);
     }
     else if(len=="3")
     {
-        ctx.fillText(y[0],102,40);
-        ctx.fillText(y[1],102,48);
-        ctx.fillText(y[2],102,56);
+        ctx.fillText(y[0],117,56);
+        ctx.fillText(y[1],117,66);
+        ctx.fillText(y[2],117,76);
     }
     else if(len=="4")
     {
-        ctx.fillText(y[0],102,40);
-        ctx.fillText(y[1],102,48);
-        ctx.fillText(y[2],102,56);
-        ctx.fillText(y[3],102,64);
+        ctx.fillText(y[0],117,56);
+        ctx.fillText(y[1],117,66);
+        ctx.fillText(y[2],117,76);
+        ctx.fillText(y[3],117,86);
     }
     else if(len=="5")
     {
-        ctx.fillText(y[0],102,32);
-        ctx.fillText(y[1],102,40);
-        ctx.fillText(y[2],102,48);
-        ctx.fillText(y[3],102,56);
-        ctx.fillText(y[4],102,64);
+        ctx.fillText(y[0],117,56);
+        ctx.fillText(y[1],117,66);
+        ctx.fillText(y[2],117,76);
+        ctx.fillText(y[3],117,86);
+        ctx.fillText(y[4],102,96);
     }
      else if(len=="6")
     {
-        ctx.fillText(y[0],102,24);
-        ctx.fillText(y[1],102,32);
-        ctx.fillText(y[2],102,40);
-        ctx.fillText(y[3],102,48);
-        ctx.fillText(y[4],102,56);
-        ctx.fillText(y[5],102,64);
+        ctx.fillText(y[0],117,56);
+        ctx.fillText(y[1],117,66);
+        ctx.fillText(y[2],117,76);
+        ctx.fillText(y[3],117,86);
+        ctx.fillText(y[4],117,96);
+	ctx.fillText(y[5],117,106);
     }
     else if(len=="7")
     {
-        ctx.fillText(y[0],102,24);
-        ctx.fillText(y[1],102,32);
-        ctx.fillText(y[2],102,40);
-        ctx.fillText(y[3],102,48);
-        ctx.fillText(y[4],102,56);
-        ctx.fillText(y[5],102,64);
-        ctx.fillText(y[6],102,72);
+        ctx.fillText(y[0],117,46);
+        ctx.fillText(y[1],117,56);
+        ctx.fillText(y[2],117,66);
+        ctx.fillText(y[3],117,76);
+        ctx.fillText(y[4],117,86);
+        ctx.fillText(y[5],117,96);
+	ctx.fillText(y[6],117,106);
     }
     
     else if(len=="8")
     {
-        ctx.fillText(y[0],102,24);
-        ctx.fillText(y[1],102,32);
-        ctx.fillText(y[2],102,40);
-        ctx.fillText(y[3],102,48);
-        ctx.fillText(y[4],102,56);
-        ctx.fillText(y[5],102,64);
-        ctx.fillText(y[6],102,72);
-        ctx.fillText(y[7],102,80);
+        ctx.fillText(y[0],117,36);
+        ctx.fillText(y[1],117,46);
+        ctx.fillText(y[2],117,56);
+        ctx.fillText(y[3],117,66);
+        ctx.fillText(y[4],117,76);
+        ctx.fillText(y[5],117,86);
+        ctx.fillText(y[6],117,96);
+	ctx.fillText(y[7],117,106);
     }
     
 }
