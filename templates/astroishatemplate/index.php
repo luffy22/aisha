@@ -27,8 +27,8 @@ $title              = $doc->title;
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/jquery-ui.min.js" type="text/javascript" language="javascript"></script>
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/bootstrap.min.js"></script>
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/common.js" type="text/javascript" language="javascript"></script>
-<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
-<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/cookieconsent.min.css" />
+<script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/cookieconsent.min.js"></script>
 <script>
 window.addEventListener("load", function(){
 window.cookieconsent.initialise({
@@ -64,26 +64,20 @@ endif;
 <div class="container-fluid">
     <h3><a id="display-4" href="<?php echo JUri::base(); ?>" title="Navigate to Home Page"><img src="<?php echo JUri::base(); ?>/logo.png" title="Click to navigate to Home Page" class="img-fluid" />Astro Isha</a></h3>
 <div class="row">
-    <div class="col-md-9 col-sm-9 col-xs-8" id="main">
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12" id="main">
         <jdoc:include type="modules" name="sidemenu" />
         <jdoc:include type="modules" name="breadcrumb" />
         <jdoc:include type="component" />
         <jdoc:include type="modules" name="content1" />
         <jdoc:include type="modules" name="content2" />
     </div>
-    <div class="col-md-3 col-sm-3 col-xs-4">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
         <jdoc:include type="modules" name="right" />
     </div>
 </div>
 </div>
 <jdoc:include type="modules" name="footer" />
 <script async src="//www.instagram.com/embed.js"></script>
-<script>
-  window.fbAsyncInit = function() {FB.init({appId      : '220390744824296',xfbml      : true,version    : 'v2.4'});};
-  (function(d, s, id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
-</script>
 <?php
 include_once (JPATH_ROOT.DS.'analyticstracking.php');
 ?>

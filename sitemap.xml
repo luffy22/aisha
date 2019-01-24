@@ -2,1609 +2,1642 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 <url>
   <loc>https://www.astroisha.com/</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/ask-question</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/horoscope</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/findspouse</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/mangaldosha</loc>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets/1-surya</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets/2-chandra</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets/3-mangal</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets/4-budh</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets/5-guru</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets/6-shukra</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets/7-shani</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets/8-rahu</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets/9-ketu</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/house?start=10</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/house/10-tanu-bhava</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/house/11-dhana-bhava</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/house/12-bandhu-bhava</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/house/13-matru-bhava</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/house/14-putra-bhava</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/house/15-rog-sthana</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/house/16-kalatra-bhava</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/house/17-mrityu-sthana</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/house/18-dharma-bhava</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/house/19-karma-bhava</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/house/20-labh-bhava</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/house/21-vyaya-bhava</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/signs</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/signs?start=10</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/signs/22-aries</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/signs/23-taurus</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/signs/24-gemini</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/signs/25-cancer</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/signs/26-leo</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/signs/27-virgo</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/signs/28-libra</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/signs/29-scorpio</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/signs/30-sagittarius</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/signs/31-capricorn</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/signs/32-aquarius</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/signs/33-pisces</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant?start=10</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant?start=20</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/103-aries-females</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/102-aries-males</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/104-taurus-females</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/105-taurus-males</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/106-gemini-females</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/107-gemini-males</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/108-cancer-females</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/109-cancer-males</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/110-simha-females</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/111-simha-males</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/114-kanya-females</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/115-kanya-males</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/116-libra-females</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/117-libra-males</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/118-scorpio-females</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/119-scorpio-males</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/120-sagittarius-females</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/121-sagittarius-males</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/123-capricorn-females</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/124-capricorn-males</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/125-aquarius-females</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/126-aquarius-males</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/127-pisces-females</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/ascendant/127-pisces-females</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra?start=10</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra?start=20</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/34-ashvini</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/35-bharani</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/36-krittika</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/37-rohini</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/38-mrigashira</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/39-ardra</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/40-punarvasu</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/41-pushya</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/42-ashlesha</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/43-magha</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/44-purva-phalguni</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/45-uttara-phalguni</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/46-hasta</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/47-chitra</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/48-swati</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/49-vishakha</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/50-anuradha</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/51-jytestha</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/52-mula</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/53-purva-asadha</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/54-uttara-asadha</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/55-sravana</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/56-dhanistha</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/57-shatabhisa</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/58-purva-bhadrapada</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/59-uttara-bhadrapada</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/nakshatra/60-revati</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/main</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/main?start=10</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/main/61-vedic-astrology</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/main/65-edu</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/main/66-career</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/main/71-family</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/main/72-relation</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/main/85-laxmi</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/main/86-vishnu</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/main/87-prarabdha</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/main/88-purushartha</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/main/89-dushamsthanas</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/main/101-lagna</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/main/303-saturnxmars</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/main/304-moon-association</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/main/332-shani-fear</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/main/336-vimshottari-dasha</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/main/338-vargottama</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/main/344-read-north-horo</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/main/345-read-south-horo</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured?start=10</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured?start=20</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured?start=30</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/67-shani-and-superstition</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/73-kuja</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/92-mantra-power</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/93-numerology-myth</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/94-lucky-charms</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/99-str</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/100-ltd</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/112-dont-blame-stars</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/113-fasting-science</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/122-fasting-science-2</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/132-gantavya</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/133-astrology-timings</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/178-shani-7years</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/187-astro-swot</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/191-mangal-compare</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/200-science-vs-superstition</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/207-astro-noconsult</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/209-shani-test</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/214-lal-kitab-farce</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/237-science-prayers</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/257-hillary-chances</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/277-sade-sati</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/280-pitru-paksha</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/307-saturn-transit</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/310-rahu_balancer</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/featured/320-female-goddess</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/featured/330-jupiter-vs-venus</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/featured/334-prison-confinement</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/featured/351-rahu-raj-yoga</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/featured/383-court-astrology</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/featured/402-superstitious-astrology</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/transits</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/transits/352-rahu-cancer-transit</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/transits/359-saturn-sagittarius2</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/transits/355-jupiter-libra-transit</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/transits/399-jupiter-scorpio</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas?start=10</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas?start=20</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas?start=30</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas?start=40</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/75-nbry</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/76-vry</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/77-vcy</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/78-sasha</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/79-ruchaka</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/80-hansa</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/81-mala</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/82-bhadra</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/83-payo</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/84-gky</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/91-kaal-sarp</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/96-pitru-dosha</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/97-pitru-dosha-2</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/98-pitru-dosha-3</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/145-sunapha-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/147-anapha-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/148-dhurdhura-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/149-kemdruma-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/150-chandra-mangal</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/151-adhi-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/152-chatusagara-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/154-vasumathi-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/155-rajlakshana</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/156-sakata-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/157-amala-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/158-parvata-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/159-kahala-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/160-vesi-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/161-obyachari-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/162-budh-aditya</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/163-mahabhagya-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/165-pushkala-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/167-laxmi-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/168-gauri-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/172-chapa-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/173-sreenatha-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/174-malika-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/183-sankha-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/269-daridra-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/282-bheri-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yogas/288-mridanga-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/yogas/315-gaja-yoga</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/yogas/323-kalinidhi_yoga</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/yogas/329-amsavatara-yoga</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/yogas/335-kusuma-yoga</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/yogas/382-matsya-yoga</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/yogas/389-shrapit-basics</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/yogas/390-shrapit-12-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/yogas/391-shrapit-association</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/case</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/case/285-rama-vs-ravana</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/case/305-hillary-lost</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/case/314-modi-nbry</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/case/321-adityanath-horoscope</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/case/342-krishna-kemdruma</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/case/353-visha-yoga-choices</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/career/343-malefics-career</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/case/373-salman-horo-analysis</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/case/376-deceit-horoscope</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/case/381-kejriwal-astro</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/case/388-rahul-gandhi-horo</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/case/393-billionare-horo</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/case/394-horoscope-of-billionaires-2</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/case/397-modi-2019</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas?start=10</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas?start=20</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas?start=30</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas?start=40</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas?start=50</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas?start=60</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas?start=70</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/134-chandra-1st-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/135-chandra-2nd-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/136-chandra-3rd-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/137-chandra-4th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/138-chandra-5th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/139-chandra-6th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/140-chandra-7th-bouse</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/141-chandra-8th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/142-chandra-9th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/143-chandra-10th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/144-chandra-11th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/146-chandra-12th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/170-shani-1st-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/171-shani-2nd-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/175-shani-3rd-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/176-shani-4th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url><url>
   <loc>https://www.astroisha.com/planets-bhavas/177-shani-5th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/179-shani-6th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/180-shani-7th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/181-shani-8th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/182-shani-9th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/184-shani-10th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/185-shani-11th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/186-shani-12th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/203-mangal-1st-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/204-mangal-2nd-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/208-mangal-3rd-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/210-mangal-4th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/212-mangal-5th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/213-mangal-6th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/227-mangal-7th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/228-mangal-8th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/230-mangal-9th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/231-mars-10th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/232-mars-11th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/233-mars-12th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/238-sun-1st-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/239-sun-2nd-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/240-sun-3rd-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/241-sun-4th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/242-sun-5th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/243-sun-6th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/244-sun-7th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/245-sun-8th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/246-sun-9th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/248-sun-10th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/249-sun-11th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/252-sun-12th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/259-mercury-1st-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/261-mercury-2nd-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/263-mercury-3rd-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/265-mercury-4th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/267-mercury-5th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/272-mercury-6th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/275-mercury-7th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/276-mercury-8th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/278-mercury-9th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/281-mercury-10th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/283-mercury-11th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planets-bhavas/286-mercury-12th-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/309-jupiter-1st-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/planet-bhavas/311-jupiter-2nd-house</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/318-jupiter-3rd-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/319-jupiter-4th-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/324-jupiter-5th-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/326-jupiter-6th-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/328-jupiter-7th-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/331-jupiter-8th-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/333-jupiter-9th-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/337-jupiter-10th-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/339-jupiter-11th-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/341-jupiter-12th-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/347-venus-1st-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/350-venus-2nd-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/354-venus-3rd-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/358-venus-4th-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/374-venus-5th-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/377-venus-6th-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/379-venus-7th-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/380-venus-8th-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/384-venus-9th-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/387-venus-10th-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/392-venus-11th-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/395-venus-12th-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/planet-bhavas/401-rahu-1st-house</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/planet-bhavas/416-rahu-2nd-house</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/planet-bhavas/417-rahu-3rd-house</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/planet-bhavas/418-rahu-4th-house</loc>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yearly</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/yearly?start=10</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/yearly/404-aries-2019</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/yearly/405-taurus-2019</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/yearly/406-gemini-2019</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/yearly/407-cancer-2019</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/yearly/408-leo-2019</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/yearly/409-virgo-2019</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/yearly/410-libra-2019</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/yearly/411-scorpio-2019</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/yearly/412-sagittarius-2019</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/yearly/413-capricorn-2019</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/yearly/414-aquarius-2019</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/yearly/415-pisces-2019</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship?start=10</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship?start=20</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship/129-opposites-attract</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship/130-love-marriage-yoga</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship/164-divorce-reasons</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship/169-run-marry</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship/197-astro-interfaith</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship/201-arranged-marriage</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship/202-mangal-dosha-marry</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship/205-retrograde-divorce</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship/206-right-marriage</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship/229-divorce-choice</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship/235-12th-delay</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship/236-kumbh-fate</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship/250-divorce-timings</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship/253-intense-attraction</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship/273-late-marriage</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship/274-fut-spousevid</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship/289-signs-divorce</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship/306-faithful-flirty</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/relationship/312-propose-love</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/relationship/313-propose-valentine</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/relationship/322-gay-relations-horo</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/relationship/327-divorcee-marry</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/relationship/346-thinking_divorce</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/relationship/372-love-lost</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/relationship/375-propose-or-not</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/relationship/386-sex-astrology</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/career</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/career/166-career-roles</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/career/211-career-relocation</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/career/260-doctor-career</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/career/264-astrology-technology</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/career/268-career-govt</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/career/271-overseas-astro</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/career/279-astrology-business</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/career/316-career-benefics</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/finance</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/finance/396-poverty-horoscope</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/finance/398-rahu-losses</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/finance/403-astro-fincrisis</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/health</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/health/70-health-main</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/health/247-elements-dosha</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/health/254-vata</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/health/255-kapha</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/health/256-pitta</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/health/258-sleep-astrology</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/health/287-planets-pulses</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/health/290-mental-worries</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/health/317-stone-blockages</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/health/349-astro-std</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/remedies</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/remedies/189-chandra-remedies</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/remedies/190-mars-remedies</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/remedies/192-mercury-remedies</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/remedies/194-jupiter-remedies</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/remedies/195-shukra-remedies</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/remedies/188-sun-remedies</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/remedies/196-shani-remedies</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/remedies/198-rahu-remedies</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/remedies/199-ketu-remedies</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/remedies/325-finance-remedy</loc>
-	<changefreq>weekly</changefreq>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/gemstones</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/gemstones/284-gemstones-summary</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/about</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/privacy</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/diclaimer</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/cookies-policy</loc>
+	<changefreq>yearly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/contact</loc>
-  <changefreq>weekly</changefreq>
+  <changefreq>yearly</changefreq>
 </url>
+
 </urlset>
