@@ -935,29 +935,29 @@ function house_8_canvas(y)
     else if(len == "3")
     {
         ctx.fillText(y[0],180,220);
-        ctx.fillText(y[0],180,230);
-        ctx.fillText(y[1],180,240);
+        ctx.fillText(y[1],180,230);
+        ctx.fillText(y[2],180,240);
     }
     else if(len == "4")
     {
         ctx.fillText(y[0],180,220);
-        ctx.fillText(y[0],180,230);
-        ctx.fillText(y[1],180,240);
+        ctx.fillText(y[1],180,230);
+        ctx.fillText(y[2],180,240);
         ctx.fillText(y[3],180,250);
     }
     else if(len == "5")
     {
         ctx.fillText(y[0],180,210);
-        ctx.fillText(y[0],180,220);
-        ctx.fillText(y[1],180,230);
+        ctx.fillText(y[1],180,220);
+        ctx.fillText(y[2],180,230);
         ctx.fillText(y[3],180,240);
         ctx.fillText(y[4],180,250);
     }
     else if(len == "6")
     {
         ctx.fillText(y[0],180,210);
-        ctx.fillText(y[0],180,220);
-        ctx.fillText(y[1],180,230);
+        ctx.fillText(y[1],180,220);
+        ctx.fillText(y[2],180,230);
         ctx.fillText(y[3],180,240);
         ctx.fillText(y[4],185,250);
         ctx.fillText(y[5],150,250);
@@ -965,8 +965,8 @@ function house_8_canvas(y)
     else if(len == "7")
     {
         ctx.fillText(y[0],180,210);
-        ctx.fillText(y[0],180,220);
-        ctx.fillText(y[1],180,230);
+        ctx.fillText(y[1],180,220);
+        ctx.fillText(y[2],180,230);
         ctx.fillText(y[3],180,240);
         ctx.fillText(y[4],185,250);
         ctx.fillText(y[5],150,250);
@@ -975,8 +975,8 @@ function house_8_canvas(y)
      else if(len == "8")
     {
         ctx.fillText(y[0],180,210);
-        ctx.fillText(y[0],180,220);
-        ctx.fillText(y[1],180,230);
+        ctx.fillText(y[1],180,220);
+        ctx.fillText(y[2],180,230);
         ctx.fillText(y[3],190,240);
         ctx.fillText(y[4],185,250);
         ctx.fillText(y[5],150,250);
