@@ -533,63 +533,63 @@ function house_2_canvas(y)
     ctx.font='10px Arial';
     if(len=="1")
     { 
-        ctx.fillText(y[0],55,32);
+        ctx.fillText(y[0],55,35);
     }
     else if(len=="2")
     { 
-        ctx.fillText(y[0],55,26);
-        ctx.fillText(y[1],55,36);
+        ctx.fillText(y[0],55,25);
+        ctx.fillText(y[1],55,35);
     }
     else if(len=="3")
     { 
-        ctx.fillText(y[0],55,26);
-        ctx.fillText(y[1],55,36);
-        ctx.fillText(y[2],55,46);
+        ctx.fillText(y[0],55,25);
+        ctx.fillText(y[1],55,35);
+        ctx.fillText(y[2],55,45);
     }
     else if(len=="4")
     { 
-        ctx.fillText(y[0],55,16);
-        ctx.fillText(y[1],55,26);
-        ctx.fillText(y[2],55,36);
-        ctx.fillText(y[3],55,46);
+        ctx.fillText(y[0],55,15);
+        ctx.fillText(y[1],55,25);
+        ctx.fillText(y[2],55,35);
+        ctx.fillText(y[3],55,45);
     }
     else if(len=="5")
     { 
-        ctx.fillText(y[0],25,16);
-        ctx.fillText(y[1],55,16);
-        ctx.fillText(y[2],55,26);
-        ctx.fillText(y[3],55,36);
-        ctx.fillText(y[4],55,46);
+        ctx.fillText(y[0],25,15);
+        ctx.fillText(y[1],55,15);
+        ctx.fillText(y[2],55,25);
+        ctx.fillText(y[3],55,35);
+        ctx.fillText(y[4],55,45);
     }
     else if(len=="6")
     { 
-        ctx.fillText(y[0],25,16);
-        ctx.fillText(y[1],55,16);
-        ctx.fillText(y[2],85,16);
-        ctx.fillText(y[3],25,26);
-        ctx.fillText(y[4],55,26);
-        ctx.fillText(y[5],55,36);
+        ctx.fillText(y[0],25,15);
+        ctx.fillText(y[1],55,15);
+        ctx.fillText(y[2],85,15);
+        ctx.fillText(y[3],25,25);
+        ctx.fillText(y[4],55,25);
+        ctx.fillText(y[5],55,35);
     }
     else if(len=="7")
     { 
-        ctx.fillText(y[0],25,16);
-        ctx.fillText(y[1],55,16);
-        ctx.fillText(y[2],85,16);
-        ctx.fillText(y[3],25,26);
-        ctx.fillText(y[4],55,26);
-        ctx.fillText(y[5],55,36);
-        ctx.fillText(y[6],55,46);
+        ctx.fillText(y[0],25,15);
+        ctx.fillText(y[1],55,15);
+        ctx.fillText(y[2],85,15);
+        ctx.fillText(y[3],25,25);
+        ctx.fillText(y[4],55,25);
+        ctx.fillText(y[5],55,35);
+        ctx.fillText(y[6],55,45);
     }
     else if(len=="8")
     { 
-        ctx.fillText(y[0],25,16);
-        ctx.fillText(y[1],55,16);
-        ctx.fillText(y[2],85,16);
-        ctx.fillText(y[3],25,26);
-        ctx.fillText(y[4],65,26);
-        ctx.fillText(y[5],65,36);
-        ctx.fillText(y[6],55,46);
-        ctx.fillText(y[7],30,36);
+        ctx.fillText(y[0],25,15);
+        ctx.fillText(y[1],55,15);
+        ctx.fillText(y[2],85,15);
+        ctx.fillText(y[3],25,25);
+        ctx.fillText(y[4],65,25);
+        ctx.fillText(y[5],65,35);
+        ctx.fillText(y[6],55,45);
+        ctx.fillText(y[7],30,35);
     }
     
 }
@@ -1007,14 +1007,14 @@ function house_9_canvas(y)
     }
     else if(len == "4")
     {
-        ctx.fillText(y[0],215,185);
+        ctx.fillText(y[0],210,185);
         ctx.fillText(y[1],210,195);
         ctx.fillText(y[2],210,205);
         ctx.fillText(y[3],215,215);
     }
      else if(len == "5")
     {
-        ctx.fillText(y[0],215,185);
+        ctx.fillText(y[0],210,185);
         ctx.fillText(y[1],210,195);
         ctx.fillText(y[2],210,205);
         ctx.fillText(y[3],215,215);
@@ -1023,7 +1023,7 @@ function house_9_canvas(y)
      else if(len == "6")
     {
         ctx.fillText(y[0],215,175);
-        ctx.fillText(y[1],215,185);
+        ctx.fillText(y[1],210,185);
         ctx.fillText(y[2],210,195);
         ctx.fillText(y[3],210,205);
         ctx.fillText(y[4],215,215);
@@ -1032,7 +1032,7 @@ function house_9_canvas(y)
      else if(len == "7")
     {
         ctx.fillText(y[0],215,175);
-        ctx.fillText(y[1],215,185);
+        ctx.fillText(y[1],210,185);
         ctx.fillText(y[2],210,195);
         ctx.fillText(y[3],210,205);
         ctx.fillText(y[4],215,215);
@@ -1042,7 +1042,7 @@ function house_9_canvas(y)
      else if(len == "8")
     {
         ctx.fillText(y[0],215,175);
-        ctx.fillText(y[1],215,185);
+        ctx.fillText(y[1],210,185);
         ctx.fillText(y[2],210,195);
         ctx.fillText(y[3],210,205);
         ctx.fillText(y[4],215,215);
@@ -1193,51 +1193,51 @@ function house_12_canvas(y)
     ctx.font='10px Arial';
     if(len == "1")
     {
-        ctx.fillText(y[0],150,32);
+        ctx.fillText(y[0],180,35);
     }
     else if(len == "2")
     {
-        ctx.fillText(y[0],150,32);
-        ctx.fillText(y[1],150,40);
+        ctx.fillText(y[0],180,25);
+        ctx.fillText(y[1],180,35);
     }
     else if(len == "3")
     {
-        ctx.fillText(y[0],150,24);
-        ctx.fillText(y[1],150,32);
-        ctx.fillText(y[2],150,40);
+        ctx.fillText(y[0],180,25);
+        ctx.fillText(y[1],180,35);
+        ctx.fillText(y[2],180,45);
     }
     else if(len == "4")
     {
-        ctx.fillText(y[0],150,16);
-        ctx.fillText(y[1],150,24);
-        ctx.fillText(y[2],150,32);
-        ctx.fillText(y[3],150,40);
+        ctx.fillText(y[0],180,15);
+        ctx.fillText(y[1],180,25);
+        ctx.fillText(y[2],180,35);
+        ctx.fillText(y[3],180,45);
     }
     else if(len == "5")
     {
-        ctx.fillText(y[0],150,16);
-        ctx.fillText(y[1],150,24);
-        ctx.fillText(y[2],150,32);
-        ctx.fillText(y[3],150,40);
-        ctx.fillText(y[4],120,16);
+        ctx.fillText(y[0],180,15);
+        ctx.fillText(y[1],180,25);
+        ctx.fillText(y[2],180,35);
+        ctx.fillText(y[3],180,45);
+        ctx.fillText(y[4],180,55);
     }
      else if(len == "6")
     {
-        ctx.fillText(y[0],150,16);
-        ctx.fillText(y[1],150,24);
-        ctx.fillText(y[2],150,32);
-        ctx.fillText(y[3],150,40);
-        ctx.fillText(y[4],120,16);
-        ctx.fillText(y[5],180,16);
+        ctx.fillText(y[0],145,15);
+        ctx.fillText(y[1],180,15);
+        ctx.fillText(y[2],180,25);
+        ctx.fillText(y[3],180,35);
+        ctx.fillText(y[4],180,45);
+        ctx.fillText(y[5],180,55);
     }
      else if(len == "7")
     {
-        ctx.fillText(y[0],150,16);
-        ctx.fillText(y[1],130,24);
-        ctx.fillText(y[2],150,32);
-        ctx.fillText(y[3],150,40);
-        ctx.fillText(y[4],120,16);
-        ctx.fillText(y[5],180,16);
-        ctx.fillText(y[6],165,24);
+        ctx.fillText(y[0],145,15);
+        ctx.fillText(y[1],180,15);
+        ctx.fillText(y[2],180,25);
+        ctx.fillText(y[3],180,35);
+        ctx.fillText(y[4],180,45);
+        ctx.fillText(y[5],180,55);
+        ctx.fillText(y[6],215,15);
     }
 }
