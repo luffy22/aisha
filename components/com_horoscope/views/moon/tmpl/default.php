@@ -22,6 +22,9 @@
   <li class="nav-item">
     <a class="nav-link" href="<?php echo JURi::base() ?>getnavamsha?chart=<?php echo $chart_id ?>">Navamsha</a>
   </li>
+   <li class="nav-item">
+    <a class="nav-link" href="<?php echo JURi::base() ?>getvimshottari?chart=<?php echo $chart_id ?>">Vimshottari</a>
+  </li>
 </ul><div class="mb-2"></div>
 <?php
 /**

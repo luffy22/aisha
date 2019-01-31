@@ -29,6 +29,9 @@ $text       = $this->data['introtext'];
   <li class="nav-item">
     <a class="nav-link" href="<?php echo JURi::base() ?>getnavamsha?chart=<?php echo $chart_id ?>">Navamsha</a>
   </li>
+   <li class="nav-item">
+    <a class="nav-link" href="<?php echo JURi::base() ?>getvimshottari?chart=<?php echo $chart_id ?>">Vimshottari</a>
+  </li>
 </ul><div class="mb-2"></div>
 <div id="<?php echo $this->data['id']; ?>" class="accordion-id"></div>
 <div class="alert-info lead breadcrumb"><?php echo "You are born with Moon in ".$title ?></div>

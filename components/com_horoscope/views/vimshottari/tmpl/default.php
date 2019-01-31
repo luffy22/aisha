@@ -32,11 +32,12 @@ $a = 0;
     <a class="nav-link" href="<?php echo JURi::base() ?>getnakshatra?chart=<?php echo $chart_id ?>">Nakshatra</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link active">Navamsha</a>
+    <a class="nav-link" href="<?php echo JURi::base() ?>getnavamsha?chart=<?php echo $chart_id ?>">Navamsha</a>
   </li>
-   <li class="nav-item">
-    <a class="nav-link" href="<?php echo JURi::base() ?>getvimshottari?chart=<?php echo $chart_id ?>">Vimshottari</a>
+  <li class="nav-item">
+    <a class="nav-link active">Vimshottari</a>
   </li>
+   
 </ul><div class="mb-2"></div>
 <canvas id="navamsha_canvas" height="260">
 Your browser does not support the HTML5 canvas tag.
