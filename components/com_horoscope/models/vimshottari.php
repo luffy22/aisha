@@ -57,24 +57,43 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
             $sign           = $this->calcDetails($dist);
             $dist           = array($planet."_dist"=>$dist2);
             $details        = array($planet=>$sign);
-            $navamsha       = $this->getNavamsha($planet, $sign, $dist2);
-            $data           = array_merge($data, $dist, $details, $navamsha);
+            $data           = array_merge($data, $dist, $details);
         }
-        print_r($data);exit;
+        //print_r($data);exit;
         $moon_sign          = $data['Moon'];                  
         $moon_dist          = $data['Moon_dist'];
-        $vim_dasha          = $this->getVimshottariDasha($moon_sign, $moon_dist);
+        $moon_nakshatra     = $this->getNakshatra($moon_sign, $moon_dist);
+        $nakshatra_deg      = $this->getNakshatraDeg($moon_nakshatra);
+        
     }
-    protected function getVimshottariDasha($moon_sign, $moon_dist)
+    protected function getNakshatra($moon_sign, $moon_dist)
     {
-        echo $moon_sign."&nbsp;".$moon_dist;exit;
+        //echo $moon_sign."&nbsp;".$moon_dist;exit;
         $db                 = JFactory::getDbo();  // Get db connection
         $query              = $db->getQuery(true);
-        $query              ->select($db->quoteName(array('down_deg','up_deg')));
-        $query              ->from($db->quoteName('#__horo_query'));
-        $query              ->where($db->quoteName('uniq_id').' = '.$db->quote($horo_id));
-        $db                 ->setQuery($query);
-        $db->execute();
+        $query              ->select($db->quoteName('nakshatra'));
+        $query          ->from($db->quoteName('#__nakshatras'));
+        $query          ->where($db->quoteName('sign').'='.$db->quote($moon_sign).' AND '.
+                                $db->quote($moon_dist).' BETWEEN '.
+                                $db->quoteName('down_deg').' AND '.
+                                $db->quoteName('up_deg'));
+        $db             ->setQuery($query);
         $result         = $db->loadAssoc();
+        return $result['nakshatra'];
+        
+    }
+    protected function getNakshatraDeg($nakshatra)
+    {
+        //echo $moon_sign."&nbsp;".$moon_dist;exit;
+        $db                 = JFactory::getDbo();  // Get db connection
+        $query              = $db->getQuery(true);
+        $query              ->select($db->quoteName(array('sign','down_deg','up_deg')));
+        $query              ->from($db->quoteName('#__nakshatras'));
+        $query              ->where($db->quoteName('nakshatra').'='.$db->quote($nakshatra));
+        $db                 ->setQuery($query);
+        $result             = $db->loadAssocList();
+        print_r($result);exit;
+        
+        
     }
 }
