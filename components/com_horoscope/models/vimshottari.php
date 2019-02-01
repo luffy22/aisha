@@ -63,7 +63,7 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         $moon_sign          = $data['Moon'];                  
         $moon_dist          = $data['Moon_dist'];
         $moon_nakshatra     = $this->getNakshatra($moon_sign, $moon_dist);
-        $nakshatra_deg      = $this->getNakshatraDeg($moon_nakshatra);
+        $nakshatra_deg      = $this->getNakshatraDeg($moon_sign, $moon_nakshatra);
         
     }
     protected function getNakshatra($moon_sign, $moon_dist)
@@ -82,7 +82,7 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         return $result['nakshatra'];
         
     }
-    protected function getNakshatraDeg($nakshatra)
+    protected function getNakshatraDeg($sign, $nakshatra)
     {
         //echo $moon_sign."&nbsp;".$moon_dist;exit;
         $db                 = JFactory::getDbo();  // Get db connection
@@ -92,7 +92,9 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         $query              ->where($db->quoteName('nakshatra').'='.$db->quote($nakshatra));
         $db                 ->setQuery($query);
         $result             = $db->loadAssocList();
-        print_r($result);exit;
+        $count              = count($result);
+        print_r($count);exit;
+        
         
         
     }
