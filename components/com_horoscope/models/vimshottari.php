@@ -63,7 +63,8 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         $moon_sign          = $data['Moon'];                  
         $moon_dist          = $data['Moon_dist'];
         $moon_nakshatra     = $this->getNakshatra($moon_sign, $moon_dist);
-        $nakshatra_deg      = $this->getNakshatraDeg($moon_sign, $moon_nakshatra);
+        $nakshatra_deg      = $this->getNakshatraDeg($moon_sign, $moon_nakshatra, $moon_dist);
+        print_r($nakshatra_deg);exit;
         
     }
     protected function getNakshatra($moon_sign, $moon_dist)
@@ -82,7 +83,13 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         return $result['nakshatra'];
         
     }
-    protected function getNakshatraDeg($sign, $nakshatra)
+    /*
+     * This method returns the distance covered and left to be covered.
+     * @param sign The astrological sign in which moon is located
+     * @param nakshatra The actual nakshatra in which moon is located
+     * @param degree The degree in nakshatra where moon is located
+     */
+    protected function getNakshatraDeg($sign, $nakshatra, $deg)
     {
         //echo $moon_sign."&nbsp;".$moon_dist;exit;
         $db                 = JFactory::getDbo();  // Get db connection
@@ -92,9 +99,44 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         $query              ->where($db->quoteName('nakshatra').'='.$db->quote($nakshatra));
         $db                 ->setQuery($query);
         $result             = $db->loadAssocList();
+        //print_r($result);exit;
+        //echo $sign." ".$nakshatra." ".$deg;exit;
         $count              = count($result);
-        print_r($count);exit;
-        
+        if($count > 1)
+        {
+            $sign1          = $result[0]['sign'];
+            $down_deg1      = $result[0]['down_deg'];
+            $up_deg1        = $result[0]['up_deg'];//echo $up_deg1;exit;
+            $sign2          = $result[1]['sign'];
+            $down_deg2      = $result[1]['down_deg'];
+            $up_deg2        = $result[1]['up_deg'];
+            if($up_deg1 == "29.59")
+            {
+                $up_deg1    = 29.99;
+            }
+            if($sign == $sign1)
+            {
+                $down_diff  = $deg  - $down_deg1;
+                $up_diff    = ((($up_deg1+0.01)-$deg) + ($up_deg2+0.01)-$down_deg2);
+                return array("down_diff"=>$down_diff, "up_diff"=>$up_diff);
+            }
+            else
+            {
+                $down_diff  = (($deg  - $down_deg2) + (($up_deg1+0.01)-$down_deg1));
+                $up_diff    = ($up_deg2+0.01)- $deg;
+                return array("down_diff"=>$down_diff, "up_diff"=>$up_diff);
+            }
+        }
+        else 
+        {
+            $sign           = $result[0]['sign'];
+            $down_deg       = $result[0]['down_deg'];
+            $up_deg         = $result[0]['up_deg'];
+            
+            $down_diff      = $deg - $down_deg;//echo $down_diff;exit;
+            $up_diff        = ($up_deg+0.01) - $deg;//echo $up_diff;exit;
+            return array("down_diff"=>$down_diff, "up_diff"=>$up_diff);
+        }
         
         
     }
