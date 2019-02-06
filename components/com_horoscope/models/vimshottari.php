@@ -64,7 +64,7 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         $moon_dist          = $data['Moon_dist'];
         $moon_nakshatra     = $this->getNakshatra($moon_sign, $moon_dist);
         $nakshatra_deg      = $this->getNakshatraDeg($moon_sign, $moon_nakshatra, $moon_dist);
-        print_r($nakshatra_deg);exit;
+        print_r($nakshatra_deg);exit; // yes it calls
         
     }
     protected function getNakshatra($moon_sign, $moon_dist)
