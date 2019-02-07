@@ -64,7 +64,7 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         $moon_dist          = $data['Moon_dist'];
         $moon_nakshatra     = $this->getNakshatra($moon_sign, $moon_dist);
         $nakshatra_deg      = $this->getNakshatraDeg($moon_sign, $moon_nakshatra, $moon_dist);
-        print_r($nakshatra_deg);exit; // yes it calls
+        $get_dasha          = $this->getDashaPeriod($nakshatra_deg);
         
     }
     protected function getNakshatra($moon_sign, $moon_dist)
@@ -94,11 +94,12 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         //echo $moon_sign."&nbsp;".$moon_dist;exit;
         $db                 = JFactory::getDbo();  // Get db connection
         $query              = $db->getQuery(true);
-        $query              ->select($db->quoteName(array('sign','down_deg','up_deg')));
+        $query              ->select($db->quoteName(array('sign','nakshatra_lord','down_deg','up_deg')));
         $query              ->from($db->quoteName('#__nakshatras'));
         $query              ->where($db->quoteName('nakshatra').'='.$db->quote($nakshatra));
         $db                 ->setQuery($query);
         $result             = $db->loadAssocList();
+        $nakshatra_lord     = $result[0]['nakshatra_lord'];
         //print_r($result);exit;
         //echo $sign." ".$nakshatra." ".$deg;exit;
         $count              = count($result);
@@ -118,13 +119,11 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
             {
                 $down_diff  = $deg  - $down_deg1;
                 $up_diff    = ((($up_deg1+0.01)-$deg) + ($up_deg2+0.01)-$down_deg2);
-                return array("down_diff"=>$down_diff, "up_diff"=>$up_diff);
             }
             else
             {
                 $down_diff  = (($deg  - $down_deg2) + (($up_deg1+0.01)-$down_deg1));
                 $up_diff    = ($up_deg2+0.01)- $deg;
-                return array("down_diff"=>$down_diff, "up_diff"=>$up_diff);
             }
         }
         else 
@@ -135,9 +134,31 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
             
             $down_diff      = $deg - $down_deg;//echo $down_diff;exit;
             $up_diff        = ($up_deg+0.01) - $deg;//echo $up_diff;exit;
-            return array("down_diff"=>$down_diff, "up_diff"=>$up_diff);
         }
+        $down_diff          = explode(".",$down_diff);
+        $up_diff            = explode(".",$up_diff);
+        $down_diff          = ($down_diff[0]*60)+$down_diff[1];
+        $up_diff            = ($up_diff[0]*60)+$up_diff[1];
+        return array("nakshatra_lord"=>$nakshatra_lord,"down_diff"=>$down_diff, "up_diff"=>$up_diff);
         
+    }
+    protected function getDashaPeriod($details)
+    {
+        //print_r($details);exit;
+        $nakshatra_lord     = $details['nakshatra_lord'];
+        $down_deg           = $details['down_diff'];
+        $up_deg             = $details['up_diff'];
         
+        $remainder          = $up_deg/800;
+        $year               = $remainder*10;
+        $month              = explode(".",$year);
+        $year               = $month[0];
+        $month              = ("0.".$month[1])*12;
+        $day                = explode(".",$month);
+        $month              = $day[0];
+        $day                = round(("0.".round($day[1],1))*30,0);
+        
+        echo $year." years ".$month." months ".$day." days";exit;
+        //$remain_period      = 
     }
 }
