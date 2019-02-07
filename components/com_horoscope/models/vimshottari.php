@@ -64,7 +64,7 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         $moon_dist          = $data['Moon_dist'];
         $moon_nakshatra     = $this->getNakshatra($moon_sign, $moon_dist);
         $nakshatra_deg      = $this->getNakshatraDeg($moon_sign, $moon_nakshatra, $moon_dist);
-        $get_dasha          = $this->getDashaPeriod($nakshatra_deg);
+        $get_dasha          = $this->getDashaPeriod($dob_tob, $nakshatra_deg);
         
     }
     protected function getNakshatra($moon_sign, $moon_dist)
@@ -142,23 +142,34 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         return array("nakshatra_lord"=>$nakshatra_lord,"down_diff"=>$down_diff, "up_diff"=>$up_diff);
         
     }
-    protected function getDashaPeriod($details)
+    protected function getDashaPeriod($date_time, $details)
     {
-        //print_r($details);exit;
-        $nakshatra_lord     = $details['nakshatra_lord'];
+        $date_time          = explode(" ",$date_time);
+        $dasha              = array("Ketu"=>7,"Venus"=>20,"Sun"=>6,"Moon"=>10,
+                                    "Mars"=>7,"Rahu"=>18,"Jupiter"=>16,
+                                    "Saturn"=>19,"Mercury"=>17);        // total years of dasha for planets
+        $nakshatra_lord     = $details['nakshatra_lord'];       // get the lord of nakshatra where moon is located
+        $dasha_years        = $dasha[$nakshatra_lord];      // get the total years dasha would last
+        
         $down_deg           = $details['down_diff'];
         $up_deg             = $details['up_diff'];
-        
         $remainder          = $up_deg/800;
-        $year               = $remainder*10;
+        $year               = $remainder*$dasha_years;
         $month              = explode(".",$year);
         $year               = $month[0];
         $month              = ("0.".$month[1])*12;
         $day                = explode(".",$month);
         $month              = $day[0];
-        $day                = round(("0.".round($day[1],1))*30,0);
+        $day                = ("0.".$day[1])*30;
+        $day                = explode(".",$day);
+        $day                = $day[0];
+        $date               = explode("-",$date_time[0]);
+        $time               = explode(":",$date_time[1]);
         
-        echo $year." years ".$month." months ".$day." days";exit;
-        //$remain_period      = 
+        $dob                = new DateTime();
+        $dob                ->setDate($date[0],$date[1],$date[2]);
+        $dob                ->setTime($time[0],$time[1],$time[2]);
+        $dob                ->sub(new DateInterval('P'.$year.'Y'.$month.'M'.$day.'D'));
+        echo $dob->format('Y-m-d H:i:s');exit;
     }
 }
