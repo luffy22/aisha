@@ -144,6 +144,7 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
     }
     protected function getDashaPeriod($date_time, $details)
     {
+        $array              = array();
         $dasha              = array("Ketu"=>7,"Venus"=>20,"Sun"=>6,"Moon"=>10,
                                     "Mars"=>7,"Rahu"=>18,"Jupiter"=>16,
                                     "Saturn"=>19,"Mercury"=>17);        // total years of dasha for planets
@@ -162,34 +163,43 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         $day                = ("0.".$day[1])*30;
         $day                = explode(".",$day);
         $day                = $day[0];
+        $balance            = array("balance_of_dasha" => $year." Years ".$month." Months ".$day." Days");
+        $array              = array_merge($array, $balance);
+        //echo $year." Years ".$month." Months ".$day." Days";exit;
+        $dasha              = new DateTime($date_time);
+        $dasha              ->add(new DateInterval('P'.$year.'Y'.$month.'M'.$day.'D'));
         
-        echo $year." Years ".$month." Months ".$day." Days";exit;
-        //$dob              = new DateTime($date_time);
-        //$dob              ->add(new DateInterval('P'.$year.'Y'.$month.'M'.$day.'D'));
-        
-        /*$dasha              = new DateTime($date_time);
+        $dob                = new DateTime($date_time);
         // database connection
         $db                 = JFactory::getDbo();  // Get db connection
         $query              = $db->getQuery(true);
-        $query              = "SELECT main_period, sub_period, year_months_days FROM jv_horo_vimshottari where main_period = '".strtolower($nakshatra_lord)."'";
+        $query              = "SELECT main_period, sub_period, year_months_days FROM jv_horo_vimshottari where main_period = '".strtolower($nakshatra_lord)."' ORDER BY vim_id DESC";
         $db                 ->setQuery($query);
         $result             = $db->loadAssocList();
+        //print_r($result);exit;
         foreach($result as $data)
         {
             $period         = $data['year_months_days'];
-            $dasha          ->add(new DateInterval($period));
+            $end            = $dasha->format('Y-m-d');
+            $dasha          ->sub(new DateInterval($period));
+            $start          = $dasha->format('Y-m-d');
             if($dob < $dasha)
             {
-                continue;
+                echo "Main Period: ".$data['main_period']."<br/>";
+                echo "Sub Period: ".$data['sub_period']."<br/>";
+                echo $period."<br/>";
+                echo "Dasha Start: ".$start."<br/>";
+                echo "Dasha End: ".$end."<br/><br/><br/>";     
             }
             else
             {
                 echo "Main Period: ".$data['main_period']."<br/>";
                 echo "Sub Period: ".$data['sub_period']."<br/>";
-                $dasha          ->add(new DateInterval($period));
-                echo $dasha->format('Y-m-d');exit;
+                echo $period."<br/>";
+                echo "DOB: ".$dob->format('Y-m-d')."<br/>";
+                echo "Dasha End: ".$end."<br/>";exit;
             }
             
-        }*/
+        }
     }
 }
