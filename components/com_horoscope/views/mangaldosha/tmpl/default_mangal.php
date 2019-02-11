@@ -117,8 +117,6 @@ else if($percent == "100")
 ?>
 </p>
 <div class="mb-3"></div>
-<p>Note: Only aspects and co-tenancy of 9 planets in traditional Vedic Astrology are analyzed.</p>
-<div class="mb-3"></div>
 <div class="lead alert alert-dark">Co-tenants of Mars</div>
 <?php 
 if($this->data['coten_count'] > 0)
@@ -142,6 +140,7 @@ for($i=0;$i<$this->data['coten_count'];$i++)
 <?php
 }
 ?>
+<p><strong>Note: Only co-tenancy of 9 planets in traditional Vedic Astrology are analyzed.</strong></p>
 <div class="mb-3"></div>
 <div class="lead alert alert-dark">Aspects on Mars</div>
 <?php
@@ -171,5 +170,6 @@ for($i=0;$i<$this->data['asp_count'];$i++)
 <?php
 }
 ?>
+<p><strong>Note: Only aspects of 9 planets in traditional Vedic Astrology are analyzed.</strong></p>
 <div class="mb-3"></div>
 <?php unset($this->data); ?>

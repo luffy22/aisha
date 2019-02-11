@@ -221,13 +221,11 @@ class HoroscopeModelMangalDosha extends HoroscopeModelLagna
             
             if($data[$planets[$i]."_sign"]== $mars_sign)
             {
-                $planet         = strtolower($planets[$i]);
-                $query          ->select($db->quoteName(array('result')));
-                $query          ->from($db->quoteName('#__planet_cotenant'));
-                $query          ->where($db->quoteName('mars').' = '.$db->quote('yes').' AND'.
-                                        $db->quoteName($planet).' = '.$db->quote('yes'));
+                $planet         = strtolower(trim($planets[$i]));
+                $query          = "SELECT result from jv_planet_cotenant where mars='yes' and ".$planet."='yes'";
                 $db             ->setQuery($query);
                 $result         = $db->loadAssoc();
+                //print_r($result);exit;
                 $details        = array("coplanet_".$j => $planets[$i], "coplanet_".$j."_details" => $result['result']);
                 $stack          = array_merge($stack,$details);
                 $j++;

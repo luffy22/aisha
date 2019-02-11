@@ -1,7 +1,7 @@
 <html>
  <head>
 <style type="text/css">
-#horo_canvas{width: 100%;padding: 0 !important;margin: 0 !important;}
+#horo_canvas{width: 100%;padding: 0 !important;margin: 0 !important;}@media (min-width: 768px) {#horo_canvas{width:65%}}
 </style>
 </head>
 <body onload="javascript:draw_horoscope();getAscendant()">
@@ -76,11 +76,10 @@ $planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Ven
                   { echo "No"; } ?></td>
         </tr>
     </table>
-<div class="mh-100 m-0 p-0">    
+    
 <canvas id="horo_canvas" height="260">
 Your browser does not support the HTML5 canvas tag.
-</canvas></div>
-    <div class="mb-2"></div>
+</canvas><div class="mb-2"></div>
     <p class="float-sm-right">(R) signifies that planet is retrograde at time of birth</p>
     <table class="table table-bordered table-striped table-responsive">
         <tr>

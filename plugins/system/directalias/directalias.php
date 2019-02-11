@@ -5,12 +5,27 @@
  * @license        http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
  */
 
+use Joomla\CMS\Application\SiteApplication;
+use Joomla\CMS\Form\Form;
+use Joomla\CMS\Plugin\CMSPlugin;
+
 defined('_JEXEC') or die('Restricted access');
 
-class plgSystemDirectalias extends JPlugin
+/**
+ * Class plgSystemDirectalias
+ *
+ * @since 1.0
+ */
+class plgSystemDirectalias extends CMSPlugin
 {
 	/**
-	 * @param   JForm    $form The form
+	 * @var SiteApplication
+	 * @since 1.2.1
+	 */
+	protected $app;
+
+	/**
+	 * @param   Form $form The form
 	 *
 	 * @return  boolean
 	 *
@@ -23,13 +38,6 @@ class plgSystemDirectalias extends JPlugin
 			return true;
 		}
 
-		if (!$form instanceof JForm)
-		{
-			$this->_subject->setError('JERROR_NOT_A_FORM');
-
-			return false;
-		}
-
 		if ($form->getName() !== 'com_menus.item')
 		{
 			return true;
@@ -37,9 +45,8 @@ class plgSystemDirectalias extends JPlugin
 
 		$this->loadLanguage();
 
-		JForm::addFieldPath(__DIR__);
+		Form::addFieldPath(__DIR__);
 
-		/** @noinspection ExceptionsAnnotatingAndHandlingInspection */
 		$form->setFieldAttribute('alias', 'type', 'directaliasfield');
 
 		$form->load('<?xml version="1.0" encoding="utf-8"?>
@@ -53,17 +60,18 @@ class plgSystemDirectalias extends JPlugin
 			</form>', false);
 
 		// Display real switchers in Falang
-		/** @noinspection ExceptionsAnnotatingAndHandlingInspection */
-		if (JFactory::getApplication()->input->get('option') === 'com_falang')
+		if ($this->app->input->get('option') === 'com_falang')
 		{
 			$form->load('<?xml version="1.0" encoding="utf-8"?>
 				<form>
 					<fields name="params">
 						<fieldset name="menu-options">
+							<!--suppress HtmlUnknownAttribute -->
 							<field name="direct_alias" type="radio" class="btn-group btn-group-yesno" default="0" label="PLG_SYSTEM_FIELD_DIRECT_ALIAS_MODE" description="PLG_SYSTEM_DIRECT_ALIAS_DIRECT_TIP_DESC">
 								<option value="1">PLG_SYSTEM_DIRECT_ALIAS_DIRECT</option>
 								<option value="0">PLG_SYSTEM_DIRECT_ALIAS_RELATIVE</option>
 							</field>
+							<!--suppress HtmlUnknownAttribute -->
 							<field name="absent_alias" type="radio" class="btn-group btn-group-yesno" default="0" label="PLG_SYSTEM_FIELD_ABSENT_ALIAS_MODE" description="PLG_SYSTEM_DIRECT_ALIAS_ABSENT_TIP_DESC">
 								<option value="1">PLG_SYSTEM_DIRECT_ALIAS_ABSENT</option>
 								<option value="0">PLG_SYSTEM_DIRECT_ALIAS_PRESENT</option>
@@ -76,11 +84,12 @@ class plgSystemDirectalias extends JPlugin
 		return true;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	public function onAfterInitialise()
 	{
-		$app = JFactory::getApplication();
-
-		if ($app->isAdmin())
+		if ($this->app->isClient('administrator'))
 		{
 			return;
 		}
@@ -89,7 +98,11 @@ class plgSystemDirectalias extends JPlugin
 		if (class_exists('plgSystemFalangdriver'))
 		{
 			/** @noinspection NullPointerExceptionInspection */
-			$app::getRouter()->attachParseRule(array($this, 'updateDirectRoutes'));
+			/** @noinspection PhpUndefinedMethodInspection */
+			SiteApplication::getRouter()->attachParseRule([
+				$this,
+				'updateDirectRoutes',
+			]);
 		}
 		else
 		{
@@ -97,6 +110,9 @@ class plgSystemDirectalias extends JPlugin
 		}
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	public function updateDirectRoutes()
 	{
 		// Execute only once since method can be attached as parse rule and executed multiple times.
@@ -106,15 +122,16 @@ class plgSystemDirectalias extends JPlugin
 			return;
 		}
 		$updated = true;
-		
-		$menu = JFactory::getApplication()->getMenu();
 
-		// I hate Joomla sometimes... somebody is crazy on privates.
-		$rProperty = new ReflectionProperty($menu, '_items');
-		$rProperty->setAccessible(true);
-		$items = $rProperty->getValue($menu);
+		/** @var \Joomla\CMS\Menu\SiteMenu $menu */
+		$menu = $this->app->getMenu();
 
-		$direct_aliases = array();
+		// Get items.
+		/** @noinspection PhpUnhandledExceptionInspection */
+		/** @var \ReflectionProperty $rProperty */
+		$items = $this->getMenuItems($menu, $rProperty);
+
+		$direct_aliases = [];
 
 		$shorten_all = $this->params->get('shorten_all');
 
@@ -174,5 +191,22 @@ class plgSystemDirectalias extends JPlugin
 				}
 			}
 		}
+	}
+
+	/**
+	 * @param \Joomla\CMS\Menu\SiteMenu $menu
+	 * @param \ReflectionProperty       $rProperty
+	 *
+	 * @return array
+	 * @throws \ReflectionException
+	 * @since 2.0
+	 */
+	protected function getMenuItems($menu, &$rProperty = null)
+	{
+		/** @noinspection PhpUnhandledExceptionInspection */
+		$rProperty = new ReflectionProperty($menu, version_compare(JVERSION, '4.0', 'l') ? '_items' : 'items');
+		$rProperty->setAccessible(true);
+
+		return $rProperty->getValue($menu);
 	}
 }

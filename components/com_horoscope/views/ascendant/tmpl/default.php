@@ -1,7 +1,7 @@
 <html>
  <head>
 <style type="text/css">
-#asc_canvas{width: 100%;height: auto;}
+#asc_canvas{width: 100%;height: auto;}@media (min-width: 768px) {#asc_canvas{width:65%}}
 </style>
 </head>
 <body onload="javascript:draw_horoscope();getAscendant();">

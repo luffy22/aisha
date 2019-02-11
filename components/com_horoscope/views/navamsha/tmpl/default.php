@@ -13,7 +13,7 @@ $a = 0;
 <html>
  <head>
 <style type="text/css">
-#navamsha_canvas{width: 100%;height: auto;}
+#navamsha_canvas{width: 100%;height: auto;}@media (min-width: 768px) {#navamsha_canvas{width:65%}}
 </style>
  </head>
  <body onload="javascript:draw_horoscope();getNavamsha();">

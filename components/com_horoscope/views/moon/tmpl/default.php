@@ -1,7 +1,7 @@
 <html>
  <head>
 <style type="text/css">
-#moon_canvas{width: 100%;}
+#moon_canvas{width: 100%;}@media (min-width: 768px) {#moon_canvas{width:65%}}
 </style>
 </head>
 <body onload="javascript:draw_horoscope();getMoon();">
