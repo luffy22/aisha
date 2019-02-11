@@ -65,6 +65,8 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         $moon_nakshatra     = $this->getNakshatra($moon_sign, $moon_dist);
         $nakshatra_deg      = $this->getNakshatraDeg($moon_sign, $moon_nakshatra, $moon_dist);
         $get_dasha          = $this->getDashaPeriod($dob_tob, $nakshatra_deg);
+        $period_id          = $get_dasha['dob_period_id'];$dasha_end    = $get_dasha['dob_sub_end'];
+        $get_remain_dasha   = $this->getRemainDasha($period_id, $dasha_end);
         
     }
     protected function getNakshatra($moon_sign, $moon_dist)
@@ -173,7 +175,7 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         // database connection
         $db                 = JFactory::getDbo();  // Get db connection
         $query              = $db->getQuery(true);
-        $query              = "SELECT main_period, sub_period, year_months_days FROM jv_horo_vimshottari where main_period = '".strtolower($nakshatra_lord)."' ORDER BY vim_id DESC";
+        $query              = "SELECT vim_id, main_period, sub_period, year_months_days FROM jv_horo_vimshottari where main_period = '".strtolower($nakshatra_lord)."' ORDER BY vim_id DESC";
         $db                 ->setQuery($query);
         $result             = $db->loadAssocList();
         //print_r($result);exit;
@@ -185,21 +187,46 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
             $start          = $dasha->format('Y-m-d');
             if($dob < $dasha)
             {
-                echo "Main Period: ".$data['main_period']."<br/>";
-                echo "Sub Period: ".$data['sub_period']."<br/>";
-                echo $period."<br/>";
-                echo "Dasha Start: ".$start."<br/>";
-                echo "Dasha End: ".$end."<br/><br/><br/>";     
+                continue; 
             }
             else
             {
-                echo "Main Period: ".$data['main_period']."<br/>";
-                echo "Sub Period: ".$data['sub_period']."<br/>";
-                echo $period."<br/>";
-                echo "DOB: ".$dob->format('Y-m-d')."<br/>";
-                echo "Dasha End: ".$end."<br/>";exit;
+                $dob_dasha      = array("dob_period_id"=>$data['vim_id'],"main_dob_period"=>$data['main_period'],"sub_dob_period"=>$data['sub_period'],
+                                        "dob_sub_start"=>$dob->format('Y-m-d'), "dob_sub_end"=>$end);
+                $array          = array_merge($array, $dob_dasha);
+                return $array;exit;
             }
             
         }
+        
+    }
+    protected function getRemainDasha($period_id, $dasha_end)
+    {
+        $dasha                  = new DateTime($dasha_end);
+        
+        $db                     = JFactory::getDbo();  // Get db connection
+        $query                  = $db->getQuery(true);
+        $new_array              = array();
+        $query                  = "SELECT main_period, sub_period, year_months_days FROM jv_horo_vimshottari WHERE vim_id > '".$period_id."' UNION "
+                . "                 SELECT main_period, sub_period, year_months_days FROM jv_horo_vimshottari WHERE  vim_id < '".$period_id."'";
+        $db                 ->setQuery($query);
+        $result             = $db->loadAssocList();
+        foreach($result as $data)
+        {
+            $period         = $data['year_months_days'];
+            $start          = $dasha->format('d-m-Y');
+            $dasha          ->add(new DateInterval($period));
+            $end          = $dasha->format('d-m-Y');
+            echo "Start Of Dasha:". $start."<br/>";
+            echo "End Of Dasha:". $end."<br/>";;
+            echo $period."<br/>";
+            echo "Main Dasha: ".$data['main_period']."<br/>";;
+            echo "Sub Period: ".$data['sub_period']."<br/><br/><br/>";
+            
+            $dob_dasha      = array("main_dasha_period"=>$data['main_period'],"sub_dasha_period"=>$data['sub_period'],
+                                        "dasha_sub_start"=>$start, "dasha_sub_end"=>$end);
+            //$new_array      = array_merge($new_array, $dob_dasha);
+        }
+       
     }
 }
