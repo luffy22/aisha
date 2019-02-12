@@ -43,7 +43,7 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         //echo $utcTimestamp;exit;
         //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
 
-        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p0142536m789 -g, -head", $output);
+        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p0142536m -g, -head", $output);
         //print_r($output);exit;
 
         # OUTPUT ARRAY
@@ -55,18 +55,21 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         {
             $dist2          = $this->convertDecimalToDegree($dist, "details");
             $sign           = $this->calcDetails($dist);
+            $navamsha       = $this->getNavamsha($planet,$sign,$dist2);
             $dist           = array($planet."_dist"=>$dist2);
-            $details        = array($planet=>$sign);
-            $data           = array_merge($data, $dist, $details);
+            $details        = array($planet."_sign"=>$sign);
+            $data           = array_merge($data, $dist, $details, $navamsha);
         }
         //print_r($data);exit;
-        $moon_sign          = $data['Moon'];                  
+        $moon_sign          = $data['Moon_sign'];                  
         $moon_dist          = $data['Moon_dist'];
         $moon_nakshatra     = $this->getNakshatra($moon_sign, $moon_dist);
         $nakshatra_deg      = $this->getNakshatraDeg($moon_sign, $moon_nakshatra, $moon_dist);
         $get_dasha          = $this->getDashaPeriod($dob_tob, $nakshatra_deg);
         $period_id          = $get_dasha['dob_period_id'];$dasha_end    = $get_dasha['dob_sub_end'];
         $get_remain_dasha   = $this->getRemainDasha($period_id, $dasha_end);
+        $data               = array_merge($data, $get_dasha, $get_remain_dasha);
+        return $data;
         
     }
     protected function getNakshatra($moon_sign, $moon_dist)
@@ -203,7 +206,8 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
     protected function getRemainDasha($period_id, $dasha_end)
     {
         $dasha                  = new DateTime($dasha_end);
-        
+        flush($array);
+        $array                  = array();
         $db                     = JFactory::getDbo();  // Get db connection
         $query                  = $db->getQuery(true);
         $new_array              = array();
@@ -211,22 +215,22 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
                 . "                 SELECT main_period, sub_period, year_months_days FROM jv_horo_vimshottari WHERE  vim_id < '".$period_id."'";
         $db                 ->setQuery($query);
         $result             = $db->loadAssocList();
+        $i                  = 0;
+        //print_r($result);exit;
         foreach($result as $data)
-        {
+        {            
             $period         = $data['year_months_days'];
             $start          = $dasha->format('d-m-Y');
             $dasha          ->add(new DateInterval($period));
-            $end          = $dasha->format('d-m-Y');
-            echo "Start Of Dasha:". $start."<br/>";
-            echo "End Of Dasha:". $end."<br/>";;
-            echo $period."<br/>";
-            echo "Main Dasha: ".$data['main_period']."<br/>";;
-            echo "Sub Period: ".$data['sub_period']."<br/><br/><br/>";
+            $end            = $dasha->format('d-m-Y');
+                        
+            $dob_dasha      = array("main_period_".$i=>$data['main_period'],"sub_period_".$i=>$data['sub_period'],
+                                        "sub_start_".$i=>$start, "sub_end_".$i=>$end);
+            $array          = array_merge($array, $dob_dasha);
+            $i++;
             
-            $dob_dasha      = array("main_dasha_period"=>$data['main_period'],"sub_dasha_period"=>$data['sub_period'],
-                                        "dasha_sub_start"=>$start, "dasha_sub_end"=>$end);
-            //$new_array      = array_merge($new_array, $dob_dasha);
         }
        
+      return $array;
     }
 }
