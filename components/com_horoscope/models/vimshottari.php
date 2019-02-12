@@ -67,7 +67,7 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         $nakshatra_deg      = $this->getNakshatraDeg($moon_sign, $moon_nakshatra, $moon_dist);
         $get_dasha          = $this->getDashaPeriod($dob_tob, $nakshatra_deg);
         $period_id          = $get_dasha['dob_period_id'];$dasha_end    = $get_dasha['dob_sub_end'];
-        $get_remain_dasha   = $this->getRemainDasha($period_id, $dasha_end);
+        $get_remain_dasha   = array("get_remain_dasha"=>$this->getRemainDasha($period_id, $dasha_end));
         $data               = array_merge($data, $get_dasha, $get_remain_dasha);
         return $data;
         
@@ -215,7 +215,8 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
                 . "                 SELECT main_period, sub_period, year_months_days FROM jv_horo_vimshottari WHERE  vim_id < '".$period_id."'";
         $db                 ->setQuery($query);
         $result             = $db->loadAssocList();
-        $i                  = 0;
+        return $result;
+        /*$i                  = 0;
         //print_r($result);exit;
         foreach($result as $data)
         {            
@@ -231,6 +232,6 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
             
         }
        
-      return $array;
+      return $array;*/
     }
 }

@@ -27,7 +27,7 @@ $(document).ready(function()
 $(document).ready(function()
   {
       //var id = $('.accordion-id').attr('id');
-      $('#about-us, #paid_dash, #free_dash, #dashboard_free, #ques_accordion').accordion({
+      $('#about-us, #paid_dash, #vimshottari, #free_dash, #dashboard_free, #ques_accordion').accordion({
             heightStyle : "content",
             collapsible : true
         });
