@@ -297,7 +297,54 @@ class HoroscopeModelLagna extends JModelItem
             return $deg."&deg;".$min."'".$sec."''";
         }
     }
-   
+        // adding degree, minutes seconds
+    public function addDegMinSec($deg1,$min1,$sec1,$deg2,$min2,$sec2)
+    {
+        $deg        = $deg1+$deg2;
+        $min        = $min1+$min2;
+        $sec        = $sec1+$sec2;
+        $value      = $this->convertDegMinSec($deg,$min,$sec);
+        return $value;
+    }
+    // subtracting degree minutes seconds
+    public function subDegMinSec($deg1,$min1,$sec1,$deg2,$min2,$sec2)
+    {
+        while($sec2>$sec1)
+        {
+            $min1       = $min1-1;
+            $sec1       = $sec1+60;
+        }
+        while($min2>$min1)
+        {
+            $deg1       = $deg1-1;
+            $min1       = $min1+60;
+        }
+        if($deg2 > $deg1)
+        $deg            = $deg2 - $deg1;
+        else
+        $deg            = $deg1 - $deg2;
+        $min            = $min1-$min2;
+        $sec            = $sec1-$sec2;
+        $value          = $deg.":".$min.":".$sec;
+        return $value;
+    }
+    // function checks seconds, minutes and degrees 
+    // seconds and mins less then 60 and adding to degrees
+    public function convertDegMinSec($deg,$min,$sec)
+    {
+        while($sec>=60)
+        {
+            $sec    = $sec-60;
+            $min    = $min+1; 
+        }
+        while($min>=60)
+        {
+            $min    = $min-60;
+            $deg    = $deg+1;
+        }
+        
+        return $deg.":".$min.":".$sec;
+    }
     public function convertDegMinToSec($deg,$min)
     {
         $sec        = ($deg*60*4)+($min*4);

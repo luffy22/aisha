@@ -5,7 +5,8 @@
         <group>
             <file>file:/var/www/html/aisha/components/com_horoscope/views/vimshottari/tmpl/default.php</file>
             <file>file:/var/www/html/aisha/components/com_horoscope/models/vimshottari.php</file>
-            <file>file:/var/www/html/aisha/templates/astroishatemplate/index.php</file>
+            <file>file:/var/www/html/aisha/templates/astroishatemplate/js/common.js</file>
+            <file>file:/var/www/html/aisha/components/com_horoscope/models/lagna.php</file>
         </group>
     </open-files>
 </project-private>

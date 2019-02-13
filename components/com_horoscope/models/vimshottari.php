@@ -67,8 +67,9 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         $nakshatra_deg      = $this->getNakshatraDeg($moon_sign, $moon_nakshatra, $moon_dist);
         $get_dasha          = $this->getDashaPeriod($dob_tob, $nakshatra_deg);
         $period_id          = $get_dasha['dob_period_id'];$dasha_end    = $get_dasha['dob_sub_end'];
+        //$get_current        = $this->getCurrentPeriod($period_id, $dasha_end);
         $get_remain_dasha   = array("get_remain_dasha"=>$this->getRemainDasha($period_id, $dasha_end));
-        $data               = array_merge($data, $get_dasha, $get_remain_dasha);
+        $data               = array_merge($data, $get_dasha,$get_remain_dasha);
         return $data;
         
     }
@@ -107,48 +108,47 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         $nakshatra_lord     = $result[0]['nakshatra_lord'];
         //print_r($result);exit;
         //echo $sign." ".$nakshatra." ".$deg;exit;
+        $deg                = explode(".",$deg);
         $count              = count($result);
         if($count > 1)
         {
             $sign1          = $result[0]['sign'];
-            $down_deg1      = $result[0]['down_deg'];
-            $up_deg1        = $result[0]['up_deg'];//echo $up_deg1;exit;
+            $down_deg1      = explode(".",$result[0]['down_deg']);
+            $up_deg1        = explode(".",$result[0]['up_deg']);//echo $up_deg1;exit;
             $sign2          = $result[1]['sign'];
-            $down_deg2      = $result[1]['down_deg'];
-            $up_deg2        = $result[1]['up_deg'];
-            if($up_deg1 == "29.59")
-            {
-                $up_deg1    = 29.99;
-            }
+            $down_deg2      = explode(".",$result[1]['down_deg']);
+            $up_deg2        = explode(".",$result[1]['up_deg']);
+
             if($sign == $sign1)
             {
-                $down_diff  = $deg  - $down_deg1;
-                $up_diff    = ((($up_deg1+0.01)-$deg) + ($up_deg2+0.01)-$down_deg2);
+                $down_diff  = $this->subDegMinSec($deg[0], $deg[1], 0, $down_deg1[0], $down_deg1[1], 0);
+                $up_diff1   = explode(":",$this->subDegMinSec($up_deg1[0], ($up_deg1[1]+1), 0, $deg[0], $deg[1], 0));
+                $up_diff2   = explode(":",$this->subDegMinSec($up_deg2[0], ($up_deg2[1]+1), 0, $down_deg2[0], $down_deg2[1], 0));
+                $up_diff    = $this->addDegMinSec($up_diff1[0],$up_diff1[1], 0, $up_diff2[0], $up_diff2[1], 0);
             }
             else
             {
-                $down_diff  = (($deg  - $down_deg2) + (($up_deg1+0.01)-$down_deg1));
-                $up_diff    = ($up_deg2+0.01)- $deg;
+                $down_diff1 = explode(":",$this->subDegMinSec($deg[0], $deg[1], 0, $down_deg2[0], $down_deg2[1], 0));
+                $down_diff2 = explode(":",$this->subDegMinSec($up_deg1[0], ($up_deg1[1]+1), 0, $down_deg1[0], $down_deg1[1],0));
+                $down_diff  = $this->addDegMinSec($down_diff1[0], $down_diff1[1], 0, $down_diff2[0], $down_diff2[1], 0);
+                $up_diff    = $this->subDegMinSec($up_deg2[0], ($up_deg2[1]+1), 0, $deg[0], $deg[1], 0);
             }
         }
         else 
         {
             $sign           = $result[0]['sign'];
-            $down_deg       = $result[0]['down_deg'];
-            $up_deg         = $result[0]['up_deg'];
-            
-            $down_diff      = $deg - $down_deg;//echo $down_diff;exit;
-            $up_diff        = ($up_deg+0.01) - $deg;//echo $up_diff;exit;
+            $down_deg       = explode(".",$result[0]['down_deg']);
+            $up_deg         = explode(".",$result[0]['up_deg']);
+            $down_diff      = $this->subDegMinSec($deg[0], $deg[1], 0, $down_deg[0], $down_deg[1], 0);
+            $up_diff        = $this->subDegMinSec($up_deg[0], ($up_deg[1]+1), 0, $deg[0], $deg[1], 0);
+
         }
-        $down_diff          = explode(".",$down_diff);
-        $up_diff            = explode(".",$up_diff);
-        $down_diff          = ($down_diff[0]*60)+$down_diff[1];
-        $up_diff            = ($up_diff[0]*60)+$up_diff[1];
-        return array("nakshatra_lord"=>$nakshatra_lord,"down_diff"=>$down_diff, "up_diff"=>$up_diff);
+       return array("nakshatra_lord"=>$nakshatra_lord,"down_diff"=>$down_diff, "up_diff"=>$up_diff);
         
     }
     protected function getDashaPeriod($date_time, $details)
     {
+        //print_r($details);exit;
         $array              = array();
         $dasha              = array("Ketu"=>7,"Venus"=>20,"Sun"=>6,"Moon"=>10,
                                     "Mars"=>7,"Rahu"=>18,"Jupiter"=>16,
@@ -156,9 +156,10 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         $nakshatra_lord     = $details['nakshatra_lord'];       // get the lord of nakshatra where moon is located
         $dasha_years        = $dasha[$nakshatra_lord];      // get the total years dasha would last
         
-        $down_deg           = $details['down_diff'];
-        $up_deg             = $details['up_diff'];
-        $remainder          = $up_deg/800;
+        $up_deg             = explode(":",$details['up_diff']);
+        $down_deg           = explode(":",$details['down_diff']);
+        $up_deg_min         = ($up_deg[0]*60)+$up_deg[1];
+        $remainder          = $up_deg_min/800;
         $year               = $remainder*$dasha_years;
         $month              = explode(".",$year);
         $year               = $month[0];
@@ -203,6 +204,40 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         }
         
     }
+    /*protected function getCurrentPeriod($id, $dasha_end)
+    {
+        $current            = new DateTime();
+        
+        $dasha              = new DateTime($dasha_end);
+        $array              = array();
+        $array                  = array();
+        $db                     = JFactory::getDbo();  // Get db connection
+        $query                  = $db->getQuery(true);
+        $new_array              = array();
+        $query                  = "SELECT main_period, sub_period, year_months_days FROM jv_horo_vimshottari WHERE vim_id > '".$id."' UNION "
+                . "                 SELECT main_period, sub_period, year_months_days FROM jv_horo_vimshottari WHERE  vim_id < '".$id."'";
+        $db                 ->setQuery($query);
+        $result             = $db->loadAssocList();
+        //print_r($result);exit;
+        foreach($result as $data)
+        {
+            $start          = $dasha->format('d-m-Y');
+            $dasha          ->add(new DateInterval($data['year_months_days']));
+            $end            = $dasha->format('d-m-Y');
+            if($dasha < $current)
+            {
+                continue;
+            }
+            else
+            {
+                $current_dasha  = array("current_main"=>$data['main_period'],"current_sub"=>$data['sub_period'],
+                                        "start_current"=>$start,"end_current"=>$end);
+                $array          = array_merge($array, $current_dasha);
+                return $array;exit;
+            }
+        }
+        
+    }*/
     protected function getRemainDasha($period_id, $dasha_end)
     {
         $dasha                  = new DateTime($dasha_end);
