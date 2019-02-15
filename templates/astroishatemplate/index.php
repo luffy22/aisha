@@ -17,6 +17,7 @@ $title              = $doc->title;
 <link rel="shortcut icon" href="<?php echo $this->baseurl ?>/favicon.ico" type="image/x-icon" />
 <link rel="icon" href="<?php echo $this->baseurl ?>/logo.png" type="image/x-icon">
 <meta name="msvalidate.01" content="E689BB58897C0A89BDC88E5DF8800B2F" />
+<meta property="fb:app_id" content="1092479767598458" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/template.css" type="text/css" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/bootstrap.min.css" type="text/css" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/jquery-ui.min.css" type="text/css" />
@@ -49,6 +50,7 @@ window.cookieconsent.initialise({
 </script>
 </head>
 <body>
+<div id="fb-root"></div>
 <?php
  // Get option and view
 $option = JRequest::getVar('option');
@@ -78,6 +80,7 @@ endif;
 </div>
 <jdoc:include type="modules" name="footer" />
 <script async src="//www.instagram.com/embed.js"></script>
+<script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=1092479767598458&autoLogAppEvents=1"></script>
 <?php
 include_once (JPATH_ROOT.DS.'analyticstracking.php');
 ?>

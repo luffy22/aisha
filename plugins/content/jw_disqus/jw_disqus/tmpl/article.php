@@ -11,7 +11,6 @@
 defined('_JEXEC') or die;
 $url =  JURI::current();
 ?>
-
 <a id="startOfPage"></a>
 <?php if($disqusArticleCounter): ?>
 <!-- DISQUS comments counter and anchor link -->
@@ -34,7 +33,7 @@ $url =  JURI::current();
 <div class="tab-content">
 <div class="mt-1"></div>
 <div id="fb" class="tab-pane" role="tabpanel">
-<div class="fb-comments" data-href="<?php echo $url; ?>" data-numposts="2"></div>
+	<div class="fb-comments" data-numposts="2"></div>
 </div>
 <div id="disqus" class="tab-pane active" role="tabpanel">
 <!-- DISQUS comments block -->

@@ -1,6 +1,7 @@
 <?php
 defined('_JEXEC') or die;
 $counter = 0;
+$count          = count($list);
 if ($module->showtitle) 
 {
 ?>
@@ -14,8 +15,9 @@ if ($module->showtitle)
 //print_r($list);exit;
 foreach ($list as $item)
 {
-    $item->slug    = $item->article_id . ':' . $item->article_alias;
-    $item->link = JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->cat_id, $item->language));
+    
+    $item->slug     = $item->article_id . ':' . $item->article_alias;
+    $item->link     = JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->cat_id, $item->language));
     if($counter % 3 == 0)
     {
 ?>
@@ -35,6 +37,12 @@ $images                 = json_decode($item->images);
     $counter++;
     if($counter % 3 == 0)
    {
+?>
+</div><div class="mb-4"></div>
+<?php 
+    }
+    if($counter % 3 !== 0 && $count == $counter)
+    {
 ?>
 </div><div class="mb-4"></div>
 <?php 

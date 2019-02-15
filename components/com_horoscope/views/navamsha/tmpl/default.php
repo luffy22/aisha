@@ -73,7 +73,14 @@ Your browser does not support the HTML5 canvas tag.
         <td id="<?php echo strtolower($new_key1) ?>_sign" value="<?php echo $new_val2; ?>"><?php echo $new_val2; ?></td>
 <?php 
         $new_key2    = str_replace("_navamsha_sign","",$new_key2);
-        if(($new_key2 == $new_key1)&&($new_val2 == $new_val1))
+        if($new_key1 == "Ascendant"||$new_key1=="Uranus"||
+                $new_key1=="Neptune"||$new_key1=="Pluto")
+        {
+?>
+        <td>-</td>
+<?php            
+        }
+        else if(($new_key2 == $new_key1)&&($new_val2 == $new_val1))
         {
 ?>
         <td><?php echo "Yes"; ?></td>

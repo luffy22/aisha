@@ -58,11 +58,34 @@ $planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Ven
         </tr>
         <tr>
             <th>Latitude</th>
-            <td><?php echo $this->data['lat']; ?></td>
+            <td><?php 
+                if(substr($this->data['lat'],0,1) == "-")
+                {
+                    $this->data['lat'] = str_replace("-","",$this->data['lat']);
+                    echo $this->data['lat']."&deg; S";
+                }
+                else
+                {
+                    echo $this->data['lat']."&deg; N"; 
+                }
+                ?>
+            </td>
         </tr>
         <tr>
             <th>Longitude</th>
-            <td><?php echo $this->data['lon']; ?></td>
+            <td>
+                <?php
+                if(substr($this->data['lon'],0,1) == "-")
+                {
+                    $this->data['lon'] = str_replace("-","",$this->data['lon']);
+                    echo $this->data['lon']."&deg; W";
+                }
+                else
+                {
+                    echo $this->data['lon']."&deg; E"; 
+                }
+                ?>
+            </td>
         </tr>
         <tr>
             <th>Timezone</th>

@@ -14,7 +14,7 @@ echo $this->data;
       action="<?php echo JRoute::_('index.php?option=com_horoscope&task=findspouse.findspouse'); ?>">
     <div class="form-group" id="lagna_grp_1">
         <label for="inputName" class="control-label">Name:</label>
-        <input type="text" name="fspouse_fname" class="form-control" id="fspouse_name" placeholder="Enter your name..." />
+        <input type="text" name="fspouse_fname" class="form-control" id="fspouse_name" required placeholder="Enter your name..." />
     </div>
     <div class="form-group">
         <label for="inputGender" class="control-label">Gender:</label>
