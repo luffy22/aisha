@@ -187,8 +187,8 @@ class PlgContentAskExpert extends JPlugin
                     $content        .= "<input type='hidden' value='".$result->username."' name='expert_uname' />";
                     $content        .=  "<div class='form-group'>";
                     $content        .= "<label for='ques_type'>Answer Type:</label> ";
-                    $content        .= "<input type='radio' id='ques_type1' name='ques_type' value='long_ans' checked  onchange='javascript:changefees();' /> Detailed Report";
-                    $content        .= "&nbsp;&nbsp;&nbsp;<input type='radio' id='ques_type2' name='ques_type' value='short_ans' onchange='javascript:changefees();' /> Short Answer";
+                    $content        .= "<input type='radio' id='ques_type1' name='ques_type' value='long_ans'  onchange='javascript:changefees();' /> Detailed Report";
+                    $content        .= "&nbsp;&nbsp;&nbsp;<input type='radio' id='ques_type2' name='ques_type' checked value='short_ans' onchange='javascript:changefees();' /> Short Answer";
                     $content        .= "</div>";
                     $content        .=  "<div class='form-group'>";
                     $content        .= "<label for='max_ques'>Number Of Questions:</label> ";
@@ -206,7 +206,7 @@ class PlgContentAskExpert extends JPlugin
                     $content        .= "<input type='hidden' name='expert_currency' id='expert_currency' value='".$details[0]['currency']."' />";
                     $content        .= "<input type='hidden' name='expert_curr_full' id='expert_curr_full' value='".$details[0]['curr_full']."' />";
                     $content        .= "<input type='hidden' name='expert_final_fees' id='expert_final_fees' value='".$details[0]['amount']."' />";
-                    $content        .= "<div class='form-group'><label>Fees:</label> <div id='fees_id'>".$details[0]['amount']."&nbsp;".$details[0]['curr_code']."(".$details[0]['currency'].'-'.$details[0]['curr_full'].')'."</div></div>";
+                    $content        .= "<div class='form-group'><label>Fees:</label> <div id='fees_id'>".$details[1]['amount']."&nbsp;".$details[1]['curr_code']."(".$details[1]['currency'].'-'.$details[1]['curr_full'].')'."</div></div>";
                     $content        .= "<div class='form-group'>";
                     $content        .= "<label for='expert_choice' class='control-label'>Payment Type: </label>";
                     if($details[0]['currency'] == 'INR')
