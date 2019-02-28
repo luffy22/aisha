@@ -48,12 +48,13 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
             else{
                $split       = explode("rise",$result);
                $split       = explode("set",$split[1]);
-               $times       = array("sun_rise_".$i=>$split[0],"sun_set_".$i=>$split[1]);
+               $times       = array("sun_rise_".$i=>trim($split[0]),"sun_set_".$i=>trim($split[1]));
                $sun         = array_merge($sun, $times);$i++;
             }
             
         }
-        return $sun;
+        $result             = $this->convertToLocal($sun,str_replace(".","-",$date), $timezone);
+        print_r($result);exit;
     }
     public function getMoonTimings($date, $timezone)
     {
@@ -82,12 +83,28 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
             else{
                $split       = explode("rise",$result);
                $split       = explode("set",$split[1]);
-               $times       = array("moon_rise_".$i=>$split[0],"moon_set_".$i=>$split[1]);
+               $times       = array("moon_rise_".$i=>trim($split[0]),"moon_set_".$i=>trim($split[1]));
                $moon        = array_merge($moon, $times);$i++;
-            }
-            
+            } 
         }
         return $moon;
     }
-
+    public function convertToLocal($planet,$date, $timezone)
+    {
+        $timezone           = new DateTimeZone($timezone);
+        $date               = new DateTime($date, $timezone);
+        $array              = array();
+        $i                  = 1;
+        foreach($planet as $result)
+        {
+            
+            $result             = substr(trim($result),0,-2);
+            $result             = str_replace(".","-",$result);
+            $result             = str_replace(" ","",$result);
+            $date1              = new DateTime($result, $timezone);
+            $rise_set           = array("date_".$key => $date1->format('d-m-Y'),"time_".$key=>$date1->format('H:i:s'));
+            $array              = array_merge($array, $rise_set);
+        }
+        return $array;
+    }
 }
