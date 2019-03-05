@@ -16,8 +16,8 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
         $location       = $jinput->get('location', 'default_value', 'filter');
         $location       = explode("_",$location);
         $timezone       = "Asia/Kolkata";
-        $sun_times      = $this->getSunTimings($date, $timezone);
-        print_r($sun_times);exit;
+        //$sun_times      = $this->getSunTimings($date, $timezone);
+        //print_r($sun_times);exit;
         $moon_times     = $this->getMoonTimings($date,$timezone);
         //print_r($moon_times);exit;
         
@@ -46,15 +46,15 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
         {
             if($i == 0){$i++;continue;}
             else{
-               $split       = explode("rise",$result);
-               $split       = explode("set",$split[1]);
-               $times       = array("sun_rise_".$i=>trim($split[0]),"sun_set_".$i=>trim($split[1]));
-               $sun         = array_merge($sun, $times);$i++;
+                    
+                $result      = $this->convertToLocal("sun",$i, $result, $timezone);
+                $sun         = array_merge($sun, $result);$i++;
             }
             
         }
-        $result             = $this->convertToLocal($sun,str_replace(".","-",$date), $timezone);
-        print_r($result);exit;
+        print_r($sun);exit;
+        //$result             = $this->convertToLocal($sun,str_replace(".","-",$date), $timezone);
+        
     }
     public function getMoonTimings($date, $timezone)
     {
@@ -81,30 +81,27 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
         {
             if($i == 0){$i++;continue;}
             else{
-               $split       = explode("rise",$result);
-               $split       = explode("set",$split[1]);
-               $times       = array("moon_rise_".$i=>trim($split[0]),"moon_set_".$i=>trim($split[1]));
-               $moon        = array_merge($moon, $times);$i++;
+               $result      = $this->convertToLocal("moon",$i, $result, $timezone);
+                $moon         = array_merge($moon, $result);$i++;
             } 
         }
-        return $moon;
+        print_r($moon);exit;
     }
-    public function convertToLocal($planet,$date, $timezone)
+    public function convertToLocal($planet,$num, $times, $timezone)
     {
+        date_default_timezone_set('UTC');
+        $split              = explode("rise",$times);
+        $split              = explode("set",$split[1]);
+        $rise               = str_replace(".","-",$split[0]);$set            = str_replace(".","-",$split[1]);
+        $rise               = str_replace(' ','',$rise);$set             = str_replace(' ','',$set);
+        $rise               = substr(trim($rise),0,-2);$set             = substr(trim($set),0,-2);
+        //echo $rise." ".$set;exit;
         $timezone           = new DateTimeZone($timezone);
-        $date               = new DateTime($date, $timezone);
-        $array              = array();
-        $i                  = 1;
-        foreach($planet as $result)
-        {
-            
-            $result             = substr(trim($result),0,-2);
-            $result             = str_replace(".","-",$result);
-            $result             = str_replace(" ","",$result);
-            $date1              = new DateTime($result, $timezone);
-            $rise_set           = array("date_".$key => $date1->format('d-m-Y'),"time_".$key=>$date1->format('H:i:s'));
-            $array              = array_merge($array, $rise_set);
-        }
+        $date               = new DateTime($rise);
+        $date1              = new DateTime($set);
+        $date               ->setTimezone($timezone);
+        $date1              ->setTimezone($timezone);
+        $array              = array($planet."_rise_".$num=>$date->format('d-m-Y H:i:s'),$planet."_set_date_".$num=>$date1->format('d-m-Y H:i:s'));
         return $array;
     }
 }
