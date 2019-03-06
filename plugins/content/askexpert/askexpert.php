@@ -14,8 +14,8 @@ class PlgContentAskExpert extends JPlugin
             $path               = JPluginHelper::getLayoutPath('content', 'askexpert');
             //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
             //$geoip              = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
-            $ip                         = '117.196.1.11';
-            //$ip                         = '157.55.39.123';  // ip address
+            //$ip                         = '117.196.1.11';
+            $ip                         = '157.55.39.123';  // ip address
             //$ip                 = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
           
             $info                       = geoip_country_code_by_name($ip);

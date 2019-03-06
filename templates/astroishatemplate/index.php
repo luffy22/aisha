@@ -48,6 +48,9 @@ window.cookieconsent.initialise({
   }
 })});
 </script>
+ <script
+    src="https://www.paypal.com/sdk/js?client-id=AQTmuXv3b_AC_GBMrw7Mw53pWDUmpjbQI68g8ndsrxqXIFa4ORLQfj-5Pc0Vtko0tSBWUPpFuaG06m8J">
+  </script>
 </head>
 <body>
 <div id="fb-root"></div>
