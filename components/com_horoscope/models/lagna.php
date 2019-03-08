@@ -482,7 +482,92 @@ class HoroscopeModelLagna extends JModelItem
 
         return $result;
     }
-   
-    
+    /*
+     * Get sunrise and sunset timings
+     * @param date The date for which sunrise and sunset need to be found
+     * @param timezone The timezone for location whose sunrise and sunset need to be found
+     * @param num The number of days for which sunrise and sunset need to be found
+     * @return array The array with sunrise and sunset values
+     */
+    public function getSunTimings($date, $timezone,$lat,$lon,$alt, $num)
+    {
+        $dtz            = new DateTimeZone($timezone); //Your timezone
+        $date           = new DateTime($date, $dtz);
+        $date           ->sub(new DateInterval('P1D'));
+        //echo $date->format('d.m.Y H:i:s');exit;        
+        $date           = $date->format('d.m.Y');
+        $h_sys = 'P';
+        $output = "";
+        //echo $utcTimestamp;exit;
+        //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
+        exec ("swetest -b$date -geopos$lon,$lat,$alt -rise -hindu -p0 -n$num -head", $output);
+        $timings        = $output;$i = 0;
+        $sun            = array();
+        foreach($timings as $result)
+        {
+            if($i == 0){$i++;continue;}
+            else{
+                    
+                $result      = $this->convertToLocal("sun",$i, $result, $timezone);
+                $sun         = array_merge($sun, $result);$i++;
+            } 
+        }
+        return $sun;
+    }
+    /*
+     * Get moonrise and moonset timings
+     * @param date The date for which moonrise and moonset need to be found
+     * @param timezone The timezone for location whose moonrise and moonset need to be found
+     * @param num The number of days for which moonrise and moonset need to be found
+     * @return array The array with moonrise and moonset values
+     */
+    public function getMoonTimings($date, $timezone,$lat,$lon,$alt, $num)
+    {
+        $dtz            = new DateTimeZone($timezone); //Your timezone
+        $date           = new DateTime($date, $dtz);
+        $date->sub(new DateInterval('P1D'));
+        //echo $date->format('d.m.Y H:i:s');exit;        
+        $date           = $date->format('d.m.Y');
+        $h_sys = 'P';
+        $output = "";
+        exec ("swetest -b$date -geopos$lon,$lat,$alt -rise -hindu -p1 -n$num -head", $output);
+        //print_r($output);exit;
+        $timings        = $output;$i = 0;
+        $moon           = array();
+        foreach($timings as $result)
+        {
+            if($i == 0){$i++;continue;}
+            else{
+               $result      = $this->convertToLocal("moon",$i, $result, $timezone);
+                $moon         = array_merge($moon, $result);$i++;
+            } 
+        }
+        return $moon;
+    }
+    /*
+     * Function converts UTC time output of sunrise, moonrise, sunset, moonset to local time
+     * @param planet Name of planet whose rise and set times need to be calculated
+     * @param num Number allows to sort dates. example: date_1, date_2, date_3
+     * @param times The date and time of rise and set
+     * @param timezone The timezone of the location
+     * @return array Array with localized time returned  
+     */
+     public function convertToLocal($planet,$num, $times, $timezone)
+    {
+        date_default_timezone_set('UTC');
+        $split              = explode("rise",$times);
+        $split              = explode("set",$split[1]);
+        $rise               = str_replace(".","-",$split[0]);$set            = str_replace(".","-",$split[1]);
+        $rise               = str_replace(' ','',$rise);$set             = str_replace(' ','',$set);
+        $rise               = substr(trim($rise),0,-2);$set             = substr(trim($set),0,-2);
+        //echo $rise." ".$set;exit;
+        $timezone           = new DateTimeZone($timezone);
+        $date               = new DateTime($rise);
+        $date1              = new DateTime($set);
+        $date               ->setTimezone($timezone);
+        $date1              ->setTimezone($timezone);
+        $array              = array($planet."_rise_".$num=>$date->format('d-m-Y H:i:s'),$planet."_set_".$num=>$date1->format('d-m-Y H:i:s'));
+        return $array;
+    }
 }
 ?>
