@@ -18,6 +18,7 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
         $timezone       = "Asia/Kolkata";
         $sun_times      = $this->getSunTimings($date, $timezone);
         $muhurat        = $this->getMuhurat($sun_times);
+        $chogadiya      = $this->getChogadiya($sun_times);
         $moon_times     = $this->getMoonTimings($date,$timezone);
         //print_r($moon_times);exit;
         
@@ -98,8 +99,52 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
      */
     public function getMuhurat($times)
     {
-        $db                 = JFactory::getDbo();  // Get db connection
-        $query              = $db->getQuery(true);
+        $muhurat            = array();
+        //print_r($times);exit;
+        for($i=1;$i<13;$i++)
+        {
+            if($i==1 || $i==12)
+            {
+                continue;
+            }
+            else
+            {
+                $j                  = $i+1;
+                $rise               = new DateTime($times['sun_rise_'.$i]);//echo $rise."<br/>";
+                $day_of_week        = $rise->format('l');
+                $set                = new DateTime($times['sun_set_'.$i]);//echo $set."<br/>";
+                $rise_next          = new DateTime($times['sun_rise_'.$j]);//echo $rise_next."<br/><br/>";exit;
+                $day_interval       = $set->getTimestamp() - $rise->getTimestamp();//echo $day_interval;exit;
+                $night_interval     = $rise_next->getTimestamp() - $set->getTimeStamp();
+                $day_prahar         = $this->getPrahar($times['sun_rise_'.$i],$day_interval,"day");
+                $night_prahar       = $this->getPrahar($times['sun_set_'.$i],$night_interval,"night");
+                $result             = $this->getMuhuratTables($day_of_week);
+                //print_r($result);exit;
+                $rahu               = $result[0]['prahar_num'];//echo $rahu_kalam."<br/>";
+                $yama               = $result[1]['prahar_num'];//echo $yama_ghanta."<br/>";
+                $guli               = $result[2]['prahar_num'];//echo $guli_kalam."<br/>";exit;
+                $rahu_kalam         = array("rahu_kalam_start_".$i=>$day_prahar["day_prahar_start_".$rahu],
+                                            "rahu_kalam_end_".$i=>$day_prahar["day_prahar_end_".$rahu]);
+                $yama_kalam         = array("yama_kalam_start".$i=>$day_prahar["day_prahar_start_".$yama],
+                                            "yama_kalam_end".$i=>$day_prahar["day_prahar_end_".$yama]);
+                $guli_kalam         = array("guli_kalam_start".$i=>$day_prahar["day_prahar_start_".$guli],
+                                            "guli_kalam_end".$i=>$day_prahar["day_prahar_end_".$guli]);
+                $abhijit_kalam      = $this->getAbhijitKalam($i,$times['sun_rise_'.$i],$day_interval);
+                $muhurat            = array_merge($muhurat,$rahu_kalam,$yama_kalam,$guli_kalam,$abhijit_kalam);
+                //print_r($night_prahar);exit;
+                //echo $night_interval;exit;
+            }
+        }
+        return $muhurat;
+    }
+    /*
+     * Get the Muhurat times for the particular day
+     * @param datetime Date and Time for sunrise and sunset
+     * @return array Array with Muhurat times for particular day.
+     */
+    public function getChogadiya($times)
+    {
+        $chogadiya                  = array();
         //print_r($times);exit;
         for($i=1;$i<13;$i++)
         {
@@ -119,25 +164,25 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
                 $day_prahar         = $this->getPrahar($times['sun_rise_'.$i],$day_interval,"day");
                 //print_r($day_prahar);exit;
                 $night_prahar       = $this->getPrahar($times['sun_set_'.$i],$night_interval,"night");
-                $query              ->select($db->quoteName('prahar_num'));
-                $query              ->from($db->quoteName('#__horo_muhurat'));
-                $query              ->where($db->quoteName('day').'='.$db->quote($day_of_week));
-                $db                 ->setQuery($query);
-                $result             = $db->loadAssocList();
-                $rahu               = $result[0]['prahar_num'];//echo $rahu_kalam."<br/>";
-                $yama               = $result[1]['prahar_num'];//echo $yama_ghanta."<br/>";
-                $guli               = $result[2]['prahar_num'];//echo $guli_kalam."<br/>";exit;
-                $rahu_kalam         = array("rahu_kalam_start"=>$day_prahar["day_prahar_start_".$rahu],
-                                            "rahu_kalam_end"=>$day_prahar["day_prahar_end_".$rahu]);
-                $yama_kalam         = array("yama_kalam_start"=>$day_prahar["day_prahar_start_".$yama],
-                                            "yama_kalam_end"=>$day_prahar["day_prahar_end_".$yama]);
-                $guli_kalam         = array("guli_kalam_start"=>$day_prahar["day_prahar_start_".$guli],
-                                            "guli_kalam_end"=>$day_prahar["day_prahar_end_".$guli]);
-                $abhijit_kalam      = $this->getAbhijitKalam($times['sun_rise_'.$i],$day_interval);
-                //print_r($night_prahar);exit;
-                //echo $night_interval;exit;
+                $day_chogad         = $this->getChogadiyaTables($day_of_week,"day");
+                //print_r($day_chogad);exit;
+                $night_chogad       = $this->getChogadiyaTables($day_or_week,"night");
+                for($k=1;$k<9;$k++)
+                {
+                    $m              = $k-1;
+                    $chogad_day     = array("day_chogad_".$i."_chogadiya_".$k => $day_chogad[$m]['chogadiya'],
+                                            "day_chogad_".$i."_start_".$k => $day_prahar["day_prahar_start_".$k],
+                                            "day_chogad_".$i."_end_".$k => $day_prahar['day_prahar_end_'.$k]);
+                    $chogad_night   = array("night_chogad_".$i."_chogadiya_".$k => $night_chogad[$m]['chogadiya'],
+                                            "night_chogad_".$i."_start_".$k => $night_prahar["night_prahar_start_".$k],
+                                            "night_chogad_".$i."_end_".$k => $night_prahar['night_prahar_end_'.$k]);
+                    $chogadiya      = array_merge($chogadiya,$chogad_day,$chogad_night);
+                    //print_r($chogadiya);exit;
+                }
+                print_r($chogadiya);exit;
             }
         }
+        print_r($chogadiya);exit;
     }
     public function getPrahar($date, $interval,$day_night)
     {
@@ -154,7 +199,7 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
         }
         return $prahar;
     }
-    public function getAbhijitKalam($date, $interval)
+    public function getAbhijitKalam($num,$date, $interval)
     {
         $muhurat                    = explode(".",round(($interval/15),2));
         $date                       = new DateTime($date);
@@ -166,7 +211,7 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
                 $start              = $date->format('Y-m-d H:i:s');
                 $date               ->add(new DateInterval('PT'.$muhurat[0].'S'));
                 $end                    = $date->format('Y-m-d H:i:s');
-                $period            = array("abhijit_start"=>$start,"abhijit_end"=>$end);
+                $period            = array("abhijit_start_".$num=>$start,"abhijit_end_".$num=>$end);
                 $abhijit            = array_merge($abhijit, $period);
             }
             else
@@ -175,5 +220,29 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
             }
         }
         return $abhijit;
+    }
+    public function getMuhuratTables($day_of_week)
+    {
+        $db                 = JFactory::getDbo();  // Get db connection
+        $query              = $db->getQuery(true);
+        
+        $query              ->select($db->quoteName('prahar_num'));
+        $query              ->from($db->quoteName('#__horo_muhurat'));
+        $query              ->where($db->quoteName('day').'='.$db->quote($day_of_week));
+        $db                 ->setQuery($query);
+        $result             = $db->loadAssocList();
+        return $result;
+    }
+    public function getChogadiyaTables($day_of_week,$day_or_night)
+    {
+        $db                 = JFactory::getDbo();  // Get db connection
+        $query              = $db->getQuery(true);
+        $query              ->select($db->quoteName(array('chogadiya','prahar_num')));
+        $query              ->from($db->quoteName('#__horo_chogadiya'));
+        $query              ->where($db->quoteName('day_of_week').' = '.$db->quote($day_of_week).' AND '.
+                                    $db->quoteName('day_or_night').' = '.$db->quote($day_or_night));
+        $db                 ->setQuery($query);
+        $result             = $db->loadAssocList();
+        return $result;
     }
 }

@@ -7,12 +7,12 @@ class AstrologinModelAstroask extends JModelItem
     function getData()
     {
         //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
-        //$geoip                  = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
-        $ip                         = '117.196.1.11';
-        //$ip                         = '157.55.39.123';  // ip address
+        //$geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
+        $ip                           = '117.196.1.11';
+        //$ip                             = '157.55.39.123';  // ip address
         //$ip                       	= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
-        $info                       = geoip_country_code_by_name($ip);
-        $country                    = geoip_country_name_by_name($ip);
+        $info                         = geoip_country_code_by_name($ip);
+        $country                      = geoip_country_name_by_name($ip);
         
         //$location               	= $geoip->lookupLocation($ip);
         //$info                   	= $location->countryCode;
@@ -464,7 +464,25 @@ public function confirmCCPayment($details)
     //print_r($data);exit;
     $this->sendMail($data);
 }
-function sendMail($data)
+/*public function convertCurrency($amount, $from, $to)
+{
+    $data = file_get_contents("https://finance.google.com/finance/converter?a=$amount&from=$from&to=$to");
+    preg_match("/<span class=bld>(.*)<\/span>/",$data, $converted);
+    $converted = preg_replace("/[^0-9.]/", "", $converted[1]);
+    return number_format(round($converted, 3),2);
+}*/
+function convertCurrency($amount,$from,$to) {
+$fromCurrency = urlencode($fromCurrency);
+$toCurrency = urlencode($toCurrency);
+$url = "https://www.google.com/search?q=".$from."+to+".$to;
+$get = file_get_contents($url);
+$data = preg_split('/\D\s(.*?)\s=\s/',$get);
+$exhangeRate = (float) substr($data[1],0,7);
+$convertedAmount = $amount*$exhangeRate;
+$data = array( 'exhangeRate' => $exhangeRate, 'convertedAmount' =>$convertedAmount, 'fromCurrency' => strtoupper($from), 'toCurrency' => strtoupper($to));
+return $data['convertedAmount'];
+}
+protected function sendMail($data)
 {
     //print_r($data);exit;
     $date       = new DateTime();
