@@ -25,8 +25,10 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
         //print_r($muhurat);exit;
         $chogadiya      = $this->getChogadiya($sun_times);
         //print_r($chogadiya);exit;
-        $hora           = $this->getHora($sun_times);
-        print_r($hora);exit;
+        $hora           = $this->getHora($sun_times);//print_r($hora);exit;
+        $all_data       = array();
+        $all_data       = array_merge($all_data,$sun_times,$moon_times,$muhurat,$chogadiya,$hora);
+        return $all_data;
         
     }
     /*
@@ -135,10 +137,10 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
         for($k=0;$k<12;$k++)
         {
             $m                      = $k+1;
-            $hora_day             = array("day_hora_".$m    => $day_hora[$k]['chogadiya'],
+            $hora_day             = array("day_hora_".$m    => $day_hora[$k]['hora_for_day'],
                                             "day_hora_start_".$m    => $day_prahar["day_hora_start_".$m],
                                             "day_hora_end_".$m    => $day_prahar['day_hora_end_'.$m]);
-            $hora_night           = array("night_hora_".$m    => $night_hora[$k]['chogadiya'],
+            $hora_night           = array("night_hora_".$m    => $night_hora[$k]['hora_for_day'],
                                             "night_hora_start_".$m    => $night_prahar["night_hora_start_".$m],
                                             "night_hora_end_".$m    => $night_prahar['night_hora_end_'.$m]);
             $hora                   = array_merge($hora,$hora_day,$hora_night);

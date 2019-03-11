@@ -8,7 +8,152 @@
  */
 defined('_JEXEC') or die();
 //print_r($this->data);exit;
+$sunrise            = new DateTime($this->data['sun_rise_2']);
+$sunset             = new DateTime($this->data['sun_set_2']);
+$rahu_kaal_start    = new DateTime($this->data['rahu_kalam_start']);
+$rahu_kaal_end      = new DateTime($this->data['rahu_kalam_end']);
+$yama_kaal_start    = new DateTime($this->data['yama_kalam_start']);
+$yama_kaal_end      = new DateTime($this->data['yama_kalam_end']);
+$guli_kaal_start    = new DateTime($this->data['guli_kalam_start']);
+$guli_kaal_end      = new DateTime($this->data['guli_kalam_end']);
+$abhijit_start      = new DateTime($this->data['abhijit_start']);
+$abhijit_end        = new DateTime($this->data['abhijit_end']);
 ?>
+<div class="mb-3"></div>
+<div class="lead alert alert-dark"><strong>Today's Muhurat, Chogadiya & Hora</strong></div>
+<div class="mb-3"></div>
+<ul class="nav nav-pills">
+<li class="nav-item"><a class="nav-link active" href="#muhurat" data-toggle="tab">Muhurat</a></li>
+<li class="nav-item"><a class="nav-link" href="#chogadiya" data-toggle="tab">Chogadiya</a></li>
+<li class="nav-item"><a class="nav-link" href="#hora" data-toggle="tab">Hora</a></li>
+</ul>
+<div class="tab-content">
+<div id="muhurat" class="tab-pane active">
+<div class="mb-3"></div>
+<table class="table table-striped table-bordered">
+<tr><th><img src="images/clipart/sunrise.png" class="img-fluid" alt="sunrise" title="sunrise" /> Sunrise </th><td><?php echo $sunrise->format('h:i:s a');unset($sunrise); ?></td></tr>
+<tr><th><img src="images/clipart/sunset.png" class="img-fluid" alt="sunset" title="sunset" /> Sunset </th><td><?php echo $sunset->format('h:i:s a');unset($sunset); ?></td></tr>
+<tr><th><img src="images/art_img/rahu.png" height="48px" width="48px" class="img-fluid" alt="rahu kaal" title="rahu kaal" /> Rahu Kaal(Bad) </th><td><?php echo $rahu_kaal_start->format('h:i:s a')." - ".$rahu_kaal_end->format('h:i:s a');unset($rahu_kaal_start);unset($rahu_kaal_end); ?></td></tr>
+<tr><th><img src="images/clipart/yama.png" height="48px" width="48px" class="img-fluid" alt="yama kaal" title="yama kaal" /> Yama Kaal(Bad) </th><td><?php echo $yama_kaal_start->format('h:i:s a')." - ".$yama_kaal_end->format('h:i:s a');unset($yama_kaal_start);unset($yama_kaal_end); ?></td></tr>
+<tr><th><img src="images/clipart/gulika.png" height="48px" width="40px" class="img-fluid" alt="guli kaal" title="guli kaal" /> Guli Kaal(Bad) </th><td><?php echo $guli_kaal_start->format('h:i:s a')." - ".$guli_kaal_end->format('h:i:s a');unset($guli_kaal_start);unset($guli_kaal_end); ?></td></tr>
+<tr><th><i class="fas fa-om fa-2x"></i> Abhijit Kaal(Auspicious)</th><td><?php echo $abhijit_start->format('h:i:s a')." - ".$abhijit_end->format('h:i:s a');unset($abhijit_start);unset($abhijit_end); ?></td></tr>
+</table><div class="mb-3"></div>
+</div>
+<div id="chogadiya" class="tab-pane">
+<div class="mb-3"></div>
+<p>Chogadiya marked with <i class="fa fa-om"></i> sign besides them and green color background are auspicious to start any task. Others not so auspicious.</p>
+<div class="mb-3"></div>
+<div class="lead alert alert-dark"><strong>Day Chogadia</strong></div>
+<table class="table table-bordered">
+    <tr><th>Chogadiya</th><th>Duration</th></tr>
+<?php
+for($i=1;$i<9;$i++)
+{
+    $date_start         = new DateTime($this->data['day_chogad_start_'.$i]);
+    $date_end         = new DateTime($this->data['day_chogad_end_'.$i]);
+    if($this->data['day_chogad_'.$i] == "Labh" || $this->data['day_chogad_'.$i] == "Shubh"||$this->data['day_chogad_'.$i] == "Amrit")
+    {
+?>
+    <tr class="bg-success"><th><?php echo $this->data['day_chogad_'.$i] ?> <i class="fas fa-om"></i></th><td><?php echo $date_start->format('h:i:s a')." - ".
+                                                                                    $date_end->format('h:i:s a'); ?></td></tr>
+<?php
+    }
+    else if($this->data['day_chogad_'.$i] == "Chal")
+    {
+?>
+    <tr class="bg-warning"><th><?php echo $this->data['day_chogad_'.$i] ?></th><td><?php echo $date_start->format('h:i:s a')." - ".
+                                                                                    $date_end->format('h:i:s a'); ?></td></tr>
+<?php        
+    }
+    else if($this->data['day_chogad_'.$i] == "Kaal" || $this->data['day_chogad_'.$i] == "Rog"|| $this->data['day_chogad_'.$i] == "Udveg")
+    {
+?>
+    <tr class="bg-danger"><th><?php echo $this->data['day_chogad_'.$i] ?></th><td><?php echo $date_start->format('h:i:s a')." - ".
+                                                                                    $date_end->format('h:i:s a'); ?></td></tr>
+<?php        
+    }
+unset($date_start);unset($date_end);
+}
+?>
+</table>
+<div class="mb-3"></div><br/>
+<div class="lead alert alert-dark"><strong>Night Chogadia</strong></div>
+<table class="table table-bordered">
+<tr><th>Chogadiya</th><th>Duration</th></tr>
+<?php
+for($i=1;$i<9;$i++)
+{
+    $night_start         = new DateTime($this->data['night_chogad_start_'.$i]);
+    $night_end         = new DateTime($this->data['night_chogad_end_'.$i]);
+    if($this->data['night_chogad_'.$i] == "Labh" || $this->data['night_chogad_'.$i] == "Shubh"||$this->data['night_chogad_'.$i] == "Amrit")
+    {
+?>
+    <tr class="bg-success"><th><?php echo $this->data['night_chogad_'.$i] ?> <i class="fas fa-om"></i></th><td><?php echo $night_start->format('h:i:s a')." - ".
+                                                                                    $night_end->format('h:i:s a'); ?></td></tr>
+<?php
+    }
+    else if($this->data['night_chogad_'.$i] == "Chal")
+    {
+?>
+    <tr class="bg-warning"><th><?php echo $this->data['night_chogad_'.$i] ?></th><td><?php echo $night_start->format('h:i:s a')." - ".
+                                                                                    $night_end->format('h:i:s a'); ?></td></tr>
+<?php        
+    }
+    else if($this->data['night_chogad_'.$i] == "Kaal" || $this->data['night_chogad_'.$i] == "Rog"|| $this->data['night_chogad_'.$i] == "Udveg")
+    {
+?>
+    <tr class="bg-danger"><th><?php echo $this->data['night_chogad_'.$i] ?></th><td><?php echo $night_start->format('h:i:s a')." - ".
+                                                                                    $night_end->format('h:i:s a'); ?></td></tr>
+<?php        
+    }
+unset($night_start);unset($night_end);
+}
+?>
+</table>
+<div class="mb-3"></div>
+</div>
+<div id="hora" class="tab-pane">
+<div class="mb-3"></div>
+<div class="lead alert alert-dark"><strong>Day Hora</strong></div>
+<table class="table table-bordered table-striped">
+    <tr><th>Hora</th><th>Duration</th></tr>
+<?php
+for($i=1;$i<13;$i++)
+{
+    $date_start         = new DateTime($this->data['day_hora_start_'.$i]);
+    $date_end         = new DateTime($this->data['day_hora_end_'.$i]);
+?>
+    <tr><th><?php echo $this->data['day_hora_'.$i] ?></th><td><?php echo $date_start->format('h:i:s a')." - ".
+                                                                                    $date_end->format('h:i:s a'); ?></td></tr>
+<?php 
+unset($date_start);unset($date_end);
+    }
+?>
+</table>
+<div class="mb-3"></div>
+<div class="lead alert alert-dark"><strong>Night Hora</strong></div>
+<table class="table table-bordered table-striped">
+    <tr><th>Hora</th><th>Duration</th></tr>
+<?php
+for($i=1;$i<13;$i++)
+{
+    $date_start         = new DateTime($this->data['night_hora_start_'.$i]);
+    $date_end         = new DateTime($this->data['night_hora_end_'.$i]);
+?>
+    <tr><th><?php echo $this->data['night_hora_'.$i] ?></th><td><?php echo $date_start->format('h:i:s a')." - ".
+                                                                                    $date_end->format('h:i:s a'); ?></td></tr>
+<?php 
+unset($date_start);unset($date_end);
+    }
+?>
+</table>
+<div class="mb-3"></div>
+</div>
+</div>
+<div class="mb-3"></div>
+<p><strong>Kindly Note: </strong>AstroIsha doesn't wish anyone to be over-realiant on Muhurat, Chogadiya & Horas. There is 
+    no good-time or bad-time to start a task. In Sanskrit there is a terminology <strong>Shubhasya Shigram(शुभस्य शीघ्रम)</strong> which means start 
+the important work immediately. It automatically becomes auspicious via hard-work, patience and good intentions.</p>
 <div class="mb-3"></div>
 <?php
 unset($this->data);
