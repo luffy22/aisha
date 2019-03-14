@@ -13,8 +13,10 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
         $libPath        = JPATH_BASE.'/sweph/';
         $jinput         = JFactory::getApplication()->input;        
         $date           = date('Y-m-d');
-        $location       = $jinput->get('location', 'default_value', 'filter');
-        $location       = explode("_",$location);
+        if(!isset($_COOKIE[$cookie_loc])) {
+            $location   = $_COOKIE[$cookie_loc];
+            echo $location;exit;
+        }
         $timezone       = "Asia/Kolkata";
         $lon            = "72.57";  $lat            = "23.02";  $alt    = 0;
         $sun_times      = $this->getSunTimings($date, $timezone,$lat,$lon,$alt,3);
@@ -31,6 +33,7 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
         return $all_data;
         
     }
+    
     /*
      * Get the Muhurat times for the particular day
      * @param datetime Date and Time for sunrise and sunset
@@ -71,6 +74,59 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
         //print_r($abhijit_kalam);exit;
         $muhurat            = array_merge($muhurat,$rahu_kalam,$yama_kalam,$guli_kalam,$abhijit_kalam);
         return $muhurat;        
+    }
+    /*
+     * Get the Muhurat times for the particular day
+     * @param datetime Date and Time for sunrise and sunset
+     * @return array Array with Muhurat times for particular day.
+     */
+    public function getMuhurat2($loc_details)
+    {
+        //print_r($loc_details);exit;
+        $libPath        = JPATH_BASE.'/sweph/';
+        $jinput         = JFactory::getApplication()->input;        
+        $date           = date('Y-m-d');
+        $location       = $loc_details['location'];
+        $lat            = $loc_details['lat'];
+        $lon            = $loc_details['lon'];
+        $tmz            = $loc_details['tmz'];
+        
+        setcookie($cookie_loc, $location, time() + (86400 * 7), "/"); // 86400 = 1 day
+        setcookie($cookie_lat, $lat, time() + (86400 * 7), "/"); // 86400 = 1 day
+        setcookie($cookie_lon, $lon, time() + (86400 * 7), "/"); // 86400 = 1 day
+        setcookie($cookie_tmz, $tmz, time() + (86400 * 7), "/"); // 86400 = 1 day
+        echo $cookie_loc;exit;
+        if($tmz == "none")
+        {
+            $timestamp      = $date->format('U');
+            $tmz            = $this->getTimeZone($lat, $lon, "rohdes");
+            if($tmz == "error")
+            {
+                $tmz        = "UTC";        // if timezone not available use UTC(Universal Time Cooridnated)
+            }
+            $date        = new DateTime($date, new DateTimeZone($tmz));         
+        }
+        else
+        {
+            $date       = new DateTime($date, new DateTimeZone($tmz));
+        }
+        $query_date     = date('Y-m-d H:i:s');
+        $query_date     = new DateTime($query_date, new DateTimeZone('Asia/Kolkata'));
+        $query_date     = $query_date->format('d-m-Y H:i:s');
+        $db             = JFactory::getDbo();  // Get db connection
+        $query          = $db->getQuery(true);
+        $columns        = array('location','query_date');
+        $values         = array($db->quote($location),$db->quote($query_date));
+        $query          ->insert($db->quoteName('#__panchang_query'))
+                        ->columns($db->quoteName($columns))
+                        ->values(implode(',', $values));
+        // Set the query using our newly populated query object and execute it
+        $db             ->setQuery($query);
+        $result          = $db->query();
+        $app            = JFactory::getApplication();
+        $link           = JURI::base().'index.php?option=com_horoscope&view=muhurat';
+        $app        ->redirect($link);
+ 
     }
     /*
      * Get the Muhurat times for the particular day
