@@ -97,16 +97,10 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
         $lon            = $loc_details['lon'];
         $tmz            = $loc_details['tmz'];
         
-        // storing location, latitude, longitude & timezone 
-        // in local cookies for 7 days
-        setcookie("loc", $location,time()+(86400*7));
-        setcookie("lat", $lat, time() + (86400 * 7)); // 86400 = 1 day
-        setcookie("lon", $lon, time() + (86400 * 7)); // 86400 = 1 day
-        setcookie("tmz", $tmz, time() + (86400 * 7)); // 86400 = 1 day
-        
         if($tmz == "none")
         {
             $tmz            = $this->getTimeZone($lat, $lon, "rohdes");
+            echo $tmz;exit;
             if($tmz == "error")
             {
                 $tmz        = "UTC";        // if timezone not available use UTC(Universal Time Cooridnated)
@@ -117,6 +111,14 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
         {
             $date       = new DateTime($date, new DateTimeZone($tmz));
         }
+        
+        // storing location, latitude, longitude & timezone 
+        // in local cookies for 7 days
+        setcookie("loc", $location,time()+(86400*7));
+        setcookie("lat", $lat, time() + (86400 * 7)); // 86400 = 1 day
+        setcookie("lon", $lon, time() + (86400 * 7)); // 86400 = 1 day
+        setcookie("tmz", $tmz, time() + (86400 * 7)); // 86400 = 1 day
+        
         $query_date     = new DateTime(date('Y-m-d H:i:s'),new DateTimeZone('Asia/Kolkata'));
         $query_date     = $query_date->format('Y-m-d H:i:s');
         $db             = JFactory::getDbo();  // Get db connection

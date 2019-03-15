@@ -29,7 +29,7 @@ class HoroscopeModelLagna extends JModelItem
             $date           = new DateTime($dob." ".$tob);
             $timestamp      = $date->format('U');
             $tmz            = $this->getTimeZone($lat, $lon, "rohdes");
-            echo $tmz;exit;
+            
             if($tmz == "error")
             {
                 $tmz        = "UTC";        // if timezone not available use UTC(Universal Time Cooridnated)
@@ -155,14 +155,14 @@ class HoroscopeModelLagna extends JModelItem
         return $asc;
     }
     protected function getTimeZone($lat, $lon, $username)
-    {    
-        //error checking
+    {
+       	//error checking
 	if (!is_numeric($lat)) { custom_die('A numeric latitude is required.'); }
 	if (!is_numeric($lon)) { custom_die('A numeric longitude is required.'); }
 	if (!$username) { custom_die('A GeoNames user account is required. You can get one here: http://www.geonames.org/login'); }
 
 	//connect to web service
-	$url = 'http://ws.geonames.org/timezone?lat='.$lat.'&lng='.$lon.'&style=full&username='.urlencode($username);
+	$url = 'http://api.geonames.org/timezone?lat='.$lat.'&lng='.$lon.'&style=full&username='.urlencode($username);
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_HEADER, false);
@@ -175,7 +175,7 @@ class HoroscopeModelLagna extends JModelItem
 	$data = new SimpleXMLElement($xml);
 	//echo '<pre>'.print_r($data,true).'</pre>'; exit;
 	$timezone = trim(strip_tags($data->timezone->timezoneId));
-        echo $timezone;exit;
+        
 	if ($timezone) { return $timezone; }
 	else { return "error"; }
 

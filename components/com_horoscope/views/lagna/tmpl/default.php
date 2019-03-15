@@ -9,7 +9,13 @@
 defined('_JEXEC') or die();
 echo $this->data;	
 ?>
-<div class="mb-1"></div>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+    <strong><i class="fas fa-exclamation-triangle"></i> If your location isn't available or if timezone error shows contact us on admin@astroisha.com. We would fix the issue asap.</strong>
+</div>
+<div class="mb-3"></div>
 <h2>Calculate Horoscope</h2>
 <form role="form" enctype="application/x-www-form-urlencoded" method="post" 
       action="<?php echo JRoute::_('index.php?option=com_horoscope&task=lagna.findlagna'); ?>">

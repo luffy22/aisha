@@ -22,6 +22,13 @@ $abhijit_start      = new DateTime($this->data['abhijit_start']);
 $abhijit_end        = new DateTime($this->data['abhijit_end']);
 ?>
 <body>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+    <strong><i class="fas fa-exclamation-triangle"></i> If your location isn't available or if timezone error shows contact us on admin@astroisha.com. We would fix the issue asap.</strong>
+</div>
+<div class="mb-3"></div>
 <div id="default_loc">
     <p>Location: <?php echo $this->data['location'] ?> <button class="btn btn-primary" onclick="javascript:showLocationForm();">Change Location</button></p>
 </div>
