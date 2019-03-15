@@ -19,6 +19,7 @@ class HoroscopeViewMuhurat extends JViewLegacy
 			JError::raiseError(500, implode('<br />', $errors));
 			return false;
         }
+        
         $this->data		= $this->get('Data');
         $tpl 				= null;
         //echo gettype($this->data);

@@ -13,12 +13,20 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
         $libPath        = JPATH_BASE.'/sweph/';
         $jinput         = JFactory::getApplication()->input;        
         $date           = date('Y-m-d');
-        if(!isset($_COOKIE[$cookie_loc])) {
-            $location   = $_COOKIE[$cookie_loc];
-            echo $location;exit;
+        
+        if(!isset($_COOKIE["loc"]) && !isset($_COOKIE["lat"]) &&
+           !isset($_COOKIE["lon"]) && !isset($_COOKIE["tmz"])) {
+            $loc            = "Ujjain, India";
+            $timezone       = "Asia/Kolkata";
+            $lon            = "75.78";  $lat            = "23.17";  $alt    = 0;
+        } else {
+           $loc         = $_COOKIE["loc"];
+           $lat         = $_COOKIE["lat"];
+           $lon         = $_COOKIE["lon"];
+           $timezone    = $_COOKIE["tmz"];
+           $alt         = 0;
         }
-        $timezone       = "Asia/Kolkata";
-        $lon            = "72.57";  $lat            = "23.02";  $alt    = 0;
+        $location       = array("location"=>$loc);
         $sun_times      = $this->getSunTimings($date, $timezone,$lat,$lon,$alt,3);
         //print_r($sun_times);exit;
         $moon_times     = $this->getMoonTimings($date,$timezone,$lat,$lon,$alt,3);
@@ -29,7 +37,7 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
         //print_r($chogadiya);exit;
         $hora           = $this->getHora($sun_times);//print_r($hora);exit;
         $all_data       = array();
-        $all_data       = array_merge($all_data,$sun_times,$moon_times,$muhurat,$chogadiya,$hora);
+        $all_data       = array_merge($all_data,$location,$sun_times,$moon_times,$muhurat,$chogadiya,$hora);
         return $all_data;
         
     }
@@ -82,23 +90,22 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
      */
     public function getMuhurat2($loc_details)
     {
-        //print_r($loc_details);exit;
-        $libPath        = JPATH_BASE.'/sweph/';
-        $jinput         = JFactory::getApplication()->input;        
+        //print_r($loc_details);exit;    
         $date           = date('Y-m-d');
         $location       = $loc_details['location'];
         $lat            = $loc_details['lat'];
         $lon            = $loc_details['lon'];
         $tmz            = $loc_details['tmz'];
         
-        setcookie($cookie_loc, $location, time() + (86400 * 7), "/"); // 86400 = 1 day
-        setcookie($cookie_lat, $lat, time() + (86400 * 7), "/"); // 86400 = 1 day
-        setcookie($cookie_lon, $lon, time() + (86400 * 7), "/"); // 86400 = 1 day
-        setcookie($cookie_tmz, $tmz, time() + (86400 * 7), "/"); // 86400 = 1 day
-        echo $cookie_loc;exit;
+        // storing location, latitude, longitude & timezone 
+        // in local cookies for 7 days
+        setcookie("loc", $location,time()+(86400*7));
+        setcookie("lat", $lat, time() + (86400 * 7)); // 86400 = 1 day
+        setcookie("lon", $lon, time() + (86400 * 7)); // 86400 = 1 day
+        setcookie("tmz", $tmz, time() + (86400 * 7)); // 86400 = 1 day
+        
         if($tmz == "none")
         {
-            $timestamp      = $date->format('U');
             $tmz            = $this->getTimeZone($lat, $lon, "rohdes");
             if($tmz == "error")
             {
@@ -110,13 +117,13 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
         {
             $date       = new DateTime($date, new DateTimeZone($tmz));
         }
-        $query_date     = date('Y-m-d H:i:s');
-        $query_date     = new DateTime($query_date, new DateTimeZone('Asia/Kolkata'));
-        $query_date     = $query_date->format('d-m-Y H:i:s');
+        $query_date     = new DateTime(date('Y-m-d H:i:s'),new DateTimeZone('Asia/Kolkata'));
+        $query_date     = $query_date->format('Y-m-d H:i:s');
         $db             = JFactory::getDbo();  // Get db connection
         $query          = $db->getQuery(true);
-        $columns        = array('location','query_date');
-        $values         = array($db->quote($location),$db->quote($query_date));
+        $columns        = array('location','query_purpose','query_date');
+        $values         = array($db->quote($location),$db->quote('muhurat'),
+                                $db->quote($query_date));
         $query          ->insert($db->quoteName('#__panchang_query'))
                         ->columns($db->quoteName($columns))
                         ->values(implode(',', $values));
@@ -124,7 +131,7 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
         $db             ->setQuery($query);
         $result          = $db->query();
         $app            = JFactory::getApplication();
-        $link           = JURI::base().'index.php?option=com_horoscope&view=muhurat';
+        $link           = JURI::base().'muhurat';
         $app        ->redirect($link);
  
     }

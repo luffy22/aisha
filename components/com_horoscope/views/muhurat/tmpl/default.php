@@ -7,6 +7,7 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die();
+//print_r($this->data);exit;
 $sunrise            = new DateTime($this->data['sun_rise_2']);
 $sunset             = new DateTime($this->data['sun_set_2']);
 $moonrise           = new DateTime($this->data['moon_rise_2']);
@@ -22,7 +23,7 @@ $abhijit_end        = new DateTime($this->data['abhijit_end']);
 ?>
 <body>
 <div id="default_loc">
-    <p>Default Location: Ujjain, India <button class="btn btn-primary" onclick="javascript:showLocationForm();">Change Location</button></p>
+    <p>Location: <?php echo $this->data['location'] ?> <button class="btn btn-primary" onclick="javascript:showLocationForm();">Change Location</button></p>
 </div>
 <div id="loc_form">
 <form class="form-inline" enctype="application/x-www-form-urlencoded" method="post" 
