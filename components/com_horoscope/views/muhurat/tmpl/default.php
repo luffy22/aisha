@@ -8,6 +8,9 @@
  */
 defined('_JEXEC') or die();
 //print_r($this->data);exit;
+$current_url        = JUri::current();
+$jinput             = JFactory::getApplication()->input;
+$url_date           = $jinput->get('date', 'default_value', 'filter');
 $sunrise            = new DateTime($this->data['sun_rise_2']);
 $sunset             = new DateTime($this->data['sun_set_2']);
 $moonrise           = new DateTime($this->data['moon_rise_2']);
@@ -20,6 +23,8 @@ $guli_kaal_start    = new DateTime($this->data['guli_kalam_start']);
 $guli_kaal_end      = new DateTime($this->data['guli_kalam_end']);
 $abhijit_start      = new DateTime($this->data['abhijit_start']);
 $abhijit_end        = new DateTime($this->data['abhijit_end']);
+$prev_day           = new DateTime($this->data['sun_rise_1']);
+$next_day           = new DateTime($this->data['sun_rise_3']);
 ?>
 <body>
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -40,13 +45,19 @@ $abhijit_end        = new DateTime($this->data['abhijit_end']);
     <input type="hidden" id="muhurat_lat" name="muhurat_lat" />
     <input type="hidden" id="muhurat_lon" name="muhurat_lon" />
     <input type="hidden" id="muhurat_tmz" name="muhurat_tmz" />
+    <input type="hidden" id="muhurat_date" name="muhurat_date" value="<?php echo $url_date; ?>" />
     <button type="submit" class="btn btn-primary mr-sm-2" name="muhurat_submit">Go</button>
     <button type="button" class="btn btn-danger" onclick="javascript:hideLocationForm();">Cancel</button>
 </form>
 </div>
 <div class="mb-3"></div>
-<p>Vedic Calendar counts day from sunrise to sunset and night from sunset to next sunrise. Whole day is from sunrise to next sunrise.</p>
-<div class="mb-3"></div>
+    <div class="row">
+        <div class="col-3 text-left"><a href="<?php echo $current_url."?date=".$prev_day->format('d-m-Y'); ?>"><i class="fas fa-arrow-circle-left" > Previous</i></a></div>
+        <div class="col-6"><form class="form-inline" enctype="application/x-www-form-urlencoded" method="post" 
+                              action="<?php echo JRoute::_('index.php?option=com_horoscope&task=muhurat.getmuhurat2'); ?>"><input class="form-control" type="text" name="muhurat_picker" id="muhurat_picker" /><button class="btn btn-primary" type="submit">Go</button></form></div>
+        <div class="col-3 text-right"><a href="<?php echo $current_url."?date=".$next_day->format('d-m-Y'); ?>"><i class="fas fa-arrow-circle-right"> Next</i></a></div>
+    </div><div class="mb-3"></div><br/>
+<?php unset($prev_day); unset($next_day); ?>
 <div class="lead alert alert-dark"><strong>Today's Muhurat, Chogadiya & Hora</strong></div>
 <div class="mb-3"></div>
 <ul class="nav nav-pills">
@@ -56,8 +67,11 @@ $abhijit_end        = new DateTime($this->data['abhijit_end']);
 </ul>
 <div class="tab-content">
 <div id="muhurat" class="tab-pane active">
+    <div class="mb-3"></div>
+<p>Vedic Calendar counts day from sunrise to sunset and night from sunset to next sunrise. Whole day is from sunrise to next sunrise.</p>
 <div class="mb-3"></div>
 <table class="table table-striped table-bordered">
+<tr><th><i class="far fa-2x fa-calendar-alt"></i> Date</th><td><?php echo $sunrise->format("dS F Y"); ?></td></tr>
 <tr><th><img src="images/clipart/sunrise.png" class="img-fluid" alt="sunrise" title="sunrise" /> Sunrise </th><td><?php echo $sunrise->format('h:i:s a');unset($sunrise); ?></td></tr>
 <tr><th><img src="images/clipart/sunset.png" class="img-fluid" alt="sunset" title="sunset" /> Sunset </th><td><?php echo $sunset->format('h:i:s a');unset($sunset); ?></td></tr>
 <tr><th><img src="images/clipart/moonrise.png" class="img-fluid" alt="moonset" title="moonrise" /> Moonrise </th><td><?php echo $moonrise->format('h:i:s a');unset($moonrise); ?></td></tr>
@@ -188,4 +202,10 @@ unset($this->data);
 ?>
 <div class="mb-1"></div>
 <script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/muhurat.js' ?>">
+</script>
+<script type="text/javascript">
+$(function() {
+$("#muhurat_picker").datepicker({yearRange: "1900:2050",changeMonth: true,
+  changeYear: true, dateFormat: "dd-mm-yy"});
+});
 </script>

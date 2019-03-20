@@ -11,9 +11,13 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
     public function getData()
     {
         $libPath        = JPATH_BASE.'/sweph/';
-        $jinput         = JFactory::getApplication()->input;        
-        $date           = date('Y-m-d');
-        
+        $jinput         = JFactory::getApplication()->input;
+        $date           = $jinput->get('date', 'default_value', 'filter');
+         if($date == "default_value")
+         {
+            $date           = date('Y-m-d');
+         }
+                 
         if(!isset($_COOKIE["loc"]) && !isset($_COOKIE["lat"]) &&
            !isset($_COOKIE["lon"]) && !isset($_COOKIE["tmz"])) {
             $loc            = "Ujjain, India";
@@ -91,16 +95,19 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
     public function getMuhurat2($loc_details)
     {
         //print_r($loc_details);exit;    
-        $date           = date('Y-m-d');
         $location       = $loc_details['location'];
         $lat            = $loc_details['lat'];
         $lon            = $loc_details['lon'];
         $tmz            = $loc_details['tmz'];
-        
+        $date           = date($loc_details['date']);
+        if($date == "default_value")
+        {
+            $date           = date('d-m-Y');
+        }
+       
         if($tmz == "none")
         {
             $tmz            = $this->getTimeZone($lat, $lon, "rohdes");
-            echo $tmz;exit;
             if($tmz == "error")
             {
                 $tmz        = "UTC";        // if timezone not available use UTC(Universal Time Cooridnated)
@@ -111,7 +118,7 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
         {
             $date       = new DateTime($date, new DateTimeZone($tmz));
         }
-        
+
         // storing location, latitude, longitude & timezone 
         // in local cookies for 7 days
         setcookie("loc", $location,time()+(86400*7));
@@ -133,9 +140,24 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
         $db             ->setQuery($query);
         $result          = $db->query();
         $app            = JFactory::getApplication();
-        $link           = JURI::base().'muhurat';
+        if($loc_details['date'] == "default_value")
+        {
+            $link           = JURI::base().'muhurat';
+        }
+        else
+        {
+            $link           = JURI::base().'muhurat?date='.$loc_details['date'];
+        }
         $app        ->redirect($link);
  
+    }
+    // just redirects after adding date. rest of function done by getData()
+    public function getMuhurat3($date)
+    {
+        $app        = JFactory::getApplication();
+        $link       = JURI::base().'muhurat?date='.$date;
+        //echo $link;exit;
+        $app            ->redirect($link);
     }
     /*
      * Get the Muhurat times for the particular day
