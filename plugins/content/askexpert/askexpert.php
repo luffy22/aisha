@@ -14,8 +14,8 @@ class PlgContentAskExpert extends JPlugin
             $path               = JPluginHelper::getLayoutPath('content', 'askexpert');
             //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
             //$geoip              = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
-            //$ip                         = '117.196.1.11';
-            $ip                         = '157.55.39.123';  // ip address
+            $ip                         = '117.196.1.11';
+            //$ip                         = '157.55.39.123';  // ip address
             //$ip                 = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
           
             $info                       = geoip_country_code_by_name($ip);
@@ -201,11 +201,11 @@ class PlgContentAskExpert extends JPlugin
                     $content        .= "</div>";         
                     $content        .= "<input type='hidden' name='long_ans_fees' id='long_ans_fees' value='".$details[0]['amount']."' />";
                     $content        .= "<input type='hidden' name='short_ans_fees' id='short_ans_fees' value='".$details[1]['amount']."' />";
-                    $content        .= "<input type='hidden' name='expert_fees' id='expert_fees' value='".$details[0]['amount']."' />";
-                    $content        .= "<input type='hidden' name='expert_curr_code' id='expert_curr_code' value='".$details[0]['curr_code']."' />";
-                    $content        .= "<input type='hidden' name='expert_currency' id='expert_currency' value='".$details[0]['currency']."' />";
-                    $content        .= "<input type='hidden' name='expert_curr_full' id='expert_curr_full' value='".$details[0]['curr_full']."' />";
-                    $content        .= "<input type='hidden' name='expert_final_fees' id='expert_final_fees' value='".$details[0]['amount']."' />";
+                    $content        .= "<input type='hidden' name='expert_fees' id='expert_fees' value='".$details[1]['amount']."' />";
+                    $content        .= "<input type='hidden' name='expert_curr_code' id='expert_curr_code' value='".$details[1]['curr_code']."' />";
+                    $content        .= "<input type='hidden' name='expert_currency' id='expert_currency' value='".$details[1]['currency']."' />";
+                    $content        .= "<input type='hidden' name='expert_curr_full' id='expert_curr_full' value='".$details[1]['curr_full']."' />";
+                    $content        .= "<input type='hidden' name='expert_final_fees' id='expert_final_fees' value='".$details[1]['amount']."' />";
                     $content        .= "<div class='form-group'><label>Fees:</label> <div id='fees_id'>".$details[1]['amount']."&nbsp;".$details[1]['curr_code']."(".$details[1]['currency'].'-'.$details[1]['curr_full'].')'."</div></div>";
                     $content        .= "<div class='form-group'>";
                     $content        .= "<label for='expert_choice' class='control-label'>Payment Type: </label>";
