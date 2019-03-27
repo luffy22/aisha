@@ -82,7 +82,8 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
         $guli_kalam         = array("guli_kalam_start"  =>  $day_prahar["day_prahar_start_".$guli],
                                     "guli_kalam_end"    =>  $day_prahar["day_prahar_end_".$guli]);
         //print_r($guli_kalam);exit;
-        $abhijit_kalam      = $this->getAbhijitKalam($times['sun_rise_'.$i],$day_interval);
+  
+        $abhijit_kalam      = $this->getAbhijitKalam($rise_set_times['sun_rise_'.$i],$day_interval);
         //print_r($abhijit_kalam);exit;
         $muhurat            = array_merge($muhurat,$rahu_kalam,$yama_kalam,$guli_kalam,$abhijit_kalam);
         return $muhurat;        
@@ -268,6 +269,7 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
     }
     public function getAbhijitKalam($date, $interval)
     {
+        //echo $date." ".$interval;exit;
         $muhurat                    = explode(".",round(($interval/15),2));
         $date                       = new DateTime($date);
         $abhijit                    = array();
