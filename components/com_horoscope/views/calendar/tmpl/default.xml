@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-        <layout title="Panchang">
+        <layout title="Calendar">
                 <message>
-                        Getting Panchang For Days
+                        Getting Vedic Calendar
                 </message>
         </layout>
 </metadata>

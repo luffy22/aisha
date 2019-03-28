@@ -8,7 +8,7 @@ jimport('joomla.application.component.controller');
 /**
  * HTML View class for the HelloWorld Component
  */
-class HoroscopeViewPanchang extends JViewLegacy
+class HoroscopeViewCalendar extends JViewLegacy
 {
     public $data;
     function display($tpl = null) 
