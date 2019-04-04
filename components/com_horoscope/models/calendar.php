@@ -3,26 +3,32 @@ defined('_JEXEC') or die;  // No direct Access
 // import Joomla modelitem library
 jimport('joomla.application.component.modelitem');
 JModelLegacy::addIncludePath(JPATH_SITE.'/components/com_horoscope/models/');
-$model = JModelLegacy::getInstance('lagna', 'horoscopeModel');
+$model = JModelLegacy::getInstance('muhurat', 'horoscopeModel');
 $libPath = JPATH_BASE.'/sweph/';
 putenv("PATH=$libPath");
-class HoroscopeModelCalendar extends HoroscopeModelLagna
+class HoroscopeModelCalendar extends HoroscopeModelMuhurat
 {
     public function getData()
     {
         $jinput         = JFactory::getApplication()->input;
         $date           = $jinput->get('date', 'default_value', 'filter');
+        $array          = array();
         if($date == "default_value")
         {
             $date       = date("Y-m-d");
         }
-        
-        $date           = new DateTime($date);
-        $days_in_month  = $date->format('t');       // getting the total number of days in current month. for eg 31 for March
-        $month_num      = $date->format('m');       // month in number format. example 01 for January 
-        $curr_year      = $date->format('Y');
-        $getCalendar    = $this->getCalendar($days_in_month,$month_num, $curr_year);
-        return $getCalendar;
+        $loc            = "Ujjain, India";
+        $timezone       = "Asia/Kolkata";
+        $lon            = "75.78";  $lat            = "23.17";  $alt    = 0;
+        $date               = new DateTime($date);
+        $days_in_month      = $date->format('t');       // getting the total number of days in current month. for eg 31 for March
+        $month_num          = $date->format('m');       // month in number format. example 01 for January 
+        $curr_year          = $date->format('Y');
+        $getCalendar        = $this->getCalendar($days_in_month,$month_num, $curr_year);
+        $sunrise_sunset     = $this->getSunTimings(date('01-'.$month_num.'-'.$curr_year), $timezone, $lat, $lon, $alt, $days_in_month+1);
+        $array              = array_merge($array, $getCalendar);
+        $array              = array_merge($array,$sunrise_sunset);
+        return $array;
     }
     public function getCalendar($days, $month, $year)
     {

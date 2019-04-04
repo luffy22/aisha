@@ -1,3 +1,10 @@
+<script type="text/javascript">
+$(function () {
+  $('.data-pop').popover({
+    container: 'body'
+  })
+})
+</script>
 <?php
 /**
  * @package     Joomla.Site
@@ -7,6 +14,7 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die();
+//print_r($this->data);exit;
 $key            = key($this->data);
 ?>
 <body>
@@ -40,13 +48,19 @@ function getFirstDate($data, $day_in_num, $days_in_month)
         if($i == $day_in_num && $day_in_num < 6)
         {
         ?>
-        <td><h1 class="text-right"><?php  echo $z;?></h1><p class="text-left"><?php echo $data[$key] ?></p></td>
+        <td  class="data-pop" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
+            <h1 class="text-right"><?php  echo $z;?></h1><p class="text-left text-primary" title="tithi"><?php echo $data[$key] ?></p>
+            <p class="text-left" title="sunrise"><img src="images/clipart/sunrise.png" width="20px" height="20px" />&nbsp;<?php $sunrise = new DateTime($data['sun_rise_2']); echo $sunrise->format('H:i:s'); ?></p><p class="text-left" title="sunset"><img src="images/clipart/sunset.png" width="20px" height="20px" title="sunset" /><?php $sunset  = new DateTime($data['sun_set_2']); echo $sunset->format('H:i:s'); ?></p>
+        </td>
         <?php
         }
         else if($i == $day_in_num && $day_in_num == 6)
         {
         ?>
-         <td><h1 class="text-right"><?php  echo $z;?></h1><p class="text-left"><?php echo $data[$key] ?></p></td></tr><tr>
+         <td data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
+             <h1 class="text-right"><?php  echo $z;?></h1><p class="text-left text-primary" title="tithi"><?php echo $data[$key] ?></p>
+             <p class="text-left" title="sunrise"><img src="images/clipart/sunrise.png" width="20px" height="20px" width="20px" height="20px" />&nbsp;<?php $sunrise = new DateTime($data['sun_rise_2']); echo $sunrise->format('H:i:s'); ?></p><p class="text-left" title="sunset"><img src="images/clipart/sunset.png" title="sunset" /><?php $sunset  = new DateTime($data['sun_set_2']); echo $sunset->format('H:i:s'); ?></p>
+         </td></tr><tr>
         <?php
         }
         else if($i > $day_in_num)
@@ -67,23 +81,30 @@ function getFirstDate($data, $day_in_num, $days_in_month)
 }
 function getDatesInWeek($data,$counter,$day, $month)
 {
-    $data       = processArray($data);
-    //echo $counter." ".$day." ".$month."<br/>";
+    $newdata       = processArray($data,$month);
+    //print_r($newdata);exit;
+    //echo $counter." ".$day." ".$month."<br/>";exit;
     for($i=0;$i<7;$i++)
     {
         while($counter <= $month)
         {
             if($day < 7)
             {
-    ?>
-         <td><h1 class="text-right"><?php echo $counter;$datacounter = $counter -1;$counter++;$day++; ?></h1><p class="text-left"><?php echo $data[$datacounter] ?></p></td>
+    ?>  
+         <td class="data-pop" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
+             <h1 class="text-right"><?php echo $counter;$datacounter = $counter -1;$counter++;$day++; ?></h1><p class="text-left text-primary" title="tithi"><?php echo $newdata[$datacounter] ?></p>
+             <p class="text-left" title="sunrise"><img src="images/clipart/sunrise.png" width="20px" height="20px" />&nbsp;<?php $sunrise = new DateTime($data['sun_rise_'.$counter]); echo $sunrise->format('H:i:s'); ?></p><p class="text-left" title="sunset"><img src="images/clipart/sunset.png" width="20px" height="20px" title="sunset" /><?php $sunset  = new DateTime($data['sun_set_'.$counter]); echo $sunset->format('H:i:s'); ?></p>
+         </td>
     <?php
             }
             else if($day ==7)
             {
                 $day    = 0;
     ?>
-         <tr><td><h1 class="text-right"><?php echo $counter;$datacounter = $counter - 1;$counter++;$day++; ?></h1><p class="text-left"><?php echo $data[$datacounter] ?></p></td>
+<tr><td class="data-pop" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
+                 <h1 class="text-right"><?php echo $counter;$datacounter = $counter - 1;$counter++;$day++; ?></h1><p class="text-left text-primary" title="tithi"><?php echo $newdata[$datacounter] ?></p>
+                 <p class="text-left" title="sunrise"><img src="images/clipart/sunrise.png" width="20px" height="20px" />&nbsp;<?php $sunrise = new DateTime($data['sun_rise_'.$counter]); echo $sunrise->format('H:i:s'); ?></p><p class="text-left" title="sunset"><img src="images/clipart/sunset.png" width="20px" height="20px" title="sunset" /><?php $sunset  = new DateTime($data['sun_set_'.$counter]); echo $sunset->format('H:i:s'); ?></p>
+             </td>
     <?php
             }
            
@@ -107,17 +128,25 @@ function incrementDate($day_in_num)
     }
     return $day_in_num;
 }
-function processArray($data)
+function processArray($data, $month)
 {
     $newarray       = array();
     $i  = 1;
     foreach($data as $result)
     {
-        $newdata    = array($i => $result);
-        $newarray   = array_merge($newarray, $newdata);
-        $i++;
+        if($i <= $month)
+        {
+            $newdata    = array($i => $result);
+            $newarray   = array_merge($newarray, $newdata);
+            $i++;
+        }
+        else
+        {
+            continue;
+        }
     }
     return $newarray;
+    //print_r($newarray);exit;
 }
 unset($this->data);
 ?>
