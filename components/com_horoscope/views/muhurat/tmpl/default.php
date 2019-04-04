@@ -13,6 +13,8 @@ $jinput             = JFactory::getApplication()->input;
 $url_date           = $jinput->get('date', 'default_value', 'filter');
 $sunrise            = new DateTime($this->data['sun_rise_2']);
 $sunset             = new DateTime($this->data['sun_set_2']);
+$day_of_week        = $sunrise->format('l');
+//echo $day_of_week;exit;
 $moonrise           = new DateTime($this->data['moon_rise_2']);
 $moonset            = new DateTime($this->data['moon_set_2']);
 $rahu_kaal_start    = new DateTime($this->data['rahu_kalam_start']);
@@ -79,7 +81,7 @@ $next_day           = new DateTime($this->data['sun_rise_3']);
 <tr><th><img src="images/art_img/rahu.png" height="48px" width="48px" class="img-fluid" alt="rahu kaal" title="rahu kaal" /> Rahu Kaal(Bad) </th><td><?php echo $rahu_kaal_start->format('h:i:s a')." - ".$rahu_kaal_end->format('h:i:s a');unset($rahu_kaal_start);unset($rahu_kaal_end); ?></td></tr>
 <tr><th><img src="images/clipart/yama.png" height="48px" width="48px" class="img-fluid" alt="yama kaal" title="yama kaal" />Yama Kaal(Bad) </th><td><?php echo $yama_kaal_start->format('h:i:s a')." - ".$yama_kaal_end->format('h:i:s a');unset($yama_kaal_start);unset($yama_kaal_end); ?></td></tr>
 <tr><th><img src="images/clipart/gulika.png" height="48px" width="40px" class="img-fluid" alt="guli kaal" title="guli kaal" /> Guli Kaal(Bad) </th><td><?php echo $guli_kaal_start->format('h:i:s a')." - ".$guli_kaal_end->format('h:i:s a');unset($guli_kaal_start);unset($guli_kaal_end); ?></td></tr>
-<tr><th><i class="fas fa-om fa-2x"></i> Abhijit Kaal(Auspicious)</th><td><?php echo $abhijit_start->format('h:i:s a')." - ".$abhijit_end->format('h:i:s a');unset($abhijit_start);unset($abhijit_end); ?></td></tr>
+<tr><th><i class="fas fa-om fa-2x"></i> Abhijit Kaal<?php if($day_of_week == "Wednesday"){ ?>(Bad)<?php }else{ ?>(Auspicious)<?php } unset($day_of_week); ?></th><td><?php echo $abhijit_start->format('h:i:s a')." - ".$abhijit_end->format('h:i:s a');unset($abhijit_start);unset($abhijit_end); ?></td></tr>
 </table><div class="mb-3"></div>
 </div>
 <div id="chogadiya" class="tab-pane">

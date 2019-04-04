@@ -22,7 +22,7 @@ class HoroscopeModelCalendar extends HoroscopeModelLagna
         $month_num      = $date->format('m');       // month in number format. example 01 for January 
         $curr_year      = $date->format('Y');
         $getCalendar    = $this->getCalendar($days_in_month,$month_num, $curr_year);
-        print_r($getCalendar);exit;
+        return $getCalendar;
     }
     public function getCalendar($days, $month, $year)
     {
@@ -34,7 +34,7 @@ class HoroscopeModelCalendar extends HoroscopeModelLagna
         exec ("swetest -edir$libPath -p1 -d0 -b1.$month.$year -n$days -fPTl -head", $output);
         $date           = "01-".$month."-".$year;
         $tithi          = $this->getTithi($date, $output);
-        print_r($tithi);exit;
+        return $tithi;
     }
     public function getTithi($date, $output)
     {
@@ -44,6 +44,7 @@ class HoroscopeModelCalendar extends HoroscopeModelLagna
         {
             $dist        = str_replace("Moo-Sun", " ", $result);
             $today       = $date->format('d.m.Y');
+            $date1       = $date->format('d-m-Y');
             $tithi       = str_replace($today,"",trim($dist));
             $date        ->add(new DateInterval('P1D'));
             $first              = substr(trim($tithi), 0, 1);
@@ -52,7 +53,7 @@ class HoroscopeModelCalendar extends HoroscopeModelLagna
                 $tithi          = 180 + $tithi;
                 $tithi_in_num   = (int)$tithi;
                 $tithi_in_words = $this->getTithiWords("krishna",$tithi_in_num);
-                $tithi          = array($today => $tithi_in_words);
+                $tithi          = array($date1 => $tithi_in_words);
                 $array          = array_merge($array, $tithi);
             }
             else
