@@ -56,10 +56,6 @@ window.cookieconsent.initialise({
 </head>
 <body>
 <div id="fb-root"></div>
-<div class='alert alert-success alert-dismissible fade show' role='alert'>
-    <strong><i class='fas fa-birthday-cake fa-2x'></i> Astro Isha turns 5 on April 4th 2019.</strong> To celebrate it we are giving 20% discount on short answers and 40% discount on detailed reports for whole month.
-  <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    <span aria-hidden='true'>&times;</span></button></div>
 <?php
 // Get option and view
 $option = JRequest::getVar('option');
@@ -76,7 +72,16 @@ endif;
     <h3><a id="display-4" href="<?php echo JUri::base(); ?>" title="Navigate to Home Page"><img src="<?php echo JUri::base(); ?>/logo.png" title="Click to navigate to Home Page" class="img-fluid" />Astro Isha</a></h3>
 <div class="row">
     <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12" id="main">
-        <jdoc:include type="message" />
+<?php
+        if(!isset($_SESSION['msg']))
+        {
+            $_SESSION['msg']   = "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+            <strong><i class='fas fa-birthday-cake fa-2x'></i> Astro Isha turns 5 on April 4th 2019.</strong> To celebrate it we are giving 20% discount on short answers and 40% discount on detailed reports for whole month.
+            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+            <span aria-hidden='true'>&times;</span></button></div>";
+            echo $_SESSION['msg'];
+        }
+?>        <jdoc:include type="message" />
         <jdoc:include type="modules" name="sidemenu" />
         <jdoc:include type="modules" name="breadcrumb" />
         <jdoc:include type="component" />

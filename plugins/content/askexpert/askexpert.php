@@ -206,7 +206,7 @@ class PlgContentAskExpert extends JPlugin
                     $content        .= "<input type='hidden' name='expert_currency' id='expert_currency' value='".$details[1]['currency']."' />";
                     $content        .= "<input type='hidden' name='expert_curr_full' id='expert_curr_full' value='".$details[1]['curr_full']."' />";
                     $content        .= "<input type='hidden' name='expert_final_fees' id='expert_final_fees' value='".$details[1]['amount']."' />";
-                    $content        .= "<div class='form-group'><label>Fees:</label> <div id='fees_id'>".$details[1]['amount']."&nbsp;".$details[1]['curr_code']."(".$details[1]['currency'].'-'.$details[1]['curr_full'].')'."</div></div>";
+                    $content        .= "<div class='form-group'><label>Fees(Discounted Price):</label> <div id='fees_id'>".$details[1]['amount']."&nbsp;".$details[1]['curr_code']."(".$details[1]['currency'].'-'.$details[1]['curr_full'].')'."</div></div>";
                     $content        .= "<div class='form-group'>";
                     $content        .= "<label for='expert_choice' class='control-label'>Payment Type: </label>";
                     if($details[0]['currency'] == 'INR')
