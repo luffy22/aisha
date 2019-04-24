@@ -4,6 +4,12 @@ $(function () {
     container: 'body'
   })
 })
+$(document).ready(function(){
+  $(".data-pop").click(function(){
+    var td_id       = document.getElementsByClassName('data-pop')[0].id;
+    $(this).toggleClass("bg-success");
+  });
+});
 </script>
 <?php
 /**
@@ -20,13 +26,15 @@ $key            = key($this->data);
 <body>
 <?php
 $date           = new DateTime(date($key));
-$month          = $date->format('m');
+$month          = $date->format('m');$month_in_words        = $date->format('F');
 $year           = $date->format('Y');
 $first          = new DateTime(date('01-'.$month."-".$year));
 $day_of_week    = $first->format('l');
 $days_in_month  = $first->format('t');
 $day_in_num     = $first->format('w');
 ?>
+<p>Note: Click on date for muhurat. Click again to remove selection. Default location is Ujjain.</p>
+<div class="lead alert alert-dark"><?php echo $month_in_words." ".$year; ?></div>
 <table class="table table-bordered table-striped table-responsive">
 <tr><th>Sunday</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th>
 <th>Thursday</th><th>Friday</th><th>Saturday</th></tr>
@@ -47,20 +55,40 @@ function getFirstDate($data, $day_in_num, $days_in_month)
        $key         = key($data);
         if($i == $day_in_num && $day_in_num < 6)
         {
+            $sunrise        = new DateTime($data['sun_rise_2']); 
+            $sunset         = new DateTime($data['sun_set_2']);
+            $rahu_start     = new DateTime($data['rahu_start_1']);
+            $rahu_end       = new DateTime($data['rahu_end_1']);
+            $yama_start     = new DateTime($data['yama_start_1']);
+            $yama_end       = new DateTime($data['yama_end_1']);
+            $guli_start     = new DateTime($data['guli_start_1']);
+            $guli_end       = new DateTime($data['guli_end_1']);
         ?>
-        <td  class="data-pop" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
-            <h1 class="text-right"><?php  echo $z;?></h1><p class="text-left text-primary" title="tithi"><?php echo $data[$key] ?></p>
-            <p class="text-left" title="sunrise"><img src="images/clipart/sunrise.png" width="20px" height="20px" />&nbsp;<?php $sunrise = new DateTime($data['sun_rise_2']); echo $sunrise->format('H:i:s'); ?></p><p class="text-left" title="sunset"><img src="images/clipart/sunset.png" width="20px" height="20px" title="sunset" /><?php $sunset  = new DateTime($data['sun_set_2']); echo $sunset->format('H:i:s'); ?></p>
+        <td id="td_1" class="data-pop" data-toggle="popover" title="Muhurat for <?php echo $sunrise->format('jS F Y'); ?>" data-content="<?php echo "Rahu Kaal: ".$rahu_start->format('h:i:s a')."-".$rahu_end->format('h:i:s a')."\n"; 
+                                                                                                                                      echo "Yama Kaal: ".$yama_start->format('h:i:s a')."-".$yama_end->format('h:i:s a')."\n";
+                                                                                                                                      echo "Guli Kaal: ".$guli_start->format('h:i:s a')."-".$guli_end->format('h:i:s a')."\n"; ?>">
+            <h1 class="text-right"><?php  echo $z;?></h1><p class="text-left text-danger" title="tithi"><?php echo $data[$key] ?></p>
+            <p class="text-left" title="sunrise"><img src="images/clipart/sunrise.png" width="20px" height="20px" />&nbsp;<?php echo $sunrise->format('H:i:s'); ?></p><p class="text-left" title="sunset"><img src="images/clipart/sunset.png" width="20px" height="20px" title="sunset" /><?php echo $sunset->format('H:i:s'); ?></p>
         </td>
         <?php
         }
         else if($i == $day_in_num && $day_in_num == 6)
         {
+            $sunrise = new DateTime($data['sun_rise_2']); 
+            $sunset  = new DateTime($data['sun_set_2']);
+            $rahu_start     = new DateTime($data['rahu_start_1']);
+            $rahu_end       = new DateTime($data['rahu_end_1']);
+            $yama_start     = new DateTime($data['yama_start_1']);
+            $yama_end       = new DateTime($data['yama_end_1']);
+            $guli_start     = new DateTime($data['guli_start_1']);
+            $guli_end       = new DateTime($data['guli_end_1']);
         ?>
-         <td data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
-             <h1 class="text-right"><?php  echo $z;?></h1><p class="text-left text-primary" title="tithi"><?php echo $data[$key] ?></p>
-             <p class="text-left" title="sunrise"><img src="images/clipart/sunrise.png" width="20px" height="20px" width="20px" height="20px" />&nbsp;<?php $sunrise = new DateTime($data['sun_rise_2']); echo $sunrise->format('H:i:s'); ?></p><p class="text-left" title="sunset"><img src="images/clipart/sunset.png" title="sunset" /><?php $sunset  = new DateTime($data['sun_set_2']); echo $sunset->format('H:i:s'); ?></p>
-         </td></tr><tr>
+         <td id="td_1" class="data-pop" data-toggle="popover" title="Muhurat for <?php echo $sunrise->format('jS F Y'); ?>" data-content="<?php echo "Rahu Kaal: ".$rahu_start->format('h:i:s a')."-".$rahu_end->format('h:i:s a')."\n"; 
+                                                                                                                                      echo "Yama Kaal: ".$yama_start->format('h:i:s a')."-".$yama_end->format('h:i:s a')."\n";
+                                                                                                                                      echo "Guli Kaal: ".$guli_start->format('h:i:s a')."-".$guli_end->format('h:i:s a')."\n"; ?>">
+            <h1 class="text-right"><?php  echo $z;?></h1><p class="text-left text-danger" title="tithi"><?php echo $data[$key] ?></p>
+            <p class="text-left" title="sunrise"><img src="images/clipart/sunrise.png" width="20px" height="20px" />&nbsp;<?php echo $sunrise->format('H:i:s'); ?></p><p class="text-left" title="sunset"><img src="images/clipart/sunset.png" width="20px" height="20px" title="sunset" /><?php echo $sunset->format('H:i:s'); ?></p>
+        </td></tr><tr>
         <?php
         }
         else if($i > $day_in_num)
@@ -77,7 +105,7 @@ function getFirstDate($data, $day_in_num, $days_in_month)
     $z++;
     $day_in_num     = incrementDate($day_in_num);
     getDatesInWeek($data, $z, $day_in_num, $days_in_month);
-   
+    unset($data);
 }
 function getDatesInWeek($data,$counter,$day, $month)
 {
@@ -90,19 +118,41 @@ function getDatesInWeek($data,$counter,$day, $month)
         {
             if($day < 7)
             {
-    ?>  
-         <td class="data-pop" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
-             <h1 class="text-right"><?php echo $counter;$datacounter = $counter -1;$counter++;$day++; ?></h1><p class="text-left text-primary" title="tithi"><?php echo $newdata[$datacounter] ?></p>
-             <p class="text-left" title="sunrise"><img src="images/clipart/sunrise.png" width="20px" height="20px" />&nbsp;<?php $sunrise = new DateTime($data['sun_rise_'.$counter]); echo $sunrise->format('H:i:s'); ?></p><p class="text-left" title="sunset"><img src="images/clipart/sunset.png" width="20px" height="20px" title="sunset" /><?php $sunset  = new DateTime($data['sun_set_'.$counter]); echo $sunset->format('H:i:s'); ?></p>
+                $counter1       = $counter+1;
+                $sunrise        = new DateTime($data['sun_rise_'.$counter1]);
+                $sunset         = new DateTime($data['sun_set_'.$counter1]);
+                $rahu_start     = new DateTime($data['rahu_start_'.$counter]);
+                $rahu_end       = new DateTime($data['rahu_end_'.$counter]);
+                $yama_start     = new DateTime($data['yama_start_'.$counter]);
+                $yama_end       = new DateTime($data['yama_end_'.$counter]);
+                $guli_start     = new DateTime($data['guli_start_'.$counter]);
+                $guli_end       = new DateTime($data['guli_end_'.$counter]);
+        ?>
+         <td id="td_<?php echo trim($counter); ?>"  class="data-pop" data-toggle="popover" title="Muhurat for <?php echo $sunrise->format('jS F Y'); ?>" data-content="<?php echo "Rahu Kaal: ".$rahu_start->format('h:i:s a')."-".$rahu_end->format('h:i:s a')."\n"; 
+                                                                                                                                      echo "Yama Kaal: ".$yama_start->format('h:i:s a')."-".$yama_end->format('h:i:s a')."\n";
+                                                                                                                                      echo "Guli Kaal: ".$guli_start->format('h:i:s a')."-".$guli_end->format('h:i:s a')."\n"; ?>">
+         <h1 class="text-right"><?php echo $counter;$datacounter = $counter -1;$counter++;$day++; ?></h1><p class="text-left text-danger" title="tithi"><?php echo $newdata[$datacounter] ?></p>
+             <p class="text-left" title="sunrise"><img src="images/clipart/sunrise.png" width="20px" height="20px" />&nbsp;<?php echo $sunrise->format('H:i:s'); ?></p><p class="text-left" title="sunset"><img src="images/clipart/sunset.png" width="20px" height="20px" title="sunset" /><?php echo $sunset->format('H:i:s'); ?></p>
          </td>
     <?php
             }
             else if($day ==7)
             {
                 $day    = 0;
-    ?>
-<tr><td class="data-pop" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
-                 <h1 class="text-right"><?php echo $counter;$datacounter = $counter - 1;$counter++;$day++; ?></h1><p class="text-left text-primary" title="tithi"><?php echo $newdata[$datacounter] ?></p>
+                $counter1       = $counter+1;
+                $sunrise = new DateTime($data['sun_rise_'.$counter1]);
+                $sunset  = new DateTime($data['sun_set_'.$counter1]);
+                $rahu_start     = new DateTime($data['rahu_start_'.$counter]);
+                $rahu_end       = new DateTime($data['rahu_end_'.$counter]);
+                $yama_start     = new DateTime($data['yama_start_'.$counter]);
+                $yama_end       = new DateTime($data['yama_end_'.$counter]);
+                $guli_start     = new DateTime($data['guli_start_'.$counter]);
+                $guli_end       = new DateTime($data['guli_end_'.$counter]);
+        ?>
+         <tr><td id="td_<?php echo trim($counter); ?>" class="data-pop" data-toggle="popover" title="Muhurat for <?php echo $sunrise->format('jS F Y'); ?>" data-content="<?php echo "Rahu Kaal: ".$rahu_start->format('h:i:s a')."-".$rahu_end->format('h:i:s a')."\n"; 
+                                                                                                                                      echo "Yama Kaal: ".$yama_start->format('h:i:s a')."-".$yama_end->format('h:i:s a')."\n";
+                                                                                                                                      echo "Guli Kaal: ".$guli_start->format('h:i:s a')."-".$guli_end->format('h:i:s a')."\n"; ?>">
+                 <h1 class="text-right"><?php echo $counter;$datacounter = $counter - 1;$counter++;$day++; ?></h1><p class="text-left text-danger" title="tithi"><?php echo $newdata[$datacounter] ?></p>
                  <p class="text-left" title="sunrise"><img src="images/clipart/sunrise.png" width="20px" height="20px" />&nbsp;<?php $sunrise = new DateTime($data['sun_rise_'.$counter]); echo $sunrise->format('H:i:s'); ?></p><p class="text-left" title="sunset"><img src="images/clipart/sunset.png" width="20px" height="20px" title="sunset" /><?php $sunset  = new DateTime($data['sun_set_'.$counter]); echo $sunset->format('H:i:s'); ?></p>
              </td>
     <?php
@@ -110,6 +160,7 @@ function getDatesInWeek($data,$counter,$day, $month)
            
         }
         break;
+        unset($data);
     }
     
 }

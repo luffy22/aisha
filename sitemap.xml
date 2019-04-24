@@ -625,19 +625,19 @@
 	<changefreq>yearly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/transits/352-rahu-cancer-transit</loc>
-	<changefreq>yearly</changefreq>
-</url>
-<url>
 	<loc>https://www.astroisha.com/transits/359-saturn-sagittarius2</loc>
 	<changefreq>yearly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/transits/355-jupiter-libra-transit</loc>
+	<loc>https://www.astroisha.com/transits/399-jupiter-scorpio</loc>
 	<changefreq>yearly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/transits/399-jupiter-scorpio</loc>
+	<loc>https://www.astroisha.com/transits/422-rahu-gemini-transit</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/transits/424-ketu-sagittarius-transit</loc>
 	<changefreq>yearly</changefreq>
 </url>
 <url>
@@ -885,10 +885,6 @@
 	<changefreq>yearly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/career/343-malefics-career</loc>
-	<changefreq>yearly</changefreq>
-</url>
-<url>
 	<loc>https://www.astroisha.com/case/373-salman-horo-analysis</loc>
 	<changefreq>yearly</changefreq>
 </url>
@@ -914,6 +910,14 @@
 </url>
 <url>
 	<loc>https://www.astroisha.com/case/397-modi-2019</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/case/420-trump-horoscope</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/case/423-anil-ambani-horo</loc>
 	<changefreq>yearly</changefreq>
 </url>
 <url>
@@ -1300,6 +1304,14 @@
 	<changefreq>yearly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/planet-bhavas/421-rahu-5th-house</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/planet-bhavas/425-rahu-6th-house</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
   <loc>https://www.astroisha.com/yearly</loc>
   <changefreq>yearly</changefreq>
 </url>
@@ -1505,6 +1517,10 @@
 </url>
 <url>
 	<loc>https://www.astroisha.com/career/316-career-benefics</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/career/343-malefics-career</loc>
 	<changefreq>yearly</changefreq>
 </url>
 <url>

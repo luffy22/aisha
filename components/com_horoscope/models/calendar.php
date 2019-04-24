@@ -17,17 +17,30 @@ class HoroscopeModelCalendar extends HoroscopeModelMuhurat
         {
             $date       = date("Y-m-d");
         }
-        $loc            = "Ujjain, India";
-        $timezone       = "Asia/Kolkata";
-        $lon            = "75.78";  $lat            = "23.17";  $alt    = 0;
+        if(!isset($_COOKIE["loc"]) && !isset($_COOKIE["lat"]) &&
+           !isset($_COOKIE["lon"]) && !isset($_COOKIE["tmz"])) {
+            $loc            = "Ujjain, India";
+            $timezone       = "Asia/Kolkata";
+            $lon            = "75.78";  $lat            = "23.17";  $alt    = 0;
+        } else {
+           $loc         = $_COOKIE["loc"];
+           $lat         = $_COOKIE["lat"];
+           $lon         = $_COOKIE["lon"];
+           $timezone    = $_COOKIE["tmz"];
+           $alt         = 0;
+        }
         $date               = new DateTime($date);
         $days_in_month      = $date->format('t');       // getting the total number of days in current month. for eg 31 for March
         $month_num          = $date->format('m');       // month in number format. example 01 for January 
         $curr_year          = $date->format('Y');
         $getCalendar        = $this->getCalendar($days_in_month,$month_num, $curr_year);
         $sunrise_sunset     = $this->getSunTimings(date('01-'.$month_num.'-'.$curr_year), $timezone, $lat, $lon, $alt, $days_in_month+1);
+        $get_muhurat        = $this->getCalendarMuhurat($sunrise_sunset);
         $array              = array_merge($array, $getCalendar);
         $array              = array_merge($array,$sunrise_sunset);
+        $array              = array_merge($array, $get_muhurat);
+        
+        //print_r($array);exit;
         return $array;
     }
     public function getCalendar($days, $month, $year)
@@ -140,5 +153,37 @@ class HoroscopeModelCalendar extends HoroscopeModelMuhurat
         {
             return "Chaturdashi";
         }
+    }
+    public function getCalendarMuhurat($rise_set_times)
+    {
+        $count              = count($rise_set_times)/2;
+        $muhurat            = array();
+        for($i=2;$i<= $count;$i++)
+        {
+            $j                  = $i+1;
+            $k                  = $i-1;
+            $rise               = new DateTime($rise_set_times['sun_rise_'.$i]);//echo $rise."<br/>";
+            $day_of_week        = $rise->format('l');
+            $set                = new DateTime($rise_set_times['sun_set_'.$i]);//echo $set."<br/>";
+            $day_interval       = $set->getTimestamp() - $rise->getTimestamp();//echo $day_interval;exit;
+            $day_prahar         = $this->getPrahar($rise_set_times['sun_rise_'.$i],$day_interval,"day");
+            $result             = $this->getMuhuratTables($day_of_week);
+            //print_r($result);exit;
+            $rahu               = $result[0]['prahar_num'];//echo $rahu."<br/>";
+            $yama               = $result[1]['prahar_num'];//echo $yama."<br/>";
+            $guli               = $result[2]['prahar_num'];//echo $guli."<br/>";exit;
+            $rahu_kalam         = array("rahu_start_".$k    =>  $day_prahar["day_prahar_start_".$rahu],
+                                        "rahu_end_".$k      =>  $day_prahar["day_prahar_end_".$rahu]);
+            //print_r($rahu_kalam);exit;
+            $yama_kalam         = array("yama_start_".$k    =>  $day_prahar["day_prahar_start_".$yama],
+                                        "yama_end_".$k      =>  $day_prahar["day_prahar_end_".$yama]);
+            //print_r($yama_kalam);exit;
+            $guli_kalam         = array("guli_start_".$k    =>  $day_prahar["day_prahar_start_".$guli],
+                                      "guli_end_".$k        =>  $day_prahar["day_prahar_end_".$guli]);
+            $muhurat            = array_merge($muhurat, $rahu_kalam, $yama_kalam, $guli_kalam);
+            
+        }
+        //print_r($muhurat);exit;
+        return $muhurat;
     }
 }
