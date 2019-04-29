@@ -18,9 +18,6 @@ $moonset        = new DateTime($this->data[1]['moon_set_2']);
         <th><i class="far fa-2x fa-calendar-alt"></i> Date</th><td><?php echo $this->data['date']; ?></td>
     </tr>
     <tr>
-        <th><i class="far fa-2x fa-calendar"></i> Day</th><td><?php echo $this->data['day_today']; ?></td>
-    </tr>
-    <tr>
         <th><img src="/aisha/images/clipart/sunrise.png" class="img-fluid" alt="sunrise" title="sunrise" /> Sunrise</th><td><?php echo $sunrise->format('h:i:s a'); ?></td>
     </tr>
     <tr>
@@ -31,6 +28,13 @@ $moonset        = new DateTime($this->data[1]['moon_set_2']);
     </tr>
     <tr>
         <th><img src="/aisha/images/clipart/moonset.png" class="img-fluid" alt="moonset" title="moonset" /> Moonset</th><td><?php echo $moonset->format('h:i:s a'); ?></td>
+    </tr>
+</table>
+<div class="mb-3"></div>
+<div class="lead alert alert-dark"><strong>Today's Panchang</strong></div>
+<table class="table table-bordered table-striped">
+    <tr>
+        <th><i class="far fa-2x fa-calendar"></i> Day</th><td><?php echo $this->data['day_today']; ?></td>
     </tr>
 </table>
 <?php
