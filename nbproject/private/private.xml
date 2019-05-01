@@ -5,7 +5,6 @@
         <group>
             <file>file:/var/www/html/aisha/components/com_horoscope/views/panchang/tmpl/default.php</file>
             <file>file:/var/www/html/aisha/components/com_horoscope/models/panchang.php</file>
-            <file>file:/var/www/html/aisha/components/com_horoscope/models/calendar.php</file>
             <file>file:/var/www/html/aisha/components/com_horoscope/models/lagna.php</file>
         </group>
     </open-files>
