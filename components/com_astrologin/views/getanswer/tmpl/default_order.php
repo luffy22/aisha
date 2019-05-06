@@ -28,20 +28,6 @@ if(isset($_GET['ref']))
             {
                 echo "Name: Hidden To Protect Customer Privacy";
             }
-     ?>
-    </li>
-    <li class="list-group-item">
-      <?php
-            if(isset($refemail) && $refemail==$this->order->email)
-            {
-      ?>
-                Email: <?php echo $this->order->email; ?>
-     <?php
-            }
-            else
-            {
-                echo "Email: Hidden To Protect Customer Privacy";
-            }
             $date   = new DateTime(); $date->setTimestamp($this->order->dob_tob);
      ?>
     </li>
@@ -72,5 +58,6 @@ foreach($this->ques as $ques)
 <div class="mb-4"></div>
 <?php
 }
+unset($this->order);
 ?>
 <div class="mb-4"></div>

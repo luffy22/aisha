@@ -48,7 +48,7 @@ $details                    = $this->msg;
 <input type="hidden" name="expert_curr_full" id="expert_curr_full" value="<?php echo $details[0]['curr_full']; ?>" />
 <input type="hidden" name="expert_final_fees" id="expert_final_fees" value="<?php echo $details[0]['amount'] ?>" />
 <div class="mb-3"></div>
-<div class="form-control" id="fees_type"><label>Fees(Discounted Price)  :</label> <div id='fees_id'><?php echo $details[0]['amount']."&nbsp;".$details[0]['curr_code']."(".$details[0]['currency']."-".$details[0]['curr_full'].")" ?></div></div>
+<div class="form-control" id="fees_type"><label>Fees:</label> <div id='fees_id'><?php echo $details[0]['amount']."&nbsp;".$details[0]['curr_code']."(".$details[0]['currency']."-".$details[0]['curr_full'].")" ?></div></div>
 <div class="mb-3"></div>
 <div class="form-control" id="pay_id">
     <label for='expert_choice' class='control-label'>Payment Type: </label>
@@ -77,4 +77,6 @@ else
     <button type="reset" name="ask_reset" id="ask_reset" class="btn btn-danger">Reset</button>
 </div>
 </form>
-
+<?php 
+unset($details);unset($this->msg);
+?>
