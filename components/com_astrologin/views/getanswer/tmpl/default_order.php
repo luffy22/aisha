@@ -58,6 +58,20 @@ foreach($this->ques as $ques)
 <div class="mb-4"></div>
 <?php
 }
-unset($this->order);
+if($this->order->order_type == "long_ans")
+{
+?>
+<div class="card card-outline-info">
+<div class="card-header alert alert-dark">Summary: </div>
+ <div class= "card-body">
+        <p class="card-text"><?php if(empty($this->summary)){echo "Not yet summarized"; }else{echo $this->summary->summary_txt;} ?></p>
+    </div>
+</div>
+<?php
+}
 ?>
 <div class="mb-4"></div>
+<?php
+unset($this->order);
+?>
+

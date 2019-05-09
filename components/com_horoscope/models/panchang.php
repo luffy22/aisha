@@ -16,13 +16,13 @@ class HoroscopeModelPanchang extends HoroscopeModelCalendar
         $date       = new DateTime($today, new DateTimeZone($tmz));
         $sunrise    = $this->getSunTimings($date->format('Y-m-d'), $tmz,$lat,$lon,$alt, 2);
         $moonrise   = $this->getMoonTimings($date->format('Y-m-d'), $tmz, $lat, $lon, $alt, 2);
-        $this->getPanchang();
+        $this->getPanchang($today, $tmz);
         //return array("date"=>$date->format('dS F Y'),"day_today"=>$date->format('l'),
                       //$sunrise, $moonrise);
     }
-    public function getPanchang()
+    public function getPanchang($today, $tmz)
     {
-        $date           = new DateTime(date('02-05-2019'));
+        $date           = new DateTime($today);
         $today          = $date->format('d.m.Y');
         $libPath        = JPATH_BASE.'/sweph/';
         putenv("PATH=$libPath");
@@ -33,10 +33,12 @@ class HoroscopeModelPanchang extends HoroscopeModelCalendar
         //swetest -p6 -DD -b1.12.1900 -n100 -s5 -fPTZ -head
         exec ("swetest -edir$libPath -p1 -d0 -b$today -n3 -fl -head", $output);
         //print_r($output);exit;
-        $tithi          = $this->getTithiToday($date, $output);
+        //$tithi          = $this->getTithiToday($today,$tmz, $output);
+        $tithi_today    = $this->getTithi($today, $output);
+        
     }
     
-    public function getTithiToday($date, $output)
+    public function getTithiToday($today,$tmz,$output)
     {
         //print_r($output);exit;
         $array      = array();
@@ -88,10 +90,11 @@ class HoroscopeModelPanchang extends HoroscopeModelCalendar
         //echo $tithi_change;exit;
         $tithi_change           = explode(":",$this->convertDecimalToTime($tithi_change));
         //print_r($tithi_change);exit;
-        $date1                   = new DateTime(date('02-05-2019'));
+        date_default_timezone_set('UTC');       // set default timezone to universal time
+        $date1                   = new DateTime($today);
+        $date1                  ->setTimezone(new DateTimeZone($tmz));
         $date1                   ->add(new DateInterval('PT'.$tithi_change[0].'H'.$tithi_change[1]."M".$tithi_change[2]."S"));
-        $date1                   ->add(new DateInterval('PT5H30M'));
-        echo $date1->format('H:i:s');exit;
+        echo $date1->format('Y-m-d H:i:s');exit;
         
     }
     public function convertDecimalToTime($dec)

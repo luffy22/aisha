@@ -39,15 +39,15 @@ $day_in_num     = $first->format('w');
 <tr><th>Sunday</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th>
 <th>Thursday</th><th>Friday</th><th>Saturday</th></tr>
 <?php
-getTable($this->data, $day_of_week,$day_in_num, $days_in_month);
+getTable($this->data, $day_of_week,$day_in_num, $days_in_month, $month,$year);
 ?>
 </table>
 <?php
-function getTable($data,$day_of_week,$day_in_num, $days_in_month)
+function getTable($data,$day_of_week,$day_in_num, $days_in_month,$month,$year)
 {
-    $z = 1;getFirstDate($data,$day_in_num, $days_in_month);
+    $z = 1;getFirstDate($data,$day_in_num, $days_in_month, $month, $year);
 }
-function getFirstDate($data, $day_in_num, $days_in_month)
+function getFirstDate($data, $day_in_num, $days_in_month, $month, $year)
 {
    for($i=0; $i< 7; $i++)
    {
@@ -64,7 +64,7 @@ function getFirstDate($data, $day_in_num, $days_in_month)
             $guli_start     = new DateTime($data['guli_start_1']);
             $guli_end       = new DateTime($data['guli_end_1']);
         ?>
-        <td id="td_1" class="data-pop" data-toggle="popover" title="Muhurat for <?php echo $sunrise->format('jS F Y'); ?>" data-content="<?php echo "Rahu Kaal: ".$rahu_start->format('h:i:s a')."-".$rahu_end->format('h:i:s a')."\n"; 
+        <td id="td_1" class="data-pop" data-toggle="popover" title="<?php echo $data[$key."_paksh"]." Paksha" ?>" data-content="<?php echo "Rahu Kaal: ".$rahu_start->format('h:i:s a')."-".$rahu_end->format('h:i:s a')."\n"; 
                                                                                                                                       echo "Yama Kaal: ".$yama_start->format('h:i:s a')."-".$yama_end->format('h:i:s a')."\n";
                                                                                                                                       echo "Guli Kaal: ".$guli_start->format('h:i:s a')."-".$guli_end->format('h:i:s a')."\n"; ?>">
             <h1 class="text-right"><?php  echo $z;?></h1><p class="text-left text-danger" title="tithi"><?php echo $data[$key] ?></p>
@@ -74,8 +74,8 @@ function getFirstDate($data, $day_in_num, $days_in_month)
         }
         else if($i == $day_in_num && $day_in_num == 6)
         {
-            $sunrise = new DateTime($data['sun_rise_2']); 
-            $sunset  = new DateTime($data['sun_set_2']);
+            $sunrise        = new DateTime($data['sun_rise_2']); 
+            $sunset         = new DateTime($data['sun_set_2']);
             $rahu_start     = new DateTime($data['rahu_start_1']);
             $rahu_end       = new DateTime($data['rahu_end_1']);
             $yama_start     = new DateTime($data['yama_start_1']);
@@ -83,7 +83,7 @@ function getFirstDate($data, $day_in_num, $days_in_month)
             $guli_start     = new DateTime($data['guli_start_1']);
             $guli_end       = new DateTime($data['guli_end_1']);
         ?>
-         <td id="td_1" class="data-pop" data-toggle="popover" title="Muhurat for <?php echo $sunrise->format('jS F Y'); ?>" data-content="<?php echo "Rahu Kaal: ".$rahu_start->format('h:i:s a')."-".$rahu_end->format('h:i:s a')."\n"; 
+         <td id="td_1" class="data-pop" data-toggle="popover" title="<?php echo $data[$key."_paksh"]." Paksha" ?>" data-content="<?php echo "Rahu Kaal: ".$rahu_start->format('h:i:s a')."-".$rahu_end->format('h:i:s a')."\n"; 
                                                                                                                                       echo "Yama Kaal: ".$yama_start->format('h:i:s a')."-".$yama_end->format('h:i:s a')."\n";
                                                                                                                                       echo "Guli Kaal: ".$guli_start->format('h:i:s a')."-".$guli_end->format('h:i:s a')."\n"; ?>">
             <h1 class="text-right"><?php  echo $z;?></h1><p class="text-left text-danger" title="tithi"><?php echo $data[$key] ?></p>
@@ -104,19 +104,20 @@ function getFirstDate($data, $day_in_num, $days_in_month)
    }
     $z++;
     $day_in_num     = incrementDate($day_in_num);
-    getDatesInWeek($data, $z, $day_in_num, $days_in_month);
+    getDatesInWeek($data, $z, $day_in_num, $days_in_month, $month, $year);
     unset($data);
 }
-function getDatesInWeek($data,$counter,$day, $month)
+function getDatesInWeek($data,$counter,$day_in_num, $days_in_month, $month, $year)
 {
-    $newdata       = processArray($data,$month);
+    //echo $counter." ".$day_in_num." ".$days_in_month." ".$month." ".$year."<br/>";
+    $newdata       = processArray($data,$days_in_month,$counter,$month, $year);
     //print_r($newdata);exit;
-    //echo $counter." ".$day." ".$month."<br/>";exit;
+    //echo $counter." ".$days_in_month." ".$month."<br/>";exit;
     for($i=0;$i<7;$i++)
     {
-        while($counter <= $month)
+        while($counter <= $days_in_month)
         {
-            if($day < 7)
+            if($day_in_num < 7)
             {
                 $counter1       = $counter+1;
                 $sunrise        = new DateTime($data['sun_rise_'.$counter1]);
@@ -127,35 +128,41 @@ function getDatesInWeek($data,$counter,$day, $month)
                 $yama_end       = new DateTime($data['yama_end_'.$counter]);
                 $guli_start     = new DateTime($data['guli_start_'.$counter]);
                 $guli_end       = new DateTime($data['guli_end_'.$counter]);
+                $tithi          = $newdata["tithi_".$counter];
+                $paksh          = $newdata["paksh_".$counter];
         ?>
-         <td id="td_<?php echo trim($counter); ?>"  class="data-pop" data-toggle="popover" title="Muhurat for <?php echo $sunrise->format('jS F Y'); ?>" data-content="<?php echo "Rahu Kaal: ".$rahu_start->format('h:i:s a')."-".$rahu_end->format('h:i:s a')."\n"; 
+         <td id="td_<?php echo trim($counter); ?>"  class="data-pop" data-toggle="popover" title="<?php echo $paksh." Paksha";; ?>" data-content="<?php echo "Rahu Kaal: ".$rahu_start->format('h:i:s a')."-".$rahu_end->format('h:i:s a')."\n"; 
                                                                                                                                       echo "Yama Kaal: ".$yama_start->format('h:i:s a')."-".$yama_end->format('h:i:s a')."\n";
                                                                                                                                       echo "Guli Kaal: ".$guli_start->format('h:i:s a')."-".$guli_end->format('h:i:s a')."\n"; ?>">
-         <h1 class="text-right"><?php echo $counter;$datacounter = $counter -1;$counter++;$day++; ?></h1><p class="text-left text-danger" title="tithi"><?php echo $newdata[$datacounter] ?></p>
+         <h1 class="text-right"><?php echo $counter;?></h1><p class="text-left text-danger" title="tithi"><?php echo $tithi;$counter++;$day_in_num++;  ?></p>
              <p class="text-left" title="sunrise"><img src="images/clipart/sunrise.png" width="20px" height="20px" />&nbsp;<?php echo $sunrise->format('H:i:s'); ?></p><p class="text-left" title="sunset"><img src="images/clipart/sunset.png" width="20px" height="20px" title="sunset" /><?php echo $sunset->format('H:i:s'); ?></p>
          </td>
     <?php
+                
             }
-            else if($day ==7)
+            else if($day_in_num ==7)
             {
-                $day    = 0;
+                $day_in_num     = 0;
                 $counter1       = $counter+1;
-                $sunrise = new DateTime($data['sun_rise_'.$counter1]);
-                $sunset  = new DateTime($data['sun_set_'.$counter1]);
+                $sunrise        = new DateTime($data['sun_rise_'.$counter1]);
+                $sunset         = new DateTime($data['sun_set_'.$counter1]);
                 $rahu_start     = new DateTime($data['rahu_start_'.$counter]);
                 $rahu_end       = new DateTime($data['rahu_end_'.$counter]);
                 $yama_start     = new DateTime($data['yama_start_'.$counter]);
                 $yama_end       = new DateTime($data['yama_end_'.$counter]);
                 $guli_start     = new DateTime($data['guli_start_'.$counter]);
                 $guli_end       = new DateTime($data['guli_end_'.$counter]);
+                $tithi          = $newdata["tithi_".$counter];
+                $paksh          = $newdata["paksh_".$counter];
         ?>
-         <tr><td id="td_<?php echo trim($counter); ?>" class="data-pop" data-toggle="popover" title="Muhurat for <?php echo $sunrise->format('jS F Y'); ?>" data-content="<?php echo "Rahu Kaal: ".$rahu_start->format('h:i:s a')."-".$rahu_end->format('h:i:s a')."\n"; 
+         <tr><td id="td_<?php echo trim($counter); ?>" class="data-pop" data-toggle="popover" title="<?php echo $paksh." Paksha"; ?>" data-content="<?php echo "Rahu Kaal: ".$rahu_start->format('h:i:s a')."-".$rahu_end->format('h:i:s a')."\n"; 
                                                                                                                                       echo "Yama Kaal: ".$yama_start->format('h:i:s a')."-".$yama_end->format('h:i:s a')."\n";
                                                                                                                                       echo "Guli Kaal: ".$guli_start->format('h:i:s a')."-".$guli_end->format('h:i:s a')."\n"; ?>">
-                 <h1 class="text-right"><?php echo $counter;$datacounter = $counter - 1;$counter++;$day++; ?></h1><p class="text-left text-danger" title="tithi"><?php echo $newdata[$datacounter] ?></p>
+                 <h1 class="text-right"><?php echo $counter; ?></h1><p class="text-left text-danger" title="tithi"><?php echo $tithi;$counter++;$day_in_num++; ?></p>
                  <p class="text-left" title="sunrise"><img src="images/clipart/sunrise.png" width="20px" height="20px" />&nbsp;<?php $sunrise = new DateTime($data['sun_rise_'.$counter]); echo $sunrise->format('H:i:s'); ?></p><p class="text-left" title="sunset"><img src="images/clipart/sunset.png" width="20px" height="20px" title="sunset" /><?php $sunset  = new DateTime($data['sun_set_'.$counter]); echo $sunset->format('H:i:s'); ?></p>
              </td>
     <?php
+                
             }
            
         }
@@ -179,22 +186,18 @@ function incrementDate($day_in_num)
     }
     return $day_in_num;
 }
-function processArray($data, $month)
+function processArray($data, $days_in_month, $counter, $month, $year)
 {
+    //print_r($data);exit;
     $newarray       = array();
-    $i  = 1;
-    foreach($data as $result)
+    $date           = new DateTime(date($counter."-".$month."-".$year));
+    for($i=1;$i<=$days_in_month-1;$i++)
     {
-        if($i <= $month)
-        {
-            $newdata    = array($i => $result);
-            $newarray   = array_merge($newarray, $newdata);
-            $i++;
-        }
-        else
-        {
-            continue;
-        }
+       $date1       = $date->format('d-m-Y'); 
+       $j           = $i+1;
+       $array       = array("tithi_".$j=>$data[$date1],"paksh_".$j => $data[$date1."_paksh"]);
+       $newarray    = array_merge($newarray,$array);
+       $date        ->add(new DateInterval('P1D'));
     }
     return $newarray;
     //print_r($newarray);exit;

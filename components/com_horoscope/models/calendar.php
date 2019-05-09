@@ -50,21 +50,20 @@ class HoroscopeModelCalendar extends HoroscopeModelMuhurat
         $h_sys = 'P';
         $output = "";
         // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
-        exec ("swetest -edir$libPath -p1 -d0 -b1.$month.$year -n$days -fPTl -head", $output);
+        exec ("swetest -edir$libPath -p1 -d0 -b1.$month.$year -n$days -fl -head", $output);
         $date           = "01-".$month."-".$year;
         $tithi          = $this->getTithi($date, $output);
         return $tithi;
     }
     public function getTithi($date, $output)
     {
+        //print_r($output);exit;
         $date           = new DateTime($date);
         $array          = array();
         foreach($output as $result)
         {
-            $dist        = str_replace("Moo-Sun", " ", $result);
-            $today       = $date->format('d.m.Y');
             $date1       = $date->format('d-m-Y');
-            $tithi       = str_replace($today,"",trim($dist));
+            $tithi       = trim($result);
             $date        ->add(new DateInterval('P1D'));
             $first              = substr(trim($tithi), 0, 1);
             if($first           == "-")
@@ -72,14 +71,14 @@ class HoroscopeModelCalendar extends HoroscopeModelMuhurat
                 $tithi          = 180 + $tithi;
                 $tithi_in_num   = (int)$tithi;
                 $tithi_in_words = $this->getTithiWords("krishna",$tithi_in_num);
-                $tithi          = array($date1 => $tithi_in_words);
+                $tithi          = array($date1 => $tithi_in_words,$date1."_paksh"=>"Krishna");
                 $array          = array_merge($array, $tithi);
             }
             else
             {
                 $tithi_in_num   = (int)$tithi;
                 $tithi_in_words     = $this->getTithiWords("shukla",$tithi_in_num);
-                $tithi          = array($today => $tithi_in_words);
+                $tithi          = array($date1 => $tithi_in_words, $date1."_paksh"=>"Shukla");
                 $array          = array_merge($array, $tithi);
             }
             
@@ -88,7 +87,7 @@ class HoroscopeModelCalendar extends HoroscopeModelMuhurat
     }
     public function getTithiWords($moon_status, $tithi)
     {
-        //echo $tithi;exit;
+        //echo $tithi." ".$moon_status;exit;
         if($tithi >= 168 && $tithi < 180 && $moon_status == "krishna")
         {
             return "Amavasya";
