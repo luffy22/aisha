@@ -7,7 +7,7 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die();
-//print_r($this->data);
+print_r($this->data);exit;
 $sunrise        = new DateTime($this->data[0]['sun_rise_2']);
 $sunset         = new DateTime($this->data[0]['sun_set_2']);
 $moonrise       = new DateTime($this->data[1]['moon_rise_2']);

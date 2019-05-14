@@ -57,20 +57,20 @@ class HoroscopeModelCalendar extends HoroscopeModelMuhurat
     }
     public function getTithi($date, $output)
     {
-        //print_r($output);exit;
+        //print_r($date);exit;
         $date           = new DateTime($date);
         $array          = array();
         foreach($output as $result)
         {
             $date1       = $date->format('d-m-Y');
             $tithi       = trim($result);
-            $date        ->add(new DateInterval('P1D'));
             $first              = substr(trim($tithi), 0, 1);
             if($first           == "-")
             {
                 $tithi          = 180 + $tithi;
                 $tithi_in_num   = (int)$tithi;
                 $tithi_in_words = $this->getTithiWords("krishna",$tithi_in_num);
+                $vedic_month    = $this->getVedicMonth($date);
                 $tithi          = array($date1 => $tithi_in_words,$date1."_paksh"=>"Krishna");
                 $array          = array_merge($array, $tithi);
             }
@@ -78,12 +78,14 @@ class HoroscopeModelCalendar extends HoroscopeModelMuhurat
             {
                 $tithi_in_num   = (int)$tithi;
                 $tithi_in_words     = $this->getTithiWords("shukla",$tithi_in_num);
+                $vedic_month    = $this->getVedicMonth($date);
                 $tithi          = array($date1 => $tithi_in_words, $date1."_paksh"=>"Shukla");
                 $array          = array_merge($array, $tithi);
             }
-            
+            $date        ->add(new DateInterval('P1D'));
         }
-        return $array;
+        exit;
+        //return $array;
     }
     public function getTithiWords($moon_status, $tithi)
     {
@@ -184,5 +186,30 @@ class HoroscopeModelCalendar extends HoroscopeModelMuhurat
         }
         //print_r($muhurat);exit;
         return $muhurat;
+    }
+    public function getVedicMonth($date)
+    {
+        $month              = $date->format('F');
+        $months             = array("January","February","March","April","May","June",
+                                    "July","August","September","October","November","December");
+        $key                = array_search($month, $months);
+        $curr_month         = $months[$key];
+        $prev_month         = $months[$key-1];
+        $next_month         = $months[$key+1];
+
+        
+        $db                 = JFactory::getDbo();  // Get db connection
+        $query              = $db->getQuery(true);     
+        $query              ->select($db->quoteName(array('month','sun_sign')));
+        $query              ->from($db->quoteName('#__hindu_calender'));
+        $query              ->where($db->quoteName('greg_upper_month').' = '.$db->quote($prev_month).' OR '.
+                                    $db->quoteName('greg_lower_month').' = '.$db->quote($prev_month).' OR '.
+                                    $db->quoteName('greg_lower_month').' = '.$db->quote($curr_month).' OR '.
+                                    $db->quoteName('greg_upper_month').' = '.$db->quote($next_month).' OR '.
+                                    $db->quoteName('greg_lower_month').' = '.$db->quote($next_month));
+        $db                 ->setQuery($query);
+        $db->execute();
+        $result             = $db->loadAssocList();
+        print_r($result);exit;
     }
 }
