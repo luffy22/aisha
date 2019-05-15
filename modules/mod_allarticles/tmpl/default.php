@@ -37,5 +37,7 @@ foreach($allarticles as $data)
     }
         $counter++;
     }
+    
+    unset($allarticles);
 ?>
 

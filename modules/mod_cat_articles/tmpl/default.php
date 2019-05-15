@@ -48,6 +48,7 @@ $images                 = json_decode($item->images);
 <?php 
     }
 }
+unset($list);
 ?>
 
 

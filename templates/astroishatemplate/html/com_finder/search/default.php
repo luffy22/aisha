@@ -32,5 +32,4 @@ JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 			<?php echo $this->loadTemplate('results'); ?>
 		</div>
 	<?php endif; ?>
-<div class="mb-3"></div>
-
+<div class="mb-3"></div><?php unset($this->loadTemplate);?>

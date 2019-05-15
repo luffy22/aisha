@@ -23,6 +23,7 @@ foreach($topview as $data)
 ?>
 </table>
 <?php
+unset($topview);
 /*
 $i=1;
 foreach($toprecent as $data)

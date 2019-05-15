@@ -61,4 +61,6 @@ defined('_JEXEC') or die;
     </div>
 </nav>
 <!--<a class="dropdown-item" href="#"><?php //echo $menu->title; ?></a>
+
+<?php unset($topmenu); ?>
                         <div class="dropdown-divider"></div>-->              

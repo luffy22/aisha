@@ -190,6 +190,8 @@ class HoroscopeModelCalendar extends HoroscopeModelMuhurat
     public function getVedicMonth($date)
     {
         $month              = $date->format('F');
+        $year               = $date->format('Y');
+        $adhik              = $this->checkAdhikMonth($year);
         $months             = array("January","February","March","April","May","June",
                                     "July","August","September","October","November","December");
         $key                = array_search($month, $months);
@@ -211,5 +213,38 @@ class HoroscopeModelCalendar extends HoroscopeModelMuhurat
         $db->execute();
         $result             = $db->loadAssocList();
         print_r($result);exit;
+    }
+    public function checkAdhikMonth($year)
+    {
+        // Default adhik maas is Jyestha in year 1902
+        $months             = array(0=>"Vaisakha",1=>"Jyestha",2=>"Asadha",3=>"Shraavan",4=>"Bhadra",
+                                    5=>"Ashvin",6=>"Kartik",7=>"Agrahayana",8=>"Pausha",9=>"Magha",
+                                    10=>"Phalguna",11=>"Chitra");
+        $default            = "Jyestha";
+        $adhik_diff         = array("28","33","34","35");
+        $a                  = 1;   // this works as index for array $months_12
+        for($i=1902;$i<=$year;$i++)
+        {
+            for($j=0;$j<4;$j++)
+            {
+                $diff       = $adhik_diff[$j];
+                for($k=0;$k<$diff;$k++)
+                {
+                    if($k < $a)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        $a++;
+                        if($a > 11)
+                        {
+                            echo $a;exit;
+                        }
+                    }
+                }echo $a;exit;
+            }
+        }
+        
     }
 }
