@@ -20,7 +20,8 @@ class AstrologinModelAstroask extends JModelItem
         $u_id           = '222';
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
-        $query1          = $db->getQuery(true);
+        $query1         = $db->getQuery(true);
+        $query          ->clear();
         $query          ->select($db->quoteName(array('a.id','a.name','a.username','b.img_name','b.img_new_name',
                                                        'c.city','c.country','c.membership','c.info','c.profile_status','c.max_no_ques','c.phone_or_report')));
         $query          ->from($db->quoteName('#__users','a'));
@@ -30,15 +31,15 @@ class AstrologinModelAstroask extends JModelItem
         $db             ->setQuery($query);
         $db->execute();
         $result         = $db->loadAssoc();
-        $service1        = 'long_ans_fees';
-        $service2        = 'short_ans_fees';
-        
+        $service1       = 'long_ans_fees';
+        $service2       = 'short_ans_fees';
+        $query1          ->clear();
         if($info == "US")
         {
-             $query1          ->select($db->quoteName(array('a.country','a.amount','b.currency','b.curr_code','b.curr_full')))
-                                    ->from($db->quoteName('#__expert_charges','a'))
-                                    ->join('INNER', $db->quoteName('#__user_currency', 'b') . ' ON (' . $db->quoteName('a.currency_ref') . ' = ' . $db->quoteName('b.Curr_ID') . ')')
-                                    ->where($db->quoteName('user_id').' = '.$db->quote($u_id).' AND '.
+             $query1            ->select($db->quoteName(array('a.country','a.amount','b.currency','b.curr_code','b.curr_full')))
+                                ->from($db->quoteName('#__expert_charges','a'))
+                                ->join('INNER', $db->quoteName('#__user_currency', 'b') . ' ON (' . $db->quoteName('a.currency_ref') . ' = ' . $db->quoteName('b.Curr_ID') . ')')
+                                ->where($db->quoteName('user_id').' = '.$db->quote($u_id).' AND '.
                                             $db->quoteName('service_for_charge').' = '.$db->quote($service1).' AND '.
                                             $db->quoteName('country').' = '.$db->quote('US').' OR '.
                                             $db->quoteName('service_for_charge').' = '.$db->quote($service2).' AND '.
@@ -47,7 +48,7 @@ class AstrologinModelAstroask extends JModelItem
         }
         else if($info == 'IN'||$info=='NP')
         {
-            $query1          ->select($db->quoteName(array('a.country','a.amount','b.currency','b.curr_code','b.curr_full')))
+            $query1             ->select($db->quoteName(array('a.country','a.amount','b.currency','b.curr_code','b.curr_full')))
                                     ->from($db->quoteName('#__expert_charges','a'))
                                     ->join('INNER', $db->quoteName('#__user_currency', 'b') . ' ON (' . $db->quoteName('a.currency_ref') . ' = ' . $db->quoteName('b.Curr_ID') . ')')
                                     ->where($db->quoteName('user_id').' = '.$db->quote($u_id).' AND '.
@@ -167,7 +168,7 @@ public function insertDetails($details)
     $pob                = $details['pob'];
     $expert             = $details['expert'];
     $no_of_ques         = $details['no_of_ques'];
-    $ques_type         = $details['ques_type'];
+    $ques_type          = $details['ques_type'];
     $pay_mode           = $details['pay_mode'];
     
     $date               = new DateTime($dob);
@@ -186,27 +187,28 @@ public function insertDetails($details)
     $expert_id          = $row['id'];   
        //print_r($details);exit;
     //$query1         = $db->getQuery(true);
-    $columns        = array('UniqueID','expert_id','no_of_ques','fees','currency','pay_mode','name','email','gender', 'dob_tob', 
-                            'pob','order_type','ques_ask_date'
-                            );
-    $values         = array(
-                            $db->quote($token),$db->quote($expert_id),$db->quote($no_of_ques),
-                            $db->quote($fees),$db->quote($currency),$db->quote($pay_mode),
-                            $db->quote($name), $db->quote($email),$db->quote($gender), 
-                            $db->quote($dob_tob),$db->quote($pob),$db->quote($ques_type),$db->quote($ques_ask_date)
+    $columns            = array('UniqueID','expert_id','no_of_ques','fees','currency','pay_mode','name','email','gender', 'dob_tob', 
+                                'pob','order_type','ques_ask_date'
+                                );
+    $values             = array(
+                                $db->quote($token),$db->quote($expert_id),$db->quote($no_of_ques),
+                                $db->quote($fees),$db->quote($currency),$db->quote($pay_mode),
+                                $db->quote($name), $db->quote($email),$db->quote($gender), 
+                                $db->quote($dob_tob),$db->quote($pob),$db->quote($ques_type),$db->quote($ques_ask_date)
                             );
     // Prepare the insert query
-    $query          ->insert($db->quoteName('#__question_details'))
-                    ->columns($db->quoteName($columns))
-                    ->values(implode(',', $values));
+    $query              ->clear();
+    $query              ->insert($db->quoteName('#__question_details'))
+                        ->columns($db->quoteName($columns))
+                        ->values(implode(',', $values));
     // Set the query using our newly populated query object and execute it
-    $db             ->setQuery($query);
-    $result          = $db->query();
+    $db                 ->setQuery($query);
+    $result             = $db->query();
     if($result)
     {
         if($ques_type == "long_ans")
         {
-            $query1          = "INSERT INTO jv_question_summary(order_id) 
+            $query1         = "INSERT INTO jv_question_summary(order_id) 
                                VALUES ('".$token."')";
             // Set the query using our newly populated query object and execute it
             $db             ->setQuery($query1);
@@ -253,7 +255,7 @@ public function insertQuestions($details)
     }
     if($result)
     {
-        $query1              ->select($db->quoteName(array('UniqueID','name','email',
+        $query1             ->select($db->quoteName(array('UniqueID','name','email',
                                     'pay_mode','fees','currency')))
                             ->from($db->quoteName('#__question_details'))
                             ->where($db->quoteName('UniqueID').'='.$db->quote($token));
@@ -282,15 +284,15 @@ public function insertQuestions($details)
        else if($pay_mode=="phonepe"||$pay_mode=="bhim"||$pay_mode=="cheque"
                 ||$pay_mode=="direct"||$pay_mode=="paypalme"||$pay_mode=="directint")
        {
-           $query1           ->clear();
+           $query1              ->clear();
            $query1              ->select($db->quoteName(array('a.UniqueID','a.expert_id','a.no_of_ques','a.name','a.email',
-                                    'a.gender','a.dob_tob','a.pob','a.pay_mode','a.order_type','a.fees','a.currency','a.paid','c.username')))
-                         ->select($db->quoteName('c.name','expertname'))  
-                         ->select($db->quoteName('c.email','expertemail'))
-                            ->from($db->quoteName('#__question_details','a'))
-                            ->join('RIGHT', $db->quoteName('#__users', 'c').' ON ('.$db->quoteName('c.id').' = '.$db->quoteName('a.expert_id').')')
-                            ->where($db->quoteName('a.UniqueID').'='.$db->quote($token));
-            $db                  ->setQuery($query1);
+                                        'a.gender','a.dob_tob','a.pob','a.pay_mode','a.order_type','a.fees','a.currency','a.paid','c.username')))
+                                ->select($db->quoteName('c.name','expertname'))  
+                                ->select($db->quoteName('c.email','expertemail'))
+                                ->from($db->quoteName('#__question_details','a'))
+                                ->join('RIGHT', $db->quoteName('#__users', 'c').' ON ('.$db->quoteName('c.id').' = '.$db->quoteName('a.expert_id').')')
+                                ->where($db->quoteName('a.UniqueID').'='.$db->quote($token));
+            $db                 ->setQuery($query1);
             $data                = $db->loadObject();
             $this->sendMail($data);
        }
@@ -309,14 +311,13 @@ public function getExpert()
     $expert             = $jinput->get('expert',  'default_value', 'string');
     $db                 = JFactory::getDbo();  // Get db connection
     $query              = $db->getQuery(true);
-    $query2              = $db->getQuery(true);
+    $query2             = $db->getQuery(true);
     $query              ->select($db->quoteName(array('id')))
                         ->from($db->quoteName('#__users'))
                         ->where($db->quoteName('username').' = '.$db->quote($expert));
     $db                     ->setQuery($query);
     $id                     = $db->loadResult();
     $query                  ->clear();
-    $query              ->clear();
     $query                  =   "SELECT DISTINCT(main_expert) from jv_role_astro where astro_id ='".$id."'";
     $db                     ->setQuery($query);
     $main                    = $db->loadColumn();     
@@ -329,9 +330,9 @@ public function getExpert()
         $db                     ->setQuery($query2);
         $row                    = $db->loadObjectList();
         $main_exp               = array_merge($main_exp,$row);
-        $query2                 ->clear();
 
     }
+    $query2                     ->clear();
     $query2                     ->select($db->quoteName('sub_expert'))
                                 ->from($db->quoteName('#__role_astro'))
                                 ->where($db->quoteName('astro_id').' = '.$db->quote($id));
@@ -341,12 +342,12 @@ public function getExpert()
     foreach($sub as $subexp)
     {
         $query2                 ->clear();
-        $query2                  ->select($db->quoteName(array('role_id','role_name','role_super')))
+        $query2                 ->select($db->quoteName(array('role_id','role_name','role_super')))
                                 ->from($db->quoteName('#__role'))
                                 ->where($db->quoteName('role_id') . ' = '. $db->quote($subexp));
         $db                     ->setQuery($query2);
         $row                    = $db->loadObjectList();
-        $sub_exp               = array_merge($sub_exp,$row);
+        $sub_exp                = array_merge($sub_exp,$row);
 
     }
     $exp                      = array_merge($main_exp, $sub_exp);
@@ -367,24 +368,23 @@ public function authorizePayment($details)
     $object->paid           = "yes";
     $object->UniqueId       = $token;
     // Update their details in the users table using id as the primary key.
-    $result = JFactory::getDbo()->updateObject('#__question_details', $object, 'UniqueId');
+    $result                 = JFactory::getDbo()->updateObject('#__question_details', $object, 'UniqueId');
     
-    $columns        = array('paypal_id','authorize_id','status','UniqueID');
+    $columns                = array('paypal_id','authorize_id','status','UniqueID');
     // Conditions for which records should be updated.
-    $values         = array($db->quote($paypal_id),$db->quote($auth_id),$db->quote('Authorized'),$db->quote($token));
-    
-    $query              ->insert($db->quoteName('#__paypal_info'))
-                        ->columns($db->quoteName($columns))
-                        ->values(implode(',', $values));
+    $values                 = array($db->quote($paypal_id),$db->quote($auth_id),$db->quote('Authorized'),$db->quote($token));
+    $query                  ->insert($db->quoteName('#__paypal_info'))
+                            ->columns($db->quoteName($columns))
+                            ->values(implode(',', $values));
     // Set the query using our newly populated query object and execute it
-    $db                 ->setQuery($query);
-    $result             = $db->query();
+    $db                     ->setQuery($query);
+    $result                 = $db->query();
  
-    $query              ->clear();
-    $query              ->select($db->quoteName(array('a.UniqueID','a.expert_id','a.no_of_ques','a.name','a.email',
+    $query                  ->clear();
+    $query                  ->select($db->quoteName(array('a.UniqueID','a.expert_id','a.no_of_ques','a.name','a.email',
                                     'a.gender','a.dob_tob','a.pob','a.pay_mode','a.order_type','a.fees','a.currency','a.paid','b.paypal_id','b.status','c.username')))
-                         ->select($db->quoteName('c.name','expertname'))  
-                         ->select($db->quoteName('c.email','expertemail'))
+                            ->select($db->quoteName('c.name','expertname'))  
+                            ->select($db->quoteName('c.email','expertemail'))
                             ->from($db->quoteName('#__question_details','a'))
                             ->join('INNER', $db->quoteName('#__paypal_info', 'b') . ' ON (' . $db->quoteName('a.UniqueID').' = '.$db->quoteName('b.UniqueID') . ')')
                             ->join('RIGHT', $db->quoteName('#__users', 'c').' ON ('.$db->quoteName('c.id').' = '.$db->quoteName('a.expert_id').')')
@@ -398,18 +398,18 @@ public function authorizePayment($details)
 public function failPayment($details)
 {
     //print_r($details);exit;
-    $token          = $details['token'];
-    $db         = JFactory::getDbo();
-    $query      = $db->getQuery(true);
+    $token              = $details['token'];
+    $db                 = JFactory::getDbo();
+    $query              = $db->getQuery(true);
     $query              ->select($db->quoteName(array('a.UniqueID','a.expert_id','a.no_of_ques','a.name','a.email',
                                     'a.gender','a.dob_tob','a.pob','a.pay_mode','a.order_type','a.fees','a.currency','a.paid','c.username')))
-                         ->select($db->quoteName('c.name','expertname'))  
-                         ->select($db->quoteName('c.email','expertemail'))
-                            ->from($db->quoteName('#__question_details','a'))
-                            ->join('RIGHT', $db->quoteName('#__users', 'c').' ON ('.$db->quoteName('c.id').' = '.$db->quoteName('a.expert_id').')')
-                            ->where($db->quoteName('a.UniqueID').'='.$db->quote($token));
-       $db                  ->setQuery($query);
-       $data                = $db->loadObject();
+                        ->select($db->quoteName('c.name','expertname'))  
+                        ->select($db->quoteName('c.email','expertemail'))
+                        ->from($db->quoteName('#__question_details','a'))
+                        ->join('RIGHT', $db->quoteName('#__users', 'c').' ON ('.$db->quoteName('c.id').' = '.$db->quoteName('a.expert_id').')')
+                        ->where($db->quoteName('a.UniqueID').'='.$db->quote($token));
+       $db              ->setQuery($query);
+       $data            = $db->loadObject();
     $this->sendMail($data);
 }
 public function confirmCCPayment($details)
@@ -419,8 +419,8 @@ public function confirmCCPayment($details)
     $trackid            = $details['trackid'];
     $bankref            = $details['bankref'];
     $status             = $details['status'];
-    $db = JFactory::getDbo();
-    $query = $db->getQuery(true);
+    $db                 = JFactory::getDbo();
+    $query              = $db->getQuery(true);
     if($status      == 'Success'||$status =='TXN_SUCCESS')
     {
     // Fields to update.
@@ -439,17 +439,15 @@ public function confirmCCPayment($details)
     {
         $status     = "Failure";
     }
-    $columns                = array('pay_token','track_id','bank_ref','pay_status');
+    $columns                    = array('pay_token','track_id','bank_ref','pay_status');
     // Conditions for which records should be updated.
-    $values                 = array($db->quote($token),$db->quote($trackid),$db->quote($bankref),$db->quote($status));
-    
-    $query              ->insert($db->quoteName('#__ccavenue_paytm'))
-                        ->columns($db->quoteName($columns))
-                        ->values(implode(',', $values));  
-    $db                 ->setQuery($query);
-    $result             = $db->query();
-    
-    $query              ->clear();
+    $values                     = array($db->quote($token),$db->quote($trackid),$db->quote($bankref),$db->quote($status));
+    $query                  ->insert($db->quoteName('#__ccavenue_paytm'))
+                            ->columns($db->quoteName($columns))
+                            ->values(implode(',', $values));  
+    $db                     ->setQuery($query);
+    $result                 = $db->query();
+    $query                  ->clear();
     $query                  ->select($db->quoteName(array('a.UniqueID','a.expert_id','a.no_of_ques','a.name','a.email',
                                     'a.gender','a.dob_tob','a.pob','a.pay_mode','a.order_type','a.fees','a.currency','a.paid','b.track_id',
                                     'b.bank_ref','b.pay_status','c.username')))

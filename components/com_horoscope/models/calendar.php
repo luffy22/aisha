@@ -34,6 +34,7 @@ class HoroscopeModelCalendar extends HoroscopeModelMuhurat
         $month_num          = $date->format('m');       // month in number format. example 01 for January 
         $curr_year          = $date->format('Y');
         $getCalendar        = $this->getCalendar($days_in_month,$month_num, $curr_year);
+        $getVedicMonth      = $this->getVedicMonth($days_in_month,$month_num, $curr_year);
         $sunrise_sunset     = $this->getSunTimings(date('01-'.$month_num.'-'.$curr_year), $timezone, $lat, $lon, $alt, $days_in_month+1);
         $get_muhurat        = $this->getCalendarMuhurat($sunrise_sunset);
         $array              = array_merge($array, $getCalendar);
@@ -70,7 +71,6 @@ class HoroscopeModelCalendar extends HoroscopeModelMuhurat
                 $tithi          = 180 + $tithi;
                 $tithi_in_num   = (int)$tithi;
                 $tithi_in_words = $this->getTithiWords("krishna",$tithi_in_num);
-                $vedic_month    = $this->getVedicMonth($date);
                 $tithi          = array($date1 => $tithi_in_words,$date1."_paksh"=>"Krishna");
                 $array          = array_merge($array, $tithi);
             }
@@ -78,14 +78,12 @@ class HoroscopeModelCalendar extends HoroscopeModelMuhurat
             {
                 $tithi_in_num   = (int)$tithi;
                 $tithi_in_words     = $this->getTithiWords("shukla",$tithi_in_num);
-                $vedic_month    = $this->getVedicMonth($date);
                 $tithi          = array($date1 => $tithi_in_words, $date1."_paksh"=>"Shukla");
                 $array          = array_merge($array, $tithi);
             }
             $date        ->add(new DateInterval('P1D'));
         }
-        exit;
-        //return $array;
+        return $array;
     }
     public function getTithiWords($moon_status, $tithi)
     {
@@ -187,32 +185,17 @@ class HoroscopeModelCalendar extends HoroscopeModelMuhurat
         //print_r($muhurat);exit;
         return $muhurat;
     }
-    public function getVedicMonth($date)
+    public function getVedicMonth($days, $month, $year)
     {
-        $month              = $date->format('F');
-        $year               = $date->format('Y');
-        $adhik              = $this->checkAdhikMonth($year);
-        $months             = array("January","February","March","April","May","June",
-                                    "July","August","September","October","November","December");
-        $key                = array_search($month, $months);
-        $curr_month         = $months[$key];
-        $prev_month         = $months[$key-1];
-        $next_month         = $months[$key+1];
-
-        
-        $db                 = JFactory::getDbo();  // Get db connection
-        $query              = $db->getQuery(true);     
-        $query              ->select($db->quoteName(array('month','sun_sign')));
-        $query              ->from($db->quoteName('#__hindu_calender'));
-        $query              ->where($db->quoteName('greg_upper_month').' = '.$db->quote($prev_month).' OR '.
-                                    $db->quoteName('greg_lower_month').' = '.$db->quote($prev_month).' OR '.
-                                    $db->quoteName('greg_lower_month').' = '.$db->quote($curr_month).' OR '.
-                                    $db->quoteName('greg_upper_month').' = '.$db->quote($next_month).' OR '.
-                                    $db->quoteName('greg_lower_month').' = '.$db->quote($next_month));
-        $db                 ->setQuery($query);
-        $db->execute();
-        $result             = $db->loadAssocList();
-        print_r($result);exit;
+        $date           = '01.'.$month.".".$year;
+        $libPath = JPATH_BASE.'/sweph/';
+        putenv("PATH=$libPath");
+        $h_sys = 'P';
+        $output = "";
+        // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
+        //swetest -p2 -b1.12.1900 -n15 -s2
+        exec ("swetest -edir$libPath -b$date -sid1 -p01 -n$days -fl, -head", $output);
+        print_r($output);exit;
     }
     public function checkAdhikMonth($year)
     {
