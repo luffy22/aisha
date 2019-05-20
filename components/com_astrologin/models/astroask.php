@@ -253,6 +253,7 @@ public function insertQuestions($details)
         $db             ->setQuery($query);
         $result          = $db->query();
     }
+    //print_r($result);
     if($result)
     {
         $query1             ->select($db->quoteName(array('UniqueID','name','email',
@@ -421,7 +422,7 @@ public function confirmCCPayment($details)
     $status             = $details['status'];
     $db                 = JFactory::getDbo();
     $query              = $db->getQuery(true);
-    if($status      == 'Success'||$status =='TXN_SUCCESS')
+    if($status      == 'Success'||$status =='credit')
     {
     // Fields to update.
         $object                 = new stdClass();
@@ -431,7 +432,7 @@ public function confirmCCPayment($details)
         // Update their details in the users table using id as the primary key.
         $result                 = JFactory::getDbo()->updateObject('#__question_details', $object, 'UniqueId');
     }
-    if($status == 'TXN_SUCCESS')
+    if($status == 'credit')
     {
         $status = "Success";
     }
@@ -543,12 +544,12 @@ protected function sendMail($data)
     $body           .= "<p>Fees: ".$data->fees."&nbsp;".$data->currency."</p>";
     $body           .= "<p>Payment Via: ".$data->pay_mode."</p>";
     
-    if(($data->pay_mode=="paytm"||$data->pay_mode=="ccavenue"||$data->pay_mode=="paypal")&&$data->paid=="no")
+    if(($data->pay_mode=="paytm"||$data->pay_mode=="instamojo"||$data->pay_mode=="paypal")&&$data->paid=="no")
     {
         $body       .= "<p>Payment Status: </strong>Failed</p>";
 
     }
-    else if(($data->pay_mode=="paytm"||$data->pay_mode=="ccavenue")&&$data->paid=="yes")
+    else if(($data->pay_mode=="paytm"||$data->pay_mode=="instamojo")&&$data->paid=="yes")
     {
         $body       .= "<p>Payment Status: Success</p>";
         $body       .= "<p>Payment Id: ".$data->track_id."</p>";

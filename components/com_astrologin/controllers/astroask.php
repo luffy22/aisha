@@ -45,17 +45,15 @@ class AstrologinControllerAstroask extends AstroLoginController
                 $ques                               = array_merge($ques,$ques_new);
                 
             }
-            //print_r($ques);exit;
             $details                    = array("uniq_id"=>$uniq_id,"ques_no"=>$ques_no);
             $details                    = array_merge($details,$ques);
-            //print_r($details);exit;
             $model          = $this->getModel('astroask');  // Add the array to model
             $model          ->insertQuestions($details);
     }
     public function confirmPayment()
     {
         $id             = $_GET['id'];
-        $auth_id       = $_GET['auth_id'];
+        $auth_id        = $_GET['auth_id'];
         $token          = $_GET['token'];
         $details        = array("paypal_id"=>$id,"auth_id"=>$auth_id,"token"=>$token);
         $model          = $this->getModel('astroask');  // Add the array to model
@@ -81,7 +79,7 @@ class AstrologinControllerAstroask extends AstroLoginController
         $token             = $_GET['token'];
         $track_id          = $_GET['track_id'];
         $bank_ref          = $_GET['bank_ref'];
-        $status            = $_GET['status'];
+        $status            = strtolower($_GET['status']);
         
         $details        = array("token"=>$token,"trackid"=>$track_id,"bankref"=>$bank_ref,"status"=>$status);
         $model          = $this->getModel('astroask');  // Add the array to model
