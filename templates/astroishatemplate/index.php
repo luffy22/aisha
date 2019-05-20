@@ -1,5 +1,5 @@
 <?php 
-error_reporting(0);       // uncomment on server 
+//error_reporting(0);       // uncomment on server 
 defined( '_JEXEC' ) or die( 'Restricted access' );
 $app             = JFactory::getApplication();
 $doc             = JFactory::getDocument();
