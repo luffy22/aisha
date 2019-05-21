@@ -47,18 +47,18 @@ defined('_JEXEC') or die();
     <input type="hidden" id="fspouse_tmz" name="fspouse_tmz"  />
     <div class="form-group">
         <label for="longitude" class="control-label">Longitude</label><br/>
-        <input type="text" id="fspouse_long_1" class="form-text1" name="fspouse_deg"  />
-        <input type="text" id="fspouse_long_2" class="form-text1" name="fspouse_min" />
-        <select class="select2" id="fspouse_long_direction" name="fspouse_dir">
+        <input type="text" id="fspouse_long_1" class="form-text1" name="fspouse_lon_deg"  />
+        <input type="text" id="fspouse_long_2" class="form-text1" name="fspouse_lon_min" />
+        <select class="select2" id="fspouse_long_direction" name="fspouse_lon_dir">
             <option>E</option>
             <option>W</option>
         </select>
     </div>
     <div class="form-group">
         <label for="latitude" class="control-label">Latitude</label><br/>
-        <input type="text" id="fspouse_lat_1" class="form-text1" name="fspouse_deg"  />
-        <input type="text" id="fspouse_lat_2" class="form-text1" name="fspouse_min" />
-        <select class="select2" id="fspouse_lat_direction" name="fspouse_dir">
+        <input type="text" id="fspouse_lat_1" class="form-text1" name="fspouse_lat_deg"  />
+        <input type="text" id="fspouse_lat_2" class="form-text1" name="fspouse_lat_min" />
+        <select class="select2" id="fspouse_lat_direction" name="fspouse_lat_dir">
             <option>N</option>
             <option>S</option>
         </select>

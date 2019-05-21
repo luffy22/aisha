@@ -2,7 +2,7 @@
 
 $token 		= $_GET['token'];
 $amount 	= $_GET['fees'];
-$server		= 'http://'.$_SERVER['SERVER_NAME'].'/instamojo/redirect.php?token='.$token;
+$server		= 'https://'.$_SERVER['SERVER_NAME'].'/instamojo/redirect.php?token='.$token;
 $email 		= $_GET['email'];
 $buyer 		= $_GET['name'];
 //echo $server;exit;
@@ -22,7 +22,7 @@ $payload = Array(
     'phone' => '9727841461',
     'buyer_name' => $buyer,
     'redirect_url' => $server,
-    'send_email' => true,
+    'send_email' => false,
     'webhook' => '',
     'send_sms' => false,
     'email' => $email,

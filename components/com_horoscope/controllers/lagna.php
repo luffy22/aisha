@@ -19,6 +19,7 @@ class HoroscopeControllerLagna extends HoroscopeController
             $dob        = $_POST['lagna_dob'];$pob      = $_POST['lagna_pob'];
             $tob        = $_POST['lagna_tob'];$lon      = $_POST['lagna_lon'];
             $lat        = $_POST['lagna_lat'];$tmz      = $_POST['lagna_tmz'];
+            $chart      = $_POST['lagna_chart'];
             if(empty($lat) && empty($lon))
             {
                 $tmz        = "none";
@@ -53,7 +54,7 @@ class HoroscopeControllerLagna extends HoroscopeController
                 
             }
             $user_details   = array(
-                                    'fname'=>$fname,'gender'=>$gender,'dob'=>$dob,"pob"=>$pob,
+                                    'fname'=>$fname,'gender'=>$gender,'chart'=>$chart,'dob'=>$dob,"pob"=>$pob,
                                     'tob'=>$tob,'lon'=>$lon,'lat'=>$lat,'tmz'=>$tmz
                                     );
             //print_r($user_details);exit;

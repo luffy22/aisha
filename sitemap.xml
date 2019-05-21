@@ -21,6 +21,14 @@
 	<changefreq>yearly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/calendar</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/muhurat</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
   <loc>https://www.astroisha.com/planets</loc>
   <changefreq>yearly</changefreq>
 </url>
@@ -625,7 +633,7 @@
 	<changefreq>yearly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/transits/359-saturn-sagittarius2</loc>
+	<loc>https://www.astroisha.com/transits/434-saturn-retro-sag</loc>
 	<changefreq>yearly</changefreq>
 </url>
 <url>
@@ -1312,6 +1320,26 @@
 	<changefreq>yearly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/planet-bhavas/427-rahu-7th-house</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/planet-bhavas/428-rahu-8th-house</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/planet-bhavas/429-rahu-9th-house</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/planet-bhavas/430-rahu-10th-house</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/planet-bhavas/432-rahu-11th-house</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
   <loc>https://www.astroisha.com/yearly</loc>
   <changefreq>yearly</changefreq>
 </url>
@@ -1540,6 +1568,22 @@
 	<changefreq>yearly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/finance/433-gambling-astro</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/study</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/study/378-exam-fears</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/study/431-low-education</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
   <loc>https://www.astroisha.com/health</loc>
   <changefreq>yearly</changefreq>
 </url>
@@ -1581,6 +1625,14 @@
 </url>
 <url>
 	<loc>https://www.astroisha.com/health/349-astro-std</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/health/419-mouth-cancer-astro</loc>
+	<changefreq>yearly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/health/426-ageing-astrology</loc>
 	<changefreq>yearly</changefreq>
 </url>
 <url>

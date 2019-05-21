@@ -114,27 +114,28 @@ if($percent == "0")
 else if($percent == "25")
 {
 ?>
-    &nbsp;which is mild. Some care is advised in marriage. 
+    &nbsp;which is mild. Mars won't cause any problems in your married life.  
 <?php
 }
 else if($percent == "50")
 {
 ?>
-    &nbsp;which is moderate. Some care, compromise and understanding are required for marriage to last. 
+    &nbsp;which is moderate. Some care and compromise should avoid any troubles in marriage due to Mars. 
 <?php
 }
 else if($percent == "75")
 {
 ?>
-    &nbsp;which is above average. Marriage requires a lot of care, concern, compromise and understanding. 
-    If you are not careful than things could turn bad in marriage.
+    &nbsp;which is above average. Mars could cause problems in married life. Its essential to 
+    control temper around spouse or else results could be disastrous. 
 <?php
 }
 else if($percent == "100")
 {
 ?>
-    &nbsp;which is a lot. Marriage requires a lot of care, concern, compromise and understanding. 
-    If you are not careful than things could turn bad in marriage.
+    &nbsp;which is a lot. Mars could cause serious problems in married life. Anger, ego and 
+    hatred need to be kept in check in marriage or else results could be disastrous. Also important is patience, calmness and compromise 
+    to make marriage work.
 <?php
 }
 ?>

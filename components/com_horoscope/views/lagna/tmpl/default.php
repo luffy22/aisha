@@ -28,6 +28,17 @@ echo $this->data;
          <input type="radio" name="lagna_gender" value="male" id="lagna_gender1"> Male
         <input type="radio" name="lagna_gender" value="female" id="lagna_gender2" checked> Female
     </div>
+    <div class="form-group">
+	<label for="inputChart" class="control-label">Chart Style:</label>
+	<div class="form-check form-check-inline">
+	  <input class="form-check-input" type="radio" name="lagna_chart" id="lagna_chart_north" value="north_indian" checked >
+	  <label class="form-check-label" for="inlineRadio1">North Indian Chart</label>
+	</div>
+	<div class="form-check form-check-inline">
+	  <input class="form-check-input" type="radio" name="lagna_chart" id="lagna_chart_south" value="south_indian">
+	  <label class="form-check-label" for="inlineRadio2">South Indian Chart</label>
+	</div>
+	</div>
     <div class="form-group" id="lagna_grp_3">
         <label for="dob" class="control-label">Date Of Birth:</label>
         <input type="date" name="lagna_dob" id="datepicker" class="form-control" placeholder="25/03/1984" />

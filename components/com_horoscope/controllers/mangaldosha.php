@@ -18,27 +18,25 @@ class HoroscopeControllerMangalDosha extends HoroscopeController
             $dob    = $_POST['mdosha_dob'];$pob          = $_POST['mdosha_pob'];
             $tob    = $_POST['mdosha_tob'];$lon          = $_POST['mdosha_lon'];
             $lat    = $_POST['mdosha_lat'];$tmz          = $_POST['mdosha_tmz'];
-			if(empty($lat) && empty($lon))
+            if(empty($lat) && empty($lon))
             {
                 $tmz        = "none";
-                $lon_dir    = $_POST['mdosha_lon_dir'];
-                $lat_dir    = $_POST['mdosha_lat_dir'];
-                if($lon_dir == "E"&& $mdosha_dir=="N")
+                if($mdosha_lon_dir == "E"&& $mdosha_lat_dir=="N")
                 {
                     $lon        = $_POST['mdosha_lon_deg'].".".$_POST['mdosha_lon_min'];
                     $lat        = $_POST['mdosha_lat_deg'].".".$_POST['mdosha_lat_min'];
                 }
-                else if($lon_dir == "W" && $mdosha_dir=="N")
+                else if($mdosha_lon_dir == "W" && $mdosha_lat_dir=="N")
                 {
                     $lon        = "-".$_POST['mdosha_lon_deg'].".".$_POST['mdosha_lon_min'];
                     $lat        = $_POST['mdosha_lat_deg'].".".$_POST['mdosha_lat_min'];
                 }
-                else if($lon_dir == "E" && $mdosha_dir=="S")
+                else if($mdosha_lon_dir == "E" && $mdosha_lat_dir=="S")
                 {
                     $lon        = $_POST['mdosha_lon_deg'].".".$_POST['mdosha_lon_min'];
                     $lat        = "-".$_POST['mdosha_lat_deg'].".".$_POST['mdosha_lat_min'];
                 }
-                else if($lon_dir == "W" && $mdosha_dir=="S")
+                else if($mdosha_lon_dir == "W" && $mdosha_lat_dir=="S")
                 {
                     $lon        = "-".$_POST['mdosha_lon_deg'].".".$_POST['mdosha_lon_min'];
                     $lat        = "-".$_POST['mdosha_lat_deg'].".".$_POST['mdosha_lat_min'];

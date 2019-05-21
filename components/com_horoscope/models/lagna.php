@@ -17,6 +17,7 @@ class HoroscopeModelLagna extends JModelItem
         // Assigning the variables
         $fname          = $user_details['fname'];
         $gender         = $user_details['gender'];
+        $chart          = $user_details['chart'];
         $dob            = $user_details['dob'];
         $tob            = $user_details['tob'];
         $pob            = $user_details['pob'];
@@ -47,8 +48,8 @@ class HoroscopeModelLagna extends JModelItem
         $now            = date('Y-m-d H:i:s');
         $db             = JFactory::getDbo();  // Get db connection
         $query          = $db->getQuery(true);
-        $columns        = array('uniq_id','fname','gender','dob_tob','pob','lon','lat','timezone','query_date');
-        $values         = array($db->quote($uniq_id),$db->quote($fname),$db->quote($gender),$db->quote($dob_tob),
+        $columns        = array('uniq_id','fname','gender','chart_type','dob_tob','pob','lon','lat','timezone','query_date');
+        $values         = array($db->quote($uniq_id),$db->quote($fname),$db->quote($gender),$db->quote($chart),$db->quote($dob_tob),
                                 $db->quote($pob),$db->quote($lon),$db->quote($lat),$db->quote($tmz),$db->quote($now));
         $query          ->insert($db->quoteName('#__horo_query'))
                         ->columns($db->quoteName($columns))
@@ -69,11 +70,11 @@ class HoroscopeModelLagna extends JModelItem
         $jinput         = JFactory::getApplication()->input;
         $horo_id        = $jinput->get('chart', 'default_value', 'filter');
         $horo_id        = str_replace("chart","horo",$horo_id);
-        
         $result         = $this->getUserData($horo_id);
         //print_r($result);exit;
         $fname          = $result['fname'];
         $gender         = $result['gender'];
+        $chart          = $result['chart_type'];
         $dob_tob        = $result['dob_tob'];
         $pob            = $result['pob'];
         $lat            = $result['lat'];
@@ -84,16 +85,10 @@ class HoroscopeModelLagna extends JModelItem
         
         $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
         $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
-        //echo $timestamp." ".$offset;exit;
-        // $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
         /**
          * Converting birth date/time to UTC
          */
         $utcTimestamp = $timestamp - $offset;
-
-        //echo $utcTimestamp;exit;
-        //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
-
         $date = date('d.m.Y', $utcTimestamp);
         $time = date('H:i:s', $utcTimestamp);
         //echo $date." ".$time;exit;
@@ -184,7 +179,7 @@ class HoroscopeModelLagna extends JModelItem
     {
         $db             = JFactory::getDbo();  // Get db connection
         $query          = $db->getQuery(true);
-        $query          ->select($db->quoteName(array('fname','gender','dob_tob','pob','lon','lat','timezone')));
+        $query          ->select($db->quoteName(array('fname','gender','chart_type','dob_tob','pob','lon','lat','timezone')));
         $query          ->from($db->quoteName('#__horo_query'));
         $query          ->where($db->quoteName('uniq_id').' = '.$db->quote($horo_id));
         $db             ->setQuery($query);
