@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/html/aisha/components/com_horoscope/controllers/findspouse.php</file>
-            <file>file:/var/www/html/aisha/components/com_horoscope/views/findspouse/tmpl/default.php</file>
-            <file>file:/var/www/html/aisha/components/com_horoscope/controllers/mangaldosha.php</file>
-            <file>file:/var/www/html/aisha/components/com_horoscope/controllers/lagna.php</file>
+            <file>file:/var/www/html/aisha/components/com_horoscope/script/horoscope_s.js</file>
+            <file>file:/var/www/html/aisha/components/com_horoscope/views/lagna/tmpl/default_lagna.php</file>
+            <file>file:/var/www/html/aisha/components/com_horoscope/script/horoscope_n.js</file>
         </group>
     </open-files>
 </project-private>

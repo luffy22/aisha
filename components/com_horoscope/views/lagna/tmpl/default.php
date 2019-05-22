@@ -7,7 +7,7 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die();
-echo $this->data;	
+//echo $this->data;	
 ?>
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -31,12 +31,12 @@ echo $this->data;
     <div class="form-group">
 	<label for="inputChart" class="control-label">Chart Style:</label>
 	<div class="form-check form-check-inline">
-	  <input class="form-check-input" type="radio" name="lagna_chart" id="lagna_chart_north" value="north_indian" checked >
-	  <label class="form-check-label" for="inlineRadio1">North Indian Chart</label>
+	  <input class="form-check-input" type="radio" name="lagna_chart" id="lagna_chart_north" value="north" checked >
+	  <label class="form-check-label" for="inlineRadio1">North Indian</label>
 	</div>
 	<div class="form-check form-check-inline">
-	  <input class="form-check-input" type="radio" name="lagna_chart" id="lagna_chart_south" value="south_indian">
-	  <label class="form-check-label" for="inlineRadio2">South Indian Chart</label>
+	  <input class="form-check-input" type="radio" name="lagna_chart" id="lagna_chart_south" value="south">
+	  <label class="form-check-label" for="inlineRadio2">South Indian</label>
 	</div>
 	</div>
     <div class="form-group" id="lagna_grp_3">

@@ -29,7 +29,7 @@
 <?php
 defined('_JEXEC') or die();
 //echo JPATH_COMPONENT.DS.'script/horoscope.js';exit;
-print_r($this->data);exit;
+//print_r($this->data);exit;
 $planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu","Uranus","Neptune","Pluto");
 ?>
 
@@ -138,8 +138,21 @@ Your browser does not support the HTML5 canvas tag.
            }
     ?>
     </table>
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/horoscope.js' ?>">
+<?php
+if($this->data['chart_type'] == "north")
+{
+?>
+<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/horoscope_n.js' ?>">
 </script>
-<?php unset($this->data); ?>
+<?php
+}
+else
+{
+?>
+<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/horoscope_s.js' ?>">
+</script>
+<?php 
+}
+unset($this->data); ?>
 </body>
 </html>
