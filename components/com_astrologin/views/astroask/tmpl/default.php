@@ -57,7 +57,7 @@ $details                    = $this->msg;
 if($details[0]['currency'] == 'INR')
 {
 ?>
-    <input type='radio' name='expert_choice' id='expert_choice1' value='instamojo'  /> <i class='fa fa-credit-card'></i> Credit/Debit Card
+    <input type='radio' name='expert_choice' id='expert_choice1' value='ccavenue'  /> <i class='fa fa-credit-card'></i> Credit/Debit Card
     <input type='radio' name='expert_choice' id='expert_choice4' value='paytm' checked /> Internet Banking/<img src="<?php echo JURi::base() ?>images/bhim.png" title="Pay using UPI Payments" />BHIM /<img src="<?php echo JURi::base() ?>images/paytm.png" title="Pay using Paytm" />
 <?php       
 }
