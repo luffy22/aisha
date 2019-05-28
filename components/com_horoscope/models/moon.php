@@ -15,15 +15,15 @@ class HoroscopeModelMoon extends HoroscopeModelLagna
         $chart_id       = $jinput->get('chart', 'default_value', 'filter');
         $chart_id       = str_replace("chart","horo", $chart_id);
         
-        $result         = $this->getUserData($chart_id);
+        $userdata       = $this->getUserData($chart_id);
         
-        $fname          = $result['fname'];
-        $gender         = $result['gender'];
-        $dob_tob        = $result['dob_tob'];
-        $pob            = $result['pob'];
-        $lat            = $result['lat'];
-        $lon            = $result['lon'];
-        $timezone       = $result['timezone'];
+        $fname          = $userdata['fname'];
+        $gender         = $userdata['gender'];
+        $dob_tob        = $userdata['dob_tob'];
+        $pob            = $userdata['pob'];
+        $lat            = $userdata['lat'];
+        $lon            = $userdata['lon'];
+        $timezone       = $userdata['timezone'];
         
         $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
         
@@ -59,7 +59,7 @@ class HoroscopeModelMoon extends HoroscopeModelLagna
         $planet             = key($result);
         $moon_sign          = $result[$planet];
         $moon_details       = $this->getArticle($moon_sign, $planet);
-        $result             = array_merge($result, $moon_details);
+        $result             = array_merge($userdata,$result, $moon_details);
         return $result;
        //$ayanamsha           = $this->applyAyanamsha($dob, $horo); 
        //return $horo;

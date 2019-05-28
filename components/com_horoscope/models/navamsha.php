@@ -59,7 +59,7 @@ class HoroscopeModelNavamsha extends HoroscopeModelLagna
             $sign           = $this->calcDetails($dist);
             $details        = array($planet=>$sign);
             $navamsha       = $this->getNavamsha($planet, $sign, $dist2);
-            $data           = array_merge($data, $details, $navamsha);
+            $data           = array_merge($data, $result, $details, $navamsha);
         }
         return $data;
     }

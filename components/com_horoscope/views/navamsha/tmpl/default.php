@@ -99,7 +99,20 @@ Your browser does not support the HTML5 canvas tag.
     }
 ?>
 </table>
-<?php unset($this->data); ?>
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/horoscope.js' ?>">
+<?php
+if($this->data['chart_type'] == "north")
+{
+?>
+<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/horoscope_n.js' ?>">
 </script>
+<?php
+}
+else
+{
+?>
+<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/horoscope_s.js' ?>">
+</script>
+<?php 
+}
+unset($this->data); ?>
  </body>

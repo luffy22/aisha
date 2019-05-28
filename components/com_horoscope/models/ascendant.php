@@ -19,6 +19,7 @@ class HoroscopeModelAscendant extends HoroscopeModelLagna
         
         $fname          = $result['fname'];
         $gender         = $result['gender'];
+        $chart          = $result['chart'];
         $dob_tob        = $result['dob_tob'];
         $pob            = $result['pob'];
         $lat            = $result['lat'];
@@ -53,7 +54,7 @@ class HoroscopeModelAscendant extends HoroscopeModelLagna
         $asc_sign           = $this->calcDetails($ascendant[1]);
         
         $asc_details        = $this->getArticle($asc_sign, $gender,$planets);
-        $all_details        = array_merge($planets, $asc_details);
+        $all_details        = array_merge($result, $planets, $asc_details);
         return $all_details;
     }
     protected function calcPlanets($result)
