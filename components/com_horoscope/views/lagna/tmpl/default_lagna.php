@@ -36,25 +36,24 @@ $planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Ven
     <table class="table table-bordered table-hover table-striped">
         <tr>
             <th>Name</th>
-            <td><?php echo $this->data['fname']; ?></td>
+            <td id="fname" value="<?php echo $this->data['fname']; ?>"><?php echo $this->data['fname']; ?></td>
         </tr>
         <tr>
             <th>Gender</th>
-            <td><?php echo ucfirst($this->data['gender']); ?></td>
+            <td id="gender" value="<?php echo $this->data['gender'] ?>"><?php echo ucfirst($this->data['gender']); ?></td>
         </tr>
         <tr>
             <th>Date Of Birth</th>
-            <td><?php 
-                $date   = new DateTime($this->data['dob_tob'], new DateTimeZone($this->data['timezone']));
-                echo $date->format('dS F Y'); ?></td>
+            <?php $date   = new DateTime($this->data['dob_tob'], new DateTimeZone($this->data['timezone'])); ?>
+            <td id="dob" value="<?php echo $date->format('d-m-Y'); ?>"><?php echo $date->format('dS F Y'); ?></td>
         </tr>
         <tr>
             <th>Time Of Birth</th>
-            <td><?php echo $date->format('H:i:s'); ?></td>
+            <td id="tob" value="<?php echo $date->format('h:i:s a'); ?>"><?php echo $date->format('h:i:s a'); ?></td>
         </tr>
         <tr>
             <th>Place Of Birth</th>
-            <td><?php echo $this->data['pob']; ?></td>
+            <td id="pob" value="<?php echo $this->data['pob'] ?>"><?php echo $this->data['pob']; ?></td>
         </tr>
         <tr>
             <th>Latitude</th>

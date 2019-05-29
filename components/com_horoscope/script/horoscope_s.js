@@ -145,12 +145,12 @@ function draw_horoscope()
     
     ctx.beginPath();
     ctx.font='8px Arial';
-    ctx.fillText('8',67,205);
-    
+    ctx.fillText('8',67,205);  
 }
 function getAscendant()
 {
-    var x = document.getElementById("ascendant_sign").getAttribute('value');
+    var url     = window.location.href;
+    var x       = document.getElementById("ascendant_sign").getAttribute('value');
     get_canvas();
     ctx.font='10px Arial';
     if(x == "Aries"){ ctx.fillText("Asc.",75,16);} else if(x == "Taurus"){ctx.fillText("Asc.",138,16);}
@@ -159,6 +159,15 @@ function getAscendant()
     else if(x == "Libra"){ctx.fillText("Asc.",138,205);;} else if(x == "Scorpio"){ctx.fillText("Asc.",75,205);}
     else if(x == "Sagittarius"){ctx.fillText("Asc.",18,205);} else if(x == "Capricorn"){ctx.fillText("Asc.",18,140);}
     else if(x == "Aquarius"){ctx.fillText("Asc.",18,76);} else if(x == "Pisces"){ctx.fillText("Asc.",18,16);} else{y=1;}
+    var url     = window.location.href;
+    if(url.includes("horoscope"))
+    {
+        main_chart();
+    }
+    else if(url.includes("getasc"))
+    {
+        asc_chart();
+    }
     aries_planets();
 }
 function getMoon()
@@ -172,6 +181,7 @@ function getMoon()
     else if(x == "Libra"){ctx.fillText("Asc.",138,205);;} else if(x == "Scorpio"){ctx.fillText("Asc.",75,205);}
     else if(x == "Sagittarius"){ctx.fillText("Asc.",18,205);} else if(x == "Capricorn"){ctx.fillText("Asc.",18,140);}
     else if(x == "Aquarius"){ctx.fillText("Asc.",18,76);} else if(x == "Pisces"){ctx.fillText("Asc.",18,16);} else{y=1;}
+    asc_chart();
     aries_planets(); 
 }
 function getNavamsha()
@@ -185,6 +195,7 @@ function getNavamsha()
     else if(x == "Libra"){ctx.fillText("Asc.",138,205);;} else if(x == "Scorpio"){ctx.fillText("Asc.",75,205);}
     else if(x == "Sagittarius"){ctx.fillText("Asc.",18,205);} else if(x == "Capricorn"){ctx.fillText("Asc.",18,140);}
     else if(x == "Aquarius"){ctx.fillText("Asc.",18,76);} else if(x == "Pisces"){ctx.fillText("Asc.",18,16);} else{y=1;}
+    asc_chart();
     aries_planets(); 
 }
 function get_planets(sign)
@@ -942,4 +953,51 @@ function pisces_planets()
             ctx.fillText(y[5],15,56);
         }
     }
+}
+function main_chart()
+{
+    get_canvas();
+    ctx.font    ='10px Arial';
+    var name    = "Name: "+document.getElementById("fname").getAttribute('value');
+    var gender  = "Gender: "+document.getElementById("gender").getAttribute('value');
+    var dob     = "Date: "+document.getElementById("dob").getAttribute('value');
+    var tob     = "Time: "+document.getElementById("tob").getAttribute('value');
+    var pob     = "Place: "+document.getElementById("pob").getAttribute('value');
+    var s       = pob.split(',')[0]
+    ctx.fillText("Main Chart",100,80);
+    ctx.fillText(name, 70, 95);
+    ctx.fillText(gender, 70, 110);
+    ctx.fillText(dob, 70, 125);
+    ctx.fillText(tob,70,140);
+    ctx.fillText(s,70,155);
+}
+function asc_chart()
+{
+    var url     = window.location.href;
+    get_canvas();
+    ctx.font    ='10px Arial';
+    var name    = "Name: "+document.getElementById("fname_sign").getAttribute('value');
+    var gender  = "Gender: "+document.getElementById("gender_sign").getAttribute('value');
+    var dob_tob = document.getElementById("dob_tob_sign").getAttribute('value');
+    var dob     = "Date: "+dob_tob.substring(0,10);
+    var tob     = "Time: "+dob_tob.substring(11,19);
+    var pob     = "Place: "+document.getElementById("pob_sign").getAttribute('value');
+    var s       = pob.split(',')[0];
+    if(url.includes("getasc"))
+    {
+        ctx.fillText("Ascendant Chart",80,80);
+    }
+    else if(url.includes("getmoon"))
+    {
+        ctx.fillText("Moon Chart",80,80);
+    }
+    else if(url.includes("getnavamsha"))
+    {
+        ctx.fillText("Navamsha Chart",80,80);
+    }
+    ctx.fillText(name, 70, 95);
+    ctx.fillText(gender, 70, 110);
+    ctx.fillText(dob, 70, 125);
+    ctx.fillText(tob,70,140);
+    ctx.fillText(s,70,155);
 }

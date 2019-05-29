@@ -19,6 +19,7 @@ class HoroscopeModelNavamsha extends HoroscopeModelLagna
         
         $fname          = $result['fname'];
         $gender         = $result['gender'];
+        $chart          = $result['chart_type'];
         $dob_tob        = $result['dob_tob'];
         $pob            = $result['pob'];
         $lat            = $result['lat'];
@@ -59,8 +60,10 @@ class HoroscopeModelNavamsha extends HoroscopeModelLagna
             $sign           = $this->calcDetails($dist);
             $details        = array($planet=>$sign);
             $navamsha       = $this->getNavamsha($planet, $sign, $dist2);
-            $data           = array_merge($data, $result, $details, $navamsha);
+            $data           = array_merge($data,$details,$navamsha);
+            
         }
+        $data               = array("nav_data"=>$data, "main"=>$result);
         return $data;
     }
    

@@ -8,6 +8,7 @@
  */
 defined('_JEXEC') or die();
 //print_r($this->data);exit;
+//$chart          = $this->data['chart'];
 $a = 0;
 ?>
 <html>
@@ -50,9 +51,8 @@ Your browser does not support the HTML5 canvas tag.
         <th>Vargottama</th>
     </tr>
 <?php 
-   foreach($this->data as $key => $data)
+   foreach($this->data['nav_data'] as $key => $data)
     {
-        
         if(($a % 2) == 0)
         {
             $new_key1   = $key;
@@ -99,8 +99,19 @@ Your browser does not support the HTML5 canvas tag.
     }
 ?>
 </table>
+<form>
 <?php
-if($this->data['chart_type'] == "north")
+    foreach($this->data['main'] as $key=>$value)
+    {
+  
+?>
+    <input type="hidden" name="<?php echo strtolower(trim($key)); ?>_sign" id="<?php echo strtolower(trim($key)); ?>_sign" value="<?php echo $value; ?>" />
+<?php
+    }
+?>
+</form>
+<?php
+if($this->data['main']['chart_type'] == "north")
 {
 ?>
 <script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/horoscope_n.js' ?>">
