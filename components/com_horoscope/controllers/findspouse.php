@@ -21,22 +21,22 @@ class HoroscopeControllerFindSpouse extends HoroscopeController
             if(empty($lat) && empty($lon))
             {
                 $tmz        = "none";
-                if($fspouse_lon_dir == "E"&& $fspouse_lat_dir=="N")
+                if($fspouse_lon_dir=="E"&& $fspouse_lat_dir=="N")
                 {
                     $lon        = $_POST['fspouse_lon_deg'].".".$_POST['fspouse_lon_min'];
                     $lat        = $_POST['fspouse_lat_deg'].".".$_POST['fspouse_lat_min'];
                 }
-                else if($fspouse_lon_dir == "W" && $fspouse_lat_dir=="N")
+                else if($fspouse_lon_dir=="W"&& $fspouse_lat_dir=="N")
                 {
                     $lon        = "-".$_POST['fspouse_lon_deg'].".".$_POST['fspouse_lon_min'];
                     $lat        = $_POST['fspouse_lat_deg'].".".$_POST['fspouse_lat_min'];
                 }
-                else if($fspouse_lon_dir == "E" && $fspouse_lat_dir=="S")
+                else if($fspouse_lon_dir=="E"&& $fspouse_lat_dir=="S")
                 {
                     $lon        = $_POST['fspouse_lon_deg'].".".$_POST['fspouse_lon_min'];
                     $lat        = "-".$_POST['fspouse_lat_deg'].".".$_POST['fspouse_lat_min'];
                 }
-                else if($fspouse_lon_dir == "W" && $fspouse_lat_dir=="S")
+                else if($fspouse_lon_dir=="W"&& $fspouse_lat_dir=="S")
                 {
                     $lon        = "-".$_POST['fspouse_lon_deg'].".".$_POST['fspouse_lon_min'];
                     $lat        = "-".$_POST['fspouse_lat_deg'].".".$_POST['fspouse_lat_min'];

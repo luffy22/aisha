@@ -241,7 +241,7 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
     protected function getRemainDasha($period_id, $dasha_end)
     {
         $dasha                  = new DateTime($dasha_end);
-        flush($array);
+        unset($array);
         $array                  = array();
         $db                     = JFactory::getDbo();  // Get db connection
         $query                  = $db->getQuery(true);

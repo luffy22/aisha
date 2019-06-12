@@ -284,7 +284,7 @@ class HoroscopeModelLagna extends JModelItem
         
         if($usage == "details")
         {
-            if($min < 10){$min  = "0".$min;}
+            if($min < 10){(int)$min  = "0".$min;}
             return $deg.".".$min;
         }
         else

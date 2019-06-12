@@ -34,7 +34,6 @@ class HoroscopeModelCalendar extends HoroscopeModelMuhurat
         $month_num          = $date->format('m');       // month in number format. example 01 for January 
         $curr_year          = $date->format('Y');
         $getCalendar        = $this->getCalendar($days_in_month,$month_num, $curr_year);
-        $getVedicMonth      = $this->getVedicMonth($days_in_month,$month_num, $curr_year);
         $sunrise_sunset     = $this->getSunTimings(date('01-'.$month_num.'-'.$curr_year), $timezone, $lat, $lon, $alt, $days_in_month+1);
         $get_muhurat        = $this->getCalendarMuhurat($sunrise_sunset);
         $array              = array_merge($array, $getCalendar);
@@ -58,13 +57,14 @@ class HoroscopeModelCalendar extends HoroscopeModelMuhurat
     }
     public function getTithi($date, $output)
     {
-        //print_r($date);exit;
+        //print_r($output);exit;
         $date           = new DateTime($date);
         $array          = array();
         foreach($output as $result)
         {
             $date1       = $date->format('d-m-Y');
             $tithi       = trim($result);
+            $date        ->add(new DateInterval('P1D'));
             $first              = substr(trim($tithi), 0, 1);
             if($first           == "-")
             {
@@ -81,7 +81,7 @@ class HoroscopeModelCalendar extends HoroscopeModelMuhurat
                 $tithi          = array($date1 => $tithi_in_words, $date1."_paksh"=>"Shukla");
                 $array          = array_merge($array, $tithi);
             }
-            $date        ->add(new DateInterval('P1D'));
+            
         }
         return $array;
     }
@@ -184,50 +184,5 @@ class HoroscopeModelCalendar extends HoroscopeModelMuhurat
         }
         //print_r($muhurat);exit;
         return $muhurat;
-    }
-    public function getVedicMonth($days, $month, $year)
-    {
-        $date           = '01.'.$month.".".$year;
-        $libPath = JPATH_BASE.'/sweph/';
-        putenv("PATH=$libPath");
-        $h_sys = 'P';
-        $output = "";
-        // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
-        //swetest -p2 -b1.12.1900 -n15 -s2
-        exec ("swetest -edir$libPath -b$date -sid1 -p01 -n$days -fl, -head", $output);
-        print_r($output);exit;
-    }
-    public function checkAdhikMonth($year)
-    {
-        // Default adhik maas is Jyestha in year 1902
-        $months             = array(0=>"Vaisakha",1=>"Jyestha",2=>"Asadha",3=>"Shraavan",4=>"Bhadra",
-                                    5=>"Ashvin",6=>"Kartik",7=>"Agrahayana",8=>"Pausha",9=>"Magha",
-                                    10=>"Phalguna",11=>"Chitra");
-        $default            = "Jyestha";
-        $adhik_diff         = array("28","33","34","35");
-        $a                  = 1;   // this works as index for array $months_12
-        for($i=1902;$i<=$year;$i++)
-        {
-            for($j=0;$j<4;$j++)
-            {
-                $diff       = $adhik_diff[$j];
-                for($k=0;$k<$diff;$k++)
-                {
-                    if($k < $a)
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        $a++;
-                        if($a > 11)
-                        {
-                            echo $a;exit;
-                        }
-                    }
-                }echo $a;exit;
-            }
-        }
-        
     }
 }

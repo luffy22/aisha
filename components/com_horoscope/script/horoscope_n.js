@@ -28,35 +28,29 @@ function draw_horoscope()
     ctx.strokeStyle='black';
     ctx.lineWidth=1;
     ctx.stroke();
-
-    // vishnu sthanas
-    ctx.beginPath();
-    ctx.rotate(45*Math.PI/180);
-    ctx.rect(97,-87,175,175);
-    ctx.strokeStyle='black';
-    ctx.lineWidth=1;
-    ctx.stroke();
     
-    ctx.rotate(315*Math.PI/180);
-    ctx.beginPath();
-    ctx.moveTo(5,5);
-    ctx.lineTo(255,255);
-    ctx.stroke();
+    // vishnu sthanas
+    //ctx.beginPath();
+    //ctx.rotate(45*Math.PI/180);
+    //ctx.rect(97,-87,175,175);
+    //ctx.strokeStyle='black';
+    //ctx.lineWidth=1;
+    //ctx.stroke();
+    
+    //ctx.rotate(315*Math.PI/180);
+    //ctx.beginPath();
+    //ctx.moveTo(5,5);
+    //ctx.lineTo(255,255);
+    //ctx.stroke();
 
     ctx.beginPath();
     ctx.moveTo(255,5);
     ctx.lineTo(5,255);
     ctx.stroke();
 
-    /*ctx.beginPath();
-    ctx.moveTo(51,-43);
-    ctx.lineTo(51,0);
-    ctx.lineTo(8,0);
-    ctx.fillStyle="#FF0000";
-    ctx.fill();
-    ctx.stroke();
+   
 
-    ctx.beginPath();
+     /*ctx.beginPath();
     ctx.moveTo(93,-85);
     ctx.lineTo(92,-41);
     ctx.lineTo(50,-41);
@@ -1240,4 +1234,53 @@ function house_12_canvas(y)
         ctx.fillText(y[5],180,55);
         ctx.fillText(y[6],215,15);
     }
+    first_house();
+}
+function first_house()
+{
+    ctx.beginPath();
+    ctx.moveTo(5,5);
+    ctx.lineTo(69,69);
+    ctx.lineTo(6,131);
+    ctx.fillStyle="#5D8FC7";
+    ctx.fill();
+    ctx.stroke();
+    
+    second_house();
+}
+function second_house()
+{
+    ctx.beginPath();
+    ctx.moveTo(5,5);
+    ctx.lineTo(69,69);
+    ctx.lineTo(132,6);
+    ctx.fillStyle="#5D8FC7";
+    ctx.fill();
+    ctx.stroke();
+    
+    fifth_house();
+}
+function fifth_house()
+{
+    ctx.beginPath();
+    ctx.moveTo(5,131);
+    ctx.lineTo(69,191);
+    ctx.lineTo(5,255);
+    //ctx.fillStyle="#5D8FC7";
+    ctx.fill();
+    ctx.stroke();
+    
+    sixth_house();
+}
+function sixth_house()
+{
+    ctx.beginPath();
+    ctx.moveTo(69,191);
+    ctx.lineTo(131,255);
+    ctx.lineTo(5,255);
+    ctx.fillStyle="#5D8FC7";
+    ctx.fill();
+    ctx.stroke();
+    
+    //sixth_house();
 }
