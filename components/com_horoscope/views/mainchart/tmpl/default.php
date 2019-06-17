@@ -2,32 +2,11 @@
  <head>
 <style type="text/css">
 #horo_canvas{width: 100%;padding: 0 !important;margin: 0 !important;}@media (min-width: 768px) {#horo_canvas{width:65%}}
-#moon_canvas{width: 100%;}@media (min-width: 768px) {#moon_canvas{width:65%}}
-#navamsha_canvas{width: 100%;height: auto;}@media (min-width: 768px) {#navamsha_canvas{width:65%}}
 </style>
 </head>
-<body onload="javascript:draw_horoscope();getAscendant();getNavamsha();getMoon();">
+<body onload="javascript:draw_horoscope();getAscendant();">
 <?php $chart_id = $_GET['chart']; ?>
-<ul class="nav nav-pills">
-  <li class="nav-item">
-    <a class="nav-link active">Horo Details</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="<?php echo JURi::base() ?>getasc?chart=<?php echo $chart_id ?>">Ascendant</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="<?php echo JURi::base() ?>getmoon?chart=<?php echo $chart_id ?>">Moon Sign</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="<?php echo JURi::base() ?>getnakshatra?chart=<?php echo $chart_id ?>">Nakshatra</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="<?php echo JURi::base() ?>getnavamsha?chart=<?php echo $chart_id ?>">Navamsha</a>
-  </li>
-   <li class="nav-item">
-    <a class="nav-link" href="<?php echo JURi::base() ?>getvimshottari?chart=<?php echo $chart_id ?>">Vimshottari</a>
-  </li>
-</ul><div class="mb-2"></div>
+<div class="mb-3"></div>
 <?php
 defined('_JEXEC') or die();
 //echo JPATH_COMPONENT.DS.'script/horoscope.js';exit;
@@ -100,28 +79,10 @@ $planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Ven
                   { echo "No"; } ?></td>
         </tr>
     </table>
-<ul class="nav nav-pills">
-<li class="nav-item"><a class="nav-link active" href="#main" data-toggle="tab">Main Chart</a></li>
-<li class="nav-item"><a class="nav-link" href="#moon" data-toggle="tab">Moon Chart</a></li>
-<li class="nav-item"><a class="nav-link" href="#navamsha" data-toggle="tab">Navamsha Chart</a></li>
-</ul>
-<div class="tab-content">
-<div id="main" class="tab-pane active">
+<div class="mb-3"></div>
     <canvas id="horo_canvas" height="260">
     Your browser does not support the HTML5 canvas tag.
     </canvas>
-</div>
-<div id="moon" class="tab-pane">
-    <canvas id="moon_canvas" height="260">
-    Your browser does not support the HTML5 canvas tag.
-    </canvas>
-</div>
-<div id="navamsha" class="tab-pane">
-    <canvas id="navamsha_canvas" height="260">
-    Your browser does not support the HTML5 canvas tag.
-    </canvas>
-</div> 
-</div>
 <div class="mb-3"></div>
     <p class="float-sm-right">(R) signifies that planet is retrograde at time of birth</p>
     <div class="table-responisve"><!--This little code keeps table aligned on big screens -->

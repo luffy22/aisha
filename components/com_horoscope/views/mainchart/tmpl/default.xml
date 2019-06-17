@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-        <layout title="Calculate Lagna">
+        <layout title="Main Chart">
                 <message>
-                        Calculate Lagna using AstroIsha Horoscope
+                        Get birth and planetary details
                 </message>
         </layout>
 </metadata>

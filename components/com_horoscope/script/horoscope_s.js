@@ -2,7 +2,7 @@ var c   = {};var ctx = {};
 function get_canvas()
 {
     var url     = window.location.href;
-    if(url.includes("horoscope"))
+    if(url.includes("mainchart"))
     {
         c           =   document.getElementById("horo_canvas");
     }
@@ -58,7 +58,7 @@ function getAscendant()
 {
     var x       = document.getElementById("ascendant_sign").getAttribute('value');
     var url     = window.location.href;
-    if(url.includes("horoscope"))
+    if(url.includes("mainchart"))
     {
         main_chart();
     }

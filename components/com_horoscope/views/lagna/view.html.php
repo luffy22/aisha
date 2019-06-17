@@ -20,8 +20,7 @@ class HoroscopeViewLagna extends JViewLegacy
         }
         if(isset($_GET['chart']))
         {
-            $this->data         = $this->get('Data');
-            $tpl    = 'lagna';
+            $tpl                = 'lagna';
         }
         else
         {

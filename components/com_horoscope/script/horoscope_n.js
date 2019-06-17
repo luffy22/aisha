@@ -2,7 +2,7 @@ var c   = {};var ctx = {};
 function get_canvas()
 {
     var url     = window.location.href;
-    if(url.includes("horoscope"))
+    if(url.includes("mainchart"))
     {  c           =   document.getElementById("horo_canvas"); }
     else if(url.includes("getasc"))
     {  c           =   document.getElementById("asc_canvas");  }
@@ -146,7 +146,7 @@ function get_planets(a,z)
 function house_1_planets()
 {
     var url     = window.location.href;
-    if(url.includes("horoscope"))
+    if(url.includes("mainchart"))
     {
         var ascendant   = document.getElementById("ascendant_sign").getAttribute('value');
     }
