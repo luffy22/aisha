@@ -56,7 +56,7 @@ else
 $text       = $this->data['introtext'];
 ?>
 <div id="<?php echo $this->data['id']; ?>" class="accordion-id"></div>
-<div class="breadcrumb lead alert-info"><?php echo "Your Ascendant is ".$title; ?></div>
+<div class="lead alert alert-dark"><?php echo "Your ascendant is ".$title; ?></div>
 <?php echo $text; 
 for($i=0;$i<3;$i++)  // remove the last 3 elements from the array to avoid confusion
 { array_pop($this->data); } ?>

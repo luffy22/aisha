@@ -163,8 +163,7 @@ class PlgContentAskExpert extends JPlugin
                 $result1            = $db->loadAssocList();
                 //print_r($result1);exit;
                 $details            = array_merge($result1,$country);
-                $content            = "<div class='card border-primary mb-3'>";
-                $content            .= "<div class='card-body'>";
+                $content            .= "<div class='lead alert alert-dark'>Ask Questions</div>";
                 $content            .= "<h3><a title='Click to get more info' href='#' data-toggle='modal' data-target='#astroinfo'><img src='".JURi::base()."images/profiles/".$result->img_new_name."' height='50px' width='50px' title='".$result->img_name."' />".$result->name."</a></h3>";
                 $content           .= "<div class='modal fade' id='astroinfo' tabindex='-1' role='dialog' aria-hidden='true' aria-labelledby='astrolabel'>";
                 $content            .= "<div class='modal-dialog' role='document'>";
@@ -182,14 +181,18 @@ class PlgContentAskExpert extends JPlugin
                 $content            .= "</div></div></div>";
                 if($result->profile_status=="visible"&&$result->membership=="Paid")
                 {
-                    $content        .= "<p class='lead'>Get Online Consultation</p>";
                     $content        .= "<form name='askexpert' method='post' enctype='application/x-www-form-urlencoded' action='".JRoute::_('?option=com_astrologin&task=astroask.askExpert')."'>";
                     $content        .= "<input type='hidden' value='".$result->username."' name='expert_uname' />";
                     $content        .=  "<div class='form-group'>";
                     $content        .= "<label for='ques_type'>Answer Type:</label> ";
-                    $content        .= "<input type='radio' id='ques_type1' name='ques_type' value='long_ans'  onchange='javascript:changefees();' /> Detailed Report";
-                    $content        .= "&nbsp;&nbsp;&nbsp;<input type='radio' id='ques_type2' name='ques_type' checked value='short_ans' onchange='javascript:changefees();' /> Short Answer";
+                    $content        .= "<div class='form-check'>";
+                    $content        .= "<input class='form-check-input' type='radio' id='ques_type1' name='ques_type' value='long_ans'  onchange='javascript:changefees();' />";
+                    $content        .= " <label class='form-check-label' for='ques_type1'>Detailed Report</label>";
                     $content        .= "</div>";
+                    $content        .= "<div class='form-check'>";
+                    $content        .= "<input class='form-check-input' type='radio' id='ques_type2' name='ques_type' checked value='short_ans' onchange='javascript:changefees();' />";
+                     $content        .= "<label class='form-check-label' for='ques_type2'>Short Answer</label>";
+                    $content        .= "</div></div>";
                     $content        .=  "<div class='form-group'>";
                     $content        .= "<label for='max_ques'>Number Of Questions:</label> ";
                     $content        .= "<select class='select2' name='expert_max_ques' id='max_ques' onchange='javascript:changefees();'>";
@@ -211,20 +214,27 @@ class PlgContentAskExpert extends JPlugin
                     $content        .= "<label for='expert_choice' class='control-label'>Payment Type: </label>";
                     if($details[0]['currency'] == 'INR')
                     {
-                        $content            .= "&nbsp;<input type='radio' name='expert_choice' id='expert_choice1' value='ccavenue' /> <i class='fa fa-credit-card'></i> Credit/Debit Card/Netbanking
-                                                <input type='radio' name='expert_choice' id='expert_choice4' value='paytm'  checked />  <img src='".JURi::base()."images/paytm.png' />";
-       
+                        $content            .= "<div class='form-check'>";
+                        $content            .= "<input class='form-check-input' type='radio' name='expert_choice' id='expert_choice1' value='ccavenue' />";
+                        $content            .= "<label class='form-check-label' for='expert_choice1'><i class='fa fa-credit-card'></i> Credit/Debit Card/Netbanking</label>";
+                        $content            .= "</div>";
+                        $content            .= "<div class='form-check'>";
+                        $content            .= "<input class='form-check-input' type='radio' name='expert_choice' id='expert_choice4' value='paytm'  checked />";
+                        $content            .= "<label class='form-check-label' for='expert_choice4'><img src='".JURi::base()."images/paytm.png' /></label>";
+                        $content            .= "</div>";
                     }
                     else
                     {
-                        $content            .= "&nbsp;<input type='radio' name='expert_choice' id='expert_choice7' value='paypal' checked /> <i class='fab fa-paypal'></i> Paypal";
+                        $content            .= "<div class='form-check'>";
+                        $content            .= "&nbsp;<input class='form-check-input' type='radio' name='expert_choice' id='expert_choice7' value='paypal' checked />";
+                        $content            .= "<label class='form-check-label' for='expert_choice7'><i class='fab fa-paypal'></i> Paypal</label>";
+                        $content            .= "</div>";
 
                     }
                     $content                .= "</div>";
                     $content                .= "<div class='form-group'><button type='submit' class='btn btn-primary' name='expert_submit'><i class='fa fa-globe'></i> Ask</button></div>";
                     $content                .= "</form>";
                 }
-                $content            .= "</div></div>";
                 return $content;
             }
 	}

@@ -7,7 +7,10 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die();
-//echo $this->data;	
+//echo $this->data;
+function isMobileDevice() {
+    return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+}
 ?>
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -41,7 +44,20 @@ defined('_JEXEC') or die();
 	</div>
     <div class="form-group" id="lagna_grp_3">
         <label for="dob" class="control-label">Date Of Birth:</label>
-        <input type="date" name="lagna_dob" id="datepicker" class="form-control" placeholder="25/03/1984" />
+    <?php 
+        if(isMobileDevice()){
+            //Your content or code for mobile devices goes here
+    ?>
+        <input type="date" name="lagna_dob" class="form-control" placeholder="25/03/1984" />
+    <?php
+        }
+        else
+        {
+    ?>
+        <input type="date" id="datepicker" name="lagna_dob" class="form-control" placeholder="25/03/1984" />
+    <?php
+        }
+    ?>
     </div>
     <div class="form-group">
         <label for="dob" class="control-label">Time Of Birth(24 Hour Format):</label><br/>
@@ -58,8 +74,8 @@ defined('_JEXEC') or die();
     <input type="hidden" id="lagna_tmz" name="lagna_tmz"  />
     <div class="form-group">
         <label for="longitude" class="control-label">Longitude</label><br/>
-        <input type="text" id="lagna_long_1" class="form-text1" name="lon_deg"  />
-        <input type="text" id="lagna_long_2" class="form-text1" name="lon_min" />
+        <input type="text" id="lagna_long_1" class="form-text1" name="lon_deg" placeholder="deg"  />
+        <input type="text" id="lagna_long_2" class="form-text1" name="lon_min" placeholder="min" />
         <select class="select2" id="lagna_long_direction" name="lon_dir">
             <option>E</option>
             <option>W</option>
@@ -67,17 +83,17 @@ defined('_JEXEC') or die();
     </div>
     <div class="form-group">
         <label for="latitude" class="control-label">Latitude</label><br/>
-        <input type="text" id="lagna_lat_1" class="form-text1" name="lat_deg"  />
-        <input type="text" id="lagna_lat_2" class="form-text1" name="lat_min" />
+        <input type="text" id="lagna_lat_1" class="form-text1" name="lat_deg" placeholder="deg"  />
+        <input type="text" id="lagna_lat_2" class="form-text1" name="lat_min" placeholder="min" />
         <select class="select2" id="lagna_lat_direction" name="lat_dir">
             <option>N</option>
             <option>S</option>
         </select>
         
     </div>
-    <div class="form-group">
+    <div class="btn-group btn-group-lg">
             <button type="submit" class="btn btn-primary btn-lg" name="lagnasubmit" onclick="javascript:getLagna();return false;">Get Horoscope</button>
-             <button type="reset" class="btn btn-danger btn-lg">Reset Form</button>
+            <button type="reset" class="btn btn-danger btn-lg">Reset Form</button>
     </div>
 </form>
-<div class="mb-1"></div>
+<div class="mb-3"></div>

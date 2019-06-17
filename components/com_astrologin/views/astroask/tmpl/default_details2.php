@@ -44,7 +44,7 @@ for($i=0;$i<$no_of_ques;$i++)
 <div class="mb-2"></div>
 <div class="form-group">
     <button type="reset" class="btn btn-danger">Reset</button>
-    <button class="btn btn-success" type="submit">$ Pay Now</button>
+    <button class="btn btn-success" type="submit">Pay Now</button>
 </div>
 </form>
 <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>

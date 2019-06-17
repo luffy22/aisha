@@ -23,8 +23,14 @@ $details                    = $this->msg;
 <input type="hidden" name="expert_uname" id="expert_uname" value="<?php echo $details['username'] ?>" /><div class="mb-2"></div>
 <div class='form-control'>
 <label for="ques_type">Answer Type:</label>
-<input type="radio" name="ques_type" id="ques_type1" value="long_ans" onchange="javascript:changefees2();" checked /> Detailed Report&nbsp;&nbsp;&nbsp;
-<input type="radio" name="ques_type" id="ques_type2" value="short_ans" onchange="javascript:changefees2();" /> Short Answer
+<div class="form-check">
+<input class="form-check-input" type="radio" name="ques_type" id="ques_type1" value="long_ans" onchange="javascript:changefees2();" checked />
+<label class="form-check-label" for="ques_type1">Detailed Report</label>
+</div>
+<div class="form-check">
+<input class="form-check-input" type="radio" name="ques_type" id="ques_type2" value="short_ans" onchange="javascript:changefees2();" />
+<label class="form-check-label" for="ques_type2">Short Answer</label>
+</div>
 </div><div class="mb-3"></div>
 <div class="form-control" id="choose_ques">
 <label for="select_expert">Choose Number Of Questions</label>
@@ -57,14 +63,23 @@ $details                    = $this->msg;
 if($details[0]['currency'] == 'INR')
 {
 ?>
-    <input type='radio' name='expert_choice' id='expert_choice1' value='ccavenue'  /> <i class='fa fa-credit-card'></i> Credit/Debit Card
-    <input type='radio' name='expert_choice' id='expert_choice4' value='paytm' checked /> Internet Banking/<img src="<?php echo JURi::base() ?>images/bhim.png" title="Pay using UPI Payments" />BHIM /<img src="<?php echo JURi::base() ?>images/paytm.png" title="Pay using Paytm" />
+    <div class="form-check">
+    <input class="form-check-input" type='radio' name='expert_choice' id='expert_choice1' value='ccavenue'  />
+    <label for="expert_choice1" class="form-check-label"><i class='fa fa-credit-card'></i> Credit/Debit Card</label>
+    </div>
+    <div class="form-check">
+    <input class="form-check-input" type='radio' name='expert_choice' id='expert_choice4' value='paytm' checked />
+    <label for="expert_choice4" class="form-check-label">Internet Banking/<img src="<?php echo JURi::base() ?>images/bhim.png" title="Pay using UPI Payments" />BHIM /<img src="<?php echo JURi::base() ?>images/paytm.png" title="Pay using Paytm" /></label>
+    </div>
 <?php       
 }
 else
 {
 ?>
-    <input type='radio' name='expert_choice' id='expert_choice7' value='paypal' checked /> <i class='fab fa-paypal'></i> Paypal
+    <div class="form-check">
+    <input class="form-check-input" type='radio' name='expert_choice' id='expert_choice7' value='paypal' checked />
+    <label for="expert_choice7" class="form-check-label"> <i class='fab fa-paypal'></i> Paypal</label
+    </div>
 <?php
 }
 ?>

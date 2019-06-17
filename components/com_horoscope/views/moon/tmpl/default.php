@@ -44,8 +44,8 @@ $text       = $this->data['introtext'];
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-2"></div>
 <div id="<?php echo $this->data['id']; ?>" class="accordion-id"></div>
-<div class="lead alert-info breadcrumb"><?php echo "Your Moon Sign is ".str_replace(" Sign","", $title) ?></div>
-<div class="mb-2"></div>
+<div class="lead alert alert-dark"><?php echo "Moon sign is ".str_replace(" Sign","", $title) ?></div>
+<div class="mb-3"></div>
 <?php echo $text; 
 for($i=0;$i<3;$i++)  // remove the last 3 elements from the array to avoid confusion
 { array_pop($this->data); } ?>

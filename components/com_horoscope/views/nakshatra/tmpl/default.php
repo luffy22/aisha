@@ -34,7 +34,7 @@ $text       = $this->data['introtext'];
   </li>
 </ul><div class="mb-2"></div>
 <div id="<?php echo $this->data['id']; ?>" class="accordion-id"></div>
-<div class="alert-info lead breadcrumb"><?php echo "You are born with Moon in ".$title ?></div>
+<div class="lead alert alert-dark"><?php echo "You are born with Moon in ".$title ?></div>
 <div class="mb-2"></div>
 <?php echo $text; ?>
 <?php unset($this->data); ?>

@@ -7,7 +7,10 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die();
-echo $this->data;	
+function isMobileDevice() {
+    return preg_match("/(android|iPhone|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+}
+//echo $this->data;	
 ?>
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -30,7 +33,20 @@ echo $this->data;
     </div>
     <div class="form-group" id="lagna_grp_3">
         <label for="dob" class="control-label">Date Of Birth:</label>
-        <input type="date" name="mdosha_dob" id="datepicker" class="form-control" placeholder="25/03/1984" />
+     <?php 
+        if(isMobileDevice()){
+            //Your content or code for mobile devices goes here
+    ?>    
+        <input type="date" name="mdosha_dob" class="form-control" placeholder="25/03/1984" />
+    <?php
+        }
+        else
+        {
+    ?>
+        <input type="date" id="datepicker" name="mdosha_dob" class="form-control" placeholder="25/03/1984" />
+    <?php
+        }
+    ?>
     </div>
     <div class="form-group">
         <label for="dob" class="control-label">Time Of Birth(24 Hour Format):</label><br/>
@@ -64,8 +80,8 @@ echo $this->data;
         </select>
         
     </div>
-    <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-lg" name="mdosha_submit" onclick="javascript:getLagna();return false;">Check Mangal Dosha</button>
+    <div class="btn btn-group btn-group-lg">
+            <button type="submit" class="btn btn-primary btn-lg" name="mdosha_submit" onclick="javascript:getLagna();return false;">Check Dosha</button>
             <button type="reset" class="btn btn-danger btn-lg">Reset Form</button>
     </div>
 </form>

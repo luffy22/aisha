@@ -7,6 +7,9 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die();
+function isMobileDevice() {
+    return preg_match("/(android|iPhone|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+}
 //echo $this->data;	
 ?>
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -30,7 +33,20 @@ defined('_JEXEC') or die();
     </div>
     <div class="form-group" id="lagna_grp_3">
         <label for="dob" class="control-label">Date Of Birth:</label>
-        <input type="date" name="fspouse_dob" id="datepicker" class="form-control" placeholder="25/03/1984" />
+         <?php 
+        if(isMobileDevice()){
+            //Your content or code for mobile devices goes here
+    ?>
+        <input type="date" name="fspouse_dob" class="form-control" placeholder="25/03/1984" />
+    <?php
+        }
+        else
+        {
+    ?>
+        <input type="date" id="datepicker" name="fspouse_dob" class="form-control" placeholder="25/03/1984" />
+          <?php
+        }
+    ?>
     </div>
     <div class="form-group">
         <label for="dob" class="control-label">Time Of Birth(24 Hour Format):</label><br/>
@@ -47,8 +63,8 @@ defined('_JEXEC') or die();
     <input type="hidden" id="fspouse_tmz" name="fspouse_tmz"  />
     <div class="form-group">
         <label for="longitude" class="control-label">Longitude</label><br/>
-        <input type="text" id="fspouse_long_1" class="form-text1" name="fspouse_lon_deg"  />
-        <input type="text" id="fspouse_long_2" class="form-text1" name="fspouse_lon_min" />
+        <input type="text" id="fspouse_long_1" class="form-text1" name="fspouse_lon_deg" placeholder="deg"  />
+        <input type="text" id="fspouse_long_2" class="form-text1" name="fspouse_lon_min" placeholder="min" />
         <select class="select2" id="fspouse_long_direction" name="fspouse_lon_dir">
             <option>E</option>
             <option>W</option>
@@ -56,15 +72,15 @@ defined('_JEXEC') or die();
     </div>
     <div class="form-group">
         <label for="latitude" class="control-label">Latitude</label><br/>
-        <input type="text" id="fspouse_lat_1" class="form-text1" name="fspouse_lat_deg"  />
-        <input type="text" id="fspouse_lat_2" class="form-text1" name="fspouse_lat_min" />
+        <input type="text" id="fspouse_lat_1" class="form-text1" name="fspouse_lat_deg" placeholder="deg"  />
+        <input type="text" id="fspouse_lat_2" class="form-text1" name="fspouse_lat_min" placeholder="min" />
         <select class="select2" id="fspouse_lat_direction" name="fspouse_lat_dir">
             <option>N</option>
             <option>S</option>
         </select>
         
     </div>
-    <div class="form-group">
+    <div class="btn-group btn-group-lg">
             <button type="submit" class="btn btn-primary btn-lg" name="fspouse_submit" onclick="javascript:getLagna();return false;">How To Find Spouse</button>
             <button type="reset" class="btn btn-danger btn-lg">Reset Form</button>
     </div>

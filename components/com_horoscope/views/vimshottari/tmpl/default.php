@@ -35,34 +35,50 @@ $chart_id = $_GET['chart']; ?>
   </li>
 </ul>
 <div class="mb-3"></div>
-<table class="table table-striped table-hover">
-    <tr><th>Balance of dasha:</th><td><?php echo $this->data['balance_of_dasha']; ?></td></tr>
-    <tr><th>Main Period(Dasha) at time of birth:</th><td><?php echo ucfirst($this->data['main_dob_period']); ?></td></tr>
-    <tr><th>Sub Period(Antardasha) at time of birth</th><td><?php echo ucfirst($this->data['sub_dob_period']); ?></td></tr>
-</table>
+<ul class="list-group">
+    <li class="list-group-item"><strong>Balance of dasha</strong><br/>
+    <?php echo $this->data['balance_of_dasha']; ?></li>
+    <li class="list-group-item"><strong>Main Period(Dasha) at time of birth</strong><br/>
+    <?php echo ucfirst($this->data['main_dob_period']); ?></li>
+    <li class="list-group-item"><strong>Sub Period(Antardasha) at time of birth</strong><br/>
+    <?php echo ucfirst($this->data['sub_dob_period']); ?></li>
+</ul>
 <div class="mb-3"></div>
-<div id="vimshottari">
-<h3><?php echo ucfirst($this->data['main_dob_period']) ?> Dasha</h3>
-<div>
+<div class="lead alert alert-dark"><?php echo ucfirst($this->data['main_dob_period']) ?> Dasha</div>
+<?php 
+    $planet     = ucfirst($this->data['main_dob_period']);
+    if($this->data[$planet."_sign"] == $this->data[$planet."_navamsha_sign"])
+    {
+?>
+        <p class="lead">&nbsp;&nbsp;<?php echo $planet ?> is vargottama in your chart. This dasha would be a golden time for you.</p>
+<?php
+    }
+?>
+<div class="table-responsive">
 <table class="table table-bordered table-striped">
-    <tr><th>Main Period</th><th>Sub Period</th>
+    <tr><th>Age</th><th>Main Period</th><th>Sub Period</th>
         <th>Start Date</th><th>End Date</th></tr>
+    <?php   $year_from = $dob_start->diff($dob_start);  $year_to        = $dob_start->diff($dob_end); ?>
     <tr>
+        <td><?php echo $year_from->y ?> to <?php echo $year_to->y; ?></td>
         <td><?php echo ucfirst($this->data['main_dob_period']) ?></td>
         <td><?php echo ucfirst($this->data['sub_dob_period']); ?></td>
         <td><?php echo $dob_start->format('dS F Y'); ?></td>
-        <td><?php echo $dob_end->format('dS F Y'); ?></td></tr>
+        <td><?php echo $dob_end->format('dS F Y');?></td></tr>
 <?php
 foreach($this->data['get_remain_dasha'] as $dasha)
 {    
     $period         = $dasha['year_months_days'];
+    $year_from      = $dob_end->diff($dob_start);
     $start          = $dob_end->format('dS F Y');
     $dob_end        ->add(new DateInterval($period));
+    $year_to        = $dob_start->diff($dob_end); 
     $end            = $dob_end->format('dS F Y');
     if($dasha['main_period'] == $main)
     {
 ?>
     <tr>
+        <td><?php echo $year_from->y ?> to <?php echo $year_to->y; ?></td>
         <td><?php echo ucfirst($dasha['main_period']); ?></td>
         <td><?php echo ucfirst($dasha['sub_period']); ?></td>
         <td><?php echo $start; ?></td>
@@ -75,16 +91,27 @@ foreach($this->data['get_remain_dasha'] as $dasha)
 ?>
 </table>
 </div>
+<div class="mb-3"></div>
 <?php
-        unset($main);
-        $main               = $dasha['main_period'];
+    unset($main);
+    $main               = $dasha['main_period'];
 ?>
-<h3><?php echo ucfirst($dasha['main_period']) ?> Dasha</h3>
-<div>
+<div class="lead alert alert-dark"><?php echo ucfirst($dasha['main_period']) ?> Dasha</div>
+<?php 
+$planet     = ucfirst($dasha['main_period']);
+    if($this->data[$planet."_sign"] == $this->data[$planet."_navamsha_sign"])
+    {
+?>
+        <p class="lead">&nbsp;&nbsp;<?php echo $planet ?> is vargottama in your chart. This dasha would be golden time for you.</p>
+<?php
+    }
+?>
+<div class="table-responsive">
 <table class="table table-bordered table-striped">
-    <tr><th>Main Period</th><th>Sub Period</th>
+    <tr><th>Age</th><th>Main Period</th><th>Sub Period</th>
         <th>Start Date</th><th>End Date</th></tr>
     <tr>
+        <td><?php echo $year_from->y ?> to <?php echo $year_to->y; ?></td>
         <td><?php echo ucfirst($dasha['main_period']); ?></td>
         <td><?php echo ucfirst($dasha['sub_period']); ?></td>
         <td><?php echo $start; ?></td>
@@ -95,7 +122,7 @@ foreach($this->data['get_remain_dasha'] as $dasha)
 }
 ?>
 </table>
-</div></div>
+</div>
 <div class="mb-3"></div>
 <?php
 unset($this->data);

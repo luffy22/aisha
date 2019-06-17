@@ -35,13 +35,15 @@ $day_in_num     = $first->format('w');
 ?>
 <p>Note: Click on date for muhurat. Click again to remove selection. Default location is Ujjain.</p>
 <div class="lead alert alert-dark"><?php echo $month_in_words." ".$year; ?></div>
-<table class="table table-bordered table-striped table-responsive">
+<div class="table-responsive">
+<table class="table table-bordered table-striped">
 <tr><th>Sunday</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th>
 <th>Thursday</th><th>Friday</th><th>Saturday</th></tr>
 <?php
 getTable($this->data, $day_of_week,$day_in_num, $days_in_month, $month,$year);
 ?>
 </table>
+</div>
 <?php
 function getTable($data,$day_of_week,$day_in_num, $days_in_month,$month,$year)
 {
