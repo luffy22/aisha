@@ -5,7 +5,19 @@ defined('_JEXEC') or die();
 $percent        =  (int)$this->data['asc_percent']+(int)$this->data['moon_percent']+
                     (int)$this->data['ven_percent']+(int)$this->data['nav_percent'];
 //$planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu","Uranus","Neptune","Pluto");
+$chart_id = $_GET['chart'];
+if(isset($_GET['back']) && $_GET['back'] =='mdosha')
+{
 ?>
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <a class="nav-link" href="<?php echo JURi::base() ?>horoscope?chart=<?php echo $chart_id ?>" title="navigate to horoscope main page"><i class="fas fa-home"></i> Horo</a>
+  </li>
+  </ul>
+<?php
+}
+?>
+<div class="mb-3"></div>
 <div class="lead alert alert-dark"><strong>Mangal Dosha Calculator</strong></div>
     
 <table class="table table-bordered table-hover table-striped">

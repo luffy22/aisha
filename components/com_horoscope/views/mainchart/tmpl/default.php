@@ -13,7 +13,11 @@ defined('_JEXEC') or die();
 //print_r($this->data);exit;
 $planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu","Uranus","Neptune","Pluto");
 ?>
-
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <a class="nav-link" href="<?php echo JURi::base() ?>horoscope?chart=<?php echo $chart_id ?>" title="navigate to horoscope main page"><i class="fas fa-home"></i> Horo</a>
+  </li>
+  </ul><div class="mb-3"></div>
     <table class="table table-bordered table-hover table-striped">
         <tr>
             <th>Name</th>
@@ -85,7 +89,7 @@ $planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Ven
     </canvas>
 <div class="mb-3"></div>
     <p class="float-sm-right">(R) signifies that planet is retrograde at time of birth</p>
-    <div class="table-responisve"><!--This little code keeps table aligned on big screens -->
+    <div class="table-responsive">
     <table class="table table-bordered table-striped">
         <tr>
             <th>Planets</th>

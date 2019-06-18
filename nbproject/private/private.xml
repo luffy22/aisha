@@ -3,13 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/html/aisha/components/com_horoscope/models/moon.php</file>
-            <file>file:/var/www/html/aisha/components/com_horoscope/views/lagna/view.html.php</file>
-            <file>file:/var/www/html/aisha/components/com_horoscope/models/mainchart.php</file>
+            <file>file:/var/www/html/aisha/components/com_horoscope/views/vimshottari/tmpl/default.php</file>
+            <file>file:/var/www/html/aisha/components/com_horoscope/views/mangaldosha/tmpl/default_mangal.php</file>
             <file>file:/var/www/html/aisha/components/com_horoscope/views/lagna/tmpl/default_lagna.php</file>
+            <file>file:/var/www/html/aisha/components/com_horoscope/views/findspouse/tmpl/default_spouse.php</file>
             <file>file:/var/www/html/aisha/components/com_horoscope/views/mainchart/tmpl/default.php</file>
-            <file>file:/var/www/html/aisha/components/com_horoscope/views/mainchart/view.html.php</file>
-            <file>file:/var/www/html/aisha/components/com_horoscope/models/lagna.php</file>
         </group>
     </open-files>
 </project-private>

@@ -7,7 +7,19 @@ if($gender == "male"){$spouse = "wife";}else if($gender == "female"){$spouse = "
 $text = $this->data['spouse_text'];
 $house  = $this->data['house'];
  if($house=="1"){$house = $house."st";}else if($house=="2"){$house = $house."nd";}else if($house=="3"){$house= $house."rd";}else{$house= $house."th";}
+$chart_id = $_GET['chart'];
+if(isset($_GET['back']) && $_GET['back'] =='fspouse')
+{
 ?>
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <a class="nav-link" href="<?php echo JURi::base() ?>horoscope?chart=<?php echo $chart_id ?>" title="navigate to horoscope main page"><i class="fas fa-home"></i> Horo</a>
+  </li>
+  </ul>
+<?php
+}
+?>
+<div class="mb-3"></div>
 <div class="lead alert alert-dark"><strong>How & Where To find Spouse</strong></div>
 <div class="container">
     

@@ -13,27 +13,13 @@ $dob_end                = new DateTime($this->data['dob_sub_end']);
 $main                   = $this->data['main_dob_period'];
 //$dasha_order         = array("ketu","venus","sun","moon","rahu","mars","jupiter","saturn","mercury");
 //$a = 0;
-$chart_id = $_GET['chart']; ?>
+$chart_id = $_GET['chart']; 
+?>
 <ul class="nav nav-pills">
   <li class="nav-item">
-    <a class="nav-link" href="<?php echo JURi::base() ?>horoscope?chart=<?php echo $chart_id ?>">Horo Details</a>
+    <a class="nav-link" href="<?php echo JURi::base() ?>horoscope?chart=<?php echo $chart_id ?>" title="navigate to horoscope main page"><i class="fas fa-home"></i> Horo</a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="<?php echo JURi::base() ?>getasc?chart=<?php echo $chart_id ?>">Ascendant</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="<?php echo JURi::base() ?>getmoon?chart=<?php echo $chart_id ?>">Moon Sign</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="<?php echo JURi::base() ?>getnakshatra?chart=<?php echo $chart_id ?>">Nakshatra</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="<?php echo JURi::base() ?>getnavamsha?chart=<?php echo $chart_id ?>">Navamsha</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active">Vimshottari</a>
-  </li>
-</ul>
+  </ul>
 <div class="mb-3"></div>
 <ul class="list-group">
     <li class="list-group-item"><strong>Balance of dasha</strong><br/>
