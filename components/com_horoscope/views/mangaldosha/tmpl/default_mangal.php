@@ -88,12 +88,6 @@ if(isset($_GET['back']) && $_GET['back'] =='mdosha')
 	</tr>
 </table>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark">How is Mangal Dosha Formed?</div>
-<p>Mangal Dosha is formed when Mars is placed in 1<sup>st</sup> House, 2<sup>nd</sup> House, 4<sup>th</sup> House, 
-7<sup>th</sup> House, 8<sup>th</sup> House or 12<sup>th</sup> House from Ascendant, Moon or Venus in main chart. Navamsha 
-chart is used to judge marriage of a person. So placement of Mars 
-in navamsha chart is also equally important in judging Mangal Dosha.</p>
-<div class="mb-3"></div>
 <div class="lead alert alert-dark">Is there Mangal Dosha in your chart?</div>
 <table class="table table-bordered table-striped">
     <tr>
@@ -115,6 +109,15 @@ in navamsha chart is also equally important in judging Mangal Dosha.</p>
 </table>
 <div class="mb-3"></div>
 <div class="lead alert alert-dark">Percentage of Mangal Dosha in your chart</div>
+<div class="row justify-content-center">
+<div class="c100 p<?php echo $percent; ?> big">
+    <span><?php echo $percent; ?>%</span>
+    <div class="slice">
+        <div class="bar"></div>
+        <div class="fill"></div>
+    </div>
+</div></div>
+<div class="mb-3"></div>
 <p>There is <?php echo $percent; ?><span>&#37;</span> Mangal Dosha in your chart
 <?php
 if($percent == "0")
@@ -208,4 +211,5 @@ for($i=0;$i<$this->data['asp_count'];$i++)
 ?>
 <p><strong>Note: Only aspects of 9 planets in traditional Vedic Astrology are analyzed.</strong></p>
 <div class="mb-3"></div>
+<link rel="stylesheet" href="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/circle.css' ?>" type="text/css" />
 <?php unset($this->data); ?>

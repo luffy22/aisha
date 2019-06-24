@@ -2,8 +2,8 @@
 <extension type="package" version="3.9" method="upgrade">
 	<name>Tamil (ta-IN) Language Pack</name>
 	<packagename>ta-IN</packagename>
-	<version>3.9.6.1</version>
-	<creationDate>2019-05-07</creationDate>
+	<version>3.9.8.1</version>
+	<creationDate>2019-06-12</creationDate>
 	<author>Ilagnayeru 'MIG' Manickam; Elango Samy Manim</author>
 	<authorEmail>mig.joomla@gmail.com</authorEmail>
 	<authorUrl></authorUrl>
@@ -12,7 +12,7 @@
 	<url></url>
 	<packager></packager>
 	<packagerurl></packagerurl>
-	<description>Tamil (India) Language Package for Joomla! 3.9.6v1</description>
+	<description>Tamil (India) Language Package for Joomla! 3.9.8v1</description>
 	<blockChildUninstall>true</blockChildUninstall>
 	<files>
 		<file type="language" client="administrator" id="ta-IN">admin_ta-IN.zip</file>

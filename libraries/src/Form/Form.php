@@ -2,7 +2,7 @@
 /**
  * Joomla! Content Management System
  *
- * @copyright  Copyright (C) 2005 - 2018 Open Source Matters, Inc. All rights reserved.
+ * @copyright  Copyright (C) 2005 - 2019 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -1546,6 +1546,27 @@ class Form
 
 				break;
 			default:
+				if ($element['type'] == 'subform')
+				{
+					$field   = $this->loadField($element);
+					$subForm = $field->loadSubForm();
+
+					if ($field->multiple)
+					{
+						$return = array();
+
+						foreach ($value as $key => $val)
+						{
+							$return[$key] = $subForm->filter($val);
+						}
+					}
+					else
+					{
+						$return = $subForm->filter($value);
+					}
+
+					break;
+				}
 				// Check for a callback filter.
 				if (strpos($filter, '::') !== false && is_callable(explode('::', $filter)))
 				{
@@ -1941,6 +1962,7 @@ class Form
 	 * @return  FormField|boolean  FormField object on success, false otherwise.
 	 *
 	 * @since   1.7.0
+	 * @deprecated  4.0  Use FormHelper::loadFieldType() directly
 	 */
 	protected function loadFieldType($type, $new = true)
 	{
@@ -1957,6 +1979,7 @@ class Form
 	 *
 	 * @see     FormHelper::loadRuleType()
 	 * @since   1.7.0
+	 * @deprecated  4.0  Use FormHelper::loadRuleType() directly
 	 */
 	protected function loadRuleType($type, $new = true)
 	{

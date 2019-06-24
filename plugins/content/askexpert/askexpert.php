@@ -2,6 +2,7 @@
 defined('_JEXEC') or die;
 class PlgContentAskExpert extends JPlugin
 {
+
 	function onContentAfterDisplay($context, &$article, &$params, $limitstart)
 	{
             $info       = $this->getExpertInfo($context, $article, $params);
@@ -12,12 +13,13 @@ class PlgContentAskExpert extends JPlugin
             $app                = JFactory::getApplication();
             $view               = $app->input->get('view');
             $path               = JPluginHelper::getLayoutPath('content', 'askexpert');
+            $content            = "";
             //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
             //$geoip              = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
             $ip                         = '117.196.1.11';
             //$ip                         = '157.55.39.123';  // ip address
             //$ip                 = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
-          
+            
             $info                       = geoip_country_code_by_name($ip);
             $country                    = geoip_country_name_by_name($ip);
             //$location           = $geoip->lookupLocation($ip);
@@ -163,9 +165,11 @@ class PlgContentAskExpert extends JPlugin
                 $result1            = $db->loadAssocList();
                 //print_r($result1);exit;
                 $details            = array_merge($result1,$country);
-                $content            .= "<div class='lead alert alert-dark'>Ask Questions</div>";
+                $content            .=  "<div class='card border-primary'>";
+                $content            .= "<div class='card-body'>";
+                $content            .= "<div class='lead text-center'>Get Online Consultation</div>";
                 $content            .= "<h3><a title='Click to get more info' href='#' data-toggle='modal' data-target='#astroinfo'><img src='".JURi::base()."images/profiles/".$result->img_new_name."' height='50px' width='50px' title='".$result->img_name."' />".$result->name."</a></h3>";
-                $content           .= "<div class='modal fade' id='astroinfo' tabindex='-1' role='dialog' aria-hidden='true' aria-labelledby='astrolabel'>";
+                $content            .= "<div class='modal fade' id='astroinfo' tabindex='-1' role='dialog' aria-hidden='true' aria-labelledby='astrolabel'>";
                 $content            .= "<div class='modal-dialog' role='document'>";
                 $content            .= "<div class='modal-content'>";
                 $content            .= "<div class='modal-header'><h5 class='modal-title' id='astrolabel'>Expert Info</h5>
@@ -234,6 +238,7 @@ class PlgContentAskExpert extends JPlugin
                     $content                .= "</div>";
                     $content                .= "<div class='form-group'><button type='submit' class='btn btn-primary' name='expert_submit'><i class='fa fa-globe'></i> Ask</button></div>";
                     $content                .= "</form>";
+                    $content                .= "</div></div>";
                 }
                 return $content;
             }

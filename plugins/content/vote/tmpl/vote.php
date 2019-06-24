@@ -3,7 +3,7 @@
  * @package     Joomla.Plugin
  * @subpackage  Content.vote
  *
- * @copyright   Copyright (C) 2005 - 2018 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2019 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -43,22 +43,3 @@ for ($i = 1; $i < 6; $i++)
 		<?php echo JHtml::_('form.token'); ?>
 	</span>
 </form>
-<div class ="container">
-<a href="https://www.facebook.com/AstroIsha" target="_blank" title="Official Facebook Page"><i class="fab fa-3x fa-facebook"></i></a> 
-<a href="https://www.instagram.com/astroisha/" target="_blank" rel="noopener noreferrer" title="Official Instagram Page"><i class="fab fa-3x fa-instagram"></i></a> 
-<a href="https://twitter.com/astroishaweb" target="_blank" title="Offical Twitter Page"><i class="fab fa-3x fa-twitter"></i></a> 
-<?php 
-if(isMobileDevice()){
-    //Your content or code for mobile devices goes here
-?>
-<a href="<?php echo "whatsapp://send?text=".JURI::current(); ?>" data-action="share/whatsapp/share"><i class="fab fa-3x fa-whatsapp"></i></a>
-<?php
-}
-?>
-<div class="fb-like" data-layout="box_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>&nbsp;&nbsp;
-</div><div class="mb-2"></div>
-<?php 
-function isMobileDevice() {
-    return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
-}
-?>

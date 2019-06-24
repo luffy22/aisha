@@ -6,7 +6,12 @@ $gender = $this->data['gender'];if($gender == "male"){$planet = "Venus";}else if
 if($gender == "male"){$spouse = "wife";}else if($gender == "female"){$spouse = "husband";}
 $text = $this->data['spouse_text'];
 $house  = $this->data['house'];
- if($house=="1"){$house = $house."st";}else if($house=="2"){$house = $house."nd";}else if($house=="3"){$house= $house."rd";}else{$house= $house."th";}
+switch($house) {
+    case "1":$house = "First";break;case "2":$house = "Second";break;case "3":$house = "Third";break;
+    case "4":$house = "Fourth";break;case "5":$house = "Fifth";break;case "6":$house = "Sixth";break;
+    case "7":$house = "Seventh";break;case "8":$house = "Eight";break;case "9":$house = "Ninth";break;
+    case "10":$house = "Tenth";break;case "11":$house = "Eleventh";break;case "12":$house = "Twelfth";break;
+}
 $chart_id = $_GET['chart'];
 if(isset($_GET['back']) && $_GET['back'] =='fspouse')
 {
@@ -91,10 +96,10 @@ if(isset($_GET['back']) && $_GET['back'] =='fspouse')
 	</tr>
 </table>
 <div class="mb-3"></div>
-    <p class="lead">For <?php echo $gender.'s' ?> position of <?php echo $planet ?> is used to know more about future <?php echo $spouse ?>. <?php echo $planet ?> is located in your <?php echo trim($house) ?> house counted from Ascendant(1st House).</p>
+    <p class="lead">For <?php echo $gender.'s' ?> position of <?php echo $planet ?> is used to know more about future <?php echo $spouse ?>. <?php echo $planet ?> is located in your <?php echo trim($house) ?> House counted from ascendant(First House).</p>
     <div class="mb-3"></div>  
     <?php echo str_replace("planet", $planet, $text); ?>
 <div class="mb-2"></div>
-    <p class="lead strong">Portfolio's associated with <?php echo trim($house); ?> house are the deciding factor for your future <?php echo $spouse ?> to choose you over others.</p>
+    <p class="lead strong">Portfolio's associated with <?php echo trim($house); ?> House are the deciding factor for your future <?php echo $spouse ?> to choose you over others.</p>
 </div>
 <?php unset($this->data); ?>
