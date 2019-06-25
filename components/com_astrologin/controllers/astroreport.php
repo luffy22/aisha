@@ -32,13 +32,13 @@ class AstrologinControllerAstroReport extends AstroLoginController
             
             
             $details    = array(
-                                 "type"=>$report_type,"fees"=>$fees,
+                                "type"=>$report_type,"fees"=>$fees,
                                 "currency"=>$currency,"pay_mode"=>$pay_mode,
-                                "name"=>$name,"email"=>$email,"gender"=>$gender,"explain"=>$explain,
+                                "name"=>$name,"email"=>$email,"gender"=>$gender,
                                 "dob"=>$dob,"pob"=>$pob, "tob"=>$tob
                                 );
-            print_r($details);exit;
-            $model          = $this->getModel('astroask');  // Add the array to model
+            //print_r($details);exit;
+            $model          = $this->getModel('astroreport');  // Add the array to model
             $model->insertDetails($details);
         
     }
