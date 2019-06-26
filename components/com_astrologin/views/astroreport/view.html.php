@@ -14,7 +14,8 @@ class AstroLoginViewAstroReport extends JViewLegacy
             JError::raiseError(500, implode('<br />', $errors));
             return false;
         }
-        if((!empty($this->msg))&&(!isset($_GET['report']))&&(!isset($_GET['fees']))&&(!isset($_GET['pay_mode'])))
+        if((!empty($this->msg))&&(!isset($_GET['report']))&&(!isset($_GET['fees']))&&(!isset($_GET['pay_mode']))&&
+                (!isset($_GET['order_type']))&&(!isset($_GET['uniq_id'])))
         {
             $tpl        = null;
         }
@@ -22,17 +23,27 @@ class AstroLoginViewAstroReport extends JViewLegacy
         {
              $tpl       = 'details';
         }
-        else if((!empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['no_of_ques']))&&(isset($_GET['expert'])))
-        {
-            $tpl                = 'details2';
-        }
-       else if(empty($this->msg)&&isset($_GET['report'])&&isset($_GET['fees'])&&isset($_GET['pay_mode']))
+        else if(empty($this->msg)&&isset($_GET['report'])&&isset($_GET['fees'])&&isset($_GET['pay_mode']))
         {
              $tpl       = 'details';
         }
-        else if((empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['no_of_ques']))&&(isset($_GET['expert'])))
+        else if((!empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['order_type'])) && $_GET['order_type'] == 'yearly')
         {
-            $tpl                = 'details2';
+            $tpl                = 'yearly';
+        }
+       
+        else if((empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['order_type'])) && $_GET['order_type'] == 'yearly')
+        {
+            $tpl                = 'yearly';
+        }
+        else if((!empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['order_type'])) && $_GET['order_type'] == 'career')
+        {
+            $tpl                = 'career';
+        }
+       
+        else if((empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['order_type'])) && $_GET['order_type'] == 'career')
+        {
+            $tpl                = 'career';
         }
         parent::display($tpl);
     }

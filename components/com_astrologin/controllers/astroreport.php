@@ -42,28 +42,17 @@ class AstrologinControllerAstroReport extends AstroLoginController
             $model->insertDetails($details);
         
     }
-    public function askQuestions2()
-    { 
-            $uniq_id        = $_POST['ques_id'];
-            $ques_no        = $_POST['ques_no'];
-            $ques           = array();
-            for($i=1;$i<=$ques_no;$i++)
-            {
-                ${"ques_select".$i}                 = $_POST['ques_select_'.$i] ;
-                ${"ques_".$i}                       = $_POST['ques_'.$i];
-                ${"ques_details_".$i}               = $_POST['ques_details_'.$i];
-                $ques_new                           = array("select_".$i    =>${"ques_select".$i},
-                                                            "ask_".$i       =>${"ques_".$i},
-                                                            "details_".$i   =>${"ques_details_".$i});
-                $ques                               = array_merge($ques,$ques_new);
-                
-            }
-            //print_r($ques);exit;
-            $details                    = array("uniq_id"=>$uniq_id,"ques_no"=>$ques_no);
-            $details                    = array_merge($details,$ques);
-            //print_r($details);exit;
-            $model          = $this->getModel('astroask');  // Add the array to model
-            $model          ->insertQuestions($details);
+    public function fillDetails2()
+    {
+        $order_id           = $_POST['order_id'];
+        $order_type         = $_POST['order_type'];
+        $yearly_explain     = $_POST['query_explain'];
+        $query_about        = $_POST['query_about'];
+        $details            = array("order_id" =>$order_id, "order_type"=>$order_type,
+                                    "query_about"=>$query_about,"details_explain" => $yearly_explain);
+        //print_r($details);exit;
+        $model          = $this->getModel('astroreport');  // Add the array to model
+        $model->insertDetails2($details);
     }
     public function confirmPayment()
     {
@@ -100,9 +89,6 @@ class AstrologinControllerAstroReport extends AstroLoginController
         $model          = $this->getModel('astroask');  // Add the array to model
         $model          ->confirmCCPayment($details);
     }
-    public function askExpert()
-    {
-        
-    }
+    
 }
 ?>
