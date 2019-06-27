@@ -45,6 +45,24 @@ class AstroLoginViewAstroReport extends JViewLegacy
         {
             $tpl                = 'career';
         }
+         else if((!empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['order_type'])) && $_GET['order_type'] == 'marriage')
+        {
+            $tpl                = 'marriage';
+        }
+       
+        else if((empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['order_type'])) && $_GET['order_type'] == 'marriage')
+        {
+            $tpl                = 'marriage';
+        }
+        else if((!empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['order_type'])) && $_GET['order_type'] == 'life')
+        {
+            $tpl                = 'life';
+        }
+       
+        else if((empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['order_type'])) && $_GET['order_type'] == 'life')
+        {
+            $tpl                = 'life';
+        }
         parent::display($tpl);
     }
     public function page2($tpl=null)

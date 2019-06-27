@@ -54,6 +54,24 @@ class AstrologinControllerAstroReport extends AstroLoginController
         $model          = $this->getModel('astroreport');  // Add the array to model
         $model->insertDetails2($details);
     }
+    public function fillDetails3()
+    {
+        $order_id           = $_POST['order_id'];
+        $order_type         = $_POST['order_type'];
+        $other_explain     = $_POST['query_explain'];
+        $other_about        = $_POST['query_other_about'];
+        $marriage_about     = $_POST['query_marriage_about'];
+        $marriage_explain   = $_POST['query_marriage'];
+        $career_about       = $_POST['query_career_about'];
+        $career_explain     = $_POST['query_career'];
+        $details            = array("order_id" =>$order_id, "order_type"=>$order_type,
+                                    "query_about"=>$other_about,"other_explain" => $other_explain,
+                                    "marriage_about"=>$marriage_about, "marriage_explain"=>$marriage_explain,
+                                    "career_about"=>$career_about,"career_explain"=>$career_explain);
+        print_r($details);exit;
+        $model          = $this->getModel('astroreport');  // Add the array to model
+        $model->insertDetails2($details);
+    }
     public function confirmPayment()
     {
         $id             = $_GET['id'];

@@ -12,7 +12,7 @@ $order_type             = $_GET['order_type'];
 <input type="hidden" name="order_type" id="order_type" value="<?php echo $order_type; ?>" />
 <div class="mb-3"></div>
 <div class="form-group">
-    <label for="query_about">What's the query about?:</label>
+    <label for="query_about">What's the query about?</label>
     <select name="query_about" id="query_about" class="form-control">
         <option value="marriage">Marriage</option>
         <option value="divorce">Divorce</option>
@@ -23,7 +23,7 @@ $order_type             = $_GET['order_type'];
     </select>
 </div><div class="mb-3"></div>
 <div class="form-group">
-    <label for="query_explain">Explain properly:</label>
+    <label for="query_explain">Explain in detail</label>
     <textarea name="query_explain" id="query_explain" rows="10" class="form-control"></textarea>
 </div>
 <div class="form-group">

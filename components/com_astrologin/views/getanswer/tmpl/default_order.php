@@ -1,4 +1,3 @@
-
 <?php
 defined('_JEXEC') or die;
 if(isset($_GET['order']))
@@ -42,7 +41,7 @@ if(isset($_GET['ref']))
 foreach($this->ques as $ques)
 {
 ?>
-	       <div class="lead alert alert-dark">Topic: <?php echo $ques->ques_topic; ?></div>
+    <div class="lead alert alert-dark">Topic: <?php echo $ques->ques_topic; ?></div>
     <div class="lead">Question: <?php echo $ques->ques_ask; ?></div>
          <p><?php echo $ques->ques_details; ?></p>
     <div class="mb-3"></div>

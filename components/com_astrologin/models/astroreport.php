@@ -159,7 +159,7 @@ class AstrologinModelAstroReport extends JModelItem
                                 ->where($db->quoteName('UniqueID').'='.$db->quote($order_id));
            $db                  ->setQuery($query);
            $row                 = $db->loadAssoc();
-           //print_r($row);exit;
+           print_r($row);exit;
            $token               = $row['UniqueID'];
            $name                = str_replace(" ","_",$row['name']);
            $email               = $row['email'];
