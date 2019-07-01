@@ -181,4 +181,68 @@ class AstrologinModelAstroReport extends JModelItem
            }
         }
     }
+    public function insertDetails3($details)
+    {
+        //print_r($details);exit;
+        $query_about_1          = $details['career_about'];
+        $query_explain_1        = $details['career_explain'];
+        $query_about_2          = $details['marriage_about'];
+        $query_explain_2        = $details['marriage_explain'];
+        $query_about_3          = $details['other_about'];
+        $query_explain_3        = $details['other_explain'];
+        $app                    = JFactory::getApplication();
+        $db                     = JFactory::getDbo();  // Get db connection
+        $query                  = $db->getQuery(true);
+        for($i=1; $i< 4;$i++)
+        {
+            $order_id           = $details['order_id'];
+            $order_type         = $details['order_type'];
+            $query_about        = ${"query_about_".$i};
+            $query_explain      = ${"query_explain_".$i};
+            //echo $order_id." ".$order_type." ".$query_about." ".$query_explain;exit;
+            $columns                = array('order_id','order_type','query_about','query_explain'
+                                    );
+            $values                 = array(
+                                        $db->quote($order_id),$db->quote($order_type),$db->quote($query_about),
+                                        $db->quote($query_explain)
+                                    );
+            // Prepare the insert query
+            $query          ->insert($db->quoteName('#__order_reports'))
+                        ->columns($db->quoteName($columns))
+                        ->values(implode(',', $values));
+            // Set the query using our newly populated query object and execute it
+            $db             ->setQuery($query);
+            $result          = $db->query();$query->clear();
+        }
+        
+        if($result)
+        {
+            $query              ->select($db->quoteName(array('UniqueID','name','email',
+                                        'pay_mode','fees','currency')))
+                                ->from($db->quoteName('#__question_details'))
+                                ->where($db->quoteName('UniqueID').'='.$db->quote($order_id));
+           $db                  ->setQuery($query);
+           $row                 = $db->loadAssoc();
+           print_r($row);exit;
+           $token               = $row['UniqueID'];
+           $name                = str_replace(" ","_",$row['name']);
+           $email               = $row['email'];
+           $currency            = $row['currency'];
+           $fees                = $row['fees'];
+           $pay_mode            = $row['pay_mode'];
+           //echo $pay_mode;exit;
+           if($pay_mode == "ccavenue")
+           {
+                $app->redirect(JUri::base().'ccavenue/nonseam/ccavenue_payment.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
+           }
+           else if($pay_mode == "paytm")
+           {
+                $app->redirect(JUri::base().'PaytmKit/TxnTest.php?token='.$token.'&email='.$email.'&fees='.$fees); 
+           }
+           else if($pay_mode=="paypal")
+           {
+               $app->redirect(JUri::base().'vendor/paypal.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees); 
+           }
+        }
+    }
 }

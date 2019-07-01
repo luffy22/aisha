@@ -61,7 +61,7 @@ $order_type             = $_GET['order_type'];
     </select>
 </div><div class="mb-3"></div>
 <div class="form-group">
-    <label for="query_explain">Explain in detail</label>
+    <label for="query_other">Explain in detail</label>
     <textarea name="query_explain" id="query_explain" rows="10" class="form-control"></textarea>
 </div>
 <div class="form-group">

@@ -65,12 +65,12 @@ class AstrologinControllerAstroReport extends AstroLoginController
         $career_about       = $_POST['query_career_about'];
         $career_explain     = $_POST['query_career'];
         $details            = array("order_id" =>$order_id, "order_type"=>$order_type,
-                                    "query_about"=>$other_about,"other_explain" => $other_explain,
+                                    "other_about"=>$other_about,"other_explain" => $other_explain,
                                     "marriage_about"=>$marriage_about, "marriage_explain"=>$marriage_explain,
                                     "career_about"=>$career_about,"career_explain"=>$career_explain);
-        print_r($details);exit;
+        //print_r($details);exit;
         $model          = $this->getModel('astroreport');  // Add the array to model
-        $model->insertDetails2($details);
+        $model->insertDetails3($details);
     }
     public function confirmPayment()
     {

@@ -60,7 +60,6 @@ $next_day           = new DateTime($this->data['sun_rise_3']);
         <div class="col-3 text-right"><a href="<?php echo $current_url."?date=".$next_day->format('d-m-Y'); ?>"><i class="fas fa-arrow-circle-right"> Next</i></a></div>
     </div><div class="mb-3"></div><br/>
 <?php unset($prev_day); unset($next_day); ?>
-<div class="lead alert alert-dark"><strong>Today's Muhurat, Chogadiya & Hora</strong></div>
 <div class="mb-3"></div>
 <ul class="nav nav-pills">
 <li class="nav-item"><a class="nav-link active" href="#muhurat" data-toggle="tab">Muhurat</a></li>
@@ -70,8 +69,7 @@ $next_day           = new DateTime($this->data['sun_rise_3']);
 <div class="tab-content">
 <div id="muhurat" class="tab-pane active">
     <div class="mb-3"></div>
-<p>Vedic Calendar counts day from sunrise to sunset and night from sunset to next sunrise. Whole day is from sunrise to next sunrise.</p>
-<div class="mb-3"></div>
+<div class="lead alert alert-dark"><strong>Muhurat timings for today</strong></div>
 <table class="table table-striped table-bordered">
 <tr><th><i class="far fa-2x fa-calendar-alt"></i> Date</th><td><?php echo $sunrise->format("dS F Y"); ?></td></tr>
 <tr><th><img src="images/clipart/sunrise.png" class="img-fluid" alt="sunrise" title="sunrise" /> Sunrise </th><td><?php echo $sunrise->format('h:i:s a');unset($sunrise); ?></td></tr>
@@ -85,8 +83,6 @@ $next_day           = new DateTime($this->data['sun_rise_3']);
 </table><div class="mb-3"></div>
 </div>
 <div id="chogadiya" class="tab-pane">
-<div class="mb-3"></div>
-<p>Chogadiya marked with <i class="fa fa-om"></i> sign besides them and green color background are auspicious to start any task. Others not so auspicious.</p>
 <div class="mb-3"></div>
 <div class="lead alert alert-dark"><strong>Day Chogadia</strong></div>
 <table class="table table-bordered">
@@ -195,10 +191,6 @@ unset($date_start);unset($date_end);
 <div class="mb-3"></div>
 </div>
 </div>
-<div class="mb-3"></div>
-<p><strong>Kindly Note: </strong>AstroIsha doesn't wish anyone to be over-realiant on Muhurat, Chogadiya & Horas. In Sanskrit there is a terminology <strong>Shubhasya Shigram(शुभस्य शीघ्रम)</strong> which means start 
-the auspicious work immediately.</p>
-<div class="mb-3"></div>
 <?php
 unset($this->data);
 ?>
