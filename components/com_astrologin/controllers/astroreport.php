@@ -14,7 +14,7 @@ class AstrologinControllerAstroReport extends AstroLoginController
             
         }
         $app                    = JFactory::getApplication();
-        $app        ->redirect(JUri::base().'get-report?report='.$report_type.'&fees='.$fees."_".$currency.'&pay_mode='.$pay_mode);        
+        $app        ->redirect(JUri::base().'order-report?report='.$report_type.'&fees='.$fees."_".$currency.'&pay_mode='.$pay_mode);        
         
     }
      public function fillDetails()
@@ -104,7 +104,8 @@ class AstrologinControllerAstroReport extends AstroLoginController
         $status            = $_GET['status'];
         
         $details        = array("token"=>$token,"trackid"=>$track_id,"bankref"=>$bank_ref,"status"=>$status);
-        $model          = $this->getModel('astroask');  // Add the array to model
+        print_r($details);exit;
+        $model          = $this->getModel('astroreport');  // Add the array to model
         $model          ->confirmCCPayment($details);
     }
     

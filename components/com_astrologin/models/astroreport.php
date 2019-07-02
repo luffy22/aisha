@@ -6,17 +6,17 @@ class AstrologinModelAstroReport extends JModelItem
 {
     public function getData()
     {
-        //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
-        //$geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
-        $ip                           = '117.196.1.11';
+        include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
+        $geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
+        //$ip                           = '117.196.1.11';
         //$ip                             = '157.55.39.123';  // ip address
-        //$ip                       	= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
-        $info                         = geoip_country_code_by_name($ip);
-        $country                      = geoip_country_name_by_name($ip);
+        $ip                       	= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
+        //$info                         = geoip_country_code_by_name($ip);
+        //$country                      = geoip_country_name_by_name($ip);
         
-        //$location               	= $geoip->lookupLocation($ip);
-        //$info                   	= $location->countryCode;
-        //$country                	= $location->countryName;
+        $location               	= $geoip->lookupLocation($ip);
+        $info                   	= $location->countryCode;
+        $country                	= $location->countryName;
         $u_id           = '222';
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
@@ -118,13 +118,13 @@ class AstrologinModelAstroReport extends JModelItem
             $details        = $db->loadAssoc();
             $uniqID         = $details['UniqueID'];
             $order_type     = $details['order_type'];       
-            $app            ->redirect(JUri::base().'get-report?uniq_id='.$uniqID.'&order_type='.$order_type);
+            $app            ->redirect(JUri::base().'order-report?uniq_id='.$uniqID.'&order_type='.$order_type);
         }
         else
         {
             $msg            = "Something went wrong. Please try again.";
             $type           = "error";
-            $app            ->redirect(Juri::base().'get-report',$msg,$type);
+            $app            ->redirect(Juri::base().'order-report',$msg,$type);
         }
     }
     public function insertDetails2($details)
@@ -159,7 +159,7 @@ class AstrologinModelAstroReport extends JModelItem
                                 ->where($db->quoteName('UniqueID').'='.$db->quote($order_id));
            $db                  ->setQuery($query);
            $row                 = $db->loadAssoc();
-           print_r($row);exit;
+           //print_r($row);exit;
            $token               = $row['UniqueID'];
            $name                = str_replace(" ","_",$row['name']);
            $email               = $row['email'];
@@ -169,11 +169,11 @@ class AstrologinModelAstroReport extends JModelItem
            //echo $pay_mode;exit;
            if($pay_mode == "ccavenue")
            {
-                $app->redirect(JUri::base().'ccavenue/nonseam/ccavenue_payment.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
+                $app->redirect(JUri::base().'ccavenue/nonseam/ccavenue_payment2.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
            }
            else if($pay_mode == "paytm")
            {
-                $app->redirect(JUri::base().'PaytmKit/TxnTest.php?token='.$token.'&email='.$email.'&fees='.$fees); 
+                $app->redirect(JUri::base().'PaytmKit/TxnTest2.php?token='.$token.'&email='.$email.'&fees='.$fees); 
            }
            else if($pay_mode=="paypal")
            {

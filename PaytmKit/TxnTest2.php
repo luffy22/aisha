@@ -4,9 +4,10 @@
 	header("Expires: 0");
 	if(isset($_GET['token']))
 	{
-		$order_id		= str_replace("token_","order_", ($_GET['token']));		// token is taken as unique order 
+		$order_id		= $_GET['token'];		// token is taken as unique order 
 		$price 			= $_GET['fees'];									// fees
 		$email			= $_GET['email'];
+                $mobile                 = $_GET['mobile']; // email is used as unique customer id
 	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -19,7 +20,7 @@
 	<h1>Merchant Check Out Page</h1>
 	<pre>
 	</pre>
-	<form method="post" action="pgRedirect2.php" name="txntest">
+	<form method="post" action="pgRedirect.php" name="txntest">
 		<table border="1">
 			<tbody>
 				<tr>
@@ -60,6 +61,11 @@
 						value="<?php echo trim($price); ?>">
 					</td>
 				</tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td><label>Mobile:</label></td>
+                                    <td><input type="text" title="TXN_MOBILE" name="TXN_MOBILE" value ="<?php echo $mobile; ?>"/></td>
+                                </tr>
                                 <input type="hidden" name="CALLBACK_URL" value="https://www.astroisha.com/PaytmKit/pgResponse2.php" />
 				<tr>
 					<td></td>

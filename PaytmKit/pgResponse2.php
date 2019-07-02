@@ -23,10 +23,10 @@ if($isValidChecksum == "TRUE") {
 	if ($_POST["STATUS"] == "TXN_SUCCESS") {
             //echo $_POST['STATUS'];exit;
 		$txnid          = $_POST['TXNID'];
-                $order          = str_replace("order_","token_",$_POST['ORDERID']);
+                $order          = $_POST['ORDERID'];
                 $bank_ref       = $_POST['BANKTXNID'];
                 $status         = $_POST['STATUS'];
-                header("Location: https://www.astroisha.com/index.php?option=com_astrologin&task=astroask.confirmCCPayment&track_id=".$txnid.
+                header("Location: https://www.astroisha.com/index.php?option=com_astrologin&task=astroreport.confirmCCPayment&track_id=".$txnid.
                         "&token=".$order."&bank_ref=".$bank_ref."&status=".$status);
 		//Process your transaction here as success transaction.
 		//Verify amount & order id received from Payment gateway with your application's order id and amount.
@@ -37,7 +37,7 @@ if($isValidChecksum == "TRUE") {
                 $order          = str_replace("order_","token_",$_POST['ORDERID']);
                 $bank_ref       = $_POST['BANKTXNID'];
                 $status         = $_POST['STATUS'];
-                header("Location: https://www.astroisha.com/index.php?option=com_astrologin&task=astroask.confirmCCPayment&track_id=".$txnid.
+                header("Location: https://www.astroisha.com/index.php?option=com_astrologin&task=astroreport.confirmCCPayment&track_id=".$txnid.
                         "&token=".$order."&bank_ref=".$bank_ref."&status=".$status);
 	}
 
