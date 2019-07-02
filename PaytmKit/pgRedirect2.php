@@ -17,8 +17,7 @@ $CHANNEL_ID = $_POST["CHANNEL_ID"];
 $TXN_AMOUNT = $_POST["TXN_AMOUNT"];
 $CALLBACK_URL   = $_POST["CALLBACK_URL"];
 $mobile     = 7777777777;
-
-
+//echo PAYTM_TXN_URL;exit;
 //echo $CALLBACK_URL;EXIT;
 //echo $TXN_AMOUNT;exit;
 

@@ -20,7 +20,7 @@
 	<h1>Merchant Check Out Page</h1>
 	<pre>
 	</pre>
-	<form method="post" action="pgRedirect.php" name="txntest">
+	<form method="post" action="pgRedirect2.php" name="txntest">
 		<table border="1">
 			<tbody>
 				<tr>

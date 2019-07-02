@@ -3,17 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/html/aisha/components/com_astrologin/views/astroreport/tmpl/default_life.php</file>
-            <file>file:/var/www/html/aisha/PaytmKit/TxnTest2.php</file>
-            <file>file:/var/www/html/aisha/PaytmKit/lib/config_paytm.php</file>
-            <file>file:/var/www/html/aisha/PaytmKit/pgResponse2.php</file>
-            <file>file:/var/www/html/aisha/ccavenue/nonseam/ccavResponseHandler2.php</file>
+            <file>file:/var/www/html/aisha/components/com_astrologin/models/astroask.php</file>
             <file>file:/var/www/html/aisha/components/com_astrologin/controllers/astroreport.php</file>
-            <file>file:/var/www/html/aisha/components/com_astrologin/controllers/astroask.php</file>
-            <file>file:/var/www/html/aisha/PaytmKit/TxnTest.php</file>
-            <file>file:/var/www/html/aisha/ccavenue/nonseam/ccavenue_payment.php</file>
-            <file>file:/var/www/html/aisha/ccavenue/nonseam/ccavenue_payment2.php</file>
-            <file>file:/var/www/html/aisha/components/com_astrologin/views/astroreport/tmpl/default_yearly.php</file>
             <file>file:/var/www/html/aisha/components/com_astrologin/models/astroreport.php</file>
         </group>
     </open-files>

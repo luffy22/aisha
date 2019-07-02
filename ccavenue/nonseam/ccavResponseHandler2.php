@@ -32,7 +32,7 @@ else
 
             }
             
-            $token_number           = "token_".$values[1];
+            $token_number           = $values[1];
             $ccavenue_track_id      = $values[2];
             $ccavenue_bank_ref      = $values[3];
             $ccavenue_order_status  = $values[4];

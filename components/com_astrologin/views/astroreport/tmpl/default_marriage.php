@@ -6,6 +6,8 @@ $order_type             = $_GET['order_type'];
 //echo $order_type;exit;
 ?>
 <div class="lead alert alert-dark">Kindly share your details</div>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Filling these details would allow us to know more about problems you face. 
+ Also it means we don't have to do guess work and can focus on solving your issues better.</p>
 <form id="ques_form" role="form" enctype="application/x-www-form-urlencoded" method="post" 
       action="<?php echo JRoute::_('index.php?option=com_astrologin&task=astroreport.fillDetails2'); ?>">
 <input type="hidden" name="order_id" id="order_id" value="<?php echo $uniq_id; ?>" />
