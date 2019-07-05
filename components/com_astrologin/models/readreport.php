@@ -5,11 +5,11 @@ defined('_JEXEC') or die;  // No direct Access
 jimport('joomla.application.component.modelitem');
 class AstrologinModelReadReport extends JModelItem
 {
-    function getOrder()
+    function getDetails()
     {
         $jinput             = JFactory::getApplication()->input;
         $order              = $jinput->get('order', 'default_value', 'string');
-        
+        //echo $order;exit;
         $db             = JFactory::getDbo();  // Get db connection
         $query          = $db->getQuery(true);
         $query          ->select($db->quoteName(array('a.UniqueID','a.expert_id','a.fees',
@@ -20,20 +20,22 @@ class AstrologinModelReadReport extends JModelItem
                         ->from($db->quoteName('#__question_details','a'))
                         ->where($db->quoteName('a.UniqueID').' = '.$db->quote($order));
         $db                  ->setQuery($query);
-        $result         = $db->loadObject();
+        $result1         = $db->loadObject();
         //print_r($result);exit;
-        return $result;
+        return $result1;
     }
-    function getQuestions()
+    function getOrder()
     {
         $jinput             = JFactory::getApplication()->input;
         $order              = $jinput->get('order', 'default_value', 'string');
-        
         $db                 = JFactory::getDbo();  // Get db connection
         $query              = $db->getQuery(true);
-        $query              ->select($db->quoteName(array('order_id','ques_topic','ques_ask','ques_details','ques_answer')));
-        $query              ->from($db->quoteName('#__question'));
-        $query              ->where($db->quoteName('order_id').' = '.$db->quote($order));
+        $query              ->select($db->quoteName(array('b.query_about','b.query_explain','a.order_full_text',
+                                                            'b.query_answer','c.summary_full_text')));
+        $query              ->from($db->quoteName('#__order_reports','a'));
+        $query          ->join('RIGHT', $db->quoteName('#__order_queries','b'). ' ON (' . $db->quoteName('a.order_id').' = '.$db->quoteName('b.order_id') . ')');
+        $query          ->join('RIGHT', $db->quoteName('#__order_summary','c'). ' ON (' . $db->quoteName('a.order_id').' = '.$db->quoteName('c.order_id') . ')');
+        $query              ->where($db->quoteName('a.order_id').' = '.$db->quote($order));
         $db                  ->setQuery($query);
         $result         = $db->loadObjectList();
         //print_r($result);exit;

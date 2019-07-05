@@ -44,7 +44,6 @@ $pay_mode               = $_GET['pay_mode'];
     <button type="reset" class="btn btn-danger">Reset</button>
         <button class="btn btn-primary" type="submit">Submit Details
             </button>
-        
 </div>
 </form>
 

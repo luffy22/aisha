@@ -7,10 +7,11 @@ class AstroLoginViewReadReport extends JViewLegacy
     * Display the extended profile view
     */
     var $order;
-    var $ques;
+    var $details;
     function display($tpl = null)
     {
         $this->order            = $this->get('Order');
+        $this->details          = $this->get('Details');
         if(empty($this->order))
         {
             $tpl        = null;

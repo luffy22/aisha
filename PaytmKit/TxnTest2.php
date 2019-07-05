@@ -7,7 +7,7 @@
 		$order_id		= $_GET['token'];		// token is taken as unique order 
 		$price 			= $_GET['fees'];									// fees
 		$email			= $_GET['email'];
-                $mobile                 = $_GET['mobile']; // email is used as unique customer id
+                $mobile                 = '9999999999'; // email is used as unique customer id
 	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -20,7 +20,7 @@
 	<h1>Merchant Check Out Page</h1>
 	<pre>
 	</pre>
-	<form method="post" action="pgRedirect2.php" name="txntest">
+	<form method="post" action="pgRedirect2.php" name="txntest2">
 		<table border="1">
 			<tbody>
 				<tr>
@@ -77,7 +77,7 @@
 		* - Mandatory Fields
 	</form>
 	<script type="text/javascript">
-			document.txntest.submit();
+			document.txntest2.submit();
 		</script>
 </body>
 </html>

@@ -123,7 +123,7 @@ class AstrologinModelAstroReport extends JModelItem
         else
         {
             $msg            = "Something went wrong. Please try again.";
-            $type           = "error";
+            $type           = "warning";
             $app            ->redirect(Juri::base().'order-report',$msg,$type);
         }
     }
@@ -144,12 +144,32 @@ class AstrologinModelAstroReport extends JModelItem
                                     $db->quote($query_explain)
                                 );
         // Prepare the insert query
+        $query          ->insert($db->quoteName('#__order_queries'))
+                        ->columns($db->quoteName($columns))
+                        ->values(implode(',', $values));
+        // Set the query using our newly populated query object and execute it
+        $db             ->setQuery($query);
+        $result          = $db->query();unset($result);
+        $query           ->clear();
+        $columns            = array('order_id');
+        $values             = array($db->quote($order_id));
+        // Prepare the insert query
         $query          ->insert($db->quoteName('#__order_reports'))
                         ->columns($db->quoteName($columns))
                         ->values(implode(',', $values));
         // Set the query using our newly populated query object and execute it
         $db             ->setQuery($query);
+        $result          = $db->query();unset($result);$query->clear();
+        $columns            = array('order_id');
+        $values             = array($db->quote($order_id));
+        // Prepare the insert query
+        $query          ->insert($db->quoteName('#__order_summary'))
+                        ->columns($db->quoteName($columns))
+                        ->values(implode(',', $values));
+        // Set the query using our newly populated query object and execute it
+        $db             ->setQuery($query);
         $result          = $db->query();
+        $query           -> clear();
         if($result)
         {
             $query              ->clear();
@@ -207,16 +227,35 @@ class AstrologinModelAstroReport extends JModelItem
                                         $db->quote($query_explain)
                                     );
             // Prepare the insert query
-            $query          ->insert($db->quoteName('#__order_reports'))
-                        ->columns($db->quoteName($columns))
-                        ->values(implode(',', $values));
+            $query              ->insert($db->quoteName('#__order_queries'))
+                                ->columns($db->quoteName($columns))
+                                ->values(implode(',', $values));
             // Set the query using our newly populated query object and execute it
             $db             ->setQuery($query);
-            $result          = $db->query();$query->clear();
+            $result          = $db->query();$query->clear();unset($result);
         }
-        
+        $columns            = array('order_id');
+        $values             = array($db->quote($order_id));
+        // Prepare the insert query
+        $query              ->insert($db->quoteName('#__order_reports'))
+                            ->columns($db->quoteName($columns))
+                            ->values(implode(',', $values));
+        // Set the query using our newly populated query object and execute it
+        $db                 ->setQuery($query);
+        $result             = $db->query();unset($result);
+        $query              ->clear();
+        $columns            = array('order_id');
+        $values             = array($db->quote($order_id));
+        // Prepare the insert query
+        $query          ->insert($db->quoteName('#__order_summary'))
+                        ->columns($db->quoteName($columns))
+                        ->values(implode(',', $values));
+        // Set the query using our newly populated query object and execute it
+        $db             ->setQuery($query);
+        $result          = $db->query();
         if($result)
         {
+            $query              -> clear();
             $query              ->select($db->quoteName(array('UniqueID','name','email',
                                         'pay_mode','fees','currency')))
                                 ->from($db->quoteName('#__question_details'))
@@ -233,11 +272,11 @@ class AstrologinModelAstroReport extends JModelItem
            //echo $pay_mode;exit;
            if($pay_mode == "ccavenue")
            {
-                $app->redirect(JUri::base().'ccavenue/nonseam/ccavenue_payment.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
+                $app->redirect(JUri::base().'ccavenue/nonseam/ccavenue_payment2.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
            }
            else if($pay_mode == "paytm")
            {
-                $app->redirect(JUri::base().'PaytmKit/TxnTest.php?token='.$token.'&email='.$email.'&fees='.$fees); 
+                $app->redirect(JUri::base().'PaytmKit/TxnTest2.php?token='.$token.'&email='.$email.'&fees='.$fees); 
            }
            else if($pay_mode=="paypal")
            {
@@ -247,7 +286,7 @@ class AstrologinModelAstroReport extends JModelItem
     }
     public function failPayment($details)
     {
-        //print_r($details);exit;
+        print_r($details);exit;
         $token          = $details['token'];
         $db         = JFactory::getDbo();
         $query      = $db->getQuery(true);
@@ -437,7 +476,7 @@ class AstrologinModelAstroReport extends JModelItem
         $link       = JUri::base().'read-report?order='.$data->UniqueID.'&ref='.$data->email;
         if ( $send !== true ) {
             $msg    = 'Error sending email: Try again and if problem continues contact admin@astroisha.com.';
-            $msgType = "error";
+            $msgType = "warning";
             $app->redirect($link, $msg,$msgType);
         } 
         else 
@@ -451,7 +490,7 @@ class AstrologinModelAstroReport extends JModelItem
             else if(($data->pay_mode=="paytm"||$data->pay_mode=="ccavenue")&&$data->paid=="no")
             {
                 $msg    =  'Payment to Astro Isha has failed. Kindly check your email for details.';
-                $msgType    = "error";
+                $msgType    = "warning";
                 $app->redirect($link, $msg,$msgType);
             }
 
