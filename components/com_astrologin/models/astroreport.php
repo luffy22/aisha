@@ -9,8 +9,8 @@ class AstrologinModelAstroReport extends JModelItem
         include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
         $geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
         //$ip                           = '117.196.1.11';
-        //$ip                             = '157.55.39.123';  // ip address
-        $ip                       	= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
+        $ip                             = '157.55.39.123';  // ip address
+        //$ip                       	= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
         //$info                         = geoip_country_code_by_name($ip);
         //$country                      = geoip_country_name_by_name($ip);
         
@@ -197,7 +197,7 @@ class AstrologinModelAstroReport extends JModelItem
            }
            else if($pay_mode=="paypal")
            {
-               $app->redirect(JUri::base().'vendor/paypal.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees); 
+               $app->redirect(JUri::base().'vendor/paypal2.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees); 
            }
         }
     }
@@ -284,23 +284,61 @@ class AstrologinModelAstroReport extends JModelItem
            }
         }
     }
+    // paypal authorize Order
+    public function authorizePayment($details)
+    {
+        //print_r($details);exit;
+        $paypal_id              = $details['paypal_id'];
+        $auth_id                = $details['auth_id'];
+        $token                  = $details['token'];
+        $data                   = array();
+        $db                     = JFactory::getDbo();
+        $query                  = $db->getQuery(true);
+        // Fields to update.
+        $object                 = new stdClass();
+        $object->paid           = "yes";
+        $object->UniqueId       = $token;
+        // Update their details in the users table using id as the primary key.
+        $result = JFactory::getDbo()->updateObject('#__question_details', $object, 'UniqueId');
+
+        $columns        = array('paypal_id','authorize_id','status','UniqueID');
+        // Conditions for which records should be updated.
+        $values         = array($db->quote($paypal_id),$db->quote($auth_id),$db->quote('Authorized'),$db->quote($token));
+
+        $query              ->insert($db->quoteName('#__paypal_info'))
+                            ->columns($db->quoteName($columns))
+                            ->values(implode(',', $values));
+        // Set the query using our newly populated query object and execute it
+        $db                 ->setQuery($query);
+        $result             = $db->query();
+
+        $query              ->clear();
+        $query              ->select($db->quoteName(array('a.UniqueID','a.expert_id','a.no_of_ques','a.name','a.email',
+                                        'a.gender','a.dob_tob','a.pob','a.pay_mode','a.order_type','a.fees','a.currency','a.paid','b.paypal_id','b.status')))
+                                ->from($db->quoteName('#__question_details','a'))
+                                ->join('INNER', $db->quoteName('#__paypal_info', 'b') . ' ON (' . $db->quoteName('a.UniqueID').' = '.$db->quoteName('b.UniqueID') . ')')
+                                ->where($db->quoteName('b.paypal_id').'='.$db->quote($paypal_id),' AND '.
+                                        $db->quoteName('a.UniqueID').' = '.$db->quote($token));
+           $db                  ->setQuery($query);
+           $data                = $db->loadObject();
+           //print_r($data);exit;
+           $this->sendMail($data);
+    }
     public function failPayment($details)
     {
-        print_r($details);exit;
+        //print_r($details);exit;
         $token          = $details['token'];
         $db         = JFactory::getDbo();
         $query      = $db->getQuery(true);
-        $query              ->select($db->quoteName(array('a.UniqueID','a.expert_id','a.no_of_ques','a.name','a.email',
-                                        'a.gender','a.dob_tob','a.pob','a.pay_mode','a.order_type','a.fees','a.currency','a.paid','c.username')))
-                             ->select($db->quoteName('c.name','expertname'))  
-                             ->select($db->quoteName('c.email','expertemail'))
+        $query              ->select($db->quoteName(array('a.UniqueID','a.name','a.email',
+                                        'a.gender','a.dob_tob','a.pob','a.pay_mode','a.order_type','a.fees','a.currency','a.paid')))
                                 ->from($db->quoteName('#__question_details','a'))
-                                ->join('RIGHT', $db->quoteName('#__users', 'c').' ON ('.$db->quoteName('c.id').' = '.$db->quoteName('a.expert_id').')')
                                 ->where($db->quoteName('a.UniqueID').'='.$db->quote($token));
-           $db                  ->setQuery($query);
-           $data                = $db->loadObject();
-        $this->sendMail($data);
+        $db                  ->setQuery($query);
+        $data                = $db->loadObject();
+        $this->sendFailMail($data);
     }
+    
     public function confirmCCPayment($details)
     {
         //print_r($details);exit;
@@ -362,6 +400,7 @@ class AstrologinModelAstroReport extends JModelItem
         //print_r($data);exit;
         $this->sendMail($data);
     }
+
     protected function sendMail($data)
     {
         //print_r($data);exit;
@@ -387,42 +426,38 @@ class AstrologinModelAstroReport extends JModelItem
         $subject    = "AstroIsha ".ucfirst($data->order_type)." Report: ".$data->UniqueID;
         $mailer     ->setSubject($subject);
 
-            $body       .= "<p>Dear ".$data->name.",</p>";
-            if($data->paid=="no")
-            {
-                    $body       .= "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your online payment to AstroIsha(https://www.astroisha.com) has failed. Kindly retry again if you wish your an answer to your questions. If you have cancelled the order thn ignore this email.</p>";
-            }
-            else if($data->paid =="yes")
-            {
-                    $body       .= "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your online payment to AstroIsha(https://www.astroisha.com) is successful. Your report would be completed and mailed to you in 15-20 working days.</p><br/>"; 
-            }
-            else
-            {
-                    $body       .= "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your online payment to AstroIsha(https://www.astroisha.com) has failed. Kindly retry again if you wish your an answer to your questions. If you have cancelled the order than kindly ignore this email.</p>";
-            }
+        $body       .= "<p>Dear ".$data->name.",</p>";
+        if($data->paid =="yes")
+        {
+                $body       .= "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your online payment to AstroIsha(https://www.astroisha.com) is successful. Your report would be completed and mailed to you in 15-20 working days.</p><br/>"; 
+        }
+        else
+        {
+                $body       .= "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your online payment to AstroIsha(https://www.astroisha.com) has failed. Kindly retry again if you wish your an answer to your questions. If you have cancelled the order than kindly ignore this email.</p>";
+        }
         $body           .= "<p><strong>Details Of Your Order Are As Below: </strong></p>";
         $body           .= "<p>Order ID: ".$data->UniqueID."</p>";
 
-            if($data->order_type == "yearly")
-            {
-                    $body 			.= "<p>Order Type: Yearly Report</p>";
-            }
-            else if($data->order_type == "life")
-            {
-                    $body 			.= "<p>Order Type: Life Report</p>";
-            }
-            else if($data->order_type == "career")
-            {
-                    $body 			.= "<p>Order Type: Career Report</p>";
-            }
-            else if($data->order_type == "marriage")
-            {
-                    $body 			.= "<p>Order Type: Marriage Reort</p>";
-            }
-            else
-            {
-                    $body 			.= "<p>Order Type: Life Report</p>";
-            }
+        if($data->order_type == "yearly")
+        {
+                $body 			.= "<p>Order Type: Yearly Report</p>";
+        }
+        else if($data->order_type == "life")
+        {
+                $body 			.= "<p>Order Type: Life Report</p>";
+        }
+        else if($data->order_type == "career")
+        {
+                $body 			.= "<p>Order Type: Career Report</p>";
+        }
+        else if($data->order_type == "marriage")
+        {
+                $body 			.= "<p>Order Type: Marriage Reort</p>";
+        }
+        else
+        {
+                $body 			.= "<p>Order Type: Life Report</p>";
+        }
 
         $order_link           = "https://www.astroisha.com/read-report?order=".$data->UniqueID."&ref=".$data->email;
         $body               .= "<p>Once your report is finished you would be notified via email. You can view your report here: <a href='".$order_link."' title='Click to get report'>Click For Report</a></p><br/>";
@@ -437,12 +472,7 @@ class AstrologinModelAstroReport extends JModelItem
         $body           .= "<p>Fees: ".$data->fees."&nbsp;".$data->currency."</p>";
         $body           .= "<p>Payment Via: ".$data->pay_mode."</p>";
 
-        if(($data->pay_mode=="paytm"||$data->pay_mode=="ccavenue"||$data->pay_mode=="paypal")&&$data->paid=="no")
-        {
-            $body       .= "<p>Payment Status: </strong>Failed</p>";
-
-        }
-        else if(($data->pay_mode=="paytm"||$data->pay_mode=="ccavenue")&&$data->paid=="yes")
+        if(($data->pay_mode=="paytm"||$data->pay_mode=="ccavenue")&&$data->paid=="yes")
         {
             $body       .= "<p>Payment Status: Success</p>";
             $body       .= "<p>Payment Id: ".$data->track_id."</p>";
@@ -452,19 +482,14 @@ class AstrologinModelAstroReport extends JModelItem
         }
         else if($data->pay_mode=="paypal"&&$data->paid=="yes")
         {
-            $body       .= "<p>Payment Status: Success</p>";
-            $body       .= "<p>Payment Id: ".$data->paypal_id."</p>";
             $body       .= "<p>Payment Status: ".$data->status."</p>";
+            $body       .= "<p>Your payment is safe with paypal. AstroIsha would only ask for credit after we have finished your order and mailed it to you.</p>";
             $body       .= "<br/><p><strong>Please keep this email as reference. Alternatively you can also print this email for future reference.</strong></p>";
             $body       .= "<p><strong>In case the order is not completed in ten working days you would be refunded full amount back into your bank account.</strong></p><br/>";
         }
         else
         {
-            $body       .= "<p>Payable To: Astro Isha</p>";
-            $body       .= "<p>Account Number: 915020051554614</p>";
-            $body       .= "<p>Bank Name: Axis Bank</p>";
-            $body       .= "<p>IFSC Code: UTIB0000080</p>";
-            $body       .= "<p>Swift Code: AXISINBB080</p>";
+            $body       .= "Something went wrong. Please contact the administrator at admin@astroisha.com";
         }
 
         $body           .= "<p>Admin At Astro Isha,<br/>Rohan Desai</p>";
@@ -481,37 +506,63 @@ class AstrologinModelAstroReport extends JModelItem
         } 
         else 
         {
-            if(($data->pay_mode=="paytm"||$data->pay_mode=="ccavenue")&&$data->paid=="yes")
+            if(($data->pay_mode=="paytm"||$data->pay_mode=="ccavenue"||$data->pay_mode=="paypal")&&$data->paid=="yes")
             {
                 $msg    =  'Payment to Astro Isha is successful. Please check your email to see payment details.';
-                $msgType    = "success";
-                $app->redirect($link, $msg,$msgType);
-            }
-            else if(($data->pay_mode=="paytm"||$data->pay_mode=="ccavenue")&&$data->paid=="no")
-            {
-                $msg    =  'Payment to Astro Isha has failed. Kindly check your email for details.';
-                $msgType    = "warning";
-                $app->redirect($link, $msg,$msgType);
-            }
-
-            else if($data->pay_mode=="paypal"&&$data->paid=="no")
-            {
-                $msg    =  'Payment via Paypal has failed. Kindly check your email for details.';
-                $msgType    = "error";
-                $app->redirect($link, $msg,$msgType);
-            }
-            else if($data->pay_mode=="paypal"&&$data->paid=="yes")
-            {
-                $msg    =  'Payment via Paypal is successfull. Please check your email to see payment details.';
                 $msgType    = "success";
                 $app->redirect($link, $msg,$msgType);
             }
             else
             {
                 $msg    =  'Please check your email for more information about payment.';
-                $msgType    = "success";
+                $msgType    = "warning";
                 $app->redirect($link, $msg,$msgType);
             }
         }        
     }
+    protected function sendFailMail($data)
+    {
+        //print_r($data);exit;
+        $token      = $data->UniqueID;
+        //print_r($data);exit;
+        $mailer     = JFactory::getMailer();
+        $config     = JFactory::getConfig();
+        $app        = JFactory::getApplication(); 
+        $body       = "";
+        $sender     = array(
+                        $config->get('mailfrom'),
+                        $config->get('fromname')
+                            );
+
+        $mailer     ->setSender($sender);
+        $recepient  = array($data->email);
+        $mailer     ->addRecipient($recepient);
+        $mailer     ->addBcc('kopnite@gmail.com');
+        $mailer     ->addBcc('consult@astroisha.com');
+        $subject    = "AstroIsha ".ucfirst($data->order_type)." Report: ".$data->UniqueID;
+        $mailer     ->setSubject($subject);
+        $body       = "";
+        $body       .= "<p>Dear ".$data->name.",</p>";
+        $body       .= "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your online payment to AstroIsha(https://www.astroisha.com) has failed. If you have cancelled the order than kindly ignore this email.</p>";
+        $body           .= "<p>Admin At Astro Isha,<br/>Rohan Desai</p>";
+        $mailer->isHtml(true);
+        $mailer->Encoding = 'base64';
+        $mailer->setBody($body);
+
+        $send = $mailer->Send();
+        $link       = JUri::base().'read-report?order='.$token.'&ref='.$data->email;
+        if ( $send !== true ) {
+            $msg    = 'Error sending email: Try again and if problem continues contact admin@astroisha.com.';
+            $msgType = "warning";
+            $app->redirect($link, $msg,$msgType);
+        } 
+        else 
+        {
+            $msg    =  'Payment has failed. Please check your email.';
+            $msgType    = "warning";
+            $app->redirect($link, $msg,$msgType);
+        }
+        
+    }
+    
 }

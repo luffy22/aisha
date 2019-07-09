@@ -5,7 +5,7 @@ class AstrologinControllerAstroReport extends AstroLoginController
 {
     public function submitReport()
     { 
-         if(isset($_POST['report_submit']))
+        if(isset($_POST['report_submit']))
         {
             $report_type        = $_POST['select_report'];
             $fees               = $_POST['report_final_fees'];
@@ -29,8 +29,7 @@ class AstrologinControllerAstroReport extends AstroLoginController
             $dob            = $_POST['report_dob'];
             $pob            = $_POST['report_pob'];
             $tob            = $_POST['report_time'];
-            
-            
+                       
             $details    = array(
                                 "type"=>$report_type,"fees"=>$fees,
                                 "currency"=>$currency,"pay_mode"=>$pay_mode,
@@ -75,16 +74,20 @@ class AstrologinControllerAstroReport extends AstroLoginController
     public function confirmPayment()
     {
         $id             = $_GET['id'];
-        $auth_id       = $_GET['auth_id'];
+        $auth_id        = $_GET['auth_id'];
         $token          = $_GET['token'];
         $details        = array("paypal_id"=>$id,"auth_id"=>$auth_id,"token"=>$token);
-        $model          = $this->getModel('astroask');  // Add the array to model
+        //print_r($details);exit;
+        $model          = $this->getModel('astroreport');  // Add the array to model
         $model          ->authorizePayment($details);
     }
     public function failPayment()
     {
-        $token              = $_GET['token'];
-        $details        = array("token"=>$token);
+        $token          = $_GET['token'];
+        $email          = $_GET['email'];
+        $status         = $_GET['status'];
+        $details        = array("token"=>$token,"email"=>$email,"status"=>$status);
+        //print_r($details);exit;
         $model          = $this->getModel('astroreport');  // Add the array to model
         $model          ->failPayment($details);
     }

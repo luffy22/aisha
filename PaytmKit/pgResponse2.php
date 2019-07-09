@@ -34,11 +34,11 @@ if($isValidChecksum == "TRUE") {
 	else {
             //echo $_POST['STATUS'];exit;
 		$txnid          = $_POST['TXNID'];
-                $order          = str_replace("order_","token_",$_POST['ORDERID']);
+                $order          = $_POST['ORDERID'];
                 $bank_ref       = $_POST['BANKTXNID'];
                 $status         = $_POST['STATUS'];
-                header("Location: https://www.astroisha.com/index.php?option=com_astrologin&task=astroreport.confirmCCPayment&track_id=".$txnid.
-                        "&token=".$order."&bank_ref=".$bank_ref."&status=".$status);
+                header("Location: https://www.astroisha.com/index.php?option=com_astrologin&task=astroreport.failPayment&track_id=".$txnid.
+                        "&token=".$order."&status=".$status);
 	}
 
 	if (isset($_POST) && count($_POST)>0 )

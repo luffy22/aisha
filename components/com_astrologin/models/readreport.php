@@ -21,7 +21,7 @@ class AstrologinModelReadReport extends JModelItem
                         ->where($db->quoteName('a.UniqueID').' = '.$db->quote($order));
         $db                  ->setQuery($query);
         $result1         = $db->loadObject();
-        //print_r($result);exit;
+        //print_r($result1);exit;
         return $result1;
     }
     function getOrder()

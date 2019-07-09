@@ -5,13 +5,10 @@ if(isset($_GET['order']))
 {
     $order      = $_GET['order'];
 }
-if(isset($_GET['ref']))
+if(isset($_GET['payment']))
 {
-    $refemail   = $_GET['ref'];
+    $payment   = $_GET['payment'];
 }
-  
-$jinput             = JFactory::getApplication()->input;
-$jinput->set('order',  $order, 'string');
-?>
-<h3>Get Answer</h3>
+ ?>
+<h3><i class='fas fa-warning fa-2x'></i> Your order has been cancelled. Please try again.</h3>
 
