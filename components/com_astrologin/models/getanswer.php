@@ -39,4 +39,19 @@ class AstrologinModelGetAnswer extends JModelItem
         //print_r($result);exit;
         return $result;
     }
+    function getSummary()
+    {
+        $jinput             = JFactory::getApplication()->input;
+        $order              = $jinput->get('order', 'default_value', 'string');
+        
+        $db                 = JFactory::getDbo();  // Get db connection
+        $query              = $db->getQuery(true);
+        $query              ->select($db->quoteName('summary_txt'));
+        $query              ->from($db->quoteName('#__question_summary'));
+        $query              ->where($db->quoteName('order_id').' = '.$db->quote($order));
+        $db                  ->setQuery($query);
+        $result         = $db->loadObject();
+        //print_r($result);exit;
+        return $result;
+    }
 }

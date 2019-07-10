@@ -41,9 +41,8 @@ $pay_mode               = $_GET['pay_mode'];
     <input type="text" id="ques_pob" name="ques_pob" class="form-control" placeholder="Enter full name of city/town, state, country" />
 </div>
 <div class="form-group">
-    <button type="reset" class="btn btn-danger">Reset</button>
-        <button class="btn btn-primary" type="submit">Submit Details
-            </button>
+   <button type="reset" class="btn btn-danger">Reset</button>
+        <button class="btn btn-primary" type="submit">Submit Details</button>
 </div>
 </form>
 

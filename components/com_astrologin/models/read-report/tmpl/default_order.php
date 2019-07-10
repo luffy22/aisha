@@ -8,7 +8,7 @@ if(isset($_GET['ref']))
 {
     $refemail   = $_GET['ref'];
 }
- //print_r($this->order);exit;
+ print_r($this->order);exit;
 ?>
 <p class="text-right"><a href="<?php echo JUri::base(); ?>getorder?order=<?php echo $this->order->UniqueID ?>&ref=<?php echo $this->order->email; ?>"><i class="fas fa-shopping-cart"></i> Your Orders</a></p>
 <div class="mb-3"></div>
@@ -34,7 +34,7 @@ if(isset($_GET['ref']))
     <li class="list-group-item">Date Of Birth: <?php echo $date->format('d-m-Y'); ?></li>
     <li class="list-group-item">Time Of Birth: <?php echo $date->format('h:i:s a');?></li>
     <li class="list-group-item">Place Of Birth: <?php echo $this->order->pob; ?></li>
-    <li class="list-group-item">Answer Type: <?php if($this->order->order_type=="short_ans"){echo "Short Answer";}else{echo "Detailed Report";} ?></li>
+    <li class="list-group-item">Order Type: <?php if($this->order->order_type=="career"){echo "Career Report";}else{echo "Detailed Report";} ?></li>
   </ul>
 <div class="mb-4"></div>
 <?php
