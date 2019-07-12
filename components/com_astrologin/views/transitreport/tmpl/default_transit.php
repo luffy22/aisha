@@ -5,7 +5,7 @@ $order_type             = $_GET['order_type'];
 //echo $uniq_id."<br/>";
 //echo $order_type;exit;
 ?>
-<div class="lead alert alert-dark">Kindly share your details</div>
+<div class="lead alert alert-dark">Anything else you wish to ask?</div>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;Filling these details would allow us to know more about problems you face. 
  Also it means we don't have to do guess work and can focus on solving your issues better.</p>
 <form id="ques_form" role="form" enctype="application/x-www-form-urlencoded" method="post" 
@@ -14,20 +14,18 @@ $order_type             = $_GET['order_type'];
 <input type="hidden" name="order_type" id="order_type" value="<?php echo $order_type; ?>" />
 <div class="mb-3"></div>
 <div class="form-group">
-    <label for="query_about">Status</label>
+    <label for="query_about">What's the query about?</label>
     <select name="query_about" id="query_about" class="form-control">
-        <option value="unmarried">Unmarried</option>
-        <option value="married">Married</option>
-        <option value="gay">Gay/Lesbian</option>
-        <option value="divorce">Divorcee</option>
-        <option value="multiple_divorces">Multiple Divorcee</option>
-        <option value="widower">Widower</option>
+        <option value="marriage">Marriage</option>
+        <option value="divorce">Divorce</option>
+        <option value="career">Career</option>
+        <option value="education">Education</option>
+        <option value="finance">Finance</option>
         <option value="other">Other</option>
     </select>
 </div><div class="mb-3"></div>
-<p></p>
 <div class="form-group">
-    <label for="query_explain">Please explain in detail</label>
+    <label for="query_explain">Explain in detail</label>
     <textarea name="query_explain" id="query_explain" rows="10" class="form-control"></textarea>
 </div>
 <div class="form-group">

@@ -2,21 +2,21 @@
 defined('_JEXEC') or die;  // No direct Access
 // import Joomla modelitem library
 jimport('joomla.application.component.modelitem');
-class AstrologinModelAstroReport extends JModelItem
+class AstrologinModelTransitReport extends JModelItem
 {
     public function getData()
     {
-        include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
-        $geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
-        //$ip                           = '117.196.1.11';
+        //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
+        //$geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
+        $ip                           = '117.196.1.11';
         //$ip                             = '157.55.39.123';  // ip address
-        $ip                       		= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
-        //$info                         = geoip_country_code_by_name($ip);
-        //$country                      = geoip_country_name_by_name($ip);
+        //$ip                       		= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
+        $info                         = geoip_country_code_by_name($ip);
+        $country                      = geoip_country_name_by_name($ip);
         
-        $location               	= $geoip->lookupLocation($ip);
-        $info                   	= $location->countryCode;
-        $country                	= $location->countryName;
+        //$location               	= $geoip->lookupLocation($ip);
+        //$info                   	= $location->countryCode;
+        //$country                	= $location->countryName;
         $u_id           = '222';
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
@@ -38,10 +38,9 @@ class AstrologinModelAstroReport extends JModelItem
     }
     public function getCurrencyDetails($info, $u_id)
     {
-        $service1       = 'yearly';
-        $service2       = 'life';
-        $service3       = 'career';
-        $service4       = 'marriage';
+        $service1       = 'saturn';
+        $service2       = 'rahu';
+        $service3       = 'jupiter';
         $country_code       = array("IN","US","UK","NZ","AU","SG","CA","RU");
         if($info=='FR'||$info=='DE'||$info=='IE'||$info=='NL'||$info=='CR'||$info=='BE'
                 ||$info=='GR'||$info=='IT'||$info=='PT'||$info=='ES'||$info=='MT'||$info=='LV'||$info=='TR')
@@ -67,8 +66,6 @@ class AstrologinModelAstroReport extends JModelItem
                                             $db->quoteName('service_for_charge').' = '.$db->quote($service2).' AND '.
                                             $db->quoteName('country').' = '.$db->quote($info).' OR '.
                                             $db->quoteName('service_for_charge').' = '.$db->quote($service3).' AND '.
-                                            $db->quoteName('country').' = '.$db->quote($info).' OR '.
-                                            $db->quoteName('service_for_charge').' = '.$db->quote($service4).' AND '.
                                             $db->quoteName('country').' = '.$db->quote($info));
         $db                 ->setQuery($query);
         $result             = $db->loadAssocList();
@@ -76,7 +73,7 @@ class AstrologinModelAstroReport extends JModelItem
     }
     public function insertDetails($details)
     {
-              //print_r($details);exit;
+        print_r($details);exit;
         $app                = JFactory::getApplication();
         $token              = uniqid('report_');
         $name               = ucfirst($details['name']);
@@ -207,89 +204,6 @@ class AstrologinModelAstroReport extends JModelItem
            else if($pay_mode=="paypal")
            {
                $app->redirect(JUri::base().'vendor/paypal2.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees); 
-           }
-        }
-    }
-    public function insertDetails3($details)
-    {
-        //print_r($details);exit;
-        $query_about_1          = $details['career_about'];
-        $query_explain_1        = $details['career_explain'];
-        $query_about_2          = $details['marriage_about'];
-        $query_explain_2        = $details['marriage_explain'];
-        $query_about_3          = $details['other_about'];
-        $query_explain_3        = $details['other_explain'];
-        $app                    = JFactory::getApplication();
-        $db                     = JFactory::getDbo();  // Get db connection
-        $query                  = $db->getQuery(true);
-        for($i=1; $i< 4;$i++)
-        {
-            $order_id           = $details['order_id'];
-            $order_type         = $details['order_type'];
-            $query_about        = ${"query_about_".$i};
-            $query_explain      = ${"query_explain_".$i};
-            //echo $order_id." ".$order_type." ".$query_about." ".$query_explain;exit;
-            $columns                = array('order_id','order_type','query_about','query_explain'
-                                    );
-            $values                 = array(
-                                        $db->quote($order_id),$db->quote($order_type),$db->quote($query_about),
-                                        $db->quote($query_explain)
-                                    );
-            // Prepare the insert query
-            $query              ->insert($db->quoteName('#__order_queries'))
-                                ->columns($db->quoteName($columns))
-                                ->values(implode(',', $values));
-            // Set the query using our newly populated query object and execute it
-            $db             ->setQuery($query);
-            $result          = $db->query();$query->clear();unset($result);
-        }
-        $columns            = array('order_id');
-        $values             = array($db->quote($order_id));
-        // Prepare the insert query
-        $query              ->insert($db->quoteName('#__order_reports'))
-                            ->columns($db->quoteName($columns))
-                            ->values(implode(',', $values));
-        // Set the query using our newly populated query object and execute it
-        $db                 ->setQuery($query);
-        $result             = $db->query();unset($result);
-        $query              ->clear();
-        $columns            = array('order_id');
-        $values             = array($db->quote($order_id));
-        // Prepare the insert query
-        $query          ->insert($db->quoteName('#__order_summary'))
-                        ->columns($db->quoteName($columns))
-                        ->values(implode(',', $values));
-        // Set the query using our newly populated query object and execute it
-        $db             ->setQuery($query);
-        $result          = $db->query();
-        if($result)
-        {
-            $query              -> clear();
-            $query              ->select($db->quoteName(array('UniqueID','name','email',
-                                        'pay_mode','fees','currency')))
-                                ->from($db->quoteName('#__question_details'))
-                                ->where($db->quoteName('UniqueID').'='.$db->quote($order_id));
-           $db                  ->setQuery($query);
-           $row                 = $db->loadAssoc();
-           //print_r($row);exit;
-           $token               = $row['UniqueID'];
-           $name                = str_replace(" ","_",$row['name']);
-           $email               = $row['email'];
-           $currency            = $row['currency'];
-           $fees                = $row['fees'];
-           $pay_mode            = $row['pay_mode'];
-           //echo $pay_mode;exit;
-           if($pay_mode == "ccavenue")
-           {
-                $app->redirect(JUri::base().'ccavenue/nonseam/ccavenue_payment2.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
-           }
-           else if($pay_mode == "paytm")
-           {
-                $app->redirect(JUri::base().'PaytmKit/TxnTest2.php?token='.$token.'&email='.$email.'&fees='.$fees); 
-           }
-           else if($pay_mode=="paypal")
-           {
-               $app->redirect(JUri::base().'vendor/paypal.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees); 
            }
         }
     }

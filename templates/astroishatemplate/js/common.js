@@ -306,6 +306,33 @@ function changefees3()
     document.getElementById("fees_id").innerHTML    = fees+"<html>&nbsp;</html>"+curr_code+"("+currency+"-"+curr_full+")"
     document.getElementById("report_final_fees").value    = fees;
 }
+function changefees4()
+{
+    var saturn_fees     = document.getElementById("saturn_fees").value;
+    var rahu_fees       = document.getElementById("rahu_fees").value;
+    var jupiter_fees     = document.getElementById("jupiter_fees").value;
+    if(document.getElementById("transit_report").value == "saturn")
+    {
+        var fees        = saturn_fees;
+    }
+    else if(document.getElementById("transit_report").value == "rahu")
+    {
+        var fees        = rahu_fees;
+    }
+    else if(document.getElementById("transit_report").value == "jupiter")
+    {
+        var fees        = jupiter_fees;
+    }
+    else
+    {
+        var fees        = document.getElementById("transit_fees").value;
+    }
+    var curr_code       = document.getElementById("transit_curr_code").value;
+    var currency        = document.getElementById("transit_currency").value;
+    var curr_full       = document.getElementById("transit_curr_full").value;
+    document.getElementById("fees_id").innerHTML    = fees+"<html>&nbsp;</html>"+curr_code+"("+currency+"-"+curr_full+")"
+    document.getElementById("transit_final_fees").value    = fees;
+}
 function getExpertDetails(country)
 {
     var expert      = document.getElementById("select_expert").value;
