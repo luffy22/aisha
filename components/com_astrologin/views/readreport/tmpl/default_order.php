@@ -11,7 +11,6 @@ if(isset($_GET['ref']))
 //print_r($this->order);
 //print_r($this->details);exit;
 ?>
-<p class="text-right"><a href="<?php echo JUri::base(); ?>getorder?order=<?php echo $this->details->UniqueID ?>&ref=<?php echo $this->details->email; ?>"><i class="fas fa-shopping-cart"></i> Your Orders</a></p>
 <div class="mb-3"></div>
     <div class="lead alert alert-dark">Order Details</div>
    <ul class="list-group">

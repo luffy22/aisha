@@ -27,41 +27,20 @@ class AstroLoginViewTransitReport extends JViewLegacy
         {
              $tpl       = 'details';
         }
-        else if((!empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['order_type'])) && $_GET['order_type'] == 'yearly')
+        else if((!empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['order_type'])) && ($_GET['order_type'] == 'saturn'
+                || $_GET['order_type'] == 'rahu' || $_GET['order_type'] == 'jupiter'))
         {
-            $tpl                = 'yearly';
+            $tpl                = 'transit';
         }
        
-        else if((empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['order_type'])) && $_GET['order_type'] == 'yearly')
+         else if((!empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['order_type'])) && ($_GET['order_type'] == 'saturn'
+                || $_GET['order_type'] == 'rahu' || $_GET['order_type'] == 'jupiter'))
         {
-            $tpl                = 'yearly';
+            $tpl                = 'transit';
         }
-        else if((!empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['order_type'])) && $_GET['order_type'] == 'career')
+        else
         {
-            $tpl                = 'career';
-        }
-       
-        else if((empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['order_type'])) && $_GET['order_type'] == 'career')
-        {
-            $tpl                = 'career';
-        }
-         else if((!empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['order_type'])) && $_GET['order_type'] == 'marriage')
-        {
-            $tpl                = 'marriage';
-        }
-       
-        else if((empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['order_type'])) && $_GET['order_type'] == 'marriage')
-        {
-            $tpl                = 'marriage';
-        }
-        else if((!empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['order_type'])) && $_GET['order_type'] == 'life')
-        {
-            $tpl                = 'life';
-        }
-       
-        else if((empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['order_type'])) && $_GET['order_type'] == 'life')
-        {
-            $tpl                = 'life';
+            $tpl                = null;
         }
         parent::display($tpl);
     }

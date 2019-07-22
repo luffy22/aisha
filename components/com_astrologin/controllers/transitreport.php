@@ -50,7 +50,7 @@ class AstrologinControllerTransitReport extends AstroLoginController
         $details            = array("order_id" =>$order_id, "order_type"=>$order_type,
                                     "query_about"=>$query_about,"details_explain" => $yearly_explain);
         //print_r($details);exit;
-        $model          = $this->getModel('astrotransit');  // Add the array to model
+        $model          = $this->getModel('transitreport');  // Add the array to model
         $model->insertDetails2($details);
     }
     public function fillDetails3()

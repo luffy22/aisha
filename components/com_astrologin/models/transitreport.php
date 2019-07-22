@@ -6,17 +6,17 @@ class AstrologinModelTransitReport extends JModelItem
 {
     public function getData()
     {
-        //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
-        //$geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
-        $ip                           = '117.196.1.11';
+        include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
+        $geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
+        //$ip                           = '117.196.1.11';
         //$ip                             = '157.55.39.123';  // ip address
-        //$ip                       		= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
-        $info                         = geoip_country_code_by_name($ip);
-        $country                      = geoip_country_name_by_name($ip);
+        $ip                       		= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
+        //$info                         = geoip_country_code_by_name($ip);
+        //$country                      = geoip_country_name_by_name($ip);
         
-        //$location               	= $geoip->lookupLocation($ip);
-        //$info                   	= $location->countryCode;
-        //$country                	= $location->countryName;
+        $location               	= $geoip->lookupLocation($ip);
+        $info                   	= $location->countryCode;
+        $country                	= $location->countryName;
         $u_id           = '222';
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
@@ -73,7 +73,7 @@ class AstrologinModelTransitReport extends JModelItem
     }
     public function insertDetails($details)
     {
-        print_r($details);exit;
+        //print_r($details);exit;
         $app                = JFactory::getApplication();
         $token              = uniqid('report_');
         $name               = ucfirst($details['name']);
@@ -97,11 +97,11 @@ class AstrologinModelTransitReport extends JModelItem
         $ques_ask_date      = $date1->format('Y-m-d H:i:s');
         $db                 = JFactory::getDbo();  // Get db connection
         $query              = $db->getQuery(true);
-        $columns            = array('UniqueID','expert_id','no_of_ques','fees','currency','pay_mode','name','email','gender', 'dob_tob', 
+        $columns            = array('UniqueID','expert_id', 'fees','currency','pay_mode','name','email','gender', 'dob_tob', 
                                     'pob','order_type','ques_ask_date'
                             );
         $values         = array(
-                                $db->quote($token),$db->quote($expert_id),$db->quote($no_of_ques),
+                                $db->quote($token),$db->quote($expert_id),
                                 $db->quote($fees),$db->quote($currency),$db->quote($pay_mode),
                                 $db->quote($name), $db->quote($email),$db->quote($gender), 
                                 $db->quote($dob_tob),$db->quote($pob),$db->quote($ques_type),$db->quote($ques_ask_date)
@@ -124,13 +124,13 @@ class AstrologinModelTransitReport extends JModelItem
             $details        = $db->loadAssoc();
             $uniqID         = $details['UniqueID'];
             $order_type     = $details['order_type'];       
-            $app            ->redirect(JUri::base().'order-report?uniq_id='.$uniqID.'&order_type='.$order_type);
+            $app            ->redirect(JUri::base().'transitreport?uniq_id='.$uniqID.'&order_type='.$order_type);
         }
         else
         {
             $msg            = "Something went wrong. Please try again.";
             $type           = "warning";
-            $app            ->redirect(Juri::base().'order-report',$msg,$type);
+            $app            ->redirect(Juri::base().'transitreport',$msg,$type);
         }
     }
     public function insertDetails2($details)
@@ -195,7 +195,7 @@ class AstrologinModelTransitReport extends JModelItem
            //echo $pay_mode;exit;
            if($pay_mode == "ccavenue")
            {
-                $app->redirect(JUri::base().'ccavenue/nonseam/ccavenue_payment2.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
+                $app->redirect(JUri::base().'ccavenue/nonseam/ccavenue_payment3.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
            }
            else if($pay_mode == "paytm")
            {
@@ -203,7 +203,7 @@ class AstrologinModelTransitReport extends JModelItem
            }
            else if($pay_mode=="paypal")
            {
-               $app->redirect(JUri::base().'vendor/paypal2.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees); 
+               $app->redirect(JUri::base().'vendor/paypal3.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees); 
            }
         }
     }

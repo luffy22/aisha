@@ -6,15 +6,15 @@ $order_type             = $_GET['order_type'];
 //echo $order_type;exit;
 ?>
 <div class="lead alert alert-dark">Anything else you wish to ask?</div>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;Filling these details would allow us to know more about problems you face. 
- Also it means we don't have to do guess work and can focus on solving your issues better.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;If you wish to know if transit is favorable or not. Example for getting married or 
+for finding a job.</p>
 <form id="ques_form" role="form" enctype="application/x-www-form-urlencoded" method="post" 
-      action="<?php echo JRoute::_('index.php?option=com_astrologin&task=astroreport.fillDetails2'); ?>">
+      action="<?php echo JRoute::_('index.php?option=com_astrologin&task=transitreport.fillDetails2'); ?>">
 <input type="hidden" name="order_id" id="order_id" value="<?php echo $uniq_id; ?>" />
 <input type="hidden" name="order_type" id="order_type" value="<?php echo $order_type; ?>" />
 <div class="mb-3"></div>
 <div class="form-group">
-    <label for="query_about">What's the query about?</label>
+    <label for="query_about">Subject?</label>
     <select name="query_about" id="query_about" class="form-control">
         <option value="marriage">Marriage</option>
         <option value="divorce">Divorce</option>
