@@ -68,7 +68,7 @@ class AstrologinControllerTransitReport extends AstroLoginController
                                     "marriage_about"=>$marriage_about, "marriage_explain"=>$marriage_explain,
                                     "career_about"=>$career_about,"career_explain"=>$career_explain);
         //print_r($details);exit;
-        $model          = $this->getModel('astroreport');  // Add the array to model
+        $model          = $this->getModel('transitreport');  // Add the array to model
         $model->insertDetails3($details);
     }
     public function confirmPayment()
@@ -78,7 +78,7 @@ class AstrologinControllerTransitReport extends AstroLoginController
         $token          = $_GET['token'];
         $details        = array("paypal_id"=>$id,"auth_id"=>$auth_id,"token"=>$token);
         //print_r($details);exit;
-        $model          = $this->getModel('astroreport');  // Add the array to model
+        $model          = $this->getModel('transitreport');  // Add the array to model
         $model          ->authorizePayment($details);
     }
     public function failPayment()
@@ -88,7 +88,7 @@ class AstrologinControllerTransitReport extends AstroLoginController
         $status         = $_GET['status'];
         $details        = array("token"=>$token,"email"=>$email,"status"=>$status);
         //print_r($details);exit;
-        $model          = $this->getModel('astroreport');  // Add the array to model
+        $model          = $this->getModel('transitreport');  // Add the array to model
         $model          ->failPayment($details);
     }
     public function confirmCCPayment()
@@ -108,7 +108,7 @@ class AstrologinControllerTransitReport extends AstroLoginController
         
         $details        = array("token"=>$token,"trackid"=>$track_id,"bankref"=>$bank_ref,"status"=>$status);
         //print_r($details);exit;
-        $model          = $this->getModel('astroreport');  // Add the array to model
+        $model          = $this->getModel('transitreport');  // Add the array to model
         $model          ->confirmCCPayment($details);
     }
     

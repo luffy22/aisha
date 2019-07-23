@@ -6,17 +6,17 @@ class AstrologinModelTransitReport extends JModelItem
 {
     public function getData()
     {
-        //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
-        //$geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
-        $ip                           = '117.196.1.11';
+        include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
+        $geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
+        //$ip                           = '117.196.1.11';
         //$ip                             = '157.55.39.123';  // ip address
-        //$ip                       		= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
-        $info                         = geoip_country_code_by_name($ip);
-        $country                      = geoip_country_name_by_name($ip);
+        $ip                       		= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
+        //$info                         = geoip_country_code_by_name($ip);
+        //$country                      = geoip_country_name_by_name($ip);
         
-        //$location               	= $geoip->lookupLocation($ip);
-        //$info                   	= $location->countryCode;
-        //$country                	= $location->countryName;
+        $location               	= $geoip->lookupLocation($ip);
+        $info                   	= $location->countryCode;
+        $country                	= $location->countryName;
         $u_id           = '222';
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
@@ -199,7 +199,7 @@ class AstrologinModelTransitReport extends JModelItem
            }
            else if($pay_mode == "paytm")
            {
-                $app->redirect(JUri::base().'PaytmKit/TxnTest2.php?token='.$token.'&email='.$email.'&fees='.$fees); 
+                $app->redirect(JUri::base().'PaytmKit/TxnTest3.php?token='.$token.'&email='.$email.'&fees='.$fees); 
            }
            else if($pay_mode=="paypal")
            {
@@ -360,28 +360,8 @@ class AstrologinModelTransitReport extends JModelItem
         }
         $body           .= "<p><strong>Details Of Your Order Are As Below: </strong></p>";
         $body           .= "<p>Order ID: ".$data->UniqueID."</p>";
-
-        if($data->order_type == "yearly")
-        {
-                $body 			.= "<p>Order Type: Yearly Report</p>";
-        }
-        else if($data->order_type == "life")
-        {
-                $body 			.= "<p>Order Type: Life Report</p>";
-        }
-        else if($data->order_type == "career")
-        {
-                $body 			.= "<p>Order Type: Career Report</p>";
-        }
-        else if($data->order_type == "marriage")
-        {
-                $body 			.= "<p>Order Type: Marriage Reort</p>";
-        }
-        else
-        {
-                $body 			.= "<p>Order Type: Life Report</p>";
-        }
-
+		$body 			.= "<p>Order Type: ".ucfirst($data->order_type)." Report</p>";
+        
         $order_link           = "https://www.astroisha.com/read-report?order=".$data->UniqueID."&ref=".$data->email;
         $body               .= "<p>Once your report is finished you would be notified via email. You can view your report here: <a href='".$order_link."' title='Click to get report'>Click For Report</a></p><br/>";
         $body           .= "<p><strong>Below Are Your Personal Details: </strong></p>";
