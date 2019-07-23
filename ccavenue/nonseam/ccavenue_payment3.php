@@ -19,7 +19,7 @@
         $fees               = $_GET['fees'];
         $server             = 'https://'.$_SERVER['SERVER_NAME'];
 ?>
-    <form method="post" id="customerData" name="customerData" action="ccavRequestHandler.php">
+    <form method="post" id="customerData" name="customerData" action="ccavTestHandler.php">
         <input type="text" name="tid" id="tid" readonly />
         <input type="text" name="merchant_id" value="79450"/>
         <input type="text" name="order_id" value="<?php echo trim($token); ?>"/>
