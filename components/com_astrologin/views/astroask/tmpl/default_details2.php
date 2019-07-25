@@ -5,6 +5,13 @@ $no_of_ques             = $_GET['no_of_ques'];
 //echo $no_of_ques;exit;
 //print_r($this->data);exit;
 ?>
+<div class="progress">
+    <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Step 1</div>
+    <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Step 2</div>
+    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Step 3</div>
+    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Step 4</div>
+</div><div class="mb-3"></div>
+<div class="mb-3"></div>
 <h3>Enter Your Questions</h3>
 <form id="ques_form" role="form" enctype="application/x-www-form-urlencoded" method="post" 
       action="<?php echo JRoute::_('index.php?option=com_astrologin&task=astroask.askQuestions2'); ?>">

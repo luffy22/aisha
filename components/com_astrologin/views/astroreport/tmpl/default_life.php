@@ -5,6 +5,12 @@ $order_type             = $_GET['order_type'];
 //echo $uniq_id."<br/>";
 //echo $order_type;exit;
 ?>
+<div class="progress">
+    <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Step 1</div>
+    <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Step 2</div>
+    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Step 3</div>
+    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Step 4</div>
+</div><div class="mb-3"></div>
 <div class="lead alert alert-dark">Tell us more about yourself</div>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;Filling these details would allow us to know more about problems you face. 
  Also it means we don't have to do guess work and can focus on solving your issues better.</p>

@@ -4,6 +4,13 @@ defined('_JEXEC') or die('Restricted access');
 $details                    = $this->msg;
 //print_r($details);exit;
 ?>
+<div class="progress">
+    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Step 1</div>
+    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Step 2</div>
+    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Step 3</div>
+    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Step 4</div>
+</div><div class="mb-3"></div>
+<div class="mb-3"></div>
 <div class='card border-primary mb-3 text-center' id="info_expert">
 <div class='card-block'>
 <h3><a title='Click to get more info' href='#' data-toggle='modal' data-target='#astroinfo'><img src=<?php echo JURi::base() ?>images/profiles/<?php echo $details['img_new_name'] ?> height='50px' width='50px' title="<?php echo $details['img_name'];?>" /><?php echo $details['name'] ?></a></h3>
@@ -92,6 +99,7 @@ else
     <button type="reset" name="ask_reset" id="ask_reset" class="btn btn-danger">Reset</button>
 </div>
 </form>
+<link rel="stylesheet" href="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/circle.css' ?>" type="text/css" />
 <?php 
 unset($details);unset($this->msg);
 ?>

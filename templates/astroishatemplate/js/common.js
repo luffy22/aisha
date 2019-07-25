@@ -141,7 +141,7 @@ $(function()
 {
 
    var result       = "";
-   $("#ques_pob").add("#report_pob").autocomplete({
+   $("#ques_pob").add("#report_pob").add("#transit_pob").autocomplete({
       source: 
        function(request, response) {
         $.ajax({
