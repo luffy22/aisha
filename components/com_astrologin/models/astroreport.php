@@ -6,17 +6,17 @@ class AstrologinModelAstroReport extends JModelItem
 {
     public function getData()
     {
-        //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
-        //$geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
-        $ip                           = '117.196.1.11';
+        include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
+        $geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
+        //$ip                           = '117.196.1.11';
         //$ip                             = '157.55.39.123';  // ip address
-        //$ip                       		= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
-        $info                         = geoip_country_code_by_name($ip);
-        $country                      = geoip_country_name_by_name($ip);
+        $ip                       		= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
+        //$info                         = geoip_country_code_by_name($ip);
+        //$country                      = geoip_country_name_by_name($ip);
         
-        //$location               	= $geoip->lookupLocation($ip);
-        //$info                   	= $location->countryCode;
-        //$country                	= $location->countryName;
+        $location               	= $geoip->lookupLocation($ip);
+        $info                   	= $location->countryCode;
+        $country                	= $location->countryName;
         $u_id           = '222';
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
@@ -100,11 +100,11 @@ class AstrologinModelAstroReport extends JModelItem
         $ques_ask_date      = $date1->format('Y-m-d H:i:s');
         $db                 = JFactory::getDbo();  // Get db connection
         $query              = $db->getQuery(true);
-        $columns            = array('UniqueID','expert_id','fees','currency','pay_mode','name','email','gender', 'dob_tob', 
+        $columns            = array('UniqueID','expert_id','no_of_ques','fees','currency','pay_mode','name','email','gender', 'dob_tob', 
                                     'pob','order_type','ques_ask_date'
                             );
         $values         = array(
-                                $db->quote($token),$db->quote($expert_id),
+                                $db->quote($token),$db->quote($expert_id),$db->quote($no_of_ques),
                                 $db->quote($fees),$db->quote($currency),$db->quote($pay_mode),
                                 $db->quote($name), $db->quote($email),$db->quote($gender), 
                                 $db->quote($dob_tob),$db->quote($pob),$db->quote($ques_type),$db->quote($ques_ask_date)
@@ -507,7 +507,7 @@ class AstrologinModelAstroReport extends JModelItem
         $mailer->setBody($body);
 
         $send = $mailer->Send();
-        $link       = JUri::base().'read-report?order='.$data->UniqueID.'&ref='.$data->email;
+        $link       = JUri::base().'read-report?order='.$data->UniqueID.'&ref='.$data->email.'&payment=success';
         if ( $send !== true ) {
             $msg    = 'Error sending email: Try again and if problem continues contact admin@astroisha.com.';
             $msgType = "warning";
@@ -515,18 +515,9 @@ class AstrologinModelAstroReport extends JModelItem
         } 
         else 
         {
-            if(($data->pay_mode=="paytm"||$data->pay_mode=="ccavenue"||$data->pay_mode=="paypal")&&$data->paid=="yes")
-            {
-                $msg    =  'Payment to Astro Isha is successful. Please check your email to see payment details.';
-                $msgType    = "success";
-                $app->redirect($link, $msg,$msgType);
-            }
-            else
-            {
-                $msg    =  'Please check your email for more information about payment.';
-                $msgType    = "warning";
-                $app->redirect($link, $msg,$msgType);
-            }
+            $msg    =  'Payment to Astro Isha is successful. Please check your email to see payment details.';
+            $msgType    = "success";
+            $app->redirect($link, $msg,$msgType);
         }        
     }
     protected function sendFailMail($data)
@@ -559,7 +550,7 @@ class AstrologinModelAstroReport extends JModelItem
         $mailer->setBody($body);
 
         $send = $mailer->Send();
-        $link       = JUri::base().'read-report?order='.$token.'&ref='.$data->email;
+        $link       = JUri::base().'read-report?order='.$token.'&ref='.$data->email.'&payment=fail';
         if ( $send !== true ) {
             $msg    = 'Error sending email: Try again and if problem continues contact admin@astroisha.com.';
             $msgType = "warning";
@@ -570,8 +561,6 @@ class AstrologinModelAstroReport extends JModelItem
             $msg    =  'Payment has failed. Please check your email.';
             $msgType    = "warning";
             $app->redirect($link, $msg,$msgType);
-        }
-        
+        }   
     }
-    
 }

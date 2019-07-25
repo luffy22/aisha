@@ -1,14 +1,14 @@
 <?php
-	header("Pragma: no-cache");
-	header("Cache-Control: no-cache");
-	header("Expires: 0");
-	if(isset($_GET['token']))
-	{
-		$order_id		= str_replace("token_","order_", ($_GET['token']));		// token is taken as unique order 
-		$price 			= $_GET['fees'];									// fees
-		$email			= $_GET['email'];
-                $mobile                 = $_GET['mobile']; // email is used as unique customer id
-	}
+    header("Pragma: no-cache");
+    header("Cache-Control: no-cache");
+    header("Expires: 0");
+    if(isset($_GET['token']))
+    {
+            $order_id		=       $_GET['token'];		// token is taken as unique order 
+            $price 			= $_GET['fees'];									// fees
+            $email			= $_GET['email'];
+            $mobile                 = $_GET['mobile']; // email is used as unique customer id
+    }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

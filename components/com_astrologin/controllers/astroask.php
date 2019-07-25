@@ -63,8 +63,11 @@ class AstrologinControllerAstroask extends AstroLoginController
     }
     public function failPayment()
     {
-        $token              = $_GET['token'];
-        $details        = array("token"=>$token);
+        $token          = $_GET['token'];
+        $email          = $_GET['email'];
+        $status         = $_GET['status'];
+        $details        = array("token"=>$token,"email"=>$email,"status"=>$status);
+        //print_r($details);exit;
         $model          = $this->getModel('astroask');  // Add the array to model
         $model          ->failPayment($details);
     }
@@ -84,6 +87,7 @@ class AstrologinControllerAstroask extends AstroLoginController
         $status            = $_GET['status'];
         
         $details        = array("token"=>$token,"trackid"=>$track_id,"bankref"=>$bank_ref,"status"=>$status);
+        //print_r($details);exit;
         $model          = $this->getModel('astroask');  // Add the array to model
         $model          ->confirmCCPayment($details);
     }

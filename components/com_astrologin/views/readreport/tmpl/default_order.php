@@ -8,6 +8,30 @@ if(isset($_GET['ref']))
 {
     $refemail   = $_GET['ref'];
 }
+if(isset($_GET['payment']) && $_GET['payment']=="success")
+{
+?>
+<div class="progress" style="height:25px">
+  <div class="progress-bar bg-success" style="width:25%;height:25px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Choose</div>
+  <div class="progress-bar bg-success" style="width:25%;height:25px" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Details</div>
+  <div class="progress-bar bg-success" style="width:25%;height:25px" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">Question(s)</div>
+  <div class="progress-bar bg-success" style="width:25%;height:25px" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Pay</div>
+</div>
+<div class="mb-3"></div>
+<?php
+}
+else if(isset($_GET['payment']) && $_GET['payment']=="fail")
+{
+?>
+<div class="progress" style="height:25px">
+  <div class="progress-bar bg-success" style="width:25%;height:25px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Choose</div>
+  <div class="progress-bar bg-success" style="width:25%;height:25px" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Details</div>
+  <div class="progress-bar bg-success" style="width:25%;height:25px" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">Question(s)</div>
+  <div class="progress-bar bg-danger" style="width:25%;height:25px" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Pay</div>
+</div>
+<div class="mb-3"></div>
+<?php
+}
 //print_r($this->order);
 //print_r($this->details);exit;
 ?>
