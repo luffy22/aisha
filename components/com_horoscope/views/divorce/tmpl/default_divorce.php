@@ -2,8 +2,6 @@
 defined('_JEXEC') or die();
 //echo JPATH_COMPONENT.DS.'script/horoscope.js';exit;
 //print_r($this->data);exit;
-$percent        =  (int)$this->data['asc_percent']+(int)$this->data['moon_percent']+
-                    (int)$this->data['ven_percent']+(int)$this->data['nav_percent'];
 //$planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu","Uranus","Neptune","Pluto");
 $chart_id = $_GET['chart'];
 if(isset($_GET['back']) && $_GET['back'] =='mdosha')
@@ -18,7 +16,7 @@ if(isset($_GET['back']) && $_GET['back'] =='mdosha')
 }
 ?>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark"><strong>Mangal Dosha Calculator</strong></div>
+<div class="lead alert alert-dark">Chances of divorce in your chart</div>
     
 <table class="table table-bordered table-hover table-striped">
 
@@ -88,128 +86,23 @@ if(isset($_GET['back']) && $_GET['back'] =='mdosha')
 	</tr>
 </table>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark">Is there Mangal Dosha in your chart?</div>
-<table class="table table-bordered table-striped">
-    <tr>
-        <td>From Ascendant in Main Chart</td>
-        <td><?php echo ucfirst($this->data['asc_dosha']); ?></td>
-    </tr>
-    <tr>
-        <td>From Moon in Main Chart</td>
-        <td><?php echo ucfirst($this->data['moon_dosha']); ?></td>
-    </tr>
-    <tr>
-        <td>From Venus in Main Chart</td>
-        <td><?php echo ucfirst($this->data['ven_dosha']); ?></td>
-    </tr>
-    <tr>
-        <td>From Ascendant in Navamsha Chart</td>
-        <td><?php echo ucfirst($this->data['nav_dosha']); ?></td>
-    </tr>
-</table>
+<div class="lead alert alert-dark">Percentage of Mangal Dosha</div>
+<p>Mangal Dosha can lead to divorce. Mars in a problematic location increases anger and frustration. No 
+marriage in today's world can survive with constant fights.</p>
+<?php
+ if(((int)$this->data['mangaldosha']) > 50)
+ {
+?>
+<p>There is <?php echo $this->data['mangaldosha']; ?><span>&#37;</span> Mangal Dosha in your chart. This could spell trouble in your married life.</p>
+<?php
+}
+ else {
+?>
+<p>There is <?php echo $this->data['mangaldosha']; ?><span>&#37;</span> Mangal Dosha in your chart. Divorce is less likely due to Mangal Dosha.</p>
+<?php    
+}
+?>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark">Percentage of Mangal Dosha in your chart</div>
-<div class="row justify-content-center">
-<div class="c100 p<?php echo $percent; ?> big">
-    <span><?php echo $percent; ?>%</span>
-    <div class="slice">
-        <div class="bar"></div>
-        <div class="fill"></div>
-    </div>
-</div></div>
-<div class="mb-3"></div>
-<p>There is <?php echo $percent; ?><span>&#37;</span> Mangal Dosha in your chart
-<?php
-if($percent == "0")
-{
-?>
-    .&nbsp;You can rest easy. Marriage doesn't suffer due to Mangal Dosha in your case.
-<?php
-}
-else if($percent == "25")
-{
-?>
-    &nbsp;which is mild. Mars won't cause any problems in your married life.  
-<?php
-}
-else if($percent == "50")
-{
-?>
-    &nbsp;which is moderate. Some care and compromise should avoid any troubles in marriage due to Mars. 
-<?php
-}
-else if($percent == "75")
-{
-?>
-    &nbsp;which is above average. Mars could cause problems in married life. Its essential to 
-    control temper around spouse or else results could be disastrous. 
-<?php
-}
-else if($percent == "100")
-{
-?>
-    &nbsp;which is a lot. Mars could cause serious problems in married life. Anger, ego and 
-    hatred need to be kept in check in marriage or else results could be disastrous. Also important is patience, calmness and compromise 
-    to make marriage work.
-<?php
-}
-?>
-</p>
-<div class="mb-3"></div>
-<div class="lead alert alert-dark">Co-tenants of Mars</div>
-<?php 
-if($this->data['coten_count'] > 0)
-{
-?>
-<p>Co-tenants who occupy same sign as Mars can greatly increase or decrease effects of 
-Mangal Dosha in a horoscope. Below are the co-tenants of Mars in your horoscope: </p>
-<?php
-}
-else
-{
-?>
-<p>There are no planets which occupy same house as Mars in your Main Chart</p>
-<?php
-}
-for($i=0;$i<$this->data['coten_count'];$i++)
-{
-?>
-<p><strong><?php echo $this->data['coplanet_'.$i] ?>: </strong>
-<?php echo $this->data['coplanet_'.$i.'_details'] ?></p>
-<?php
-}
-?>
-<p><strong>Note: Only co-tenancy of 9 planets in traditional Vedic Astrology are analyzed.</strong></p>
-<div class="mb-3"></div>
-<div class="lead alert alert-dark">Aspects on Mars</div>
-<?php
-if($this->data['asp_count'] > 0)
-{
-?>
-<p>Aspects on Mars can also increase or decrease effects of Mangal Dosha in a horoscope. 
-    Below are 
-<?php 
-if($this->data['asp_count'] > 1) 
-  {echo "planets";}
-else
-    {echo "planet";} ?>&nbsp;which cast an aspect on your Mars: </p>
-<?php
-}
-else
-{
-?>
-<p>There are no planets aspecting Mars in your Main Chart.</p>
-<?php
-}
-for($i=0;$i<$this->data['asp_count'];$i++)
-{
-?>
-<p><strong><?php echo $this->data['aspect_'.$i] ?>: </strong>
-<?php echo $this->data['aspect_'.$i.'_details'] ?></p>
-<?php
-}
-?>
-<p><strong>Note: Only aspects of 9 planets in traditional Vedic Astrology are analyzed.</strong></p>
-<div class="mb-3"></div>
+<div class="lead alert alert-dark">Planets in the 7th House</div>
 <link rel="stylesheet" href="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/circle.css' ?>" type="text/css" />
 <?php unset($this->data); ?>
