@@ -68,3 +68,12 @@ $(function()
       }   
     });
 });
+function callMe()
+{
+    //alert("calls");
+    var percent     = document.getElementById("divorce_rate").value;
+    var element = document.getElementById("percent_checker");
+    element.classList.add("p"+percent);
+    document.getElementById("percent_value").innerHTML = percent+"%";
+
+}

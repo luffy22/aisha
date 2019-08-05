@@ -20,26 +20,26 @@ if(isset($_GET['back']) && $_GET['back'] =='mdosha')
 <div class="lead alert alert-dark">Chances of divorce in your chart</div>
 <table class="table table-bordered table-hover table-striped">
     <tr>
-            <th>Name</th>
-            <td><?php echo $this->data['fname']; ?></td>
+        <th>Name</th>
+        <td><?php echo $this->data['fname']; ?></td>
     </tr>
     <tr>
-            <th>Gender</th>
-            <td><?php echo ucfirst($this->data['gender']); ?></td>
+        <th>Gender</th>
+        <td><?php echo ucfirst($this->data['gender']); ?></td>
     </tr>
     <tr>
-            <th>Date Of Birth</th>
-            <td><?php 
-                    $date   = new DateTime($this->data['dob_tob'], new DateTimeZone($this->data['timezone']));
-                    echo $date->format('dS F Y'); ?></td>
+        <th>Date Of Birth</th>
+        <td><?php 
+                $date   = new DateTime($this->data['dob_tob'], new DateTimeZone($this->data['timezone']));
+                echo $date->format('dS F Y'); ?></td>
     </tr>
     <tr>
-            <th>Time Of Birth</th>
-            <td><?php echo $date->format('H:i:s'); ?></td>
+        <th>Time Of Birth</th>
+        <td><?php echo $date->format('H:i:s'); ?></td>
     </tr>
     <tr>
-            <th>Place Of Birth</th>
-            <td><?php echo $this->data['pob']; ?></td>
+        <th>Place Of Birth</th>
+        <td><?php echo $this->data['pob']; ?></td>
     </tr>
     <tr>
         <th>Latitude</th>
@@ -85,6 +85,18 @@ if(isset($_GET['back']) && $_GET['back'] =='mdosha')
     </tr>
 </table>
 <div class="mb-3"></div>
+<body onload="callMe();">
+<div class="lead alert alert-dark">Chances of divorce in your horoscope.</div>
+<div class="row justify-content-center">
+<div class="c100 big" id="percent_checker">
+    <span id="percent_value"></span>
+    <div class="slice">
+        <div class="bar"></div>
+        <div class="fill"></div>
+    </div>
+</div></div>
+<p>Note: Current planetary transits and planetary periods are not considered. This software isn't 100% accurate. But a rough idea is possible.</p>
+<div class="mb-3"></div>
 <div class="lead alert alert-dark">Percentage of Mangal Dosha</div>
 <p>Mangal Dosha can lead to divorce. Mars in a problematic location increases anger and frustration. No 
 marriage in today's world can survive with constant fights.</p>
@@ -94,20 +106,17 @@ marriage in today's world can survive with constant fights.</p>
 ?>
 <p>There is <?php echo $this->data['mangaldosha']; ?><span>&#37;</span> Mangal Dosha in your chart.</p>
 <?php
-    $percent        = $percent+20;
 }
 else if(((int)$this->data['mangaldosha']) == 50)
  {
 ?>
 <p>There is <?php echo $this->data['mangaldosha']; ?><span>&#37;</span> Mangal Dosha in your chart.</p>
 <?php
-    $percent        = $percent+10;
 }
  else {
 ?>
 <p>There is nominal <?php echo $this->data['mangaldosha']; ?><span>&#37;</span> Mangal Dosha in your chart.</p>
 <?php   
-    $percent          = $percent+0;
 }
 ?>
 <div class="mb-3"></div>
@@ -167,17 +176,6 @@ else if(((int)$this->data['mangaldosha']) == 50)
 ?>
     on your 1st house(ascendant). 
 </p>
-<?php
-    if($this->data['asc_sign'] == "Cancer"||$this->data['asc_sign'] == "Libra"
-       ||$this->data['asc_sign'] == "Aries")
-    {
-           $percent  = $percent + 10;
-    }
-    else
-    {
-           $percent  = $percent + 0;
-    }
-?>
 <div class="mb-3"></div>
 <div class="lead alert alert-dark">Influence on the 7th House</div>
 <p>7th house is the house of marriage. One of the leading factors of divorce is bad 
@@ -208,45 +206,7 @@ condition of 7th house.</p>
 ?>
     in your 7th house. 
 </p>
-<?php
-    if((in_array("Sun", $this->data['house_7']))||(in_array("Sun", $this->data['aspect_7'])))
-    {
-        $percent = $percent+5;
-    }
-    if((in_array("Moon", $this->data['house_7']))||(in_array("Moon", $this->data['aspect_7'])))
 
-    {
-        $percent = $percent+0;
-    }
-    if((in_array("Mars", $this->data['house_7']))||(in_array("Mars", $this->data['aspect_7'])))
-    {
-        $percent = $percent+10;
-    }
-    if((in_array("Mercury", $this->data['house_7']))||(in_array("Mercury", $this->data['aspect_7'])))
-    {
-        $percent = $percent+0;
-    }
-    if((in_array("Jupiter", $this->data['house_7']))||(in_array("Jupiter", $this->data['aspect_7'])))
-    {
-        $percent = $percent-10;
-    }
-    if((in_array("Venus", $this->data['house_7']))||(in_array("Venus", $this->data['aspect_7'])))
-    {
-        $percent = $percent-5;
-    }
-    if((in_array("Saturn", $this->data['house_7']))||(in_array("Saturn", $this->data['aspect_7'])))
-    {
-        $percent = $percent+5;
-    }
-    if((in_array("Rahu", $this->data['house_7']))||(in_array("Rahu", $this->data['aspect_7'])))
-    {
-        $percent = $percent+5;
-    }
-    if(in_array("Ketu", $this->data['house_7']))
-    {
-        $percent = $percent+10;
-    }
-?>
 <div class="mb-3"></div>
 <p>
     There 
@@ -305,45 +265,6 @@ condition of 7th house.</p>
 ?>
     in your 8th house. 
 </p>
-<?php
-    if((in_array("Sun", $this->data['house_8']))||(in_array("Sun", $this->data['aspect_8'])))
-    {
-        $percent = $percent+5;
-    }
-    if((in_array("Moon", $this->data['house_8']))||(in_array("Moon", $this->data['aspect_8'])))
-
-    {
-        $percent = $percent+0;
-    }
-    if((in_array("Mars", $this->data['house_8']))||(in_array("Mars", $this->data['aspect_8'])))
-    {
-        $percent = $percent+10;
-    }
-    if((in_array("Mercury", $this->data['house_8']))||(in_array("Mercury", $this->data['aspect_8'])))
-    {
-        $percent = $percent+0;
-    }
-    if((in_array("Jupiter", $this->data['house_8']))||(in_array("Jupiter", $this->data['aspect_8'])))
-    {
-        $percent = $percent-15;
-    }
-    if((in_array("Venus", $this->data['house_8']))||(in_array("Venus", $this->data['aspect_8'])))
-    {
-        $percent = $percent+10;
-    }
-    if((in_array("Saturn", $this->data['house_8']))||(in_array("Saturn", $this->data['aspect_8'])))
-    {
-        $percent = $percent+5;
-    }
-    if((in_array("Rahu", $this->data['house_8']))||(in_array("Rahu", $this->data['aspect_8'])))
-    {
-        $percent = $percent+5;
-    }
-    if(in_array("Ketu", $this->data['house_8']))
-    {
-        $percent = $percent+20;
-    }
-?>
 <div class="mb-3"></div>
 <p>
     There  
@@ -374,10 +295,10 @@ condition of 7th house.</p>
 </p>
 <div class="mb-3"></div>
 <div class="lead alert alert-dark">Influence on the 12th House</div>
-<p>12th house rules over sex and bedroom pleasures. Divorce today have 
+<p>12th house rules over sex and bedroom pleasures. Divorce rate today has 
 gone up due to partners complaining of insufficient romance and sex in marriage life.</p>
 <p>
-    There are 
+    There is 
 <?php
     $count  = count($this->data['house_12']);
     if($count == "0")
@@ -428,46 +349,107 @@ gone up due to partners complaining of insufficient romance and sex in marriage 
 ?>
     on your 12th house. 
 </p>
-<?php
-    if((in_array("Sun", $this->data['house_12']))||(in_array("Sun", $this->data['aspect_12'])))
+<?php 
+    // mangal dosha- 15%
+    if(((int)$this->data['mangaldosha']) > 50)
     {
-        $percent = $percent+5;
+        $percent            = $percent+15;
     }
-    if((in_array("Moon", $this->data['house_12']))||(in_array("Moon", $this->data['aspect_12'])))
+    else if(((int)$this->data['mangaldosha']) == 50)
+    {
+        $percent            = $percent+10;
+    }
+    else
+    {
+        $percent            = $percent+0;
+    }
+    // ascendant= percent 15%
+    if($this->data['asc_sign'] == "Aries"|| $this->data['asc_sign'] == "Libra"||
+       $this->data['asc_sign'] == "Cancer")
+    {
+        $percent            = $percent+10;
 
-    {
-        $percent = $percent+0;
     }
-    if((in_array("Mars", $this->data['house_12']))||(in_array("Mars", $this->data['aspect_12'])))
+    if(in_array("Mars", $this->data['house_1']) || in_array("Rahu", $this->data['house_1'])
+            ||in_array("Ketu", $this->data['house_1'])||in_array("Saturn", $this->data['house_1']))
     {
-        $percent = $percent+5;
+        $percent            = $percent+10;
     }
-    if((in_array("Mercury", $this->data['house_12']))||(in_array("Mercury", $this->data['aspect_12'])))
+    if(in_array("Mars", $this->data['aspect_1']) || in_array("Rahu", $this->data['aspect_1'])
+            ||in_array("Ketu", $this->data['aspect_1'])||in_array("Saturn", $this->data['aspect_1']))
     {
-        $percent = $percent+0;
+        $percent            = $percent+10;
     }
-    if((in_array("Jupiter", $this->data['house_12']))||(in_array("Jupiter", $this->data['aspect_12'])))
+    if(in_array("Jupiter", $this->data['house_1'])|| in_array("Jupiter", $this->data['aspect_1']))
     {
-        $percent = $percent+0;
+        $percent            = $percent - 10;
     }
-    if((in_array("Venus", $this->data['house_12']))||(in_array("Venus", $this->data['aspect_12'])))
+    // house 7 20% divorce chances
+    if(in_array("Mars", $this->data['house_7']))
     {
-        $percent = $percent+5;
+        $percent            = $percent+10;
     }
-    if((in_array("Saturn", $this->data['house_12']))||(in_array("Saturn", $this->data['aspect_12'])))
+    else if(in_array("Ketu", $this->data['house_7']) || in_array("Rahu", $this->data['house_7']))
     {
-        $percent = $percent+5;
+        $percent            = $percent+10;
     }
-    if((in_array("Rahu", $this->data['house_12']))||(in_array("Rahu", $this->data['aspect_12'])))
+    else
     {
-        $percent = $percent+5;
+        $percent            = $percent+0;
     }
-    if(in_array("Ketu", $this->data['house_12']))
+    // house 8 40% divorce chance
+    if(in_array("Mars", $this->data['house_8'])|| in_array("Mars",$this->data['aspect_8']))
     {
-        $percent = $percent+10;
+        $percent            = $percent+10;
     }
-    echo $percent;
-?>
+    if(in_array("Venus", $this->data['house_8']))
+    {
+        $percent            = $percent+10;
+    }
+    if(in_array("Rahu", $this->data['house_8'])|| in_array("Rahu", $this->data['aspect_8']))
+    {
+        $percent            = $percent+10;
+    }
+    if(in_array("Ketu", $this->data['house_8']))
+    {
+        $percent            = $percent+10;
+    }
+    if(in_array("Sun", $this->data['house_8'])|| in_array("Sun", $this->data['aspect_8']))
+    {
+        $percent            = $percent+5;
+    }
+     if(in_array("Saturn", $this->data['house_8'])|| in_array("Saturn", $this->data['aspect_8']))
+    {
+        $percent            = $percent +5;
+    }
+    if(in_array("Jupiter", $this->data['house_8'])|| in_array("Jupiter", $this->data['aspect_8']))
+    {
+        $percent            = $percent - 10;
+    }
+     // 12th house 10% divorce rate
+    if(in_array("Sun", $this->data['house_12']) && in_array("Venus", $this->data['house_12']))
+    {
+        $percent            = $percent+10;
+    }
+    if(in_array("Rahu", $this->data['house_12']) || in_array("Rahu",$this->data['aspect_12']))
+    {
+        $percent            = $percent+10;
+    }
+    if(in_array("Saturn", $this->data['house_12']) || in_array("Saturn",$this->data['aspect_12']))
+    {
+        $percent            = $percent+10;
+    }
+    if(in_array("Mars", $this->data['house_12']) && in_array("Venus",$this->data['house_12']))
+    {
+        $percent            = $percent+5;
+    }
+?>  
+<form>
+    <input type="hidden" value="<?php echo $percent; ?>" id="divorce_rate" />
+</form>
 <div class="mb-3"></div>
 <link rel="stylesheet" href="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/circle.css' ?>" type="text/css" />
+<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/divorce.js' ?>">
+</script>
 <?php unset($this->data); ?>
+</body>
