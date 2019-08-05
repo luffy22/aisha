@@ -134,6 +134,8 @@ class HoroscopeModelDivorce extends HoroscopeModelMangalDosha
         $percent                    = $check_asc_dosha['asc_percent']+$check_moon_dosha['moon_percent']+$check_ven_dosha['ven_percent']+$check_nav_dosha['nav_percent'];
         $percent                    = array("mangaldosha"=>$percent);
         $asc_divorce                = $this->checkAscendant($data['Ascendant']);
+        $asc_house                  = $this->checkPlanetsInHouse($data, 1);
+        $asc_asp                    = $this->checkAspectsOnHouse($data, 1);
         $seventh_house              = $this->checkPlanetsInHouse($data, 7);
         $seventh_asp                = $this->checkAspectsOnHouse($data, 7);
         $eight_house                = $this->checkPlanetsInHouse($data, 8);
@@ -141,7 +143,8 @@ class HoroscopeModelDivorce extends HoroscopeModelMangalDosha
         $twelfth_house              = $this->checkPlanetsInHouse($data,12);
         $twelfth_asp                = $this->checkAspectsOnHouse($data, 12);
         $array                      = array();
-        $array                      = array_merge($array,$user_data,$percent,
+        $array                      = array_merge($array,$user_data,$percent, $asc_divorce,
+                                                    $asc_house, $asc_asp,
                                                     $seventh_house,$seventh_asp,
                                                     $eight_house,$eight_asp,
                                                     $twelfth_house, $twelfth_asp);
@@ -192,6 +195,20 @@ class HoroscopeModelDivorce extends HoroscopeModelMangalDosha
             {
                 $get_7th_sign   = $this->getHouseSign($planet_sign, 7);
                 if($sign        == $get_7th_sign)
+                {
+                    array_push($aspect, $planet);
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            else if($planet == "Mars")
+            {
+                $get_4th_sign   = $this->getHouseSign($planet_sign, 4);
+                $get_7th_sign   = $this->getHouseSign($planet_sign, 7);
+                $get_8th_sign   = $this->getHouseSign($planet_sign, 8);
+                if($sign        == $get_4th_sign || $sign == $get_7th_sign || $sign == $get_8th_sign)
                 {
                     array_push($aspect, $planet);
                 }

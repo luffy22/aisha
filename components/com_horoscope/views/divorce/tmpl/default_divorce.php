@@ -92,397 +92,381 @@ marriage in today's world can survive with constant fights.</p>
  if(((int)$this->data['mangaldosha']) > 50)
  {
 ?>
-<p>There is <?php echo $this->data['mangaldosha']; ?><span>&#37;</span> Mangal Dosha in your chart. This could spell trouble in your married life.</p>
+<p>There is <?php echo $this->data['mangaldosha']; ?><span>&#37;</span> Mangal Dosha in your chart.</p>
 <?php
     $percent        = $percent+20;
 }
 else if(((int)$this->data['mangaldosha']) == 50)
  {
 ?>
-<p>There is <?php echo $this->data['mangaldosha']; ?><span>&#37;</span> Mangal Dosha in your chart. Some problems are possible in marriage due to Mangal Dosha.</p>
+<p>There is <?php echo $this->data['mangaldosha']; ?><span>&#37;</span> Mangal Dosha in your chart.</p>
 <?php
     $percent        = $percent+10;
 }
  else {
 ?>
-<p>There is nominal <?php echo $this->data['mangaldosha']; ?><span>&#37;</span> Mangal Dosha in your chart. Divorce is less likely due to Mangal Dosha.</p>
+<p>There is nominal <?php echo $this->data['mangaldosha']; ?><span>&#37;</span> Mangal Dosha in your chart.</p>
 <?php   
     $percent          = $percent+0;
 }
 ?>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark">Planets in the 7th House</div>
-<p>Chances of problems in marriage rise if malefic planets like Mars, Saturn, Rahu or Ketu occupy 7th house. Sun can cause ego problems with marriage partner in 7th house. 
-    Mercury can lead to arguments but couple stays together. Moon, Jupiter and Venus in 7th house generally suggest good relation with spouse.</p>
+<div class="lead alert alert-dark">Ascendant in your chart</div>
+<p>Chances of divorce rise in certain ascendant and with bad planets influencing ascendant.</p>
+<p>Your ascendant is <?php echo $this->data['asc_sign']; ?>.</p>
+<p>
+    There is 
+<?php
+    $count  = count($this->data['house_1']);
+    if($count == "0")
+    {
+        echo " no planet ";
+    }
+    else
+    {
+        //echo $count;exit;
+        for($i = 0; $i < $count;$i++)
+        {
+           if($i < $count-1)
+           {
+               echo $this->data['house_1'][$i].", ";
+           }
+           else
+           {
+               echo $this->data['house_1'][$i]." ";
+           }
+        }
+    }
+?>
+    in your 1st house(ascendant). 
+</p>
+<div class="mb-3"></div>
+<p>
+    There 
+<?php
+    $count  = count($this->data['aspect_1']);
+    if($count == "0")
+    {
+        echo " are no aspect ";
+    }
+    else
+    {
+        echo " is aspect of ";
+        for($i = 0; $i < $count;$i++)
+        {
+           if($i < $count-1)
+           {
+               echo $this->data['aspect_1'][$i].", ";
+           }
+           else
+           {
+               echo $this->data['aspect_1'][$i]." ";
+           }
+        }
+    }
+?>
+    on your 1st house(ascendant). 
+</p>
+<?php
+    if($this->data['asc_sign'] == "Cancer"||$this->data['asc_sign'] == "Libra"
+       ||$this->data['asc_sign'] == "Aries")
+    {
+           $percent  = $percent + 10;
+    }
+    else
+    {
+           $percent  = $percent + 0;
+    }
+?>
+<div class="mb-3"></div>
+<div class="lead alert alert-dark">Influence on the 7th House</div>
+<p>7th house is the house of marriage. One of the leading factors of divorce is bad 
+condition of 7th house.</p>
 <p>
     There is 
 <?php
     $count  = count($this->data['house_7']);
-    //echo $count;exit;
-    for($i = 0; $i < $count;$i++)
+    if($count == "0")
     {
-       if($i < $count-1)
-       {
-           echo $this->data['house_7'][$i].", ";
-       }
-       else
-       {
-           echo $this->data['house_7'][$i]." ";
-       }
+        echo " no planet ";
+    }
+    else
+    {
+        //echo $count;exit;
+        for($i = 0; $i < $count;$i++)
+        {
+           if($i < $count-1)
+           {
+               echo $this->data['house_7'][$i].", ";
+           }
+           else
+           {
+               echo $this->data['house_7'][$i]." ";
+           }
+        }
     }
 ?>
     in your 7th house. 
 </p>
 <?php
-    if(in_array("Sun", $this->data['house_7']))
+    if((in_array("Sun", $this->data['house_7']))||(in_array("Sun", $this->data['aspect_7'])))
     {
-        $percent = $percent+2.5;
+        $percent = $percent+5;
     }
-    if(in_array("Moon", $this->data['house_7']))
+    if((in_array("Moon", $this->data['house_7']))||(in_array("Moon", $this->data['aspect_7'])))
+
     {
         $percent = $percent+0;
     }
-    if(in_array("Mars", $this->data['house_7']))
+    if((in_array("Mars", $this->data['house_7']))||(in_array("Mars", $this->data['aspect_7'])))
     {
-        $percent = $percent+2.5;
+        $percent = $percent+10;
     }
-    if(in_array("Mercury", $this->data['house_7']))
+    if((in_array("Mercury", $this->data['house_7']))||(in_array("Mercury", $this->data['aspect_7'])))
     {
         $percent = $percent+0;
     }
-    if(in_array("Jupiter", $this->data['house_7']))
+    if((in_array("Jupiter", $this->data['house_7']))||(in_array("Jupiter", $this->data['aspect_7'])))
     {
-        $percent = $percent+0;
+        $percent = $percent-10;
     }
-    if(in_array("Venus", $this->data['house_7']))
+    if((in_array("Venus", $this->data['house_7']))||(in_array("Venus", $this->data['aspect_7'])))
     {
-        $percent = $percent+0;
+        $percent = $percent-5;
     }
-    if(in_array("Saturn", $this->data['house_7']))
+    if((in_array("Saturn", $this->data['house_7']))||(in_array("Saturn", $this->data['aspect_7'])))
     {
-        $percent = $percent+2.5;
+        $percent = $percent+5;
     }
-    if(in_array("Rahu", $this->data['house_7']))
+    if((in_array("Rahu", $this->data['house_7']))||(in_array("Rahu", $this->data['aspect_7'])))
     {
-        $percent = $percent+2.5;
+        $percent = $percent+5;
     }
     if(in_array("Ketu", $this->data['house_7']))
     {
-        $percent = $percent+2.5;
+        $percent = $percent+10;
     }
 ?>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark">Aspects on the 7th House</div>
-<p>Aspects on the 7th house can increase or decrease problems with marriage partner. Aspect of 
-benefic planets like Moon, Jupiter and Venus mean there is more understanding and less fights. Aspect of planets like 
-Sun, Mars, Saturn, Rahu or Ketu increase problems in marriage life. </p>
 <p>
-    There is aspect of 
+    There 
 <?php
     $count  = count($this->data['aspect_7']);
-    //echo $count;exit;
-    for($i = 0; $i < $count;$i++)
+    if($count == "0")
     {
-       if($i < $count-1)
-       {
-           echo $this->data['aspect_7'][$i].", ";
-       }
-       else
-       {
-           echo $this->data['aspect_7'][$i]." ";
-       }
+        echo " are no aspect ";
+    }
+    else
+    {
+        echo " is aspect of ";
+        for($i = 0; $i < $count;$i++)
+        {
+           if($i < $count-1)
+           {
+               echo $this->data['aspect_7'][$i].", ";
+           }
+           else
+           {
+               echo $this->data['aspect_7'][$i]." ";
+           }
+        }
     }
 ?>
     on your 7th house. 
 </p>
-<?php
-    if(in_array("Sun", $this->data['aspect_7']))
-    {
-        $percent = $percent+2.5;
-    }
-    if(in_array("Moon", $this->data['aspect_7']))
-    {
-        $percent = $percent-2.5;
-    }
-    if(in_array("Mars", $this->data['aspect_7']))
-    {
-        $percent = $percent+2.5;
-    }
-    if(in_array("Mercury", $this->data['aspect_7']))
-    {
-        $percent = $percent-2.5;
-    }
-    if(in_array("Jupiter", $this->data['aspect_7']))
-    {
-        $percent = $percent-2.5;
-    }
-    if(in_array("Venus", $this->data['aspect_7']))
-    {
-        $percent = $percent-2.5;
-    }
-    if(in_array("Saturn", $this->data['aspect_7']))
-    {
-        $percent = $percent+2.5;
-    }
-    if(in_array("Rahu", $this->data['aspect_7']))
-    {
-        $percent = $percent+2.5;
-    }
-    if(in_array("Ketu", $this->data['aspect_7']))
-    {
-        $percent = $percent+2.5;
-    }
-?>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark">Planets in the 8th House</div>
+<div class="lead alert alert-dark">Influence on the 8th House</div>
 <p>Biggest factor for divorce is the 8th house which deals with divorce and court cases. 
-Having planets like Mars, Venus, Rahu or Ketu spells trouble in marriage life. Planets like Sun, Moon, Jupiter, 
-Mercury and Saturn resist divorce unless its absolutely necessary or other planets influence them.</p>
+</p>
 <p>
-    There is 
+    There  
 <?php
     $count  = count($this->data['house_8']);
-    //echo $count;exit;
-    for($i = 0; $i < $count;$i++)
+    if($count == "0")
     {
-       if($i < $count-1)
-       {
-           echo $this->data['house_8'][$i].", ";
-       }
-       else
-       {
-           echo $this->data['house_8'][$i]." ";
-       }
+        echo " no planets ";
+    }
+    else
+    {
+        echo " is ";
+        //echo $count;exit;
+        for($i = 0; $i < $count;$i++)
+        {
+           if($i < $count-1)
+           {
+               echo $this->data['house_8'][$i].", ";
+           }
+           else
+           {
+               echo $this->data['house_8'][$i]." ";
+           }
+        }
     }
 ?>
     in your 8th house. 
 </p>
 <?php
-    if(in_array("Sun", $this->data['house_8']))
-    {
-        $percent = $percent+0;
-    }
-    if(in_array("Moon", $this->data['house_8']))
-    {
-        $percent = $percent+0;
-    }
-    if(in_array("Mars", $this->data['house_8']))
+    if((in_array("Sun", $this->data['house_8']))||(in_array("Sun", $this->data['aspect_8'])))
     {
         $percent = $percent+5;
     }
-    if(in_array("Mercury", $this->data['house_8']))
+    if((in_array("Moon", $this->data['house_8']))||(in_array("Moon", $this->data['aspect_8'])))
+
     {
         $percent = $percent+0;
     }
-    if(in_array("Jupiter", $this->data['house_8']))
+    if((in_array("Mars", $this->data['house_8']))||(in_array("Mars", $this->data['aspect_8'])))
+    {
+        $percent = $percent+10;
+    }
+    if((in_array("Mercury", $this->data['house_8']))||(in_array("Mercury", $this->data['aspect_8'])))
     {
         $percent = $percent+0;
     }
-    if(in_array("Venus", $this->data['house_8']))
+    if((in_array("Jupiter", $this->data['house_8']))||(in_array("Jupiter", $this->data['aspect_8'])))
+    {
+        $percent = $percent-15;
+    }
+    if((in_array("Venus", $this->data['house_8']))||(in_array("Venus", $this->data['aspect_8'])))
+    {
+        $percent = $percent+10;
+    }
+    if((in_array("Saturn", $this->data['house_8']))||(in_array("Saturn", $this->data['aspect_8'])))
     {
         $percent = $percent+5;
     }
-    if(in_array("Saturn", $this->data['house_8']))
-    {
-        $percent = $percent+0;
-    }
-    if(in_array("Rahu", $this->data['house_8']))
+    if((in_array("Rahu", $this->data['house_8']))||(in_array("Rahu", $this->data['aspect_8'])))
     {
         $percent = $percent+5;
     }
     if(in_array("Ketu", $this->data['house_8']))
     {
-        $percent = $percent+5;
+        $percent = $percent+20;
     }
-
 ?>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark">Aspects on the 8th House</div>
-<p>Aspects on the 8th house especially of certain planets can greatly increase chances of divorce. Aspect of Jupiter and Venus. Aspect of planets 
-like Rahu, Mars or Saturn can increase chances of divorce multi-fold.</p>
 <p>
-    There is aspect of 
+    There  
 <?php
     $count  = count($this->data['aspect_8']);
     //echo $count;exit;
-    for($i = 0; $i < $count;$i++)
+    if($count == "0")
     {
-       if($i < $count-1)
-       {
-           echo $this->data['aspect_8'][$i].", ";
-       }
-       else
-       {
-           echo $this->data['aspect_8'][$i]." ";
-       }
+        echo " is no aspect ";
+    }
+    else
+    {
+        echo " is aspect of ";
+        for($i = 0; $i < $count;$i++)
+        {
+           if($i < $count-1)
+           {
+               echo $this->data['aspect_8'][$i].", ";
+           }
+           else
+           {
+               echo $this->data['aspect_8'][$i]." ";
+           }
+        }
     }
 ?>
     on your 8th house. 
 </p>
-<?php
-    if(in_array("Sun", $this->data['aspect_8']))
-    {
-        $percent = $percent+5;
-    }
-    if(in_array("Moon", $this->data['aspect_8']))
-    {
-        $percent = $percent+0;
-    }
-    if(in_array("Mars", $this->data['aspect_8']))
-    {
-        $percent = $percent+5;
-    }
-    if(in_array("Mercury", $this->data['aspect_8']))
-    {
-        $percent = $percent+0;
-    }
-    if(in_array("Jupiter", $this->data['aspect_8']))
-    {
-        $percent = $percent-5;
-    }
-    if(in_array("Venus", $this->data['aspect_8']))
-    {
-        $percent = $percent+0;
-    }
-    if(in_array("Saturn", $this->data['aspect_8']))
-    {
-        $percent = $percent+5;
-    }
-    if(in_array("Rahu", $this->data['aspect_8']))
-    {
-        $percent = $percent+5;
-    }
-    if(in_array("Ketu", $this->data['aspect_8']))
-    {
-        $percent = $percent+0;
-    }
-?>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark">Planets in the 12th House</div>
+<div class="lead alert alert-dark">Influence on the 12th House</div>
 <p>12th house rules over sex and bedroom pleasures. Divorce today have 
-gone up due to partners complaining of insufficient romance and sex in marriage life. Venus is the planet of 
-romance and sex. Placement of Venus or 7th house lord in 12th house with malefics like 
-Sun, Mars, Saturn, Rahu or Ketu spells troubles for sex and romance in marriage life.</p>
+gone up due to partners complaining of insufficient romance and sex in marriage life.</p>
 <p>
-    There is 
+    There are 
 <?php
     $count  = count($this->data['house_12']);
-    for($i = 0; $i < $count;$i++)
+    if($count == "0")
     {
-       if($i < $count-1)
-       {
-           echo $this->data['house_12'][$i].", ";
-       }
-       else if($i > $count-1)
-       {
-           echo " no planet ";
-       }
-       else
-       {
-           echo $this->data['house_12'][$i]." ";
-       }
+        echo " no planets ";
+    }
+    else
+    {
+        for($i = 0; $i < $count;$i++)
+        {
+           if($i < $count-1)
+           {
+               echo $this->data['house_12'][$i].", ";
+           }
+          else
+           {
+               echo $this->data['house_12'][$i]." ";
+           }
+        }
     }
 ?>
     in your 12th house. 
 </p>
-<?php
-    if(in_array("Sun", $this->data['house_12']))
-    {
-        $percent = $percent+2.5;
-    }
-    if(in_array("Moon", $this->data['house_12']))
-    {
-        $percent = $percent+0;
-    }
-    if(in_array("Mars", $this->data['house_12']))
-    {
-        $percent = $percent+2.5;
-    }
-    if(in_array("Mercury", $this->data['house_12']))
-    {
-        $percent = $percent+0;
-    }
-    if(in_array("Jupiter", $this->data['house_12']))
-    {
-        $percent = $percent+0;
-    }
-    if(in_array("Venus", $this->data['house_12']))
-    {
-        $percent = $percent+2.5;
-    }
-    if(in_array("Saturn", $this->data['house_12']))
-    {
-        $percent = $percent+2.5;
-    }
-    if(in_array("Rahu", $this->data['house_12']))
-    {
-        $percent = $percent+0;
-    }
-    if(in_array("Ketu", $this->data['house_12']))
-    {
-        $percent = $percent+0;
-    }
-?>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark">Aspects on the 12th House</div>
-<p>Aspects on the 12th house can increase or decrease romance and sex in married life. Aspect of Venus is 
-desirable. Rest all planets either delay or lessen romance and sex in married life.</p>
 <p>
-    There is aspect of 
+    There is 
 <?php
     $count  = count($this->data['aspect_12']);
-    //echo $count;exit;
-    for($i = 0; $i < $count;$i++)
+    if($count == "0")
     {
-       if($i < $count-1)
-       {
-           echo $this->data['aspect_12'][$i].", ";
-       }
-       else
-       {
-           echo $this->data['aspect_12'][$i]." ";
-       }
+        echo " no aspects ";
+    }
+    else
+    {
+        echo " aspect of ";
+        for($i = 0; $i < $count;$i++)
+        {
+           if($i < $count-1)
+           {
+               echo $this->data['aspect_12'][$i].", ";
+           }
+           else
+           {
+               echo $this->data['aspect_12'][$i]." ";
+           }
+        }
     }
 ?>
     on your 12th house. 
 </p>
 <?php
-    if(in_array("Sun", $this->data['aspect_12']))
+    if((in_array("Sun", $this->data['house_12']))||(in_array("Sun", $this->data['aspect_12'])))
     {
-        $percent = $percent+2.5;
+        $percent = $percent+5;
     }
-    if(in_array("Moon", $this->data['aspect_12']))
-    {
-        $percent = $percent+0;
-    }
-    if(in_array("Mars", $this->data['aspect_12']))
-    {
-        $percent = $percent+2.5;
-    }
-    if(in_array("Mercury", $this->data['aspect_12']))
+    if((in_array("Moon", $this->data['house_12']))||(in_array("Moon", $this->data['aspect_12'])))
+
     {
         $percent = $percent+0;
     }
-    if(in_array("Jupiter", $this->data['aspect_12']))
+    if((in_array("Mars", $this->data['house_12']))||(in_array("Mars", $this->data['aspect_12'])))
+    {
+        $percent = $percent+5;
+    }
+    if((in_array("Mercury", $this->data['house_12']))||(in_array("Mercury", $this->data['aspect_12'])))
     {
         $percent = $percent+0;
     }
-    if(in_array("Venus", $this->data['aspect_12']))
+    if((in_array("Jupiter", $this->data['house_12']))||(in_array("Jupiter", $this->data['aspect_12'])))
     {
-        $percent = $percent-2.5;
+        $percent = $percent+0;
     }
-    if(in_array("Saturn", $this->data['aspect_12']))
+    if((in_array("Venus", $this->data['house_12']))||(in_array("Venus", $this->data['aspect_12'])))
     {
-        $percent = $percent+2.5;
+        $percent = $percent+5;
     }
-    if(in_array("Rahu", $this->data['aspect_12']))
+    if((in_array("Saturn", $this->data['house_12']))||(in_array("Saturn", $this->data['aspect_12'])))
     {
-        $percent = $percent+2.5;
+        $percent = $percent+5;
     }
-    if(in_array("Ketu", $this->data['aspect_12']))
+    if((in_array("Rahu", $this->data['house_12']))||(in_array("Rahu", $this->data['aspect_12'])))
     {
-        $percent = $percent+2.5;
+        $percent = $percent+5;
     }
+    if(in_array("Ketu", $this->data['house_12']))
+    {
+        $percent = $percent+10;
+    }
+    echo $percent;
 ?>
 <div class="mb-3"></div>
 <link rel="stylesheet" href="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/circle.css' ?>" type="text/css" />
