@@ -2,9 +2,11 @@
  <head>
 <style type="text/css">
 #horo_canvas{width: 100%;padding: 0 !important;margin: 0 !important;}@media (min-width: 768px) {#horo_canvas{width:65%}}
+#moon_canvas{width: 100%;padding: 0 !important;margin: 0 !important;}@media (min-width: 768px) {#moon_canvas{width:65%}}
+#navamsha_canvas{width: 100%;padding: 0 !important;margin: 0 !important;}@media (min-width: 768px) {#navamsha_canvas{width:65%}}
 </style>
 </head>
-<body onload="javascript:draw_horoscope();getAscendant();">
+<body onload="javascript:draw_horoscope();getAscendant();getMoon();getNavamsha();">
 <?php $chart_id = $_GET['chart']; ?>
 <div class="mb-3"></div>
 <?php
@@ -84,9 +86,31 @@ $planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Ven
         </tr>
     </table>
 <div class="mb-3"></div>
+<ul class="nav nav-pills">
+<li class="nav-item"><a class="nav-link active" href="#asc" data-toggle="tab">Ascendant</a></li>
+<li class="nav-item"><a class="nav-link" href="#moon" data-toggle="tab">Moon</a></li>
+<li class="nav-item"><a class="nav-link" href="#navamsha" data-toggle="tab">Navamsha</a></li>
+</ul>
+<div class="tab-content">
+<div id="asc" class="tab-pane active">
+<div class="mb-1"></div>
     <canvas id="horo_canvas" height="260">
-    Your browser does not support the HTML5 canvas tag.
+        Your browser does not support the HTML5 canvas tag.
     </canvas>
+</div>
+<div id="moon" class="tab-pane">
+<div class="mb-1"></div>
+ <canvas id="moon_canvas" height="260">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+</div>
+<div id="navamsha" class="tab-pane">
+<div class="mb-1"></div>
+ <canvas id="navamsha_canvas" height="260">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+</div>
+</div>
 <div class="mb-3"></div>
     <p class="float-sm-right">(R) signifies that planet is retrograde at time of birth</p>
     <div class="table-responsive">
@@ -129,7 +153,7 @@ $planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Ven
 if($this->data['chart_type'] == "north")
 {
 ?>
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/horoscope_n.js' ?>">
+<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/asc_n.js' ?>">
 </script>
 <?php
 }
