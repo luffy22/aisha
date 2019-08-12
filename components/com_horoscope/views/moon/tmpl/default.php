@@ -6,11 +6,7 @@
 </head>
 <body onload="javascript:draw_horoscope();getMoon();">
 <?php $chart_id = $_GET['chart']; ?>
-<ul class="nav nav-pills">
-  <li class="nav-item">
-    <a class="nav-link" href="<?php echo JURi::base() ?>horoscope?chart=<?php echo $chart_id ?>" title="navigate to horoscope main page"><i class="fas fa-home"></i> Horo</a>
-  </li>
-  </ul><div class="mb-3"></div>
+<div class="mb-3"></div>
 <?php
 /**
  * @package     Joomla.Site

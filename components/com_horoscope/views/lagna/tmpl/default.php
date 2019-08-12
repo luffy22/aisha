@@ -12,11 +12,8 @@ function isMobileDevice() {
     return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
 }
 ?>
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-    <strong><i class="fas fa-exclamation-triangle"></i> If your location isn't available or if timezone error shows contact us on admin@astroisha.com. We would fix the issue asap.</strong>
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    If your location isn't available than add it: <a href="<?php echo JUri::base().'addlocation?redirect=horoscope'; ?>"><i class="fas fa-plus"></i> Add Location</a>
 </div>
 <div class="mb-3"></div>
 <h2>Calculate Horoscope</h2>

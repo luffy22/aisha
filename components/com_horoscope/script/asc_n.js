@@ -42,17 +42,16 @@ function getAscendant()
     var y = getSignNum(x);
     house_1("1",y);
 }
-
 function getMoon()
 {
-    alert("moon canvas");
     var x = document.getElementById("moon_sign").getAttribute('value');
     var y = getSignNum(x);
-    house_1("2",y);
+    house_1("2", y);
+
 }
 function getNavamsha()
 {
-    var x = document.getElementById("ascendant_sign").getAttribute('value');
+    var x = document.getElementById("ascendant_navamsha_sign").getAttribute('value');
     var y = getSignNum(x);
     house_1("3",y);
 }
@@ -67,41 +66,45 @@ function getSignNum(x)
     return y;
 }
 // places sign number in correct block eg. 10 for Capricorn, 1 for Aries
-function placeValue(a,x, y, z)
+function placeValue(a, x, y, z)
 {   
-    get_canvas(); 
     if(a == "1")
-    {ctx1.beginPath(); ctx1.font='8px Arial'; ctx1.fillText(x,y,z);}
+    {
+        get_canvas(); ctx1.beginPath(); ctx1.font='8px Arial'; ctx1.fillText(x,y,z);
+    }
     else if(a == "2")
-    {ctx2.beginPath(); ctx2.font='8px Arial'; ctx2.fillText(x,y,z);}
+    {
+        get_canvas(); ctx2.beginPath(); ctx2.font='8px Arial'; ctx2.fillText(x,y,z);
+    }
     else if(a == "3")
-    {ctx3.beginPath(); ctx3.font='8px Arial'; ctx3.fillText(x,y,z);}
+    {
+        get_canvas(); ctx3.beginPath(); ctx3.font='8px Arial'; ctx3.fillText(x,y,z);
+    }
 }
-
-function house_1(a, y)
+function house_1(a,y)
 {   var x = y;placeValue(a, x, 125, 122);var y = calc_next_value(x);house_2(a, y); }
 function house_2(a, y)
 {   var x = y;placeValue(a, x, 65, 62); var y = calc_next_value(x);house_3(a, y);}
-function house_3(a, y)
-{   var x = y;placeValue(a, x, 54, 70); var y = calc_next_value(x);house_4(a, y);}
-function house_4(a, y)
-{    var x = y;placeValue(a, x, 118, 132);var y = calc_next_value(x);house_5(a, y);}
-function house_5(a, y)
-{   var x = y;placeValue(a, x, 55, 194);var y = calc_next_value(x); house_6(a, y); }
-function house_6(a, y)
-{   var x = y;placeValue(a, x, 63, 202);var y = calc_next_value(x); house_7(a, y); }
-function house_7(a, y)
-{   var x = y;placeValue(a, x, 126, 142); var y = calc_next_value(x);house_8(a, y); }
-function house_8(a, y)
-{   var x = y; placeValue(a, x, 188, 202);var y = calc_next_value(x);house_9(a, y); }
-function house_9(a, y)
-{   var x = y; placeValue(a, x, 197, 195);var y = calc_next_value(x);house_10(a ,y); }
-function house_10(a, y)
-{   var x = y; placeValue(a, x, 135, 132);var y = calc_next_value(x);house_11(a, y); }  
-function house_11(a, y)
-{   var x = y; placeValue(a, x,197, 70); var y = calc_next_value(x); house_12(a, y); }
-function house_12(a, y)
-{    var x = y; placeValue(a, x, 189, 62);house_1_planets(a); }
+function house_3(a,y)
+{   var x = y;placeValue(a,x, 54, 70); var y = calc_next_value(x);house_4(a,y);}
+function house_4(a,y)
+{    var x = y; placeValue(a,x, 118, 132);var y = calc_next_value(x);house_5(a,y);}
+function house_5(a,y)
+{   var x = y;placeValue(a,x, 55, 194);var y = calc_next_value(x); house_6(a,y); }
+function house_6(a,y)
+{   var x = y;placeValue(a,x, 63, 202);var y = calc_next_value(x); house_7(a,y); }
+function house_7(a,y)
+{   var x = y;placeValue(a,x, 126, 142); var y = calc_next_value(x);house_8(a,y); }
+function house_8(a,y)
+{   var x = y; placeValue(a,x, 188, 202);var y = calc_next_value(x);house_9(a,y); }
+function house_9(a,y)
+{   var x = y; placeValue(a,x, 197, 195);var y = calc_next_value(x);house_10(a,y); }
+function house_10(a,y)
+{   var x = y; placeValue(a,x, 135, 132);var y = calc_next_value(x);house_11(a,y); }  
+function house_11(a,y)
+{   var x = y; placeValue(a,x,197, 70); var y = calc_next_value(x); house_12(a,y); }
+function house_12(a,y)
+{    var x = y; placeValue(a,x, 189, 62);house_1_planets(a); }
 function calc_next_value(x)
 {    if(x == "12"){y = 1;}else{y = x+1;}return y; }
 function get_next_sign(z)
@@ -121,20 +124,31 @@ function get_next_sign(z)
         }
     }return y;
 }
-function get_planets(a,z)
+function get_planets(a,num, z)
 {
     var sign        = z;
     var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
     var x;var y=[];
     for(var i=0;i<planets.length; i++)
     {
-       if(sign == document.getElementById(planets[i]+"_sign").getAttribute('value'))
+       if(a == "3")
        {
-            x       = planets[i];
-            y.push(x);           
-       }
+            if(sign == document.getElementById(planets[i]+"_navamsha_sign").getAttribute('value'))
+            {
+                 x       = planets[i];
+                 y.push(x);           
+            }
+        }
+        else
+        {
+            if(sign == document.getElementById(planets[i]+"_sign").getAttribute('value'))
+            {
+                 x       = planets[i];
+                 y.push(x);           
+            }
+        }
     }
-    var canvas      = "house_"+a+"_canvas";
+    var canvas      = "house_"+num+"_canvas";
     if(y.length > 0)        // check if there are any planets in house
     {
         return y;
@@ -146,7 +160,6 @@ function get_planets(a,z)
 }
 function house_1_planets(a)
 {
-    var chart           = a;
     if(a == "1")
     {
         var ascendant   = document.getElementById("ascendant_sign").getAttribute('value');
@@ -156,75 +169,89 @@ function house_1_planets(a)
         var ascendant   = document.getElementById("moon_sign").getAttribute('value');
     }
     else if(a == "3")
-    {     
-        var ascendant   = document.getElementById("ascendant_sign").getAttribute('value');
+    {
+        var ascendant   = document.getElementById("ascendant_navamsha_sign").getAttribute('value');
     }
     var planets     = ["sun","moon","mars","mercury","jupiter","venus","saturn","rahu","ketu","uranus","neptune","pluto"];
     var x;var y=[];
     for(var i=0;i<planets.length; i++)
     {
-       if(ascendant == document.getElementById(planets[i]+"_sign").getAttribute('value'))
+       if(a == "3")
        {
-            x       = planets[i];
-            y.push(x);        
+           if(ascendant == document.getElementById(planets[i]+"_navamsha_sign").getAttribute('value'))
+            {
+                
+                 x       = planets[i];
+                 y.push(x); 
+
+            }
        }
+       else
+       {
+            if(ascendant == document.getElementById(planets[i]+"_sign").getAttribute('value'))
+            {
+                 x       = planets[i];
+                 y.push(x);        
+            }
+        }
     }
-    if(y.length > 0)        // check if there are any planets in house
+    
+     if(y.length > 0)        // check if there are any planets in house
     {
-        house_cent_canvas(chart,1, y,117,66);      // execute only if there are planets
+        house_cent_canvas(a, 1, y,117,66);      // execute only if there are planets
     }
-    //var z  = get_next_sign(ascendant);
-    //house_planets(2, z);
+    var z  = get_next_sign(ascendant);
+    house_planets(a, 2, z);
 }
-function house_planets(a, z)
+function house_planets(a, b, z)
 {
-    var num         = a;
-    var y           = get_planets(num, z);
+    var num         = b;
+    var y           = get_planets(a, num, z);
     if(y== "0"){}else
     {
         if(num == "2")
         {
-            house_up_canvas(num,y,55,35);
+            house_up_canvas(a,num,y,55,35);
         }
         else if(num == "3")
         {
-            house_cent_canvas(num,y,7,60);
+            house_cent_canvas(a,num,y,7,60);
         }
         else if(num == "4")
         {
-            house_cent_canvas(num,y,55,130);
+            house_cent_canvas(a,num,y,55,130);
         }
         else if(num == "5")
         {
-            house_cent_canvas(num,y,7,190);
+            house_cent_canvas(a, num,y,7,190);
         }
         else if(num == "6")
         {
-            house_down_canvas(num,y,55,230);
+            house_down_canvas(a, num,y,55,230);
         }
         else if(num == "7")
         {
-            house_cent_canvas(num,y,117,180);
+            house_cent_canvas(a,num,y,117,180);
         }
         else if(num == "8")
         {
-            house_down_canvas(num,y,180,230);
+            house_down_canvas(a,num,y,180,230);
         }
         else if(num == "9")
         {
-            house_right_canvas(num,y,215,190);
+            house_right_canvas(a,num,y,215,190);
         }
         else if(num == "10")
         {
-            house_cent_canvas(num,y,180,130);
+            house_cent_canvas(a,num,y,180,130);
         }
         else if(num == "11")
         {
-            house_right_canvas(num,y, 215,70);
+            house_right_canvas(a,num,y, 215,70);
         }
         else if(num == "12")
         {
-            house_up_canvas(num,y,180,35);
+            house_up_canvas(a,num,y,180,35);
         }
         
     }
@@ -232,13 +259,23 @@ function house_planets(a, z)
     {
         var z       = get_next_sign(z);
         num         = num+1;
-        house_planets(num, z);
+        house_planets(a, num, z);
     }
 }
 function house_cent_canvas(chart, a, y, b, c)
 {
-    
-    //var y       = ["sun","moon","mars","mercury","jupiter","uranus","neptune"];
+    if(chart == "1")
+    {
+        var ctx     = ctx1;
+    }
+    else if(chart=="2")
+    {
+        var ctx     = ctx2;
+    }
+    else if(chart=="3")
+    {
+        var ctx     = ctx3;
+    }
     var len     = y.length;var b = b; var c = c;
     get_canvas();ctx.font='10px Arial';
     if(len=="1")
@@ -293,7 +330,7 @@ function house_cent_canvas(chart, a, y, b, c)
     else if(len=="8")
     {
         ctx.fillText(y[7],b,c-40);
-         ctx.fillText(y[0],b,c-30);
+        ctx.fillText(y[0],b,c-30);
         ctx.fillText(y[1],b,c-20);
         ctx.fillText(y[2],b,c-10);
         ctx.fillText(y[3],b,c);
@@ -302,8 +339,20 @@ function house_cent_canvas(chart, a, y, b, c)
 	ctx.fillText(y[6],b,c+30);
     }
 }
-function house_right_canvas(a,y, b, c)
+function house_right_canvas(chart,a,y, b, c)
 {
+    if(chart == "1")
+    {
+        var ctx     = ctx1;
+    }
+    else if(chart=="2")
+    {
+        var ctx     = ctx2;
+    }
+    else if(chart=="3")
+    {
+        var ctx     = ctx3;
+    }
     //var y       = ["sun","moon","mars","mercury","jupiter","uranus","neptune"];
     var len     = y.length;var b = b; var c = c;
     get_canvas();ctx.font='10px Arial';
@@ -368,8 +417,20 @@ function house_right_canvas(a,y, b, c)
 	ctx.fillText(y[7],b+30,c+30);
     }
 }
-function house_up_canvas(a,y, b, c)
+function house_up_canvas(chart,a,y, b, c)
 {
+    if(chart == "1")
+    {
+        var ctx     = ctx1;
+    }
+    else if(chart=="2")
+    {
+        var ctx     = ctx2;
+    }
+    else if(chart=="3")
+    {
+        var ctx     = ctx3;
+    }
     //var y       = ["sun","moon","mars","mercury","jupiter","uranus","neptune"];
     var len     = y.length;var b = b; var c = c;
     get_canvas();ctx.font='10px Arial';
@@ -434,8 +495,20 @@ function house_up_canvas(a,y, b, c)
 	ctx.fillText(y[7],b,c+20);
     }
 }
-function house_down_canvas(a,y,b,c)
+function house_down_canvas(chart,a,y,b,c)
 {
+    if(chart == "1")
+    {
+        var ctx     = ctx1;
+    }
+    else if(chart=="2")
+    {
+        var ctx     = ctx2;
+    }
+    else if(chart=="3")
+    {
+        var ctx     = ctx3;
+    }
     //var y       = ["sun","moon","mars","mercury","jupiter","uranus","neptune","pluto"];
     var len     = y.length;var b = b; var c = c;
     get_canvas();ctx.font='10px Arial';
@@ -500,3 +573,5 @@ function house_down_canvas(a,y,b,c)
 	ctx.fillText(y[7],b+45,c+20);
     }
 }
+getMoon();
+getNavamsha();

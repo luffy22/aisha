@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1" client="site" method="upgrade">
+	<name>mod_horomenu</name>
+	<author>Rohan Desai</author>
+	<creationDate>August 2019</creationDate>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>kopnite@gmail.com</authorEmail>
+	<authorUrl>www.astroisha.com</authorUrl>
+	<version>1.0</version>
+	<description>Menu for horoscope software</description>
+	<files>
+		<filename module="mod_horomenu">mod_horomenu.php</filename>
+		<folder>tmpl</folder>
+		<filename>helper.php</filename>
+	</files>
+</extension>

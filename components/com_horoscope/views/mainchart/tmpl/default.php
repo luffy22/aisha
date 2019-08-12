@@ -6,7 +6,7 @@
 #navamsha_canvas{width: 100%;padding: 0 !important;margin: 0 !important;}@media (min-width: 768px) {#navamsha_canvas{width:65%}}
 </style>
 </head>
-<body onload="javascript:draw_horoscope();getAscendant();getMoon();getNavamsha();">
+<body onload="javascript:draw_horoscope();getAscendant();">
 <?php $chart_id = $_GET['chart']; ?>
 <div class="mb-3"></div>
 <?php
@@ -15,11 +15,7 @@ defined('_JEXEC') or die();
 //print_r($this->data);exit;
 $planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu","Uranus","Neptune","Pluto");
 ?>
-<ul class="nav nav-pills">
-  <li class="nav-item">
-    <a class="nav-link" href="<?php echo JURi::base() ?>horoscope?chart=<?php echo $chart_id ?>" title="navigate to horoscope main page"><i class="fas fa-home"></i> Horo</a>
-  </li>
-  </ul><div class="mb-3"></div>
+<div class="mb-3"></div>
     <table class="table table-bordered table-hover table-striped">
         <tr>
             <th>Name</th>
@@ -97,18 +93,46 @@ $planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Ven
     <canvas id="horo_canvas" height="260">
         Your browser does not support the HTML5 canvas tag.
     </canvas>
+<?php
+if($this->data['chart_type'] == "north")
+{
+?>
+        <div class="mb-3"></div>
+<p class="lead">Ascendant Chart</p>
+<?php
+}
+?>
 </div>
 <div id="moon" class="tab-pane">
 <div class="mb-1"></div>
  <canvas id="moon_canvas" height="260">
         Your browser does not support the HTML5 canvas tag.
     </canvas>
+<?php
+if($this->data['chart_type'] == "north")
+{
+?>
+    <div class="mb-3"></div>
+<p class="lead">Moon Chart</p>
+<?php
+}
+?>
+
 </div>
 <div id="navamsha" class="tab-pane">
 <div class="mb-1"></div>
  <canvas id="navamsha_canvas" height="260">
         Your browser does not support the HTML5 canvas tag.
     </canvas>
+<?php
+if($this->data['chart_type'] == "north")
+{
+?>
+    <div class="mb-3"></div>
+<p class="lead">Navamsha Chart</p>
+<?php
+}
+?>
 </div>
 </div>
 <div class="mb-3"></div>
@@ -142,13 +166,18 @@ $planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Ven
             <td><?php echo $this->data[$i][$dist]; ?></td>
             <td><?php echo $this->data[$i][$nakshatra]; ?></td>
             <td><?php echo $this->data[$i][$nakshatra_lord]; ?></td>
-            <td><?php echo $this->data[$i][$navamsha_sign]; ?></td>
+            <td id="<?php echo strtolower(trim($planets[$i])); ?>_navamsha_sign" value="<?php echo $this->data[$i][$navamsha_sign]; ?>"><?php echo $this->data[$i][$navamsha_sign]; ?></td>
         </tr>
     <?php
            }
     ?>
     </table>
     </div>
+    <form>
+        <input type="hidden" name="ascendant_sign" id="ascendant_sign" value="<?php echo $this->data[0]['Ascendant_sign'];  ?>" />
+        <input type="hidden" name="moon_sign" id="moon_sign" value="<?php echo $this->data[2]['Moon_sign']; ?>" />
+        <input type="hidden" name="navamsha_sign" id="navamsha_sign" value="<?php echo $this->data[0]['Ascendant_navamsha_sign']; ?>" />
+    </form>
 <?php
 if($this->data['chart_type'] == "north")
 {
@@ -160,7 +189,7 @@ if($this->data['chart_type'] == "north")
 else
 {
 ?>
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/horoscope_s.js' ?>">
+<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/asc_s.js' ?>">
 </script>
 <?php 
 }

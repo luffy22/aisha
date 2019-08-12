@@ -10,7 +10,6 @@ putenv("PATH=$libPath");
 class HoroscopeModelLagna extends JModelItem
 {
     public $data;
-   
     public function getLagna($user_details)
     {
         //print_r($user_details);exit;

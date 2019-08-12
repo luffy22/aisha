@@ -12,11 +12,8 @@ function isMobileDevice() {
 }
 //echo $this->data;	
 ?>
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-    <strong><i class="fas fa-exclamation-triangle"></i> If your location isn't available or if timezone error shows contact us on admin@astroisha.com. We would fix the issue asap.</strong>
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    If your location isn't available than add it: <a href="<?php echo JUri::base().'addlocation?redirect=mangaldosha'; ?>"><i class="fas fa-plus"></i> Add Location</a>
 </div>
 <div class="mb-3"></div>
 <h3>Enter Your Birth Details</h3>
@@ -31,6 +28,17 @@ function isMobileDevice() {
          <input type="radio" name="mdosha_gender" value="male" id="mdosha_gender1"> Male
         <input type="radio" name="mdosha_gender" value="female" id="mdosha_gender2" checked> Female
     </div>
+    <div class="form-group">
+	<label for="inputChart" class="control-label">Chart Style:</label>
+	<div class="form-check form-check-inline">
+	  <input class="form-check-input" type="radio" name="mdosha_chart" id="lagna_chart_north" value="north" checked >
+	  <label class="form-check-label" for="inlineRadio1">North Indian</label>
+	</div>
+	<div class="form-check form-check-inline">
+	  <input class="form-check-input" type="radio" name="mdosha_chart" id="lagna_chart_south" value="south">
+	  <label class="form-check-label" for="inlineRadio2">South Indian</label>
+	</div>
+	</div>
     <div class="form-group" id="lagna_grp_3">
         <label for="dob" class="control-label">Date Of Birth:</label>
      <?php 

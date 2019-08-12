@@ -6,7 +6,10 @@
 </style>-->
 </head>
 <body>
-<?php $chart_id = $_GET['chart']; ?>
+<?php 
+$chart_id = $_GET['chart']; 
+$type       = $this->data['chart_type'];
+?>
 <div class="lead alert alert-dark">Horoscope</div>
 <div class="row">
 <div class="col-4"><a class="content_links" title="Main Chart" href="<?php echo Juri::base() ?>mainchart?chart=<?php echo $chart_id; ?>"><span> <img src="images/mainchart.jpeg" width="50px" height="50px" alt="main" />&nbsp;Main Chart</span> </a></div>
@@ -26,4 +29,3 @@
     <div class="col-4"><a class="content_links" title="Mangal Dosha Calculator" href="<?php echo Juri::base() ?>mangaldosha?chart=<?php echo $chart_id; ?>&back=mdosha"> <span> <img src="images/mars_dosha.png" alt="mdosha" width="50px" height="50px" />&nbsp;Mangal Dosha Calculator</span> </a></div>    
 </div>
 <div class="mb-3"></div>
-

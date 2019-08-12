@@ -21,6 +21,7 @@ class HoroscopeModelFindSpouse extends HoroscopeModelLagna
         $lon            = $details['lon'];
         $lat            = $details['lat'];
         $tmz            = $details['tmz'];
+        $chart          = $details['chart'];
         if($tmz == "none")
         {
             $date           = new DateTime($dob." ".$tob);
@@ -43,9 +44,9 @@ class HoroscopeModelFindSpouse extends HoroscopeModelLagna
         $now            = date('Y-m-d H:i:s');
         $db             = JFactory::getDbo();  // Get db connection
         $query          = $db->getQuery(true);
-        $columns        = array('uniq_id','fname','gender','dob_tob','pob','lon','lat','timezone','query_date','query_cause');
+        $columns        = array('uniq_id','fname','gender','dob_tob','pob','lon','lat','chart_type','timezone','query_date','query_cause');
         $values         = array($db->quote($uniq_id),$db->quote($fname),$db->quote($gender),$db->quote($dob_tob),
-                                $db->quote($pob),$db->quote($lon),$db->quote($lat),$db->quote($tmz),$db->quote($now),$db->quote('fspouse'));
+                                $db->quote($pob),$db->quote($lon),$db->quote($lat),$db->quote($chart),$db->quote($tmz),$db->quote($now),$db->quote('fspouse'));
         $query          ->insert($db->quoteName('#__horo_query'))
                         ->columns($db->quoteName($columns))
                         ->values(implode(',', $values));

@@ -13,16 +13,6 @@ switch($house) {
     case "10":$house = "Tenth";break;case "11":$house = "Eleventh";break;case "12":$house = "Twelfth";break;
 }
 $chart_id = $_GET['chart'];
-if(isset($_GET['back']) && $_GET['back'] =='fspouse')
-{
-?>
-<ul class="nav nav-pills">
-  <li class="nav-item">
-    <a class="nav-link" href="<?php echo JURi::base() ?>horoscope?chart=<?php echo $chart_id ?>" title="navigate to horoscope main page"><i class="fas fa-home"></i> Horo</a>
-  </li>
-  </ul>
-<?php
-}
 ?>
 <div class="mb-3"></div>
 <div class="lead alert alert-dark"><strong>How & Where To find Spouse</strong></div>

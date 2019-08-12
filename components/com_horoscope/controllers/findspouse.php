@@ -18,6 +18,7 @@ class HoroscopeControllerFindSpouse extends HoroscopeController
             $dob    = $_POST['fspouse_dob'];$pob          = $_POST['fspouse_pob'];
             $tob    = $_POST['fspouse_tob'];$lon          = $_POST['fspouse_lon'];
             $lat    = $_POST['fspouse_lat'];$tmz          = $_POST['fspouse_tmz'];
+            $chart  = $_POST['fspouse_chart'];
             if(empty($lat) && empty($lon))
             {
                 $tmz        = "none";
@@ -50,7 +51,7 @@ class HoroscopeControllerFindSpouse extends HoroscopeController
             }
             $user_details   = array(
                                     'fname'=>$fname,'gender'=>$gender,'dob'=>$dob,"pob"=>$pob,
-                                    'tob'=>$tob,'lon'=>$lon,'lat'=>$lat,'tmz'=>$tmz
+                                    'tob'=>$tob,'lon'=>$lon,'lat'=>$lat,'tmz'=>$tmz,"chart"=>$chart
                                     );
             //print_r($user_details);exit;
             $model          = $this->getModel('findspouse');  // Add the array to model

@@ -18,6 +18,7 @@ class HoroscopeControllerDivorce extends HoroscopeController
             $dob    = $_POST['divorce_dob'];$pob          = $_POST['divorce_pob'];
             $tob    = $_POST['divorce_tob'];$lon          = $_POST['divorce_lon'];
             $lat    = $_POST['divorce_lat'];$tmz          = $_POST['divorce_tmz'];
+            $chart  = $_POST['divorce_chart'];
             if(empty($lat) && empty($lon))
             {
                 $tmz        = "none";
@@ -50,7 +51,7 @@ class HoroscopeControllerDivorce extends HoroscopeController
             }
             $user_details   = array(
                                     'fname'=>$fname,'gender'=>$gender,'dob'=>$dob,"pob"=>$pob,
-                                    'tob'=>$tob,'lon'=>$lon,'lat'=>$lat,'tmz'=>$tmz
+                                    'tob'=>$tob,'lon'=>$lon,'lat'=>$lat,'tmz'=>$tmz,"chart"=>$chart
                                     );
             //print_r($user_details);exit;
             $model          = $this->getModel('divorce');  // Add the array to model

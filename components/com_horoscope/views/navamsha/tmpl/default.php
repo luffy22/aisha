@@ -19,11 +19,7 @@ $a = 0;
  </head>
  <body onload="javascript:draw_horoscope();getNavamsha();">
  <?php $chart_id = $_GET['chart']; ?>
-<ul class="nav nav-pills">
-  <li class="nav-item">
-    <a class="nav-link" href="<?php echo JURi::base() ?>horoscope?chart=<?php echo $chart_id ?>" title="navigate to horoscope main page"><i class="fas fa-home"></i> Horo</a>
-  </li>
-  </ul><div class="mb-3"></div>
+<div class="mb-3"></div>
 <canvas id="navamsha_canvas" height="260">
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-3"></div>
