@@ -525,7 +525,7 @@ class HoroscopeModelLagna extends JModelItem
         $house_7                = $this->getHouseSign($asc, $num);
         $planets                = array("Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu","Neptune","Uranus","Pluto");
         $planets_in_house       = array(); 
-        for($i = 1; $i< 10;$i++)
+        for($i = 1; $i< 13;$i++)
         { 
             $j              = $i-1;
             $planet         = $planets[$j];
@@ -548,11 +548,12 @@ class HoroscopeModelLagna extends JModelItem
         $aspect                 = array();
         $asc                    = $this->calcDetails($data["Ascendant"]);
         $sign                   = $this->getHouseSign($asc, $num);
-        $planets                = array("Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu","Uranus","Neptune","Pluto"); 
+
+        $planets                = array("Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu","Neptune","Uranus","Pluto"); 
         foreach($planets as $planet)
         {
             $planet_sign        = $this->calcDetails($data[$planet]);
-            if($planet =="Sun"|| $planet =="Moon"|| $planet=="Mercury"||$planet =="Venus"||$planet=="Uranus"||$planet=="Neptune"||$planet=="Pluto")
+            if($planet =="Sun"|| $planet =="Moon"|| $planet=="Mercury"||$planet =="Venus"||$planet=="Neptune"||$planet=="Uranus"||$planet=="Pluto")
             {
                 $get_7th_sign   = $this->getHouseSign($planet_sign, 7);
                 if($sign        == $get_7th_sign)
@@ -612,6 +613,24 @@ class HoroscopeModelLagna extends JModelItem
             }
         }
         return array("aspect_".$num =>$aspect);
+    }
+    protected function getHouseSign($asc, $num)
+    {
+        $signs              = array("Aries","Taurus","Gemini","Cancer",
+                                    "Leo","Virgo","Libra","Scorpio",
+                                    "Sagittarius","Capricorn","Aquarius","Pisces");
+       $key                 = array_keys($signs, $asc);
+       $key                 = $key[0];
+       if($key+$num <= 12)
+       {
+           $house           =   $key+$num;
+       }
+       else
+       {
+           $house             = ($key + $num)-12;
+           
+       }
+       return $signs[$house-1];
     }
 }
 ?>

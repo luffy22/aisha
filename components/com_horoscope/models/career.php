@@ -6,13 +6,13 @@ JModelLegacy::addIncludePath(JPATH_SITE.'/components/com_horoscope/models/');
 $model = JModelLegacy::getInstance('mangaldosha', 'horoscopeModel');
 $libPath = JPATH_BASE.'/sweph/';
 putenv("PATH=$libPath");
-class HoroscopeModelDivorce extends HoroscopeModelMangalDosha
+class HoroscopeModelCareer extends HoroscopeModelMangalDosha
 {
     public $data;
  
-    public function addDivorceDetails($details)
+    public function addCareerDetails($details)
     {
-        //print_r($details);exit;
+        print_r($details);exit;
         $fname          = $details['fname'];
         $gender         = $details['gender'];
         $dob            = $details['dob'];
@@ -46,7 +46,7 @@ class HoroscopeModelDivorce extends HoroscopeModelMangalDosha
         $query          = $db->getQuery(true);
         $columns        = array('uniq_id','fname','gender','chart_type','dob_tob','pob','lon','lat','timezone','query_date','query_cause');
         $values         = array($db->quote($uniq_id),$db->quote($fname),$db->quote($gender),$db->quote($chart),$db->quote($dob_tob),
-                                $db->quote($pob),$db->quote($lon),$db->quote($lat),$db->quote($tmz),$db->quote($now),$db->quote('divorce'));
+                                $db->quote($pob),$db->quote($lon),$db->quote($lat),$db->quote($tmz),$db->quote($now),$db->quote('careerfind'));
         $query          ->insert($db->quoteName('#__horo_query'))
                         ->columns($db->quoteName($columns))
                         ->values(implode(',', $values));
@@ -57,7 +57,7 @@ class HoroscopeModelDivorce extends HoroscopeModelMangalDosha
         {
             //echo "query inserted";exit;
             $app        = JFactory::getApplication();
-            $link       = JURI::base().'divorce?chart='.str_replace("horo","chart",$uniq_id);
+            $link       = JURI::base().'career?chart='.str_replace("horo","chart",$uniq_id);
             $app        ->redirect($link);
         }
     }
@@ -122,34 +122,7 @@ class HoroscopeModelDivorce extends HoroscopeModelMangalDosha
             $navamsha_sign_num      = array($key."_navamsha_num"=>$this->getSignNum($navamsha[$key.'_navamsha_sign']));
             $newdata                = array_merge($newdata,$getsign,$sign_num,$navamsha, $navamsha_sign_num);
         }
-        //print_r($newdata);exit;
-        $asc_house                  = $this->getHouse("Ascendant",$newdata);
-        $moon_house                 = $this->getHouse("Moon",$newdata);
-        $ven_house                  = $this->getHouse("Venus",$newdata);
-        $nav_house                  = $this->getHouse("Ascendant_navamsha",$newdata);
-        unset($newdata);
-        $check_asc_dosha            = $this->checkDosha("asc",$asc_house);
-        $check_moon_dosha           = $this->checkDosha("moon",$moon_house);
-        $check_ven_dosha            = $this->checkDosha("ven",$ven_house);
-        $check_nav_dosha            = $this->checkDosha("nav",$nav_house); 
-        $percent                    = $check_asc_dosha['asc_percent']+$check_moon_dosha['moon_percent']+$check_ven_dosha['ven_percent']+$check_nav_dosha['nav_percent'];
-        $percent                    = array("mangaldosha"=>$percent);
-        $asc_divorce                = $this->checkAscendant($data['Ascendant']);
-        $asc_house                  = $this->checkPlanetsInHouse($data, 1);
-        $asc_asp                    = $this->checkAspectsOnHouse($data, 1);
-        $seventh_house              = $this->checkPlanetsInHouse($data, 7);
-        $seventh_asp                = $this->checkAspectsOnHouse($data, 7);
-        $eight_house                = $this->checkPlanetsInHouse($data, 8);
-        $eight_asp                  = $this->checkAspectsOnHouse($data, 8);
-        $twelfth_house              = $this->checkPlanetsInHouse($data,12);
-        $twelfth_asp                = $this->checkAspectsOnHouse($data, 12);
-        $array                      = array();
-        $array                      = array_merge($array,$user_data,$percent, $asc_divorce,
-                                                    $asc_house, $asc_asp,
-                                                    $seventh_house,$seventh_asp,
-                                                    $eight_house,$eight_asp,
-                                                    $twelfth_house, $twelfth_asp);
-        return $array;
+        print_r($newdata);exit;
        
     }
     protected function checkAscendant($asc)

@@ -18,7 +18,7 @@ function isMobileDevice() {
 <div class="mb-3"></div>
 <h3>Enter Your Birth Details</h3>
 <form role="form" enctype="application/x-www-form-urlencoded" method="post" 
-      action="<?php echo JRoute::_('index.php?option=com_horoscope&task=divorce.checkchances'); ?>">
+      action="<?php echo JRoute::_('index.php?option=com_horoscope&task=career.checkcareer'); ?>">
     <div class="form-group" id="lagna_grp_1">
         <label for="inputName" class="control-label">Name:</label>
         <input type="text" name="career_fname" class="form-control" id="career_name" placeholder="Enter your name..." required />
