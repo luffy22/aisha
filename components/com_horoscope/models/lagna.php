@@ -518,5 +518,100 @@ class HoroscopeModelLagna extends JModelItem
         $array              = array($planet."_rise_".$num=>$date->format('d-m-Y H:i:s'),$planet."_set_".$num=>$date1->format('d-m-Y H:i:s'));
         return $array;
     }
+    protected function checkPlanetsInHouse($data, $num)
+    {
+        //print_r($data);exit;
+        $asc                    = $this->calcDetails($data["Ascendant"]);
+        $house_7                = $this->getHouseSign($asc, $num);
+        $planets                = array("Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu","Neptune","Uranus","Pluto");
+        $planets_in_house       = array(); 
+        for($i = 1; $i< 10;$i++)
+        { 
+            $j              = $i-1;
+            $planet         = $planets[$j];
+            $planet_sign    = $this->calcDetails($data[$planet]);
+            if($house_7 == $planet_sign)
+            {
+                $planet     = $planets[$j];
+                //print_r($effect);exit;
+                array_push($planets_in_house, $planet);
+            }
+            else
+            {
+                continue;
+            }
+        }
+       return array("house_".$num => $planets_in_house);
+    }
+    protected function checkAspectsOnHouse($data, $num)
+    {
+        $aspect                 = array();
+        $asc                    = $this->calcDetails($data["Ascendant"]);
+        $sign                   = $this->getHouseSign($asc, $num);
+        $planets                = array("Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu","Uranus","Neptune","Pluto"); 
+        foreach($planets as $planet)
+        {
+            $planet_sign        = $this->calcDetails($data[$planet]);
+            if($planet =="Sun"|| $planet =="Moon"|| $planet=="Mercury"||$planet =="Venus"||$planet=="Uranus"||$planet=="Neptune"||$planet=="Pluto")
+            {
+                $get_7th_sign   = $this->getHouseSign($planet_sign, 7);
+                if($sign        == $get_7th_sign)
+                {
+                    array_push($aspect, $planet);
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            else if($planet == "Mars")
+            {
+                $get_4th_sign   = $this->getHouseSign($planet_sign, 4);
+                $get_7th_sign   = $this->getHouseSign($planet_sign, 7);
+                $get_8th_sign   = $this->getHouseSign($planet_sign, 8);
+                if($sign        == $get_4th_sign || $sign == $get_7th_sign || $sign == $get_8th_sign)
+                {
+                    array_push($aspect, $planet);
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            else if($planet == "Jupiter" || $planet == "Rahu")
+            {
+                $get_7th_sign   = $this->getHouseSign($planet_sign, 7);
+                $get_5th_sign   = $this->getHouseSign($planet_sign, 5);
+                $get_9th_sign   = $this->getHouseSign($planet_sign, 9);
+                if($sign        == $get_7th_sign || $sign == $get_5th_sign || $sign == $get_9th_sign)
+                {
+                    array_push($aspect, $planet);
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            else if($planet == "Saturn")
+            {
+                $get_7th_sign   = $this->getHouseSign($planet_sign, 7);
+                $get_3rd_sign   = $this->getHouseSign($planet_sign, 3);
+                $get_10th_sign   = $this->getHouseSign($planet_sign, 10);
+                if($sign        == $get_7th_sign || $sign == $get_3rd_sign || $sign == $get_10th_sign)
+                {
+                    array_push($aspect, $planet);
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            else
+            {
+                continue; // for ketu who has no aspects
+            }
+        }
+        return array("aspect_".$num =>$aspect);
+    }
 }
 ?>
