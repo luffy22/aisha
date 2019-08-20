@@ -5,6 +5,8 @@ defined('_JEXEC') or die();
 //$planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu","Uranus","Neptune","Pluto");
 $chart_id = $_GET['chart'];
 $percent            = 0;
+$document = JFactory::getDocument(); 
+$document->setTitle(strtolower($this->data['fname']).' divorce chances');
 ?>
 <div class="mb-3"></div>
 <div class="lead alert alert-dark">Chances of divorce in your chart</div>

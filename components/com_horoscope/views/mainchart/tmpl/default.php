@@ -14,6 +14,8 @@ defined('_JEXEC') or die();
 //echo JPATH_COMPONENT.DS.'script/horoscope.js';exit;
 //print_r($this->data);exit;
 $planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu","Uranus","Neptune","Pluto");
+$document = JFactory::getDocument(); 
+$document->setTitle(strtolower($this->data['fname']).' details');
 ?>
 <div class="mb-3"></div>
     <table class="table table-bordered table-hover table-striped">

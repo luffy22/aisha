@@ -12,7 +12,7 @@ class HoroscopeModelCareer extends HoroscopeModelMangalDosha
  
     public function addCareerDetails($details)
     {
-        print_r($details);exit;
+        //print_r($details);exit;
         $fname          = $details['fname'];
         $gender         = $details['gender'];
         $dob            = $details['dob'];
@@ -57,7 +57,7 @@ class HoroscopeModelCareer extends HoroscopeModelMangalDosha
         {
             //echo "query inserted";exit;
             $app        = JFactory::getApplication();
-            $link       = JURI::base().'career?chart='.str_replace("horo","chart",$uniq_id);
+            $link       = JURI::base().'careerfind?chart='.str_replace("horo","chart",$uniq_id);
             $app        ->redirect($link);
         }
     }
@@ -69,7 +69,7 @@ class HoroscopeModelCareer extends HoroscopeModelMangalDosha
         $chart_id       = str_replace("chart","horo", $chart_id);
         
         $user_data      = $this->getUserData($chart_id);
-        
+        //print_r($user_data);exit;
         $fname          = $user_data['fname'];
         $gender         = $user_data['gender'];
         $dob_tob        = $user_data['dob_tob'];
@@ -103,26 +103,16 @@ class HoroscopeModelCareer extends HoroscopeModelMangalDosha
 
         # OUTPUT ARRAY
         # Planet Name, Planet Degree, Planet Speed per day
-        $asc            = $this->getAscendant($user_data);
-        $planets        = $this->getPlanets($output);
-        $data           = array_merge($asc,$planets);
+        $asc                        = $this->getAscendant($user_data);
+        $planets                    = $this->getPlanets($output);
+        $data                       = array_merge($asc,$planets);
+        $tenth_house                = $this->checkPlanetsInHouse($data, 10);
+        $tenth_asp                  = $this->checkAspectsOnHouse($data, 10);
+        $asc_sign                   = $this->calcDetails($data["Ascendant"]);
+        $tenth_sign                 = $this->getHouseSign($asc_sign, 10);
+        echo $tenth_sign;exit;
         //print_r($data);exit;
-        //$details        = $this->getDetails($data);
-        //print_r($details);exit;
-        $newdata        = array();
-        foreach($data as $key=>$distance)
-        {
-            // this loop gets the horoscope sign of Ascendant, Moon & Jupiter or Venus
-            $dist                   = str_replace(":r","",$distance);
-            $dist2                  = $this->convertDecimalToDegree(str_replace(":r","",$distance),"details");
-            $sign                   = $this->calcDetails($dist);
-            $sign_num               = array($key."_num"=>$this->getSignNum($sign));
-            $getsign                = array($key."_sign"=>$sign);
-            $navamsha               = $this->getNavamsha($key, $sign, $dist2);
-            $navamsha_sign_num      = array($key."_navamsha_num"=>$this->getSignNum($navamsha[$key.'_navamsha_sign']));
-            $newdata                = array_merge($newdata,$getsign,$sign_num,$navamsha, $navamsha_sign_num);
-        }
-        print_r($newdata);exit;
+        
        
     }
     protected function checkAscendant($asc)

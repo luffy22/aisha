@@ -16,6 +16,8 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die();
+$document = JFactory::getDocument(); 
+$document->setTitle(strtolower($this->data['fname']).' moon chart');
 //print_r($this->data);exit;
 $id         = $this->data['id'];
 $title      = $this->data['title'];

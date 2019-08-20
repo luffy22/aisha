@@ -7,6 +7,8 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die();
+$document = JFactory::getDocument(); 
+$document->setTitle('Navamsha Chart');
 //print_r($this->data);exit;
 //$chart          = $this->data['chart'];
 $a = 0;
