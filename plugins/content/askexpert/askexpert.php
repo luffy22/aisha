@@ -30,7 +30,7 @@ class PlgContentAskExpert extends JPlugin
             {
                 $text           = $article->introtext;
                 $user           = $article->created_by;
-                $content 		= "";
+                
                 $db             = JFactory::getDbo();
                 $query          = $db->getQuery(true);
                 $query1          = $db->getQuery(true);
