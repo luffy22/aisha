@@ -30,6 +30,13 @@ $current        = Juri::current();
              </div>
         </li>
         <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="horo_3" href="#">
+                Career </a>
+            <div class="dropdown-menu bg-dark" aria-labelledby="horo_3">
+                <a class="dropdown-item <?php if($current == Juri::base().'careerfind'){ echo "active";} ?>" href="<?php echo Juri::base().'careerfind?chart='.$chart_id; ?>">Career Finder</a>
+            </div>
+        </li>
+        <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="horo_2" href="#">
                 Marriage </a>
             <div class="dropdown-menu bg-dark" aria-labelledby="horo_2">
@@ -46,3 +53,4 @@ $current        = Juri::current();
 <?php
 }
 ?>
+<div class="mb-3"></div>

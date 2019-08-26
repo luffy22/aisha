@@ -67,7 +67,7 @@ class HoroscopeModelCareer extends HoroscopeModelMangalDosha
         $jinput         = JFactory::getApplication()->input;
         $chart_id       = $jinput->get('chart', 'default_value', 'filter');
         $chart_id       = str_replace("chart","horo", $chart_id);
-        
+        $array          = array();
         $user_data      = $this->getUserData($chart_id);
         //print_r($user_data);exit;
         $fname          = $user_data['fname'];
@@ -108,12 +108,55 @@ class HoroscopeModelCareer extends HoroscopeModelMangalDosha
         $data                       = array_merge($asc,$planets);
         $tenth_house                = $this->checkPlanetsInHouse($data, 10);
         $tenth_asp                  = $this->checkAspectsOnHouse($data, 10);
-        $asc_sign                   = $this->calcDetails($data["Ascendant"]);
+        $asc_sign                   = strtolower($this->calcDetails($data["Ascendant"]))."-asc";
         $tenth_sign                 = $this->getHouseSign($asc_sign, 10);
-        echo $tenth_sign;exit;
-        //print_r($data);exit;
+        $career_sign                = $this->checkCareerViaTenthSign($asc_sign); // check career via 10th sign of an ascendant
+        $career_planets             = $this->checkCareerViaPlanets($tenth_house);  // check career via planets in 10th house
+        $array                      = array_merge($array, $user_data, $career_sign,$career_planets);
         
-       
+        return $array;
+    }
+    protected function checkCareerViaTenthSign($sign)
+    {
+        $db             = JFactory::getDbo();  // Get db connection
+        $query          = $db->getQuery(true);
+        $asc            = ucfirst(str_replace("-asc","",$sign));
+        $query          ->select($db->quoteName('career_text'));
+        $query          ->from($db->quoteName('#__career_finder'));
+        $query          ->where($db->quoteName('asc_planet').'='.$db->quote($sign));
+        $db             ->setQuery($query);
+        $result         = $db->loadAssoc();
+        $data           = array("asc"=>$asc, "10th_sign" => $result['career_text']);
+        return $data;
+    }
+    protected function checkCareerViaPlanets($house)
+    {
+        $db             = JFactory::getDbo();  // Get db connection
+        $query          = $db->getQuery(true);
+        $house_10       = $house['house_10'];
+        $count          = array("house_count"=>count($house_10));
+        $array          = array();
+        $array          = array_merge($array, $count);
+        $i              = 0;
+        foreach($house_10 as $planet)
+        {
+            if(trim($planet) == "Pluto" || trim($planet) == "Uranus" || trim($planet) == "Neptune")
+            {
+               continue;
+            }
+            else
+            {
+                $query          ->select($db->quoteName('career_text'));
+                $query          ->from($db->quoteName('#__career_finder'));
+                $query          ->where($db->quoteName('asc_planet').'='.$db->quote($planet));
+                $db             ->setQuery($query);
+                $result         = $db->loadAssoc();
+                $data           = array("planet_".$i=>$planet,$planet."_result" => $result['career_text']);
+                $array          = array_merge($array, $data);$i++;
+                $query          ->clear();
+            }
+        }
+        return $array;
     }
     protected function checkAscendant($asc)
     {

@@ -21,7 +21,7 @@ class HoroscopeViewCareer extends JViewLegacy
         if(isset($_GET['chart']))
         {
             $this->data     = $this->get('Data');
-            $tpl            = 'divorce';
+            $tpl            = 'career';
         }
         else
         {

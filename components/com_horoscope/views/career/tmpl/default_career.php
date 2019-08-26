@@ -4,7 +4,6 @@ defined('_JEXEC') or die();
 //print_r($this->data);exit;
 //$planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu","Uranus","Neptune","Pluto");
 $chart_id = $_GET['chart'];
-$percent            = 0;
 ?>
 <div class="mb-3"></div>
 <div class="lead alert alert-dark">Career Finder</div>
@@ -75,10 +74,29 @@ $percent            = 0;
     </tr>
 </table>
 <div class="mb-3"></div>
-<body onload="callMe();">
-
+<p>Note: Only 9 planets in traditional vedic astrology are counted. This sofware isn't 100% accurate. Only the 10th house is analyzed for possible career field.</p>
+<div class="lead alert alert-dark">Possible career's via ascendant</div>
+<p><strong>You are born with <?php echo $this->data['asc']; ?> Ascendant.</strong></p><p><?php echo $this->data['10th_sign']; ?></p>
+<div class="lead alert alert-dark">Career via planets in 10th house</div>
+<?php
+if($this->data['house_count'] > 0)
+{
+    for($i =0; $i < $this->data['house_count'];$i++)
+    {
+       $planet        = $this->data['planet_'.$i];
+       if(!empty($planet))
+       {
+           echo "<p><strong>".$this->data['planet_'.$i]."</strong>: ".$this->data[$planet."_result"]."</p>";
+       }
+    }
+}
+else
+{
+    echo "<p>There are no planets in your 10th house which deals with career.</p>";
+}
+?>
 <div class="mb-3"></div>
 <script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/career.js' ?>">
 </script>
 <?php unset($this->data); ?>
-</body>
+

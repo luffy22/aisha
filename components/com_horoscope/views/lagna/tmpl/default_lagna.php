@@ -23,9 +23,16 @@ $type       = $this->data['chart_type'];
 <div class="col-4"><a class="content_links" title="Vimhshottari Dasha" href="<?php echo Juri::base() ?>getvimshottari?chart=<?php echo $chart_id; ?>"> <span> <img src="images/vimshottari.jpeg" alt="vimshottari" width="50px" height="50px" />&nbsp;Vimshottari Dasha</span></a></div>
 </div>
 <div class="mb-3"></div>
+<div class="lead alert alert-dark">Career</div>
+<div class="row">
+    <div class="col-4"><a class="content_links" title="career finder" href="<?php echo Juri::base() ?>careerfind?chart=<?php echo $chart_id; ?>"> <span> <img src="images/art_img/career.jpg" alt="career" width="50px" height="50px" />&nbsp;Career Finder</span></a></div>
+
+</div>
+<div class="mb-3"></div>
 <div class="lead alert alert-dark">Marriage</div>
 <div class="row">
-    <div class="col-4"><a class="content_links" title="Spouse Finder" href="<?php echo Juri::base() ?>findspouse?chart=<?php echo $chart_id; ?>&back=fspouse"> <span> <img src="images/art_img/marriage.png" alt="marriage"  width="50px" height="50px" />&nbsp;Spouse Finder</span></a></div>
-    <div class="col-4"><a class="content_links" title="Mangal Dosha Calculator" href="<?php echo Juri::base() ?>mangaldosha?chart=<?php echo $chart_id; ?>&back=mdosha"> <span> <img src="images/mars_dosha.png" alt="mdosha" width="50px" height="50px" />&nbsp;Mangal Dosha Calculator</span> </a></div>    
+    <div class="col-4"><a class="content_links" title="Spouse Finder" href="<?php echo Juri::base() ?>findspouse?chart=<?php echo $chart_id; ?>"> <span> <img src="images/art_img/marriage.png" alt="marriage"  width="50px" height="50px" />&nbsp;Spouse Finder</span></a></div>
+    <div class="col-4"><a class="content_links" title="Mangal Dosha Calculator" href="<?php echo Juri::base() ?>mangaldosha?chart=<?php echo $chart_id; ?>"> <span> <img src="images/mars_dosha.png" alt="mdosha" width="50px" height="50px" />&nbsp;Mangal Dosha Calculator</span> </a></div>
+    <div class="col-4"><a class="content_links" title="Chances of Divorce" href="<?php echo Juri::base() ?>divorce?chart=<?php echo $chart_id; ?>"> <span> <img src="images/divorce_clipart.jpeg" alt="divorce" width="50px" height="50px" />&nbspDivorce Chances</span> </a></div>
 </div>
 <div class="mb-3"></div>
