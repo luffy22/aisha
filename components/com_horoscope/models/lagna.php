@@ -529,7 +529,7 @@ class HoroscopeModelLagna extends JModelItem
         { 
             $j              = $i-1;
             $planet         = $planets[$j];
-            $planet_sign    = $this->calcDetails($data[$planet]);
+            $planet_sign    = $this->calcDDetails($data[$planet]);
             if($house_7 == $planet_sign)
             {
                 $planet     = $planets[$j];
@@ -632,5 +632,22 @@ class HoroscopeModelLagna extends JModelItem
        }
        return $signs[$house-1];
     }
+    public function getHouseDistance($asc, $planet)
+    {
+        $signs              = array("Aries"=>1,"Taurus"=>2,"Gemini"=>3,"Cancer"=>4,
+                                    "Leo"=>5,"Virgo"=>6,"Libra"=>7,"Scorpio"=>8,
+                                    "Sagittarius"=>9,"Capricorn"=>10,"Aquarius"=>11,"Pisces"=>12);
+        $asc                = $signs[$asc];
+        $planet             = $signs[$planet];
+        if($asc > $planet)
+        {
+           $planet     = $planet + 12;
+        }
+        for($i=$asc;$i <= $planet;$i++)
+        {
+           $j++;       
+        }   
+        return $j;
+    }    
 }
 ?>
