@@ -119,6 +119,15 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $checkRuchaka               = $this->checkRuchakaYoga($data['Ascendant'], $data['Moon'], $data['Mars']);
         $checkMalavya               = $this->checkMalavyaYoga($data['Ascendant'], $data['Moon'], $data['Venus']);
         $checkBhadra                = $this->checkBhadraYoga($data['Ascendant'], $data['Moon'], $data['Mercury']);
+        $checkSunapha               = $this->checkSunapha($data);
+        $checkAnapha                = $this->checkAnapha($data);
+        $checkDhurdura              = $this->checkDhurdura($data);
+        $checkKemdruma              = $this->checkKemdruma($data);
+        $checkAdhiYoga              = $this->checkAdhiYoga($data['Moon'],$data['Mercury'],$data['Jupiter'],$data['Venus']);
+        $checkChatusagara           = $this->checkChatusagara($data);
+        $checkRajlakshana           = $this->checkRajlakshana($data['Ascendant'],$data["Moon"],$data['Mercury'],$data['Jupiter'],$data['Venus']);
+        $checkSakata                = $this->checkSakata($data['Moon'],$data['Jupiter']);
+        $checkAmala                 = $this->checkAmala($data['Ascendant'],$data['Moon'],$data['Mercury'],$data['Jupiter'],$data['Venus']);
     }
     protected function removeRetro($planet)
     {
@@ -129,7 +138,6 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
     }
     protected function checkVishYoga($moon, $sat)
     {
-        $sat                        = $this->removeRetro($sat);
         $moon_sign                  = $this->calcDetails($moon);
         $sat_sign                   = $this->calcDetails($sat);
         $diff                       = $sat - $moon;
@@ -152,7 +160,6 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
     }
     protected function checkBudhAditya($sun, $mercury)
     {
-        $merc                       = $this->removeRetro($mercury);
         $sun_sign                   = $this->calcDetails($sun);
         $merc_sign                  = $this->calcDetails($mercury);
         $diff                       = $sun - $mercury;
@@ -181,8 +188,6 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
     }
     protected function checkVipraChandal($jup, $rahu)
     {
-        $jup                        = $this->removeRetro($jup);
-        $rahu                       = $this->removeRetro($rahu);
         $jup_sign                   = $this->calcDetails($jup);
         $rahu_sign                  = $this->calcDetails($rahu);
         
@@ -205,9 +210,6 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
     }
     protected function checkShrapit($sat, $rahu, $ketu)
     {
-        $sat                        = $this->removeRetro($sat);
-        $rahu                       = $this->removeRetro($rahu);
-        $ketu                       = $this->removeRetro($ketu);
         $sat_sign                   = $this->calcDetails($sat);
         $rahu_sign                  = $this->calcDetails($rahu);
         $ketu_sign                  = $this->calcDetails($ketu);
@@ -228,8 +230,6 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
     }
     protected function checkGrahan($sun, $moon, $rahu, $ketu)
     {
-        $rahu                       = $this->removeRetro($rahu);
-        $ketu                       = $this->removeRetro($ketu);
         $sun_sign                   = $this->calcDetails($sun);
         $moon_sign                  = $this->calcDetails($moon);
         $rahu_sign                  = $this->calcDetails($rahu);
@@ -259,7 +259,6 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
     }
     protected function checkPitru($sun, $sat)
     {
-        $sat                        = $this->removeRetro($sat);
         $sun_sign                   = $this->calcDetails($sun);
         $sat_sign                   = $this->calcDetails($sat);
         $diff                       = $sun - $sat;
@@ -267,11 +266,11 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             if((int)$diff <= 12)
             {
-                $array              = array("pitru_dosha" => "There is a strong <a href='https://www.astroisha.com/yogas/97-pitru-dosha-2' title='pitru dosha' >pitru dosha</a> in your horoscope. Your life could be full of difficulties.");
+                $array              = array("pitru_dosha" => "There is a strong <a href='https://www.astroisha.com/yogas/97-pitru-dosha-2' title='pitru dosha' >pitru dosha</a> in your horoscope due to Sun and Saturn joining together in same sign. Your life could be full of difficulties.");
             }
             else
             {
-                $array              = array("pitru_dosha" => "There is <a href='https://www.astroisha.com/yogas/97-pitru-dosha-2' title='pitru dosha' >pitru dosha</a> in your horoscope. Some troubles in life are expected.");
+                $array              = array("pitru_dosha" => "There is <a href='https://www.astroisha.com/yogas/97-pitru-dosha-2' title='pitru dosha' >pitru dosha</a> in your horoscope due to Sun and Saturn joining together in same sign. Some troubles in life are expected.");
             }
         }
         else
@@ -282,7 +281,6 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
     }
     protected function checkChandraMangal($moon,$mars)
     {
-        $mars                       = $this->removeRetro($mars);
         $moon_sign                  = $this->calcDetails($sun);
         $mars_sign                  = $this->calcDetails($mars);
         $diff                       = $moon - $mars;
@@ -396,7 +394,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
     {
         $asc_sign       = $this->calcDetails($asc);
         $moon_sign      = $this->calcDetails($moon);
-        $mars_sign       = $this->calcDetails($mars);
+        $mars_sign      = $this->calcDetails($mars);
 
         if($mars_sign == "Aries" || $mars_sign == "Scorpio"|| $mars_sign == "Capricorn")
         {
@@ -477,6 +475,286 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             $array              = array("bhadra_yoga"    => "none");
         }
-       print_r($array);exit;
+       return $array;
+    }
+    protected function checkSunapha($data)
+    {
+        $moon                   = $data['Moon'];
+        $moon_sign              = $this->calcDetails($moon);
+        $get_next_sign          = $this->getHouseSign($moon_sign,2);
+        $mars                   = $this->calcDetails($data['Mars']);
+        $mercury                = $this->calcDetails($data['Mercury']);
+        $jupiter                = $this->calcDetails($data['Jupiter']);
+        $venus                  = $this->calcDetails($data['Venus']);
+        $saturn                 = $this->calcDetails($data['Saturn']);
+        
+        if($saturn == $get_next_sign || $mars == $get_next_sign || $mercury == $get_next_sign
+            || $jupiter == $get_next_sign || $venus == $get_next_sign)
+        {
+            $array              = array("sunapha_yoga" => "There is <a href='https://www.astroisha.com/yogas/145-sunapha-yoga' title='Sunapha Yoga'>Sunapha Yoga</a> formed in your horoscope");
+        }
+        else
+        {
+            $array              = array("sunapha_yoga" => "none");
+        }
+        return $array;
+    }
+    protected function checkAnapha($data)
+    {
+        $moon                   = $data['Moon'];
+        $moon_sign              = $this->calcDetails($moon);
+        $get_prev_sign          = $this->getHouseSign($moon_sign,12);
+        $mars                   = $this->calcDetails($data['Mars']);
+        $mercury                = $this->calcDetails($data['Mercury']);
+        $jupiter                = $this->calcDetails($data['Jupiter']);
+        $venus                  = $this->calcDetails($data['Venus']);
+        $saturn                 = $this->calcDetails($data['Saturn']);
+        
+        if($saturn == $get_prev_sign || $mars == $get_prev_sign || $mercury == $get_prev_sign
+            || $jupiter == $get_prev_sign || $venus == $get_prev_sign)
+        {
+            $array              = array("anapha_yoga" => "There is <a href='https://www.astroisha.com/yogas/147-anapha-yoga' title='Anapha Yoga'>Anapha Yoga</a> formed in your horoscope");
+        }
+        else
+        {
+            $array              = array("anapha_yoga" => "none");
+        }
+        return $array;
+    }
+    protected function checkDhurdura($data)
+    {
+        $moon                   = $data['Moon'];
+        $moon_sign              = $this->calcDetails($moon);
+        $get_prev_sign          = $this->getHouseSign($moon_sign,12);
+        $get_next_sign          = $this->getHouseSign($moon_sign,2);
+        $mars                   = $this->calcDetails($data['Mars']);
+        $mercury                = $this->calcDetails($data['Mercury']);
+        $jupiter                = $this->calcDetails($data['Jupiter']);
+        $venus                  = $this->calcDetails($data['Venus']);
+        $saturn                 = $this->calcDetails($data['Saturn']);
+        
+        if(($saturn == $get_next_sign) && ($mars == $get_prev_sign || $mercury == $get_prev_sign
+            || $jupiter == $get_prev_sign || $venus == $get_prev_sign)) 
+        {
+            $array              = array("dhurdhura_yoga" => "There is <a href='https://www.astroisha.com/yogas/148-dhurdhura-yoga' title='Dhurdura Yoga'>Dhurdhura Yoga</a> formed in your horoscope");
+        }
+        else if(($jupiter == $get_next_sign) && ($mars == $get_prev_sign || $mercury == $get_prev_sign
+            || $saturn == $get_prev_sign || $venus == $get_prev_sign))
+        {
+            $array              = array("dhurdhura_yoga" => "There is <a href='https://www.astroisha.com/yogas/148-dhurdhura-yoga' title='Dhurdura Yoga'>Dhurdhura Yoga</a> formed in your horoscope");
+        }
+        else if(($mercury == $get_next_sign) && ($mars == $get_prev_sign || $jupiter == $get_prev_sign
+            || $saturn == $get_prev_sign || $venus == $get_prev_sign))
+        {
+            $array              = array("dhurdhura_yoga" => "There is <a href='https://www.astroisha.com/yogas/148-dhurdhura-yoga' title='Dhurdura Yoga'>Dhurdhura Yoga</a> formed in your horoscope");
+        }
+        else if(($venus == $get_next_sign) && ($mars == $get_prev_sign || $jupiter == $get_prev_sign
+            || $saturn == $get_prev_sign || $mercury == $get_prev_sign))
+        {
+            $array              = array("dhurdhura_yoga" => "There is <a href='https://www.astroisha.com/yogas/148-dhurdhura-yoga' title='Dhurdura Yoga'>Dhurdhura Yoga</a> formed in your horoscope");
+        }
+        else if(($mars == $get_next_sign) && ($mercury == $get_prev_sign || $jupiter == $get_prev_sign
+            || $saturn == $get_prev_sign || $venus == $get_prev_sign))
+        {
+            $array              = array("dhurdhura_yoga" => "There is <a href='https://www.astroisha.com/yogas/148-dhurdhura-yoga' title='Dhurdura Yoga'>Dhurdhura Yoga</a> formed in your horoscope");
+        }
+        else
+        {
+            $array              = array("dhurdhura_yoga" => "none");
+        }
+        return $array;
+    }
+    protected function checkKemdruma($data)
+    {
+        $moon                   = $data['Moon'];
+        $moon_sign              = $this->calcDetails($moon);
+        $get_prev_sign          = $this->getHouseSign($moon_sign,12);
+        $get_next_sign          = $this->getHouseSign($moon_sign,2);
+        $mars                   = $this->calcDetails($data['Mars']);
+        $mercury                = $this->calcDetails($data['Mercury']);
+        $jupiter                = $this->calcDetails($data['Jupiter']);
+        $venus                  = $this->calcDetails($data['Venus']);
+        $saturn                 = $this->calcDetails($data['Saturn']);
+        
+        if($saturn == $get_next_sign || $saturn == $get_prev_sign) 
+        {
+            $array              = array("kemdruma_yoga" => "none");
+        }
+        else if($jupiter == $get_next_sign || $jupiter == $get_prev_sign) 
+        {
+            $array              = array("kemdruma_yoga" => "none");
+        }
+        else if($mercury == $get_next_sign || $mercury == $get_prev_sign) 
+        {
+            $array              = array("kemdruma_yoga" => "none");
+        }
+        else if($venus == $get_next_sign || $venus == $get_prev_sign) 
+        {
+            $array              = array("kemdruma_yoga" => "none");
+        }
+        else if($mars == $get_next_sign || $mars == $get_prev_sign) 
+        {
+            $array              = array("kemdruma_yoga" => "none");
+        }
+        else if($mars == $moon_sign || $jupiter == $moon_sign || $mercury == $moon_sign ||
+                $venus == $moon_sign || $saturn == $moon_sign)
+        {
+            $array              = array("kemdruma_yoga" => "<a href='https://www.astroisha.com/yogas/149-kemdruma-yoga' title='Kemdruma Yoga'>Kemdruma Yoga</a> gets cancelled in your horoscope due to a planet placed in same house as Moon.");
+        }
+        else
+        {
+            $array              = array("kemdruma_yoga" => "There is <a href='https://www.astroisha.com/yogas/149-kemdruma-yoga' title='Kemdruma Yoga'>Kemdruma Yoga</a> in your horoscope.");
+        }
+        return $array;
+    }
+    protected function checkAdhiYoga($moon, $mercury, $jupiter, $venus)
+    {
+        $moon_sign          = $this->calcDetails($moon);
+        $merc_sign          = $this->calcDetails($mercury);
+        $jup_sign           = $this->calcDetails($jupiter);
+        $ven_sign           = $this->calcDetails($venus);
+        $merc_dist          = $this->getHouseDistance($moon_sign, $merc_sign);
+        $jup_dist           = $this->getHouseDistance($moon_sign, $jup_sign);
+        $ven_dist           = $this->getHouseDistance($moon_sign, $ven_sign);
+        //echo $merc_dist." ".$jup_dist." ".$ven_dist;exit;
+        if($merc_dist == "6"&& $jup_dist=="7"&& $ven_dist=="8")
+        {
+            $array          = array("adhi_yoga"=>"There is <a href='https://www.astroisha.com/yogas/151-adhi-yoga' title='Adhi Yoga'>Adhi Yoga</a> in your horoscope.");
+        }
+        else if($merc_dist == "6"&& $jup_dist=="8"&& $ven_dist=="7")
+        {
+            $array          = array("adhi_yoga"=>"There is <a href='https://www.astroisha.com/yogas/151-adhi-yoga' title='Adhi Yoga'>Adhi Yoga</a> in your horoscope.");
+        }
+        else if($merc_dist == "7"&& $jup_dist=="8"&& $ven_dist=="6")
+        {
+            $array          = array("adhi_yoga"=>"There is <a href='https://www.astroisha.com/yogas/151-adhi-yoga' title='Adhi Yoga'>Adhi Yoga</a> in your horoscope.");
+        }
+         else if($merc_dist == "7"&& $jup_dist=="6"&& $ven_dist=="8")
+        {
+            $array          = array("adhi_yoga"=>"There is <a href='https://www.astroisha.com/yogas/151-adhi-yoga' title='Adhi Yoga'>Adhi Yoga</a> in your horoscope.");
+        }
+        else if($merc_dist == "8"&& $jup_dist=="6"&& $ven_dist=="7")
+        {
+            $array          = array("adhi_yoga"=>"There is <a href='https://www.astroisha.com/yogas/151-adhi-yoga' title='Adhi Yoga'>Adhi Yoga</a> in your horoscope.");
+        }
+        else if($merc_dist == "8"&& $jup_dist=="7"&& $ven_dist=="6")
+        {
+            $array          = array("adhi_yoga"=>"There is <a href='https://www.astroisha.com/yogas/151-adhi-yoga' title='Adhi Yoga'>Adhi Yoga</a> in your horoscope.");
+        }
+        else
+        {
+            $array          = array("adhi_yoga"=>"none");
+        }
+        return $array;
+    }
+    protected function checkChatusagara($data)
+    {
+        $asc                = $data['Ascendant'];
+        $asc_sign           = $this->calcDetails($asc);
+        $planets            = array("Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu");
+        $array              = array();
+        foreach($planets as $planet)
+        {
+            $planet_sign     = $this->calcDetails($data[$planet]);
+            $planet_dist     = $this->getHouseDistance($asc_sign, $planet_sign);
+            if($planet_sign     == $asc_sign)
+            {
+                $array_asc      = array("planet_asc"=>"yes");
+                $array          = array_merge($array, $array_asc);
+            }
+            else if($planet_dist    == "4")
+            {
+                $array_4        = array("planet_4"=>"yes");
+                $array          = array_merge($array,$array_4);
+            }
+            else if($planet_dist    == "7")
+            {
+                $array_7        = array("planet_7"=>"yes");
+                $array          = array_merge($array,$array_7);
+            }
+            else if($planet_dist    == "10")
+            {
+                $array_10       = array("planet_10"=>"yes");
+                $array          = array_merge($array,$array_10);
+            }
+        }
+        //print_r($array);exit;
+        if($array['planet_asc'] == "yes" && $array['planet_4'] == "yes" && $array['planet_7'] == "yes" && $array['planet_10'] == "yes")
+        {
+            $yoga           = array("chatusagara_yoga" => "There is <a href='' title='Chatusagara Yoga'>Chatusagara Yoga</a> in your horoscope");
+        }
+        else
+        {
+            $yoga           = array("chatusagara_yoga"  => "none");
+        }
+        return $yoga;
+    }
+    protected function checkRajlakshana($asc,$moon,$mercury,$jupiter,$venus)
+    {
+        $asc_sign           = $this->calcDetails($asc);
+        $moon_sign          = $this->calcDetails($moon);
+        $merc_sign          = $this->calcDetails($mercury);
+        $jup_sign           = $this->calcDetails($jupiter);
+        $ven_sign           = $this->calcDetails($venus);
+        $moon_dist          = $this->getHouseDistance($asc_sign, $moon_sign);
+        $merc_dist          = $this->getHouseDistance($asc_sign, $merc_sign);
+        $jup_dist           = $this->getHouseDistance($asc_sign, $jup_sign);
+        $ven_dist           = $this->getHouseDistance($asc_sign, $ven_sign);
+        
+        if(($moon_dist == "1" || $moon_dist=="4"||$moon_dist =="7"||$moon_dist=="10")&&
+           ($merc_dist == "1" || $merc_dist=="4"||$merc_dist =="7"||$merc_dist=="10") &&
+           ($jup_dist == "1" || $jup_dist=="4"||$jup_dist =="7"||$jup_dist=="10") &&
+           ($ven_dist == "1" || $ven_dist=="4"||$ven_dist =="7"||$ven_dist=="10"))
+        {
+            $array          = array("rajlakshana_yoga"  => "There is <a href='https://www.astroisha.com/yogas/155-rajlakshana' title='Rajlakshana Yoga'>Rajlakshana Yoga</a> in your horoscope");
+        }
+        else
+        {
+            $array          = array("rajlakshana_yoga"  => "none");
+        }
+        return $array;
+    }
+    protected function checkSakata($moon,$jup)
+    {
+        $moon_sign          = $this->calcDetails($moon);
+        $jup_sign           = $this->calcDetails($jup);
+        $dist               = $this->getHouseDistance($jup_sign, $moon_sign);
+        if($dist == "6" || $dist == "8" || $dist == "12")
+        {
+            $array          = array("sakata_yoga" => "There is <a href='https://www.astroisha.com/yogas/156-sakata-yoga' title='Sakata Yoga'>Sakata Yoga</a> in your horoscope.");
+        }
+        else
+        {
+            $array          = array("sakata_yoga"   => "none");
+        }
+        return $array;
+    }
+    protected function checkAmala($asc,$moon,$mercury,$jupiter,$venus)
+    {
+        $asc_sign           = $this->calcDetails($asc);
+        $moon_sign          = $this->calcDetails($moon);
+        $merc_sign          = $this->calcDetails($mercury);
+        $jup_sign           = $this->calcDetails($jupiter);
+        $ven_sign           = $this->calcDetails($venus);
+        $merc_dist_asc      = $this->getHouseDistance($asc_sign, $merc_sign);
+        $jup_dist_asc       = $this->getHouseDistance($asc_sign, $jup_sign);
+        $ven_dist_asc       = $this->getHouseDistance($asc_sign, $ven_sign);
+        $merc_dist_moo      = $this->getHouseDistance($moon_sign, $merc_sign);
+        $jup_dist_moo       = $this->getHouseDistance($moon_sign, $jup_sign);
+        $ven_dist_moo       = $this->getHouseDistance($moon_sign, $ven_sign);
+        
+        if($merc_dist_asc=="10" || $jup_dist_asc == "10" ||$ven_dist_asc == "10")
+        {
+            $array          = array("amala_yoga"  => "There is <a href='https://www.astroisha.com/yogas/157-amala-yoga' title='Amala Yoga'>Amala Yoga</a> in your horoscope");
+        }
+        else if($merc_dist_moo=="10" || $jup_dist_moo == "10" ||$ven_dist_moo == "10")
+        {
+            $array          = array("amala_yoga"  => "There is <a href='https://www.astroisha.com/yogas/157-amala-yoga' title='Amala Yoga'>Amala Yoga</a> in your horoscope");
+        }
+        else
+        {
+            $array          = array("amala_yoga"  => "none");
+        }
+        return $array;
     }
 }
