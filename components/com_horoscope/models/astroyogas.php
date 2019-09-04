@@ -112,6 +112,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $checkShrapit               = $this->checkShrapit($data['Saturn'],$data['Rahu'],$data['Ketu']);
         $checkGrahan                = $this->checkGrahan($data['Sun'],$data['Moon'],$data['Rahu'],$data['Ketu']);
         $checkPitru                 = $this->checkPitru($data['Sun'],$data['Saturn']);
+        $checkNBRY                  = $this->checkNBRY($data);
         $checkChandraMangal         = $this->checkChandraMangal($data['Moon'],$data['Mars']);
         $checkGajaKesari            = $this->checkGajaKesari($data['Moon'], $data['Jupiter']);
         $checkSasha                 = $this->checkSashaYoga($data['Ascendant'],$data['Moon'],$data['Saturn']);
@@ -278,6 +279,39 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             $array                  = array("pitru_dosha" => "none");
         }
         return $array;
+    }
+    protected function checkNBRY($data)
+    {
+        $asc_sign                   = $this->calcDetails($data['Ascendant']);
+        $moon_sign                  = $this->calcDetails($data['Moon']);
+        
+        $planets                    = array("Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn");
+        $deb_sign                   = array("Libra","Scorpio","Cancer","Pisces","Capricorn","Virgo","Aries");
+        $exal_planet                = array("Libra"=>"Saturn","Scorpio"=>"","Cancer"=>"Jupiter",
+                                            "Pisces"=>"Venus","Capricorn"=>"Mars","Virgo"=>"Mecury","Aries"=>"Sun");
+        $check_NBRY                 = array();
+        for($i=0; $i < count($planets);$i++)
+        {
+            $planet                 = $planets[$i];
+            if(strpos($planet,":r"))
+            {
+                $status     = "retro";
+            }
+            else
+            {
+                $status     = "normal";
+            }
+            $planet_sign            = $this->calcDetails($data[$planet]);
+            $planet_from_asc        = $this->getHouseDistance($asc_sign, $planet_sign);
+            $planet_from_moon       = $this->getHouseDistance($moon_sign, $planet_sign);
+            $sign                   = $deb_sign[$i];
+            if($planet_sign == $sign)
+            {
+                echo $planet;exit;
+            }
+        }
+        
+        
     }
     protected function checkChandraMangal($moon,$mars)
     {
