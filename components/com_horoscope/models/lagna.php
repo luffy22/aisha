@@ -529,7 +529,7 @@ class HoroscopeModelLagna extends JModelItem
         { 
             $j              = $i-1;
             $planet         = $planets[$j];
-            $planet_sign    = $this->calcDDetails($data[$planet]);
+            $planet_sign    = $this->calcDetails($data[$planet]);
             if($house_7 == $planet_sign)
             {
                 $planet     = $planets[$j];

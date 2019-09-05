@@ -283,13 +283,16 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
     protected function checkNBRY($data)
     {
         $asc_sign                   = $this->calcDetails($data['Ascendant']);
-        $moon_sign                  = $this->calcDetails($data['Moon']);
-        
+       
         $planets                    = array("Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn");
         $deb_sign                   = array("Libra","Scorpio","Cancer","Pisces","Capricorn","Virgo","Aries");
-        $exal_planet                = array("Libra"=>"Saturn","Scorpio"=>"","Cancer"=>"Jupiter",
+        $exal_planet                = array("Libra"=>"Saturn","Scorpio"=>"","Cancer"=>"Jupiter","Taurus"=>"Moon",
                                             "Pisces"=>"Venus","Capricorn"=>"Mars","Virgo"=>"Mecury","Aries"=>"Sun");
-        $check_NBRY                 = array();
+        $own_sign                   = array("Aries"=>"Mars", "Taurus"=>"Venus","Gemini"=>"Mercury",
+                                            "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
+                                            "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
+                                            "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
+        $array                      = array();   // empty array for checks
         for($i=0; $i < count($planets);$i++)
         {
             $planet                 = $planets[$i];
@@ -303,12 +306,63 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             }
             $planet_sign            = $this->calcDetails($data[$planet]);
             $planet_from_asc        = $this->getHouseDistance($asc_sign, $planet_sign);
-            $planet_from_moon       = $this->getHouseDistance($moon_sign, $planet_sign);
             $sign                   = $deb_sign[$i];
             if($planet_sign == $sign)
             {
-                echo $planet;exit;
+                // check1 sees if planet is in a quadrant or not
+                if($planet_from_asc == "1" || $planet_from_asc == "4"||
+                   $planet_from_asc == "7" || $planet_from_asc == "7")
+                {
+                    $check1         = array("check_1" => "pass");
+                    $array          = array_merge($array, $check1);
+                }
+                else
+                {
+                    $check1         = array("check_1" => "fail");
+                    $array          = array_merge($array, $check1);
+                }
+                      // check2 sees if there is exalted or own-sign planet as co-tenant
+                if($this->calcDetails($data[$exal_planet[$sign]]) == $sign || 
+                    $this->calcDetails($data[$own_sign[$sign]]) == $sign)
+                {
+                    $check2         = array("check_2" => "pass");
+                    $array          = array_merge($array, $check2);
+                }
+                else
+                {
+                    $check2         = array("check_2" => "fail");
+                    $array          = array_merge($array, $check2);
+                }
+                // check3 sees if signs ruled by debilitated planet have an exalted planet in them
+                $pair              = array_keys($own_sign, $planet);
+                
+                for($i=0; $i < count($pair);$i++)
+                {
+                    $exal           = $exal_planet[$pair[$i]];  // checks to see which planet is exalted in the sign
+                    $exal_planet_sign   = $this->calcDetails($data[$exal]); // checks the horoscope sign of exalted planet
+                    
+                    if($exal_planet_sign == $pair)
+                    {
+                        $check3     = array("check_3" => "pass");
+                        $array          = array_merge($array, $check3);
+                        break;
+                    }
+                    else
+                    {
+                        $check3     = array("check_3" => "fail");
+                        $array      = array_merge($array, $check3);
+                    }
+                }
+                $pl                 = $own_sign[$sign];  // planetary lord of sign where debilitated planet is placed
+                $pl_sign            = $this->calcDetails($data[$pl]);  // sign where that planetary lord is placed
+                $pl_from_asc        = $this->getHouseDistance($asc_sign, $pl_sign);
+               /* if(($pl_from_asc == "1" || $pl_from_asc == "4" || 
+                    $pl_from_asc == "7" || $pl_from_asc == "10")&&($pl_sign == ))
+                {
+                    
+                }*/
             }
+           
         }
         
         
