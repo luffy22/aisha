@@ -283,88 +283,134 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
     protected function checkNBRY($data)
     {
         $asc_sign                   = $this->calcDetails($data['Ascendant']);
-       
+
         $planets                    = array("Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn");
-        $deb_sign                   = array("Libra","Scorpio","Cancer","Pisces","Capricorn","Virgo","Aries");
-        $exal_planet                = array("Libra"=>"Saturn","Scorpio"=>"","Cancer"=>"Jupiter","Taurus"=>"Moon",
+        $deb                        = array("Sun"=>"Libra","Moon"=>"Scorpio","Mars"=>"Cancer",
+                                            "Mercury"=>"Pisces","Jupiter"=>"Capricorn",
+                                            "Venus"=>"Virgo","Saturn"=>"Aries");
+        $exal_sign                  = array("Libra"=>"Saturn","Scorpio"=>"","Cancer"=>"Jupiter","Taurus"=>"Moon",
                                             "Pisces"=>"Venus","Capricorn"=>"Mars","Virgo"=>"Mecury","Aries"=>"Sun");
         $own_sign                   = array("Aries"=>"Mars", "Taurus"=>"Venus","Gemini"=>"Mercury",
                                             "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
                                             "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
                                             "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
         $array                      = array();   // empty array for checks
-        for($i=0; $i < count($planets);$i++)
+        $j                          = 1;
+        for($i=0;$i< count($planets);$i++)
         {
-            $planet                 = $planets[$i];
-            if(strpos($planet,":r"))
-            {
-                $status     = "retro";
-            }
-            else
-            {
-                $status     = "normal";
-            }
+           
+           $sign                    = $this->calcDetails($data[$planets[$i]]);
+           $deb_sign                = $deb[$planets[$i]];
+           if($sign == $deb_sign)
+           {
+               $deb_planets         = array("deb_planet_".$j => $planets[$i]);
+               $array               = array_merge($array,$deb_planets);
+               $j                   = $j+1;
+           }
+        }
+        $nbry_planets               = array();
+        foreach($array as $planet)
+        {
+            if(strpos($data[$planet],":r")){$status = "retro";}else{$status = "normal";}
             $planet_sign            = $this->calcDetails($data[$planet]);
             $planet_from_asc        = $this->getHouseDistance($asc_sign, $planet_sign);
-            $sign                   = $deb_sign[$i];
-            if($planet_sign == $sign)
+            $deb_sign               = $deb[$planet];
+            $exal_planet            = $exal_sign[$deb_sign]; //echo $exal_planet;exit;
+            $own_planet             = $own_sign[$deb_sign]; //echo $own_planet;exit;
+            $ex_pl_sign             = $this->calcDetails($data[$exal_planet]);  // horoscope placement sign of planet which gets exalted in debilitated sign
+            $own_pl_sign            = $this->calcDetails($data[$own_planet]);   // horoscope placement sign of planet which owns the debilitated sign  
+
+            if($planet_sign == $deb_sign)
             {
-                // check1 sees if planet is in a quadrant or not
+                 // check1 sees if planet is in a quadrant or not
                 if($planet_from_asc == "1" || $planet_from_asc == "4"||
                    $planet_from_asc == "7" || $planet_from_asc == "7")
                 {
-                    $check1         = array("check_1" => "pass");
-                    $array          = array_merge($array, $check1);
+                    $check1         = "pass";
                 }
                 else
                 {
-                    $check1         = array("check_1" => "fail");
-                    $array          = array_merge($array, $check1);
+                    $check1         = "fail";
                 }
-                      // check2 sees if there is exalted or own-sign planet as co-tenant
-                if($this->calcDetails($data[$exal_planet[$sign]]) == $sign || 
-                    $this->calcDetails($data[$own_sign[$sign]]) == $sign)
+                // check2 sees if there is exalted or own-sign planet as co-tenant
+                if($deb_sign == $ex_pl_sign || $deb_sign == $own_pl_sign)
                 {
-                    $check2         = array("check_2" => "pass");
-                    $array          = array_merge($array, $check2);
+                    $check2         = "pass";
                 }
                 else
                 {
-                    $check2         = array("check_2" => "fail");
-                    $array          = array_merge($array, $check2);
+                    $check2         = "fail";
                 }
                 // check3 sees if signs ruled by debilitated planet have an exalted planet in them
                 $pair              = array_keys($own_sign, $planet);
-                
                 for($i=0; $i < count($pair);$i++)
                 {
-                    $exal           = $exal_planet[$pair[$i]];  // checks to see which planet is exalted in the sign
-                    $exal_planet_sign   = $this->calcDetails($data[$exal]); // checks the horoscope sign of exalted planet
-                    
-                    if($exal_planet_sign == $pair)
+                    $ex_pl          = $exal_sign[$pair[$i]];  // checks to see which planet is exalted in the sign
+                    $ex_pl_loc      = $this->calcDetails($data[$ex_pl]); // checks the horoscope sign of exalted planet
+                    if($ex_pl_loc == $pair[$i])
                     {
-                        $check3     = array("check_3" => "pass");
-                        $array          = array_merge($array, $check3);
-                        break;
+                        $check3     = "pass";break; // will break the loop if one of the signs has an exalted planet
                     }
                     else
                     {
-                        $check3     = array("check_3" => "fail");
-                        $array      = array_merge($array, $check3);
+                        $check3     = "fail";
                     }
                 }
-                $pl                 = $own_sign[$sign];  // planetary lord of sign where debilitated planet is placed
-                $pl_sign            = $this->calcDetails($data[$pl]);  // sign where that planetary lord is placed
-                $pl_from_asc        = $this->getHouseDistance($asc_sign, $pl_sign);
-               /* if(($pl_from_asc == "1" || $pl_from_asc == "4" || 
-                    $pl_from_asc == "7" || $pl_from_asc == "10")&&($pl_sign == ))
+                // check4 checks if planetary lord is exalted in one of the quadrants from ascendant
+                //print_r($array);exit;
+                $ex_sign            = array_search($own_planet, $exal_sign);        // checks the exalted sign of planetary lord
+                $pl_from_asc        = $this->getHouseDistance($asc_sign, $own_pl_sign);     // gets distance from ascendant
+                
+                if(($pl_from_asc == "1" || $pl_from_asc == "4" || 
+                    $pl_from_asc == "7" || $pl_from_asc == "10")&&($own_pl_sign == $ex_sign))
                 {
-                    
-                }*/
+                    $check4         = "pass";
+                }
+                else
+                {
+                    $check4         = "fail";
+                }
+                 // check5 checks if planet is retrograde in a quadrant from ascendant
+                if($status == "retro" && ($pl_from_asc == "1" || $pl_from_asc == "4" || 
+                    $pl_from_asc == "7" || $pl_from_asc == "10"))
+                {
+                    $check5         = "pass";
+                }
+                else
+                {
+                    $check5         = "fail";
+                }
+                if($check1 == "pass" && $check2 == "pass")
+                {
+                    "nbry_".$j          = array("nbry_yoga" => $planet." does NBRY in your horoscope.");
+                    $j                  = $j+1;
+                }
+                else if($check1 == "pass" && $check3 == "pass")
+                {
+                    "nbry_".$j          = array("nbry_yoga" => $planet." does NBRY in your horoscope.");
+                    $j                  = $j+1;
+                }
+                else if($check1 == "pass" && $check4 == "pass")
+                {
+                    "nbry_".$j          = array("nbry_yoga" => $planet." does NBRY in your horoscope.");
+                    $j                  = $j+1;
+                }
+                else if($check1 == "true" && $check5 == "true")
+                {
+                    "nbry_".$j          = array("nbry_yoga" => $planet." does correction for debilitation in your horoscope. May not transform into NBRY.");
+                    $j                  = $j+1;
+                }
+                else
+                {
+                    "nbry_".$j          = array("nbry_yoga" => "none");
+                    $j                  = $j+1;   
+                }
+                print_r(${"nbry_".$j});exit;
+                $nbry_planets       = array_merge($nbry_planets,${"nbry_".$j});
             }
-           
+            
         }
-        
+        print_r($nbry_planets);exit;
         
     }
     protected function checkChandraMangal($moon,$mars)
