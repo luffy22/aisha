@@ -112,6 +112,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $checkShrapit               = $this->checkShrapit($data['Saturn'],$data['Rahu'],$data['Ketu']);
         $checkGrahan                = $this->checkGrahan($data['Sun'],$data['Moon'],$data['Rahu'],$data['Ketu']);
         $checkPitru                 = $this->checkPitru($data['Sun'],$data['Saturn']);
+        $checkKaalSarpa             = $this->checkKaalSarpa($data);
         $checkNBRY                  = $this->checkNBRY($data);
         $checkChandraMangal         = $this->checkChandraMangal($data['Moon'],$data['Mars']);
         $checkGajaKesari            = $this->checkGajaKesari($data['Moon'], $data['Jupiter']);
@@ -280,6 +281,33 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         return $array;
     }
+    protected function checkKaalSarpa($data)
+    {
+        $asc_sign                   = $this->calcDetails($data['Ascendant']);
+        $rahu_sign                  = $this->calcDetails($data['Rahu']);
+        $ketu_sign                  = $this->calcDetails($data['Ketu']);
+        $rahu_dist                  = $this->getHouseDistance($asc_sign, $rahu_sign);
+        $ketu_dist                  = $this->getHouseDistance($asc_sign,$ketu_sign);
+        $planets                    = array("Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn");
+        $array                      = array();$upper = array();$lower = array();
+        echo $rahu_dist." ".$ketu_dist;exit;
+        foreach($planets as $planet)
+        {
+            $planet_sign            = $this->calcDetails($data[$planet]);
+            $planet_dist            = $this->getHouseDistance($asc_sign,$planet_sign);
+           
+            if($rahu_dist      < $ketu_dist)
+            {
+                echo "calls 1";exit;
+            }
+            else
+            {
+                echo "calls 2";exit;
+            }
+        }
+        exit;
+        
+    }
     protected function checkNBRY($data)
     {
         $asc_sign                   = $this->calcDetails($data['Ascendant']);
@@ -382,36 +410,28 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                 }
                 if($check1 == "pass" && $check2 == "pass")
                 {
-                    "nbry_".$j          = array("nbry_yoga" => $planet." does NBRY in your horoscope.");
-                    $j                  = $j+1;
+                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> in your horoscope.";
                 }
                 else if($check1 == "pass" && $check3 == "pass")
                 {
-                    "nbry_".$j          = array("nbry_yoga" => $planet." does NBRY in your horoscope.");
-                    $j                  = $j+1;
+                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> in your horoscope.";
                 }
                 else if($check1 == "pass" && $check4 == "pass")
                 {
-                    "nbry_".$j          = array("nbry_yoga" => $planet." does NBRY in your horoscope.");
-                    $j                  = $j+1;
+                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> in your horoscope.";
                 }
                 else if($check1 == "true" && $check5 == "true")
                 {
-                    "nbry_".$j          = array("nbry_yoga" => $planet." does correction for debilitation in your horoscope. May not transform into NBRY.");
-                    $j                  = $j+1;
+                    $nbry_planets[]         = $planet." does correction in your horoscope. <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> may or may not happen.";
                 }
                 else
                 {
-                    "nbry_".$j          = array("nbry_yoga" => "none");
-                    $j                  = $j+1;   
+                    $nbry_planets[]         = $planet." none";
                 }
-                print_r(${"nbry_".$j});exit;
-                $nbry_planets       = array_merge($nbry_planets,${"nbry_".$j});
             }
             
         }
-        print_r($nbry_planets);exit;
-        
+        return $nbry_planets;     
     }
     protected function checkChandraMangal($moon,$mars)
     {
