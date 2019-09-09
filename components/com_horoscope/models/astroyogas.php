@@ -114,6 +114,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $checkPitru                 = $this->checkPitru($data['Sun'],$data['Saturn']);
         $checkKaalSarpa             = $this->checkKaalSarpa($data);
         $checkNBRY                  = $this->checkNBRY($data);
+        $checkVRY                   = $this->checkVRY($data);
         $checkChandraMangal         = $this->checkChandraMangal($data['Moon'],$data['Mars']);
         $checkGajaKesari            = $this->checkGajaKesari($data['Moon'], $data['Jupiter']);
         $checkSasha                 = $this->checkSashaYoga($data['Ascendant'],$data['Moon'],$data['Saturn']);
@@ -290,7 +291,9 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $ketu_dist                  = $this->getHouseDistance($asc_sign,$ketu_sign);
         $planets                    = array("Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn");
         $array                      = array();$upper = array();$lower = array();
-        echo $rahu_dist." ".$ketu_dist;exit;
+        $j                          = 0;
+        $k                          = 0;
+        //echo $rahu_dist." ".$ketu_dist."<br/>";
         foreach($planets as $planet)
         {
             $planet_sign            = $this->calcDetails($data[$planet]);
@@ -298,15 +301,38 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
            
             if($rahu_dist      < $ketu_dist)
             {
-                echo "calls 1";exit;
+                if($planet_dist >= $rahu_dist && $planet_dist <= $ketu_dist)
+                {
+                    
+                     $j         = $j+1;
+                }
+                else
+                {
+                    $k          = $k+1;
+                }
             }
             else
             {
-                echo "calls 2";exit;
+                //$k                  = $k+1;
+                if($planet_dist <= $rahu_dist && $planet_dist > $ketu_dist)
+                {
+                    $j          = $j+1;
+                }
+                else
+                {
+                    $k          = $k+1;
+                }
             }
         }
-        exit;
-        
+        if($j == "7" || $k == "7")
+        {
+            $array              = array("kaal_sarpa"=> "There is Kaal Sarpa Yoga in your horoscope.");
+        }
+        else
+        {
+            $array              = array("kaal_sarpa"=>"none");
+        }
+        return $array;
     }
     protected function checkNBRY($data)
     {
@@ -432,6 +458,19 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             
         }
         return $nbry_planets;     
+    }
+    protected function checkVRY($data)
+    {
+        $own_sign                   = array("Aries"=>"Mars", "Taurus"=>"Venus","Gemini"=>"Mercury",
+                                            "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
+                                            "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
+                                            "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
+        $asc_sign                   = $this->calcDetails($data['Ascendant']);
+        $sixth_sign                 = $this->getHouseSign($asc_sign, 6);
+        $eigth_sign                 = $this->getHouseSign($asc_sign, 8);
+        $twelfth_sign               = $this->getHouseSign($asc_sign, 12);
+        $sixth_lord                 = $own_sign[$sixth_sign];
+        
     }
     protected function checkChandraMangal($moon,$mars)
     {

@@ -29,6 +29,10 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/divorce</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
   <loc>https://www.astroisha.com/planets</loc>
   <changefreq>monthly</changefreq>
 </url>
@@ -529,10 +533,6 @@
   <changefreq>monthly</changefreq>
 </url>
 <url>
-  <loc>https://www.astroisha.com/featured/100-ltd</loc>
-  <changefreq>monthly</changefreq>
-</url>
-<url>
   <loc>https://www.astroisha.com/featured/112-dont-blame-stars</loc>
   <changefreq>monthly</changefreq>
 </url>
@@ -542,10 +542,6 @@
 </url>
 <url>
   <loc>https://www.astroisha.com/featured/122-fasting-science-2</loc>
-  <changefreq>monthly</changefreq>
-</url>
-<url>
-  <loc>https://www.astroisha.com/featured/132-gantavya</loc>
   <changefreq>monthly</changefreq>
 </url>
 <url>
@@ -633,8 +629,8 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/transits/434-saturn-retro-sag</loc>
-	<changefreq>monthly</changefreq>
+	<loc>https://www.astroisha.com/transits/359-saturn-sagittarius2</loc>
+	<changefreq>monhtly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/transits/399-jupiter-scorpio</loc>
@@ -866,6 +862,14 @@
 </url>
 <url>
 	<loc>https://www.astroisha.com/yogas/443-harihar-yoga</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/yogas/447-grahan-yoga</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/yogas/451-angaraka-yoga</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
@@ -1360,6 +1364,10 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/planet-bhavas/446-ketu-4th-house</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
   <loc>https://www.astroisha.com/monthly</loc>
   <changefreq>monthly</changefreq>
 </url>
@@ -1580,6 +1588,10 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/career/343-malefics-career</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
 	<loc>https://www.astroisha.com/finance</loc>
 	<changefreq>monthly</changefreq>
 </url>
@@ -1597,6 +1609,14 @@
 </url>
 <url>
 	<loc>https://www.astroisha.com/finance/433-gambling-astro</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/finance/448-gold-astrology</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/finance/450-property-astrology</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
@@ -1722,10 +1742,6 @@
 <url>
   <loc>https://www.astroisha.com/remedies/199-ketu-remedies</loc>
   <changefreq>monthly</changefreq>
-</url>
-<url>
-	<loc>https://www.astroisha.com/remedies/325-finance-remedy</loc>
-	<changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/gemstones</loc>
