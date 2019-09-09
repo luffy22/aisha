@@ -115,6 +115,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $checkKaalSarpa             = $this->checkKaalSarpa($data);
         $checkNBRY                  = $this->checkNBRY($data);
         $checkVRY                   = $this->checkVRY($data);
+        $checkParivartana           = $this->checkParivartana($data);
         $checkChandraMangal         = $this->checkChandraMangal($data['Moon'],$data['Mars']);
         $checkGajaKesari            = $this->checkGajaKesari($data['Moon'], $data['Jupiter']);
         $checkSasha                 = $this->checkSashaYoga($data['Ascendant'],$data['Moon'],$data['Saturn']);
@@ -131,6 +132,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $checkRajlakshana           = $this->checkRajlakshana($data['Ascendant'],$data["Moon"],$data['Mercury'],$data['Jupiter'],$data['Venus']);
         $checkSakata                = $this->checkSakata($data['Moon'],$data['Jupiter']);
         $checkAmala                 = $this->checkAmala($data['Ascendant'],$data['Moon'],$data['Mercury'],$data['Jupiter'],$data['Venus']);
+        
     }
     protected function removeRetro($planet)
     {
@@ -324,9 +326,10 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                 }
             }
         }
+        //echo $j." ".$k;exit;
         if($j == "7" || $k == "7")
         {
-            $array              = array("kaal_sarpa"=> "There is Kaal Sarpa Yoga in your horoscope.");
+            $array              = array("kaal_sarpa"=> "There is <a href='https://www.astroisha.com/yogas/91-kaal-sarp' title='kaal sarpa yoga'>Kaal Sarpa Yoga</a> in your horoscope.");
         }
         else
         {
@@ -467,10 +470,90 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                                             "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
         $asc_sign                   = $this->calcDetails($data['Ascendant']);
         $sixth_sign                 = $this->getHouseSign($asc_sign, 6);
-        $eigth_sign                 = $this->getHouseSign($asc_sign, 8);
+        $eight_sign                 = $this->getHouseSign($asc_sign, 8);
         $twelfth_sign               = $this->getHouseSign($asc_sign, 12);
         $sixth_lord                 = $own_sign[$sixth_sign];
+        $eight_lord                 = $own_sign[$eight_sign];
+        $twelfth_lord               = $own_sign[$twelfth_sign];
+        $sixth_lord_pl              = $this->calcDetails($data[$sixth_lord]);  // placement sign of sixth house lord
+        $eight_lord_pl              = $this->calcDetails($data[$eight_lord]);   // placement sign of eight house lord
+        $twelfth_lord_pl            = $this->calcDetails($data[$twelfth_lord]); // placement sign of twelfth house lord
+        $array                      = array();
         
+        if($twelfth_lord_pl == $sixth_sign || $eight_lord_pl == $sixth_sign ||
+            $sixth_lord_pl == $sixth_sign)
+        {
+            $harsha                 = array("harsha" => "There is Harsha Yoga of the <a href='https://www.astroisha.com/yogas/76-vry' title='Vipreeta Raj Yoga'>Vipreeta Raj Yoga</a> in your horoscope.");
+            $array                  = array_merge($array, $harsha);
+        }
+        else
+        {
+            $harsha                 = array("harsha" => "none");
+            $array                  = array_merge($array, $harsha);
+        }
+        if($twelfth_lord_pl == $eight_sign || $eight_lord_pl == $eight_sign ||
+            $sixth_lord_pl == $eight_sign)
+        {
+            $sarala                 = array("sarala" => "There is Sarala Yoga of the <a href='https://www.astroisha.com/yogas/76-vry' title='Vipreeta Raj Yoga'>Vipreeta Raj Yoga</a> in your horoscope.");
+            $array                  = array_merge($array, $sarala);
+        }
+        else
+        {
+            $sarala                 = array("sarala" => "none");
+            $array                  = array_merge($array, $sarala);
+        }
+        if($twelfth_lord_pl == $twelfth_sign || $eight_lord_pl == $twelfth_sign ||
+            $sixth_lord_pl == $twelfth_sign)
+        {
+            $vimala                  = array("vimala" => "There is Vimala Yoga of the <a href='https://www.astroisha.com/yogas/76-vry' title='Vipreeta Raj Yoga'>Vipreeta Raj Yoga</a> in your horoscope.");
+            $array                  = array_merge($array, $vimala);
+        }
+        else
+        {
+            $vimala                 = array("vimala" => "none");
+            $array                  = array_merge($array, $vimala);
+        }
+        return $array;
+    }
+    protected function checkParivartana($data)
+    {
+        $asc_sign                   = $this->calcDetails($data['Ascendant']);
+        $own_sign                   = array("Aries"=>"Mars", "Taurus"=>"Venus","Gemini"=>"Mercury",
+                                            "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
+                                            "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
+                                            "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
+        $array                      = array();
+        $i                          = 1;
+        foreach($data as $key=>$planet)
+        {
+            if($key == "Sun" || $key == "Moon" || $key == "Mars" ||
+               $key == "Mercury" || $key == "Jupiter" || 
+               $key == "Venus" || $key == "Saturn")
+            {
+                $pl_sign            = $this->calcDetails($planet);  // checks the sign of planet
+                $pl_sign_lord       = $own_sign[$pl_sign]; // checks the lord of the sign where planet is located
+                $pl_lord_loc        = $this->calcDetails($data[$pl_sign_lord]);
+                $sign_of_pl_lord    = $own_sign[$pl_lord_loc];
+                //echo $key." ".$pl_sign." ".$pl_sign_lord." ".$pl_lord_loc." ".$sign_of_pl_lord;exit;
+                if($key == $sign_of_pl_lord && $key !== $pl_sign_lord)
+                {
+                    unset($data[$key]);unset($data[$sign_of_pl_lord]);
+                    $parivar        = array("parivartan_yoga_".$i => $key." and ".$pl_sign_lord." do <a href='https://www.astroisha.com/yogas/83-payo' title='Parivartana Yoga'>Parivartana Yoga</a> in your horoscope.");        
+                    $array          = array_merge($array, $parivar);
+                    $i              = $i + 1;
+                }
+                else
+                {   
+                    continue;
+                }
+                //if(($sun_lord == "Moon" && $moon_lord == "Sun")||($sun_lord == "Mars"))
+            }
+        }
+        if(empty($array))
+        {
+            $array                  = array("parivartana_yoga" => "none");
+        }
+        return $array;
     }
     protected function checkChandraMangal($moon,$mars)
     {
@@ -874,7 +957,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         //print_r($array);exit;
         if($array['planet_asc'] == "yes" && $array['planet_4'] == "yes" && $array['planet_7'] == "yes" && $array['planet_10'] == "yes")
         {
-            $yoga           = array("chatusagara_yoga" => "There is <a href='' title='Chatusagara Yoga'>Chatusagara Yoga</a> in your horoscope");
+            $yoga           = array("chatusagara_yoga" => "There is <a href='https://www.astroisha.com/yogas/152-chatusagara-yoga' title='Chatusagara Yoga'>Chatusagara Yoga</a> in your horoscope");
         }
         else
         {
