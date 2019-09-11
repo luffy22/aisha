@@ -105,19 +105,26 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         # Planet Name, Planet Degree, Planet Speed per day
         $asc                        = $this->getAscendant($user_data);
         $planets                    = $this->getPlanets($output);
-        $data                       = array_merge($asc,$planets);
-        $checkVishYoga              = $this->checkVishYoga($data['Moon'],$data['Saturn']);
-        $checkBudhAditya            = $this->checkBudhAditya($data['Sun'],$data['Mercury']);
+        $planets                    = array_merge($asc,$planets);
+        $data                       = array();
+        foreach($planets as $key => $planet)
+        {
+            $planet_sign            = $this->calcDetails($planet);
+            $array                  = array($key => $planet_sign);
+            $data                   = array_merge($data, $array);
+        }
+        $checkVishYoga              = $this->checkVishYoga($planets['Moon'],$planets['Saturn']);
+        $checkBudhAditya            = $this->checkBudhAditya($planets['Sun'],$planets['Mercury']);
         $checkVipraChandal          = $this->checkVipraChandal($data['Jupiter'],$data['Rahu']);
         $checkShrapit               = $this->checkShrapit($data['Saturn'],$data['Rahu'],$data['Ketu']);
         $checkGrahan                = $this->checkGrahan($data['Sun'],$data['Moon'],$data['Rahu'],$data['Ketu']);
-        $checkPitru                 = $this->checkPitru($data['Sun'],$data['Saturn']);
+        $checkPitru                 = $this->checkPitru($planets['Sun'],$planets['Saturn']);
         $checkKaalSarpa             = $this->checkKaalSarpa($data);
         $checkNBRY                  = $this->checkNBRY($data);
         $checkVRY                   = $this->checkVRY($data);
         $checkParivartana           = $this->checkParivartana($data);
-        $checkChandraMangal         = $this->checkChandraMangal($data['Moon'],$data['Mars']);
-        $checkGajaKesari            = $this->checkGajaKesari($data['Moon'], $data['Jupiter']);
+        $checkChandraMangal         = $this->checkChandraMangal($planets['Moon'],$planets['Mars']);
+        $checkGajaKesari            = $this->checkGajaKesari($planets['Moon'], $planets['Jupiter']);
         $checkSasha                 = $this->checkSashaYoga($data['Ascendant'],$data['Moon'],$data['Saturn']);
         $checkHansa                 = $this->checkHansaYoga($data['Ascendant'],$data['Moon'],$data['Jupiter']);
         $checkRuchaka               = $this->checkRuchakaYoga($data['Ascendant'], $data['Moon'], $data['Mars']);
@@ -132,7 +139,11 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $checkRajlakshana           = $this->checkRajlakshana($data['Ascendant'],$data["Moon"],$data['Mercury'],$data['Jupiter'],$data['Venus']);
         $checkSakata                = $this->checkSakata($data['Moon'],$data['Jupiter']);
         $checkAmala                 = $this->checkAmala($data['Ascendant'],$data['Moon'],$data['Mercury'],$data['Jupiter'],$data['Venus']);
-        
+        $checkKahala                = $this->checkKahala($data);
+        $checkVesi                  = $this->checkVesi($data);
+        $checkObyachari             = $this->checkObyachari($data);
+        $checkMahabhagya            = $this->checkMahabhagyaYoga($user_data, $data);
+        $checkPushkala              = $this->checkPushkala($data);
     }
     protected function removeRetro($planet)
     {
@@ -150,11 +161,11 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             if((int)$diff <= 12)
             {
-                $array              = array("vish_yoga" => "There is a strong <a href='https://www.astroisha.com/yogas/74-visha-yoga' title='vish yoga' >vish yoga</a> in your horoscope. Your life could be full of difficulties.");
+                $array              = array("vish_yoga" => "There is a strong <a href='https://www.astroisha.com/yogas/74-visha-yoga' title='vish yoga' >vish yoga</a> formed in your horoscope. Your life could be full of difficulties.");
             }
             else
             {
-                $array              = array("visha_yoga" => "There is <a href='https://www.astroisha.com/yogas/74-visha-yoga' title='vish yoga' >vish yoga</a> in your horoscope. Some troubles in life are expected.");
+                $array              = array("visha_yoga" => "There is <a href='https://www.astroisha.com/yogas/74-visha-yoga' title='vish yoga' >vish yoga</a> formed in your horoscope. Some troubles in life are expected.");
             }
         }
         else
@@ -173,15 +184,15 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             if(($sun_sign == "Leo" || $sun_sign == "Gemini" || $sun_sign == "Virgo")&&((int)$diff <= 12))
             {
-                $array              = array("budh_aditya" => "There is a very strong <a href='https://www.astroisha.com/yogas/162-budh-aditya'  title='budh-aditya yoga'>budh-aditya yoga</a> in a favorable sign in your horoscope.");
+                $array              = array("budh_aditya" => "There is a very strong <a href='https://www.astroisha.com/yogas/162-budh-aditya'  title='budh-aditya yoga'>budh-aditya yoga</a> in a favorable sign formed in your horoscope.");
             }
             else  if(($sun_sign !== "Leo" || $sun_sign !== "Gemini" || $sun_sign !== "Virgo")&&((int)$diff <= 12))
             {
-                $array              = array("budh_aditya" => "There is a strong <a href='https://www.astroisha.com/yogas/162-budh-aditya'  title='budh-aditya yoga'>budh-aditya yoga</a> in your horoscope.");
+                $array              = array("budh_aditya" => "There is a strong <a href='https://www.astroisha.com/yogas/162-budh-aditya'  title='budh-aditya yoga'>budh-aditya yoga</a> formed in your horoscope.");
             }
             else 
             {
-                $array              = array("budh_aditya" => "There is a mild <a href='https://www.astroisha.com/yogas/162-budh-aditya'  title='budh-aditya yoga'>budh-aditya yoga</a> in your horoscope.");
+                $array              = array("budh_aditya" => "There is a mild <a href='https://www.astroisha.com/yogas/162-budh-aditya'  title='budh-aditya yoga'>budh-aditya yoga</a> formed in your horoscope.");
             }   
             
         }
@@ -192,19 +203,16 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         return $array;
     }
     protected function checkVipraChandal($jup, $rahu)
-    {
-        $jup_sign                   = $this->calcDetails($jup);
-        $rahu_sign                  = $this->calcDetails($rahu);
-        
-        if($jup_sign == $rahu_sign)
+    {       
+        if($jup == $rahu)
         {
             if($jup_sign == "Sagittarius" || $jup_sign == "Pisces")
             {
-                $array                  = array("vipra_chandal" => "There is <a href='https://www.astroisha.com/yogas/77-vcy'  title='vipra-chandal yoga'>vipra-chandal yoga</a> in Jupiter's sign in your horoscope. Though its a bad yoga it can work in your favour if you accomodate traits of Jupiter in your life.");
+                $array                  = array("vipra_chandal" => "There is <a href='https://www.astroisha.com/yogas/77-vcy'  title='vipra-chandal yoga'>vipra-chandal yoga</a> in Jupiter's sign formed in your horoscope. Though its a bad yoga it can work in your favour if you accomodate traits of Jupiter in your life.");
             }
             else 
             {
-                $array                  = array("vipra_chandal" => "There is <a href='https://www.astroisha.com/yogas/77-vcy'  title='vipra-chandal yoga'>vipra-chandal yoga</a> in your horoscope. Troubles in life are possible especially if you try shortcuts in life.");
+                $array                  = array("vipra_chandal" => "There is <a href='https://www.astroisha.com/yogas/77-vcy'  title='vipra-chandal yoga'>vipra-chandal yoga</a> formed in your horoscope. Troubles in life are possible especially if you try shortcuts in life.");
             }
         }
         else
@@ -214,18 +222,14 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         return $array;
     }
     protected function checkShrapit($sat, $rahu, $ketu)
-    {
-        $sat_sign                   = $this->calcDetails($sat);
-        $rahu_sign                  = $this->calcDetails($rahu);
-        $ketu_sign                  = $this->calcDetails($ketu);
-        
-        if($sat_sign == $rahu_sign)
+    {  
+        if($sat == $rahu)
         {
-            $array                  = array("shrapit_yoga" => "There is <a href='https://www.astroisha.com/yogas/391-shrapit-association' title='shrapit yoga' >shrapit yoga</a> in your horoscope due to Saturn and Rahu joining together in the same sign.");
+            $array                  = array("shrapit_yoga" => "There is <a href='https://www.astroisha.com/yogas/391-shrapit-association' title='shrapit yoga' >shrapit yoga</a> formed in your horoscope due to Saturn and Rahu joining together in the same sign.");
         }
-        else if($sat_sign == $ketu_sign)
+        else if($sat == $ketu)
         {
-            $array                  = array("shrapit_yoga" => "There is <a href='https://www.astroisha.com/yogas/391-shrapit-association' title='shrapit yoga' >shrapit yoga</a> in your horoscope due to Saturn and Ketu joining together in the same sign.");
+            $array                  = array("shrapit_yoga" => "There is <a href='https://www.astroisha.com/yogas/391-shrapit-association' title='shrapit yoga' >shrapit yoga</a> formed in your horoscope due to Saturn and Ketu joining together in the same sign.");
         }
         else
         {
@@ -234,27 +238,22 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         return $array;
     }
     protected function checkGrahan($sun, $moon, $rahu, $ketu)
-    {
-        $sun_sign                   = $this->calcDetails($sun);
-        $moon_sign                  = $this->calcDetails($moon);
-        $rahu_sign                  = $this->calcDetails($rahu);
-        $ketu_sign                  = $this->calcDetails($ketu);
-        
-        if($sun_sign == $rahu_sign)
+    {      
+        if($sun == $rahu)
         {
-            $array                  = array("grahan_yoga" => "There is <a href='https://www.astroisha.com/yogas/447-grahan-yoga' title='grahan yoga' >grahan yoga</a> in your horoscope due to Sun and Rahu joining in same sign.");
+            $array                  = array("grahan_yoga" => "There is <a href='https://www.astroisha.com/yogas/447-grahan-yoga' title='grahan yoga' >grahan yoga</a> formed in your horoscope due to Sun and Rahu joining in same sign.");
         }
-        else if($sun_sign == $ketu_sign)
+        else if($sun == $ketu)
         {
-            $array                  = array("grahan_yoga" => "There is <a href='https://www.astroisha.com/yogas/447-grahan-yoga' title='grahan yoga' >grahan yoga</a> in your horoscope due to Moon and Rahu joining in same sign.");
+            $array                  = array("grahan_yoga" => "There is <a href='https://www.astroisha.com/yogas/447-grahan-yoga' title='grahan yoga' >grahan yoga</a> formed in your horoscope due to Moon and Rahu joining in same sign.");
         }
-        else if($moon_sign == $rahu_sign)
+        else if($moon == $rahu)
         {
-            $array                  = array("grahan_yoga" => "There is <a href='https://www.astroisha.com/yogas/447-grahan-yoga' title='grahan yoga' >grahan yoga</a> in your horoscope due to Sun and Ketu joining in same sign.");
+            $array                  = array("grahan_yoga" => "There is <a href='https://www.astroisha.com/yogas/447-grahan-yoga' title='grahan yoga' >grahan yoga</a> formed in your horoscope due to Sun and Ketu joining in same sign.");
         }
-        else if($moon_sign == $ketu_sign)
+        else if($moon == $ketu)
         {
-            $array                  = array("grahan_yoga" => "There is <a href='https://www.astroisha.com/yogas/447-grahan-yoga' title='grahan yoga' >grahan yoga</a> in your horoscope due to Moon and Ketu joining in same sign.");
+            $array                  = array("grahan_yoga" => "There is <a href='https://www.astroisha.com/yogas/447-grahan-yoga' title='grahan yoga' >grahan yoga</a> formed in your horoscope due to Moon and Ketu joining in same sign.");
         }
         else
         {
@@ -271,11 +270,11 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             if((int)$diff <= 12)
             {
-                $array              = array("pitru_dosha" => "There is a strong <a href='https://www.astroisha.com/yogas/97-pitru-dosha-2' title='pitru dosha' >pitru dosha</a> in your horoscope due to Sun and Saturn joining together in same sign. Your life could be full of difficulties.");
+                $array              = array("pitru_dosha" => "There is a strong <a href='https://www.astroisha.com/yogas/97-pitru-dosha-2' title='pitru dosha' >pitru dosha</a> formed in your horoscope due to Sun and Saturn joining together in same sign. Your life could be full of difficulties.");
             }
             else
             {
-                $array              = array("pitru_dosha" => "There is <a href='https://www.astroisha.com/yogas/97-pitru-dosha-2' title='pitru dosha' >pitru dosha</a> in your horoscope due to Sun and Saturn joining together in same sign. Some troubles in life are expected.");
+                $array              = array("pitru_dosha" => "There is <a href='https://www.astroisha.com/yogas/97-pitru-dosha-2' title='pitru dosha' >pitru dosha</a> formed in your horoscope due to Sun and Saturn joining together in same sign. Some troubles in life are expected.");
             }
         }
         else
@@ -286,21 +285,17 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
     }
     protected function checkKaalSarpa($data)
     {
-        $asc_sign                   = $this->calcDetails($data['Ascendant']);
-        $rahu_sign                  = $this->calcDetails($data['Rahu']);
-        $ketu_sign                  = $this->calcDetails($data['Ketu']);
-        $rahu_dist                  = $this->getHouseDistance($asc_sign, $rahu_sign);
-        $ketu_dist                  = $this->getHouseDistance($asc_sign,$ketu_sign);
+        $asc                        = $data['Ascendant'];
+        $rahu_dist                  = $this->getHouseDistance($asc, $data['Rahu']);
+        $ketu_dist                  = $this->getHouseDistance($asc, $data['Ketu']);
         $planets                    = array("Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn");
         $array                      = array();$upper = array();$lower = array();
         $j                          = 0;
         $k                          = 0;
-        //echo $rahu_dist." ".$ketu_dist."<br/>";
         foreach($planets as $planet)
         {
-            $planet_sign            = $this->calcDetails($data[$planet]);
-            $planet_dist            = $this->getHouseDistance($asc_sign,$planet_sign);
-           
+            $planet_sign            = $data[$planet];
+            $planet_dist            = $this->getHouseDistance($asc,$planet_sign);
             if($rahu_dist      < $ketu_dist)
             {
                 if($planet_dist >= $rahu_dist && $planet_dist <= $ketu_dist)
@@ -329,7 +324,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         //echo $j." ".$k;exit;
         if($j == "7" || $k == "7")
         {
-            $array              = array("kaal_sarpa"=> "There is <a href='https://www.astroisha.com/yogas/91-kaal-sarp' title='kaal sarpa yoga'>Kaal Sarpa Yoga</a> in your horoscope.");
+            $array              = array("kaal_sarpa"=> "There is <a href='https://www.astroisha.com/yogas/91-kaal-sarp' title='kaal sarpa yoga'>Kaal Sarpa Yoga</a> formed in your horoscope.");
         }
         else
         {
@@ -339,8 +334,8 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
     }
     protected function checkNBRY($data)
     {
-        $asc_sign                   = $this->calcDetails($data['Ascendant']);
-
+        $asc_sign                   = $data['Ascendant'];
+        $moon_sign                  = $data['Moon'];
         $planets                    = array("Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn");
         $deb                        = array("Sun"=>"Libra","Moon"=>"Scorpio","Mars"=>"Cancer",
                                             "Mercury"=>"Pisces","Jupiter"=>"Capricorn",
@@ -355,9 +350,9 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $j                          = 1;
         for($i=0;$i< count($planets);$i++)
         {
-           
-           $sign                    = $this->calcDetails($data[$planets[$i]]);
+           $sign                    = $data[$planets[$i]];
            $deb_sign                = $deb[$planets[$i]];
+
            if($sign == $deb_sign)
            {
                $deb_planets         = array("deb_planet_".$j => $planets[$i]);
@@ -368,15 +363,15 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $nbry_planets               = array();
         foreach($array as $planet)
         {
-            if(strpos($data[$planet],":r")){$status = "retro";}else{$status = "normal";}
-            $planet_sign            = $this->calcDetails($data[$planet]);
+            $planet_sign            = $data[$planet];
             $planet_from_asc        = $this->getHouseDistance($asc_sign, $planet_sign);
+            $planet_from_moon       = $this->getHouseDistance($moon_sign, $planet_sign);
             $deb_sign               = $deb[$planet];
             $exal_planet            = $exal_sign[$deb_sign]; //echo $exal_planet;exit;
             $own_planet             = $own_sign[$deb_sign]; //echo $own_planet;exit;
-            $ex_pl_sign             = $this->calcDetails($data[$exal_planet]);  // horoscope placement sign of planet which gets exalted in debilitated sign
-            $own_pl_sign            = $this->calcDetails($data[$own_planet]);   // horoscope placement sign of planet which owns the debilitated sign  
-
+            $ex_pl_sign             = $data[$exal_planet];  // horoscope placement sign of planet which gets exalted in debilitated sign
+            $own_pl_sign            = $data[$own_planet];   // horoscope placement sign of planet which owns the debilitated sign  
+            //echo $ex_pl_sign." ".$own_pl_sign;exit;
             if($planet_sign == $deb_sign)
             {
                  // check1 sees if planet is in a quadrant or not
@@ -389,6 +384,15 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                 {
                     $check1         = "fail";
                 }
+                if($planet_from_moon == "1" || $planet_from_moon == "4"||
+                   $planet_from_moon == "7" || $planet_from_moon == "7")
+                {
+                    $check5         = "pass";
+                }
+                else
+                {
+                    $check5         = "fail";
+                }
                 // check2 sees if there is exalted or own-sign planet as co-tenant
                 if($deb_sign == $ex_pl_sign || $deb_sign == $own_pl_sign)
                 {
@@ -398,12 +402,12 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                 {
                     $check2         = "fail";
                 }
-                // check3 sees if signs ruled by debilitated planet have an exalted planet in them
+                 // check3 sees if signs ruled by debilitated planet have an exalted planet in them
                 $pair              = array_keys($own_sign, $planet);
                 for($i=0; $i < count($pair);$i++)
                 {
                     $ex_pl          = $exal_sign[$pair[$i]];  // checks to see which planet is exalted in the sign
-                    $ex_pl_loc      = $this->calcDetails($data[$ex_pl]); // checks the horoscope sign of exalted planet
+                    $ex_pl_loc      = $data[$ex_pl]; // checks the horoscope sign of exalted planet
                     if($ex_pl_loc == $pair[$i])
                     {
                         $check3     = "pass";break; // will break the loop if one of the signs has an exalted planet
@@ -427,39 +431,40 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                 {
                     $check4         = "fail";
                 }
+                //echo $check4;exit;
                  // check5 checks if planet is retrograde in a quadrant from ascendant
-                if($status == "retro" && ($pl_from_asc == "1" || $pl_from_asc == "4" || 
-                    $pl_from_asc == "7" || $pl_from_asc == "10"))
-                {
-                    $check5         = "pass";
-                }
-                else
-                {
-                    $check5         = "fail";
-                }
+                
                 if($check1 == "pass" && $check2 == "pass")
                 {
-                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> in your horoscope.";
+                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> formed in Main Chart in your horoscope.";
+                }
+                else  if($check5 == "pass" && $check2 == "pass")
+                {
+                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> formed in Moon Chart in your horoscope.";
                 }
                 else if($check1 == "pass" && $check3 == "pass")
                 {
-                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> in your horoscope.";
+                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> formed in Main Chart in your horoscope.";
+                }
+                else  if($check5 == "pass" && $check2 == "pass")
+                {
+                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> formed in Moon Chart in your horoscope.";
                 }
                 else if($check1 == "pass" && $check4 == "pass")
                 {
-                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> in your horoscope.";
+                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> formed in Main Chart in your horoscope.";
                 }
-                else if($check1 == "true" && $check5 == "true")
+                else  if($check5 == "pass" && $check2 == "pass")
                 {
-                    $nbry_planets[]         = $planet." does correction in your horoscope. <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> may or may not happen.";
+                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> formed in Moon Chart in your horoscope.";
                 }
                 else
                 {
-                    $nbry_planets[]         = $planet." none";
+                    $nbry_planets[]         = "none";
                 }
             }
-            
         }
+        //print_r($nbry_planets);exit;
         return $nbry_planets;     
     }
     protected function checkVRY($data)
@@ -468,22 +473,22 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                                             "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
                                             "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
                                             "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
-        $asc_sign                   = $this->calcDetails($data['Ascendant']);
+        $asc_sign                   = $data['Ascendant'];
         $sixth_sign                 = $this->getHouseSign($asc_sign, 6);
         $eight_sign                 = $this->getHouseSign($asc_sign, 8);
         $twelfth_sign               = $this->getHouseSign($asc_sign, 12);
         $sixth_lord                 = $own_sign[$sixth_sign];
         $eight_lord                 = $own_sign[$eight_sign];
         $twelfth_lord               = $own_sign[$twelfth_sign];
-        $sixth_lord_pl              = $this->calcDetails($data[$sixth_lord]);  // placement sign of sixth house lord
-        $eight_lord_pl              = $this->calcDetails($data[$eight_lord]);   // placement sign of eight house lord
-        $twelfth_lord_pl            = $this->calcDetails($data[$twelfth_lord]); // placement sign of twelfth house lord
+        $sixth_lord_pl              = $data[$sixth_lord];  // placement sign of sixth house lord
+        $eight_lord_pl              = $data[$eight_lord];   // placement sign of eight house lord
+        $twelfth_lord_pl            = $data[$twelfth_lord]; // placement sign of twelfth house lord
         $array                      = array();
         
         if($twelfth_lord_pl == $sixth_sign || $eight_lord_pl == $sixth_sign ||
             $sixth_lord_pl == $sixth_sign)
         {
-            $harsha                 = array("harsha" => "There is Harsha Yoga of the <a href='https://www.astroisha.com/yogas/76-vry' title='Vipreeta Raj Yoga'>Vipreeta Raj Yoga</a> in your horoscope.");
+            $harsha                 = array("harsha" => "There is Harsha Yoga of the <a href='https://www.astroisha.com/yogas/76-vry' title='Vipreeta Raj Yoga'>Vipreeta Raj Yoga</a> formed in your horoscope.");
             $array                  = array_merge($array, $harsha);
         }
         else
@@ -494,7 +499,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         if($twelfth_lord_pl == $eight_sign || $eight_lord_pl == $eight_sign ||
             $sixth_lord_pl == $eight_sign)
         {
-            $sarala                 = array("sarala" => "There is Sarala Yoga of the <a href='https://www.astroisha.com/yogas/76-vry' title='Vipreeta Raj Yoga'>Vipreeta Raj Yoga</a> in your horoscope.");
+            $sarala                 = array("sarala" => "There is Sarala Yoga of the <a href='https://www.astroisha.com/yogas/76-vry' title='Vipreeta Raj Yoga'>Vipreeta Raj Yoga</a> formed in your horoscope.");
             $array                  = array_merge($array, $sarala);
         }
         else
@@ -505,7 +510,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         if($twelfth_lord_pl == $twelfth_sign || $eight_lord_pl == $twelfth_sign ||
             $sixth_lord_pl == $twelfth_sign)
         {
-            $vimala                  = array("vimala" => "There is Vimala Yoga of the <a href='https://www.astroisha.com/yogas/76-vry' title='Vipreeta Raj Yoga'>Vipreeta Raj Yoga</a> in your horoscope.");
+            $vimala                  = array("vimala" => "There is Vimala Yoga of the <a href='https://www.astroisha.com/yogas/76-vry' title='Vipreeta Raj Yoga'>Vipreeta Raj Yoga</a> formed in your horoscope.");
             $array                  = array_merge($array, $vimala);
         }
         else
@@ -513,11 +518,12 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             $vimala                 = array("vimala" => "none");
             $array                  = array_merge($array, $vimala);
         }
+        //print_r($array);exit;
         return $array;
     }
     protected function checkParivartana($data)
     {
-        $asc_sign                   = $this->calcDetails($data['Ascendant']);
+        $asc_sign                   = $data['Ascendant'];
         $own_sign                   = array("Aries"=>"Mars", "Taurus"=>"Venus","Gemini"=>"Mercury",
                                             "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
                                             "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
@@ -530,15 +536,13 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                $key == "Mercury" || $key == "Jupiter" || 
                $key == "Venus" || $key == "Saturn")
             {
-                $pl_sign            = $this->calcDetails($planet);  // checks the sign of planet
-                $pl_sign_lord       = $own_sign[$pl_sign]; // checks the lord of the sign where planet is located
-                $pl_lord_loc        = $this->calcDetails($data[$pl_sign_lord]);
+                $pl_sign_lord       = $own_sign[$planet]; // checks the lord of the sign where planet is located
+                $pl_lord_loc        = $data[$pl_sign_lord];
                 $sign_of_pl_lord    = $own_sign[$pl_lord_loc];
-                //echo $key." ".$pl_sign." ".$pl_sign_lord." ".$pl_lord_loc." ".$sign_of_pl_lord;exit;
                 if($key == $sign_of_pl_lord && $key !== $pl_sign_lord)
                 {
                     unset($data[$key]);unset($data[$sign_of_pl_lord]);
-                    $parivar        = array("parivartan_yoga_".$i => $key." and ".$pl_sign_lord." do <a href='https://www.astroisha.com/yogas/83-payo' title='Parivartana Yoga'>Parivartana Yoga</a> in your horoscope.");        
+                    $parivar        = array("parivartan_yoga_".$i => $key." and ".$pl_sign_lord." do <a href='https://www.astroisha.com/yogas/83-payo' title='Parivartana Yoga'>Parivartana Yoga</a> formed in your horoscope.");        
                     $array          = array_merge($array, $parivar);
                     $i              = $i + 1;
                 }
@@ -553,6 +557,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             $array                  = array("parivartana_yoga" => "none");
         }
+        //print_r($array);exit;
         return $array;
     }
     protected function checkChandraMangal($moon,$mars)
@@ -565,15 +570,15 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             if(((int)$diff <= 12)&&($mars_sign == "Leo" || $mars_sign == "Aries" || $mars_sign == "Scorpio" || $mars_sign =="Sagittarius" || $mars_sign =="Pisces"))
             {
-                $array              = array("chandra_mangal" => "There is very strong <a href='https://www.astroisha.com/yogas/150-chandra-mangal' title='chandra mangal yoga'>chandra-mangala yoga</a> in a favorable sign in your horoscope. You would be happy and successful in life via hard work and genuine efforts.");
+                $array              = array("chandra_mangal" => "There is very strong <a href='https://www.astroisha.com/yogas/150-chandra-mangal' title='chandra mangal yoga'>chandra-mangala yoga</a> formed in a favorable sign in your horoscope. You would be happy and successful in life via hard work and genuine efforts.");
             }
             else if(((int)$diff <= 12)&&($mars_sign !== "Leo" || $mars_sign !== "Aries" || $mars_sign !== "Scorpio" || $mars_sign !=="Sagittarius" || $mars_sign !=="Pisces"))
             {
-                $array              = array("chandra_mangal" => "There is strong <a href='https://www.astroisha.com/yogas/150-chandra-mangal' title='chandra mangal yoga'>chanra-mangala yoga</a> in your horoscope. This yoga promises happiness and success if you work hard.");
+                $array              = array("chandra_mangal" => "There is strong <a href='https://www.astroisha.com/yogas/150-chandra-mangal' title='chandra mangal yoga'>chanra-mangala yoga</a> formed in your horoscope. This yoga promises happiness and success if you work hard.");
             }
             else
             {
-                $array              = array("chandra_mangal" => "There is <a href='https://www.astroisha.com/yogas/150-chandra-mangal' title='chandra mangal yoga'>chandra-mangala yoga</a> in your horoscope. You would achieve success and happiness via hard work.");
+                $array              = array("chandra_mangal" => "There is <a href='https://www.astroisha.com/yogas/150-chandra-mangal' title='chandra mangal yoga'>chandra-mangala yoga</a> formed in your horoscope. You would achieve success and happiness via hard work.");
             }
         }
         else
@@ -592,15 +597,15 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         //echo $dist;exit;
         if(($jup_sign == $moon_sign) && ($jup_sign == "Cancer"|| $jup_sign == "Pisces") && ((int)$diff <= 12))
         {
-            $array                  = array("gaja_kesari" => "There is very strong <a href='https://www.astroisha.com/yogas/84-gky' title='gaja-kesari yoga'>gaja-kesari yoga</a> in a supportive sign in your horoscope.");
+            $array                  = array("gaja_kesari" => "There is very strong <a href='https://www.astroisha.com/yogas/84-gky' title='gaja-kesari yoga'>gaja-kesari yoga</a> formed in a supportive sign in your horoscope.");
         }
         else if(($jup_sign == $moon_sign) && ($jup_sign !== "Cancer"|| $jup_sign !== "Pisces") && ((int)$diff <= 12))
         {
-            $array                  = array("gaja_kesari" => "There is strong <a href='https://www.astroisha.com/yogas/84-gky' title='gaja-kesari yoga'>gaja-kesari yoga</a> in your horoscope.");
+            $array                  = array("gaja_kesari" => "There is strong <a href='https://www.astroisha.com/yogas/84-gky' title='gaja-kesari yoga'>gaja-kesari yoga</a> formed in your horoscope.");
         }
         else if($dist == "4" || $dist=="7"|| $dist=="1"||$dist=="10")
         {
-            $array                  = array("gaja_kesari" => "There is <a href='https://www.astroisha.com/yogas/84-gky' title='gaja-kesari yoga'>gaja-kesari yoga</a> in your horoscope.");
+            $array                  = array("gaja_kesari" => "There is <a href='https://www.astroisha.com/yogas/84-gky' title='gaja-kesari yoga'>gaja-kesari yoga</a> formed in your horoscope.");
         }
         else
         {
@@ -608,16 +613,12 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         return $array;
     }
-    protected function checkSashaYoga($asc, $moon, $saturn)
+    protected function checkSashaYoga($asc, $moon, $sat)
     {
-        $asc_sign       = $this->calcDetails($asc);
-        $moon_sign      = $this->calcDetails($moon);
-        $sat_sign       = $this->calcDetails($saturn);
-        
-        if($sat_sign == "Libra" || $sat_sign == "Capricorn"|| $sat_sign == "Aquarius")
+        if($sat == "Libra" || $sat == "Capricorn"|| $sat == "Aquarius")
         {
-            $dist_moon          = $this->getHouseDistance($moon_sign, $sat_sign);
-            $dist_asc           = $this->getHouseDistance($asc_sign, $sat_sign);
+            $dist_moon          = $this->getHouseDistance($moon, $sat);
+            $dist_asc           = $this->getHouseDistance($asc, $sat);
             if($dist_asc == "1" || $dist_asc == "4" || $dist_asc == "7" || $dist_asc == "10")
             {
                 $array              = array("sasha_yoga"    => "There is a powerful <a href='https://www.astroisha.com/yogas/78-sasha' title='sasha yoga'>sasha yoga</a> counted from ascendant in your horoscope.");
@@ -635,13 +636,11 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             $array              = array("sasha_yoga"    => "none");
         }
+        //print_r($array);exit;
         return $array;
     }
-    protected function checkHansaYoga($asc, $moon, $jupiter)
+    protected function checkHansaYoga($asc_sign, $moon_sign, $jup_sign)
     {
-        $asc_sign       = $this->calcDetails($asc);
-        $moon_sign      = $this->calcDetails($moon);
-        $jup_sign       = $this->calcDetails($jupiter);
 
         if($jup_sign == "Sagittarius" || $jup_sign == "Pisces"|| $jup_sign == "Cancer")
         {
@@ -666,11 +665,8 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         return $array;
     }
-    protected function checkRuchakaYoga($asc, $moon, $mars)
+    protected function checkRuchakaYoga($asc_sign, $moon_sign, $mars_sign)
     {
-        $asc_sign       = $this->calcDetails($asc);
-        $moon_sign      = $this->calcDetails($moon);
-        $mars_sign      = $this->calcDetails($mars);
 
         if($mars_sign == "Aries" || $mars_sign == "Scorpio"|| $mars_sign == "Capricorn")
         {
@@ -695,11 +691,8 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         return $array;
     }
-    protected function checkMalavyaYoga($asc, $moon, $venus)
+    protected function checkMalavyaYoga($asc_sign, $moon_sign, $ven_sign)
     {
-        $asc_sign       = $this->calcDetails($asc);
-        $moon_sign      = $this->calcDetails($moon);
-        $ven_sign       = $this->calcDetails($venus);
 
         if($ven_sign == "Taurus" || $ven_sign == "Libra"|| $ven_sign == "Pisces")
         {
@@ -722,13 +715,11 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             $array              = array("malavya_yoga"    => "none");
         }
+        //print_r($array);exit;
         return $array;
     }
-       protected function checkBhadraYoga($asc, $moon, $merc)
+       protected function checkBhadraYoga($asc_sign, $moon_sign, $merc_sign)
     {
-        $asc_sign       = $this->calcDetails($asc);
-        $moon_sign      = $this->calcDetails($moon);
-        $merc_sign      = $this->calcDetails($merc);
         //$merc_sign      = "Gemini";$asc_sign = "Pisces";
         if($merc_sign == "Gemini" || $merc_sign == "Virgo")
         {
@@ -751,19 +742,19 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             $array              = array("bhadra_yoga"    => "none");
         }
+        //print_r($array);exit;
        return $array;
     }
     protected function checkSunapha($data)
     {
-        $moon                   = $data['Moon'];
-        $moon_sign              = $this->calcDetails($moon);
+        $moon_sign              = $data['Moon'];
         $get_next_sign          = $this->getHouseSign($moon_sign,2);
-        $mars                   = $this->calcDetails($data['Mars']);
-        $mercury                = $this->calcDetails($data['Mercury']);
-        $jupiter                = $this->calcDetails($data['Jupiter']);
-        $venus                  = $this->calcDetails($data['Venus']);
-        $saturn                 = $this->calcDetails($data['Saturn']);
-        
+        $mars                   = $data['Mars'];
+        $mercury                = $data['Mercury'];
+        $jupiter                = $data['Jupiter'];
+        $venus                  = $data['Venus'];
+        $saturn                 = $data['Saturn'];
+        //echo $mars." ".$mercury." ".$jupiter." ".$venus." ".$saturn;exit;
         if($saturn == $get_next_sign || $mars == $get_next_sign || $mercury == $get_next_sign
             || $jupiter == $get_next_sign || $venus == $get_next_sign)
         {
@@ -773,19 +764,19 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             $array              = array("sunapha_yoga" => "none");
         }
+        //print_r($array);exit;
         return $array;
     }
     protected function checkAnapha($data)
     {
-        $moon                   = $data['Moon'];
-        $moon_sign              = $this->calcDetails($moon);
+        $moon_sign              = $data['Moon'];
         $get_prev_sign          = $this->getHouseSign($moon_sign,12);
-        $mars                   = $this->calcDetails($data['Mars']);
-        $mercury                = $this->calcDetails($data['Mercury']);
-        $jupiter                = $this->calcDetails($data['Jupiter']);
-        $venus                  = $this->calcDetails($data['Venus']);
-        $saturn                 = $this->calcDetails($data['Saturn']);
-        
+        $mars                   = $data['Mars'];
+        $mercury                = $data['Mercury'];
+        $jupiter                = $data['Jupiter'];
+        $venus                  = $data['Venus'];
+        $saturn                 = $data['Saturn'];
+        //echo $mars." ".$mercury." ".$jupiter." ".$venus." ".$saturn;exit;
         if($saturn == $get_prev_sign || $mars == $get_prev_sign || $mercury == $get_prev_sign
             || $jupiter == $get_prev_sign || $venus == $get_prev_sign)
         {
@@ -795,19 +786,19 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             $array              = array("anapha_yoga" => "none");
         }
+        //print_r($array);exit;
         return $array;
     }
     protected function checkDhurdura($data)
     {
-        $moon                   = $data['Moon'];
-        $moon_sign              = $this->calcDetails($moon);
+        $moon_sign              = $data['Moon'];
         $get_prev_sign          = $this->getHouseSign($moon_sign,12);
         $get_next_sign          = $this->getHouseSign($moon_sign,2);
-        $mars                   = $this->calcDetails($data['Mars']);
-        $mercury                = $this->calcDetails($data['Mercury']);
-        $jupiter                = $this->calcDetails($data['Jupiter']);
-        $venus                  = $this->calcDetails($data['Venus']);
-        $saturn                 = $this->calcDetails($data['Saturn']);
+        $mars                   = $data['Mars'];
+        $mercury                = $data['Mercury'];
+        $jupiter                = $data['Jupiter'];
+        $venus                  = $data['Venus'];
+        $saturn                 = $data['Saturn'];
         
         if(($saturn == $get_next_sign) && ($mars == $get_prev_sign || $mercury == $get_prev_sign
             || $jupiter == $get_prev_sign || $venus == $get_prev_sign)) 
@@ -838,19 +829,19 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             $array              = array("dhurdhura_yoga" => "none");
         }
+        //print_r($array);exit;
         return $array;
     }
     protected function checkKemdruma($data)
     {
-        $moon                   = $data['Moon'];
-        $moon_sign              = $this->calcDetails($moon);
+        $moon_sign              = $data['Moon'];
         $get_prev_sign          = $this->getHouseSign($moon_sign,12);
         $get_next_sign          = $this->getHouseSign($moon_sign,2);
-        $mars                   = $this->calcDetails($data['Mars']);
-        $mercury                = $this->calcDetails($data['Mercury']);
-        $jupiter                = $this->calcDetails($data['Jupiter']);
-        $venus                  = $this->calcDetails($data['Venus']);
-        $saturn                 = $this->calcDetails($data['Saturn']);
+        $mars                   = $data['Mars'];
+        $mercury                = $data['Mercury'];
+        $jupiter                = $data['Jupiter'];
+        $venus                  = $data['Venus'];
+        $saturn                 = $data['Saturn'];
         
         if($saturn == $get_next_sign || $saturn == $get_prev_sign) 
         {
@@ -881,14 +872,11 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             $array              = array("kemdruma_yoga" => "There is <a href='https://www.astroisha.com/yogas/149-kemdruma-yoga' title='Kemdruma Yoga'>Kemdruma Yoga</a> in your horoscope.");
         }
+        //print_r($array);exit;
         return $array;
     }
-    protected function checkAdhiYoga($moon, $mercury, $jupiter, $venus)
+    protected function checkAdhiYoga($moon_sign, $merc_sign, $jup_sign, $ven_sign)
     {
-        $moon_sign          = $this->calcDetails($moon);
-        $merc_sign          = $this->calcDetails($mercury);
-        $jup_sign           = $this->calcDetails($jupiter);
-        $ven_sign           = $this->calcDetails($venus);
         $merc_dist          = $this->getHouseDistance($moon_sign, $merc_sign);
         $jup_dist           = $this->getHouseDistance($moon_sign, $jup_sign);
         $ven_dist           = $this->getHouseDistance($moon_sign, $ven_sign);
@@ -921,18 +909,19 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             $array          = array("adhi_yoga"=>"none");
         }
+        //print_r($array);exit;
         return $array;
     }
     protected function checkChatusagara($data)
     {
-        $asc                = $data['Ascendant'];
-        $asc_sign           = $this->calcDetails($asc);
+        $asc_sign           = $data['Ascendant'];
         $planets            = array("Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu");
         $array              = array();
         foreach($planets as $planet)
         {
-            $planet_sign     = $this->calcDetails($data[$planet]);
+            $planet_sign     = $data[$planet];
             $planet_dist     = $this->getHouseDistance($asc_sign, $planet_sign);
+
             if($planet_sign     == $asc_sign)
             {
                 $array_asc      = array("planet_asc"=>"yes");
@@ -963,15 +952,11 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             $yoga           = array("chatusagara_yoga"  => "none");
         }
+        //print_r($yoga);exit;
         return $yoga;
     }
-    protected function checkRajlakshana($asc,$moon,$mercury,$jupiter,$venus)
+    protected function checkRajlakshana($asc_sign,$moon_sign,$merc_sign,$jup_sign,$ven_sign)
     {
-        $asc_sign           = $this->calcDetails($asc);
-        $moon_sign          = $this->calcDetails($moon);
-        $merc_sign          = $this->calcDetails($mercury);
-        $jup_sign           = $this->calcDetails($jupiter);
-        $ven_sign           = $this->calcDetails($venus);
         $moon_dist          = $this->getHouseDistance($asc_sign, $moon_sign);
         $merc_dist          = $this->getHouseDistance($asc_sign, $merc_sign);
         $jup_dist           = $this->getHouseDistance($asc_sign, $jup_sign);
@@ -988,12 +973,11 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             $array          = array("rajlakshana_yoga"  => "none");
         }
+        //print_r($array);exit;
         return $array;
     }
-    protected function checkSakata($moon,$jup)
+    protected function checkSakata($moon_sign,$jup_sign)
     {
-        $moon_sign          = $this->calcDetails($moon);
-        $jup_sign           = $this->calcDetails($jup);
         $dist               = $this->getHouseDistance($jup_sign, $moon_sign);
         if($dist == "6" || $dist == "8" || $dist == "12")
         {
@@ -1005,13 +989,8 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         return $array;
     }
-    protected function checkAmala($asc,$moon,$mercury,$jupiter,$venus)
+    protected function checkAmala($asc_sign,$moon_sign,$merc_sign,$jup_sign,$ven_sign)
     {
-        $asc_sign           = $this->calcDetails($asc);
-        $moon_sign          = $this->calcDetails($moon);
-        $merc_sign          = $this->calcDetails($mercury);
-        $jup_sign           = $this->calcDetails($jupiter);
-        $ven_sign           = $this->calcDetails($venus);
         $merc_dist_asc      = $this->getHouseDistance($asc_sign, $merc_sign);
         $jup_dist_asc       = $this->getHouseDistance($asc_sign, $jup_sign);
         $ven_dist_asc       = $this->getHouseDistance($asc_sign, $ven_sign);
@@ -1025,12 +1004,131 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else if($merc_dist_moo=="10" || $jup_dist_moo == "10" ||$ven_dist_moo == "10")
         {
-            $array          = array("amala_yoga"  => "There is <a href='https://www.astroisha.com/yogas/157-amala-yoga' title='Amala Yoga'>Amala Yoga</a> in your horoscope");
+            $array          = array("amala_yoga"  => "There is <a href='https://www.astroisha.com/yogas/157-amala-yoga' title='Amala Yoga'>Amala Yoga</a> formed in your horoscope");
         }
         else
         {
             $array          = array("amala_yoga"  => "none");
         }
+        //print_r($array);exit;
         return $array;
     }
+    protected function checkKahala($data)
+    {
+        $own_sign           = array("Aries"=>"Mars", "Taurus"=>"Venus","Gemini"=>"Mercury",
+                                    "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
+                                    "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
+                                    "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
+        $exal_sign          = array("Libra"=>"Saturn","Scorpio"=>"","Cancer"=>"Jupiter","Taurus"=>"Moon",
+                                    "Pisces"=>"Venus","Capricorn"=>"Mars","Virgo"=>"Mecury","Aries"=>"Sun");
+        $asc_sign           = $data['Ascendant'];
+        $asc_lord           = $own_sign[$asc_sign];
+        $asc_pl             = $data[$asc_lord];
+        $exal_pl            = $exal_sign[$asc_pl];
+        $own_pl             = $own_sign[$asc_pl];
+        //echo $asc_lord." ".$exal_pl." ".$own_pl;exit;
+        $fourth_sign        = $this->getHouseSign($asc_sign, 4);
+        $ninth_sign         = $this->getHouseSign($asc_sign, 9);
+        
+        $fourth_pl          = $data[$own_sign[$fourth_sign]];  // get horoscope sign of 4th lord
+        $ninth_pl           = $data[$own_sign[$ninth_sign]];   // get horoscope sign of 9th lord
+        
+        $dist               = $this->getHouseDistance($fourth_pl, $ninth_pl);
+        if(($dist == "1" || $dist == "4" || $dist == "7" || $dist == "10")&&
+            ($asc_lord == $exal_pl || $asc_lord == $own_pl))
+        {
+            $array          = array("kahala_yoga"  => "There is <a href='https://www.astroisha.com/yogas/159-kahala-yoga' title='kahala yoga'>Kahala Yoga</a> formed in your horoscope.");
+
+        }
+        else
+        {
+            $array          = array("kahala_yoga"  => "non");
+        }
+     return $array;
+    }
+    protected function checkVesi($data)
+    {
+        $sun_sign           = $data['Sun'];
+        $get_next_sign      = $this->getHouseSign($sun_sign, 2);
+        $planets            = array("Mars","Mercury","Jupiter","Venus","Saturn");
+        foreach($planets as $planet)
+        {
+            $sign           = $data[$planet];
+            if($get_next_sign == $sign)
+            {
+                 $array      = array("vesi_yoga" => "There is <a href='https://www.astroisha.com/yogas/160-vesi-yoga' title='Vesi Yoga'>Vesi Yoga</a> formed in your horoscope.");
+                 break;
+            }
+            else
+            {
+                $array      = array("vesi_yoga" => "none");
+            }
+        }
+        //print_r($array);exit;
+        return $array;
+    }
+    protected function checkObyachari($data)
+    {
+        $sun                = $data["Sun"];
+        $get_next_sign      = $this->getHouseSign($sun, 2);
+        $get_prev_sign      = $this->getHouseSign($sun, 12);
+        $planets            = array("Mars","Mercury","Jupiter","Venus","Saturn");
+        
+        foreach($planets as $planet)
+        {
+            $sign           = $data[$planet];
+            if($get_next_sign == $sign || $get_prev_sign == $sign)
+            {
+                 $array      = array("obya_yoga" => "There is <a href='https://www.astroisha.com/yogas/161-obyachari-yoga' title='Obyachari Yoga'>Obyachari Yoga</a> formed in your horoscope.");
+                 break;
+            }
+            else
+            {
+                $array      = array("obya_yoga" => "none");
+            }
+        }
+        return $array;
+    }
+    protected function checkMahabhagyaYoga($user_data, $data)
+    {
+        $asc_sign           = $data['Ascendant'];
+        $sun_sign           = $data['Sun'];
+        $moon_sign          = $data['Moon'];
+        $odd_sign           = array("Aries","Gemini","Leo","Libra","Sagittarius","Aquarius");
+        $even_sign          = array("Taurus","Cancer","Virgo","Scorpio","Capricorn","Pisces");
+        $gender             = $user_data['gender'];
+        $dob                = new DateTime($user_data['dob_tob']);
+        $date               = $dob->format('d.m.Y');
+        $tob                = $dob->format('d-m-Y H:i:s');
+        $tmz                = $user_data['timezone'];
+        $lat                = $user_data['lat'];
+        $lon                = $user_data['lon'];
+        $checkSunTimes      = $this->getSunTimings($date, $tmz, $lat, $lon, 0, 3);
+        $sun_rise           = $checkSunTimes['sun_rise_2'];
+        $sun_set            = $checkSunTimes['sun_set_2'];
+        $next_sun_rise      = $checkSunTimes['sun_rise_3'];
+        //echo $sun_rise." ".$sun_set." ".$tob;exit;
+        // checks to see if gender is male, birth is during daytime and 
+        // ascendant, moon and sun are in odd signs
+        if($gender == "male" && $tob > $sun_rise && $tob < $sun_set &&
+            in_array($asc_sign, $odd_sign) && in_array($moon_sign,$odd_sign) &&
+            in_array($sun_sign, $odd_sign))
+        {
+            $array          = array("mahabhagya_yoga" => "There is <a href='https://www.astroisha.com/yogas/163-mahabhagya-yoga' title='Mahabhagya Yoga'>Mahabhagya Yoga</a> formed in your horoscope.");
+        }
+        // checks to see if gender is female, birth is at night and ascendant,
+        // moon and sun are in even signs
+        else if($gender == "female" && $tob > $sun_set && $tob < $next_sun_rise &&
+             in_array($asc_sign, $even_sign) && in_array($moon_sign,$even_sign) &&
+            in_array($sun_sign, $even_sign))
+        {
+            $array          = array("mahabhagya_yoga" => "There is <a href='https://www.astroisha.com/yogas/163-mahabhagya-yoga' title='Mahabhagya Yoga'>Mahabhagya Yoga</a> formed in your horoscope.");
+        }
+        else
+        {
+            $array          = array("mahabhagya_yoga" => "none");
+        }
+        return $array;
+    }
+    
 }
