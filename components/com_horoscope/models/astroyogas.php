@@ -139,11 +139,13 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $checkRajlakshana           = $this->checkRajlakshana($data['Ascendant'],$data["Moon"],$data['Mercury'],$data['Jupiter'],$data['Venus']);
         $checkSakata                = $this->checkSakata($data['Moon'],$data['Jupiter']);
         $checkAmala                 = $this->checkAmala($data['Ascendant'],$data['Moon'],$data['Mercury'],$data['Jupiter'],$data['Venus']);
+        $checkParvata               = $this->checkParvata($data);
         $checkKahala                = $this->checkKahala($data);
         $checkVesi                  = $this->checkVesi($data);
         $checkObyachari             = $this->checkObyachari($data);
         $checkMahabhagya            = $this->checkMahabhagyaYoga($user_data, $data);
-        $checkPushkala              = $this->checkPushkala($data);
+        $checkLaxmi                 = $this->checkLaxmi($data);
+
     }
     protected function removeRetro($planet)
     {
@@ -1015,6 +1017,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
     }
     protected function checkParvata($data)
     {
+        //print_r($data);exit;
         $asc_sign           = $data['Ascendant'];
         $jup_sign           = $data['Jupiter'];
         $merc_sign          = $data['Mercury'];
@@ -1190,5 +1193,44 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         return $array;
     }
-    
+    protected function checkLaxmi($data)
+    {
+        $exal_sign                  = array("Libra"=>"Saturn","Scorpio"=>"","Cancer"=>"Jupiter","Taurus"=>"Moon",
+                                            "Pisces"=>"Venus","Capricorn"=>"Mars","Virgo"=>"Mecury","Aries"=>"Sun");
+        $own_sign                   = array("Aries"=>"Mars", "Taurus"=>"Venus","Gemini"=>"Mercury",
+                                            "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
+                                            "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
+                                            "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
+        $asc_sign           = $data['Ascendant'];       // ascendant sign
+        $asc_lord           = $own_sign[$asc_sign];     // lord of asc
+        $asc_lord_pl        = $data[$asc_lord];         // sign in which asc lord is
+        $asc_exal           = $exal_sign[$asc_lord_pl];
+        $asc_own            = $own_sign[$asc_lord_pl];
+       
+        $ninth_sign         = $this->getHouseSign($asc_sign, 9);        // 9th sign
+        $ninth_lord         = $own_sign[$ninth_sign];       // lord of 9th sign
+        $ninth_lord_pl      = $data[$ninth_lord];       // sign where 9th lord is placed
+        $ninth_lord_dist    = $this->getHouseDistance($asc_sign, $ninth_lord_pl);  // dist from ascendant
+        $ninth_exal         = "Mercury";//$exal_sign[$ninth_lord_pl];
+        $ninth_own          = $own_sign[$ninth_lord_pl];
+        echo $ninth_lord_pl." ".$ninth_exal;exit;
+        $venus_sign        = "Pisces";//$data['Venus'];
+        $venus_dist         = "7";//$this->getHouseDistance($asc_sign, $venus_sign);
+
+        if(($asc_lord_pl == $asc_exal || $asc_lord_pl == $asc_own)&&
+            ($ninth_lord_pl == $ninth_exal || $ninth_lord_pl == $ninth_own)&&
+            $ninth_lord_dist == "1" || $ninth_lord_dist == "4" || 
+            $ninth_lord_dist == "7" || $ninth_lord_dist == "10")
+        {
+            $array          = array("laxmi_yoga" => "There is <a href='https://www.astroisha.com/yogas/167-laxmi-yoga' title='Laxmi Yoga'>Laxmi Yoga</a> formed in your horoscope.");
+        }
+        else if((($ninth_lord_pl == $ninth_exal || $ninth_lord_pl == $ninth_own)&&
+            $ninth_lord_dist == "1" || $ninth_lord_dist == "4" || 
+            $ninth_lord_dist == "7" || $ninth_lord_dist == "10") && 
+            ($venus_sign == "Taurus" || $venus_sign == "Libra" || $venus_sign == "Pisces")&&
+             $venus_dist == "1" || $venus_dist == "4" || $venus_dist == "10" || $venus_dist == "7")
+        {
+            echo "calls";exit;
+        }
+    }
 }
