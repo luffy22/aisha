@@ -1013,6 +1013,66 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         //print_r($array);exit;
         return $array;
     }
+    protected function checkParvata($data)
+    {
+        $asc_sign           = $data['Ascendant'];
+        $jup_sign           = $data['Jupiter'];
+        $merc_sign          = $data['Mercury'];
+        $ven_sign           = $data['Venus'];
+        $moon_sign          = $data['Moon'];
+        $twelfth_sign       = $this->getHouseSign($asc_sign,12);
+        
+        $jup_dist           = $this->getHouseDistance($asc_sign, $jup_sign);
+        $merc_dist          = $this->getHouseDistance($asc_sign, $merc_sign);
+        $ven_dist           = $this->getHouseDistance($asc_sign, $ven_sign);
+        $moon_dist          = $this->getHouseDistance($asc_sign, $moon_sign);
+        $own_sign                   = array("Aries"=>"Mars", "Taurus"=>"Venus","Gemini"=>"Mercury",
+                                            "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
+                                            "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
+                                            "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
+        $array                      = array();
+        $sixth_planets      = $this->checkPlanetsInHouse($data, 6);
+        $eight_planets      = $this->checkPlanetsInHouse($data, 8);
+        $asc_lord           = $own_sign[$asc_sign];
+        $twelfth_lord       = $own_sign[$twelfth_sign];
+        $asc_lord_sign      = $this->calcDetails($data[$asc_lord]);
+        $twelfth_lord_sign  = $this->calcDetails($data[$twelfth_lord]);
+        $asc_lord_dist      = $this->getHouseDistance($asc_sign, $asc_lord_sign);
+        $twelfth_lord_dist  = $this->getHouseDistance($asc_sign,$twelfth_lord_sign);
+        
+        if(($asc_lord_dist == "1" || $asc_lord_dist == "4" ||
+           $asc_lord_dist == "7" || $asc_lord_dist == "10") &&
+          ($twelfth_lord_dist == "1" || $twelfth_lord_dist == "4" ||
+           $twelfth_lord_dist == "7" || $twelfth_lord_dist == "10"))
+        {
+            $array          = array("parvata_yoga" => "There is <a href='https://www.astroisha.com/yogas/158-parvata-yoga' title='Parvata Yoga'>Parvata Yoga</a> in your horoscope.");
+        }
+        else if(($jup_dist == "1" || $jup_dist == "4" || $jup_dist == "7" ||
+                $jup_dist == "10" || $merc_dist == "1" || $merc_dist == "4" ||
+                $merc_dist == "7" || $merc_dist == "10" || $ven_dist == "1" ||
+                $ven_dist == "4" || $ven_dist == "7" || $ven_dist == "10" ||
+                $moon_dist == "1" || $moon_dist == "4" || $moon_dist == "7" || $moon_dist == "10") &&
+                (count($sixth_planets['house_6']) == "0") && (count($eight_planets['house_8']) == "0"))
+        {
+            $array          = array("parvata_yoga" => "There is <a href='https://www.astroisha.com/yogas/158-parvata-yoga' title='Parvata Yoga'>Parvata Yoga</a> in your horoscope.");
+        }
+        else if($jup_dist == "1" || $jup_dist == "4" || $jup_dist == "7" ||
+            $jup_dist == "10" || $jup_dist =="6" || $jup_dist == "8" ||
+            $merc_dist == "1" || $merc_dist == "4" || $merc_dist == "7" ||
+            $merc_dist == "10" || $merc_dist =="6" || $merc_dist == "8" || 
+            $ven_dist == "1" || $ven_dist == "4" || $ven_dist == "7" || 
+            $ven_dist == "10" || $ven_dist =="6" || $ven_dist == "8" ||
+            $moon_dist == "1" || $moon_dist == "4" || $moon_dist == "7" ||
+            $moon_dist == "10" || $moon_dist =="6" || $moon_dist == "8")
+        {
+            $array          = array("parvata_yoga" => "There is <a href='https://www.astroisha.com/yogas/158-parvata-yoga' title='Parvata Yoga'>Parvata Yoga</a> in your horoscope.");
+        }
+        else
+        {
+            $array          = array("parvata_yoga"  => "none");
+        }
+        return $array;
+    }
     protected function checkKahala($data)
     {
         $own_sign           = array("Aries"=>"Mars", "Taurus"=>"Venus","Gemini"=>"Mercury",
