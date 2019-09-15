@@ -145,7 +145,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $checkObyachari             = $this->checkObyachari($data);
         $checkMahabhagya            = $this->checkMahabhagyaYoga($user_data, $data);
         $checkLaxmi                 = $this->checkLaxmi($data);
-
+        $checkGauri                 = $this->checkGauri($data);
     }
     protected function removeRetro($planet)
     {
@@ -1206,31 +1206,42 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $asc_lord_pl        = $data[$asc_lord];         // sign in which asc lord is
         $asc_exal           = $exal_sign[$asc_lord_pl];
         $asc_own            = $own_sign[$asc_lord_pl];
-       
+        $asc_lord_dist      = $this->getHouseDistance($asc_sign, $asc_lord_pl);
         $ninth_sign         = $this->getHouseSign($asc_sign, 9);        // 9th sign
         $ninth_lord         = $own_sign[$ninth_sign];       // lord of 9th sign
         $ninth_lord_pl      = $data[$ninth_lord];       // sign where 9th lord is placed
         $ninth_lord_dist    = $this->getHouseDistance($asc_sign, $ninth_lord_pl);  // dist from ascendant
-        $ninth_exal         = "Mercury";//$exal_sign[$ninth_lord_pl];
+        $ninth_exal         = $exal_sign[$ninth_lord_pl];
         $ninth_own          = $own_sign[$ninth_lord_pl];
-        echo $ninth_lord_pl." ".$ninth_exal;exit;
-        $venus_sign        = "Pisces";//$data['Venus'];
-        $venus_dist         = "7";//$this->getHouseDistance($asc_sign, $venus_sign);
-
-        if(($asc_lord_pl == $asc_exal || $asc_lord_pl == $asc_own)&&
-            ($ninth_lord_pl == $ninth_exal || $ninth_lord_pl == $ninth_own)&&
-            $ninth_lord_dist == "1" || $ninth_lord_dist == "4" || 
-            $ninth_lord_dist == "7" || $ninth_lord_dist == "10")
+        //echo $ninth_lord." ".$ninth_exal." ".$ninth_own;exit;
+        $venus_sign         = $data['Venus'];
+        $venus_dist         = $this->getHouseDistance($asc_sign, $venus_sign);
+         //echo $asc_lord." ".$asc_exal." ".$asc_own;exit;
+        if(($asc_lord == $asc_exal || $asc_lord == $asc_own)&&
+            ($asc_lord_dist == "1" || $asc_lord_dist == "4" || 
+            $asc_lord_dist == "7" || $asc_lord_dist == "10") &&
+            ($ninth_lord == $ninth_exal || $ninth_lord == $ninth_own)&&
+            ($ninth_lord_dist == "1" || $ninth_lord_dist == "4" || 
+            $ninth_lord_dist == "7" || $ninth_lord_dist == "10"))
         {
             $array          = array("laxmi_yoga" => "There is <a href='https://www.astroisha.com/yogas/167-laxmi-yoga' title='Laxmi Yoga'>Laxmi Yoga</a> formed in your horoscope.");
         }
-        else if((($ninth_lord_pl == $ninth_exal || $ninth_lord_pl == $ninth_own)&&
+        else if((($ninth_lord == $ninth_exal || $ninth_lord == $ninth_own)&&
             $ninth_lord_dist == "1" || $ninth_lord_dist == "4" || 
             $ninth_lord_dist == "7" || $ninth_lord_dist == "10") && 
             ($venus_sign == "Taurus" || $venus_sign == "Libra" || $venus_sign == "Pisces")&&
              $venus_dist == "1" || $venus_dist == "4" || $venus_dist == "10" || $venus_dist == "7")
         {
-            echo "calls";exit;
+            $array          = array("laxmi_yoga" => "There is <a href='https://www.astroisha.com/yogas/167-laxmi-yoga' title='Laxmi Yoga'>Laxmi Yoga</a> formed in your horoscope.");
         }
+        else
+        {
+            $array          = array("laxmi_yoga" => "none");
+        }
+        return $array;
+    }
+    protected function checkGauri($data)
+    {
+        
     }
 }
