@@ -145,7 +145,12 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $checkObyachari             = $this->checkObyachari($data);
         $checkMahabhagya            = $this->checkMahabhagyaYoga($user_data, $data);
         $checkLaxmi                 = $this->checkLaxmi($data);
-        $checkGauri                 = $this->checkGauri($data);
+        $checkGauri                 = $this->checkGauri($planets);
+        $checkChapa                 = $this->checkChapa($data);
+        $checkSreenatha             = $this->checkSreenatha($data['Ascendant'], $data['Mercury']);
+        $checkMallika               = $this->checkMallika($data);
+        $checkSankha                = $this->checkSankha($data);
+        $checkDaridra               = $this->checkDaridra($data);
     }
     protected function removeRetro($planet)
     {
@@ -1242,6 +1247,177 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
     }
     protected function checkGauri($data)
     {
-        
+        $own_sign           = array("Aries"=>"Mars", "Taurus"=>"Venus","Gemini"=>"Mercury",
+                                    "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
+                                    "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
+                                    "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
+        $asc_sign           = $this->calcDetails($data['Ascendant']);
+        $asc_dist           = $this->convertDecimalToDegree(str_replace(":r","",$data['Ascendant']),"details");
+        $navamsha           = $this->getNavamsha("Ascendant", $asc_sign, $asc_dist);
+        $navamsha           = $navamsha['Ascendant_navamsha_sign'];
+        $asc_lord           = $own_sign[$asc_sign];
+        $nav_lord           = $own_sign[$navamsha];
+        $tenth_sign         = $this->getHouseSign($asc_sign, "10");
+        $tenth_lord         = $own_sign[$tenth_sign];
+        $tenth_lord_sign    = $this->calcDetails($data[$tenth_lord]);
+        $tenth_lord_dist    = $this->getHouseDistance($asc_sign, $tenth_lord_sign);
+       
+        $asc_lord_sign      = $this->calcDetails($data[$asc_lord]);
+        $nav_lord_sign      = $this->calcDetails($data[$nav_lord]);
+        $asc_lord_dist      = $this->getHouseDistance($asc_sign, $asc_lord_sign);
+        $nav_lord_dist      = $this->getHouseDistance($asc_sign, $nav_lord_sign);
+        if(($asc_lord_dist == "10" && $nav_lord_dist == "10")||
+            ($tenth_lord_dist == "10" && $nav_lord_dist == "10"))
+        {
+            $array          = array("gauri_yoga" => "There is <a href='https://www.astroisha.com/yogas/168-gauri-yoga' title='Gauri Yoga'>Gauri Yoga</a> formed in your horoscope.");
+        }
+        else
+        {
+            $array          = array("gauri_yoga" => "none");
+        }
+        return $array;
+    }
+    protected function checkChapa($data)
+    {
+        $own_sign           = array("Aries"=>"Mars", "Taurus"=>"Venus","Gemini"=>"Mercury",
+                                "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
+                                "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
+                                "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
+        $exal_sign          = array("Libra"=>"Saturn","Scorpio"=>"","Cancer"=>"Jupiter","Taurus"=>"Moon",
+                                "Pisces"=>"Venus","Capricorn"=>"Mars","Virgo"=>"Mecury","Aries"=>"Sun");
+        $asc_sign           = $data['Ascendant'];
+        $asc_lord           = $own_sign[$asc_sign];
+        $asc_exal_sign      = array_search($asc_lord, $exal_sign);
+        $asc_lord_sign      = $data[$asc_lord];
+        $fourth_sign        = $this->getHouseSign($asc_sign, 4);
+        $fourth_lord        = $own_sign[$fourth_sign];
+        $tenth_sign         = $this->getHouseSign($asc_sign, 10);
+        $tenth_lord         = $own_sign[$tenth_sign];
+
+        $fourth_lord_sign   = $data[$fourth_lord];
+        $tenth_lord_sign    = $data[$tenth_lord];
+         
+        if(($asc_lord_sign == $asc_exal_sign) && ($fourth_lord_sign == $tenth_sign) && 
+            ($tenth_lord_sign == $fourth_sign))
+        {
+            $array          = array("chapa_yoga" => "There is Chapa Yoga formed in your horoscope.");
+        }
+        else
+        {
+            $array          = array("chapa_yoga" => "none");
+        }
+        return $array;
+    }
+    protected function checkSreenatha($asc, $merc)
+    {
+        $asc = "Sagittarius";$merc = "Virgo";
+       if($asc == "Sagittarius" && $merc == "Virgo")
+       {
+           $array           = array("sreenatha_yoga" => "There is <a href='https://www.astroisha.com/yogas/173-sreenatha-yoga' title='Sreenatha Yoga'>Sreenatha Yoga</a> formed in your horoscope.");
+       }
+       else
+       {
+           $array           = array("sreenatha_yoga" => "none");
+       }
+       return $array;
+    }
+    protected function checkMallika($data)
+    {
+        if($data['Sun'] == $data['Moon'] || $data['Sun'] == $data['Mercury'] ||
+            $data['Sun'] == $data['Venus'])
+        {
+            $array          = array("malika_yoga" => "none");
+        }
+        else if($data['Moon'] == $data['Saturn'] || $data['Moon'] == $data['Mars'] ||
+            $data['Moon'] == $data['Mercury'] || $data['Moon'] == $data['Venus'] ||
+                $data['Jupiter'] == $data['Moon'])
+        {
+            $array          = array("malika_yoga" => "none");
+        }
+        else if($data['Mars'] == $data['Mercury'] || $data['Mars'] == $data['Jupiter'] ||
+                $data['Mars'] == $data['Saturn'] || $data['Mars'] == $data['Venus'])
+        {
+            $array          = array("malika_yoga" => "none");
+        }
+        else if($data['Jupiter'] == $data['Sun'] || $data['Jupiter'] == $data['Saturn'] ||
+                $data['Jupiter'] == $data['Venus'] || $data['Jupiter'] == $data['Mercury'])
+        {
+            $array          = array("malika_yoga" => "none");
+        }
+        else
+        {
+            $array          = array("malika_yoga" => "There is <a href='https://www.astroisha.com/yogas/174-malika-yoga' title='Mallika Yoga'>Mallika Yoga</a> formed in your horoscope");
+        }
+        return $array;
+    }
+    protected function checkSankha($data)
+    {
+        $own_sign           = array("Aries"=>"Mars", "Taurus"=>"Venus","Gemini"=>"Mercury",
+                                "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
+                                "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
+                                "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
+        $exal_sign          = array("Libra"=>"Saturn","Scorpio"=>"","Cancer"=>"Jupiter","Taurus"=>"Moon",
+                                "Pisces"=>"Venus","Capricorn"=>"Mars","Virgo"=>"Mecury","Aries"=>"Sun");
+        $asc_sign           = $data['Ascendant'];
+        $asc_lord           = $own_sign[$asc_sign];
+        $fifth_sign         = $this->getHouseSign($asc_sign, 5);
+        $sixth_sign         = $this->getHouseSign($asc_sign, 6);
+        $fifth_lord         = $own_sign[$fifth_sign];
+        $sixth_lord         = $own_sign[$sixth_sign];
+        $fifth_lord_pl      = $data[$fifth_lord];
+        $sixth_lord_pl      = $data[$sixth_lord];
+        $dist               = $this->getHouseDistance($fifth_lord_pl, $sixth_lord_pl);
+        $own_sign           = array_keys($own_sign, $asc_lord);
+        $exal_sign          = array_search($asc_lord, $exal_sign);
+
+        $count              = count($own_sign);
+        if($count == "2")
+        {
+            if(($data[$asc_lord] == $exal_sign || $data[$asc_lord] == $own_sign[0] ||
+               $data[$asc_lord] == $own_sign[1]) && ($dist == "1" || $dist == "4" ||
+               $dist == "7" || $dist == "10"))
+            {
+                $array      = array("sankha_yoga" => "There is <a href='https://www.astroisha.com/yogas/183-sankha-yoga' title='Sankha Yoga'>Sankha Yoga</a> formed in your horoscope.");
+            }
+            else
+            {
+                $array      = array("sankha_yoga" => "none");
+            }
+        }
+        else
+        {
+            if(($data[$asc_lord] == $exal_sign || $data[$asc_lord] == $own_sign[0])
+                && ($dist == "1" || $dist == "4" ||
+               $dist == "7" || $dist == "10"))
+            {
+                $array      = array("sankha_yoga" => "There is <a href='https://www.astroisha.com/yogas/183-sankha-yoga' title='Sankha Yoga'>Sankha Yoga</a> formed in your horoscope.");
+            }
+            else
+            {
+                $array      = array("sankha_yoga" => "none");
+            }
+        }
+        return $array;
+    }
+    protected function checkDaridra($data)
+    {
+        $own_sign           = array("Aries"=>"Mars", "Taurus"=>"Venus","Gemini"=>"Mercury",
+                                "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
+                                "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
+                                "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
+        $asc_sign           = $data['Ascendant'];
+        $eleventh_sign      = $this->getHouseSign($asc_sign, 11);
+        $eleventh_lord      = $own_sign[$eleventh_sign];
+        $eleventh_lord_pl   = $data[$eleventh_lord];
+        $dist               = $this->getHouseDistance($asc_sign, $eleventh_lord_pl);
+        if($dist == "6" || $dist == "8" || $dist == "12")
+        {
+            $array          = array("daridra_yoga" => "There is <a href='https://www.astroisha.com/yogas/269-daridra-yoga' title='Daridra Yoga'>Daridra Yoga</a> formed in your horoscope.");
+        }
+        else
+        {
+            $array          = array("daridra_yoga" => "none");
+        }
+        print_r($array);exit;
     }
 }
