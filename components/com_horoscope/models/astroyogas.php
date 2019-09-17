@@ -151,6 +151,8 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $checkMallika               = $this->checkMallika($data);
         $checkSankha                = $this->checkSankha($data);
         $checkDaridra               = $this->checkDaridra($data);
+        $checkBheri                 = $this->checkBheri($data);
+        $checkMridanga              = $this->checkMridanga($planets);
     }
     protected function removeRetro($planet)
     {
@@ -1405,6 +1407,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                                 "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
                                 "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
                                 "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
+        
         $asc_sign           = $data['Ascendant'];
         $eleventh_sign      = $this->getHouseSign($asc_sign, 11);
         $eleventh_lord      = $own_sign[$eleventh_sign];
@@ -1418,6 +1421,87 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             $array          = array("daridra_yoga" => "none");
         }
-        print_r($array);exit;
+        return $array;
+    }
+    protected function checkBheri($data)
+    {
+        $own_sign           = array("Aries"=>"Mars", "Taurus"=>"Venus","Gemini"=>"Mercury",
+                                    "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
+                                    "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
+                                    "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");          
+        $asc_sign           = $data['Ascendant'];
+        $asc_lord           = $own_sign[$asc_sign];
+        $asc_lord_sign      = $data[$asc_lord];
+        $jup_sign           = $data['Jupiter'];
+        $ven_sign           = $data['Venus'];
+        
+        $asc_lord_dist      = $this->getHouseDistance($asc_sign, $asc_lord_sign);
+        $jup_dist           = $this->getHouseDistance($asc_sign, $jup_sign);
+        $ven_dist           = $this->getHouseDistance($asc_sign, $ven_sign);
+        
+        if(($asc_lord_dist == "1" || $asc_lord_dist == "4" || $asc_lord_dist == "7" ||
+            $asc_lord_dist == "10")&&($jup_dist == "1" || $jup_dist == "4" || 
+            $jup_dist == "7" || $jup_dist == "10")&&($ven_dist == "1" || $ven_dist == "4" ||
+            $ven_dist == "7" || $ven_dist == "10"))
+        {
+            $array          = array("bheri_yoga"    => "There is <a href='https://www.astroisha.com/yogas/282-bheri-yoga' title='Bheri Yoga'>Bheri Yoga</a> formed in your horoscope.");
+        }
+        else
+        {
+            $array          = array("bheri_yoga"    => "none");
+        }
+        return $array;
+    }
+    protected function checkMridanga($data)
+    {
+        $own_sign           = array("Aries"=>"Mars", "Taurus"=>"Venus","Gemini"=>"Mercury",
+                                    "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
+                                    "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
+                                    "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
+        $exal_sign          = array("Libra"=>"Saturn","Scorpio"=>"","Cancer"=>"Jupiter","Taurus"=>"Moon",
+                                    "Pisces"=>"Venus","Capricorn"=>"Mars","Virgo"=>"Mecury","Aries"=>"Sun");
+        $asc_sign           = $this->calcDetails($data['Ascendant']);
+        $asc_lord           = $own_sign[$asc_sign];
+        $asc_lord_pl        = $this->calcDetails($data[$asc_lord]);
+        $asc_dist           = $this->convertDecimalToDegree(str_replace(":r","",$data['Ascendant']),"details");
+        $asc_own            = array_keys($own_sign, $asc_lord);
+        $asc_exal           = array_search($asc_lord, $exal_sign);
+        $count              = count($asc_own);
+
+        if($count == "2")
+        {
+            if($asc_own[0] == $asc_lord_pl || $asc_own[1] == $asc_lord_pl ||
+                $asc_exal == $asc_lord_pl)
+            {
+                $navamsha           = $this->getNavamsha("Ascendant", $asc_sign, $asc_dist);
+                $navamsha           = $navamsha['Ascendant_navamsha_sign'];
+                echo $navamsha;exit;
+                $nav_lord           = $own_sign[$navamsha];
+                $nav_lord_pl        = $this->calcDetails($data[$nav_lord]);
+                $nav_dist           = $this->getHouseDistance($asc_sign, $nav_lord_pl);
+                $navamsha           = $this->getNavamsha("Ascendant", $asc_sign, $asc_dist);
+                $nav_sign           = $navamsha['Ascendant_navamsha_sign'];
+                $nav_lord_sign      = $this->getNavamsha($nav_lord, $nav_sign, $nav_dist);
+                $nav_lord_sign      = $nav_lord_sign[$nav_lord."_navamsha_sign"];    // sign in which navamsha lord is placed in navamsha
+                $nav_dist           = $this->convertDecimalToDegree(str_replace(":r","",$data[$nav_lord]),"details");
+            }
+            else
+            {
+                return array("mridanga_yoga" => "none");exit;
+            }
+        }
+        else
+        {
+             if($asc_own[0] == $asc_lord_pl || $asc_own[1] == $asc_lord_pl ||
+                $asc_exal == $asc_lord_pl)
+            {
+                $check1     = "yes";
+            }
+            else
+            {
+                return array("mridanga_yoga" => "none");exit;
+            }
+        }
+        
     }
 }
