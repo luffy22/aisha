@@ -153,6 +153,10 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $checkDaridra               = $this->checkDaridra($data);
         $checkBheri                 = $this->checkBheri($data);
         $checkMridanga              = $this->checkMridanga($planets);
+        $checkGaja                  = $this->checkGaja($planets);
+        $checkKalnidhi              = $this->checkKalnidhi($data['Ascendant'],$data['Mercury'],$data['Jupiter'],$data['Venus']);
+        $checkAmsavatara            = $this->checkAmsavatara($data);
+        $checkKusuma                = $this->checkKusuma($data);
     }
     protected function removeRetro($planet)
     {
@@ -1474,16 +1478,48 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                 $asc_exal == $asc_lord_pl)
             {
                 $navamsha           = $this->getNavamsha("Ascendant", $asc_sign, $asc_dist);
-                $navamsha           = $navamsha['Ascendant_navamsha_sign'];
-                echo $navamsha;exit;
-                $nav_lord           = $own_sign[$navamsha];
-                $nav_lord_pl        = $this->calcDetails($data[$nav_lord]);
-                $nav_dist           = $this->getHouseDistance($asc_sign, $nav_lord_pl);
-                $navamsha           = $this->getNavamsha("Ascendant", $asc_sign, $asc_dist);
                 $nav_sign           = $navamsha['Ascendant_navamsha_sign'];
-                $nav_lord_sign      = $this->getNavamsha($nav_lord, $nav_sign, $nav_dist);
-                $nav_lord_sign      = $nav_lord_sign[$nav_lord."_navamsha_sign"];    // sign in which navamsha lord is placed in navamsha
-                $nav_dist           = $this->convertDecimalToDegree(str_replace(":r","",$data[$nav_lord]),"details");
+                $nav_lord           = $own_sign[$nav_sign];
+                $nav_exal           = array_search($nav_lord, $exal_sign);
+                $nav_own            = array_keys($own_sign, $nav_lord);
+                $count              = count($nav_own);
+                $dist               = $this->getHouseDistance($asc_sign, $nav_sign);
+        
+                if(($dist == "1" || $dist == "4" || $dist == "7" ||
+                   $dist == "10" || $dist == "5" || $dist == "9") && 
+                    $nav_exal == $nav_sign)
+                {
+                    $nav_dist           = $this->convertDecimalToDegree(str_replace(":r","",$data[$nav_lord]),"details");
+                    $nav_lord_sign      = $this->getNavamsha($nav_lord, $nav_sign, $nav_dist);
+                    $nav_lord_sign      = $nav_lord_sign[$nav_lord."_navamsha_sign"];
+                    if($count == "2")
+                    {
+                       if($nav_lord_sign == $nav_own[0] || $nav_lord_sign == $nav_own[1] ||
+                           $nav_lord_sign == $nav_exal)
+                       {
+                          return array("mridanga_yoga"    => "There is <a href='https://www.astroisha.com/yogas/288-mridanga-yoga' title='Mridanga Yoga'>Mridanga Yoga</a> formed in your horoscope.");
+                       }
+                       else
+                        {
+                            return array("mridanga_yoga" => "none");exit;
+                        }
+                    }
+                    else
+                    {
+                        if($nav_lord_sign == $nav_own[0] || $nav_lord_sign == $nav_exal)
+                        {
+                            return array("mridanga_yoga"    => "There is <a href='https://www.astroisha.com/yogas/288-mridanga-yoga' title='Mridanga Yoga'>Mridanga Yoga</a> formed in your horoscope.");
+                        }
+                        else
+                        {
+                            return array("mridanga_yoga" => "none");exit;
+                        }
+                    }
+                }
+                else
+                {
+                    return array("mridanga_yoga" => "none");exit;
+                }               
             }
             else
             {
@@ -1492,16 +1528,132 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-             if($asc_own[0] == $asc_lord_pl || $asc_own[1] == $asc_lord_pl ||
-                $asc_exal == $asc_lord_pl)
+             if($asc_own[0] == $asc_lord_pl || $asc_exal == $asc_lord_pl)
             {
-                $check1     = "yes";
+                $navamsha           = $this->getNavamsha("Ascendant", $asc_sign, $asc_dist);
+                $nav_sign           = $navamsha['Ascendant_navamsha_sign'];
+                $nav_lord           = $own_sign[$nav_sign];
+                $nav_exal           = array_search($nav_lord, $exal_sign);
+                $nav_own            = array_keys($own_sign, $nav_lord);
+                $count              = count($nav_own);
+                $dist               = $this->getHouseDistance($asc_sign, $nav_sign);
+        
+                if(($dist == "1" || $dist == "4" || $dist == "7" ||
+                   $dist == "10" || $dist == "5" || $dist == "9") && 
+                    $nav_exal == $nav_sign)
+                {
+                    $nav_dist           = $this->convertDecimalToDegree(str_replace(":r","",$data[$nav_lord]),"details");
+                    $nav_lord_sign      = $this->getNavamsha($nav_lord, $nav_sign, $nav_dist);
+                    $nav_lord_sign      = $nav_lord_sign[$nav_lord."_navamsha_sign"];
+                    if($count == "2")
+                    {
+                       if($nav_lord_sign == $nav_own[0] || $nav_lord_sign == $nav_own[1] ||
+                           $nav_lord_sign == $nav_exal)
+                       {
+                           $array    = array("mridanga_yoga"    => "There is <a href='https://www.astroisha.com/yogas/288-mridanga-yoga' title='Mridanga Yoga'>Mridanga Yoga</a> formed in your horoscope.");
+                       }
+                       else
+                        {
+                            return array("mridanga_yoga" => "none");exit;
+                        }
+                    }
+                    else
+                    {
+                        if($nav_lord_sign == $nav_own[0] || $nav_lord_sign == $nav_exal)
+                        {
+                            $array    = array("mridanga_yoga"    => "There is <a href='https://www.astroisha.com/yogas/288-mridanga-yoga' title='Mridanga Yoga'>Mridanga Yoga</a> formed in your horoscope.");
+                        }
+                        else
+                        {
+                            return array("mridanga_yoga" => "none");exit;
+                        }
+                    }
+                }
+                else
+                {
+                    return array("mridanga_yoga" => "none");exit;
+                }   
             }
             else
             {
                 return array("mridanga_yoga" => "none");exit;
             }
-        }
+        } 
+    }
+    protected function checkGaja($data)
+    {
+        $own_sign           = array("Aries"=>"Mars", "Taurus"=>"Venus","Gemini"=>"Mercury",
+                                    "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
+                                    "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
+                                    "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
+        $asc_sign           = $this->calcDetails($data['Ascendant']);
+        $eleventh_sign      = $this->getHouseSign($asc_sign, 11);
+        $eleventh_lord      = $own_sign[$eleventh_sign];
+        $seventh_sign       = $this->getHouseSign($asc_sign, 7);
+        $seventh_lord       = $own_sign[$seventh_sign];
+        $seventh_pl         = $data[$seventh_lord];
+        $moon_pl            = $data['Moon'];
+        $check_aspects      = $this->checkAspectsOnHouse($data, 11);
+        $check_aspects      = $check_aspects['aspect_11'];
+        $count              = count($check_aspects);
         
+        if($seventh_pl == $eleventh_sign && $moon_pl == $eleventh_sign)
+        {
+            for($i=0; $i<= $count; $i++)
+            {
+                $lord       = $check_aspects[$i];
+                if($lord    == $eleventh_lord)
+                {
+                    return array("gaja_yoga" => "There is Gaja Yoga formed in your horoscope.");exit;
+                }   
+                else
+                {
+                    continue;
+                }
+            }
+            
+        }
+        else
+        {
+            return array("gaja_yoga"    => "none");exit;
+        }
+    }
+    protected function checkKalnidhi($asc, $merc, $jup, $ven)
+    {
+        $dist           = $this->getHouseDistance($asc, $jup);
+        if(($dist == "2" || $dist == "5")&& $jup == "Virgo" ||
+            ($jup == "Gemini" || $jup == "Libra" || $jup == "Taurus")&&
+            ($jup == $merc && $jup == $ven))
+        {
+            $array      = array("kalnidhi_yoga" => "There is Kalnidhi Yoga formed in your horoscope.");
+        }
+        else
+        {
+            $array      = array("kalnidhi_yoga" => "none");
+        }
+        return $array;
+    }
+    protected function checkAmsavatara($data)
+    {
+        $sat            = $data['Saturn'];
+        $asc            = $data['Ascendant'];
+        $jup            = $data['Jupiter'];
+        $ven            = $data['Venus'];
+
+        $mov_sign       = array("Aries", "Cancer","Libra","Capricorn");
+        if($sat == "Libra" && in_array($asc, $mov_sign) && in_array($jup, $mov_sign)
+            && in_array($ven, $mov_sign))
+        {
+           $array       = array("amsavatara_yoga"   => "There is <a href='https://www.astroisha.com/yogas/329-amsavatara-yoga' title='Amsavatara Yoga'>Amsavatara Yoga</a> formed in your horoscope.");
+        }
+        else
+        {
+            $array      = array("amsavatara_yoga" => "none");
+        }
+        return $array;
+    }
+    protected function checkKusuma($data)
+    {
+        print_r($data);exit;
     }
 }
