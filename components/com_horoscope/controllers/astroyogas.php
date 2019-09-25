@@ -22,22 +22,24 @@ class HoroscopeControllerAstroYogas extends HoroscopeController
             if(empty($lat) && empty($lon))
             {
                 $tmz        = "none";
-                if($yogas_lon_dir == "E"&& $yogas_lat_dir=="N")
+                $lon_dir    = $_POST['yogas_lon_dir'];
+                $lat_dir    = $_POST['yogas_lat_dir'];
+                if($lon_dir == "E"&& $lat_dir=="N")
                 {
                     $lon        = $_POST['yogas_lon_deg'].".".$_POST['yogas_lon_min'];
                     $lat        = $_POST['yogas_lat_deg'].".".$_POST['yogas_lat_min'];
                 }
-                else if($yogas_lon_dir == "W" && $yogas_lat_dir=="N")
+                else if($lon_dir == "W" && $lat_dir=="N")
                 {
                     $lon        = "-".$_POST['yogas_lon_deg'].".".$_POST['yogas_lon_min'];
                     $lat        = $_POST['yogas_lat_deg'].".".$_POST['yogas_lat_min'];
                 }
-                else if($yogas_lon_dir == "E" && $yogas_lat_dir=="S")
-                {
+                else if($lon_dir == "E" && $lat_dir=="S")
+                { 
                     $lon        = $_POST['yogas_lon_deg'].".".$_POST['yogas_lon_min'];
                     $lat        = "-".$_POST['yogas_lat_deg'].".".$_POST['yogas_lat_min'];
                 }
-                else if($yogas_lon_dir == "W" && $yogas_lat_dir=="S")
+                else if($lon_dir == "W" && $lat_dir=="S")
                 {
                     $lon        = "-".$_POST['yogas_lon_deg'].".".$_POST['yogas_lon_min'];
                     $lat        = "-".$_POST['yogas_lat_deg'].".".$_POST['yogas_lat_min'];
@@ -49,6 +51,7 @@ class HoroscopeControllerAstroYogas extends HoroscopeController
                 }
                 
             }
+            
             $user_details   = array(
                                     'fname'=>$fname,'gender'=>$gender,'dob'=>$dob,"pob"=>$pob,
                                     'tob'=>$tob,'lon'=>$lon,'lat'=>$lat,'tmz'=>$tmz,"chart"=>$chart

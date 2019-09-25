@@ -22,6 +22,8 @@ class HoroscopeControllerCareer extends HoroscopeController
             if(empty($lat) && empty($lon))
             {
                 $tmz        = "none";
+                $career_lon_dir    = $_POST['career_lon_dir'];
+                $career_lat_dir    = $_POST['career_lat_dir'];
                 if($career_lon_dir == "E"&& $career_lat_dir=="N")
                 {
                     $lon        = $_POST['career_lon_deg'].".".$_POST['career_lon_min'];

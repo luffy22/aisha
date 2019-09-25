@@ -27,6 +27,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             $date           = new DateTime($dob." ".$tob);
             $timestamp      = $date->format('U');
             $tmz            = $this->getTimeZone($lat, $lon, "rohdes");
+            
             if($tmz == "error")
             {
                 $tmz        = "UTC";        // if timezone not available use UTC(Universal Time Cooridnated)
@@ -113,7 +114,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             $array                  = array($key => $planet_sign);
             $data                   = array_merge($data, $array);
         }
-        $checkVishYoga              = $this->checkVishYoga($planets['Moon'],$planets['Saturn']);
+        $checkVish                  = $this->checkVishYoga($planets['Moon'],$planets['Saturn']);
         $checkBudhAditya            = $this->checkBudhAditya($planets['Sun'],$planets['Mercury']);
         $checkVipraChandal          = $this->checkVipraChandal($data['Jupiter'],$data['Rahu']);
         $checkShrapit               = $this->checkShrapit($data['Saturn'],$data['Rahu'],$data['Ketu']);
@@ -157,6 +158,19 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $checkKalnidhi              = $this->checkKalnidhi($data['Ascendant'],$data['Mercury'],$data['Jupiter'],$data['Venus']);
         $checkAmsavatara            = $this->checkAmsavatara($data);
         $checkKusuma                = $this->checkKusuma($data);
+        
+        $array                      = array_merge($array, $user_data, $checkVish, $checkBudhAditya,
+                                        $checkVipraChandal, $checkShrapit, $checkGrahan, $checkPitru,
+                                        $checkKaalSarpa,$checkNBRY, $checkVRY, $checkParivartana, 
+                                        $checkChandraMangal,$checkGajaKesari,$checkSasha,$checkHansa,
+                                        $checkRuchaka,$checkMalavya,$checkBhadra,$checkSunapha,$checkAnapha,
+                                        $checkDhurdura,$checkKemdruma,$checkAdhiYoga, $checkChatusagara,
+                                        $checkRajlakshana,$checkSakata,$checkAmala,$checkParvata,$checkKahala,
+                                        $checkVesi,$checkObyachari, $checkMahabhagya,$checkLaxmi, $checkGauri,
+                                        $checkChapa,$checkSreenatha,$checkMallika,$checkSankha,$checkDaridra,
+                                        $checkBheri,$checkMridanga,$checkGaja,$checkKalnidhi,
+                                        $checkAmsavatara,$checkKusuma);
+        return $array;
     }
     protected function removeRetro($planet)
     {
@@ -174,16 +188,16 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             if((int)$diff <= 12)
             {
-                $array              = array("vish_yoga" => "There is a strong <a href='https://www.astroisha.com/yogas/74-visha-yoga' title='vish yoga' >vish yoga</a> formed in your horoscope. Your life could be full of difficulties.");
+                $array              = array("vish_yoga" => "There is a strong <a href='https://www.astroisha.com/yogas/74-visha-yoga' title='vish yoga' >Vish Yoga</a> formed in your horoscope. Your life could be full of difficulties.");
             }
             else
             {
-                $array              = array("visha_yoga" => "There is <a href='https://www.astroisha.com/yogas/74-visha-yoga' title='vish yoga' >vish yoga</a> formed in your horoscope. Some troubles in life are expected.");
+                $array              = array("vish_yoga" => "There is <a href='https://www.astroisha.com/yogas/74-visha-yoga' title='vish yoga' >Vish Yoga</a> formed in your horoscope. Some troubles in life are expected.");
             }
         }
         else
         {
-            $array                  = array("visha_Yoga" => "none");
+            $array                  = array("vish_yoga" => "No");
         }
         return $array;
     }
@@ -197,21 +211,21 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             if(($sun_sign == "Leo" || $sun_sign == "Gemini" || $sun_sign == "Virgo")&&((int)$diff <= 12))
             {
-                $array              = array("budh_aditya" => "There is a very strong <a href='https://www.astroisha.com/yogas/162-budh-aditya'  title='budh-aditya yoga'>budh-aditya yoga</a> in a favorable sign formed in your horoscope.");
+                $array              = array("budh_aditya" => "There is a very strong <a href='https://www.astroisha.com/yogas/162-budh-aditya'  title='budh-aditya yoga'>Budh-Aditya Yoga</a> in a favorable sign formed in your horoscope.");
             }
             else  if(($sun_sign !== "Leo" || $sun_sign !== "Gemini" || $sun_sign !== "Virgo")&&((int)$diff <= 12))
             {
-                $array              = array("budh_aditya" => "There is a strong <a href='https://www.astroisha.com/yogas/162-budh-aditya'  title='budh-aditya yoga'>budh-aditya yoga</a> formed in your horoscope.");
+                $array              = array("budh_aditya" => "There is a strong <a href='https://www.astroisha.com/yogas/162-budh-aditya'  title='budh-aditya yoga'>Budh-Aditya Yoga</a> formed in your horoscope.");
             }
             else 
             {
-                $array              = array("budh_aditya" => "There is a mild <a href='https://www.astroisha.com/yogas/162-budh-aditya'  title='budh-aditya yoga'>budh-aditya yoga</a> formed in your horoscope.");
+                $array              = array("budh_aditya" => "There is a mild <a href='https://www.astroisha.com/yogas/162-budh-aditya'  title='budh-aditya yoga'>Budh-Aditya Yoga</a> formed in your horoscope.");
             }   
             
         }
         else
         {
-            $array                  = array("budh_aditya" => "none");
+            $array                  = array("budh_aditya" => "No");
         }
         return $array;
     }
@@ -221,16 +235,16 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             if($jup_sign == "Sagittarius" || $jup_sign == "Pisces")
             {
-                $array                  = array("vipra_chandal" => "There is <a href='https://www.astroisha.com/yogas/77-vcy'  title='vipra-chandal yoga'>vipra-chandal yoga</a> in Jupiter's sign formed in your horoscope. Though its a bad yoga it can work in your favour if you accomodate traits of Jupiter in your life.");
+                $array                  = array("vipra_chandal" => "There is <a href='https://www.astroisha.com/yogas/77-vcy'  title='vipra-chandal yoga'>Vipra-Chandal Yoga</a> in Jupiter's sign formed in your horoscope. Though its a bad yoga it can work in your favour if you accomodate traits of Jupiter in your life.");
             }
             else 
             {
-                $array                  = array("vipra_chandal" => "There is <a href='https://www.astroisha.com/yogas/77-vcy'  title='vipra-chandal yoga'>vipra-chandal yoga</a> formed in your horoscope. Troubles in life are possible especially if you try shortcuts in life.");
+                $array                  = array("vipra_chandal" => "There is <a href='https://www.astroisha.com/yogas/77-vcy'  title='vipra-chandal yoga'>Vipra-Chandal Yoga</a> formed in your horoscope. Troubles in life are possible especially if you try shortcuts in life.");
             }
         }
         else
         {
-            $array                      = array("vipra_chandal" => "none");
+            $array                      = array("vipra_chandal" => "No");
         }
         return $array;
     }
@@ -238,15 +252,15 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
     {  
         if($sat == $rahu)
         {
-            $array                  = array("shrapit_yoga" => "There is <a href='https://www.astroisha.com/yogas/391-shrapit-association' title='shrapit yoga' >shrapit yoga</a> formed in your horoscope due to Saturn and Rahu joining together in the same sign.");
+            $array                  = array("shrapit_yoga" => "There is <a href='https://www.astroisha.com/yogas/391-shrapit-association' title='shrapit yoga' >Shrapit Yoga</a> formed in your horoscope due to Saturn and Rahu joining together in the same sign.");
         }
         else if($sat == $ketu)
         {
-            $array                  = array("shrapit_yoga" => "There is <a href='https://www.astroisha.com/yogas/391-shrapit-association' title='shrapit yoga' >shrapit yoga</a> formed in your horoscope due to Saturn and Ketu joining together in the same sign.");
+            $array                  = array("shrapit_yoga" => "There is <a href='https://www.astroisha.com/yogas/391-shrapit-association' title='shrapit yoga' >Shrapit Yoga</a> formed in your horoscope due to Saturn and Ketu joining together in the same sign.");
         }
         else
         {
-            $array                  = array("shrapit_yoga" => "none");
+            $array                  = array("shrapit_yoga" => "No");
         }
         return $array;
     }
@@ -258,19 +272,19 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else if($sun == $ketu)
         {
-            $array                  = array("grahan_yoga" => "There is <a href='https://www.astroisha.com/yogas/447-grahan-yoga' title='grahan yoga' >grahan yoga</a> formed in your horoscope due to Moon and Rahu joining in same sign.");
+            $array                  = array("grahan_yoga" => "There is <a href='https://www.astroisha.com/yogas/447-grahan-yoga' title='grahan yoga' >Grahan Yoga</a> formed in your horoscope due to Moon and Rahu joining in same sign.");
         }
         else if($moon == $rahu)
         {
-            $array                  = array("grahan_yoga" => "There is <a href='https://www.astroisha.com/yogas/447-grahan-yoga' title='grahan yoga' >grahan yoga</a> formed in your horoscope due to Sun and Ketu joining in same sign.");
+            $array                  = array("grahan_yoga" => "There is <a href='https://www.astroisha.com/yogas/447-grahan-yoga' title='grahan yoga' >Grahan Yoga</a> formed in your horoscope due to Sun and Ketu joining in same sign.");
         }
         else if($moon == $ketu)
         {
-            $array                  = array("grahan_yoga" => "There is <a href='https://www.astroisha.com/yogas/447-grahan-yoga' title='grahan yoga' >grahan yoga</a> formed in your horoscope due to Moon and Ketu joining in same sign.");
+            $array                  = array("grahan_yoga" => "There is <a href='https://www.astroisha.com/yogas/447-grahan-yoga' title='grahan yoga' >Grahan Yoga</a> formed in your horoscope due to Moon and Ketu joining in same sign.");
         }
         else
         {
-            $array                  = array("grahan_yoga" => "none");
+            $array                  = array("grahan_yoga" => "No");
         }
         return $array;
     }
@@ -283,16 +297,16 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             if((int)$diff <= 12)
             {
-                $array              = array("pitru_dosha" => "There is a strong <a href='https://www.astroisha.com/yogas/97-pitru-dosha-2' title='pitru dosha' >pitru dosha</a> formed in your horoscope due to Sun and Saturn joining together in same sign. Your life could be full of difficulties.");
+                $array              = array("pitru_dosha" => "There is a strong <a href='https://www.astroisha.com/yogas/97-pitru-dosha-2' title='pitru dosha' >Pitru Dosha</a> formed in your horoscope due to Sun and Saturn joining together in same sign. Your life could be full of difficulties.");
             }
             else
             {
-                $array              = array("pitru_dosha" => "There is <a href='https://www.astroisha.com/yogas/97-pitru-dosha-2' title='pitru dosha' >pitru dosha</a> formed in your horoscope due to Sun and Saturn joining together in same sign. Some troubles in life are expected.");
+                $array              = array("pitru_dosha" => "There is <a href='https://www.astroisha.com/yogas/97-pitru-dosha-2' title='pitru dosha' >Pitru Dosha</a> formed in your horoscope due to Sun and Saturn joining together in same sign. Some troubles in life are expected.");
             }
         }
         else
         {
-            $array                  = array("pitru_dosha" => "none");
+            $array                  = array("pitru_dosha" => "No");
         }
         return $array;
     }
@@ -304,17 +318,21 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $planets                    = array("Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn");
         $array                      = array();$upper = array();$lower = array();
         $j                          = 0;
-        $k                          = 0;
+        $k                          = 0;$i = 0;
         foreach($planets as $planet)
         {
             $planet_sign            = $data[$planet];
             $planet_dist            = $this->getHouseDistance($asc,$planet_sign);
+            
             if($rahu_dist      < $ketu_dist)
             {
-                if($planet_dist >= $rahu_dist && $planet_dist <= $ketu_dist)
+                if($planet_dist > $rahu_dist && $planet_dist < $ketu_dist)
                 {
-                    
                      $j         = $j+1;
+                }
+                else if($planet_dist == $rahu_dist || $planet_dist == $ketu_dist)
+                {
+                    $i          = $i+1;
                 }
                 else
                 {
@@ -324,9 +342,13 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             else
             {
                 //$k                  = $k+1;
-                if($planet_dist <= $rahu_dist && $planet_dist > $ketu_dist)
+                if($planet_dist < $rahu_dist && $planet_dist > $ketu_dist)
                 {
                     $j          = $j+1;
+                }
+                else if($planet_dist == $rahu_dist || $planet_dist == $ketu_dist)
+                {
+                    $i          = $i+1;
                 }
                 else
                 {
@@ -334,14 +356,13 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                 }
             }
         }
-        //echo $j." ".$k;exit;
-        if($j == "7" || $k == "7")
+        if($j+$i == "7" || $k+$i == "7")
         {
             $array              = array("kaal_sarpa"=> "There is <a href='https://www.astroisha.com/yogas/91-kaal-sarp' title='kaal sarpa yoga'>Kaal Sarpa Yoga</a> formed in your horoscope.");
         }
         else
         {
-            $array              = array("kaal_sarpa"=>"none");
+            $array              = array("kaal_sarpa"=>"No");
         }
         return $array;
     }
@@ -387,7 +408,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             //echo $ex_pl_sign." ".$own_pl_sign;exit;
             if($planet_sign == $deb_sign)
             {
-                 // check1 sees if planet is in a quadrant or not
+                 // check1 sees if planet is in a quadrant or Not
                 if($planet_from_asc == "1" || $planet_from_asc == "4"||
                    $planet_from_asc == "7" || $planet_from_asc == "7")
                 {
@@ -449,36 +470,37 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                 
                 if($check1 == "pass" && $check2 == "pass")
                 {
-                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> formed in Main Chart in your horoscope.";
+                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> in Main Chart in your horoscope.";
                 }
                 else  if($check5 == "pass" && $check2 == "pass")
                 {
-                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> formed in Moon Chart in your horoscope.";
+                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> in Moon Chart in your horoscope.";
                 }
                 else if($check1 == "pass" && $check3 == "pass")
                 {
-                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> formed in Main Chart in your horoscope.";
+                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> in Main Chart in your horoscope.";
                 }
                 else  if($check5 == "pass" && $check2 == "pass")
                 {
-                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> formed in Moon Chart in your horoscope.";
+                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> in Moon Chart in your horoscope.";
                 }
                 else if($check1 == "pass" && $check4 == "pass")
                 {
-                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> formed in Main Chart in your horoscope.";
+                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> in Main Chart in your horoscope.";
                 }
                 else  if($check5 == "pass" && $check2 == "pass")
                 {
-                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> formed in Moon Chart in your horoscope.";
+                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> in Moon Chart in your horoscope.";
                 }
                 else
                 {
-                    $nbry_planets[]         = "none";
+                    $nbry_planets[]         = $planet." is debilitated but does not do <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> in your horoscope.";
                 }
             }
         }
+        
         //print_r($nbry_planets);exit;
-        return $nbry_planets;     
+        return array("nbry_yoga" => $nbry_planets);     
     }
     protected function checkVRY($data)
     {
@@ -506,7 +528,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-            $harsha                 = array("harsha" => "none");
+            $harsha                 = array("harsha" => "No");
             $array                  = array_merge($array, $harsha);
         }
         if($twelfth_lord_pl == $eight_sign || $eight_lord_pl == $eight_sign ||
@@ -517,7 +539,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-            $sarala                 = array("sarala" => "none");
+            $sarala                 = array("sarala" => "No");
             $array                  = array_merge($array, $sarala);
         }
         if($twelfth_lord_pl == $twelfth_sign || $eight_lord_pl == $twelfth_sign ||
@@ -528,7 +550,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-            $vimala                 = array("vimala" => "none");
+            $vimala                 = array("vimala" => "No");
             $array                  = array_merge($array, $vimala);
         }
         //print_r($array);exit;
@@ -555,7 +577,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                 if($key == $sign_of_pl_lord && $key !== $pl_sign_lord)
                 {
                     unset($data[$key]);unset($data[$sign_of_pl_lord]);
-                    $parivar        = array("parivartan_yoga_".$i => $key." and ".$pl_sign_lord." do <a href='https://www.astroisha.com/yogas/83-payo' title='Parivartana Yoga'>Parivartana Yoga</a> formed in your horoscope.");        
+                    $parivar        = array("parivartana_yoga_".$i => $key." and ".$pl_sign_lord." do <a href='https://www.astroisha.com/yogas/83-payo' title='Parivartana Yoga'>Parivartana Yoga</a> in your horoscope.");        
                     $array          = array_merge($array, $parivar);
                     $i              = $i + 1;
                 }
@@ -568,7 +590,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         if(empty($array))
         {
-            $array                  = array("parivartana_yoga" => "none");
+            $array                  = array("parivartana_yoga_0" => "No");
         }
         //print_r($array);exit;
         return $array;
@@ -596,7 +618,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-            $array                  = array("chandra_mangal" => "none");
+            $array                  = array("chandra_mangal" => "No");
         }
         return $array;
     }
@@ -610,19 +632,19 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         //echo $dist;exit;
         if(($jup_sign == $moon_sign) && ($jup_sign == "Cancer"|| $jup_sign == "Pisces") && ((int)$diff <= 12))
         {
-            $array                  = array("gaja_kesari" => "There is very strong <a href='https://www.astroisha.com/yogas/84-gky' title='gaja-kesari yoga'>gaja-kesari yoga</a> formed in a supportive sign in your horoscope.");
+            $array                  = array("gaja_kesari" => "There is very strong <a href='https://www.astroisha.com/yogas/84-gky' title='gaja-kesari yoga'>Gaja-Kesari Yoga</a> formed in a supportive sign in your horoscope.");
         }
         else if(($jup_sign == $moon_sign) && ($jup_sign !== "Cancer"|| $jup_sign !== "Pisces") && ((int)$diff <= 12))
         {
-            $array                  = array("gaja_kesari" => "There is strong <a href='https://www.astroisha.com/yogas/84-gky' title='gaja-kesari yoga'>gaja-kesari yoga</a> formed in your horoscope.");
+            $array                  = array("gaja_kesari" => "There is strong <a href='https://www.astroisha.com/yogas/84-gky' title='gaja-kesari yoga'>Gaja-Kesari Yoga</a> formed in your horoscope.");
         }
         else if($dist == "4" || $dist=="7"|| $dist=="1"||$dist=="10")
         {
-            $array                  = array("gaja_kesari" => "There is <a href='https://www.astroisha.com/yogas/84-gky' title='gaja-kesari yoga'>gaja-kesari yoga</a> formed in your horoscope.");
+            $array                  = array("gaja_kesari" => "There is <a href='https://www.astroisha.com/yogas/84-gky' title='gaja-kesari yoga'>Gaja-Kesari Yoga</a> formed in your horoscope.");
         }
         else
         {
-            $array                  = array("gaja_kesari" => "none");
+            $array                  = array("gaja_kesari" => "No");
         }
         return $array;
     }
@@ -634,20 +656,20 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             $dist_asc           = $this->getHouseDistance($asc, $sat);
             if($dist_asc == "1" || $dist_asc == "4" || $dist_asc == "7" || $dist_asc == "10")
             {
-                $array              = array("sasha_yoga"    => "There is a powerful <a href='https://www.astroisha.com/yogas/78-sasha' title='sasha yoga'>sasha yoga</a> counted from ascendant in your horoscope.");
+                $array              = array("sasha_yoga"    => "There is a powerful <a href='https://www.astroisha.com/yogas/78-sasha' title='sasha yoga'>Sasha Yoga</a> counted from ascendant in your horoscope.");
             }
             else if($dist_moon == "1" || $dist_moon == "4" || $dist_moon == "7" || $dist_moon == "10")
             {
-                $array              = array("sasha_yoga"    => "There is <a href='https://www.astroisha.com/yogas/78-sasha' title='sasha yoga'>sasha yoga</a> counted from moon in your horoscope.");
+                $array              = array("sasha_yoga"    => "There is <a href='https://www.astroisha.com/yogas/78-sasha' title='sasha yoga'>Sasha Yoga</a> counted from moon in your horoscope.");
             }
             else
             {
-                $array              = array("sasha_yoga"    => "none");
+                $array              = array("sasha_yoga"    => "No");
             }
         }
         else
         {
-            $array              = array("sasha_yoga"    => "none");
+            $array              = array("sasha_yoga"    => "No");
         }
         //print_r($array);exit;
         return $array;
@@ -661,20 +683,20 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             $dist_asc           = $this->getHouseDistance($asc_sign, $jup_sign);
             if($dist_asc == "1" || $dist_asc == "4" || $dist_asc == "7" || $dist_asc == "10")
             {
-                $array              = array("hansa_yoga"    => "There is a powerful <a href='https://www.astroisha.com/yogas/80-hansa' title='hansa yoga'>hansa yoga</a> counted from ascendant in your horoscope.");
+                $array              = array("hansa_yoga"    => "There is a powerful <a href='https://www.astroisha.com/yogas/80-hansa' title='hansa yoga'>Hansa Yoga</a> counted from ascendant in your horoscope.");
             }
             else if($dist_moon == "1" || $dist_moon == "4" || $dist_moon == "7" || $dist_moon == "10")
             {
-                $array              = array("hansa_yoga"    => "There is <a href='https://www.astroisha.com/yogas/80-hansa' title='hansa yoga'>hansa yoga</a> counted from moon in your horoscope.");
+                $array              = array("hansa_yoga"    => "There is <a href='https://www.astroisha.com/yogas/80-hansa' title='hansa yoga'>Hansa Yoga</a> counted from moon in your horoscope.");
             }
             else
             {
-                $array              = array("hansa_yoga"    => "none");
+                $array              = array("hansa_yoga"    => "No");
             }
         }
         else
         {
-            $array              = array("hansa_yoga"    => "none");
+            $array              = array("hansa_yoga"    => "No");
         }
         return $array;
     }
@@ -687,20 +709,20 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             $dist_asc           = $this->getHouseDistance($asc_sign, $mars_sign);
             if($dist_asc == "1" || $dist_asc == "4" || $dist_asc == "7" || $dist_asc == "10")
             {
-                $array              = array("ruchak_yoga"    => "There is a powerful <a href='https://www.astroisha.com/yogas/79-ruchaka' title='ruchaka yoga'>ruchaka yoga</a> counted from ascendant in your horoscope.");
+                $array              = array("ruchak_yoga"    => "There is a powerful <a href='https://www.astroisha.com/yogas/79-ruchaka' title='ruchaka yoga'>Ruchaka Yoga</a> counted from ascendant in your horoscope.");
             }
             else if($dist_moon == "1" || $dist_moon == "4" || $dist_moon == "7" || $dist_moon == "10")
             {
-                $array              = array("ruchak_yoga"    => "There is <a href='https://www.astroisha.com/yogas/79-ruchaka' title='ruchaka yoga'>ruchaka yoga</a> counted from moon in your horoscope.");
+                $array              = array("ruchak_yoga"    => "There is <a href='https://www.astroisha.com/yogas/79-ruchaka' title='ruchaka yoga'>Ruchaka Yoga</a> counted from moon in your horoscope.");
             }
             else
             {
-                $array              = array("ruchak_yoga"    => "none");
+                $array              = array("ruchak_yoga"    => "No");
             }
         }
         else
         {
-            $array              = array("ruchak_yoga"    => "none");
+            $array              = array("ruchak_yoga"    => "No");
         }
         return $array;
     }
@@ -713,20 +735,20 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             $dist_asc           = $this->getHouseDistance($asc_sign, $ven_sign);
             if($dist_asc == "1" || $dist_asc == "4" || $dist_asc == "7" || $dist_asc == "10")
             {
-                $array              = array("malavya_yoga"    => "There is a powerful <a href='https://www.astroisha.com/yogas/81-mala' title='malavya yoga'>malavya yoga</a> counted from ascendant in your horoscope.");
+                $array              = array("malavya_yoga"    => "There is a powerful <a href='https://www.astroisha.com/yogas/81-mala' title='malavya yoga'>Malavya Yoga</a> counted from ascendant in your horoscope.");
             }
             else if($dist_moon == "1" || $dist_moon == "4" || $dist_moon == "7" || $dist_moon == "10")
             {
-                $array              = array("malavya_yoga"    => "There is <a href='https://www.astroisha.com/yogas/81-mala' title='malavya yoga'>malavya yoga</a> counted from moon in your horoscope.");
+                $array              = array("malavya_yoga"    => "There is <a href='https://www.astroisha.com/yogas/81-mala' title='malavya yoga'>Malavya Yoga</a> counted from moon in your horoscope.");
             }
             else
             {
-                $array              = array("malavya_yoga"    => "none");
+                $array              = array("malavya_yoga"    => "No");
             }
         }
         else
         {
-            $array              = array("malavya_yoga"    => "none");
+            $array              = array("malavya_yoga"    => "No");
         }
         //print_r($array);exit;
         return $array;
@@ -740,20 +762,20 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             $dist_asc           = $this->getHouseDistance($asc_sign, $merc_sign);
             if($dist_asc == "1" || $dist_asc == "4" || $dist_asc == "7" || $dist_asc == "10")
             {
-                $array              = array("bhadra_yoga"    => "There is a powerful <a href='https://www.astroisha.com/yogas/82-bhadra' title='bhadra yoga'>bhadra yoga</a> counted from ascendant in your horoscope.");
+                $array              = array("bhadra_yoga"    => "There is a powerful <a href='https://www.astroisha.com/yogas/82-bhadra' title='bhadra yoga'>Bhadra Yoga</a> counted from ascendant in your horoscope.");
             }
             else if($dist_moon == "1" || $dist_moon == "4" || $dist_moon == "7" || $dist_moon == "10")
             {
-                $array              = array("bhadra_yoga"    => "There is <a href='https://www.astroisha.com/yogas/82-bhadra' title='bhadra yoga'>bhadra yoga</a> counted from moon in your horoscope.");
+                $array              = array("bhadra_yoga"    => "There is <a href='https://www.astroisha.com/yogas/82-bhadra' title='bhadra yoga'>Bhadra Yoga</a> counted from moon in your horoscope.");
             }
             else
             {
-                $array              = array("bhadra_yoga"    => "none");
+                $array              = array("bhadra_yoga"    => "No");
             }
         }
         else
         {
-            $array              = array("bhadra_yoga"    => "none");
+            $array              = array("bhadra_yoga"    => "No");
         }
         //print_r($array);exit;
        return $array;
@@ -775,7 +797,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-            $array              = array("sunapha_yoga" => "none");
+            $array              = array("sunapha_yoga" => "No");
         }
         //print_r($array);exit;
         return $array;
@@ -797,7 +819,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-            $array              = array("anapha_yoga" => "none");
+            $array              = array("anapha_yoga" => "No");
         }
         //print_r($array);exit;
         return $array;
@@ -840,7 +862,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-            $array              = array("dhurdhura_yoga" => "none");
+            $array              = array("dhurdhura_yoga" => "No");
         }
         //print_r($array);exit;
         return $array;
@@ -858,23 +880,23 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         
         if($saturn == $get_next_sign || $saturn == $get_prev_sign) 
         {
-            $array              = array("kemdruma_yoga" => "none");
+            $array              = array("kemdruma_yoga" => "No");
         }
         else if($jupiter == $get_next_sign || $jupiter == $get_prev_sign) 
         {
-            $array              = array("kemdruma_yoga" => "none");
+            $array              = array("kemdruma_yoga" => "No");
         }
         else if($mercury == $get_next_sign || $mercury == $get_prev_sign) 
         {
-            $array              = array("kemdruma_yoga" => "none");
+            $array              = array("kemdruma_yoga" => "No");
         }
         else if($venus == $get_next_sign || $venus == $get_prev_sign) 
         {
-            $array              = array("kemdruma_yoga" => "none");
+            $array              = array("kemdruma_yoga" => "No");
         }
         else if($mars == $get_next_sign || $mars == $get_prev_sign) 
         {
-            $array              = array("kemdruma_yoga" => "none");
+            $array              = array("kemdruma_yoga" => "No");
         }
         else if($mars == $moon_sign || $jupiter == $moon_sign || $mercury == $moon_sign ||
                 $venus == $moon_sign || $saturn == $moon_sign)
@@ -920,7 +942,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-            $array          = array("adhi_yoga"=>"none");
+            $array          = array("adhi_yoga"=>"No");
         }
         //print_r($array);exit;
         return $array;
@@ -963,7 +985,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-            $yoga           = array("chatusagara_yoga"  => "none");
+            $yoga           = array("chatusagara_yoga"  => "No");
         }
         //print_r($yoga);exit;
         return $yoga;
@@ -984,7 +1006,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-            $array          = array("rajlakshana_yoga"  => "none");
+            $array          = array("rajlakshana_yoga"  => "No");
         }
         //print_r($array);exit;
         return $array;
@@ -994,11 +1016,11 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $dist               = $this->getHouseDistance($jup_sign, $moon_sign);
         if($dist == "6" || $dist == "8" || $dist == "12")
         {
-            $array          = array("sakata_yoga" => "There is <a href='https://www.astroisha.com/yogas/156-sakata-yoga' title='Sakata Yoga'>Sakata Yoga</a> in your horoscope.");
+            $array          = array("sakata_yoga" => "There is <a href='https://www.astroisha.com/yogas/156-sakata-yoga' title='Sakata Yoga'>Sakata Yoga</a> formed in your horoscope.");
         }
         else
         {
-            $array          = array("sakata_yoga"   => "none");
+            $array          = array("sakata_yoga"   => "No");
         }
         return $array;
     }
@@ -1013,7 +1035,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         
         if($merc_dist_asc=="10" || $jup_dist_asc == "10" ||$ven_dist_asc == "10")
         {
-            $array          = array("amala_yoga"  => "There is <a href='https://www.astroisha.com/yogas/157-amala-yoga' title='Amala Yoga'>Amala Yoga</a> in your horoscope");
+            $array          = array("amala_yoga"  => "There is <a href='https://www.astroisha.com/yogas/157-amala-yoga' title='Amala Yoga'>Amala Yoga</a> formed in your horoscope");
         }
         else if($merc_dist_moo=="10" || $jup_dist_moo == "10" ||$ven_dist_moo == "10")
         {
@@ -1021,7 +1043,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-            $array          = array("amala_yoga"  => "none");
+            $array          = array("amala_yoga"  => "No");
         }
         //print_r($array);exit;
         return $array;
@@ -1059,7 +1081,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
           ($twelfth_lord_dist == "1" || $twelfth_lord_dist == "4" ||
            $twelfth_lord_dist == "7" || $twelfth_lord_dist == "10"))
         {
-            $array          = array("parvata_yoga" => "There is <a href='https://www.astroisha.com/yogas/158-parvata-yoga' title='Parvata Yoga'>Parvata Yoga</a> in your horoscope.");
+            $array          = array("parvata_yoga" => "There is <a href='https://www.astroisha.com/yogas/158-parvata-yoga' title='Parvata Yoga'>Parvata Yoga</a> formed in your horoscope.");
         }
         else if(($jup_dist == "1" || $jup_dist == "4" || $jup_dist == "7" ||
                 $jup_dist == "10" || $merc_dist == "1" || $merc_dist == "4" ||
@@ -1068,7 +1090,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                 $moon_dist == "1" || $moon_dist == "4" || $moon_dist == "7" || $moon_dist == "10") &&
                 (count($sixth_planets['house_6']) == "0") && (count($eight_planets['house_8']) == "0"))
         {
-            $array          = array("parvata_yoga" => "There is <a href='https://www.astroisha.com/yogas/158-parvata-yoga' title='Parvata Yoga'>Parvata Yoga</a> in your horoscope.");
+            $array          = array("parvata_yoga" => "There is <a href='https://www.astroisha.com/yogas/158-parvata-yoga' title='Parvata Yoga'>Parvata Yoga</a> formed in your horoscope.");
         }
         else if($jup_dist == "1" || $jup_dist == "4" || $jup_dist == "7" ||
             $jup_dist == "10" || $jup_dist =="6" || $jup_dist == "8" ||
@@ -1079,11 +1101,11 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             $moon_dist == "1" || $moon_dist == "4" || $moon_dist == "7" ||
             $moon_dist == "10" || $moon_dist =="6" || $moon_dist == "8")
         {
-            $array          = array("parvata_yoga" => "There is <a href='https://www.astroisha.com/yogas/158-parvata-yoga' title='Parvata Yoga'>Parvata Yoga</a> in your horoscope.");
+            $array          = array("parvata_yoga" => "There is <a href='https://www.astroisha.com/yogas/158-parvata-yoga' title='Parvata Yoga'>Parvata Yoga</a> formed in your horoscope.");
         }
         else
         {
-            $array          = array("parvata_yoga"  => "none");
+            $array          = array("parvata_yoga"  => "No");
         }
         return $array;
     }
@@ -1116,7 +1138,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-            $array          = array("kahala_yoga"  => "non");
+            $array          = array("kahala_yoga"  => "No");
         }
      return $array;
     }
@@ -1135,7 +1157,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             }
             else
             {
-                $array      = array("vesi_yoga" => "none");
+                $array      = array("vesi_yoga" => "No");
             }
         }
         //print_r($array);exit;
@@ -1158,7 +1180,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             }
             else
             {
-                $array      = array("obya_yoga" => "none");
+                $array      = array("obya_yoga" => "No");
             }
         }
         return $array;
@@ -1200,7 +1222,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-            $array          = array("mahabhagya_yoga" => "none");
+            $array          = array("mahabhagya_yoga" => "No");
         }
         return $array;
     }
@@ -1247,7 +1269,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-            $array          = array("laxmi_yoga" => "none");
+            $array          = array("laxmi_yoga" => "No");
         }
         return $array;
     }
@@ -1279,7 +1301,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-            $array          = array("gauri_yoga" => "none");
+            $array          = array("gauri_yoga" => "No");
         }
         return $array;
     }
@@ -1310,20 +1332,19 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-            $array          = array("chapa_yoga" => "none");
+            $array          = array("chapa_yoga" => "No");
         }
         return $array;
     }
     protected function checkSreenatha($asc, $merc)
     {
-        $asc = "Sagittarius";$merc = "Virgo";
        if($asc == "Sagittarius" && $merc == "Virgo")
        {
            $array           = array("sreenatha_yoga" => "There is <a href='https://www.astroisha.com/yogas/173-sreenatha-yoga' title='Sreenatha Yoga'>Sreenatha Yoga</a> formed in your horoscope.");
        }
        else
        {
-           $array           = array("sreenatha_yoga" => "none");
+           $array           = array("sreenatha_yoga" => "No");
        }
        return $array;
     }
@@ -1332,23 +1353,24 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         if($data['Sun'] == $data['Moon'] || $data['Sun'] == $data['Mercury'] ||
             $data['Sun'] == $data['Venus'])
         {
-            $array          = array("malika_yoga" => "none");
+            $array          = array("malika_yoga" => "No");
         }
         else if($data['Moon'] == $data['Saturn'] || $data['Moon'] == $data['Mars'] ||
             $data['Moon'] == $data['Mercury'] || $data['Moon'] == $data['Venus'] ||
                 $data['Jupiter'] == $data['Moon'])
         {
-            $array          = array("malika_yoga" => "none");
+            $array          = array("malika_yoga" => "No");
         }
         else if($data['Mars'] == $data['Mercury'] || $data['Mars'] == $data['Jupiter'] ||
-                $data['Mars'] == $data['Saturn'] || $data['Mars'] == $data['Venus'])
+                $data['Mars'] == $data['Saturn'] || $data['Mars'] == $data['Venus'] ||
+                $data['Venus'] == $data['Saturn'])
         {
-            $array          = array("malika_yoga" => "none");
+            $array          = array("malika_yoga" => "No");
         }
         else if($data['Jupiter'] == $data['Sun'] || $data['Jupiter'] == $data['Saturn'] ||
                 $data['Jupiter'] == $data['Venus'] || $data['Jupiter'] == $data['Mercury'])
         {
-            $array          = array("malika_yoga" => "none");
+            $array          = array("malika_yoga" => "No");
         }
         else
         {
@@ -1387,7 +1409,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             }
             else
             {
-                $array      = array("sankha_yoga" => "none");
+                $array      = array("sankha_yoga" => "No");
             }
         }
         else
@@ -1400,7 +1422,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             }
             else
             {
-                $array      = array("sankha_yoga" => "none");
+                $array      = array("sankha_yoga" => "No");
             }
         }
         return $array;
@@ -1423,7 +1445,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-            $array          = array("daridra_yoga" => "none");
+            $array          = array("daridra_yoga" => "No");
         }
         return $array;
     }
@@ -1452,7 +1474,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-            $array          = array("bheri_yoga"    => "none");
+            $array          = array("bheri_yoga"    => "No");
         }
         return $array;
     }
@@ -1501,7 +1523,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                        }
                        else
                         {
-                            return array("mridanga_yoga" => "none");exit;
+                            return array("mridanga_yoga" => "No");exit;
                         }
                     }
                     else
@@ -1512,18 +1534,18 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                         }
                         else
                         {
-                            return array("mridanga_yoga" => "none");exit;
+                            return array("mridanga_yoga" => "No");exit;
                         }
                     }
                 }
                 else
                 {
-                    return array("mridanga_yoga" => "none");exit;
+                    return array("mridanga_yoga" => "No");exit;
                 }               
             }
             else
             {
-                return array("mridanga_yoga" => "none");exit;
+                return array("mridanga_yoga" => "No");exit;
             }
         }
         else
@@ -1554,7 +1576,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                        }
                        else
                         {
-                            return array("mridanga_yoga" => "none");exit;
+                            return array("mridanga_yoga" => "No");exit;
                         }
                     }
                     else
@@ -1565,18 +1587,18 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                         }
                         else
                         {
-                            return array("mridanga_yoga" => "none");exit;
+                            return array("mridanga_yoga" => "No");exit;
                         }
                     }
                 }
                 else
                 {
-                    return array("mridanga_yoga" => "none");exit;
+                    return array("mridanga_yoga" => "No");exit;
                 }   
             }
             else
             {
-                return array("mridanga_yoga" => "none");exit;
+                return array("mridanga_yoga" => "No");exit;
             }
         } 
     }
@@ -1615,7 +1637,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-            return array("gaja_yoga"    => "none");exit;
+            return array("gaja_yoga"    => "No");exit;
         }
     }
     protected function checkKalnidhi($asc, $merc, $jup, $ven)
@@ -1629,7 +1651,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-            $array      = array("kalnidhi_yoga" => "none");
+            $array      = array("kalnidhi_yoga" => "No");
         }
         return $array;
     }
@@ -1648,12 +1670,28 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         }
         else
         {
-            $array      = array("amsavatara_yoga" => "none");
+            $array      = array("amsavatara_yoga" => "No");
         }
         return $array;
     }
     protected function checkKusuma($data)
     {
-        print_r($data);exit;
+        $asc            = $data['Ascendant'];
+        $jup            = $data['Jupiter'];
+        $moon           = $data['Moon'];
+        $sun            = $data['Sun'];
+        $seventh        = $this->getHouseSign($asc, 7);
+        $second         = $this->getHouseSign($asc, 2);      
+        
+        if($asc == $jup && $moon == $seventh && $sun == $second)
+        {
+            $array      = array("kusuma_yoga"   => "There is <a href='https://www.astroisha.com/yogas/335-kusuma-yoga' title='Kusuma Yoga'>Kusuma Yoga</a> formed in your horoscope.");
+        }
+        else
+        {
+            $array      = array("kusuma_yoga"   => "No");
+        }
+        
+        return $array;
     }
 }

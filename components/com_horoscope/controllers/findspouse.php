@@ -22,6 +22,8 @@ class HoroscopeControllerFindSpouse extends HoroscopeController
             if(empty($lat) && empty($lon))
             {
                 $tmz        = "none";
+                $fspouse_lon_dir    = $_POST['fspouse_lon_dir'];
+                $fspouse_lat_dir    = $_POST['fspouse_lat_dir'];
                 if($fspouse_lon_dir=="E"&& $fspouse_lat_dir=="N")
                 {
                     $lon        = $_POST['fspouse_lon_deg'].".".$_POST['fspouse_lon_min'];

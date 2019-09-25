@@ -22,6 +22,8 @@ class HoroscopeControllerMangalDosha extends HoroscopeController
             if(empty($lat) && empty($lon))
             {
                 $tmz        = "none";
+                $mdosha_lon_dir    = $_POST['mdosha_lon_dir'];
+                $mdosha_lat_dir    = $_POST['mdosha_lat_dir'];
                 if($mdosha_lon_dir == "E"&& $mdosha_lat_dir=="N")
                 {
                     $lon        = $_POST['mdosha_lon_deg'].".".$_POST['mdosha_lon_min'];

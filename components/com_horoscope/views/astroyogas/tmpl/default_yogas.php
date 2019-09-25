@@ -4,12 +4,13 @@ defined('_JEXEC') or die();
 //print_r($this->data);exit;
 //$planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu","Uranus","Neptune","Pluto");
 $chart_id = $_GET['chart'];
-$percent            = 0;
+$count       = count($this->data['nbry_yoga']);
+$name       = explode(' ', $this->data['fname']);
 $document = JFactory::getDocument(); 
-$document->setTitle(strtolower($this->data['fname']).' divorce chances');
+$document->setTitle(strtolower($name[0]).' astro yogas');
 ?>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark">Chances of divorce in your chart</div>
+<div class="lead alert alert-dark">Astro Yogas in your chart</div>
 <table class="table table-bordered table-hover table-striped">
     <tr>
         <th>Name</th>
@@ -77,371 +78,61 @@ $document->setTitle(strtolower($this->data['fname']).' divorce chances');
     </tr>
 </table>
 <div class="mb-3"></div>
-<body onload="callMe();">
-<div class="lead alert alert-dark">Chances of divorce in your horoscope.</div>
-<div class="row justify-content-center">
-<div class="c100 big" id="percent_checker">
-    <span id="percent_value"></span>
-    <div class="slice">
-        <div class="bar"></div>
-        <div class="fill"></div>
-    </div>
-</div></div>
-<p>Note: Current planetary transits and planetary periods are not considered. This software isn't 100% accurate. But a rough idea is possible.</p>
+<div class="lead alert alert-dark">Main Good Yogas</div>
+<ul class="list-group">
+    <li class="list-group-item"><strong>Budh-Aditya Yoga: </strong><?php echo $this->data['budh_aditya']; ?></li>
+    <li class="list-group-item"><strong>Neech-Bhang Raj Yoga: </strong><?php if($count == "0"){echo "No"; }else{ for($i=0;$i<$count;$i++){ echo "<br/>".$this->data['nbry_yoga'][$i]; } } ?></li>
+    <li class="list-group-item"><strong>Vimala Yoga: </strong><?php echo $this->data['vimala'] ?></li>
+    <li class="list-group-item"><strong>Sarala Yoga: </strong><?php echo $this->data['sarala']; ?></li>
+    <li class="list-group-item"><strong>Harsha Yoga: </strong><?php echo $this->data['harsha']; ?></li>
+    <li class="list-group-item"><strong>Parivartana Yoga: </strong><?php for($i=0;$i<3;$i++){echo $this->data['parivartana_yoga_'.$i]."<br/>"; } ?></li>
+    <li class="list-group-item"><strong>Chandra-Mangal Yoga: </strong><?php echo $this->data['chandra_mangal']; ?></li>
+    <li class="list-group-item"><strong>Gaja-Kesari Yoga: </strong><?php echo $this->data['gaja_kesari']; ?></li>
+    <li class="list-group-item"><strong>Sasha Yoga: </strong><?php echo $this->data['sasha_yoga']; ?></li>
+    <li class="list-group-item"><strong>Hansa Yoga: </strong><?php echo $this->data['hansa_yoga']; ?></li>
+    <li class="list-group-item"><strong>Ruchaka Yoga: </strong><?php echo $this->data['ruchak_yoga']; ?></li>
+    <li class="list-group-item"><strong>Malavya Yoga: </strong><?php echo $this->data['malavya_yoga']; ?></li>
+    <li class="list-group-item"><strong>Bhadra Yoga: </strong><?php echo $this->data['bhadra_yoga']; ?></li>
+</ul><div class="mb-3"></div>
+<div class="lead alert alert-dark">Main Bad Yogas</div>
+<ul class="list-group">
+    <li class="list-group-item"><strong>Visha Yoga: </strong><?php echo $this->data['vish_yoga']; ?></li>
+    <li class="list-group-item"><strong>Vipra-Chandal Yoga: </strong><?php echo $this->data['vipra_chandal']; ?></li>
+    <li class="list-group-item"><strong>Kaal-Sarpa Yoga: </strong><?php echo $this->data['kaal_sarpa']; ?></li>
+    <li class="list-group-item"><strong>Shrapit Yoga: </strong><?php echo $this->data['shrapit_yoga']; ?></li>
+    <li class="list-group-item"><strong>Grahan Yoga: </strong><?php echo $this->data['grahan_yoga']; ?></li>
+    <li class="list-group-item"><strong>Shani-Surya Yuti: </strong><?php echo $this->data['pitru_dosha']; ?></li>
+    <li class="list-group-item"><strong>Kemdruma Yoga: </strong><?php echo $this->data['kemdruma_yoga']; ?></li>
+</ul>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark">Percentage of Mangal Dosha</div>
-<p>Mangal Dosha can lead to divorce. Mars in a problematic location increases anger and frustration. No 
-marriage in today's world can survive with constant fights.</p>
-<?php
- if(((int)$this->data['mangaldosha']) > 50)
- {
-?>
-<p>There is <?php echo $this->data['mangaldosha']; ?><span>&#37;</span> Mangal Dosha in your chart.</p>
-<?php
-}
-else if(((int)$this->data['mangaldosha']) == 50)
- {
-?>
-<p>There is <?php echo $this->data['mangaldosha']; ?><span>&#37;</span> Mangal Dosha in your chart.</p>
-<?php
-}
- else {
-?>
-<p>There is nominal <?php echo $this->data['mangaldosha']; ?><span>&#37;</span> Mangal Dosha in your chart.</p>
-<?php   
-}
-?>
+<div class="lead alert alert-dark">Other Yogas</div>
+<ul class="list-group">
+    <li class="list-group-item"><strong>Sunapha Yoga: </strong><?php echo $this->data['sunapha_yoga']; ?></li>
+    <li class="list-group-item"><strong>Anapha Yoga: </strong><?php echo $this->data['anapha_yoga']; ?></li>
+    <li class="list-group-item"><strong>Dhurdhura Yoga: </strong><?php echo $this->data['dhurdhura_yoga']; ?></li>
+    <li class="list-group-item"><strong>Adhi Yoga: </strong><?php echo $this->data['adhi_yoga']; ?></li>
+    <li class="list-group-item"><strong>Chatusagara Yoga: </strong><?php echo $this->data['chatusagara_yoga']; ?></li>
+    <li class="list-group-item"><strong>Rajlakshana Yoga: </strong><?php echo $this->data['rajlakshana_yoga']; ?></li>
+    <li class="list-group-item"><strong>Sakata Yoga; </strong><?php echo $this->data['sakata_yoga']; ?></li>
+    <li class="list-group-item"><strong>Amala Yoga: </strong><?php echo $this->data['amala_yoga']; ?></li>
+    <li class="list-group-item"><strong>Parvata Yoga: </strong><?php echo $this->data['parvata_yoga']; ?></li>
+    <li class="list-group-item"><strong>Kahala Yoga: </strong><?php echo $this->data['kahala_yoga']; ?></li>
+    <li class="list-group-item"><strong>Vesi Yoga: </strong><?php echo $this->data['vesi_yoga']; ?></li>
+    <li class="list-group-item"><strong>Obyachari Yoga: </strong><?php echo $this->data['obya_yoga']; ?></li>
+    <li class="list-group-item"><strong>Mahabhagya Yoga: </strong><?php echo $this->data['mahabhagya_yoga']; ?></li>
+    <li class="list-group-item"><strong>Laxmi Yoga: </strong><?php echo $this->data['laxmi_yoga']; ?></li>
+    <li class="list-group-item"><strong>Gauri Yoga: </strong><?php echo $this->data['gauri_yoga']; ?></li>
+    <li class="list-group-item"><strong>Chapa Yoga: </strong><?php echo $this->data['chapa_yoga']; ?></li>
+    <li class="list-group-item"><strong>Sreenatha Yoga: </strong><?php echo $this->data['sreenatha_yoga']; ?></li>
+    <li class="list-group-item"><strong>Mallika Yoga: </strong><?php echo $this->data['malika_yoga']; ?></li>
+    <li class="list-group-item"><strong>Sankha Yoga: </strong><?php echo $this->data['sankha_yoga']; ?></li>
+    <li class="list-group-item"><strong>Daridra Yoga: </strong><?php echo $this->data['daridra_yoga']; ?></li>
+    <li class="list-group-item"><strong>Bheri Yoga: </strong><?php echo $this->data['bheri_yoga']; ?></li>
+    <li class="list-group-item"><strong>Mridanga Yoga: </strong><?php echo $this->data['mridanga_yoga']; ?></li>
+    <li class="list-group-item"><strong>Gaja Yoga: </strong><?php echo $this->data['gaja_yoga']; ?></li>
+    <li class="list-group-item"><strong>Kalnidhi Yoga: </strong><?php echo $this->data['kalnidhi_yoga']; ?></li>
+    <li class="list-group-item"><strong>Amsavatara Yoga: </strong><?php echo $this->data['amsavatara_yoga']; ?></li>
+    <li class="list-group-item"><strong>Kusuma Yoga: </strong><?php echo $this->data['kusuma_yoga']; ?></li>
+</ul>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark">Ascendant in your chart</div>
-<p>Chances of divorce rise in certain ascendant and with bad planets influencing ascendant.</p>
-<p>Your ascendant is <?php echo $this->data['asc_sign']; ?>.</p>
-<p>
-    There is 
-<?php
-    $count  = count($this->data['house_1']);
-    if($count == "0")
-    {
-        echo " no planet ";
-    }
-    else
-    {
-        //echo $count;exit;
-        for($i = 0; $i < $count;$i++)
-        {
-           if($i < $count-1)
-           {
-               echo $this->data['house_1'][$i].", ";
-           }
-           else
-           {
-               echo $this->data['house_1'][$i]." ";
-           }
-        }
-    }
-?>
-    in your 1st house(ascendant). 
-</p>
-<div class="mb-3"></div>
-<p>
-    There 
-<?php
-    $count  = count($this->data['aspect_1']);
-    if($count == "0")
-    {
-        echo " are no aspect ";
-    }
-    else
-    {
-        echo " is aspect of ";
-        for($i = 0; $i < $count;$i++)
-        {
-           if($i < $count-1)
-           {
-               echo $this->data['aspect_1'][$i].", ";
-           }
-           else
-           {
-               echo $this->data['aspect_1'][$i]." ";
-           }
-        }
-    }
-?>
-    on your 1st house(ascendant). 
-</p>
-<div class="mb-3"></div>
-<div class="lead alert alert-dark">Influence on the 7th House</div>
-<p>7th house is the house of marriage. One of the leading factors of divorce is bad 
-condition of 7th house.</p>
-<p>
-    There is 
-<?php
-    $count  = count($this->data['house_7']);
-    if($count == "0")
-    {
-        echo " no planet ";
-    }
-    else
-    {
-        //echo $count;exit;
-        for($i = 0; $i < $count;$i++)
-        {
-           if($i < $count-1)
-           {
-               echo $this->data['house_7'][$i].", ";
-           }
-           else
-           {
-               echo $this->data['house_7'][$i]." ";
-           }
-        }
-    }
-?>
-    in your 7th house. 
-</p>
-
-<div class="mb-3"></div>
-<p>
-    There 
-<?php
-    $count  = count($this->data['aspect_7']);
-    if($count == "0")
-    {
-        echo " are no aspect ";
-    }
-    else
-    {
-        echo " is aspect of ";
-        for($i = 0; $i < $count;$i++)
-        {
-           if($i < $count-1)
-           {
-               echo $this->data['aspect_7'][$i].", ";
-           }
-           else
-           {
-               echo $this->data['aspect_7'][$i]." ";
-           }
-        }
-    }
-?>
-    on your 7th house. 
-</p>
-<div class="mb-3"></div>
-<div class="lead alert alert-dark">Influence on the 8th House</div>
-<p>Biggest factor for divorce is the 8th house which deals with divorce and court cases. 
-</p>
-<p>
-    There  
-<?php
-    $count  = count($this->data['house_8']);
-    if($count == "0")
-    {
-        echo " no planets ";
-    }
-    else
-    {
-        echo " is ";
-        //echo $count;exit;
-        for($i = 0; $i < $count;$i++)
-        {
-           if($i < $count-1)
-           {
-               echo $this->data['house_8'][$i].", ";
-           }
-           else
-           {
-               echo $this->data['house_8'][$i]." ";
-           }
-        }
-    }
-?>
-    in your 8th house. 
-</p>
-<div class="mb-3"></div>
-<p>
-    There  
-<?php
-    $count  = count($this->data['aspect_8']);
-    //echo $count;exit;
-    if($count == "0")
-    {
-        echo " is no aspect ";
-    }
-    else
-    {
-        echo " is aspect of ";
-        for($i = 0; $i < $count;$i++)
-        {
-           if($i < $count-1)
-           {
-               echo $this->data['aspect_8'][$i].", ";
-           }
-           else
-           {
-               echo $this->data['aspect_8'][$i]." ";
-           }
-        }
-    }
-?>
-    on your 8th house. 
-</p>
-<div class="mb-3"></div>
-<div class="lead alert alert-dark">Influence on the 12th House</div>
-<p>12th house rules over sex and bedroom pleasures. Divorce rate today has 
-gone up due to partners complaining of insufficient romance and sex in marriage life.</p>
-<p>
-    There is 
-<?php
-    $count  = count($this->data['house_12']);
-    if($count == "0")
-    {
-        echo " no planets ";
-    }
-    else
-    {
-        for($i = 0; $i < $count;$i++)
-        {
-           if($i < $count-1)
-           {
-               echo $this->data['house_12'][$i].", ";
-           }
-          else
-           {
-               echo $this->data['house_12'][$i]." ";
-           }
-        }
-    }
-?>
-    in your 12th house. 
-</p>
-<div class="mb-3"></div>
-<p>
-    There is 
-<?php
-    $count  = count($this->data['aspect_12']);
-    if($count == "0")
-    {
-        echo " no aspects ";
-    }
-    else
-    {
-        echo " aspect of ";
-        for($i = 0; $i < $count;$i++)
-        {
-           if($i < $count-1)
-           {
-               echo $this->data['aspect_12'][$i].", ";
-           }
-           else
-           {
-               echo $this->data['aspect_12'][$i]." ";
-           }
-        }
-    }
-?>
-    on your 12th house. 
-</p>
-<?php 
-    // mangal dosha- 15%
-    if(((int)$this->data['mangaldosha']) > 50)
-    {
-        $percent            = $percent+15;
-    }
-    else if(((int)$this->data['mangaldosha']) == 50)
-    {
-        $percent            = $percent+10;
-    }
-    else
-    {
-        $percent            = $percent+0;
-    }
-    // ascendant= percent 15%
-    if($this->data['asc_sign'] == "Aries"|| $this->data['asc_sign'] == "Libra"||
-       $this->data['asc_sign'] == "Cancer")
-    {
-        $percent            = $percent+10;
-
-    }
-    if(in_array("Mars", $this->data['house_1']) || in_array("Rahu", $this->data['house_1'])
-            ||in_array("Ketu", $this->data['house_1'])||in_array("Saturn", $this->data['house_1']))
-    {
-        $percent            = $percent+10;
-    }
-    if(in_array("Mars", $this->data['aspect_1']) || in_array("Rahu", $this->data['aspect_1'])
-            ||in_array("Ketu", $this->data['aspect_1'])||in_array("Saturn", $this->data['aspect_1']))
-    {
-        $percent            = $percent+10;
-    }
-    if(in_array("Jupiter", $this->data['house_1'])|| in_array("Jupiter", $this->data['aspect_1']))
-    {
-        $percent            = $percent - 10;
-    }
-    // house 7 20% divorce chances
-    if(in_array("Mars", $this->data['house_7']))
-    {
-        $percent            = $percent+10;
-    }
-    else if(in_array("Ketu", $this->data['house_7']) || in_array("Rahu", $this->data['house_7']))
-    {
-        $percent            = $percent+10;
-    }
-    else
-    {
-        $percent            = $percent+0;
-    }
-    // house 8 40% divorce chance
-    if(in_array("Mars", $this->data['house_8'])|| in_array("Mars",$this->data['aspect_8']))
-    {
-        $percent            = $percent+10;
-    }
-    if(in_array("Venus", $this->data['house_8']))
-    {
-        $percent            = $percent+10;
-    }
-    if(in_array("Rahu", $this->data['house_8'])|| in_array("Rahu", $this->data['aspect_8']))
-    {
-        $percent            = $percent+10;
-    }
-    if(in_array("Ketu", $this->data['house_8']))
-    {
-        $percent            = $percent+10;
-    }
-    if(in_array("Sun", $this->data['house_8'])|| in_array("Sun", $this->data['aspect_8']))
-    {
-        $percent            = $percent+5;
-    }
-     if(in_array("Saturn", $this->data['house_8'])|| in_array("Saturn", $this->data['aspect_8']))
-    {
-        $percent            = $percent +5;
-    }
-    if(in_array("Jupiter", $this->data['house_8'])|| in_array("Jupiter", $this->data['aspect_8']))
-    {
-        $percent            = $percent - 10;
-    }
-     // 12th house 10% divorce rate
-    if(in_array("Sun", $this->data['house_12']) && in_array("Venus", $this->data['house_12']))
-    {
-        $percent            = $percent+10;
-    }
-    if(in_array("Rahu", $this->data['house_12']) || in_array("Rahu",$this->data['aspect_12']))
-    {
-        $percent            = $percent+10;
-    }
-    if(in_array("Saturn", $this->data['house_12']) || in_array("Saturn",$this->data['aspect_12']))
-    {
-        $percent            = $percent+10;
-    }
-    if(in_array("Mars", $this->data['house_12']) && in_array("Venus",$this->data['house_12']))
-    {
-        $percent            = $percent+5;
-    }
-?>  
-<form>
-    <input type="hidden" value="<?php echo $percent; ?>" id="divorce_rate" />
-</form>
-<div class="mb-3"></div>
-<link rel="stylesheet" href="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/circle.css' ?>" type="text/css" />
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/divorce.js' ?>">
-</script>
 <?php unset($this->data); ?>
-</body>

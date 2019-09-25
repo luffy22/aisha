@@ -22,6 +22,8 @@ class HoroscopeControllerDivorce extends HoroscopeController
             if(empty($lat) && empty($lon))
             {
                 $tmz        = "none";
+                $divorce_lon_dir    = $_POST['divorce_lon_dir'];
+                $divorce_lat_dir    = $_POST['divorce_lat_dir'];
                 if($divorce_lon_dir == "E"&& $divorce_lat_dir=="N")
                 {
                     $lon        = $_POST['divorce_lon_deg'].".".$_POST['divorce_lon_min'];
