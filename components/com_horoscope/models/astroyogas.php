@@ -123,6 +123,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $checkKaalSarpa             = $this->checkKaalSarpa($data);
         $checkNBRY                  = $this->checkNBRY($data);
         $checkVRY                   = $this->checkVRY($data);
+        $checkAngaraka              = $this->checkAngaraka($data['Mars'],$data['Rahu']);
         $checkParivartana           = $this->checkParivartana($data);
         $checkChandraMangal         = $this->checkChandraMangal($planets['Moon'],$planets['Mars']);
         $checkGajaKesari            = $this->checkGajaKesari($planets['Moon'], $planets['Jupiter']);
@@ -161,7 +162,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         
         $array                      = array_merge($array, $user_data, $checkVish, $checkBudhAditya,
                                         $checkVipraChandal, $checkShrapit, $checkGrahan, $checkPitru,
-                                        $checkKaalSarpa,$checkNBRY, $checkVRY, $checkParivartana, 
+                                        $checkKaalSarpa,$checkNBRY, $checkAngaraka,$checkVRY, $checkParivartana, 
                                         $checkChandraMangal,$checkGajaKesari,$checkSasha,$checkHansa,
                                         $checkRuchaka,$checkMalavya,$checkBhadra,$checkSunapha,$checkAnapha,
                                         $checkDhurdura,$checkKemdruma,$checkAdhiYoga, $checkChatusagara,
@@ -213,13 +214,9 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             {
                 $array              = array("budh_aditya" => "There is a very strong <a href='https://www.astroisha.com/yogas/162-budh-aditya'  title='budh-aditya yoga'>Budh-Aditya Yoga</a> in a favorable sign formed in your horoscope.");
             }
-            else  if(($sun_sign !== "Leo" || $sun_sign !== "Gemini" || $sun_sign !== "Virgo")&&((int)$diff <= 12))
-            {
-                $array              = array("budh_aditya" => "There is a strong <a href='https://www.astroisha.com/yogas/162-budh-aditya'  title='budh-aditya yoga'>Budh-Aditya Yoga</a> formed in your horoscope.");
-            }
             else 
             {
-                $array              = array("budh_aditya" => "There is a mild <a href='https://www.astroisha.com/yogas/162-budh-aditya'  title='budh-aditya yoga'>Budh-Aditya Yoga</a> formed in your horoscope.");
+                $array              = array("budh_aditya" => "There is <a href='https://www.astroisha.com/yogas/162-budh-aditya'  title='budh-aditya yoga'>Budh-Aditya Yoga</a> formed in your horoscope.");
             }   
             
         }
@@ -554,6 +551,19 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             $array                  = array_merge($array, $vimala);
         }
         //print_r($array);exit;
+        return $array;
+    }
+     protected function checkAngaraka($mars, $rahu)
+    {
+        $dist                       = $this->getHouseDistance($mars, $rahu);
+        if($dist == "1" || $dist == "7")
+        {
+            $array                  = array("angaraka_yoga" => "There is <a href='https://www.astroisha.com/yogas/451-angaraka-yoga' title='Angaraka Yoga'>Angaraka Yoga</a> in your horoscope.");
+        }
+        else
+        {
+            $array                  = array("angaraka_yoga" => "No");
+        }
         return $array;
     }
     protected function checkParivartana($data)
