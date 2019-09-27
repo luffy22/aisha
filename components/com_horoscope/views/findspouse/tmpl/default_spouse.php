@@ -36,7 +36,7 @@ $chart_id = $_GET['chart'];
 	</tr>
 	<tr>
 		<th>Time Of Birth</th>
-		<td><?php echo $date->format('H:i:s'); ?></td>
+		<td><?php echo $date->format('h:i:s a'); ?></td>
 	</tr>
 	<tr>
 		<th>Place Of Birth</th>
