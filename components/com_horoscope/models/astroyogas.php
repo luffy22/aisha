@@ -407,7 +407,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             {
                  // check1 sees if planet is in a quadrant or Not
                 if($planet_from_asc == "1" || $planet_from_asc == "4"||
-                   $planet_from_asc == "7" || $planet_from_asc == "7")
+                   $planet_from_asc == "7" || $planet_from_asc == "10")
                 {
                     $check1         = "pass";
                 }
@@ -416,7 +416,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                     $check1         = "fail";
                 }
                 if($planet_from_moon == "1" || $planet_from_moon == "4"||
-                   $planet_from_moon == "7" || $planet_from_moon == "7")
+                   $planet_from_moon == "7" || $planet_from_moon == "10")
                 {
                     $check5         = "pass";
                 }
