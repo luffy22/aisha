@@ -28,14 +28,13 @@ class AstrologinModelReadReport extends JModelItem
     {
         $jinput             = JFactory::getApplication()->input;
         $order              = $jinput->get('order', 'default_value', 'string');
+        $type 				= 'chart_panchang';
         $db                 = JFactory::getDbo();  // Get db connection
         $query              = $db->getQuery(true);
-        $query              ->select($db->quoteName(array('b.query_about','b.query_explain','a.order_full_text',
-                                                            'b.query_answer','c.summary_full_text')));
-        $query              ->from($db->quoteName('#__order_reports','a'));
-        $query          ->join('RIGHT', $db->quoteName('#__order_queries','b'). ' ON (' . $db->quoteName('a.order_id').' = '.$db->quoteName('b.order_id') . ')');
-        $query          ->join('RIGHT', $db->quoteName('#__order_summary','c'). ' ON (' . $db->quoteName('a.order_id').' = '.$db->quoteName('c.order_id') . ')');
-        $query              ->where($db->quoteName('a.order_id').' = '.$db->quote($order));
+        $query              ->select($db->quoteName(array('order_full_text')));
+        $query              ->from($db->quoteName('#__order_reports'));
+        $query              ->where($db->quoteName('order_id').' = '.$db->quote($order).' AND '.
+									$db->quoteName('order_branch').' = '.$db->quote($type));
         $db                  ->setQuery($query);
         $result         = $db->loadObjectList();
         //print_r($result);exit;

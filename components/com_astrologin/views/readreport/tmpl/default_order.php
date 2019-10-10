@@ -79,49 +79,7 @@ else
 }
 ?>
 <div clas="mb-4"></div>
-<div class="lead alert alert-dark">Other Queries</div>
 <?php
-if($this->details->order_type == "life")
-{
-    for($i=0;$i <3;$i++)
-    {
-?>
-<div class="lead alert alert-dark">Question <?php echo $i+1; ?>: <?php echo ucfirst($this->order[$i]->query_about); ?></div>
-<p>Question: <?php echo $this->order[$i]->query_explain; ?></p>
-<div class="lead alert alert-dark">Answer</div>
-<?php 
-    if(empty($this->order[$i]->query_answer))
-    {
-        echo "Not yet answered<br/><br/>";
-    }
-    else
-    {
-        echo $this->order[$i]->query_answer; 
-    }
-?>
-<div clas="mb-4"></div>
-<?php
-    }
-}
-else
-{
-?>
-<div class="lead alert alert-dark">Question: <?php echo ucfirst($this->order[0]->query_about); ?></div>
-<p>Question: <?php echo $this->order[0]->query_explain; ?></p>
-<div class="lead alert alert-dark">Answer</div>
-<?php 
-    if(empty($this->order[0]->query_answer))
-    {
-        echo "Not yet answered<br/><br/>";
-    }
-    else
-    {
-        echo $this->order[0]->query_answer; 
-    }
-?>
-<div clas="mb-4"></div>
-<?php
-}
 unset($this->order);unset($this->details);
 ?>
 
