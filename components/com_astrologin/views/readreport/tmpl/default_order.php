@@ -71,11 +71,33 @@ else if(isset($_GET['payment']) && $_GET['payment']=="fail")
 <?php
 if(empty($this->order[0]->order_full_text))
 {
-    echo "Not yet answered<br/><br/>";
+?>
+<ul class="list-group">
+    <li class="list-group-item">Charts and Panchang</li>
+    <li class="list-group-item">Analysis of 9 planets</li>
+    <li class="list-group-item">Analysis of 12 houses</li>
+    <li class="list-group-item">Analysis of Vimshottari Dasha</li>
+    <li class="list-group-item">Astro Yogas in your horoscope</li>
+    <li class="list-group-item">Basic Forecast</li>
+    <li class="list-group-item">Sade-Sati Effects</li>
+    <li class="list-group-item">Questions</li>
+</ul>
+<?php
 }
 else
 {
-    echo $this->order[0]->order_full_text;
+?>
+<ul class="list-group">
+    <li class="list-group-item"><a href="<?php echo Juri::base().'readchart?order='.$order.'&ref='.$refemail; ?>">Charts and Panchang</a></li>
+    <li class="list-group-item"><a href="<?php echo Juri::base().'readplanet?order='.$order.'&ref='.$refemail; ?>">Analysis of 9 planets</a></li>
+    <li class="list-group-item"><a href="<?php echo Juri::base().'readhouses?order='.$order.'&ref='.$refemail; ?>">Analysis of 12 houses</a></li>
+    <li class="list-group-item"><a href="<?php echo Juri::base().'readdasha?order='.$order.'&ref='.$refemail; ?>">Analysis of Vimshottari Dasha</a></li>
+    <li class="list-group-item"><a href="<?php echo Juri::base().'readyogas?order='.$order.'&ref='.$refemail; ?>">Astro Yogas in your horoscope</a></li>
+    <li class="list-group-item"><a href="<?php echo Juri::base().'readforecast?order='.$order.'&ref='.$refemail; ?>">Basic Forecast</a></li>
+    <li class="list-group-item"><a href="<?php echo Juri::base().'readsadesati?order='.$order.'&ref='.$refemail; ?>">Sade-Sati Effects</a></li>
+    <li class="list-group-item"><a href="<?php echo Juri::base().'astroqueries?order='.$order.'&ref='.$refemail; ?>">Questions</a></li>
+</ul>
+<?php
 }
 ?>
 <div clas="mb-4"></div>

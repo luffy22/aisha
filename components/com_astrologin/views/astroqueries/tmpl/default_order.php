@@ -48,19 +48,52 @@ if(isset($_GET['payment']) && $_GET['payment']=="success")
   </ul>
   <div class="mb-4"></div>
 <div class="container"><div class="row">
-<div class="col-4 text-left"><a href="<?php echo Juri::base().'readchart?order='.$order.'&ref='.$refemail; ?>"><i class="fas fa-arrow-left"></i> Previous</a></div>
+<div class="col-4 text-left"><a href="<?php echo Juri::base().'readsadesati?order='.$order.'&ref='.$refemail; ?>"><i class="fas fa-arrow-left"></i> Previous</a></div>
 <div class="col-4 text-center"><a href="<?php echo Juri::base().'read-report?order='.$order.'&ref='.$refemail; ?>"><i class="fas fa-home"></i> Report Home</a></div>
-<div class="col-4 text-right"><a href="<?php echo Juri::base().'readhouses?order='.$order.'&ref='.$refemail; ?>"><i class="fas fa-arrow-right"></i> Next</a></div>
 </div></div>
 <div class="mb-4"></div>
+<div class="lead alert alert-dark">Question 1</div>
+<p><strong>Topic: </strong><?php echo ucfirst($this->order[0]->query_about); ?></p>
+<p><strong>Background: </strong><?php echo ucfirst($this->order[0]->query_explain); ?></p>
+<div class="lead alert alert-dark">Answer</div>
 <?php
-if(empty($this->order[0]->order_full_text))
+if(empty($this->order[0]->query_answer))
 {
     echo "Not yet answered<br/><br/>";
 }
 else
 {
-    echo $this->order[0]->order_full_text;
+    echo $this->order[0]->query_answer;
+}
+?>
+<div clas="mb-4"></div>
+<div class="lead alert alert-dark">Question 2</div>
+<p><strong>Topic: </strong><?php echo ucfirst($this->order[1]->query_about); ?></p>
+<p><strong>Background: </strong><?php echo ucfirst($this->order[1]->query_explain); ?></p>
+<div class="lead alert alert-dark">Answer</div>
+<?php
+if(empty($this->order[1]->query_answer))
+{
+    echo "Not yet answered<br/><br/>";
+}
+else
+{
+    echo $this->order[1]->query_answer;
+}
+?>
+<div clas="mb-4"></div>
+<div class="lead alert alert-dark">Question 3</div>
+<p><strong>Topic: </strong><?php echo ucfirst($this->order[2]->query_about); ?></p>
+<p><strong>Background: </strong><?php echo ucfirst($this->order[2]->query_explain); ?></p>
+<div class="lead alert alert-dark">Answer</div>
+<?php
+if(empty($this->order[2]->query_answer))
+{
+    echo "Not yet answered<br/><br/>";
+}
+else
+{
+    echo $this->order[20]->query_answer;
 }
 ?>
 <div clas="mb-4"></div>

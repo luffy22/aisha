@@ -3,7 +3,7 @@
 defined('_JEXEC') or die;  // No direct Access
 // import Joomla modelitem library
 jimport('joomla.application.component.modelitem');
-class AstrologinModelReadReport extends JModelItem
+class AstrologinModelReadForecast extends JModelItem
 {
     function getDetails()
     {
@@ -28,7 +28,7 @@ class AstrologinModelReadReport extends JModelItem
     {
         $jinput             = JFactory::getApplication()->input;
         $order              = $jinput->get('order', 'default_value', 'string');
-        $type               = 'chart_main';
+        $type 				= 'chart_basics';
         $db                 = JFactory::getDbo();  // Get db connection
         $query              = $db->getQuery(true);
         $query              ->select($db->quoteName(array('order_full_text')));
