@@ -234,7 +234,7 @@ class HoroscopeModelLagna extends JModelItem
 
         $tempma = $tempma * 3600;
         $min = floor($tempma / 60);
-        $sec = round($tempma - ($min*60),0);
+        $sec = number_format($tempma - ($min*60),0);
         
         if($usage == "details")
         {

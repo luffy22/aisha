@@ -63,12 +63,12 @@ This privacy policy applies to the Site and all products and services offered by
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you have any questions about this Privacy Policy, the practices of this site, or your dealings with this site, please contact us at: </p>
 <address>Astro Isha<br/>
 Address:<br/> 
-223, Second Floor,<br/>Spectrum Commercial Center,<br/> Near Relief Arcade, Relief Road<br/>
+C Block 426, Fourth Floor,<br/>ST Shopping Center,<br/> Near Geeta Mandir Cross Roads, Astodia<br/>
 Ahmedabad<br/>
 Gujarat<br/>
-Pin Code: 380001<br/>
+Pin Code: 380022<br/>
 India<br/>
 Phone: +91-9727841461<br/>
-Email: admin@astroisha.com</address>
+Email: consult@astroisha.com</address>
 <div class="mb-3"></div>
 

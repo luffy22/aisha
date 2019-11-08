@@ -69,22 +69,7 @@ else if(isset($_GET['payment']) && $_GET['payment']=="fail")
 <div class="lead alert alert-dark">Full Report</div>
 <div clas="mb-4"></div>
 <?php
-if(empty($this->order[0]->order_full_text))
-{
-?>
-<ul class="list-group">
-    <li class="list-group-item">Charts and Panchang</li>
-    <li class="list-group-item">Analysis of 9 planets</li>
-    <li class="list-group-item">Analysis of 12 houses</li>
-    <li class="list-group-item">Analysis of Vimshottari Dasha</li>
-    <li class="list-group-item">Astro Yogas in your horoscope</li>
-    <li class="list-group-item">Basic Forecast</li>
-    <li class="list-group-item">Sade-Sati Effects</li>
-    <li class="list-group-item">Questions</li>
-</ul>
-<?php
-}
-else
+if($this->details->order_type=="life")
 {
 ?>
 <ul class="list-group">
@@ -95,9 +80,40 @@ else
     <li class="list-group-item"><a href="<?php echo Juri::base().'readyogas?order='.$order.'&ref='.$refemail; ?>">Astro Yogas in your horoscope</a></li>
     <li class="list-group-item"><a href="<?php echo Juri::base().'readforecast?order='.$order.'&ref='.$refemail; ?>">Basic Forecast</a></li>
     <li class="list-group-item"><a href="<?php echo Juri::base().'readsadesati?order='.$order.'&ref='.$refemail; ?>">Sade-Sati Effects</a></li>
-    <li class="list-group-item"><a href="<?php echo Juri::base().'astroqueries?order='.$order.'&ref='.$refemail; ?>">Questions</a></li>
+    <li class="list-group-item"><a href="<?php echo Juri::base().'astroqueries?order='.$order.'&ref='.$refemail; ?>">Answer to Queries</a></li>
 </ul>
 <?php
+}
+else if($this->details->order_type=="marriage")
+{
+?>
+<ul class="list-group">
+    <li class="list-group-item"><a href="<?php echo Juri::base().'marriagereport?order='.$order.'&ref='.$refemail; ?>">Marriage Report</a></li>
+    <li class="list-group-item"><a href="<?php echo Juri::base().'astroqueries?order='.$order.'&ref='.$refemail; ?>">Query Answer</a></li>
+</ul>
+<?php
+}
+else if($this->details->order_type=="career")
+{
+?>
+<ul class="list-group">
+    <li class="list-group-item"><a href="<?php echo Juri::base().'careerreport?order='.$order.'&ref='.$refemail; ?>">Career Report</a></li>
+    <li class="list-group-item"><a href="<?php echo Juri::base().'astroqueries?order='.$order.'&ref='.$refemail; ?>">Query Answer</a></li>
+</ul>
+<?php
+}
+else if($this->details->order_type=="yearly")
+{
+?>
+<ul class="list-group">
+    <li class="list-group-item"><a href="<?php echo Juri::base().'yearlyreport?order='.$order.'&ref='.$refemail; ?>">Yearly Report</a></li>
+    <li class="list-group-item"><a href="<?php echo Juri::base().'astroqueries?order='.$order.'&ref='.$refemail; ?>">Query Answer</a></li>
+</ul>
+<?php
+}
+else
+{
+    echo "Not yet answered";    
 }
 ?>
 <div clas="mb-4"></div>

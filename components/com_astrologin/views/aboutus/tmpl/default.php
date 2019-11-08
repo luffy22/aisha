@@ -24,7 +24,7 @@ well-versed in the Astrological Concepts and currently answers all the queries a
 design and coding.</p>
 <div class="lead alert alert-dark">For More Information</div>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you have any further queries regarding the working and services offered by the website kindly get in 
-touch at email: admin@astroisha.com.</p>
+touch at email: consult@astroisha.com.</p>
  <!-- astro-reg -->
 <div class="mb-3"></div>
 

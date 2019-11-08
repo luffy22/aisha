@@ -262,18 +262,18 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         return $array;
     }
     protected function checkGrahan($sun, $moon, $rahu, $ketu)
-    {      
+    { 
         if($sun == $rahu)
         {
             $array                  = array("grahan_yoga" => "There is <a href='https://www.astroisha.com/yogas/447-grahan-yoga' title='grahan yoga' >grahan yoga</a> formed in your horoscope due to Sun and Rahu joining in same sign.");
         }
         else if($sun == $ketu)
         {
-            $array                  = array("grahan_yoga" => "There is <a href='https://www.astroisha.com/yogas/447-grahan-yoga' title='grahan yoga' >Grahan Yoga</a> formed in your horoscope due to Moon and Rahu joining in same sign.");
+            $array                  = array("grahan_yoga" => "There is <a href='https://www.astroisha.com/yogas/447-grahan-yoga' title='grahan yoga' >Grahan Yoga</a> formed in your horoscope due to Sun and Ketu joining in same sign.");
         }
         else if($moon == $rahu)
         {
-            $array                  = array("grahan_yoga" => "There is <a href='https://www.astroisha.com/yogas/447-grahan-yoga' title='grahan yoga' >Grahan Yoga</a> formed in your horoscope due to Sun and Ketu joining in same sign.");
+            $array                  = array("grahan_yoga" => "There is <a href='https://www.astroisha.com/yogas/447-grahan-yoga' title='grahan yoga' >Grahan Yoga</a> formed in your horoscope due to Moon and Rahu joining in same sign.");
         }
         else if($moon == $ketu)
         {
@@ -1081,8 +1081,8 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $eight_planets      = $this->checkPlanetsInHouse($data, 8);
         $asc_lord           = $own_sign[$asc_sign];
         $twelfth_lord       = $own_sign[$twelfth_sign];
-        $asc_lord_sign      = $this->calcDetails($data[$asc_lord]);
-        $twelfth_lord_sign  = $this->calcDetails($data[$twelfth_lord]);
+        $asc_lord_sign      = $data[$asc_lord];
+        $twelfth_lord_sign  = $data[$twelfth_lord];
         $asc_lord_dist      = $this->getHouseDistance($asc_sign, $asc_lord_sign);
         $twelfth_lord_dist  = $this->getHouseDistance($asc_sign,$twelfth_lord_sign);
         
