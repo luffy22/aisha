@@ -55,6 +55,7 @@ class AstrologinControllerAstroReport extends AstroLoginController
     }
     public function fillDetails3()
     {
+        //echo "calls3";exit;
         $order_id           = $_POST['order_id'];
         $order_type         = $_POST['order_type'];
         $other_explain     = $_POST['query_explain'];

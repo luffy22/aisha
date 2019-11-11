@@ -113,6 +113,7 @@ $document->setTitle(strtolower($name[0]).' astro yogas');
     <li class="list-group-item"><strong>Dhurdhura Yoga: </strong><?php echo $this->data['dhurdhura_yoga']; ?></li>
     <li class="list-group-item"><strong>Adhi Yoga: </strong><?php echo $this->data['adhi_yoga']; ?></li>
     <li class="list-group-item"><strong>Chatusagara Yoga: </strong><?php echo $this->data['chatusagara_yoga']; ?></li>
+    <li class="list-group-item"><strong>Vasumathi Yoga: </strong><?php echo $this->data['vasumati_yoga']; ?></li>
     <li class="list-group-item"><strong>Rajlakshana Yoga: </strong><?php echo $this->data['rajlakshana_yoga']; ?></li>
     <li class="list-group-item"><strong>Sakata Yoga; </strong><?php echo $this->data['sakata_yoga']; ?></li>
     <li class="list-group-item"><strong>Amala Yoga: </strong><?php echo $this->data['amala_yoga']; ?></li>

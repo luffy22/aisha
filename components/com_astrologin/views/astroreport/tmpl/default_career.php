@@ -26,7 +26,7 @@ $order_type             = $_GET['order_type'];
         <option value="unemployed">Unemployed</option>
         <option value="private">Private Sector</option>
         <option value="govt">Government Sector</option>
-        <option value="business">Individual Business</option>
+        <option value="business">Solo Business</option>
         <option value="partnership">Partnership Business</option>
         <option value="other">Other</option>
     </select>

@@ -280,6 +280,7 @@ function changefees3()
     var life_fees       = document.getElementById("life_fees").value;
     var career_fees     = document.getElementById("career_fees").value;
     var marriage_fees   = document.getElementById("marriage_fees").value;
+    var sadesati_fees   = document.getElementById("sadesati_fees").value;
     if(document.getElementById("select_report").value == "yearly")
     {
         var fees        = yearly_fees;
@@ -291,6 +292,10 @@ function changefees3()
     else if(document.getElementById("select_report").value == "career")
     {
         var fees        = career_fees;
+    }
+    else if(document.getElementById("select_report").value == "sadesati")
+    {
+        var fees        = sadesati_fees;
     }
     else if(document.getElementById("select_report").value == "marriage")
     {

@@ -62,6 +62,7 @@ else if(isset($_GET['payment']) && $_GET['payment']=="fail")
                                                   else if($this->details->order_type=="marriage"){echo "Marriage Report";}
                                                   else if($this->details->order_type=="life"){echo "Life Report"; }
                                                   else if($this->details->order_type=="yearly"){echo "Yearly Report"; }
+                                                  else if($this->details->order_type=="sadesati"){echo "Sade-Sati Report"; }
                                                   else if($this->details->order_type=="detailed"){echo "Detailed Answer"; }
                                                   else{echo "Detailed Report";} ?></li>
   </ul>
@@ -98,6 +99,15 @@ else if($this->details->order_type=="career")
 ?>
 <ul class="list-group">
     <li class="list-group-item"><a href="<?php echo Juri::base().'careerreport?order='.$order.'&ref='.$refemail; ?>">Career Report</a></li>
+    <li class="list-group-item"><a href="<?php echo Juri::base().'astroqueries?order='.$order.'&ref='.$refemail; ?>">Query Answer</a></li>
+</ul>
+<?php
+}
+else if($this->details->order_type=="sadesati")
+{
+?>
+<ul class="list-group">
+    <li class="list-group-item"><a href="<?php echo Juri::base().'readsadesati?order='.$order.'&ref='.$refemail; ?>">Sade-Sati Report</a></li>
     <li class="list-group-item"><a href="<?php echo Juri::base().'astroqueries?order='.$order.'&ref='.$refemail; ?>">Query Answer</a></li>
 </ul>
 <?php

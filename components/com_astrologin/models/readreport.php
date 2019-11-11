@@ -28,13 +28,11 @@ class AstrologinModelReadReport extends JModelItem
     {
         $jinput             = JFactory::getApplication()->input;
         $order              = $jinput->get('order', 'default_value', 'string');
-        $type               = 'chart_main';
         $db                 = JFactory::getDbo();  // Get db connection
         $query              = $db->getQuery(true);
         $query              ->select($db->quoteName(array('order_full_text')));
         $query              ->from($db->quoteName('#__order_reports'));
-        $query              ->where($db->quoteName('order_id').' = '.$db->quote($order).' AND '.
-									$db->quoteName('order_branch').' = '.$db->quote($type));
+        $query              ->where($db->quoteName('order_id').' = '.$db->quote($order));
         $db                  ->setQuery($query);
         $result         = $db->loadObjectList();
         //print_r($result);exit;

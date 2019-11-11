@@ -28,7 +28,7 @@ class AstrologinModelReadYogas extends JModelItem
     {
         $jinput             = JFactory::getApplication()->input;
         $order              = $jinput->get('order', 'default_value', 'string');
-        $type 				= 'chart_yogas';
+        $type 				= 'life_yogas';
         $db                 = JFactory::getDbo();  // Get db connection
         $query              = $db->getQuery(true);
         $query              ->select($db->quoteName(array('order_full_text')));

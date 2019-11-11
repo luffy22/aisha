@@ -28,7 +28,7 @@ class AstrologinModelReadDasha extends JModelItem
     {
         $jinput             = JFactory::getApplication()->input;
         $order              = $jinput->get('order', 'default_value', 'string');
-        $type 				= 'chart_dasha';
+        $type 				= 'life_dasha';
         $db                 = JFactory::getDbo();  // Get db connection
         $query              = $db->getQuery(true);
         $query              ->select($db->quoteName(array('order_full_text')));

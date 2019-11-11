@@ -34,6 +34,7 @@ $details                    = $this->msg;
     <option value='life'>Life Report</option>
     <option value='career'>Career Report</option>
     <option value='marriage'>Marriage Report</option>
+    <option value='sadesati'>Sade-Sati Report</option>
 </select>
 </div>
 <div class="mb-3"></div>
@@ -41,6 +42,7 @@ $details                    = $this->msg;
 <input type="hidden" name="life_fees" id="life_fees" value="<?php echo $details[0]['amount'] ?>" />
 <input type="hidden" name="career_fees" id="career_fees" value="<?php echo $details[2]['amount'] ?>" />
 <input type="hidden" name="marriage_fees" id="marriage_fees" value="<?php echo $details[3]['amount'] ?>" />
+<input type="hidden" name="sadesati_fees" id="sadesati_fees" value="<?php echo $details[4]['amount'] ?>" />
 <input type="hidden" name="report_fees" id="report_fees" value="<?php echo $details[0]['amount'] ?>" />
 <input type="hidden" name="report_curr_code" id="report_curr_code" value="<?php echo $details[0]['curr_code'] ?>" />
 <input type="hidden" name="report_currency" id="report_currency" value="<?php echo $details[0]['currency']; ?>" />

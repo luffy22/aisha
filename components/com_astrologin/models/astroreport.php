@@ -6,17 +6,17 @@ class AstrologinModelAstroReport extends JModelItem
 {
     public function getData()
     {
-        //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
-        //$geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
+        include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
+        $geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
         //$ip                           = '117.196.1.11';
-        $ip                             = '157.55.39.123';  // ip address
-        //$ip                       		= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
-        $info                         = geoip_country_code_by_name($ip);
-        $country                      = geoip_country_name_by_name($ip);
+        //$ip                             = '157.55.39.123';  // ip address
+        $ip                             = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
+        //$info                         = geoip_country_code_by_name($ip);
+        //$country                      = geoip_country_name_by_name($ip);
         
-        //$location               	= $geoip->lookupLocation($ip);
-        //$info                   	= $location->countryCode;
-        //$country                	= $location->countryName;
+        $location               	= $geoip->lookupLocation($ip);
+        $info                   	= $location->countryCode;
+        $country                	= $location->countryName;
         $u_id           = '222';
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
@@ -42,6 +42,7 @@ class AstrologinModelAstroReport extends JModelItem
         $service2       = 'life';
         $service3       = 'career';
         $service4       = 'marriage';
+        $service5       = 'sade-sati';
         $country_code       = array("IN","US","UK","NZ","AU","SG","CA","RU");
         if($info=='FR'||$info=='DE'||$info=='IE'||$info=='NL'||$info=='CR'||$info=='BE'
                 ||$info=='GR'||$info=='IT'||$info=='PT'||$info=='ES'||$info=='MT'||$info=='LV'||$info=='TR')
@@ -69,6 +70,8 @@ class AstrologinModelAstroReport extends JModelItem
                                             $db->quoteName('service_for_charge').' = '.$db->quote($service3).' AND '.
                                             $db->quoteName('country').' = '.$db->quote($info).' OR '.
                                             $db->quoteName('service_for_charge').' = '.$db->quote($service4).' AND '.
+                                            $db->quoteName('country').' = '.$db->quote($info).' OR '.
+                                            $db->quoteName('service_for_charge').' = '.$db->quote($service5).' AND '.
                                             $db->quoteName('country').' = '.$db->quote($info));
         $db                 ->setQuery($query);
         $result             = $db->loadAssocList();
@@ -114,7 +117,7 @@ class AstrologinModelAstroReport extends JModelItem
                         ->columns($db->quoteName($columns))
                         ->values(implode(',', $values));
         // Set the query using our newly populated query object and execute it
-        $db             ->setQuery($query);
+        $db             ->setQuery($query);$db->execute();
         $result          = $db->query();
         if($result)
         {
@@ -142,6 +145,27 @@ class AstrologinModelAstroReport extends JModelItem
         $order_id           = $details['order_id'];
         $order_type         = $details['order_type'];
         $query_about        = $details['query_about'];
+        if($order_type == "career")
+        {
+            $order_branch   = "career_report";
+        }
+        else if($order_type == "marriage")
+        {
+            $order_branch   = "marriage_report";
+        }
+        else if($order_type == "yearly")
+        {
+            $order_branch   = "yearly_report";
+        }
+        else if($order_type == "sadesati")
+        {
+            $order_branch   = "sadesati_report";
+        }
+        else
+        {       
+            $order_branch   = "marriage_report";
+        }
+        //echo $order_branch;exit;
         $query_explain      = $details['details_explain'];
         $app                = JFactory::getApplication();
         $db                 = JFactory::getDbo();  // Get db connection
@@ -158,27 +182,17 @@ class AstrologinModelAstroReport extends JModelItem
                         ->values(implode(',', $values));
         // Set the query using our newly populated query object and execute it
         $db             ->setQuery($query);
-        $result          = $db->query();unset($result);
+        $result          = $db->execute();unset($result);
         $query           ->clear();
-        $columns            = array('order_id');
-        $values             = array($db->quote($order_id));
+        $columns            = array('order_id','order_branch');
+        $values             = array($db->quote($order_id), $db->quote($order_branch));
         // Prepare the insert query
         $query          ->insert($db->quoteName('#__order_reports'))
                         ->columns($db->quoteName($columns))
                         ->values(implode(',', $values));
         // Set the query using our newly populated query object and execute it
         $db             ->setQuery($query);
-        $result          = $db->query();unset($result);$query->clear();
-        $columns            = array('order_id');
-        $values             = array($db->quote($order_id));
-        // Prepare the insert query
-        $query          ->insert($db->quoteName('#__order_summary'))
-                        ->columns($db->quoteName($columns))
-                        ->values(implode(',', $values));
-        // Set the query using our newly populated query object and execute it
-        $db             ->setQuery($query);
-        $result          = $db->query();
-        $query           -> clear();
+        $result          = $db->execute();$query->clear();
         if($result)
         {
             $query              ->clear();
@@ -241,27 +255,24 @@ class AstrologinModelAstroReport extends JModelItem
                                 ->values(implode(',', $values));
             // Set the query using our newly populated query object and execute it
             $db             ->setQuery($query);
-            $result          = $db->query();$query->clear();unset($result);
+            $result          = $db->execute();$query->clear();unset($result);
         }
-        $columns            = array('order_id');
-        $values             = array($db->quote($order_id));
-        // Prepare the insert query
-        $query              ->insert($db->quoteName('#__order_reports'))
-                            ->columns($db->quoteName($columns))
-                            ->values(implode(',', $values));
-        // Set the query using our newly populated query object and execute it
-        $db                 ->setQuery($query);
-        $result             = $db->query();unset($result);
-        $query              ->clear();
-        $columns            = array('order_id');
-        $values             = array($db->quote($order_id));
-        // Prepare the insert query
-        $query          ->insert($db->quoteName('#__order_summary'))
-                        ->columns($db->quoteName($columns))
-                        ->values(implode(',', $values));
-        // Set the query using our newly populated query object and execute it
-        $db             ->setQuery($query);
-        $result          = $db->query();
+        
+        $array              = array('life_report','life_planets','life_houses','life_dasha','life_basics','life_yogas','sadesati_report');
+
+        for($i=0; $i < 7; $i++)
+        {
+            $columns            = array('order_id','order_branch');
+            $values             = array($db->quote($order_id),$db->quote($array[$i]));
+            // Prepare the insert query
+            $query              ->insert($db->quoteName('#__order_reports'))
+                                ->columns($db->quoteName($columns))
+                                ->values(implode(',', $values));
+            // Set the query using our newly populated query object and execute it
+            $db                 ->setQuery($query);
+            $result             = $db->execute();
+            $query              ->clear();
+        }
         if($result)
         {
             $query              -> clear();
@@ -461,7 +472,11 @@ class AstrologinModelAstroReport extends JModelItem
         }
         else if($data->order_type == "marriage")
         {
-                $body 			.= "<p>Order Type: Marriage Reort</p>";
+                $body 			.= "<p>Order Type: Marriage Report</p>";
+        }
+        else if($data->order_type == "sadsati")
+        {
+                $body 			.= "<p>Order Type: Sade-Sati Report</p>";
         }
         else
         {

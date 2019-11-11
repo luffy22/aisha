@@ -28,7 +28,7 @@ class AstrologinModelReadHouses extends JModelItem
     {
         $jinput             = JFactory::getApplication()->input;
         $order              = $jinput->get('order', 'default_value', 'string');
-        $type 				= 'chart_houses';
+        $type 				= 'life_houses';
         $db                 = JFactory::getDbo();  // Get db connection
         $query              = $db->getQuery(true);
         $query              ->select($db->quoteName(array('order_full_text')));
