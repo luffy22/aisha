@@ -2,8 +2,8 @@
 <extension version="3.9" client="site" type="language" method="upgrade">
 	<name>Tamil (ta-IN)</name>
     <tag>ta-IN</tag>
-	<version>3.9.12.1</version>
-	<creationDate>2019-09-24</creationDate>
+	<version>3.9.13.1</version>
+	<creationDate>2019-11-05</creationDate>
 	<author>Ilagnayeru 'MIG' Manickam; Elango Samy Manim</author>
 	<authorEmail>mig.joomla@gmail.com</authorEmail>
 	<authorUrl></authorUrl>

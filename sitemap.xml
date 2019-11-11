@@ -1368,59 +1368,63 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-  <loc>https://www.astroisha.com/monthly</loc>
+	<loc>https://www.astroisha.com/planet-bhavas/453-ketu-5th-house</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>https://www.astroisha.com/yearly</loc>
   <changefreq>monthly</changefreq>
 </url>
 <url>
-  <loc>https://www.astroisha.com/monthly?start=10</loc>
+  <loc>https://www.astroisha.com/yearly?start=10</loc>
   <changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/monthly/404-aries-2019</loc>
+	<loc>https://www.astroisha.com/yearly/454-aries-2020</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/monthly/405-taurus-2019</loc>
+	<loc>https://www.astroisha.com/yearly/455-taurus-2020</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/monthly/406-gemini-2019</loc>
+	<loc>https://www.astroisha.com/yearly/456-gemini-2020</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/monthly/407-cancer-2019</loc>
+	<loc>https://www.astroisha.com/yearly/457-cancer-2020</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/monthly/408-leo-2019</loc>
+	<loc>https://www.astroisha.com/yearly/458-leo-2020</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/monthly/409-virgo-2019</loc>
+	<loc>https://www.astroisha.com/yearly/459-virgo-2020</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/monthly/410-libra-2019</loc>
+	<loc>https://www.astroisha.com/yearly/460-liba-2020</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/monthly/411-scorpio-2019</loc>
+	<loc>https://www.astroisha.com/yearly/461-scorpio-2020</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/monthly/412-sagittarius-2019</loc>
+	<loc>https://www.astroisha.com/yearly/462-sagittarius-2020</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/monthly/413-capricorn-2019</loc>
+	<loc>https://www.astroisha.com/yearly/463-capricorn-2020</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/monthly/414-aquarius-2019</loc>
+	<loc>https://www.astroisha.com/yearly/464-aquarius-2020</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/monthly/415-pisces-2019</loc>
+	<loc>https://www.astroisha.com/yearly/465-pisces-2020</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
