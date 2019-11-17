@@ -122,8 +122,8 @@ class AstrologinModelAstroask extends JModelItem
                         ->values(implode(',', $values));
         // Set the query using our newly populated query object and execute it
         $db             ->setQuery($query);
-        $result          = $db->query();
-        if($result)
+
+        if($result = $db->execute())
         {
             if($ques_type == "long_ans")
             {
@@ -171,9 +171,9 @@ class AstrologinModelAstroask extends JModelItem
                                                     VALUES ('".$token."','".${"select_".$j}."','".${"ask_".$j}."','".${"ques_details_".$j}."')";
             // Set the query using our newly populated query object and execute it
             $db             ->setQuery($query);
-            $result          = $db->query();
+            
         }
-        if($result)
+        if($result= $db->execute())
         {
             $query1              ->select($db->quoteName(array('UniqueID','name','email',
                                         'pay_mode','fees','currency')))

@@ -118,8 +118,8 @@ class AstrologinModelAstroReport extends JModelItem
                         ->values(implode(',', $values));
         // Set the query using our newly populated query object and execute it
         $db             ->setQuery($query);$db->execute();
-        $result          = $db->query();
-        if($result)
+        
+        if($result          = $db->query())
         {
             $query          ->clear();
             $query          ->select($db->quoteName(array('UniqueID','order_type')))
@@ -192,8 +192,7 @@ class AstrologinModelAstroReport extends JModelItem
                         ->values(implode(',', $values));
         // Set the query using our newly populated query object and execute it
         $db             ->setQuery($query);
-        $result          = $db->execute();$query->clear();
-        if($result)
+        if($result          = $db->execute())
         {
             $query              ->clear();
             $query              ->select($db->quoteName(array('UniqueID','name','email',
@@ -242,6 +241,7 @@ class AstrologinModelAstroReport extends JModelItem
             $order_type         = $details['order_type'];
             $query_about        = ${"query_about_".$i};
             $query_explain      = ${"query_explain_".$i};
+            
             //echo $order_id." ".$order_type." ".$query_about." ".$query_explain;exit;
             $columns                = array('order_id','order_type','query_about','query_explain'
                                     );
@@ -270,12 +270,11 @@ class AstrologinModelAstroReport extends JModelItem
                                 ->values(implode(',', $values));
             // Set the query using our newly populated query object and execute it
             $db                 ->setQuery($query);
-            $result             = $db->execute();
-            $query              ->clear();
+            $result             = $db->execute();$query->clear();
         }
         if($result)
         {
-            $query              -> clear();
+            $query              ->clear();
             $query              ->select($db->quoteName(array('UniqueID','name','email',
                                         'pay_mode','fees','currency')))
                                 ->from($db->quoteName('#__question_details'))
@@ -500,16 +499,16 @@ class AstrologinModelAstroReport extends JModelItem
         {
             $body       .= "<p>Payment Status: Success</p>";
             $body       .= "<p>Payment Id: ".$data->track_id."</p>";
-            $body       .= "<p>Bank Reference Id: ".$data->bank_ref."</p>";
             $body       .= "<br/><p><strong>Please keep this email as reference. Alternatively you can also print this email for future reference.</strong></p>";
-            $body       .= "<p><strong>In case the order is not completed in ten working days you would be refunded full amount back into your bank account.</strong></p><br/>";
+            $body       .= "<p><strong>In case the order is not completed in twenty-five working days you would be refunded most of the amount back into your bank account. Amount deducted would be service charge by third-party payment service. AstroIsha does not charge anything for uncompleted orders.</strong></p><br/>";
         }
         else if($data->pay_mode=="paypal"&&$data->paid=="yes")
         {
             $body       .= "<p>Payment Status: ".$data->status."</p>";
             $body       .= "<p>Your payment is safe with paypal. AstroIsha would only ask for credit after we have finished your order and mailed it to you.</p>";
             $body       .= "<br/><p><strong>Please keep this email as reference. Alternatively you can also print this email for future reference.</strong></p>";
-            $body       .= "<p><strong>In case the order is not completed in ten working days you would be refunded full amount back into your bank account.</strong></p><br/>";
+            $body       .= "<p><strong>In case your order is not completed in twenty-five working days you would be refunded most of the amount back into your bank account. Amount if deducted would be service charge by paypal. 
+                             AstroIsha does not charge anything for uncompleted orders.</strong></p><br/>";
         }
         else
         {
