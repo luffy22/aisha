@@ -8,13 +8,13 @@
 - Above details will be different for testing and production environment.
 
 */
-define('PAYTM_ENVIRONMENT', 'TEST'); // Use TEST for testing and PROD for production environment
-define('PAYTM_MERCHANT_KEY', 'WkL%%iYg_9AilDBh'); //Change this constant's value with Merchant key downloaded from portal
-define('PAYTM_MERCHANT_MID', 'fRJIDg93720967325991'); //Change this constant's value with MID (Merchant ID) received from Paytm
-define('PAYTM_MERCHANT_WEBSITE', 'WEBSTAGING'); //Change this constant's value with Website name received from Paytm
+define('PAYTM_ENVIRONMENT', 'PROD'); // Use TEST for testing and PROD for production environment
+define('PAYTM_MERCHANT_KEY', 'BQKQ4imLsG4E8O9q'); //Change this constant's value with Merchant key downloaded from portal
+define('PAYTM_MERCHANT_MID', 'AstroI82769251589297'); //Change this constant's value with MID (Merchant ID) received from Paytm
+define('PAYTM_MERCHANT_WEBSITE', 'AstroIWEB'); //Change this constant's value with Website name received from Paytm
 
-$PAYTM_STATUS_QUERY_NEW_URL='https://securegw-stage.paytm.in/order/status';
-$PAYTM_TXN_URL='https://securegw-stage.paytm.in/order/process';
+$PAYTM_STATUS_QUERY_NEW_URL='https://securegw.paytm.in/order/status';
+$PAYTM_TXN_URL='https://securegw.paytm.in/order/process';
 if (PAYTM_ENVIRONMENT == 'PROD') {
 	$PAYTM_STATUS_QUERY_NEW_URL='https://securegw.paytm.in/order/status';
 	$PAYTM_TXN_URL='https://securegw.paytm.in/order/process';

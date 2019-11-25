@@ -235,29 +235,28 @@ class AstrologinModelAstroReport extends JModelItem
         $app                    = JFactory::getApplication();
         $db                     = JFactory::getDbo();  // Get db connection
         $query                  = $db->getQuery(true);
-        for($i=1; $i< 4;$i++)
+
+        for($i=1;$i<4;$i++)
         {
             $order_id           = $details['order_id'];
             $order_type         = $details['order_type'];
             $query_about        = ${"query_about_".$i};
             $query_explain      = ${"query_explain_".$i};
-            
-            //echo $order_id." ".$order_type." ".$query_about." ".$query_explain;exit;
             $columns                = array('order_id','order_type','query_about','query_explain'
                                     );
             $values                 = array(
                                         $db->quote($order_id),$db->quote($order_type),$db->quote($query_about),
                                         $db->quote($query_explain)
                                     );
-            // Prepare the insert query
+             // Prepare the insert query
             $query              ->insert($db->quoteName('#__order_queries'))
                                 ->columns($db->quoteName($columns))
                                 ->values(implode(',', $values));
             // Set the query using our newly populated query object and execute it
             $db             ->setQuery($query);
-            $result          = $db->execute();$query->clear();unset($result);
+            $db->execute();$query->clear();
+            
         }
-        
         $array              = array('life_report','life_planets','life_houses','life_dasha','life_basics','life_yogas','sadesati_report');
 
         for($i=0; $i < 7; $i++)

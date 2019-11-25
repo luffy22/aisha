@@ -40,6 +40,7 @@ $paramList["WEBSITE"] = PAYTM_MERCHANT_WEBSITE;
 $paramList["MSISDN"] = $mobile; //Mobile number of customer
 $paramList["EMAIL"] = $CUST_ID;  //Email ID of customer
 $paramList["CALLBACK_URL"]  = $CALLBACK_URL;
+
 //print_r($paramList);exit;
 $checkSum = getChecksumFromArray($paramList,PAYTM_MERCHANT_KEY);
 //print_r($checkSum);exit;
