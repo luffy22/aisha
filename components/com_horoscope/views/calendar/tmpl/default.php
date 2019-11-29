@@ -206,4 +206,5 @@ function processArray($data, $days_in_month, $counter, $month, $year)
 }
 unset($this->data);
 ?>
+<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/popper.min.js' ?>"></script>
 <div class="mb-1"></div>

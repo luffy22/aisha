@@ -20,8 +20,8 @@ class ModOrderHelper
 {
     public function showOrder()
     {
-        //$ip               = '117.196.1.11';
-        $ip                 = '157.55.39.123';  // ip address
+        $ip               = '117.196.1.11';
+        //$ip                 = '157.55.39.123';  // ip address
         //$ip                 = '180.215.160.173';
         //$ip               = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
 

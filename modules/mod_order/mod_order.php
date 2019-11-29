@@ -12,6 +12,6 @@ defined('_JEXEC') or die;
 // Include the syndicate functions only once
 require_once __DIR__ . '/helper.php';
 
-$footer	= ModOrderHelper::showOrder();
+$order	= ModOrderHelper::showOrder();
 
 require JModuleHelper::getLayoutPath('mod_order', $params->get('layout', 'default'));

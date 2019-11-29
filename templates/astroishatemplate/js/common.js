@@ -16,22 +16,6 @@ function closeNav() {
  */
 // Dropdown menu is closed & opened using this function.
 
-$(document).ready(function()
-  {
-      //var id = $('.accordion-id').attr('id');
-      $('#topcontent-1, #top-1, #top-2, #topcontent-2, #payments-accordion, #payments-accordion1').accordion({
-            heightStyle : "content",
-            collapsible : true,
-        });
-    });
-$(document).ready(function()
-  {
-      //var id = $('.accordion-id').attr('id');
-      $('#about-us, #paid_dash, #vimshottari, #free_dash, #dashboard_free, #ques_accordion').accordion({
-            heightStyle : "content",
-            collapsible : true
-        });
-    });
 
 /*     
  *     var location = window.location.protocol + "//" + window.location.host;
@@ -205,7 +189,7 @@ $(function()
     });
 });
 $(function() {
-$("#ques_dob, #datepicker").datepicker({yearRange: "1900:2050",changeMonth: true,
+$("#ques_dob, #datepicker, #report_dob").datepicker({yearRange: "1900:2050",changeMonth: true,
   changeYear: true, dateFormat: "yy-mm-dd"});
 });
 

@@ -99,7 +99,6 @@ else
     <button type="reset" name="ask_reset" id="ask_reset" class="btn btn-danger">Reset</button>
 </div>
 </form>
-<link rel="stylesheet" href="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/circle.css' ?>" type="text/css" />
 <?php 
 unset($details);unset($this->msg);
 ?>
