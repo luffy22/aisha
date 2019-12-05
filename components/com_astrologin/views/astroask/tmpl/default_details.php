@@ -44,7 +44,7 @@ function isMobileDevice() {
         if(isMobileDevice()){
             //Your content or code for mobile devices goes here
     ?>    
-        <input type="date" id="ques_dob" name="ques_dob" class="form-control" placeholder="25/03/1984" min="1900-01-01" max="2030-12-31" />
+        <input type="date" name="ques_dob" class="form-control" placeholder="25/03/1984" min="1900-01-01" max="2030-12-31" />
     <?php
         }
         else
