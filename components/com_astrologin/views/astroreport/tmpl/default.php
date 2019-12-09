@@ -89,3 +89,42 @@ else
 <?php 
 unset($details);unset($this->msg);
 ?>
+<script>
+function changefees3()
+{
+    var yearly_fees     = document.getElementById("yearly_fees").value;
+    var life_fees       = document.getElementById("life_fees").value;
+    var career_fees     = document.getElementById("career_fees").value;
+    var marriage_fees   = document.getElementById("marriage_fees").value;
+    var sadesati_fees   = document.getElementById("sadesati_fees").value;
+    if(document.getElementById("select_report").value == "yearly")
+    {
+        var fees        = yearly_fees;
+    }
+    else if(document.getElementById("select_report").value == "life")
+    {
+        var fees        = life_fees;
+    }
+    else if(document.getElementById("select_report").value == "career")
+    {
+        var fees        = career_fees;
+    }
+    else if(document.getElementById("select_report").value == "sadesati")
+    {
+        var fees        = sadesati_fees;
+    }
+    else if(document.getElementById("select_report").value == "marriage")
+    {
+        var fees        = marriage_fees;
+    }
+    else
+    {
+        var fees        = document.getElementById("report_fees").value;
+    }
+    var curr_code       = document.getElementById("report_curr_code").value;
+    var currency        = document.getElementById("report_currency").value;
+    var curr_full       = document.getElementById("report_curr_full").value;
+    document.getElementById("fees_id").innerHTML    = fees+"<html>&nbsp;</html>"+curr_code+"("+currency+"-"+curr_full+")"
+    document.getElementById("report_final_fees").value    = fees;
+}
+</script>

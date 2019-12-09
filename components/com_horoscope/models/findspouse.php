@@ -24,12 +24,19 @@ class HoroscopeModelFindSpouse extends HoroscopeModelLagna
         $chart          = $details['chart'];
         if($tmz == "none")
         {
-            $date           = new DateTime($dob." ".$tob);
-            $timestamp      = $date->format('U');
-            $tmz            = $this->getTimeZone($lat, $lon, "rohdes");
-            if($tmz == "error")
+            if(strpos($pob, "India") == "true"||strpos($pob,"india") == true)
             {
-                $tmz        = "UTC";        // if timezone not available use UTC(Universal Time Cooridnated)
+                $tmz     = "Asia/Kolkata";
+            }
+            else
+            {
+                $date           = new DateTime($dob." ".$tob);
+                $timestamp      = $date->format('U');
+                $tmz            = $this->getTimeZone($lat, $lon, "rohdes");
+                if($tmz == "error")
+                {
+                    $tmz        = "UTC";        // if timezone not available use UTC(Universal Time Cooridnated)
+                }
             }
             $newdate        = new DateTime($dob." ".$tob, new DateTimeZone($tmz));
             $dob_tob        = $newdate->format('Y-m-d H:i:s');

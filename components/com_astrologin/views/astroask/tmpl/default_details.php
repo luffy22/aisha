@@ -70,3 +70,64 @@ function isMobileDevice() {
 </form>
 <link rel="stylesheet" href="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/jquery-ui.min.css' ?>" type="text/css" />
 <script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/jquery-ui.min.js' ?>"></script>
+<script>
+$(function() {
+$("#ques_dob").datepicker({yearRange: "1900:2050",changeMonth: true,
+  changeYear: true, dateFormat: "yy-mm-dd"});
+});
+$(function() 
+{
+   var result       = "";
+   $("#ques_pob").autocomplete({
+      source: 
+       function(request, response) {
+        $.ajax({
+          url: "ajaxcalls/autocomplete.php",
+          dataType: "json",
+          data: {
+            term: request.term
+          },
+          success: function( data ) {
+          response(data);
+          
+          }
+        
+        });
+      },
+      minLength: 3,
+     
+      open: function() {
+        $('#ques_pob').removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+         $(".ui-autocomplete").css("z-index", 1000);
+      },
+      close: function() {
+        $('#ques_pob').removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+   })
+   
+});
+function changefees()
+{
+    var long_ans        = document.getElementById("long_ans_fees").value;
+    var short_ans        = document.getElementById("short_ans_fees").value;
+    if(document.getElementById("ques_type1").checked)
+    {
+        var fees        = long_ans;
+    }
+    else if(document.getElementById("ques_type2").checked)
+    {
+        var fees        = short_ans;
+    }
+    else
+    {
+        var fees        = document.getElementById("expert_fees").value;
+    }
+    var no_of_ques      = document.getElementById("max_ques").value;
+    var curr_code       = document.getElementById("expert_curr_code").value;
+    var currency        = document.getElementById("expert_currency").value;
+    var curr_full       = document.getElementById("expert_curr_full").value;
+    var new_fees        = parseFloat(fees)*parseFloat(no_of_ques);
+    document.getElementById("fees_id").innerHTML    = new_fees+"<html>&nbsp;</html>"+curr_code+"("+currency+"-"+curr_full+")"
+    document.getElementById("expert_final_fees").value    = new_fees.toFixed(2);
+}
+</script>

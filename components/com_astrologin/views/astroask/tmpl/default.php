@@ -102,3 +102,30 @@ else
 <?php 
 unset($details);unset($this->msg);
 ?>
+<script>
+function changefees2()
+{
+
+    var long_ans        = document.getElementById("long_ans_fees").value;
+    var short_ans        = document.getElementById("short_ans_fees").value;
+    if(document.getElementById("ques_type1").checked)
+    {
+        var fees        = long_ans;
+    }
+    else if(document.getElementById("ques_type2").checked)
+    {
+        var fees        = short_ans;
+    }
+    else
+    {
+        var fees        = document.getElementById("expert_fees").value;
+    }
+    var no_of_ques      = document.getElementById("select_ques").value;
+    var curr_code       = document.getElementById("expert_curr_code").value;
+    var currency        = document.getElementById("expert_currency").value;
+    var curr_full       = document.getElementById("expert_curr_full").value;
+    var new_fees        = parseFloat(fees)*parseFloat(no_of_ques);
+    document.getElementById("fees_id").innerHTML    = new_fees+"<html>&nbsp;</html>"+curr_code+"("+currency+"-"+curr_full+")"
+    document.getElementById("expert_final_fees").value    = new_fees.toFixed(2);
+}    
+</script>

@@ -12,7 +12,6 @@ class HoroscopeControllerLagna extends HoroscopeController
 {
     public function findlagna()
     {
-        //echo "calls lagna";exit;
         if(isset($_POST['lagnasubmit']))
         {
             $fname      = $_POST['lagna_fname'];$gender = $_POST['lagna_gender'];

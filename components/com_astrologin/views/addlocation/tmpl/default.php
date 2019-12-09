@@ -17,6 +17,14 @@ if(isset($_GET['redirect']) && $_GET['redirect'] == "divorce")
 {
     $redirect = "divorce";
 }
+if(isset($_GET['redirect']) && $_GET['redirect'] == "careerfind")
+{
+    $redirect = "careerfind";
+}
+if(isset($_GET['redirect']) && $_GET['redirect'] == "astroyogas")
+{
+    $redirect = "astroyogas";
+}
 ?>
 <h3 class="lead alert alert-dark">Add Location</h3>
 <form role="form" enctype="application/x-www-form-urlencoded" method="post" 
@@ -52,3 +60,6 @@ if(isset($_GET['redirect']) && $_GET['redirect'] == "divorce")
         <button type="submit" class="btn btn-primary btn-lg" name="loc_submit"><i class="fas fa-plus"></i> Add</button>
     </div>
 </form>
+<link rel="stylesheet" href="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/jquery-ui.min.css' ?>" type="text/css" />
+<script type="text/javascript" src="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/jquery-ui.min.js' ?>"></script>
+<script type="text/javascript" src="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/autocomplete.js' ?>"></script>

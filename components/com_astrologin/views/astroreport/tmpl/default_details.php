@@ -68,3 +68,40 @@ function isMobileDevice() {
 </form>
 <link rel="stylesheet" href="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/jquery-ui.min.css' ?>" type="text/css" />
 <script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/jquery-ui.min.js' ?>"></script>
+<script>
+$(function() {
+$("#report_dob").datepicker({yearRange: "1900:2050",changeMonth: true,
+  changeYear: true, dateFormat: "yy-mm-dd"});
+});
+$(function() 
+{
+   var result       = "";
+   $("#report_pob").autocomplete({
+      source: 
+       function(request, response) {
+        $.ajax({
+          url: "ajaxcalls/autocomplete.php",
+          dataType: "json",
+          data: {
+            term: request.term
+          },
+          success: function( data ) {
+          response(data);
+          
+          }
+        
+        });
+      },
+      minLength: 3,
+     
+      open: function() {
+        $('#ques_pob').removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+         $(".ui-autocomplete").css("z-index", 1000);
+      },
+      close: function() {
+        $('#ques_pob').removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+   })
+   
+});
+</script>
