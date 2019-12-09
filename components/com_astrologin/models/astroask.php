@@ -15,7 +15,7 @@ class AstrologinModelAstroask extends JModelItem
         $info                         = geoip_country_code_by_name($ip);
         $country                      = geoip_country_name_by_name($ip);
         
-        ///$location               	= $geoip->lookupLocation($ip);
+        //$location               	= $geoip->lookupLocation($ip);
         //$info                   	= $location->countryCode;
         //$country                	= $location->countryName;
         $u_id           = '222';
@@ -31,8 +31,8 @@ class AstrologinModelAstroask extends JModelItem
         $db             ->setQuery($query);
         $db->execute();
         $result         = $db->loadAssoc();
-        $service1       = 'long_ans_fees';
-        $service2       = 'short_ans_fees';
+        $service1       = 'long';
+        $service2       = 'short';
         $result1        = $this->getCurrencyDetails($info, $u_id);
         
         $country            = array("country_full"=>$country);
@@ -42,8 +42,8 @@ class AstrologinModelAstroask extends JModelItem
     }
     public function getCurrencyDetails($info, $u_id)
     {
-        $service1           = 'long_ans_fees';
-        $service2           = 'short_ans_fees';
+        $service1           = 'long';
+        $service2           = 'short';
         $country_code       = array("IN","US","UK","NZ","AU","SG","CA","RU");
         if($info=='FR'||$info=='DE'||$info=='IE'||$info=='NL'||$info=='CR'||$info=='BE'
                 ||$info=='GR'||$info=='IT'||$info=='PT'||$info=='ES'||$info=='MT'||$info=='LV'||$info=='TR')
@@ -61,7 +61,7 @@ class AstrologinModelAstroask extends JModelItem
 
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
-        $query          ->select($db->quoteName(array('a.country','a.amount','b.currency','b.curr_code','b.curr_full')))
+        $query          ->select($db->quoteName(array('a.country','a.amount','a.disc_percent','b.currency','b.curr_code','b.curr_full')))
                                     ->from($db->quoteName('#__expert_charges','a'))
                                     ->join('INNER', $db->quoteName('#__user_currency', 'b') . ' ON (' . $db->quoteName('a.currency_ref') . ' = ' . $db->quoteName('b.Curr_ID') . ')')
                                     ->where($db->quoteName('user_id').' = '.$db->quote($u_id).' AND '.

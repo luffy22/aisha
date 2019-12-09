@@ -3,6 +3,9 @@
 defined('_JEXEC') or die('Restricted access');
 $details                    = $this->msg;
 //print_r($details);exit;
+$fees                       = $details[0]['amount'];
+$disc                       = number_format((float)($fees*$details[0]['disc_percent'])/100,2);
+$disc_fees                  = $fees-$disc;
 ?>
 <div class="progress" style="height:25px">
   <div class="progress-bar" style="width:25%;height:25px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Choose</div>
@@ -55,13 +58,30 @@ $details                    = $this->msg;
 <div class="mb-3"></div>
 <input type="hidden" name="ques_long_fees" id="long_ans_fees" value="<?php echo $details[0]["amount"] ?>" />
 <input type="hidden" name="ques_short_fees" id="short_ans_fees" value="<?php echo $details[1]['amount'] ?>" />
+<input type="hidden" name="ques_long_disc" id="long_ans_disc" value="<?php echo $details[0]['disc_percent']; ?>" />
+<input type="hidden" name="ques_short_disc" id="short_ans_disc" value="<?php echo $details[1]['disc_percent']; ?>" />
 <input type="hidden" name="expert_fees" id="expert_fees" value="<?php echo $details[0]['amount'] ?>" />
 <input type="hidden" name="expert_curr_code" id="expert_curr_code" value="<?php echo $details[0]['curr_code'] ?>" />
 <input type="hidden" name="expert_currency" id="expert_currency" value="<?php echo $details[0]['currency']; ?>" />
 <input type="hidden" name="expert_curr_full" id="expert_curr_full" value="<?php echo $details[0]['curr_full']; ?>" />
 <input type="hidden" name="expert_final_fees" id="expert_final_fees" value="<?php echo $details[0]['amount'] ?>" />
 <div class="mb-3"></div>
-<div class="form-control" id="fees_type"><label>Fees:</label> <div id='fees_id'><?php echo $details[0]['amount']."&nbsp;".$details[0]['curr_code']."(".$details[0]['currency']."-".$details[0]['curr_full'].")" ?></div></div>
+<?php
+    if($disc_fees == $fees)
+    {
+?>
+<div class="form-control" id="fees_type"><label>Fees:</label> <div id='fees_id'><?php echo $details[0]["amount"]."&nbsp;".$details[0]['currency']." only"; ?></div></div>
+
+<?php
+    }
+    else
+    {
+?>
+<div class="form-control" id="fees_type"><label>Fees:</label> <div id='fees_id'><?php echo "<s>".$details[0]["amount"]."&nbsp;".$details[0]['currency']."</s><br/>".$disc_fees."&nbsp;".$details[0]['currency']." only" ?></div></div>
+
+<?php
+    }
+?>
 <div class="mb-3"></div>
 <div class="form-control" id="pay_id">
     <label for='expert_choice' class='control-label'>Payment Type: </label>
@@ -92,7 +112,7 @@ else
 ?>
     </div>
 </div>
-
+</div>
 <div class="mb-3"></div>
 <div class="form-group" id="btn_grp">
    <button type="submit" name="expert_submit" id="ask_submit" class="btn btn-primary" >Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
@@ -106,26 +126,41 @@ unset($details);unset($this->msg);
 function changefees2()
 {
 
-    var long_ans        = document.getElementById("long_ans_fees").value;
-    var short_ans        = document.getElementById("short_ans_fees").value;
+    var long_ans            = document.getElementById("long_ans_fees").value;
+    var short_ans           = document.getElementById("short_ans_fees").value;
+    var disc_long           = document.getElementById("long_ans_disc").value;
+    var disc_short          = document.getElementById("long_ans_disc").value;
+    
     if(document.getElementById("ques_type1").checked)
     {
-        var fees        = long_ans;
+        var fees            = long_ans;
+        var disc            = parseFloat((long_ans*disc_long)/100).toFixed(2);
+        var disc_fees       = long_ans - disc;
     }
     else if(document.getElementById("ques_type2").checked)
     {
-        var fees        = short_ans;
+        var fees            = short_ans;
+        var disc            = parseFloat((short_ans*disc_short)/100).toFixed(2);
+        var disc_fees       = short_ans - disc;
     }
     else
     {
         var fees        = document.getElementById("expert_fees").value;
     }
     var no_of_ques      = document.getElementById("select_ques").value;
-    var curr_code       = document.getElementById("expert_curr_code").value;
-    var currency        = document.getElementById("expert_currency").value;
-    var curr_full       = document.getElementById("expert_curr_full").value;
-    var new_fees        = parseFloat(fees)*parseFloat(no_of_ques);
-    document.getElementById("fees_id").innerHTML    = new_fees+"<html>&nbsp;</html>"+curr_code+"("+currency+"-"+curr_full+")"
-    document.getElementById("expert_final_fees").value    = new_fees.toFixed(2);
+    var curr_code       = document.getElementById("expert_currency").value;
+    if(fees == disc_fees)
+    {
+        var new_fees        = parseFloat(fees)*parseFloat(no_of_ques);
+        document.getElementById("fees_id").innerHTML    = new_fees+"&nbsp;"+curr_code+" only"
+        document.getElementById("expert_final_fees").value    = new_fees.toFixed(2);
+    }
+    else
+    {
+        var fees            = parseFloat(fees)*parseFloat(no_of_ques);
+        var new_fees        = parseFloat(disc_fees)*parseFloat(no_of_ques);
+        document.getElementById("fees_id").innerHTML    = "<s>"+fees+"&nbsp;"+curr_code+"</s>"+"<br/>"+new_fees+"&nbsp;"+curr_code+" only"
+        document.getElementById("expert_final_fees").value    = new_fees.toFixed(2);
+    }
 }    
 </script>

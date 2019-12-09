@@ -51,7 +51,7 @@ function isMobileDevice() {
         else
         {
     ?>
-        <input type="date" id="datepicker" name="mdosha_dob" class="form-control" placeholder="25/03/1984" min="1900-01-01" max="2030-12-31" />
+        <input type="date" id="mdosha_dob" name="mdosha_dob" class="form-control" placeholder="25/03/1984" min="1900-01-01" max="2030-12-31" />
     <?php
         }
     ?>

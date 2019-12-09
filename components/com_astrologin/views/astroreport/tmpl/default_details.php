@@ -93,7 +93,6 @@ $(function()
         });
       },
       minLength: 3,
-     
       open: function() {
         $('#ques_pob').removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
          $(".ui-autocomplete").css("z-index", 1000);

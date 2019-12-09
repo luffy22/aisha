@@ -2,7 +2,9 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 $details                    = $this->msg;
-//print_r($details);exit;
+$fees                       = $details[1]['amount'];
+$disc                       = $details[1]['disc_percent'];
+$disc_fees                  = $fees - number_format((float)($fees*$disc)/100,2);
 ?>
 <div class="progress" style="height:25px">
   <div class="progress-bar" style="width:25%;height:25px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Choose</div>
@@ -43,13 +45,32 @@ $details                    = $this->msg;
 <input type="hidden" name="career_fees" id="career_fees" value="<?php echo $details[2]['amount'] ?>" />
 <input type="hidden" name="marriage_fees" id="marriage_fees" value="<?php echo $details[3]['amount'] ?>" />
 <input type="hidden" name="sadesati_fees" id="sadesati_fees" value="<?php echo $details[4]['amount'] ?>" />
+<input type="hidden" name="yearly_disc" id="yearly_disc" value="<?php echo $details[1]["disc_percent"] ?>" />
+<input type="hidden" name="life_disc" id="life_disc" value="<?php echo $details[0]['disc_percent'] ?>" />
+<input type="hidden" name="career_disc" id="career_disc" value="<?php echo $details[2]['disc_percent'] ?>" />
+<input type="hidden" name="marriage_disc" id="marriage_disc" value="<?php echo $details[3]['disc_percent'] ?>" />
+<input type="hidden" name="sadesati_disc" id="sadesati_disc" value="<?php echo $details[4]['disc_percent'] ?>" />
 <input type="hidden" name="report_fees" id="report_fees" value="<?php echo $details[0]['amount'] ?>" />
 <input type="hidden" name="report_curr_code" id="report_curr_code" value="<?php echo $details[0]['curr_code'] ?>" />
 <input type="hidden" name="report_currency" id="report_currency" value="<?php echo $details[0]['currency']; ?>" />
 <input type="hidden" name="report_curr_full" id="report_curr_full" value="<?php echo $details[0]['curr_full']; ?>" />
 <input type="hidden" name="report_final_fees" id="report_final_fees" value="<?php echo $details[1]['amount'] ?>" />
 <div class="mb-3"></div>
-<div class="form-control" id="fees_type"><label>Fees:</label> <div id='fees_id'><?php echo $details[1]['amount']."&nbsp;".$details[0]['curr_code']."(".$details[0]['currency']."-".$details[0]['curr_full'].")" ?></div></div>
+<?php
+    if($disc_fees == $fees)
+    {
+?>
+<div class="form-control" id="fees_type"><label>Fees:</label> <div id='fees_id'><?php echo $details[1]['amount']."&nbsp;".$details[1]['currency']." only" ?></div></div>
+<?php
+    }
+    else
+    {
+?>
+<div class="form-control" id="fees_type"><label>Fees:</label> <div id='fees_id'><?php echo "<s>".$details[1]["amount"]."&nbsp;".$details[1]['currency']."</s><br/>".$disc_fees."&nbsp;".$details[1]['currency']." only" ?></div></div>
+
+<?php
+    }
+?>
 <div class="mb-3"></div>
 <div class="form-control" id="pay_id">
     <label for='expert_choice' class='control-label'>Payment Type: </label>
@@ -97,34 +118,61 @@ function changefees3()
     var career_fees     = document.getElementById("career_fees").value;
     var marriage_fees   = document.getElementById("marriage_fees").value;
     var sadesati_fees   = document.getElementById("sadesati_fees").value;
+    var yearly_disc     = document.getElementById("yearly_disc").value;
+    var life_disc       = document.getElementById("life_disc").value;
+    var career_disc     = document.getElementById("career_disc").value;
+    var marriage_disc   = document.getElementById("marriage_disc").value;
+    var sadesati_disc   = document.getElementById("sadesati_disc").value;
     if(document.getElementById("select_report").value == "yearly")
     {
-        var fees        = yearly_fees;
+        var fees            = yearly_fees;
+        var disc            = parseFloat((yearly_fees*yearly_disc)/100).toFixed(2);
+        var disc_fees       = yearly_fees - disc;
     }
     else if(document.getElementById("select_report").value == "life")
     {
-        var fees        = life_fees;
+        var fees            = life_fees;
+        var disc            = parseFloat((life_fees*life_disc)/100).toFixed(2);
+        var disc_fees       = life_fees - disc;
     }
     else if(document.getElementById("select_report").value == "career")
     {
-        var fees        = career_fees;
+        var fees            = career_fees;
+        var disc            = parseFloat((career_fees*career_disc)/100).toFixed(2);
+        var disc_fees       = career_fees - disc;
     }
     else if(document.getElementById("select_report").value == "sadesati")
     {
-        var fees        = sadesati_fees;
+        var fees            = sadesati_fees;
+        var disc            = parseFloat((sadesati_fees*sadesati_disc)/100).toFixed(2);
+        var disc_fees       = sadesati_fees - disc;
     }
     else if(document.getElementById("select_report").value == "marriage")
     {
-        var fees        = marriage_fees;
+        var fees            = marriage_fees;
+        var disc            = parseFloat((marriage_fees*marriage_disc)/100).toFixed(2);
+        var disc_fees       = marriage_fees - disc;
     }
     else
     {
-        var fees        = document.getElementById("report_fees").value;
+        var fees            = document.getElementById("report_fees").value;
+        var disc            = parseFloat((report_fees*yearly_disc)/100).toFixed(2);
+        var disc_fees       = fees - disc;
     }
     var curr_code       = document.getElementById("report_curr_code").value;
     var currency        = document.getElementById("report_currency").value;
     var curr_full       = document.getElementById("report_curr_full").value;
-    document.getElementById("fees_id").innerHTML    = fees+"<html>&nbsp;</html>"+curr_code+"("+currency+"-"+curr_full+")"
-    document.getElementById("report_final_fees").value    = fees;
+    if(fees == disc_fees)
+    {
+        document.getElementById("fees_id").innerHTML    = fees+"&nbsp;"+currency+" only"
+        document.getElementById("report_final_fees").value    = fees;
+    }
+    else
+    {
+        document.getElementById("fees_id").innerHTML    = "<s>"+fees+"&nbsp;"+currency+"</s><br/>"+
+                disc_fees+"&nbsp;"+currency+" only"
+        document.getElementById("report_final_fees").value    = disc_fees;
+    }
+    
 }
 </script>

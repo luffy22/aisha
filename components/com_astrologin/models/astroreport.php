@@ -42,7 +42,7 @@ class AstrologinModelAstroReport extends JModelItem
         $service2       = 'life';
         $service3       = 'career';
         $service4       = 'marriage';
-        $service5       = 'sade-sati';
+        $service5       = 'sadesati';
         $country_code       = array("IN","US","UK","NZ","AU","SG","CA","RU");
         if($info=='FR'||$info=='DE'||$info=='IE'||$info=='NL'||$info=='CR'||$info=='BE'
                 ||$info=='GR'||$info=='IT'||$info=='PT'||$info=='ES'||$info=='MT'||$info=='LV'||$info=='TR')
@@ -59,7 +59,7 @@ class AstrologinModelAstroReport extends JModelItem
         }
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
-        $query          ->select($db->quoteName(array('a.country','a.amount','b.currency','b.curr_code','b.curr_full')))
+        $query          ->select($db->quoteName(array('a.country','a.amount','a.disc_percent','b.currency','b.curr_code','b.curr_full')))
                                     ->from($db->quoteName('#__expert_charges','a'))
                                     ->join('INNER', $db->quoteName('#__user_currency', 'b') . ' ON (' . $db->quoteName('a.currency_ref') . ' = ' . $db->quoteName('b.Curr_ID') . ')')
                                     ->where($db->quoteName('user_id').' = '.$db->quote($u_id).' AND '.

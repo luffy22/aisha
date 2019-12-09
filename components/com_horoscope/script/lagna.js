@@ -1,3 +1,8 @@
+$(function() {
+$("#lagna_dob").datepicker({yearRange: "1900:2050",changeMonth: true,
+  changeYear: true, dateFormat: "yy-mm-dd"});
+});
+
 $(function() 
 {
    var result       = "";
