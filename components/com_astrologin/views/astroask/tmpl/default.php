@@ -105,13 +105,12 @@ else
 ?>
     <div class="form-check">
     <input class="form-check-input" type='radio' name='expert_choice' id='expert_choice7' value='paypal' checked />
-    <label for="expert_choice7" class="form-check-label"> <i class='fab fa-paypal'></i> Paypal</label
+    <label for="expert_choice7" class="form-check-label"> <i class='fab fa-paypal'></i> Paypal</label>
     </div>
 <?php
 }
 ?>
     </div>
-</div>
 </div>
 <div class="mb-3"></div>
 <div class="form-group" id="btn_grp">
@@ -129,7 +128,7 @@ function changefees2()
     var long_ans            = document.getElementById("long_ans_fees").value;
     var short_ans           = document.getElementById("short_ans_fees").value;
     var disc_long           = document.getElementById("long_ans_disc").value;
-    var disc_short          = document.getElementById("long_ans_disc").value;
+    var disc_short          = document.getElementById("short_ans_disc").value;
     
     if(document.getElementById("ques_type1").checked)
     {
