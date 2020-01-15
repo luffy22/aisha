@@ -171,22 +171,22 @@ function assign_planets(x,a,b)
         }
         if(len=="6")
         { 
-            ctx.fillText(y[0],a+25,b-16);
-            ctx.fillText(y[1],a-25,b-8);
-            ctx.fillText(y[2],a+15,b-8);
+            ctx.fillText(y[0],a+25,b-20);
+            ctx.fillText(y[1],a,b-15);
+            ctx.fillText(y[2],a,b-8);
             ctx.fillText(y[3],a,b);
             ctx.fillText(y[4],a,b+8);
             ctx.fillText(y[5],a,b+16);
         }
         if(len=="7")
         { 
-            ctx.fillText(y[0],a+25,b-16);
-            ctx.fillText(y[1],a-25,b-8);
-            ctx.fillText(y[2],a+15,b-8);
+            ctx.fillText(y[0],a+25,b-20);
+            ctx.fillText(y[1],a,b-15);
+            ctx.fillText(y[2],a,b-8);
             ctx.fillText(y[3],a,b);
             ctx.fillText(y[4],a,b+8);
-            ctx.fillText(y[5],a-25,b+16);
-            ctx.fillText(y[6],a+15,b+16);
+            ctx.fillText(y[5],a,b+16);
+            ctx.fillText(y[6],a+15,b+20);
         }
     }
 }

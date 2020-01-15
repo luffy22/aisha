@@ -6,18 +6,18 @@ class AstrologinModelAstroask extends JModelItem
 {
     function getData()
     {
-        //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
-        //$geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
-        $ip                           = '117.196.1.11';
+        include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
+        $geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
+        //$ip                           = '117.196.1.11';
         //$ip                             = '140.120.6.207';
         //$ip                             = '157.55.39.123';  // ip address
-        //$ip                       	= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
-        $info                         = geoip_country_code_by_name($ip);
-        $country                      = geoip_country_name_by_name($ip);
+        $ip                       	= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
+        //$info                         = geoip_country_code_by_name($ip);
+        //$country                      = geoip_country_name_by_name($ip);
         
-        //$location               	= $geoip->lookupLocation($ip);
-        //$info                   	= $location->countryCode;
-        //$country                	= $location->countryName;
+        $location               	= $geoip->lookupLocation($ip);
+        $info                   	= $location->countryCode;
+        $country                	= $location->countryName;
         $u_id           = '222';
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
@@ -161,19 +161,21 @@ class AstrologinModelAstroask extends JModelItem
         $query1             = $db->getQuery(true);
         $token              = $details['uniq_id'];
         $no_of_ques         = $details['ques_no'];
-        for($i=0;$i<$no_of_ques;$i++)
+        //echo $no_of_ques;exit;
+        for($i=1;$i<=$no_of_ques;$i++)
         {
-            $j      = $i+1;
-            ${"select_".$j}                     = $details['select_'.$j];
-            ${"ask_".$j}                        = addslashes($details['ask_'.$j]);
-            ${"ques_details_".$j}               = addslashes($details['details_'.$j]);
+            ${"select_".$i}                     = $details['select_'.$i];
+            ${"ask_".$i}                        = addslashes($details['ask_'.$i]);
+            ${"ques_details_".$i}               = addslashes($details['details_'.$i]);
             $query                              = "INSERT INTO jv_question (order_id,ques_topic,ques_ask,ques_details) 
-                                                    VALUES ('".$token."','".${"select_".$j}."','".${"ask_".$j}."','".${"ques_details_".$j}."')";
+                                                    VALUES ('".$token."','".${"select_".$i}."','".${"ask_".$i}."','".${"ques_details_".$i}."')";
             // Set the query using our newly populated query object and execute it
-            $db             ->setQuery($query);
-            
+            $db                                 ->setQuery($query);
+            flush($query);
+            $result                             = $db->execute();
         }
-        if($result= $db->execute())
+        
+        if($result)
         {
             $query1              ->select($db->quoteName(array('UniqueID','name','email',
                                         'pay_mode','fees','currency')))

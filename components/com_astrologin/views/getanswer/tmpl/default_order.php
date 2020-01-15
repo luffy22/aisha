@@ -1,5 +1,6 @@
 <?php
 defined('_JEXEC') or die;
+//print_r($this->order);exit;
 if(isset($_GET['order']))
 {
     $order      = $_GET['order'];
@@ -59,7 +60,7 @@ else if(isset($_GET['payment']) && $_GET['payment']=="fail")
     <li class="list-group-item">Date Of Birth: <?php echo $date->format('d-m-Y'); ?></li>
     <li class="list-group-item">Time Of Birth: <?php echo $date->format('h:i:s a');?></li>
     <li class="list-group-item">Place Of Birth: <?php echo $this->order->pob; ?></li>
-    <li class="list-group-item">Answer Type: <?php if($this->order->order_type=="short_ans"){echo "Short Answer";}else{echo "Detailed Report";} ?></li>
+    <li class="list-group-item">Answer Type: <?php if($this->order->order_type=="short"){echo "Short Answer";}else{echo "Detailed Report";} ?></li>
   </ul>
 <div class="mb-4"></div>
 <?php

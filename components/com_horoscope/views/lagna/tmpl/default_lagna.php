@@ -32,7 +32,17 @@ $type       = $this->data['chart_type'];
 <div class="lead alert alert-dark">Marriage</div>
 <div class="row">
   <div class="col-4"><a class="content_links" title="Spouse Finder" href="<?php echo Juri::base() ?>findspouse?chart=<?php echo $chart_id; ?>"><img src="images/art_img/marriage.png" alt="marriage"  width="50px" height="50px" /> Spouse Finder</a></div>
-  <div class="col-4"><a class="content_links" title="Mangal Dosha Calculator" href="<?php echo Juri::base() ?>mangaldosha?chart=<?php echo $chart_id; ?>"><img src="images/mars_dosha.png" alt="mdosha" width="50px" height="50px" /> Mangal Dosha Calculator</a></div>
+  <div class="col-4"><a class="content_links" title="Chances of Love Marriage" href="<?php echo Juri::base() ?>lovemarry?chart=<?php echo $chart_id; ?>"><img src="images/art_img/love.png" alt="love"  width="70px" height="70px" /> Chances of Love Marriage</a></div>
+</div>
+<div class="mb-3"></div>
+<div class="lead alert alert-dark">Divorce</div>
+<div class="row">
+    <div class="col-4"><a class="content_links" title="Mangal Dosha Calculator" href="<?php echo Juri::base() ?>mangaldosha?chart=<?php echo $chart_id; ?>"><img src="images/mars_dosha.png" alt="mdosha" width="50px" height="50px" /> Mangal Dosha Calculator</a></div>
   <div class="col-4"><a class="content_links" title="Chances of Divorce" href="<?php echo Juri::base() ?>divorce?chart=<?php echo $chart_id; ?>"><img src="images/divorce_clipart.jpeg" alt="divorce" width="50px" height="50px" /> Divorce Chances</a></div>
+</div>
+<div class="mb-3"></div>
+<div class="lead alert alert-dark">Astro Yogas</div>
+<div class="row">
+      <div class="col-4"><a class="content_links" title="Astro Yogas" href="<?php echo Juri::base() ?>astroyogas?chart=<?php echo $chart_id; ?>"><img src="images/yogas.png" alt="yogas"  width="50px" height="50px" /> Astro Yogas</a></div>
 </div>
 <div class="mb-3"></div>

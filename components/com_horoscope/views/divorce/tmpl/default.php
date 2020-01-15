@@ -70,15 +70,6 @@ function isMobileDevice() {
     <input type="hidden" id="divorce_lon" name="divorce_lon"  />
     <input type="hidden" id="divorce_tmz" name="divorce_tmz"  />
     <div class="form-group">
-        <label for="longitude" class="control-label">Longitude</label><br/>
-        <input type="text" id="divorce_long_1" class="form-text1" name="divorce_lon_deg"  />
-        <input type="text" id="divorce_long_2" class="form-text1" name="divorce_lon_min" />
-        <select class="select2" id="divorce_long_direction" name="divorce_lon_dir">
-            <option>E</option>
-            <option>W</option>
-        </select>
-    </div>
-    <div class="form-group">
         <label for="latitude" class="control-label">Latitude</label><br/>
         <input type="text" id="divorce_lat_1" class="form-text1" name="divorce_lat_deg"  />
         <input type="text" id="divorce_lat_2" class="form-text1" name="divorce_lat_min" />
@@ -87,6 +78,15 @@ function isMobileDevice() {
             <option>S</option>
         </select>
         
+    </div>
+    <div class="form-group">
+        <label for="longitude" class="control-label">Longitude</label><br/>
+        <input type="text" id="divorce_long_1" class="form-text1" name="divorce_lon_deg"  />
+        <input type="text" id="divorce_long_2" class="form-text1" name="divorce_lon_min" />
+        <select class="select2" id="divorce_long_direction" name="divorce_lon_dir">
+            <option>E</option>
+            <option>W</option>
+        </select>
     </div>
     <div class="btn btn-group btn-group-lg">
             <button type="submit" class="btn btn-primary btn-lg" name="divorce_submit" >Check Chances</button>

@@ -13,7 +13,7 @@ foreach($this->order as $result)
 	<li class="list-group-item"><a class="btn btn-primary" href="<?php echo JUri::base().'getanswer?order='.$result->UniqueID.'&ref='.$result->email; ?>">View Order</a></li>
     <li class="list-group-item">Order Id: <?php echo $result->UniqueID; ?></li>
     <li class="list-group-item">Name: <?php echo $result->name; ?></li>
-    <li class="list-group-item">Order Type: <?php if($result->order_type=='short_ans'){echo "Short Answer";}else{echo "Detailed Report";} ?></li>
+    <li class="list-group-item">Order Type: <?php if($result->order_type=='short'){echo "Short Answer";}else{echo "Detailed Report";} ?></li>
     <li class="list-group-item">Number of Ques: <?php echo $result->no_of_ques ?></li>
      <li class="list-group-item">Question asked on: <?php echo $dateasked->format('dS F Y'); ?></li>
 </ul><div class="mb-3"></div>

@@ -70,15 +70,6 @@ function isMobileDevice() {
     <input type="hidden" id="lagna_lon" name="lagna_lon"  />
     <input type="hidden" id="lagna_tmz" name="lagna_tmz"  />
     <div class="form-group">
-        <label for="longitude" class="control-label">Longitude</label><br/>
-        <input type="text" id="lagna_long_1" class="form-text1" name="lon_deg" placeholder="deg"  />
-        <input type="text" id="lagna_long_2" class="form-text1" name="lon_min" placeholder="min" />
-        <select class="select2" id="lagna_long_direction" name="lon_dir">
-            <option>E</option>
-            <option>W</option>
-        </select>
-    </div>
-    <div class="form-group">
         <label for="latitude" class="control-label">Latitude</label><br/>
         <input type="text" id="lagna_lat_1" class="form-text1" name="lat_deg" placeholder="deg"  />
         <input type="text" id="lagna_lat_2" class="form-text1" name="lat_min" placeholder="min" />
@@ -87,6 +78,15 @@ function isMobileDevice() {
             <option>S</option>
         </select>
         
+    </div>
+    <div class="form-group">
+        <label for="longitude" class="control-label">Longitude</label><br/>
+        <input type="text" id="lagna_long_1" class="form-text1" name="lon_deg" placeholder="deg"  />
+        <input type="text" id="lagna_long_2" class="form-text1" name="lon_min" placeholder="min" />
+        <select class="select2" id="lagna_long_direction" name="lon_dir">
+            <option>E</option>
+            <option>W</option>
+        </select>
     </div>
     <div class="btn-group btn-group-lg">
             <button type="submit" class="btn btn-primary btn-lg" name="lagnasubmit" onclick="javascript:getLagna();return false;">Get Horoscope</button>

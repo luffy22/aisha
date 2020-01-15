@@ -70,15 +70,6 @@ function isMobileDevice() {
     <input type="hidden" id="career_lon" name="career_lon"  />
     <input type="hidden" id="career_tmz" name="career_tmz"  />
     <div class="form-group">
-        <label for="longitude" class="control-label">Longitude</label><br/>
-        <input type="text" id="career_long_1" class="form-text1" name="career_lon_deg"  />
-        <input type="text" id="career_long_2" class="form-text1" name="career_lon_min" />
-        <select class="select2" id="career_long_direction" name="career_lon_dir">
-            <option>E</option>
-            <option>W</option>
-        </select>
-    </div>
-    <div class="form-group">
         <label for="latitude" class="control-label">Latitude</label><br/>
         <input type="text" id="career_lat_1" class="form-text1" name="career_lat_deg"  />
         <input type="text" id="career_lat_2" class="form-text1" name="career_lat_min" />
@@ -87,6 +78,15 @@ function isMobileDevice() {
             <option>S</option>
         </select>
         
+    </div>
+    <div class="form-group">
+        <label for="longitude" class="control-label">Longitude</label><br/>
+        <input type="text" id="career_long_1" class="form-text1" name="career_lon_deg"  />
+        <input type="text" id="career_long_2" class="form-text1" name="career_lon_min" />
+        <select class="select2" id="career_long_direction" name="career_lon_dir">
+            <option>E</option>
+            <option>W</option>
+        </select>
     </div>
     <div class="btn btn-group btn-group-lg">
             <button type="submit" class="btn btn-primary btn-lg" name="career_submit" >Find Career</button>

@@ -1223,21 +1223,30 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
     protected function checkObyachari($data)
     {
         $sun                = $data["Sun"];
+        $moon               = $data["Moon"];
         $get_next_sign      = $this->getHouseSign($sun, 2);
         $get_prev_sign      = $this->getHouseSign($sun, 12);
+
         $planets            = array("Mars","Mercury","Jupiter","Venus","Saturn");
         
-        foreach($planets as $planet)
+        if($moon == $get_next_sign || $moon == $get_prev_sign)
         {
-            $sign           = $data[$planet];
-            if($get_next_sign == $sign || $get_prev_sign == $sign)
+            $array      = array("obya_yoga" => "No");
+        }
+        else
+        {
+            foreach($planets as $planet)
             {
-                 $array      = array("obya_yoga" => "There is <a href='https://www.astroisha.com/yogas/161-obyachari-yoga' title='Obyachari Yoga'>Obyachari Yoga</a> formed in your horoscope.");
-                 break;
-            }
-            else
-            {
-                $array      = array("obya_yoga" => "No");
+                $sign           = $data[$planet];
+                if($get_next_sign == $sign || $get_prev_sign == $sign)
+                {
+                     $array      = array("obya_yoga" => "There is <a href='https://www.astroisha.com/yogas/161-obyachari-yoga' title='Obyachari Yoga'>Obyachari Yoga</a> formed in your horoscope.");
+                     break;
+                }
+                else
+                {
+                    $array      = array("obya_yoga" => "No");
+                }
             }
         }
         return $array;

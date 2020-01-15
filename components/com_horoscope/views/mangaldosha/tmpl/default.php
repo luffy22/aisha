@@ -70,15 +70,6 @@ function isMobileDevice() {
     <input type="hidden" id="mdosha_lon" name="mdosha_lon"  />
     <input type="hidden" id="mdosha_tmz" name="mdosha_tmz"  />
     <div class="form-group">
-        <label for="longitude" class="control-label">Longitude</label><br/>
-        <input type="text" id="mdosha_long_1" class="form-text1" name="mdosha_lon_deg"  />
-        <input type="text" id="mdosha_long_2" class="form-text1" name="mdosha_lon_min" />
-        <select class="select2" id="mdosha_long_direction" name="mdosha_lon_dir">
-            <option>E</option>
-            <option>W</option>
-        </select>
-    </div>
-    <div class="form-group">
         <label for="latitude" class="control-label">Latitude</label><br/>
         <input type="text" id="mdosha_lat_1" class="form-text1" name="mdosha_lat_deg"  />
         <input type="text" id="mdosha_lat_2" class="form-text1" name="mdosha_lat_min" />
@@ -87,6 +78,15 @@ function isMobileDevice() {
             <option>S</option>
         </select>
         
+    </div>
+    <div class="form-group">
+        <label for="longitude" class="control-label">Longitude</label><br/>
+        <input type="text" id="mdosha_long_1" class="form-text1" name="mdosha_lon_deg"  />
+        <input type="text" id="mdosha_long_2" class="form-text1" name="mdosha_lon_min" />
+        <select class="select2" id="mdosha_long_direction" name="mdosha_lon_dir">
+            <option>E</option>
+            <option>W</option>
+        </select>
     </div>
     <div class="btn btn-group btn-group-lg">
             <button type="submit" class="btn btn-primary btn-lg" name="mdosha_submit" onclick="javascript:getLagna();return false;">Check Dosha</button>

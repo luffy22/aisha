@@ -9,6 +9,10 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/order-report</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
 	<loc>https://www.astroisha.com/horoscope</loc>
 	<changefreq>monthly</changefreq>
 </url>
@@ -21,15 +25,27 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/divorce</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/careerfind</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/astroyogas</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/lovemarry</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
 	<loc>https://www.astroisha.com/calendar</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
 	<loc>https://www.astroisha.com/muhurat</loc>
-	<changefreq>monthly</changefreq>
-</url>
-<url>
-	<loc>https://www.astroisha.com/divorce</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
@@ -493,6 +509,14 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/main/469-signs-basics</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/main/470-planet-basics</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
   <loc>https://www.astroisha.com/featured</loc>
   <changefreq>monthly</changefreq>
 </url>
@@ -629,10 +653,6 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/transits/359-saturn-sagittarius2</loc>
-	<changefreq>monthly</changefreq>
-</url>
-<url>
 	<loc>https://www.astroisha.com/transits/452-jupiter-sag</loc>
 	<changefreq>monthly</changefreq>
 </url>
@@ -642,6 +662,10 @@
 </url>
 <url>
 	<loc>https://www.astroisha.com/transits/424-ketu-sagittarius-transit</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/transits/471-saturn-capricorn</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
@@ -934,6 +958,10 @@
 </url>
 <url>
 	<loc>https://www.astroisha.com/case/423-anil-ambani-horo</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/case/467-shah-horoscope</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
@@ -1372,6 +1400,10 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/planet-bhavas/468-ketu-6th-house</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
   <loc>https://www.astroisha.com/yearly</loc>
   <changefreq>monthly</changefreq>
 </url>
@@ -1549,6 +1581,10 @@
 </url>
 <url>
 	<loc>https://www.astroisha.com/relationship/441-astro-multi-marrige</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/relationship/466-capricorn-partners</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
