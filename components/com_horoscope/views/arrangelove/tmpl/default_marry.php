@@ -186,7 +186,7 @@ if($this->data['five_sev'] == "no" && $this->data['fifth_seventh_exc'] == "no"
     && $this->data['fifth_seventh_asp'] == "no")
 {    
 ?>
-    <li class="list-group-item list-group-item-danger"><strong><i class="fas fa-times-circle"></i> Fifth house lord and seventh house lord are not associated in your chart.</strong></li>
+    <li class="list-group-item list-group-item-danger"><strong><i class="fas fa-times-circle"></i> There is no association between fifth house and seventh house in your chart.</strong></li>
 <?php
 }
 ?>
@@ -220,7 +220,7 @@ if($this->data['asc_sev'] == "no" && $this->data['asc_seventh_exc'] == "no"
     && $this->data['asc_seventh_asp'] == "no")
 {    
 ?>
-    <li class="list-group-item list-group-item-danger"><strong><i class="fas fa-times-circle"></i> First house lord and seventh house lord are not associated in your chart.</strong></li>
+    <li class="list-group-item list-group-item-danger"><strong><i class="fas fa-times-circle"></i> There is no association between first house and seventh house in your chart.</strong></li>
 <?php
 }
 ?>
