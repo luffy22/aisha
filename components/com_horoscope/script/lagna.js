@@ -11,7 +11,9 @@ $(function()
        function(request, response) {
         $.ajax({
           url: "ajaxcalls/autocomplete.php",
+          contentType: "application/x-www-form-urlencoded;charset=utf-8",
           dataType: "json",
+	
           data: {
             term: request.term
           },

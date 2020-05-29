@@ -25,6 +25,10 @@ if(isset($_GET['redirect']) && $_GET['redirect'] == "astroyogas")
 {
     $redirect = "astroyogas";
 }
+if(isset($_GET['redirect']) && $_GET['redirect'] == "fourstage")
+{
+    $redirect = "fourstage";
+}
 ?>
 <h3 class="lead alert alert-dark">Add Location</h3>
 <form role="form" enctype="application/x-www-form-urlencoded" method="post" 
@@ -50,11 +54,11 @@ if(isset($_GET['redirect']) && $_GET['redirect'] == "astroyogas")
     </div>
     <div class="form-group">
         <label for="longitude" class="control-label">Latitude</label><br/>
-        <input type="text" id="loc_lat" class="form-control" name="loc_lat" placeholder="40.71.N for New York"  />
+        <input type="text" id="loc_lat" class="form-control" name="loc_lat" placeholder="Example: 40.71.N or 33.86.S"  />
     </div>
     <div class="form-group">
         <label for="latitude" class="control-label">Longitude</label><br/>
-        <input type="text" id="loc_lon" class="form-control" name="loc_lon" placeholder="74.00.W for New York"  />
+        <input type="text" id="loc_lon" class="form-control" name="loc_lon" placeholder="Example: 74.00.W or 23.15.E"  />
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-primary btn-lg" name="loc_submit"><i class="fas fa-plus"></i> Add</button>

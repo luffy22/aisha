@@ -41,8 +41,10 @@ $type       = $this->data['chart_type'];
   <div class="col-4"><a class="content_links" title="Chances of Divorce" href="<?php echo Juri::base() ?>divorce?chart=<?php echo $chart_id; ?>"><img src="images/divorce_clipart.jpeg" alt="divorce" width="50px" height="50px" /> Divorce Chances</a></div>
 </div>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark">Astro Yogas</div>
+<div class="lead alert alert-dark">Misc</div>
 <div class="row">
-      <div class="col-4"><a class="content_links" title="Astro Yogas" href="<?php echo Juri::base() ?>astroyogas?chart=<?php echo $chart_id; ?>"><img src="images/yogas.png" alt="yogas"  width="50px" height="50px" /> Astro Yogas</a></div>
+    <div class="col-4"><a class="content_links" title="Astro Yogas" href="<?php echo Juri::base() ?>astroyogas?chart=<?php echo $chart_id; ?>"><img src="images/yogas.png" alt="yogas"  width="50px" height="50px" /> Astro Yogas</a></div>
+    <div class="col-4"><a class="content_links" title="4 Stages" href="<?php echo Juri::base() ?>fourstage?chart=<?php echo $chart_id; ?>"><img src="images/four.png" alt="yogas"  width="50px" height="50px" /> Stages Of Life</a></div>
+
 </div>
 <div class="mb-3"></div>

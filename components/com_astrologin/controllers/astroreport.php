@@ -104,10 +104,9 @@ class AstrologinControllerAstroReport extends AstroLoginController
         }
         $token             = $_GET['token'];
         $track_id          = $_GET['track_id'];
-        $bank_ref          = $_GET['bank_ref'];
         $status            = $_GET['status'];
         
-        $details        = array("token"=>$token,"trackid"=>$track_id,"bankref"=>$bank_ref,"status"=>$status);
+        $details        = array("token"=>$token,"trackid"=>$track_id,"status"=>$status);
         //print_r($details);exit;
         $model          = $this->getModel('astroreport');  // Add the array to model
         $model          ->confirmCCPayment($details);

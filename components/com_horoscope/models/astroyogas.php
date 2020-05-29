@@ -614,7 +614,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
     }
     protected function checkChandraMangal($moon,$mars)
     {
-        $moon_sign                  = $this->calcDetails($sun);
+        $moon_sign                  = $this->calcDetails($moon);
         $mars_sign                  = $this->calcDetails($mars);
         $diff                       = $moon - $mars;
         
@@ -1326,10 +1326,10 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             $array          = array("laxmi_yoga" => "There is <a href='https://www.astroisha.com/yogas/167-laxmi-yoga' title='Laxmi Yoga'>Laxmi Yoga</a> formed in your horoscope.");
         }
         else if((($ninth_lord == $ninth_exal || $ninth_lord == $ninth_own)&&
-            $ninth_lord_dist == "1" || $ninth_lord_dist == "4" || 
-            $ninth_lord_dist == "7" || $ninth_lord_dist == "10") && 
-            ($venus_sign == "Taurus" || $venus_sign == "Libra" || $venus_sign == "Pisces")&&
-             $venus_dist == "1" || $venus_dist == "4" || $venus_dist == "10" || $venus_dist == "7")
+            ($ninth_lord_dist == "1" || $ninth_lord_dist == "4" || 
+            $ninth_lord_dist == "7" || $ninth_lord_dist == "10")) && 
+            (($venus_sign == "Taurus" || $venus_sign == "Libra" || $venus_sign == "Pisces")&&
+             ($venus_dist == "1" || $venus_dist == "4" || $venus_dist == "10" || $venus_dist == "7")))
         {
             $array          = array("laxmi_yoga" => "There is <a href='https://www.astroisha.com/yogas/167-laxmi-yoga' title='Laxmi Yoga'>Laxmi Yoga</a> formed in your horoscope.");
         }

@@ -7,6 +7,7 @@ $(function()
         $.ajax({
           url: "ajaxcalls/autocomplete1.php",
           dataType: "json",
+	  contentType: "application/json; charset=utf-8",
           data: {
             term: request.term
           },
@@ -40,6 +41,7 @@ $(function()
         $.ajax({
           url: "ajaxcalls/autocomplete2.php",
           dataType: "json",
+          contentType: "application/json; charset=utf-8",
           data: {
             term: request.term
           },

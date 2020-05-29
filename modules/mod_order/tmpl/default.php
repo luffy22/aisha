@@ -3,80 +3,94 @@ defined('_JEXEC') or die;
 //print_r($order);exit;
 $current        = JUri::current();
 $menualias = JFactory::getApplication()->getMenu()->getActive()->alias;
-
+$date       = new DateTime();
+$date_mar   = new Datetime("03/15/2020");
+$date_apr   = new DateTime("04/16/2020");
 ?>
 <?php
     if($current  == JUri::base())
-    {  
-        for($i=0;$i< count($order);$i++)
+    {
+        if($date > $date_mar && $date < $date_apr)
         {
-            if($order[$i]['on_home'] == "yes" && ($order[$i]['service_for_charge'] == "long"||
-                    $order[$i]['service_for_charge'] == "short"))
-            {
-                $type       = $order[$i]['service_for_charge'].'_ans';
-                $amount     = $order[$i]['amount'];
-                $discount   = round(($order[$i]['amount']*$order[$i]['disc_percent'])/100,2);
-                $disc_price = $order[$i]['amount'] - $discount;
-                $currency   = $order[$i]['currency'];
-                if($currency == "INR"){$pay_mode = "paytm";}else{$pay_mode = "paypal";}
-                if($amount == $disc_price)
-                {
 ?>
-                <div class="p-1 row alert alert-dark">
-                    <div class="col-4"><img src="<?php echo JUri::base().'images/'.$order[$i]['img_for_text'] ?>" align="right"  /></div>
-                    <div class="col-8 pt-4"><a href="<?php echo JUri::base().'ask-question?uname=luffy22&ques=1&type='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode; ?>"><p class="lead"> <?php echo $order[$i]['text_before']." ".$amount."&nbsp;".$currency; ?> only                </p></a></div>          
-                </div>
+            <div class="p-1 row alert alert-dark">
+                <div class="col-4"><img src="<?php echo JUri::base().'images/astro_bday.png' ?>" align="right"  /></div>
+                <div class="col-8 pt-4 lead">Astro Isha turns 6 on April 4th. We are giving away 20% off on all <a href="<?php echo JUri::base(); ?>order-report">orders</a> and <a href="<?php echo JUri::base(); ?>ask-question">reports</a> until April 15th.</p></a></div>          
+            </div>
 <?php
-                }
-                else
-                {
- ?>
-                <div class="p-1 row alert alert-dark">
-                    <div class="col-4"><img src="<?php echo JUri::base().'images/'.$order[$i]['img_for_text'] ?>" align="right"  /></div>
-                    <div class="col-8 pt-4"><a href="<?php echo JUri::base().'ask-question?uname=luffy22&ques=1&type='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode; ?>"><p class="lead"> <?php echo $order[$i]['text_before']." <s>".$order[$i]['amount']."&nbsp;".$currency."</s> "; ?>
-                    <br/><?php echo $disc_price." ".$currency; ?> only
-                </p></a></div>          
-                </div>
- <?php            
-                }
-            }
-            else if($order[$i]['on_home'] == "yes" && ($order[$i]['service_for_charge'] == "life"||
-                    $order[$i]['service_for_charge'] == "marriage" ||
-                    $order[$i]['service_for_charge'] == "career" ||
-                    $order[$i]['service_for_charge'] == "sade-sati"||
-                    $order[$i]['service_for_charge'] == "yearly"))
+        }
+        else
+        {
+            for($i=0;$i< count($order);$i++)
             {
-                $type       = $order[$i]['service_for_charge'];
-                $amount     = $order[$i]['amount'];
-                $discount   = round(($order[$i]['amount']*$order[$i]['disc_percent'])/100,2);
-                $disc_price = $amount - $discount;
-                $currency   = $order[$i]['currency'];
-                if($currency == "INR"){$pay_mode = "paytm";}else{$pay_mode = "paypal";}
-                if($amount == $disc_price)
+                if($order[$i]['on_home'] == "yes" && ($order[$i]['service_for_charge'] == "long"||
+                        $order[$i]['service_for_charge'] == "short"))
                 {
-?>
-<div class="p-1 row alert alert-dark">
-    
-    <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[$i]['img_for_text'] ?>" align="right"  /></div>
-    <div class="col-8 pt-4"><a href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>"><p class="lead"><?php echo $order[$i]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only
-        </p></a></div>          
-</div>
-<?php
+                    $type       = $order[$i]['service_for_charge'].'_ans';
+                    $amount     = $order[$i]['amount'];
+                    $discount   = round(($order[$i]['amount']*$order[$i]['disc_percent'])/100,2);
+                    $disc_price = $order[$i]['amount'] - $discount;
+                    $currency   = $order[$i]['currency'];
+                    if($currency == "INR"){$pay_mode = "paytm";}else{$pay_mode = "paypal";}
+                    if($amount == $disc_price)
+                    {
+    ?>
+                    <div class="p-1 row alert alert-dark">
+                        <div class="col-4"><img src="<?php echo JUri::base().'images/'.$order[$i]['img_for_text'] ?>" align="right"  /></div>
+                        <div class="col-8 pt-4"><a href="<?php echo JUri::base().'ask-question?uname=luffy22&ques=1&type='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode; ?>"><p class="lead"> <?php echo $order[$i]['text_before']." ".$amount."&nbsp;".$currency; ?> only                </p></a></div>          
+                    </div>
+    <?php
+                    }
+                    else
+                    {
+     ?>
+                    <div class="p-1 row alert alert-dark">
+                        <div class="col-4"><img src="<?php echo JUri::base().'images/'.$order[$i]['img_for_text'] ?>" align="right"  /></div>
+                        <div class="col-8 pt-4"><a href="<?php echo JUri::base().'ask-question?uname=luffy22&ques=1&type='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode; ?>"><p class="lead"> <?php echo $order[$i]['text_before']." <s>".$order[$i]['amount']."&nbsp;".$currency."</s> "; ?>
+                        <br/><?php echo $disc_price." ".$currency; ?> only
+                    </p></a></div>          
+                    </div>
+     <?php            
+                    }
                 }
-                else
+                else if($order[$i]['on_home'] == "yes" && ($order[$i]['service_for_charge'] == "life"||
+                        $order[$i]['service_for_charge'] == "marriage" ||
+                        $order[$i]['service_for_charge'] == "career" ||
+                        $order[$i]['service_for_charge'] == "sade-sati"||
+                        $order[$i]['service_for_charge'] == "yearly"))
                 {
- ?>
-<div class="p-1 row alert alert-dark">
-    
-    <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[$i]['img_for_text'] ?>" align="right"  /></div>
-    <div class="col-8 pt-4"><a href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>"><p class="lead"><?php echo $order[$i]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
-            <br/><?php echo number_format((float)$disc_price,2)." ".$currency; ?> only
-        </p></a></div>          
-</div>
-<?php
+                    $type       = $order[$i]['service_for_charge'];
+                    $amount     = $order[$i]['amount'];
+                    $discount   = round(($order[$i]['amount']*$order[$i]['disc_percent'])/100,2);
+                    $disc_price = $amount - $discount;
+                    $currency   = $order[$i]['currency'];
+                    if($currency == "INR"){$pay_mode = "paytm";}else{$pay_mode = "paypal";}
+                    if($amount == $disc_price)
+                    {
+    ?>
+    <div class="p-1 row alert alert-dark">
+
+        <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[$i]['img_for_text'] ?>" align="right"  /></div>
+        <div class="col-8 pt-4"><a href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>"><p class="lead"><?php echo $order[$i]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only
+            </p></a></div>          
+    </div>
+    <?php
+                    }
+                    else
+                    {
+     ?>
+    <div class="p-1 row alert alert-dark">
+
+        <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[$i]['img_for_text'] ?>" align="right"  /></div>
+        <div class="col-8 pt-4"><a href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>"><p class="lead"><?php echo $order[$i]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
+                <br/><?php echo number_format((float)$disc_price,2)." ".$currency; ?> only
+            </p></a></div>          
+    </div>
+    <?php
+                    }
                 }
+
             }
-             
         }
     }
     else if($menualias == "yearly")
@@ -204,7 +218,7 @@ $menualias = JFactory::getApplication()->getMenu()->getActive()->alias;
     else if($menualias == "ascendant" || $menualias == "nakshatra" ||
             $menualias == "planets" || $menualias == "signs" || $menualias == "house")
     {
-        $type       = $order[0]['service_for_charge'];
+        $type       = $order[0]['service_for_charge']."_ans";
         $amount     = $order[0]['amount'];
         $discount   = round(($order[0]['amount']*$order[0]['disc_percent'])/100,2);
         $disc_price = $amount - $discount;
@@ -267,7 +281,7 @@ $menualias = JFactory::getApplication()->getMenu()->getActive()->alias;
     }
     else
     {
-        $type       = $order[1]['service_for_charge'];
+        $type       = $order[1]['service_for_charge']."_ans";
         $amount     = $order[1]['amount'];
         $discount   = round(($order[1]['amount']*$order[1]['disc_percent'])/100,2);
         $disc_price = $amount - $discount;

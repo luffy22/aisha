@@ -6,17 +6,17 @@ class AstrologinModelAstroReport extends JModelItem
 {
     public function getData()
     {
-        //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
-        //$geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
-        $ip                           = '117.196.1.11';
+        include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
+        $geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
+        //$ip                           = '117.196.1.11';
         //$ip                             = '157.55.39.123';  // ip address
-        //$ip                             = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
-        $info                         = geoip_country_code_by_name($ip);
-        $country                      = geoip_country_name_by_name($ip);
+        $ip                             = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
+        //$info                         = geoip_country_code_by_name($ip);
+        //$country                      = geoip_country_name_by_name($ip);
         
-        //$location               	= $geoip->lookupLocation($ip);
-        //$info                   	= $location->countryCode;
-        //$country                	= $location->countryName;
+        $location               	= $geoip->lookupLocation($ip);
+        $info                   	= $location->countryCode;
+        $country                	= $location->countryName;
         $u_id           = '222';
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
@@ -209,9 +209,9 @@ class AstrologinModelAstroReport extends JModelItem
            $fees                = $row['fees'];
            $pay_mode            = $row['pay_mode'];
            //echo $pay_mode;exit;
-           if($pay_mode == "ccavenue")
+           if($pay_mode == "razorpay")
            {
-                $app->redirect(JUri::base().'ccavenue/nonseam/ccavenue_payment2.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
+                $app->redirect(JUri::base().'razorpay/order.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
            }
            else if($pay_mode == "paytm")
            {
@@ -288,9 +288,9 @@ class AstrologinModelAstroReport extends JModelItem
            $fees                = $row['fees'];
            $pay_mode            = $row['pay_mode'];
            //echo $pay_mode;exit;
-           if($pay_mode == "ccavenue")
+           if($pay_mode == "razorpay")
            {
-                $app->redirect(JUri::base().'ccavenue/nonseam/ccavenue_payment2.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
+                $app->redirect(JUri::base().'razorpay/order.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
            }
            else if($pay_mode == "paytm")
            {
@@ -362,11 +362,10 @@ class AstrologinModelAstroReport extends JModelItem
         //print_r($details);exit;
         $token              = $details['token'];
         $trackid            = $details['trackid'];
-        $bankref            = $details['bankref'];
         $status             = $details['status'];
         $db = JFactory::getDbo();
         $query = $db->getQuery(true);
-        if($status      == 'Success'||$status =='TXN_SUCCESS')
+        if($status      == 'Success'||$status =='TXN_SUCCESS'||$status="confirmed")
         {
             $status = "Success";
             // Fields to update.
@@ -378,9 +377,9 @@ class AstrologinModelAstroReport extends JModelItem
             $result                 = JFactory::getDbo()->updateObject('#__question_details', $object, 'UniqueId');
             
             $query                  ->clear();
-            $columns                = array('pay_token','track_id','bank_ref','pay_status');
+            $columns                = array('pay_token','track_id','pay_status');
             // Conditions for which records should be updated.
-            $values                 = array($db->quote($token),$db->quote($trackid),$db->quote($bankref),$db->quote($status));
+            $values                 = array($db->quote($token),$db->quote($trackid),$db->quote($status));
 
             $query              ->insert($db->quoteName('#__ccavenue_paytm'))
                                 ->columns($db->quoteName($columns))
@@ -494,7 +493,7 @@ class AstrologinModelAstroReport extends JModelItem
         $body           .= "<p>Fees: ".$data->fees."&nbsp;".$data->currency."</p>";
         $body           .= "<p>Payment Via: ".$data->pay_mode."</p>";
 
-        if(($data->pay_mode=="paytm"||$data->pay_mode=="ccavenue")&&$data->paid=="yes")
+        if(($data->pay_mode=="paytm"||$data->pay_mode=="razorpay")&&$data->paid=="yes")
         {
             $body       .= "<p>Payment Status: Success</p>";
             $body       .= "<p>Payment Id: ".$data->track_id."</p>";

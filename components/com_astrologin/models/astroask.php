@@ -11,7 +11,7 @@ class AstrologinModelAstroask extends JModelItem
         //$ip                           = '117.196.1.11';
         //$ip                             = '140.120.6.207';
         //$ip                             = '157.55.39.123';  // ip address
-        $ip                       	= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
+        $ip                       		= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
         //$info                         = geoip_country_code_by_name($ip);
         //$country                      = geoip_country_name_by_name($ip);
         
@@ -191,9 +191,9 @@ class AstrologinModelAstroask extends JModelItem
            $fees                = $row['fees'];
            $pay_mode            = $row['pay_mode'];
            //echo $pay_mode;exit;
-           if($pay_mode == "ccavenue")
+           if($pay_mode == "razorpay")
            {
-                $app->redirect(JUri::base().'ccavenue/nonseam/ccavenue_payment.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
+                $app->redirect(JUri::base().'razorpay/question.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
            }
            else if($pay_mode == "paytm")
            {
@@ -341,58 +341,41 @@ class AstrologinModelAstroask extends JModelItem
         //print_r($details);exit;
         $token              = $details['token'];
         $trackid            = $details['trackid'];
-        $bankref            = $details['bankref'];
         $status             = $details['status'];
         $db                 = JFactory::getDbo();
         $query              = $db->getQuery(true);
-        if($status      == 'Success'||$status =='TXN_SUCCESS')
-        {
-            $status = "Success";
-            // Fields to update.
-            $object                 = new stdClass();
-            $object->paid           = "yes";
-            $object->UniqueId       = $token;
+       
+        // Fields to update.
+        $object                 = new stdClass();
+        $object->paid           = "yes";
+        $object->UniqueId       = $token;
 
-            // Update their details in the users table using id as the primary key.
-            $result                 = JFactory::getDbo()->updateObject('#__question_details', $object, 'UniqueId');
-            
-            $query                  ->clear();
-            $columns                = array('pay_token','track_id','bank_ref','pay_status');
-            // Conditions for which records should be updated.
-            $values                 = array($db->quote($token),$db->quote($trackid),$db->quote($bankref),$db->quote($status));
+        // Update their details in the users table using id as the primary key.
+        $result                 = JFactory::getDbo()->updateObject('#__question_details', $object, 'UniqueId');
 
-            $query              ->insert($db->quoteName('#__ccavenue_paytm'))
-                                ->columns($db->quoteName($columns))
-                                ->values(implode(',', $values));  
-            $db                 ->setQuery($query);
-            $result             = $db->query();
-            $query              ->clear();
-            $query                  ->select($db->quoteName(array('a.UniqueID','a.expert_id','a.name','a.email',
-                                        'a.gender','a.dob_tob','a.pob','a.pay_mode','a.order_type','a.fees','a.currency','a.paid','b.track_id',
-                                        'b.bank_ref','b.pay_status','c.username')))
-                                ->select($db->quoteName('c.name','expertname'))  
-                                ->select($db->quoteName('c.email','expertemail'))
-                                ->from($db->quoteName('#__question_details','a'))
-                                ->join('INNER', $db->quoteName('#__ccavenue_paytm', 'b') . ' ON (' . $db->quoteName('a.UniqueID').' = '.$db->quoteName('b.pay_token') . ')')
-                                ->join('RIGHT', $db->quoteName('#__users', 'c').' ON ('.$db->quoteName('c.id').' = '.$db->quoteName('a.expert_id').')')
-                                ->where($db->quoteName('a.UniqueID').' = '.$db->quote($token));
-            $db                     ->setQuery($query);
-            $data                   = $db->loadObject();
-        }
-        else if($status == 'TXN_FAILURE'|| $status == "Failure")
-        {
-            $status     = "Failure";
-            $query              ->clear();
-            $query                  ->select($db->quoteName(array('a.UniqueID','a.expert_id','a.name','a.email',
-                                        'a.gender','a.dob_tob','a.pob','a.pay_mode','a.order_type','a.fees','a.currency','a.paid','c.username')))
-                                ->select($db->quoteName('c.name','expertname'))  
-                                ->select($db->quoteName('c.email','expertemail'))
-                                ->from($db->quoteName('#__question_details','a'))
-                                ->join('RIGHT', $db->quoteName('#__users', 'c').' ON ('.$db->quoteName('c.id').' = '.$db->quoteName('a.expert_id').')')
-                                ->where($db->quoteName('a.UniqueID').' = '.$db->quote($token));
-            $db                     ->setQuery($query);
-            $data                   = $db->loadObject();
-        }
+        $query                  ->clear();
+        $columns                = array('pay_token','track_id','pay_status');
+        // Conditions for which records should be updated.
+        $values                 = array($db->quote($token),$db->quote($trackid),$db->quote($status));
+
+        $query              ->insert($db->quoteName('#__ccavenue_paytm'))
+                            ->columns($db->quoteName($columns))
+                            ->values(implode(',', $values));  
+        $db                 ->setQuery($query);
+        $result             = $db->query();
+        $query              ->clear();
+        $query                  ->select($db->quoteName(array('a.UniqueID','a.expert_id','a.name','a.email',
+                                    'a.gender','a.dob_tob','a.pob','a.pay_mode','a.order_type','a.fees','a.currency','a.paid','b.track_id',
+                                    'b.bank_ref','b.pay_status','c.username')))
+                            ->select($db->quoteName('c.name','expertname'))  
+                            ->select($db->quoteName('c.email','expertemail'))
+                            ->from($db->quoteName('#__question_details','a'))
+                            ->join('INNER', $db->quoteName('#__ccavenue_paytm', 'b') . ' ON (' . $db->quoteName('a.UniqueID').' = '.$db->quoteName('b.pay_token') . ')')
+                            ->join('RIGHT', $db->quoteName('#__users', 'c').' ON ('.$db->quoteName('c.id').' = '.$db->quoteName('a.expert_id').')')
+                            ->where($db->quoteName('a.UniqueID').' = '.$db->quote($token));
+        $db                     ->setQuery($query);
+        $data                   = $db->loadObject();
+        
         //print_r($data);exit;
         $this->sendMail($data);
     }
@@ -439,7 +422,7 @@ class AstrologinModelAstroask extends JModelItem
         $subject    = "AstroIsha Order: ".$data->UniqueID;
         $mailer     ->setSubject($subject);
 
-        $body       .= "<p>Dear ".$data->name.",</p>";
+        $body       .= "<p>Hello ".$data->name.",</p>";
         $body       .= "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Online Payment to AstroIsha(https://www.astroisha.com) is successful. The answers to your questions would be resolved and mailed to you in ten working days.</p><br/>"; 
         $body       .= "<p><strong>Details Of Your Order Are As Below: </strong></p>";
         $body       .= "<p>Order ID: ".$data->UniqueID."</p>";
@@ -452,7 +435,6 @@ class AstrologinModelAstroask extends JModelItem
         {
                 $body 			.= "<p>Answer Type: Detailed Report</p>";
         }
-        $body           .= "<p>Number Of Questions: ".$data->no_of_ques."</p>";
         $order_link           = "https://www.astroisha.com/getanswer?order=".$data->UniqueID."&ref=".$data->email;
         $body               .= "<p>Once your report is finished you would be notified via email. You can view your report here: <a href='".$order_link."' title='Click to get report'>Click For Report</a></p><br/>";
         $body           .= "<p><strong>Below Are Your Personal Details: </strong></p>";
@@ -464,13 +446,12 @@ class AstrologinModelAstroask extends JModelItem
         $body           .= "<p>Place Of Birth: ".$data->pob."</p><br/>";
         $body           .= "<p><strong>Below Are The Payment Details:</strong></p>";
         $body           .= "<p>Fees: ".$data->fees."&nbsp;".$data->currency."</p>";
-        $body           .= "<p>Payment Via: ".$data->pay_mode."</p>";
+        $body           .= "<p>Payment Via: ".ucfirst($data->pay_mode)."</p>";
 
-       if($data->pay_mode=="paytm"||$data->pay_mode=="ccavenue")
+       if($data->pay_mode=="paytm"||$data->pay_mode=="razorpay")
         {
             $body       .= "<p>Payment Status: Success</p>";
             $body       .= "<p>Payment Id: ".$data->track_id."</p>";
-            $body       .= "<p>Bank Reference Id: ".$data->bank_ref."</p>";
             $body       .= "<br/><p><strong>Please keep this email as reference. Alternatively you can also print this email for future reference.</strong></p>";
             $body       .= "<p><strong>In case the order is not completed in ten working days you would be refunded full amount back into your bank account.</strong></p><br/>";
         }
@@ -550,5 +531,24 @@ class AstrologinModelAstroask extends JModelItem
         }
         
     }
-}
+    protected function getIPAddress()
+    {
+        //whether ip is from share internet
+        if (!empty($_SERVER['HTTP_CLIENT_IP']))   
+          {
+            $ip_address = $_SERVER['HTTP_CLIENT_IP'];
+          }
+        //whether ip is from proxy
+        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))  
+          {
+            $ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
+          }
+        //whether ip is from remote address
+        else
+          {
+            $ip_address = $_SERVER['REMOTE_ADDR'];
+          }
+        return $ip_address;
+    }
+ }
 ?>

@@ -16,7 +16,7 @@ class PlgContentAskExpert extends JPlugin
             $content            = "";
             //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
             //$geoip              = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
-            $ip                         = '117.196.1.11';
+			$ip                         = '117.196.1.11';
             //$ip                         = '157.55.39.123';  // ip address
             //$ip                 = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
             
@@ -53,7 +53,7 @@ class PlgContentAskExpert extends JPlugin
         {
             $info       = "EU";
         }
-        else if($info=="IN"||$info=="NP"||$info=="LK")
+        else if($info=="IN")
         {
             $info       = "IN";
         }
@@ -82,6 +82,11 @@ class PlgContentAskExpert extends JPlugin
         //print_r($details);exit;
         $content            .=  "<div class='card border-primary'>";
         $content            .= "<div class='card-body'>";
+        $content            .= '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong><i class="fas fa-exclamation-circle"></i> Delays Possible!</strong> Due to corona virus epidemic your orders can 
+                                be severely delayed. We apologize for the inconvenience caused. 
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button></div>';
         $content            .= "<div class='lead text-center'>Get Online Consultation</div>";
         $content            .= "<h3><a title='Click to get more info' href='#' data-toggle='modal' data-target='#astroinfo'><img src='".JURi::base()."images/profiles/".$result->img_new_name."' height='50px' width='50px' title='".$result->img_name."' />".$result->name."</a></h3>";
         $content            .= "<div class='modal fade' id='astroinfo' tabindex='-1' role='dialog' aria-hidden='true' aria-labelledby='astrolabel'>";
@@ -132,14 +137,14 @@ class PlgContentAskExpert extends JPlugin
             $content        .= "<input type='hidden' name='expert_curr_code' id='expert_curr_code' value='".$details[1]['curr_code']."' />";
             $content        .= "<input type='hidden' name='expert_currency' id='expert_currency' value='".$details[1]['currency']."' />";
             $content        .= "<input type='hidden' name='expert_curr_full' id='expert_curr_full' value='".$details[1]['curr_full']."' />";
-            $content        .= "<input type='hidden' name='expert_final_fees' id='expert_final_fees' value='".$details[1]['amount']."' />";
+            $content        .= "<input type='hidden' name='expert_final_fees' id='expert_final_fees' value='".$disc_fees."' />";
             $content        .= "<div class='form-group'><label>Fees:</label> <div id='fees_id'>".$disc_fees."&nbsp;".$details[1]['curr_code']."(".$details[1]['currency'].'-'.$details[1]['curr_full'].')'."</div></div>";
             $content        .= "<div class='form-group'>";
             $content        .= "<label for='expert_choice' class='control-label'>Payment Type: </label>";
             if($details[0]['currency'] == 'INR')
             {
                 $content            .= "<div class='form-check'>";
-                $content            .= "<input class='form-check-input' type='radio' name='expert_choice' id='expert_choice1' value='ccavenue' />";
+                $content            .= "<input class='form-check-input' type='radio' name='expert_choice' id='expert_choice1' value='razorpay' />";
                 $content            .= "<label class='form-check-label' for='expert_choice1'><i class='fa fa-credit-card'></i> Credit/Debit Card/Netbanking</label>";
                 $content            .= "</div>";
                 $content            .= "<div class='form-check'>";

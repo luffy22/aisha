@@ -54,7 +54,10 @@ $current        = Juri::current();
                 Misc </a>
             <div class="dropdown-menu bg-dark" aria-labelledby="horo_4">
                 <a class="dropdown-item <?php if($current == Juri::base().'astroyogas'){ echo "active";} ?>" href="<?php echo Juri::base().'astroyogas?chart='.$chart_id; ?>">Astro Yogas</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item <?php if($current == Juri::base().'fourstage'){ echo "active";} ?>" href="<?php echo Juri::base().'fourstage?chart='.$chart_id; ?>">Life Stages</a>
             </div>
+            
         </li>
     </ul>
     </div>
