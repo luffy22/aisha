@@ -17,10 +17,11 @@ class AstrologinModelGetOrders extends JModelItem
 	var $_pagination = null;
      public function getOrder()
     {	
-        $jinput             = JFactory::getApplication()->input;
+		$mainframe 			= JFactory::getApplication();
+        $jinput             = $mainframe->input;
         $email              = $jinput->get('ref','default_value','string');
         $order              = $jinput->get('order', 'default_value', 'string');
-        $mainframe 			=JFactory::getApplication();
+        
 		$limit				= $mainframe->getUserStateFromRequest("$option.limit", 'limit', 3, 'int');
 		$limitstart			= JRequest::getVar('limitstart', 0, '', 'int');
 		
@@ -44,6 +45,7 @@ class AstrologinModelGetOrders extends JModelItem
                                         ->from($db->quoteName('#__question_details'))
                                         ->where($db->quoteName('email').' = '.$db->quote($email).' AND '.
                                                 $db->quoteName('paid').' = '.$db->quote('yes'));
+		$query->order('ques_ask_date DESC');
 		$db             ->setQuery($query,$limitstart, $limit);
 		$result         = $db->loadObjectList();
         return $result;

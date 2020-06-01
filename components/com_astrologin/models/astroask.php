@@ -171,12 +171,11 @@ class AstrologinModelAstroask extends JModelItem
                                                     VALUES ('".$token."','".${"select_".$i}."','".${"ask_".$i}."','".${"ques_details_".$i}."')";
             // Set the query using our newly populated query object and execute it
             $db                                 ->setQuery($query);
-            flush($query);
-            $result                             = $db->execute();
+            
         }
-        
-        if($result)
+        if($result                             = $db->execute())
         {
+			flush($query);
             $query1              ->select($db->quoteName(array('UniqueID','name','email',
                                         'pay_mode','fees','currency')))
                                 ->from($db->quoteName('#__question_details'))
@@ -190,7 +189,7 @@ class AstrologinModelAstroask extends JModelItem
            $currency            = $row['currency'];
            $fees                = $row['fees'];
            $pay_mode            = $row['pay_mode'];
-           //echo $pay_mode;exit;
+            //echo $pay_mode;exit;
            if($pay_mode == "razorpay")
            {
                 $app->redirect(JUri::base().'razorpay/question.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);

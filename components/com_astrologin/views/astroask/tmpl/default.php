@@ -97,11 +97,11 @@ if($details[0]['currency'] == 'INR')
 {
 ?>
     <div class="form-check">
-    <input class="form-check-input" type='radio' name='expert_choice' id='expert_choice1' value='razorpay'  />
+    <input class="form-check-input" type='radio' name='expert_choice' id='expert_choice1' value='razorpay' checked />
     <label for="expert_choice1" class="form-check-label"><i class='fa fa-credit-card'></i> Credit/Debit Card</label>
     </div>
     <div class="form-check">
-    <input class="form-check-input" type='radio' name='expert_choice' id='expert_choice4' value='paytm' checked />
+    <input class="form-check-input" type='radio' name='expert_choice' id='expert_choice4' value='paytm' />
     <label for="expert_choice4" class="form-check-label"><img src="<?php echo JURi::base() ?>images/paytm.png" title="Pay using Paytm" /></label>
     </div>
 <?php       

@@ -2,7 +2,7 @@
 header("Pragma: no-cache");
 header("Cache-Control: no-cache");
 header("Expires: 0");
-
+ob_start();
 // following files need to be included
 require_once("./lib/config_paytm.php");
 require_once("./lib/encdec_paytm.php");
@@ -54,5 +54,5 @@ else {
 	echo "<b>Checksum mismatched.</b>";
 	//Process transaction as suspicious.
 }
-
+ob_end_clean();
 ?>

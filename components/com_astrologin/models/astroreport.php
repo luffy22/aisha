@@ -117,9 +117,10 @@ class AstrologinModelAstroReport extends JModelItem
                         ->columns($db->quoteName($columns))
                         ->values(implode(',', $values));
         // Set the query using our newly populated query object and execute it
-        $db             ->setQuery($query);$db->execute();
+        $db->setQuery($query);
+		
         
-        if($result          = $db->query())
+        if($result          = $db->execute())
         {
             $query          ->clear();
             $query          ->select($db->quoteName(array('UniqueID','order_type')))
@@ -238,6 +239,7 @@ class AstrologinModelAstroReport extends JModelItem
 
         for($i=1;$i<4;$i++)
         {
+			$query 				->clear();
             $order_id           = $details['order_id'];
             $order_type         = $details['order_type'];
             $query_about        = ${"query_about_".$i};
@@ -254,9 +256,10 @@ class AstrologinModelAstroReport extends JModelItem
                                 ->values(implode(',', $values));
             // Set the query using our newly populated query object and execute it
             $db             ->setQuery($query);
-            $db->execute();$query->clear();
+            $db->execute();
             
         }
+        $query 				->clear();
         $array              = array('life_report','life_planets','life_houses','life_dasha','life_basics','life_yogas','sadesati_report');
 
         for($i=0; $i < 7; $i++)
@@ -269,11 +272,11 @@ class AstrologinModelAstroReport extends JModelItem
                                 ->values(implode(',', $values));
             // Set the query using our newly populated query object and execute it
             $db                 ->setQuery($query);
-            $result             = $db->execute();$query->clear();
+			$result             = $db->execute();$query              ->clear();
         }
         if($result)
         {
-            $query              ->clear();
+			$query 				->clear();
             $query              ->select($db->quoteName(array('UniqueID','name','email',
                                         'pay_mode','fees','currency')))
                                 ->from($db->quoteName('#__question_details'))

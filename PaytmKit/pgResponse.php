@@ -2,7 +2,7 @@
 header("Pragma: no-cache");
 header("Cache-Control: no-cache");
 header("Expires: 0");
-
+ob_start();
 // following files need to be included
 require_once("./lib/config_paytm.php");
 require_once("./lib/encdec_paytm.php");
@@ -26,8 +26,9 @@ if($isValidChecksum == "TRUE") {
                 $order          = $_POST['ORDERID'];
                 $bank_ref       = $_POST['BANKTXNID'];
                 $status         = $_POST['STATUS'];
-                header("Location: https://www.astroisha.com/index.php?option=com_astrologin&task=astroask.confirmCCPayment&track_id=".$txnid.
-                        "&token=".$order."&bank_ref=".$bank_ref."&status=".$status);
+                //header('Location: https://www.astroisha.com');
+                header('Location: https://www.astroisha.com/index.php?option=com_astrologin&task=astroask.confirmCCPayment&track_id='.$txnid.
+                        '&token='.$order.'&bank_ref='.$bank_ref.'&status='.$status);
 		//Process your transaction here as success transaction.
 		//Verify amount & order id received from Payment gateway with your application's order id and amount.
 	}
@@ -37,8 +38,9 @@ if($isValidChecksum == "TRUE") {
                 $order          = $_POST['ORDERID'];
                 $bank_ref       = $_POST['BANKTXNID'];
                 $status         = $_POST['STATUS'];
-                header("Location: https://www.astroisha.com/index.php?option=com_astrologin&task=astroask.failPayment&track_id=".$txnid.
-                        "&token=".$order."&status=".$status);
+                //header('Location: http://www.astroisha.com/');
+                header('Location: https://www.astroisha.com/index.php?option=com_astrologin&task=astroask.failPayment&track_id='.$txnid.
+                        '&token='.$order.'&status='.$status);
 	}
 
 	if (isset($_POST) && count($_POST)>0 )
@@ -54,5 +56,5 @@ else {
 	echo "<b>Checksum mismatched.</b>";
 	//Process transaction as suspicious.
 }
-
+ob_end_clean();
 ?>
