@@ -11,26 +11,23 @@ class AstrologinControllerAddlocation extends AstroLoginController
             $city       = $_POST['loc_city'];
             $state      = $_POST['loc_state'];
             $country    = $_POST['loc_country'];
-            $lat        = $_POST['loc_lat'];
-            $lon        = $_POST['loc_lon'];
-            if(strpos($lat, "N"))
+            if($_POST['lat_dir'] == "N")
             {
-                $lat 	= str_replace(".N","",$lat);
+                $lat    = $_POST['lat_deg'].".".$_POST['lat_min'];
             }
-            else if(strpos($lat,"S"))
+            else if($_POST['lat_dir'] == "S")
             {
-                $lat 	= str_replace(".S","",$lat);
-                $lat 	= "-".$lat;
+                $lat    = "-".$_POST['lat_deg'].".".$_POST['lat_min'];
             }
-            if(strpos($lon, "E"))
+            if($_POST['lon_dir'] == "E")
             {
-                $lon 	= str_replace(".E","",$lon);
+                $lon    = $_POST['lon_deg'].".".$_POST['lon_min'];
             }
-            else if(strpos($lon,"W"))
+            else if($_POST['lon_dir'] == "W")
             {
-                $lon 	= str_replace(".W","",$lon);
-                $lon 	= "-".$lon;
+                $lon    = "-".$_POST['lon_deg'].".".$_POST['lon_min'];
             }
+            //echo $lat." ".$lon;exit;
             $details    = array(
                                 "city"=>$city,"state"=>$state,"country"=>$country,
                                 "lat"=>$lat,"lon"=>$lon,"redirect"=>$redirect

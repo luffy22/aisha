@@ -171,59 +171,51 @@ class AstrologinModelAstroask extends JModelItem
                                                     VALUES ('".$token."','".${"select_".$i}."','".${"ask_".$i}."','".${"ques_details_".$i}."')";
             // Set the query using our newly populated query object and execute it
             $db                                 ->setQuery($query);
-            
+            $result                             = $db->execute();
         }
-        if($result                             = $db->execute())
-        {
-			flush($query);
-            $query1              ->select($db->quoteName(array('UniqueID','name','email',
+
+		$query1              ->select($db->quoteName(array('UniqueID','name','email',
                                         'pay_mode','fees','currency')))
                                 ->from($db->quoteName('#__question_details'))
                                 ->where($db->quoteName('UniqueID').'='.$db->quote($token));
-           $db                  ->setQuery($query1);
-           $row                 = $db->loadAssoc();
-           //print_r($row);exit;
-           $token               = $row['UniqueID'];
-           $name                = str_replace(" ","_",$row['name']);
-           $email               = $row['email'];
-           $currency            = $row['currency'];
-           $fees                = $row['fees'];
-           $pay_mode            = $row['pay_mode'];
-            //echo $pay_mode;exit;
-           if($pay_mode == "razorpay")
-           {
-                $app->redirect(JUri::base().'razorpay/question.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
-           }
-           else if($pay_mode == "paytm")
-           {
-                $app->redirect(JUri::base().'PaytmKit/TxnTest.php?token='.$token.'&email='.$email.'&fees='.$fees); 
-           }
-           else if($pay_mode=="paypal")
-           {
-               $app->redirect(JUri::base().'vendor/paypal.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees); 
-           }
-           else if($pay_mode=="phonepe"||$pay_mode=="bhim"||$pay_mode=="cheque"
-                    ||$pay_mode=="direct"||$pay_mode=="paypalme"||$pay_mode=="directint")
-           {
-               $query1           ->clear();
-               $query1              ->select($db->quoteName(array('a.UniqueID','a.expert_id','a.no_of_ques','a.name','a.email',
-                                        'a.gender','a.dob_tob','a.pob','a.pay_mode','a.order_type','a.fees','a.currency','a.paid','c.username')))
-                             ->select($db->quoteName('c.name','expertname'))  
-                             ->select($db->quoteName('c.email','expertemail'))
-                                ->from($db->quoteName('#__question_details','a'))
-                                ->join('RIGHT', $db->quoteName('#__users', 'c').' ON ('.$db->quoteName('c.id').' = '.$db->quoteName('a.expert_id').')')
-                                ->where($db->quoteName('a.UniqueID').'='.$db->quote($token));
-                $db                  ->setQuery($query1);
-                $data                = $db->loadObject();
-                $this->sendMail($data);
-           }
-        }
-        else
-        {
-            $msg            = "Something went wrong. Please try again.";
-            $type           = "error";
-            $app            ->redirect(Juri::base().'ask-expert',$msg,$type);
-        }
+		$db                  ->setQuery($query1);
+		$row                 = $db->loadAssoc();
+		//print_r($row);exit;
+		$token               = $row['UniqueID'];
+		$name                = str_replace(" ","_",$row['name']);
+		$email               = $row['email'];
+		$currency            = $row['currency'];
+		$fees                = $row['fees'];
+		$pay_mode            = $row['pay_mode'];
+		//echo $pay_mode;exit;
+		if($pay_mode == "razorpay")
+		{
+			$app->redirect(JUri::base().'razorpay/question.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
+		}
+		else if($pay_mode == "paytm")
+		{
+			$app->redirect(JUri::base().'PaytmKit/TxnTest.php?token='.$token.'&email='.$email.'&fees='.$fees); 
+		}
+		else if($pay_mode=="paypal")
+		{
+		   $app->redirect(JUri::base().'vendor/paypal.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees); 
+		}
+		else if($pay_mode=="phonepe"||$pay_mode=="bhim"||$pay_mode=="cheque"
+				||$pay_mode=="direct"||$pay_mode=="paypalme"||$pay_mode=="directint")
+		{
+		   $query1           ->clear();
+		   $query1              ->select($db->quoteName(array('a.UniqueID','a.expert_id','a.no_of_ques','a.name','a.email',
+									'a.gender','a.dob_tob','a.pob','a.pay_mode','a.order_type','a.fees','a.currency','a.paid','c.username')))
+						 ->select($db->quoteName('c.name','expertname'))  
+						 ->select($db->quoteName('c.email','expertemail'))
+							->from($db->quoteName('#__question_details','a'))
+							->join('RIGHT', $db->quoteName('#__users', 'c').' ON ('.$db->quoteName('c.id').' = '.$db->quoteName('a.expert_id').')')
+							->where($db->quoteName('a.UniqueID').'='.$db->quote($token));
+			$db                  ->setQuery($query1);
+			$data                = $db->loadObject();
+			$this->sendMail($data);
+		}
+        
     }
     public function getExpert()
     {

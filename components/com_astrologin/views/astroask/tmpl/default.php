@@ -7,12 +7,6 @@ $fees                       = $details[0]['amount'];
 $disc                       = number_format((float)($fees*$details[0]['disc_percent'])/100,2);
 $disc_fees                  = $fees-$disc;
 ?>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong><i class="fas fa-exclamation-circle"></i> Delays Possible!</strong> Due to corona virus epidemic your orders can 
-  be severely delayed. We apologize for the inconvenience caused. 
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span></button></div>
-<div class="mb-3"></div>
 <div class="progress" style="height:25px">
   <div class="progress-bar" style="width:25%;height:25px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Choose</div>
   <div class="progress-bar" style="width:25%;height:25px" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Details</div>

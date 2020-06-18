@@ -8,24 +8,13 @@ $this->language  = $doc->language;
 $this->direction = $doc->direction;
 $title              = $doc->title;
 session_start();
-$var             = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong><i class="fas fa-exclamation-circle"></i> Delays Possible!</strong> Due to corona virus epidemic your orders can 
-  be severely delayed. We apologize for the inconvenience caused. 
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span></button></div>';
-if(!isset($_SESSION['var']))
-{
-    $_SESSION['var']    = $var;
-    echo $_SESSION['var'];
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
 <head>
 <title><?php echo $title; ?></title>
 <meta name="robots" content="index, follow" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" href="<?php echo $this->baseurl ?>/favicon.ico" type="image/x-icon" />
 <link rel="icon" href="<?php echo $this->baseurl ?>/logo.png" type="image/x-icon">

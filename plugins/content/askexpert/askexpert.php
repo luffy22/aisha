@@ -14,17 +14,17 @@ class PlgContentAskExpert extends JPlugin
             $view               = $app->input->get('view');
             $path               = JPluginHelper::getLayoutPath('content', 'askexpert');
             $content            = "";
-            //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
-            //$geoip              = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
-			$ip                         = '117.196.1.11';
+            include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
+            $geoip              = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
+            //$ip                         = '117.196.1.11';
             //$ip                         = '157.55.39.123';  // ip address
-            //$ip                 = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
+            $ip                 = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
             
-            $info                       = geoip_country_code_by_name($ip);
-            $country                    = geoip_country_name_by_name($ip);
-            //$location           = $geoip->lookupLocation($ip);
-            //$info               = $location->countryCode;
-            //$country            = $location->countryName;
+            //$info                       = geoip_country_code_by_name($ip);
+            //$country                    = geoip_country_name_by_name($ip);
+            $location           = $geoip->lookupLocation($ip);
+            $info               = $location->countryCode;
+            $country            = $location->countryName;
             //echo $info;exit;
             if(($context === 'com_content.article')&&($view=='article'))
             {
@@ -82,11 +82,6 @@ class PlgContentAskExpert extends JPlugin
         //print_r($details);exit;
         $content            .=  "<div class='card border-primary'>";
         $content            .= "<div class='card-body'>";
-        $content            .= '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                <strong><i class="fas fa-exclamation-circle"></i> Delays Possible!</strong> Due to corona virus epidemic your orders can 
-                                be severely delayed. We apologize for the inconvenience caused. 
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span></button></div>';
         $content            .= "<div class='lead text-center'>Get Online Consultation</div>";
         $content            .= "<h3><a title='Click to get more info' href='#' data-toggle='modal' data-target='#astroinfo'><img src='".JURi::base()."images/profiles/".$result->img_new_name."' height='50px' width='50px' title='".$result->img_name."' />".$result->name."</a></h3>";
         $content            .= "<div class='modal fade' id='astroinfo' tabindex='-1' role='dialog' aria-hidden='true' aria-labelledby='astrolabel'>";
