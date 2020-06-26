@@ -13,12 +13,12 @@ function isMobileDevice() {
 }
 ?>
 <div class="alert alert-info alert-dismissible fade show" role="alert">
-    If your location isn't available than add it: <a href="<?php echo JUri::base().'addlocation?redirect=horoscope'; ?>"><i class="fas fa-plus"></i> Add Location</a>
+    If your location isn't available than add it: <a href="<?php echo JUri::base().'addlocation?redirect=investwhere'; ?>"><i class="fas fa-plus"></i> Add Location</a>
 </div>
 <div class="mb-3"></div>
 <h2>Where To Invest</h2>
 <form role="form" enctype="application/x-www-form-urlencoded" method="post" 
-      action="<?php echo JRoute::_('index.php?option=com_horoscope&task=lagna.findlagna'); ?>">
+      action="<?php echo JRoute::_('index.php?option=com_horoscope&task=savings.checksavings'); ?>">
     <div class="form-group" id="savings_grp_1">
         <label for="inputName" class="control-label">Name:</label>
         <input type="text" name="savings_fname" class="form-control" id="savings_1" placeholder="Enter your name..." required />
@@ -89,7 +89,7 @@ function isMobileDevice() {
         </select>
     </div>
     <div class="btn-group btn-group-lg">
-            <button type="submit" class="btn btn-primary btn-lg" name="savingssubmit" onclick="javascript:getsavings();return false;">Check Places</button>
+            <button type="submit" class="btn btn-primary btn-lg" name="savings_submit" onclick="javascript:getsavings();return false;">Check Places</button>
             <button type="reset" class="btn btn-danger btn-lg">Reset Form</button>
     </div>
 </form>

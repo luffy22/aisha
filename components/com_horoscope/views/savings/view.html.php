@@ -20,6 +20,7 @@ class HoroscopeViewSavings extends JViewLegacy
         }
         if(isset($_GET['chart']))
         {
+            $this->data     = $this->get('Data');
             $tpl                = 'savings';
         }
         else

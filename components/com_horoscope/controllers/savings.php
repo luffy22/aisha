@@ -10,44 +10,44 @@ require_once JPATH_COMPONENT.'/controller.php';
  */
 class HoroscopeControllerSavings extends HoroscopeController
 {
-    public function checkyogas()
+    public function checksavings()
     {
-        if(isset($_POST['yogas_submit']))
+        if(isset($_POST['savings_submit']))
         {
-            $fname  = $_POST['yogas_fname'];$gender     = $_POST['yogas_gender'];
-            $dob    = $_POST['yogas_dob'];$pob          = $_POST['yogas_pob'];
-            $tob    = $_POST['yogas_tob'];$lon          = $_POST['yogas_lon'];
-            $lat    = $_POST['yogas_lat'];$tmz          = $_POST['yogas_tmz'];
-            $chart  = $_POST['yogas_chart'];
+            $fname  = $_POST['savings_fname'];$gender     = $_POST['savings_gender'];
+            $dob    = $_POST['savings_dob'];$pob          = $_POST['savings_pob'];
+            $tob    = $_POST['savings_tob'];$lon          = $_POST['savings_lon'];
+            $lat    = $_POST['savings_lat'];$tmz          = $_POST['savings_tmz'];
+            $chart  = $_POST['savings_chart'];
             if(empty($lat) && empty($lon))
             {
                 $tmz        = "none";
-                $lon_dir    = $_POST['yogas_lon_dir'];
-                $lat_dir    = $_POST['yogas_lat_dir'];
+                $lon_dir    = $_POST['lon_dir'];
+                $lat_dir    = $_POST['lat_dir'];
                 if($lon_dir == "E"&& $lat_dir=="N")
                 {
-                    $lon        = $_POST['yogas_lon_deg'].".".$_POST['yogas_lon_min'];
-                    $lat        = $_POST['yogas_lat_deg'].".".$_POST['yogas_lat_min'];
+                    $lon        = $_POST['lon_deg'].".".$_POST['lon_min'];
+                    $lat        = $_POST['lat_deg'].".".$_POST['lat_min'];
                 }
                 else if($lon_dir == "W" && $lat_dir=="N")
                 {
-                    $lon        = "-".$_POST['yogas_lon_deg'].".".$_POST['yogas_lon_min'];
-                    $lat        = $_POST['yogas_lat_deg'].".".$_POST['yogas_lat_min'];
+                    $lon        = "-".$_POST['lon_deg'].".".$_POST['lon_min'];
+                    $lat        = $_POST['lat_deg'].".".$_POST['lat_min'];
                 }
                 else if($lon_dir == "E" && $lat_dir=="S")
                 { 
-                    $lon        = $_POST['yogas_lon_deg'].".".$_POST['yogas_lon_min'];
-                    $lat        = "-".$_POST['yogas_lat_deg'].".".$_POST['yogas_lat_min'];
+                    $lon        = $_POST['lon_deg'].".".$_POST['lon_min'];
+                    $lat        = "-".$_POST['lat_deg'].".".$_POST['lat_min'];
                 }
                 else if($lon_dir == "W" && $lat_dir=="S")
                 {
-                    $lon        = "-".$_POST['yogas_lon_deg'].".".$_POST['yogas_lon_min'];
-                    $lat        = "-".$_POST['yogas_lat_deg'].".".$_POST['yogas_lat_min'];
+                    $lon        = "-".$_POST['lon_deg'].".".$_POST['lon_min'];
+                    $lat        = "-".$_POST['lat_deg'].".".$_POST['lat_min'];
                 }
                 else
                 {
-                    $lon        = $_POST['yogas_lon_deg'].".".$_POST['yogas_lon_min'];
-                    $lat        = $_POST['yogas_lat_deg'].".".$_POST['yogas_lat_min'];
+                    $lon        = $_POST['lon_deg'].".".$_POST['lon_min'];
+                    $lat        = $_POST['lat_deg'].".".$_POST['lat_min'];
                 }
                 
             }
@@ -57,7 +57,7 @@ class HoroscopeControllerSavings extends HoroscopeController
                                     'tob'=>$tob,'lon'=>$lon,'lat'=>$lat,'tmz'=>$tmz,"chart"=>$chart
                                     );
             //print_r($user_details);exit;
-            $model          = $this->getModel('astroyogas');  // Add the array to model
+            $model          = $this->getModel('savings');  // Add the array to model
             $data           = $model->addUserDetails($user_details);
         }
     }

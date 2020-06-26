@@ -29,6 +29,10 @@ if(isset($_GET['redirect']) && $_GET['redirect'] == "fourstage")
 {
     $redirect = "fourstage";
 }
+if(isset($_GET['redirect']) && $_GET['redirect'] == "investwhere")
+{
+    $redirect = "investwhere";
+}
 ?>
 <h3 class="lead alert alert-dark">Add Location</h3>
 <form role="form" enctype="application/x-www-form-urlencoded" method="post" 
