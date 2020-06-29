@@ -71,8 +71,8 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
     public function getData()
     {
         $libPath        = JPATH_BASE.'/sweph/';
-        $jinput         = JFactory::getApplication()->input;
-        $chart_id       = $jinput->get('chart', 'default_value', 'filter');
+        $iinput         = JFactory::getApplication()->input;
+        $chart_id       = $iinput->get('chart', 'default_value', 'filter');
         $chart_id       = str_replace("chart","horo", $chart_id);
         $array          = array();
         $user_data      = $this->getUserData($chart_id);
@@ -105,7 +105,7 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
         $h_sys = 'P';
         $output = "";
  
-        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p0142536m789 -g, -head", $output);
+        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p0142536m -g, -head", $output);
         //print_r($output);exit;
 
         # OUTPUT ARRAY
@@ -115,7 +115,10 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
         $planets                    = array_merge($asc,$planets);
         $asc_sign                   = $this->calcDetails($planets['Ascendant']);
 
-        $strength_2nd               = $this->checkBanks($asc_sign, $planets);
+        //$check_bank                 = $this->checkBanks($asc_sign, $planets);
+        $check_land                 = $this->checkProperty($asc_sign, $planets);
+        $check_stock                = $this->checkStocks($asc_sign, $planets);
+        
         $data                       = array();
         foreach($planets as $key => $planet)
         {
@@ -132,25 +135,222 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
         $planet         = str_replace(":r","",$planet);
         return $planet;
     }
+    protected function checkElement($sign)
+    {
+        $water          = array("Pisces","Cancer", "Scorpio");
+        $air            = array("Libra","Aquarius","Gemini");
+        $earth          = array("Taurus","Virgo","Capricorn");
+        $fire           = array("Aries","Leo","Sagittarius");
+        
+        if(in_array($sign, $water))
+        {
+            return "water";
+        }
+        if(in_array($sign, $air))
+        {
+            return "wind";
+        }
+        if(in_array($sign, $earth))
+        {
+            return "earth";
+        }
+        if(in_array($sign, $fire))
+        {
+            return "fire";
+        }
+    }
+
     protected function checkBanks($asc, $data)
     {
         $sign                       = $this->getHouseSign($asc, "2");
+        $element                    = $this->checkElement($sign);
         $planets                    = $this->checkPlanetsInHouse($data, "2");
         $aspects                    = $this->checkAspectsOnHouse($data, "2");
-        
         $planets                    = $planets['house_2'];
         $aspects                    = $aspects['aspect_2'];
-        if(empty($planets))
+        $pl_count                   = count($planets); // count number of planets
+        $asp_count                  = count($aspects); // count number of aspects
+        $total                      = $pl_count+$asp_count;
+        $i                          = 0;
+        foreach($planets as $planet)
         {
-            $array                  = array("planet_2_1" => "empty");
-        }
-        else
-        {
-            foreach($planets as $planet)
+            if((in_array("Jupiter", $planets) || in_array("Venus", $planets) || 
+                in_array("Moon", $planets)) && $element == "water")
             {
-                
+                $i                  = $i + 4;
+            }
+            else if((in_array("Jupiter", $planets) || in_array("Venus", $planets) || 
+                in_array("Moon", $planets)) && $element == "earth")
+            {
+                $i                  = $i + 3;
+            }
+            else if((in_array("Jupiter", $planets) || in_array("Venus", $planets) || 
+                in_array("Moon", $planets)) && $element == "wind")
+            {
+                $i                  = $i + 2;
+            }
+            else if((in_array("Jupiter", $planets) || in_array("Venus", $planets) || 
+                in_array("Moon", $planets)) && $element == "fire")
+            {
+                $i                  = $i + 1;
+            }
+            else if((in_array("Rahu", $planets) || in_array("Saturn", $planets) || 
+                in_array("Mercury", $planets)) && $element == "water")
+            {
+                $i                  = $i + 3;
+            }
+            else if((in_array("Rahu", $planets) || in_array("Saturn", $planets) || 
+                in_array("Mercury", $planets)) && $element == "earth")
+            {
+               $i                   = $i + 2;
+            }
+            else if((in_array("Rahu", $planets) || in_array("Saturn", $planets) || 
+                in_array("Mercury", $planets)) && $element == "wind")
+            {
+               $i                   = $i + 1;
+            }
+            else if((in_array("Rahu", $planets) || in_array("Saturn", $planets) || 
+                in_array("Mercury", $planets)) && $element == "fire")
+            {
+                $i                  = $i + 0;
+            }
+            else if((in_array("Mars", $planets) || in_array("Ketu", $planets) || 
+                in_array("Sun", $planets)) && $element == "water")
+            {
+               $i                   = $i + 2;
+            }
+            else if((in_array("Mars", $planets) || in_array("Ketu", $planets) || 
+                in_array("Sun", $planets)) && $element == "earth")
+            {
+                $i                  = $i + 1;
+            }
+            else if((in_array("Mars", $planets) || in_array("Ketu", $planets) || 
+                in_array("Sun", $planets)) && $element == "wind")
+            {
+                $i                  = $i + 0;
+            }
+            else if((in_array("Mars", $planets) || in_array("Ketu", $planets) || 
+                in_array("Sun", $planets)) && $element == "fire")
+            {
+                $i                  = $i + 0;
+            }
+            else
+            {
+                $i                  = $i + 0;
             }
         }
+        foreach($aspects as $aspect)
+        {
+            if((in_array("Jupiter", $aspects) || in_array("Venus", $aspects) || 
+                in_array("Moon", $aspects)) && $element == "water")
+            {
+               $i                   = $i + 4;
+            }
+            else if((in_array("Jupiter", $aspects) || in_array("Venus", $aspects) || 
+                in_array("Moon", $aspects)) && $element == "earth")
+            {
+                $i                  = $i + 3;
+            }
+            else if((in_array("Jupiter", $aspects) || in_array("Venus", $aspects) || 
+                in_array("Moon", $aspects)) && $element == "wind")
+            {
+                $i                  = $i + 2;
+            }
+            else if((in_array("Jupiter", $aspects) || in_array("Venus", $aspects) || 
+                in_array("Moon", $aspects)) && $element == "fire")
+            {
+                $i                  = $i + 1;
+            }
+            else if((in_array("Rahu", $aspects) || in_array("Saturn", $aspects) || 
+                in_array("Mercury", $aspects)) && $element == "water")
+            {
+                $i                  = $i + 3;
+            }
+            else if((in_array("Rahu", $aspects) || in_array("Saturn", $aspects) || 
+                in_array("Mercury", $aspects)) && $element == "earth")
+            {
+                $i                  = $i + 2;
+            }
+            else if((in_array("Rahu", $aspects) || in_array("Saturn", $aspects) || 
+                in_array("Mercury", $aspects)) && $element == "wind")
+            {
+                $i                  = $i + 1;
+                
+            }
+            else if((in_array("Rahu", $aspects) || in_array("Saturn", $aspects) || 
+                in_array("Mercury", $aspects)) && $element == "fire")
+            {
+                $i                  = $i + 0;
+            }
+            else if((in_array("Mars", $aspects) || in_array("Ketu", $aspects) || 
+                in_array("Sun", $aspects)) && $element == "water")
+            {
+                $i                  = $i + 2;
+            }
+            else if((in_array("Mars", $aspects) || in_array("Ketu", $aspects) || 
+                in_array("Sun", $aspects)) && $element == "earth")
+            {
+               $i                   = $i + 1;
+            }
+            else if((in_array("Mars", $aspects) || in_array("Ketu", $aspects) || 
+                in_array("Sun", $aspects)) && $element == "wind")
+            {
+                $i                  = $i + 0;
+            }
+            else if((in_array("Mars", $aspects) || in_array("Ketu", $aspects) || 
+                in_array("Sun", $aspects)) && $element == "fire")
+            {
+                $i                  = $i + 0;
+            }
+        }
+    
+        $array                       = array("bank_invest" => $i, "bank_pl_asp"=> $total);
+        //print_r($array);exit;
+    }
+    protected function checkProperty($asc, $data)
+    {
+        $sign                       = $this->getHouseSign($asc, "4");
+        $planets                    = $this->checkPlanetsInHouse($data, "4");
+        $aspects                    = $this->checkAspectsOnHouse($data, "4");
+        $planets                    = $planets['house_4'];
+        $aspects                    = $aspects['aspect_4'];
+        $pl_count                   = count($planets); // count number of planets
+        $asp_count                  = count($aspects); // count number of aspects
+        $total                      = $pl_count+$asp_count;
         
+        $deb                        = array("Sun"=>"Libra","Moon"=>"Scorpio","Mars"=>"Cancer",
+                                            "Mercury"=>"Pisces","Jupiter"=>"Capricorn",
+                                            "Venus"=>"Virgo","Saturn"=>"Aries");
+        $exal_sign                  = array("Saturn"=>"Libra","Jupiter"=>"Cancer","Moon"=>"Taurus",
+                                            "Venus"=>"Pisces","Mars"=>"Capricorn","Mercury"=>"Virgo","Sun"=>"Aries");
+        $own_sign                   = array("Aries"=>"Mars", "Taurus"=>"Venus","Gemini"=>"Mercury",
+                                            "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
+                                            "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
+                                            "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
+        print_r($planets);exit;
+       
+         
+        $array                       = array("land_invest" => $total_strength, "land_pl_asp"=> $total);
+        
+    }
+    protected function checkStocks($asc, $data)
+    {
+         $sign                       = $this->getHouseSign($asc, "5");
+        $element                    = $this->checkElement($sign);
+        $planets                    = $this->checkPlanetsInHouse($data, "5");
+        $aspects                    = $this->checkAspectsOnHouse($data, "5");
+        $planets                    = $planets['house_5'];
+        $aspects                    = $aspects['aspect_5'];
+        $pl_count                   = count($planets); // count number of planets
+        $asp_count                  = count($aspects); // count number of aspects
+        $total                      = $pl_count+$asp_count;
+        $pl_count                   = count($planets); // count number of planets
+        $asp_count                  = count($aspects); // count number of aspects
+        $total                      = $pl_count+$asp_count;
+        $pl_strength                = $this->checkPlacements($planet, $element);
+        $asp_strength               = $this->checkAspects($aspects, $element);
+        $total_strength             = $pl_strength+$asp_strength;        
+        $array                       = array("stock_invest" => $total_strength, "stock_pl_asp"=> $total);
+        print_r($array);exit;
     }
 }

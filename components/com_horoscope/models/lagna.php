@@ -527,7 +527,7 @@ class HoroscopeModelLagna extends JModelItem
     }
     protected function checkPlanetsInHouse($data, $num)
     {
-        //print_r($data);exit;
+        //print_r($num);exit;
         $asc                    = $this->calcDetails($data["Ascendant"]);
         $house_7                = $this->getHouseSign($asc, $num);
         $planets                = array("Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu","Neptune","Uranus","Pluto");
@@ -536,7 +536,10 @@ class HoroscopeModelLagna extends JModelItem
         { 
             $j              = $i-1;
             $planet         = $planets[$j];
-            $planet_sign    = $this->calcDetails($data[$planet]);
+            if(isset($data[$planet]))
+            {
+                $planet_sign    = $this->calcDetails($data[$planet]);
+            }
             if($house_7 == $planet_sign)
             {
                 $planet     = $planets[$j];
