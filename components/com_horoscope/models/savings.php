@@ -317,8 +317,8 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
         $pl_count                   = count($planets); // count number of planets
         $asp_count                  = count($aspects); // count number of aspects
         $total                      = $pl_count+$asp_count;
-        
-        $deb                        = array("Sun"=>"Libra","Moon"=>"Scorpio","Mars"=>"Cancer",
+        $i                          = 0;$j  = 0; $k = 0;
+        $deb_sign                   = array("Sun"=>"Libra","Moon"=>"Scorpio","Mars"=>"Cancer",
                                             "Mercury"=>"Pisces","Jupiter"=>"Capricorn",
                                             "Venus"=>"Virgo","Saturn"=>"Aries");
         $exal_sign                  = array("Saturn"=>"Libra","Jupiter"=>"Cancer","Moon"=>"Taurus",
@@ -327,8 +327,54 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
                                             "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
                                             "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
                                             "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
-        print_r($planets);exit;
-       
+        foreach($planets as $planet)
+        {
+            if($planet == "Jupiter" && ($sign == "Pisces" || $sign == "Cancer" ||
+                    $sign == "Scorpio"))
+            {
+                $i                  = $i + 4;
+                $j                  = $j + 1;
+            }
+            else if($planet == "Jupiter" && ($sign == "Capricorn" || $sign == "Taurus" ||
+                    $sign == "Virgo"))
+            {
+                $i                  = $i + 3;
+                $j                  = $j + 1;
+            }
+           else if($planet == "Jupiter" && ($sign == "Libra" || $sign == "Gemini" ||
+                    $sign == "Aquarius"))
+            {
+                $i                  = $i + 2;
+                $j                  = $j + 1;
+            }
+            else if($planet == "Jupiter" && ($sign == "Aries" || $sign == "Leo" ||
+                    $sign == "Sagittarius"))
+            {
+                $i                  = $i + 2;
+                $j                  = $j + 1;
+            }
+            else if($planet == "Venus" && ($sign == "Pisces" || $sign == "Libra" ||
+                    $sign == "Taurus" || $sign == "Cancer"))
+            {
+                $i                  = $i + 4;
+                $j                  = $j + 1;
+            }
+            else if($planet == "Venus" && ($sign == "Scorpio" ||
+                    $sign == "Virgo"||$sign == "Capricorn"||$sign=="Gemini"
+                    ||$sign=="Aquarius"))
+            {
+                $i                  = $i + 3;
+                $j                  = $j + 1;
+            }
+            else if($planet == "Venus" && ($sign == "Aries" || $sign == "Leo" ||
+                    $sign == "Sagittarius"))
+            {
+                $i                  = $i + 2;
+                $j                  = $j + 1;
+            }
+            
+        }
+        echo $i." ".$j." ".$k;exit;
          
         $array                       = array("land_invest" => $total_strength, "land_pl_asp"=> $total);
         
