@@ -372,9 +372,183 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
                 $i                  = $i + 2;
                 $j                  = $j + 1;
             }
-            
+            else if($planet == "Moon" && ($sign == "Pisces" || $sign == "Libra" ||
+                    $sign == "Taurus" || $sign == "Cancer"))
+            {
+                $i                  = $i + 4;
+                $j                  = $j + 1;
+            }
+            else if($planet == "Moon" && ($sign == "Scorpio" ||
+                    $sign == "Virgo"||$sign == "Capricorn"||$sign=="Gemini"
+                    ||$sign=="Aquarius"))
+            {
+                $i                  = $i + 2;
+                $j                  = $j + 1;
+            }
+            else if($planet == "Moon" && ($sign == "Aries" || $sign == "Leo" ||
+                    $sign == "Sagittarius"))
+            {
+                $i                  = $i + 2;
+                $j                  = $j + 1;
+            }
+            else if($planet == "Mercury" && ($sign == "Pisces" || $sign == "Libra" ||
+                    $sign == "Taurus" || $sign == "Cancer" || $sign == "Scorpio"))
+            {
+                $i                  = $i + 1;
+                $j                  = $j + 1;
+            }
+            else if($planet == "Mercury" && ($sign == "Virgo"||$sign == "Capricorn"||$sign=="Gemini"
+                    ||$sign=="Aquarius"))
+            {
+                $i                  = $i + 3;
+                $j                  = $j + 1;
+            }
+            else if($planet == "Mercury" && ($sign == "Aries" || $sign == "Leo" ||
+                    $sign == "Sagittarius"))
+            {
+                $i                  = $i + 2;
+                $j                  = $j + 1;
+            }
+            else if($planet == "Sun" && ($sign == "Pisces" || $sign == "Sagittarius" ||
+                    $sign == "Scorpio" || $sign == "Aries" || 
+                    $sign == "Leo" || $sign == "Cancer"))
+            {
+                $i                  = $i + 2;
+                $k                  = $k + 1;
+            }
+            else if($planet == "Sun" && ($sign == "Virgo" ||$sign=="Taurus"
+                    ||$sign=="Capricorn"))
+            {
+                $i                  = $i + 1;
+                $k                  = $k + 1;
+            }
+            else if($planet == "Sun" && ($sign == "Aquarius" || $sign == "Gemini" ||
+                    $sign == "Libra"))
+            {
+                $i                  = $i + 0;
+                $k                  = $k + 1;
+            }
+            else if($planet == "Mars" && ($sign == "Pisces" || $sign == "Sagittarius" ||
+                    $sign == "Scorpio" || $sign == "Aries" || 
+                    $sign == "Leo" || $sign == "Capricorn"))
+            {
+                $i                  = $i + 2;
+                $k                  = $k + 1;
+            }
+            else if($planet == "Mars" && ($sign=="Aquarius"
+                    ||$sign=="Cancer"))
+            {
+                $i                  = $i + 1;
+                $k                  = $k + 1;
+            }
+            else if($planet == "Mars" && ($sign == "Virgo" || $sign == "Gemini" ||
+                    $sign == "Libra"||$sign == "Taurus"))
+            {
+                $i                  = $i + 0;
+                $k                  = $k + 1;
+            }
+            else if($planet == "Saturn" && ($sign == "Aquarius" || $sign == "Gemini" ||
+                    $sign == "Virgo" || $sign == "Capricorn" || $sign == "Libra" || $sign == "Taurus"))
+            {
+                $i                  = $i + 2;
+                $k                  = $k + 1;
+            }
+            else if($planet == "Saturn" && ($sign=="Pisces"
+                    ||$sign=="Sagittarius"))
+            {
+                $i                  = $i + 1;
+                $k                  = $k + 1;
+            }
+            else if($planet == "Saturn" && ($sign == "Scorpio" || $sign == "Leo" ||
+                    $sign == "Aries"||$sign == "Cancer"))
+            {
+                $i                  = $i + 0;
+                $k                  = $k + 1;
+            }
+            else if($planet == "Rahu" && ($sign == "Aquarius" || $sign == "Gemini" ||
+                    $sign == "Virgo" || $sign == "Libra" || $sign == "Taurus"))
+            {
+                $i                  = $i + 1;
+                $k                  = $k + 1;
+            }
+            else if($planet == "Rahu" && ($sign=="Pisces"
+                    ||$sign=="Sagittarius" || $sign == "Capricorn"))
+            {
+                $i                  = $i + 0;
+                $k                  = $k + 1;
+            }
+            else if($planet == "Rahu" && ($sign == "Scorpio" || $sign == "Leo" ||
+                    $sign == "Aries"||$sign == "Cancer"))
+            {
+                $i                  = $i + 0;
+                $k                  = $k + 1;
+            }
+            else if($planet == "Ketu")
+            {
+                $i                  = $i + 0;
+                $k                  = $k + 1;
+            }
+            else
+            {
+                $i                  = $i+0;
+                $k                  = $k+1;
+            }
         }
-        echo $i." ".$j." ".$k;exit;
+        foreach($aspects as $aspect)
+        {
+            if($aspect == "Jupiter" && ($sign == "Cancer" || $sign == "Sagittarius"|| $sign == "Pisces"))
+            {
+                $i                  = $i+4;
+                $j                  = $j+1;
+            }
+            else if($aspect == "Jupiter" && ($sign == "Aries" || $sign == "Scorpio"|| $sign == "Leo"))
+            {
+                $i                  = $i+3;
+                $j                  = $j+1;
+            }
+            else if($aspect == "Jupiter" && ($sign == "Virgo" || $sign == "Gemini"|| $sign == "Capricorn"
+                    || $sign == "Aquarius" || $sign == "Libra" || $sign == "Taurus"))
+            {
+                $i                  = $i+2;
+                $j                  = $j+1;
+            }
+            else if($aspect == "Venus" && ($sign == "Cancer" || $sign == "Pisces"|| $sign == "Libra"
+                    || $sign == "Taurus"))
+            {
+                $i                  = $i+4;
+                $j                  = $j+1;
+            }
+            else if($aspect == "Venus" && ($sign == "Capricorn" || $sign == "Gemini"|| $sign == "Aquarius"||
+                    $sign == "Virgo"))
+            {
+                $i                  = $i+3;
+                $j                  = $j+1;
+            }
+            else if($aspect == "Venus" && ($sign == "Scorpio"
+                    || $sign == "Leo" || $sign == "Sagittarius" || $sign == "Aries"))
+            {
+                $i                  = $i+2;
+                $j                  = $j+1;
+            }
+             else if($aspect == "Venus" && ($sign == "Cancer" || $sign == "Pisces"|| $sign == "Libra"
+                    || $sign == "Taurus"))
+            {
+                $i                  = $i+4;
+                $j                  = $j+1;
+            }
+            else if($aspect == "Venus" && ($sign == "Capricorn" || $sign == "Gemini"|| $sign == "Aquarius"||
+                    $sign == "Virgo"))
+            {
+                $i                  = $i+3;
+                $j                  = $j+1;
+            }
+            else if($aspect == "Venus" && ($sign == "Scorpio"
+                    || $sign == "Leo" || $sign == "Sagittarius" || $sign == "Aries"))
+            {
+                $i                  = $i+2;
+                $j                  = $j+1;
+            }
+        }
          
         $array                       = array("land_invest" => $total_strength, "land_pl_asp"=> $total);
         
