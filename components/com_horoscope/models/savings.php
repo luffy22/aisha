@@ -116,7 +116,7 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
         $asc_sign                   = $this->calcDetails($planets['Ascendant']);
 
         //$check_bank                 = $this->checkBanks($asc_sign, $planets);
-        $check_land                 = $this->checkProperty($asc_sign, $planets);
+        //$check_land                 = $this->checkProperty($asc_sign, $planets);
         $check_stock                = $this->checkStocks($asc_sign, $planets);
         
         $data                       = array();
@@ -135,442 +135,232 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
         $planet         = str_replace(":r","",$planet);
         return $planet;
     }
-    protected function checkElement($sign)
+    protected function getSignLord($sign)
     {
-        $water          = array("Pisces","Cancer", "Scorpio");
-        $air            = array("Libra","Aquarius","Gemini");
-        $earth          = array("Taurus","Virgo","Capricorn");
-        $fire           = array("Aries","Leo","Sagittarius");
-        
-        if(in_array($sign, $water))
-        {
-            return "water";
-        }
-        if(in_array($sign, $air))
-        {
-            return "wind";
-        }
-        if(in_array($sign, $earth))
-        {
-            return "earth";
-        }
-        if(in_array($sign, $fire))
-        {
-            return "fire";
-        }
-    }
-
-    protected function checkBanks($asc, $data)
-    {
-        $sign                       = $this->getHouseSign($asc, "2");
-        $element                    = $this->checkElement($sign);
-        $planets                    = $this->checkPlanetsInHouse($data, "2");
-        $aspects                    = $this->checkAspectsOnHouse($data, "2");
-        $planets                    = $planets['house_2'];
-        $aspects                    = $aspects['aspect_2'];
-        $pl_count                   = count($planets); // count number of planets
-        $asp_count                  = count($aspects); // count number of aspects
-        $total                      = $pl_count+$asp_count;
-        $i                          = 0;
-        foreach($planets as $planet)
-        {
-            if((in_array("Jupiter", $planets) || in_array("Venus", $planets) || 
-                in_array("Moon", $planets)) && $element == "water")
-            {
-                $i                  = $i + 4;
-            }
-            else if((in_array("Jupiter", $planets) || in_array("Venus", $planets) || 
-                in_array("Moon", $planets)) && $element == "earth")
-            {
-                $i                  = $i + 3;
-            }
-            else if((in_array("Jupiter", $planets) || in_array("Venus", $planets) || 
-                in_array("Moon", $planets)) && $element == "wind")
-            {
-                $i                  = $i + 2;
-            }
-            else if((in_array("Jupiter", $planets) || in_array("Venus", $planets) || 
-                in_array("Moon", $planets)) && $element == "fire")
-            {
-                $i                  = $i + 1;
-            }
-            else if((in_array("Rahu", $planets) || in_array("Saturn", $planets) || 
-                in_array("Mercury", $planets)) && $element == "water")
-            {
-                $i                  = $i + 3;
-            }
-            else if((in_array("Rahu", $planets) || in_array("Saturn", $planets) || 
-                in_array("Mercury", $planets)) && $element == "earth")
-            {
-               $i                   = $i + 2;
-            }
-            else if((in_array("Rahu", $planets) || in_array("Saturn", $planets) || 
-                in_array("Mercury", $planets)) && $element == "wind")
-            {
-               $i                   = $i + 1;
-            }
-            else if((in_array("Rahu", $planets) || in_array("Saturn", $planets) || 
-                in_array("Mercury", $planets)) && $element == "fire")
-            {
-                $i                  = $i + 0;
-            }
-            else if((in_array("Mars", $planets) || in_array("Ketu", $planets) || 
-                in_array("Sun", $planets)) && $element == "water")
-            {
-               $i                   = $i + 2;
-            }
-            else if((in_array("Mars", $planets) || in_array("Ketu", $planets) || 
-                in_array("Sun", $planets)) && $element == "earth")
-            {
-                $i                  = $i + 1;
-            }
-            else if((in_array("Mars", $planets) || in_array("Ketu", $planets) || 
-                in_array("Sun", $planets)) && $element == "wind")
-            {
-                $i                  = $i + 0;
-            }
-            else if((in_array("Mars", $planets) || in_array("Ketu", $planets) || 
-                in_array("Sun", $planets)) && $element == "fire")
-            {
-                $i                  = $i + 0;
-            }
-            else
-            {
-                $i                  = $i + 0;
-            }
-        }
-        foreach($aspects as $aspect)
-        {
-            if((in_array("Jupiter", $aspects) || in_array("Venus", $aspects) || 
-                in_array("Moon", $aspects)) && $element == "water")
-            {
-               $i                   = $i + 4;
-            }
-            else if((in_array("Jupiter", $aspects) || in_array("Venus", $aspects) || 
-                in_array("Moon", $aspects)) && $element == "earth")
-            {
-                $i                  = $i + 3;
-            }
-            else if((in_array("Jupiter", $aspects) || in_array("Venus", $aspects) || 
-                in_array("Moon", $aspects)) && $element == "wind")
-            {
-                $i                  = $i + 2;
-            }
-            else if((in_array("Jupiter", $aspects) || in_array("Venus", $aspects) || 
-                in_array("Moon", $aspects)) && $element == "fire")
-            {
-                $i                  = $i + 1;
-            }
-            else if((in_array("Rahu", $aspects) || in_array("Saturn", $aspects) || 
-                in_array("Mercury", $aspects)) && $element == "water")
-            {
-                $i                  = $i + 3;
-            }
-            else if((in_array("Rahu", $aspects) || in_array("Saturn", $aspects) || 
-                in_array("Mercury", $aspects)) && $element == "earth")
-            {
-                $i                  = $i + 2;
-            }
-            else if((in_array("Rahu", $aspects) || in_array("Saturn", $aspects) || 
-                in_array("Mercury", $aspects)) && $element == "wind")
-            {
-                $i                  = $i + 1;
-                
-            }
-            else if((in_array("Rahu", $aspects) || in_array("Saturn", $aspects) || 
-                in_array("Mercury", $aspects)) && $element == "fire")
-            {
-                $i                  = $i + 0;
-            }
-            else if((in_array("Mars", $aspects) || in_array("Ketu", $aspects) || 
-                in_array("Sun", $aspects)) && $element == "water")
-            {
-                $i                  = $i + 2;
-            }
-            else if((in_array("Mars", $aspects) || in_array("Ketu", $aspects) || 
-                in_array("Sun", $aspects)) && $element == "earth")
-            {
-               $i                   = $i + 1;
-            }
-            else if((in_array("Mars", $aspects) || in_array("Ketu", $aspects) || 
-                in_array("Sun", $aspects)) && $element == "wind")
-            {
-                $i                  = $i + 0;
-            }
-            else if((in_array("Mars", $aspects) || in_array("Ketu", $aspects) || 
-                in_array("Sun", $aspects)) && $element == "fire")
-            {
-                $i                  = $i + 0;
-            }
-        }
-    
-        $array                       = array("bank_invest" => $i, "bank_pl_asp"=> $total);
-        //print_r($array);exit;
-    }
-    protected function checkProperty($asc, $data)
-    {
-        $sign                       = $this->getHouseSign($asc, "4");
-        $planets                    = $this->checkPlanetsInHouse($data, "4");
-        $aspects                    = $this->checkAspectsOnHouse($data, "4");
-        $planets                    = $planets['house_4'];
-        $aspects                    = $aspects['aspect_4'];
-        $pl_count                   = count($planets); // count number of planets
-        $asp_count                  = count($aspects); // count number of aspects
-        $total                      = $pl_count+$asp_count;
-        $i                          = 0;$j  = 0; $k = 0;
-        $deb_sign                   = array("Sun"=>"Libra","Moon"=>"Scorpio","Mars"=>"Cancer",
-                                            "Mercury"=>"Pisces","Jupiter"=>"Capricorn",
-                                            "Venus"=>"Virgo","Saturn"=>"Aries");
-        $exal_sign                  = array("Saturn"=>"Libra","Jupiter"=>"Cancer","Moon"=>"Taurus",
-                                            "Venus"=>"Pisces","Mars"=>"Capricorn","Mercury"=>"Virgo","Sun"=>"Aries");
         $own_sign                   = array("Aries"=>"Mars", "Taurus"=>"Venus","Gemini"=>"Mercury",
                                             "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
                                             "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
                                             "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
+        return $own_sign[$sign];
+    }
+    protected function checkStrength($sign, $planet)
+    {
+        //echo $planet." ".$sign;exit;
+        $own_sign                   = array("Aries"=>"Mars", "Taurus"=>"Venus","Gemini"=>"Mercury",
+                                            "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
+                                            "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
+                                            "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
+        $deb_sign                   = array("Libra"=>"Sun","Scorpio"=>"Moon","Cancer"=>"Mars",
+                                            "Pisces"=>"Mercury","Capricorn"=>"Jupiter",
+                                            "Virgo"=>"Venus","Aries"=>"Saturn");
+        $exal_sign                  = array("Libra"=>"Saturn","Cancer"=>"Jupiter","Taurus"=>"Moon",
+                                            "Pisces"=>"Venus","Capricorn"=>"Mars","Virgo"=>"Mercury","Aries"=>"Sun");
+        
+        if($planet == $own_sign[$sign] || $planet == $exal_sign[$sign])
+        {
+            $val                    = "strong";
+        }
+        else if($planet == $deb_sign[$sign])
+        {
+            $val                    = "weak";
+        }
+        else
+        {
+            $val                    = "neutral";
+        }
+        return $val;
+    }
+    protected function planetGoodOrBad($planet)
+    {
+        $good                       = array("Jupiter","Venus","Moon","Mercury");
+        $bad                        = array("Saturn","Mars","Rahu", "Ketu","Sun");
+        
+        if(in_array($planet, $good))
+        {
+            $val                    = "good";
+        }
+        else if(in_array($planet, $bad))
+        {
+            $val                    = "bad";
+        }
+        else 
+        {
+            $val                    = "neutral";
+        }
+        return $val;
+    }
+    protected function checkStrengthOfLord($asc, $sign,$data,$num)
+    {
+        $sign_lord                  = $this->getSignLord($sign);
+        $lord_pl                    = $this->calcDetails($data[$sign_lord]);            // check sign where planetary lord is placed
+        $lord_strength              = $this->checkStrength($lord_pl, $sign_lord); // check strength of planetary lord
+        $lord_pl_dist               = $this->getHouseDistance($asc, $lord_pl);  // get distance of planetary lord from ascendant
+
+        if($lord_strength == "strong" && ($lord_pl_dist == "9"|| $lord_pl_dist == "2" ||
+            $lord_pl_dist == "5" || $lord_pl_dist == "1" || $lord_pl_dist == "4"||
+            $lord_pl_dist == "10"|| $lord_pl_dist == "7" || $lord_pl_dist == "11"))
+        {
+            $invest                 = array("lord_pl_".$num => "good");
+        }
+        else if($lord_strength == "neutral" && ($lord_pl_dist == "9"|| $lord_pl_dist == "2" ||
+            $lord_pl_dist == "5" || $lord_pl_dist == "1" || $lord_pl_dist == "4"||
+            $lord_pl_dist == "10"|| $lord_pl_dist == "7" || $lord_pl_dist == "11"))
+        {
+            $invest                 = array("lord_pl_".$num => "safe");
+        }
+        else if($lord_strength == "weak" && ($lord_pl_dist == "9"|| $lord_pl_dist == "2" ||
+            $lord_pl_dist == "5" || $lord_pl_dist == "1" || $lord_pl_dist == "4"||
+            $lord_pl_dist == "10"|| $lord_pl_dist == "7" || $lord_pl_dist == "11"))
+        {
+            $invest                 = array("lord_pl_".$num => "caution");
+        }
+        else if($lord_strength == "strong" && ($lord_pl_dist !== "9"|| $lord_pl_dist !== "2" ||
+            $lord_pl_dist !== "5" || $lord_pl_dist !== "1" || $lord_pl_dist !== "4"||
+            $lord_pl_dist !== "10"|| $lord_pl_dist !== "7" || $lord_pl_dist == "11"))
+        {
+            $invest                 = array("lord_pl_".$num => "caution");
+        }
+         else if($lord_strength == "neutral" && ($lord_pl_dist !== "9"|| $lord_pl_dist !== "2" ||
+            $lord_pl_dist !== "5" || $lord_pl_dist !== "1" || $lord_pl_dist !== "4"||
+            $lord_pl_dist !== "10"|| $lord_pl_dist !== "7" || $lord_pl_dist == "11"))
+        {
+            $invest                 = array("lord_pl_".$num => "caution");
+        }
+         else 
+        {
+            $invest                 = array("lord_pl_".$num => "risky");
+        }
+        return $invest;
+    }
+    // recursive function to check strength of planet
+    protected function checkPlStrength($sign, $planets, $num)
+    {
+         $i                          = 0;
+         $count                     = count($planets);
         foreach($planets as $planet)
         {
-            if($planet == "Jupiter" && ($sign == "Pisces" || $sign == "Cancer" ||
-                    $sign == "Scorpio"))
+            if($count > 0)
             {
-                $i                  = $i + 4;
-                $j                  = $j + 1;
-            }
-            else if($planet == "Jupiter" && ($sign == "Capricorn" || $sign == "Taurus" ||
-                    $sign == "Virgo"))
-            {
-                $i                  = $i + 3;
-                $j                  = $j + 1;
-            }
-           else if($planet == "Jupiter" && ($sign == "Libra" || $sign == "Gemini" ||
-                    $sign == "Aquarius"))
-            {
-                $i                  = $i + 2;
-                $j                  = $j + 1;
-            }
-            else if($planet == "Jupiter" && ($sign == "Aries" || $sign == "Leo" ||
-                    $sign == "Sagittarius"))
-            {
-                $i                  = $i + 2;
-                $j                  = $j + 1;
-            }
-            else if($planet == "Venus" && ($sign == "Pisces" || $sign == "Libra" ||
-                    $sign == "Taurus" || $sign == "Cancer"))
-            {
-                $i                  = $i + 4;
-                $j                  = $j + 1;
-            }
-            else if($planet == "Venus" && ($sign == "Scorpio" ||
-                    $sign == "Virgo"||$sign == "Capricorn"||$sign=="Gemini"
-                    ||$sign=="Aquarius"))
-            {
-                $i                  = $i + 3;
-                $j                  = $j + 1;
-            }
-            else if($planet == "Venus" && ($sign == "Aries" || $sign == "Leo" ||
-                    $sign == "Sagittarius"))
-            {
-                $i                  = $i + 2;
-                $j                  = $j + 1;
-            }
-            else if($planet == "Moon" && ($sign == "Pisces" || $sign == "Libra" ||
-                    $sign == "Taurus" || $sign == "Cancer"))
-            {
-                $i                  = $i + 4;
-                $j                  = $j + 1;
-            }
-            else if($planet == "Moon" && ($sign == "Scorpio" ||
-                    $sign == "Virgo"||$sign == "Capricorn"||$sign=="Gemini"
-                    ||$sign=="Aquarius"))
-            {
-                $i                  = $i + 2;
-                $j                  = $j + 1;
-            }
-            else if($planet == "Moon" && ($sign == "Aries" || $sign == "Leo" ||
-                    $sign == "Sagittarius"))
-            {
-                $i                  = $i + 2;
-                $j                  = $j + 1;
-            }
-            else if($planet == "Mercury" && ($sign == "Pisces" || $sign == "Libra" ||
-                    $sign == "Taurus" || $sign == "Cancer" || $sign == "Scorpio"))
-            {
-                $i                  = $i + 1;
-                $j                  = $j + 1;
-            }
-            else if($planet == "Mercury" && ($sign == "Virgo"||$sign == "Capricorn"||$sign=="Gemini"
-                    ||$sign=="Aquarius"))
-            {
-                $i                  = $i + 3;
-                $j                  = $j + 1;
-            }
-            else if($planet == "Mercury" && ($sign == "Aries" || $sign == "Leo" ||
-                    $sign == "Sagittarius"))
-            {
-                $i                  = $i + 2;
-                $j                  = $j + 1;
-            }
-            else if($planet == "Sun" && ($sign == "Pisces" || $sign == "Sagittarius" ||
-                    $sign == "Scorpio" || $sign == "Aries" || 
-                    $sign == "Leo" || $sign == "Cancer"))
-            {
-                $i                  = $i + 2;
-                $k                  = $k + 1;
-            }
-            else if($planet == "Sun" && ($sign == "Virgo" ||$sign=="Taurus"
-                    ||$sign=="Capricorn"))
-            {
-                $i                  = $i + 1;
-                $k                  = $k + 1;
-            }
-            else if($planet == "Sun" && ($sign == "Aquarius" || $sign == "Gemini" ||
-                    $sign == "Libra"))
-            {
-                $i                  = $i + 0;
-                $k                  = $k + 1;
-            }
-            else if($planet == "Mars" && ($sign == "Pisces" || $sign == "Sagittarius" ||
-                    $sign == "Scorpio" || $sign == "Aries" || 
-                    $sign == "Leo" || $sign == "Capricorn"))
-            {
-                $i                  = $i + 2;
-                $k                  = $k + 1;
-            }
-            else if($planet == "Mars" && ($sign=="Aquarius"
-                    ||$sign=="Cancer"))
-            {
-                $i                  = $i + 1;
-                $k                  = $k + 1;
-            }
-            else if($planet == "Mars" && ($sign == "Virgo" || $sign == "Gemini" ||
-                    $sign == "Libra"||$sign == "Taurus"))
-            {
-                $i                  = $i + 0;
-                $k                  = $k + 1;
-            }
-            else if($planet == "Saturn" && ($sign == "Aquarius" || $sign == "Gemini" ||
-                    $sign == "Virgo" || $sign == "Capricorn" || $sign == "Libra" || $sign == "Taurus"))
-            {
-                $i                  = $i + 2;
-                $k                  = $k + 1;
-            }
-            else if($planet == "Saturn" && ($sign=="Pisces"
-                    ||$sign=="Sagittarius"))
-            {
-                $i                  = $i + 1;
-                $k                  = $k + 1;
-            }
-            else if($planet == "Saturn" && ($sign == "Scorpio" || $sign == "Leo" ||
-                    $sign == "Aries"||$sign == "Cancer"))
-            {
-                $i                  = $i + 0;
-                $k                  = $k + 1;
-            }
-            else if($planet == "Rahu" && ($sign == "Aquarius" || $sign == "Gemini" ||
-                    $sign == "Virgo" || $sign == "Libra" || $sign == "Taurus"))
-            {
-                $i                  = $i + 1;
-                $k                  = $k + 1;
-            }
-            else if($planet == "Rahu" && ($sign=="Pisces"
-                    ||$sign=="Sagittarius" || $sign == "Capricorn"))
-            {
-                $i                  = $i + 0;
-                $k                  = $k + 1;
-            }
-            else if($planet == "Rahu" && ($sign == "Scorpio" || $sign == "Leo" ||
-                    $sign == "Aries"||$sign == "Cancer"))
-            {
-                $i                  = $i + 0;
-                $k                  = $k + 1;
-            }
-            else if($planet == "Ketu")
-            {
-                $i                  = $i + 0;
-                $k                  = $k + 1;
+                $strength           = $this->checkStrength($sign, $planet);
+                $good_bad           = $this->planetGoodOrBad($planet);
+                if($strength == "strong" && $good_bad == "good")
+                {
+                    $i              = $i + 4;
+                }
+                else if($strength == "strong" && $good_bad == "bad")
+                {
+                    $i              = $i + 2;
+                }
+                else if($strength == "neutral" && $good_bad == "good")
+                {
+                    $i              = $i + 3;
+                }
+                else if($strength == "neutral" && good_bad == "bad")
+                {
+                    $i              = $i + 1;
+                }
+                else if($strength == "bad" && $good_bad == "good")
+                {
+                    $i              = $i + 2;
+                }
+                else if($strength == "bad" && good_bad == "bad")
+                {
+                    $i              = $i + 0;
+                }
             }
             else
             {
-                $i                  = $i+0;
-                $k                  = $k+1;
+                $i                   = $i + 0;
             }
         }
+        return array("pl_strength_".$num => $i,"total_pl_".$num => $count);
+    }
+     protected function checkAspStrength($sign, $aspects, $num)
+    {
+        $i                      = 0;
+        $count                  = count($aspects);
         foreach($aspects as $aspect)
         {
-            if($aspect == "Jupiter" && ($sign == "Cancer" || $sign == "Sagittarius"|| $sign == "Pisces"))
+            if($count > 0)
             {
-                $i                  = $i+4;
-                $j                  = $j+1;
+                $strength           = $this->checkStrength($sign, $aspect);
+                $good_bad           = $this->planetGoodOrBad($aspect);
+                if($strength == "strong" && $good_bad == "good")
+                {
+                    $i              = $i + 4;
+                }
+                else if($strength == "strong" && $good_bad == "bad")
+                {
+                    $i              = $i + 2;
+                }
+                else if($strength == "neutral" && $good_bad == "good")
+                {
+                    $i              = $i + 3;
+                }
+                else if($strength == "neutral" && good_bad == "bad")
+                {
+                    $i              = $i + 1;
+                }
+                else if($strength == "bad" && $good_bad == "good")
+                {
+                    $i              = $i + 2;
+                }
+                else if($strength == "bad" && good_bad == "bad")
+                {
+                    $i              = $i + 0;
+                }
             }
-            else if($aspect == "Jupiter" && ($sign == "Aries" || $sign == "Scorpio"|| $sign == "Leo"))
+            else
             {
-                $i                  = $i+3;
-                $j                  = $j+1;
-            }
-            else if($aspect == "Jupiter" && ($sign == "Virgo" || $sign == "Gemini"|| $sign == "Capricorn"
-                    || $sign == "Aquarius" || $sign == "Libra" || $sign == "Taurus"))
-            {
-                $i                  = $i+2;
-                $j                  = $j+1;
-            }
-            else if($aspect == "Venus" && ($sign == "Cancer" || $sign == "Pisces"|| $sign == "Libra"
-                    || $sign == "Taurus"))
-            {
-                $i                  = $i+4;
-                $j                  = $j+1;
-            }
-            else if($aspect == "Venus" && ($sign == "Capricorn" || $sign == "Gemini"|| $sign == "Aquarius"||
-                    $sign == "Virgo"))
-            {
-                $i                  = $i+3;
-                $j                  = $j+1;
-            }
-            else if($aspect == "Venus" && ($sign == "Scorpio"
-                    || $sign == "Leo" || $sign == "Sagittarius" || $sign == "Aries"))
-            {
-                $i                  = $i+2;
-                $j                  = $j+1;
-            }
-             else if($aspect == "Venus" && ($sign == "Cancer" || $sign == "Pisces"|| $sign == "Libra"
-                    || $sign == "Taurus"))
-            {
-                $i                  = $i+4;
-                $j                  = $j+1;
-            }
-            else if($aspect == "Venus" && ($sign == "Capricorn" || $sign == "Gemini"|| $sign == "Aquarius"||
-                    $sign == "Virgo"))
-            {
-                $i                  = $i+3;
-                $j                  = $j+1;
-            }
-            else if($aspect == "Venus" && ($sign == "Scorpio"
-                    || $sign == "Leo" || $sign == "Sagittarius" || $sign == "Aries"))
-            {
-                $i                  = $i+2;
-                $j                  = $j+1;
+                $i                   = $i + 0;
             }
         }
-         
-        $array                       = array("land_invest" => $total_strength, "land_pl_asp"=> $total);
-        
+        return array("asp_strength_".$num => $i,"total_asp_".$num => $count);
+    }
+    protected function checkBanks($asc, $data)
+    {
+        $sign                       = $this->getHouseSign($asc, "2");
+        $array                      = array();
+        $lord_strength              = $this->checkStrengthOfLord($asc, $sign, $data, "2");
+        $planets                    = $this->checkPlanetsInHouse($data, "2");
+        $aspects                    = $this->checkAspectsOnHouse($data, "2");
+        $planets                    = $planets['house_2'];
+        $aspects                    = $aspects['aspect_2'];
+
+        $pl_strength                = $this->checkPlStrength($sign, $planets,"2");
+        $asp_strength               = $this->checkAspStrength($sign, $aspects, "2");
+        $array                      = array_merge($array, $lord_strength, $pl_strength, $asp_strength);
+        //print_r($array);exit;
+    
+    }
+    protected function checkProperty($asc, $data)
+    {
+        $sign                       = $this->getHouseSign($asc, "4");
+        $array                      = array();
+        $lord_strength              = $this->checkStrengthOfLord($asc, $sign, $data, "4");
+        $planets                    = $this->checkPlanetsInHouse($data, "4");
+        $aspects                    = $this->checkAspectsOnHouse($data, "4");
+        $planets                    = $planets['house_4'];
+        $aspects                    = $aspects['aspect_4'];
+
+        $pl_strength                = $this->checkPlStrength($sign, $planets,"4");
+        $asp_strength               = $this->checkAspStrength($sign, $aspects, "4");
+        $array                      = array_merge($array, $lord_strength, $pl_strength, $asp_strength);
+        //print_r($array);exit;
     }
     protected function checkStocks($asc, $data)
     {
-         $sign                       = $this->getHouseSign($asc, "5");
-        $element                    = $this->checkElement($sign);
+        $sign                       = $this->getHouseSign($asc, "5");
+        $array                      = array();
+        $lord_strength              = $this->checkStrengthOfLord($asc, $sign, $data, "5");
         $planets                    = $this->checkPlanetsInHouse($data, "5");
         $aspects                    = $this->checkAspectsOnHouse($data, "5");
         $planets                    = $planets['house_5'];
         $aspects                    = $aspects['aspect_5'];
-        $pl_count                   = count($planets); // count number of planets
-        $asp_count                  = count($aspects); // count number of aspects
-        $total                      = $pl_count+$asp_count;
-        $pl_count                   = count($planets); // count number of planets
-        $asp_count                  = count($aspects); // count number of aspects
-        $total                      = $pl_count+$asp_count;
-        $pl_strength                = $this->checkPlacements($planet, $element);
-        $asp_strength               = $this->checkAspects($aspects, $element);
-        $total_strength             = $pl_strength+$asp_strength;        
-        $array                       = array("stock_invest" => $total_strength, "stock_pl_asp"=> $total);
+
+        $pl_strength                = $this->checkPlStrength($sign, $planets,"5");
+        $asp_strength               = $this->checkAspStrength($sign, $aspects, "5");
+        $array                      = array_merge($array, $lord_strength, $pl_strength, $asp_strength);
         print_r($array);exit;
     }
 }
