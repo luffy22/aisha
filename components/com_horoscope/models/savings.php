@@ -115,18 +115,18 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
         $planets                    = array_merge($asc,$planets);
         $asc_sign                   = $this->calcDetails($planets['Ascendant']);
 
-        //$check_bank                 = $this->checkBanks($asc_sign, $planets);
-        //$check_land                 = $this->checkProperty($asc_sign, $planets);
+        $check_bank                 = $this->checkBanks($asc_sign, $planets);
+        $check_land                 = $this->checkProperty($asc_sign, $planets);
         $check_stock                = $this->checkStocks($asc_sign, $planets);
-        
-        $data                       = array();
-        foreach($planets as $key => $planet)
-        {
-            $planet_sign            = $this->calcDetails($planet);
-            $array                  = array($key => $planet_sign);
-            $data                   = array_merge($data, $array);
-        }
-        print_r($planets);exit;
+        $check_hidden               = $this->checkHidden($asc_sign, $planets);
+        $check_gold                 = $this->checkGold($asc_sign, $planets);
+        $check_silver               = $this->checkSilver($asc_sign, $planets);
+       
+        $array                      = array();
+        $array                      = array_merge($user_data,$check_bank,$check_land,$check_stock,
+                                                    $check_hidden, $check_gold, $check_silver);
+        return $array;
+                                                    
     }
     protected function removeRetro($planet)
     {
@@ -200,35 +200,35 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
             $lord_pl_dist == "5" || $lord_pl_dist == "1" || $lord_pl_dist == "4"||
             $lord_pl_dist == "10"|| $lord_pl_dist == "7" || $lord_pl_dist == "11"))
         {
-            $invest                 = array("lord_pl_".$num => "good");
+            $invest                 = array("lord_pl_".$num => "4");
         }
         else if($lord_strength == "neutral" && ($lord_pl_dist == "9"|| $lord_pl_dist == "2" ||
             $lord_pl_dist == "5" || $lord_pl_dist == "1" || $lord_pl_dist == "4"||
             $lord_pl_dist == "10"|| $lord_pl_dist == "7" || $lord_pl_dist == "11"))
         {
-            $invest                 = array("lord_pl_".$num => "safe");
+            $invest                 = array("lord_pl_".$num => "3");
         }
         else if($lord_strength == "weak" && ($lord_pl_dist == "9"|| $lord_pl_dist == "2" ||
             $lord_pl_dist == "5" || $lord_pl_dist == "1" || $lord_pl_dist == "4"||
             $lord_pl_dist == "10"|| $lord_pl_dist == "7" || $lord_pl_dist == "11"))
         {
-            $invest                 = array("lord_pl_".$num => "caution");
+            $invest                 = array("lord_pl_".$num => "2");
         }
         else if($lord_strength == "strong" && ($lord_pl_dist !== "9"|| $lord_pl_dist !== "2" ||
             $lord_pl_dist !== "5" || $lord_pl_dist !== "1" || $lord_pl_dist !== "4"||
-            $lord_pl_dist !== "10"|| $lord_pl_dist !== "7" || $lord_pl_dist == "11"))
+            $lord_pl_dist !== "10"|| $lord_pl_dist !== "7" || $lord_pl_dist !== "11"))
         {
-            $invest                 = array("lord_pl_".$num => "caution");
+            $invest                 = array("lord_pl_".$num => "3");
         }
          else if($lord_strength == "neutral" && ($lord_pl_dist !== "9"|| $lord_pl_dist !== "2" ||
             $lord_pl_dist !== "5" || $lord_pl_dist !== "1" || $lord_pl_dist !== "4"||
-            $lord_pl_dist !== "10"|| $lord_pl_dist !== "7" || $lord_pl_dist == "11"))
+            $lord_pl_dist !== "10"|| $lord_pl_dist !== "7" || $lord_pl_dist !== "11"))
         {
-            $invest                 = array("lord_pl_".$num => "caution");
+            $invest                 = array("lord_pl_".$num => "1");
         }
          else 
         {
-            $invest                 = array("lord_pl_".$num => "risky");
+            $invest                 = array("lord_pl_".$num => "0");
         }
         return $invest;
     }
@@ -270,7 +270,7 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
             }
             else
             {
-                $i                   = $i + 0;
+                $i                   = $i + 2;
             }
         }
         return array("pl_strength_".$num => $i,"total_pl_".$num => $count);
@@ -312,7 +312,7 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
             }
             else
             {
-                $i                   = $i + 0;
+                $i                   = $i + 2;
             }
         }
         return array("asp_strength_".$num => $i,"total_asp_".$num => $count);
@@ -330,7 +330,7 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
         $pl_strength                = $this->checkPlStrength($sign, $planets,"2");
         $asp_strength               = $this->checkAspStrength($sign, $aspects, "2");
         $array                      = array_merge($array, $lord_strength, $pl_strength, $asp_strength);
-        //print_r($array);exit;
+        return $array;
     
     }
     protected function checkProperty($asc, $data)
@@ -346,7 +346,7 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
         $pl_strength                = $this->checkPlStrength($sign, $planets,"4");
         $asp_strength               = $this->checkAspStrength($sign, $aspects, "4");
         $array                      = array_merge($array, $lord_strength, $pl_strength, $asp_strength);
-        //print_r($array);exit;
+        return $array;
     }
     protected function checkStocks($asc, $data)
     {
@@ -361,6 +361,234 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
         $pl_strength                = $this->checkPlStrength($sign, $planets,"5");
         $asp_strength               = $this->checkAspStrength($sign, $aspects, "5");
         $array                      = array_merge($array, $lord_strength, $pl_strength, $asp_strength);
-        print_r($array);exit;
+        return $array;
+    }
+    protected function checkHidden($asc, $data)
+    {
+        $sign                       = $this->getHouseSign($asc, "8");
+        $array                      = array();
+        $lord_strength              = $this->checkStrengthOfLord($asc, $sign, $data, "8");
+        $planets                    = $this->checkPlanetsInHouse($data, "8");
+        $aspects                    = $this->checkAspectsOnHouse($data, "8");
+        $planets                    = $planets['house_8'];
+        $aspects                    = $aspects['aspect_8'];
+
+        $pl_strength                = $this->checkPlStrength($sign, $planets,"8");
+        $asp_strength               = $this->checkAspStrength($sign, $aspects, "8");
+        $array                      = array_merge($array, $lord_strength, $pl_strength, $asp_strength);
+        return $array;
+    }
+    protected function checkGold($asc, $data)
+    {
+        $sign                       = $this->getHouseSign($asc, "2");
+        //print_r($data);exit;
+        $array                      = array();
+        $planets                    = $this->checkPlanetsInHouse($data, "2");
+        $aspects                    = $this->checkAspectsOnHouse($data, "2");
+        $planets                    = $planets['house_2'];
+        $aspects                    = $aspects['aspect_2'];
+        $sun_sign                   = $this->calcDetails($data['Sun']);
+        $jup_sign                   = $this->calcDetails($data['Jupiter']);
+        $mars_sign                  = $this->calcDetails($data['Mars']);
+        $sun_strength               = $this->checkStrength($sun_sign, "Sun");
+        $jup_strength               = $this->checkStrength($jup_sign, "Jupiter");
+        $mars_strength              = $this->checkStrength($mars_sign, "Mars");
+        
+        if((in_array("Sun", $planets) || in_array("Sun", $aspects))&&($sun_strength =="strong"))
+        {
+            $gold_inv               = array("gold_sun" => "4");
+            $array                  = array_merge($array, $gold_inv);
+        }
+        else  if((in_array("Sun", $planets) || in_array("Sun", $aspects))&&($sun_strength =="neutral"))
+        {
+            $gold_inv               = array("gold_sun" => "3");
+            $array                  = array_merge($array, $gold_inv);
+        }
+        else if((in_array("Sun", $planets) || in_array("Sun", $aspects))&&($sun_strength =="weak"))
+        {
+            $gold_inv               = array("gold_sun" => "2");
+            $array                  = array_merge($array, $gold_inv);
+        }
+        else 
+        {
+            $gold_inv               = array("gold_sun" => "0");
+            $array                  = array_merge($array, $gold_inv);
+        }
+        if((in_array("Mars", $planets) || in_array("Mars", $aspects))&&($mars_strength =="strong"))
+        {
+            $gold_inv                = array("gold_mars" => "4");
+            $array                  = array_merge($array, $gold_inv);
+        }
+        else if((in_array("Mars", $planets) || in_array("Mars", $aspects))&&($mars_strength =="neutral"))
+        {
+            $gold_inv               = array("gold_mars" => "3");
+            $array                  = array_merge($array, $gold_inv);
+        }
+        else if((in_array("Mars", $planets) || in_array("Mars", $aspects))&&($mars_strength =="weak"))
+        {
+            $gold_inv               = array("gold_mars" => "2");
+            $array                  = array_merge($array, $gold_inv);
+        }
+        else 
+        {
+            $gold_inv               = array("gold_mars" => "0");
+            $array                  = array_merge($array, $gold_inv);
+        }
+        if((in_array("Jupiter", $planets) || in_array("Jupiter", $aspects))&&($jup_strength =="strong"))
+        {
+            $gold_inv               = array("gold_jup" => "4");
+            $array                  = array_merge($array, $gold_inv);
+        }
+        else if((in_array("Jupiter", $planets) || in_array("Jupiter", $aspects))&&($jup_strength =="neutral"))
+        {
+            $gold_inv               = array("gold_jup" => "3");
+            $array                  = array_merge($array, $gold_inv);
+        }
+        
+        else if((in_array("Jupiter", $planets) || in_array("Jupiter", $aspects))&&($jup_strength =="weak"))
+        {
+            $gold_inv               = array("gold_jup" => "2");
+            $array                  = array_merge($array, $gold_inv);
+        }
+        else 
+        {
+            $gold_inv               = array("gold_jup" => "1");
+            $array                  = array_merge($array, $gold_inv);
+        }
+        if($sun_strength == "strong")
+        {
+            $sun                    = array("sun_gold_strength" => "4");
+            $array                  = array_merge($array, $sun);
+        }
+        else if($sun_strength == "neutral")
+        {
+            $sun                    = array("sun_gold_strength" => "2");
+            $array                  = array_merge($array, $sun);
+        }
+        else
+        {
+            $sun                    = array("sun_gold-strength" => "0");
+            $array                  = array_merge($array, $sun);
+        }
+        if($jup_strength == "strong")
+        {
+            $jup                    = array("jup_gold_strength" => "4");
+            $array                  = array_merge($array, $jup);
+        }
+        else if($jup_strength == "neutral")
+        {
+            $jup                    = array("jup_gold_strength" => "2");
+            $array                  = array_merge($array, $jup);
+        }
+        else 
+        {
+            $jup                    = array("jup_gold_strength" => "1");
+            $array                  = array_merge($array, $jup);
+        }
+        if($mars_strength == "strong")
+        {
+            $mars                    = array("mars_gold_strength" => "4");
+            $array                  = array_merge($array, $mars);
+        }
+        else if($mars_strength == "neutral")
+        {
+            $mars                    = array("mars_gold_strength" => "2");
+            $array                  = array_merge($array, $mars);
+        }
+        else
+        {
+            $mars                   = array("mars_gold_strength" => "0");
+            $array                  = array_merge($array, $mars);
+        }
+        return $array;
+    }
+    protected function checkSilver($asc, $data)
+    {
+        $sign                       = $this->getHouseSign($asc, "2");
+        //print_r($data);exit;
+        $array                      = array();
+        $planets                    = $this->checkPlanetsInHouse($data, "2");
+        $aspects                    = $this->checkAspectsOnHouse($data, "2");
+        $planets                    = $planets['house_2'];
+        $aspects                    = $aspects['aspect_2'];
+        $moon_sign                  = $this->calcDetails($data['Moon']);
+        $jup_sign                   = $this->calcDetails($data['Jupiter']);
+
+        $moon_strength               = $this->checkStrength($moon_sign, "Moon");
+        $jup_strength               = $this->checkStrength($jup_sign, "Jupiter");
+        
+        if((in_array("Moon", $planets) || in_array("Moon", $aspects))&&($moon_strength =="strong"))
+        {
+            $silver_inv             = array("silver_moon" => "4");
+            $array                  = array_merge($array, $silver_inv);
+        }
+        else if((in_array("Moon", $planets) || in_array("Moon", $aspects))&&($moon_strength =="neutral"))
+        {
+            $silver_inv             = array("silver_moon" => "3");
+            $array                  = array_merge($array, $silver_inv);
+        }
+        else if((in_array("Moon", $planets) || in_array("Moon", $aspects))&&($moon_strength =="weak"))
+        {
+            $silver_inv             = array("silver_moon" => "2");
+            $array                  = array_merge($array, $silver_inv);
+        }
+        else 
+        {
+            $silver_inv             = array("silver_moon" => "0");
+            $array                  = array_merge($array, $silver_inv);
+        }
+        if((in_array("Jupiter", $planets) || in_array("Jupiter", $aspects))&&($jup_strength =="strong"))
+        {
+            $silver_inv             = array("silver_jup" => "4");
+            $array                  = array_merge($array, $silver_inv);
+        }
+        
+        else if((in_array("Jupiter", $planets) || in_array("Jupiter", $aspects))&&($jup_strength =="neutral"))
+        {
+            $silver_inv             = array("silver_jup" => "3");
+            $array                  = array_merge($array, $silver_inv);
+        }
+        
+        else if((in_array("Jupiter", $planets) || in_array("Jupiter", $aspects))&&($jup_strength =="weak"))
+        {
+            $silver_inv             = array("silver_jup" => "2");
+            $array                  = array_merge($array, $silver_inv);
+        }
+        else
+        {
+            $silver_inv             = array("silver_jup" => "0");
+            $array                    = array_merge($array, $silver_inv);
+        }
+        if($moon_strength == "strong")
+        {
+            $moon                    = array("moon_sil_strength" => "4");
+            $array                  = array_merge($array, $moon);
+        }
+        else if($jup_strength == "strong")
+        {
+            $jup                    = array("jup_sil_strength" => "4");
+            $array                  = array_merge($array, $jup);
+        }
+        if($moon_strength == "neutral")
+        {
+            $moon                    = array("moon_sil_strength" => "2");
+            $array                  = array_merge($array, $moon);
+        }
+        else if($jup_strength == "neutral")
+        {
+            $jup                    = array("jup__sil_strength" => "2");
+            $array                  = array_merge($array, $jup);
+        }
+        if($moon_strength == "weak")
+        {
+            $moon                    = array("moon__sil_strength" => "1");
+            $array                  = array_merge($array, $moon);
+        }
+        else if($jup_strength == "weak")
+        {
+            $jup                    = array("jup_sil_strength" => "1");
+            $array                  = array_merge($array, $jup);
+        }
+        return $array;
     }
 }
