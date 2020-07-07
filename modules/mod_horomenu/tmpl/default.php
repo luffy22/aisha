@@ -34,6 +34,8 @@ $current        = Juri::current();
                 Career </a>
             <div class="dropdown-menu bg-dark" aria-labelledby="horo_3">
                 <a class="dropdown-item <?php if($current == Juri::base().'careerfind'){ echo "active";} ?>" href="<?php echo Juri::base().'careerfind?chart='.$chart_id; ?>">Career Finder</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item <?php if($current == Juri::base().'investwhere'){ echo "active";} ?>" href="<?php echo Juri::base().'investwhere?chart='.$chart_id; ?>">Where To Invest</a>
             </div>
         </li>
         <li class="nav-item dropdown">

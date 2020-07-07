@@ -558,11 +558,20 @@ class HoroscopeModelLagna extends JModelItem
         $aspect                 = array();
         $asc                    = $this->calcDetails($data["Ascendant"]);
         $sign                   = $this->getHouseSign($asc, $num);
-
+        
         $planets                = array("Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu","Neptune","Uranus","Pluto"); 
         foreach($planets as $planet)
         {
+            if(isset($data[$planet]))
+            {
+                $planet_sign    = $this->calcDetails($data[$planet]);
+            }
+            else
+            {
+                unset($planet);
+            }
             $planet_sign        = $this->calcDetails($data[$planet]);
+            
             if($planet =="Sun"|| $planet =="Moon"|| $planet=="Mercury"||$planet =="Venus"||$planet=="Neptune"||$planet=="Uranus"||$planet=="Pluto")
             {
                 $get_7th_sign   = $this->getHouseSign($planet_sign, 7);

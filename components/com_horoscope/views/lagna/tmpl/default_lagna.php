@@ -26,6 +26,11 @@ $type       = $this->data['chart_type'];
 <div class="lead alert alert-dark">Career</div>
 <div class="row">
   <div class="col-4"><a class="content_links" title="career finder" href="<?php echo Juri::base() ?>careerfind?chart=<?php echo $chart_id; ?>"><img src="images/art_img/career.jpg" alt="career" width="50px" height="50px" /> Career Finder</a></div>
+</div>
+<div class="mb-3"></div>
+<div class="lead alert alert-dark">Finances</div>
+<div class="row">
+  <div class="col-4"><a class="content_links" title="where to invest" href="<?php echo Juri::base() ?>investwhere?chart=<?php echo $chart_id; ?>"><img src="images/money.jpg" alt="money" width="50px" height="50px" /> Where To Invest</a></div>
 
 </div>
 <div class="mb-3"></div>

@@ -174,18 +174,14 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
     {
         $good                       = array("Jupiter","Venus","Moon","Mercury");
         $bad                        = array("Saturn","Mars","Rahu", "Ketu","Sun");
-        
+
         if(in_array($planet, $good))
         {
             $val                    = "good";
         }
-        else if(in_array($planet, $bad))
-        {
-            $val                    = "bad";
-        }
         else 
         {
-            $val                    = "neutral";
+            $val                    = "bad";
         }
         return $val;
     }
@@ -206,7 +202,7 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
             $lord_pl_dist == "5" || $lord_pl_dist == "1" || $lord_pl_dist == "4"||
             $lord_pl_dist == "10"|| $lord_pl_dist == "7" || $lord_pl_dist == "11"))
         {
-            $invest                 = array("lord_pl_".$num => "3");
+            $invest                 = array("lord_pl_".$num => "2");
         }
         else if($lord_strength == "weak" && ($lord_pl_dist == "9"|| $lord_pl_dist == "2" ||
             $lord_pl_dist == "5" || $lord_pl_dist == "1" || $lord_pl_dist == "4"||
@@ -249,7 +245,7 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
                 }
                 else if($strength == "strong" && $good_bad == "bad")
                 {
-                    $i              = $i + 2;
+                    $i              = $i + 3;
                 }
                 else if($strength == "neutral" && $good_bad == "good")
                 {
@@ -257,15 +253,15 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
                 }
                 else if($strength == "neutral" && good_bad == "bad")
                 {
-                    $i              = $i + 1;
+                    $i              = $i + 2;
                 }
                 else if($strength == "bad" && $good_bad == "good")
                 {
                     $i              = $i + 2;
                 }
-                else if($strength == "bad" && good_bad == "bad")
+                else if($strength == "bad" && $good_bad == "bad")
                 {
-                    $i              = $i + 0;
+                    $i              = $i + 1;
                 }
             }
             else
@@ -299,7 +295,7 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
                 }
                 else if($strength == "neutral" && good_bad == "bad")
                 {
-                    $i              = $i + 1;
+                    $i              = $i + 2;
                 }
                 else if($strength == "bad" && $good_bad == "good")
                 {

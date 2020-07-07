@@ -67,7 +67,7 @@ if(isset($_GET['redirect']) && $_GET['redirect'] == "investwhere")
     </div>
     <div class="form-group">
         <label for="longitude" class="control-label">Longitude</label><br/>
-        <input type="text" id="loc_lon_1" class="form-text1" name="lon_deg" maxlength="2" placeholder="deg" />
+        <input type="text" id="loc_lon_1" class="form-text1" name="lon_deg" maxlength="3" placeholder="deg" />
         <input type="text" id="loc_lon_2" class="form-text1" name="lon_min" maxlength="2" placeholder="min" />
         <select class="select2" id="lagna_lon_direction" name="lon_dir">
             <option>E</option>

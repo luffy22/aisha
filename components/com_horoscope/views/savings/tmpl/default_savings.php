@@ -75,8 +75,8 @@ $chart_id = $_GET['chart'];
               { echo "No"; } ?></td>
     </tr>
 </table>
-<p class="lead">Kindly Note: We recommend you only do long-term investments. Also don't put all your savings in one place as 
-that is a recipe for disaster. If there is no favorable place than invest in more then one bank as generally your savings are safe in banks.</p>
+<p class="lead">Kindly Note: This software does not consider current transits of planets. Only birth-time chart is analyzed. Do not 
+invest all your money in one place. We also advise you to do long-term investments only.</p>
 <div class="mb-3"></div>
 <div class="lead alert alert-dark">Banks</div>
 <div class="mb-3"></div>
@@ -111,6 +111,10 @@ else
     $total_strength         = $lord_2+$pl_strength_2+$asp_strength_2;
 }
 //echo $total_strength;exit;
+?>
+<div class="row">
+<div class="col-md-3 col-sm-3 col-xs-4">
+<?php
 if($total_strength >= 4)
 {
 ?>
@@ -124,14 +128,22 @@ else
 <?php
 }
 ?>
+</div>
+<div class="col-md-9 col-sm-9 col-xs-8">
 <ul class="list-group">
     <li class="list-group-item">2nd house deals with savings in banks and various financial schemes. Generally the safest option among 
         all places for investment are banks.</li>
 <?php 
-    if($lord_2 > 2.5) 
+    if($lord_2 > 3) 
     {
 ?>
     <li class="list-group-item list-group-item-success"><i class="far fa-check-circle"></i> 2nd house lord has strength.</li>
+<?php
+    }
+     else if($lord_2 >= 2 && $lord_2 <= 3) 
+    {
+?>
+    <li class="list-group-item"><i class="far fa-check-circle"></i> 2nd house lord is decent.</li>
 <?php
     }
  else 
@@ -191,6 +203,8 @@ else
 }
 ?>
 </ul>
+</div>
+</div>
 <div class="mb-3"></div>
 <div class="lead alert alert-dark">Land and Real Estate</div>
 <?php
@@ -226,6 +240,10 @@ else
 }
 //echo $total_strength;exit;
 //echo $lord_4." ".$pl_strength_4." ".$asp_strength_4;exit;
+?>
+<div class="row">
+<div class="col-md-3 col-sm-3 col-xs-4">
+<?php
 if($total_strength >= 4)
 {
 ?>
@@ -239,14 +257,22 @@ else
 <?php
 }
 ?>
+</div>
+<div class="col-md-9 col-sm-9 col-xs-8">
 <ul class="list-group">
 <li class="list-group-item">4th house deals with home, land property and real estate. Land maybe an 
 immovable asset but is a wonderful investment for long term.</li>
 <?php 
-    if($lord_4 > 2.5) 
+    if($lord_4 > 3) 
     {
 ?>
     <li class="list-group-item list-group-item-success"><i class="far fa-check-circle"></i> 4th house lord has strength.</li>
+<?php
+    }
+    else if($lord_4 >= 2 && $lord_4 <= 3) 
+    {
+?>
+    <li class="list-group-item"><i class="far fa-check-circle"></i> 4th house lord is decent.</li>
 <?php
     }
  else 
@@ -306,6 +332,7 @@ else
 }
 ?>
 </ul>
+</div></div>
 <div class="mb-3"></div>
 <div class="lead alert alert-dark">Stock Markets</div>
 <?php
@@ -340,6 +367,10 @@ else
 }
 //echo $total_strength;exit;
 //echo $lord_5." ".$pl_strength_5." ".$asp_strength_5;exit;
+?>
+<div class="row">
+<div class="col-md-3 col-sm-3 col-xs-4">
+<?php
 if($total_strength >= 4)
 {
 ?>
@@ -353,14 +384,22 @@ else
 <?php
 }
 ?>
+</div>
+<div class="col-md-9 col-sm-9 col-xs-8">
 <ul class="list-group">
     <li class="list-group-item">5th house deals with stock markets. Investing in stock markets is generally 
     favorable especially in open economies where capitalism flourishes. </li>
 <?php 
-    if($lord_5 > 2.5) 
+    if($lord_5 > 3) 
     {
 ?>
     <li class="list-group-item list-group-item-success"><i class="far fa-check-circle"></i> 5th house lord has strength.</li>
+<?php
+    }
+    else if($lord_5 >= 2 && $lord_5 <= 3) 
+    {
+?>
+    <li class="list-group-item"><i class="far fa-check-circle"></i> 5th house lord is decent.</li>
 <?php
     }
  else 
@@ -420,6 +459,7 @@ else
 }
 ?>
 </ul>
+</div></div>
 <div class="mb-3"></div>
 <div class="lead alert alert-dark">Hidden Wealth</div>
 <?php
@@ -454,6 +494,10 @@ else
 }
 //echo $total_strength;exit;
 //echo $lord_5." ".$pl_strength_5." ".$asp_strength_5;exit;
+?>
+<div class="row">
+<div class="col-md-3 col-sm-3 col-xs-4">
+<?php
 if($total_strength >= 4)
 {
 ?>
@@ -467,14 +511,22 @@ else
 <?php
 }
 ?>
+</div>
+<div class="col-md-9 col-sm-9 col-xs-8">    
 <ul class="list-group">
     <li class="list-group-item">8th house deals hidden wealth and inheritance. Normally it signifies tax-saver bonds, mutual funds  
     and other types of schemes which are exempt from taxation. It can also represent treasures and wealth hidden from public view.</li>
 <?php 
-    if($lord_8 > 2.5) 
+    if($lord_8 > 3) 
     {
 ?>
     <li class="list-group-item list-group-item-success"><i class="far fa-check-circle"></i> 8th house lord has strength.</li>
+<?php
+    }
+    else if($lord_8 >= 2 && $lord_8 <= 3) 
+    {
+?>
+    <li class="list-group-item"><i class="far fa-check-circle"></i> 8th house lord is decent.</li>
 <?php
     }
  else 
@@ -534,6 +586,7 @@ else
 }
 ?>
 </ul>
+</div></div>
 <div class="mb-3"></div>
 <?php
     $sun_2_conn         = $this->data['gold_sun'];
@@ -547,6 +600,8 @@ else
     //echo $total;exit;
 ?>
 <div class="lead alert alert-dark">Gold</div>
+<div class="row">
+<div class="col-md-3 col-sm-3 col-xs-4">
 <?php
     if($total >= 10)
     {
@@ -561,6 +616,8 @@ else
 <?php
     }
 ?>
+</div>
+<div class="col-md-9 col-sm-9 col-xs-8">
 <ul class="list-group">
     <?php
         if($sun_2_conn > 2)
@@ -685,6 +742,7 @@ if($total >= 10)
     }
 ?>
 </ul>
+</div></div>
 <div class="mb-3"></div>
 <?php
     $moon_2_conn        = $this->data['silver_moon'];
@@ -695,6 +753,8 @@ if($total >= 10)
                             $moon_strength + $jup_strength;
 ?>
 <div class="lead alert alert-dark">Silver</div>
+<div class="row">
+<div class="col-md-3 col-sm-3 col-xs-4">
 <?php
 if($total >= 6)
 {
@@ -709,18 +769,20 @@ else
 <?php
 }    
 ?>
+</div>
+<div class="col-md-9 col-sm-9 col-xs-8">
 <ul class="list-group">
     <?php
         if($moon_2_conn > 2)
         {
     ?>
-    <li class="list-group-item list-group-item list-group-item-success"><i class="far fa-check-circle"></i> Strong Moon influences 2nd house.</li>
+    <li class="list-group-item list-group-item list-group-item-success"><i class="far fa-check-circle"></i> Moon has strong influences 2nd house.</li>
         <?php
         }
         else if($moon_2_conn <= 2 && $moon_2_conn != 0)
         {
     ?>
-    <li class="list-group-item list-group-item"><i class="far fa-check-circle"></i> Weak Moon influences 2nd house.</li>
+    <li class="list-group-item list-group-item"><i class="far fa-check-circle"></i> Moon has weak influence on 2nd house.</li>
         <?php
         }
         else
@@ -732,13 +794,13 @@ else
         if($jup_2_conn > 2)
         {
     ?>
-    <li class="list-group-item list-group-item list-group-item-success"><i class="far fa-check-circle"></i> Strong Jupiter influences 2nd house.</li>
+    <li class="list-group-item list-group-item list-group-item-success"><i class="far fa-check-circle"></i> Jupiter has strong influences 2nd house.</li>
         <?php
         }
         else if($jup_2_conn <= 2 && $jup_2_conn != 0)
         {
     ?>
-    <li class="list-group-item list-group-item list-group"><i class="far fa-check-circle"></i> Weak Jupiter influences 2nd house.</li>
+    <li class="list-group-item list-group-item list-group"><i class="far fa-check-circle"></i> Jupiter has weakinfluences 2nd house.</li>
         <?php
         }
         else
@@ -797,6 +859,7 @@ else
     }
 ?>
 </ul>
+</div></div>
 <div class="mb-3"></div>
 <?php
 unset($this->data);
