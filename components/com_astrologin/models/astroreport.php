@@ -42,7 +42,7 @@ class AstrologinModelAstroReport extends JModelItem
         $service2       = 'life';
         $service3       = 'career';
         $service4       = 'marriage';
-        $service5       = 'sadesati';
+        $service5       = 'finance';
         $country_code       = array("IN","US","UK","NZ","AU","SG","CA","RU");
         if($info=='FR'||$info=='DE'||$info=='IE'||$info=='NL'||$info=='CR'||$info=='BE'
                 ||$info=='GR'||$info=='IT'||$info=='PT'||$info=='ES'||$info=='MT'||$info=='LV'||$info=='TR')
@@ -158,9 +158,9 @@ class AstrologinModelAstroReport extends JModelItem
         {
             $order_branch   = "yearly_report";
         }
-        else if($order_type == "sadesati")
+        else if($order_type == "finance")
         {
-            $order_branch   = "sadesati_report";
+            $order_branch   = "finance_report";
         }
         else
         {       
@@ -474,9 +474,9 @@ class AstrologinModelAstroReport extends JModelItem
         {
                 $body 			.= "<p>Order Type: Marriage Report</p>";
         }
-        else if($data->order_type == "sadsati")
+        else if($data->order_type == "finance")
         {
-                $body 			.= "<p>Order Type: Sade-Sati Report</p>";
+                $body 			.= "<p>Order Type: Financial Report</p>";
         }
         else
         {

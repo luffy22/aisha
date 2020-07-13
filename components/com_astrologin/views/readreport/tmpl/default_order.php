@@ -104,11 +104,11 @@ else if($this->details->order_type=="career")
 </ul>
 <?php
 }
-else if($this->details->order_type=="sadesati")
+else if($this->details->order_type=="finance")
 {
 ?>
 <ul class="list-group">
-    <li class="list-group-item"><a href="<?php echo Juri::base().'readsadesati?order='.$order.'&ref='.$refemail; ?>">Sade-Sati Report</a></li>
+    <li class="list-group-item"><a href="<?php echo Juri::base().'financereport?order='.$order.'&ref='.$refemail; ?>">Financial Report</a></li>
     <li class="list-group-item"><a href="<?php echo Juri::base().'astroqueries?order='.$order.'&ref='.$refemail; ?>">Query Answer</a></li>
 </ul>
 <?php

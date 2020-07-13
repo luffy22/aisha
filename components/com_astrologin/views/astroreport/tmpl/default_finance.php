@@ -23,11 +23,9 @@ $order_type             = $_GET['order_type'];
 <div class="form-group">
     <label for="query_about">What's the query about?</label>
     <select name="query_about" id="query_about" class="form-control">
-        <option value="marriage">Marriage</option>
-        <option value="divorce">Divorce</option>
-        <option value="career">Career</option>
-        <option value="education">Education</option>
-        <option value="finance">Finance</option>
+        <option value="savings">Savings</option>
+        <option value="income">Income</option>
+        <option value="debt">Debt</option>
         <option value="other">Other</option>
     </select>
 </div><div class="mb-3"></div>

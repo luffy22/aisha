@@ -56,7 +56,7 @@ $date_apr   = new DateTime("04/16/2020");
                 else if($order[$i]['on_home'] == "yes" && ($order[$i]['service_for_charge'] == "life"||
                         $order[$i]['service_for_charge'] == "marriage" ||
                         $order[$i]['service_for_charge'] == "career" ||
-                        $order[$i]['service_for_charge'] == "sade-sati"||
+                        $order[$i]['service_for_charge'] == "finance"||
                         $order[$i]['service_for_charge'] == "yearly"))
                 {
                     $type       = $order[$i]['service_for_charge'];
@@ -185,7 +185,7 @@ $date_apr   = new DateTime("04/16/2020");
         }
     }
     else if($menualias == "horoscope" || $menualias == "mainchart" || $menualias == "astroyogas"
-            || $menualias == "yogas" || $menualias == "planet-bhavas" || $menualias == "finance")
+            || $menualias == "yogas" || $menualias == "planet-bhavas" || $menualias == "transits")
     {
         $type       = $order[2]['service_for_charge'];
         $amount     = $order[2]['amount'];
@@ -245,7 +245,7 @@ $date_apr   = new DateTime("04/16/2020");
 <?php
         }
     }
-    else if($menualias == "featured" || $menualias == "transits")
+    else if($menualias == "featured" || $menualias == "finance" || $menualias == "investwhere")
     {
         $type       = $order[6]['service_for_charge'];
         $amount     = $order[6]['amount'];

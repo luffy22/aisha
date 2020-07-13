@@ -231,12 +231,13 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
     // recursive function to check strength of planet
     protected function checkPlStrength($sign, $planets, $num)
     {
-         $i                          = 0;
-         $count                     = count($planets);
-        foreach($planets as $planet)
+        $i                          = 0;
+        $count                     = count($planets);
+        if($count > 0)
         {
-            if($count > 0)
+            foreach($planets as $planet)
             {
+            
                 $strength           = $this->checkStrength($sign, $planet);
                 $good_bad           = $this->planetGoodOrBad($planet);
                 if($strength == "strong" && $good_bad == "good")
@@ -255,30 +256,34 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
                 {
                     $i              = $i + 2;
                 }
-                else if($strength == "bad" && $good_bad == "good")
+                else if($strength == "weak" && $good_bad == "good")
                 {
                     $i              = $i + 2;
                 }
-                else if($strength == "bad" && $good_bad == "bad")
+                else if($strength == "weak" && $good_bad == "bad")
                 {
                     $i              = $i + 1;
                 }
             }
-            else
-            {
-                $i                   = $i + 2;
-            }
         }
+        else
+        {
+            $i                   = $i + 2;
+        }
+        
         return array("pl_strength_".$num => $i,"total_pl_".$num => $count);
     }
      protected function checkAspStrength($sign, $aspects, $num)
     {
+        //print_r($aspects);exit;
         $i                      = 0;
         $count                  = count($aspects);
-        foreach($aspects as $aspect)
+        //echo $count;exit;
+        if($count > 0)
         {
-            if($count > 0)
+            foreach($aspects as $aspect)
             {
+           
                 $strength           = $this->checkStrength($sign, $aspect);
                 $good_bad           = $this->planetGoodOrBad($aspect);
                 if($strength == "strong" && $good_bad == "good")
@@ -297,20 +302,21 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
                 {
                     $i              = $i + 2;
                 }
-                else if($strength == "bad" && $good_bad == "good")
+                else if($strength == "weak" && $good_bad == "good")
                 {
                     $i              = $i + 2;
                 }
-                else if($strength == "bad" && good_bad == "bad")
+                else if($strength == "weak" && good_bad == "bad")
                 {
                     $i              = $i + 0;
                 }
-            }
-            else
-            {
-                $i                   = $i + 2;
-            }
+            }    
         }
+        else
+        {
+            $i                   = $i + 2;
+        }
+        //echo "acalls";exit;
         return array("asp_strength_".$num => $i,"total_asp_".$num => $count);
     }
     protected function checkBanks($asc, $data)
@@ -448,7 +454,7 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
         }
         else 
         {
-            $gold_inv               = array("gold_jup" => "1");
+            $gold_inv               = array("gold_jup" => "0");
             $array                  = array_merge($array, $gold_inv);
         }
         if($sun_strength == "strong")
@@ -560,27 +566,29 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
             $moon                    = array("moon_sil_strength" => "4");
             $array                  = array_merge($array, $moon);
         }
-        else if($jup_strength == "strong")
-        {
-            $jup                    = array("jup_sil_strength" => "4");
-            $array                  = array_merge($array, $jup);
-        }
-        if($moon_strength == "neutral")
+        else if($moon_strength == "neutral")
         {
             $moon                    = array("moon_sil_strength" => "2");
             $array                  = array_merge($array, $moon);
         }
-        else if($jup_strength == "neutral")
+        else
         {
-            $jup                    = array("jup__sil_strength" => "2");
-            $array                  = array_merge($array, $jup);
-        }
-        if($moon_strength == "weak")
-        {
-            $moon                    = array("moon__sil_strength" => "1");
+            $moon                    = array("moon_sil_strength" => "1");
             $array                  = array_merge($array, $moon);
         }
-        else if($jup_strength == "weak")
+        if($jup_strength == "strong")
+        {
+            $jup                    = array("jup_sil_strength" => "4");
+            $array                  = array_merge($array, $jup);
+        }
+        
+        else if($jup_strength == "neutral")
+        {
+            $jup                    = array("jup_sil_strength" => "2");
+            $array                  = array_merge($array, $jup);
+        }
+        
+        else
         {
             $jup                    = array("jup_sil_strength" => "1");
             $array                  = array_merge($array, $jup);

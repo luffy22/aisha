@@ -2,6 +2,7 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 $details                    = $this->msg;
+//print_r($details);exit;
 $fees                       = $details[1]['amount'];
 $disc                       = $details[1]['disc_percent'];
 $disc_fees                  = $fees - number_format((float)($fees*$disc)/100,2);
@@ -36,7 +37,7 @@ $disc_fees                  = $fees - number_format((float)($fees*$disc)/100,2);
     <option value='life'>Life Report</option>
     <option value='career'>Career Report</option>
     <option value='marriage'>Marriage Report</option>
-    <option value='sadesati'>Sade-Sati Report</option>
+    <option value='finance'>Finance Report</option>
 </select>
 </div>
 <div class="mb-3"></div>
@@ -44,17 +45,17 @@ $disc_fees                  = $fees - number_format((float)($fees*$disc)/100,2);
 <input type="hidden" name="life_fees" id="life_fees" value="<?php echo $details[0]['amount'] ?>" />
 <input type="hidden" name="career_fees" id="career_fees" value="<?php echo $details[2]['amount'] ?>" />
 <input type="hidden" name="marriage_fees" id="marriage_fees" value="<?php echo $details[3]['amount'] ?>" />
-<input type="hidden" name="sadesati_fees" id="sadesati_fees" value="<?php echo $details[4]['amount'] ?>" />
+<input type="hidden" name="finance_fees" id="finance_fees" value="<?php echo $details[4]['amount'] ?>" />
 <input type="hidden" name="yearly_disc" id="yearly_disc" value="<?php echo $details[1]["disc_percent"] ?>" />
 <input type="hidden" name="life_disc" id="life_disc" value="<?php echo $details[0]['disc_percent'] ?>" />
 <input type="hidden" name="career_disc" id="career_disc" value="<?php echo $details[2]['disc_percent'] ?>" />
 <input type="hidden" name="marriage_disc" id="marriage_disc" value="<?php echo $details[3]['disc_percent'] ?>" />
-<input type="hidden" name="sadesati_disc" id="sadesati_disc" value="<?php echo $details[4]['disc_percent'] ?>" />
+<input type="hidden" name="finance_disc" id="finance_disc" value="<?php echo $details[4]['disc_percent'] ?>" />
 <input type="hidden" name="report_fees" id="report_fees" value="<?php echo $details[0]['amount'] ?>" />
 <input type="hidden" name="report_curr_code" id="report_curr_code" value="<?php echo $details[0]['curr_code'] ?>" />
 <input type="hidden" name="report_currency" id="report_currency" value="<?php echo $details[0]['currency']; ?>" />
 <input type="hidden" name="report_curr_full" id="report_curr_full" value="<?php echo $details[0]['curr_full']; ?>" />
-<input type="hidden" name="report_final_fees" id="report_final_fees" value="<?php echo $details[1]['amount'] ?>" />
+<input type="hidden" name="report_final_fees" id="report_final_fees" value="<?php echo $disc_fees; ?>" />
 <div class="mb-3"></div>
 <?php
     if($disc_fees == $fees)
@@ -117,12 +118,12 @@ function changefees3()
     var life_fees       = document.getElementById("life_fees").value;
     var career_fees     = document.getElementById("career_fees").value;
     var marriage_fees   = document.getElementById("marriage_fees").value;
-    var sadesati_fees   = document.getElementById("sadesati_fees").value;
+    var finance_fees    = document.getElementById("finance_fees").value;
     var yearly_disc     = document.getElementById("yearly_disc").value;
     var life_disc       = document.getElementById("life_disc").value;
     var career_disc     = document.getElementById("career_disc").value;
     var marriage_disc   = document.getElementById("marriage_disc").value;
-    var sadesati_disc   = document.getElementById("sadesati_disc").value;
+    var finance_disc    = document.getElementById("finance_disc").value;
     if(document.getElementById("select_report").value == "yearly")
     {
         var fees            = yearly_fees;
@@ -141,11 +142,11 @@ function changefees3()
         var disc            = parseFloat((career_fees*career_disc)/100).toFixed(2);
         var disc_fees       = career_fees - disc;
     }
-    else if(document.getElementById("select_report").value == "sadesati")
+    else if(document.getElementById("select_report").value == "finance")
     {
-        var fees            = sadesati_fees;
-        var disc            = parseFloat((sadesati_fees*sadesati_disc)/100).toFixed(2);
-        var disc_fees       = sadesati_fees - disc;
+        var fees            = finance_fees;
+        var disc            = parseFloat((finance_fees*finance_disc)/100).toFixed(2);
+        var disc_fees       = finance_fees - disc;
     }
     else if(document.getElementById("select_report").value == "marriage")
     {
