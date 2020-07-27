@@ -5,7 +5,7 @@ defined('_JEXEC') or die;  // No direct Access
 jimport('joomla.application.component.modelitem');
 class AstrologinModelAstroSearch extends JModelItem
 {
-    var $_total         = null;
+   /* var $_total         = null;
     var $_data          = null;
     var $_pagination    = null;
 
@@ -161,5 +161,5 @@ class AstrologinModelAstroSearch extends JModelItem
             $exp                      = array_merge($main_exp, $sub_exp);
             return $exp;
         }
-    }
+    }*/
 }
