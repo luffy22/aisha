@@ -64,7 +64,7 @@ $disc_fees                  = $fees-$disc;
 <input type="hidden" name="expert_curr_code" id="expert_curr_code" value="<?php echo $details[0]['curr_code'] ?>" />
 <input type="hidden" name="expert_currency" id="expert_currency" value="<?php echo $details[0]['currency']; ?>" />
 <input type="hidden" name="expert_curr_full" id="expert_curr_full" value="<?php echo $details[0]['curr_full']; ?>" />
-<input type="hidden" name="expert_final_fees" id="expert_final_fees" value="<?php echo $details[0]['amount'] ?>" />
+<input type="hidden" name="expert_final_fees" id="expert_final_fees" value="<?php echo $disc_fees; ?>" />
 <div class="mb-3"></div>
 <?php
     if($disc_fees == $fees)

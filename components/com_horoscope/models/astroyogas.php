@@ -498,7 +498,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                 }
                 else
                 {
-                    $nbry_planets[]         = $planet." is debilitated but does not do <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> in your horoscope.";
+                    $nbry_planets[]         = $planet.": No";
                 }
             }
         }
