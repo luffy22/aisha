@@ -166,6 +166,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $checkKalnidhi              = $this->checkKalnidhi($data['Ascendant'],$data['Mercury'],$data['Jupiter'],$data['Venus']);
         $checkAmsavatara            = $this->checkAmsavatara($data);
         $checkKusuma                = $this->checkKusuma($data);
+        $checkKurma                 = $this->checkKurma($planets);
         
         $array                      = array_merge($array, $user_data, $checkVish, $checkBudhAditya,
                                         $checkVipraChandal, $checkShrapit, $checkGrahan, $checkPitru,
@@ -177,7 +178,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                                         $checkVesi,$checkObyachari, $checkMahabhagya,$checkLaxmi, $checkGauri,
                                         $checkChapa,$checkSreenatha,$checkMallika,$checkSankha,$checkDaridra,
                                         $checkBheri,$checkMridanga,$checkGaja,$checkKalnidhi,
-                                        $checkAmsavatara,$checkKusuma);
+                                        $checkAmsavatara,$checkKusuma,$checkKurma);
         return $array;
     }
     protected function removeRetro($planet)
@@ -1758,6 +1759,121 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             $array      = array("kusuma_yoga"   => "No");
         }
         
+        return $array;
+    }
+    protected function checkKurma($data)
+    {
+        $asc            = $this->calcDetails($data['Ascendant']);
+        $third          = $this->getHouseSign($asc, 3);
+        $eleventh       = $this->getHouseSign($asc,11);
+       
+        $fifth          = $this->getHouseSign($asc, 5);
+        $sixth          = $this->getHouseSign($asc, 6);
+        $seventh        = $this->getHouseSign($asc, 7);
+        $array          = array();
+        $benefic        = array();
+        $exal_sign                  = array("Libra"=>"Saturn","Scorpio"=>"","Cancer"=>"Jupiter","Taurus"=>"Moon",
+                                            "Pisces"=>"Venus","Capricorn"=>"Mars","Virgo"=>"Mecury","Aries"=>"Sun");
+        $own_sign                   = array("Aries"=>"Mars", "Taurus"=>"Venus","Gemini"=>"Mercury",
+                                            "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
+                                            "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
+                                            "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
+        $friendly                   = array("Jupiter"=>"Aries,Scorpio,Leo","Venus"=>"Gemini,Cancer,Capricorn,Aquarius",
+                                            "Moon"=>"Aries,Leo,Libra,Sagittarius,Pisces","Mercury"=>"Taurus,Leo,Libra,Capricorn, Aquarius");
+        // checks the benefics in 5th house, 6th house and 7th house
+        $x              = 0;
+        $y              = 0;
+        foreach($data as $planet=>$dist)
+        {
+
+            $sign       = $this->calcDetails($dist);
+            if(($planet == "Jupiter" || $planet == "Venus" ||
+               $planet == "Mercury" || $planet == "Moon") && $sign == $fifth)
+            {
+                $pl_dist        = $this->convertDecimalToDegree(str_replace(":r","",$data[$planet]),"details");
+                $pl_nav         = $this->getNavamsha($planet, $sign, $pl_dist);
+                $pl_nav_sign    = $pl_nav[$planet.'_navamsha_sign'];
+                if($exal_sign[$pl_nav_sign] == $planet || $own_sign[$pl_nav_sign] == $planet ||
+                        (strpos($friendly[$planet], $pl_nav_sign) !== false))
+                {
+                    $x          = $x + 1;
+                }
+            }
+            else if(($planet == "Jupiter" || $planet == "Venus" ||
+               $planet == "Mercury" || $planet == "Moon") && $sign == $sixth)
+            {
+                $pl_dist        = $this->convertDecimalToDegree(str_replace(":r","",$data[$planet]),"details");
+                $pl_nav         = $this->getNavamsha($planet, $sign, $pl_dist);
+                $pl_nav_sign    = $pl_nav[$planet.'_navamsha_sign'];
+                if($exal_sign[$pl_nav_sign] == $planet || $own_sign[$pl_nav_sign] == $planet ||
+                        (strpos($friendly[$planet], $pl_nav_sign) !== false))
+                {
+                    $x          = $x + 1;
+                }
+ 
+            }
+            else if(($planet == "Jupiter" || $planet == "Venus" ||
+               $planet == "Mercury" || $planet == "Moon") && $sign == $seventh)
+            {
+                $pl_dist        = $this->convertDecimalToDegree(str_replace(":r","",$data[$planet]),"details");
+                $pl_nav         = $this->getNavamsha($planet, $sign, $pl_dist);
+                $pl_nav_sign    = $pl_nav[$planet.'_navamsha_sign'];
+                if($exal_sign[$pl_nav_sign] == $planet || $own_sign[$pl_nav_sign] == $planet ||
+                        (strpos($friendly[$planet], $pl_nav_sign) !== false))
+                {
+                    $x          = $x + 1;
+                }
+                
+            }
+            
+        }
+        if($x == "3")
+        {
+            $array              = array("kurma_yoga" => "There is <a href='https://www.astroisha.com/yogas/489-kurma-yoga' title='Kurma Yoga'>Kurma Yoga</a> formed in your horoscope.");
+        }
+        else
+        {
+            foreach($data as $planet=>$dist)
+            {
+                $sign       = $this->calcDetails($dist);
+                if(($planet == "Jupiter" || $planet == "Venus" ||
+                $planet == "Mercury" || $planet == "Moon") && $sign == $asc)
+                {
+                    if($exal_sign[$sign] == $planet || $own_sign[$sign] == $planet ||
+                            (strpos($friendly[$planet], $sign) !== false))
+                    {
+                        $y          = $y + 1;
+                    }
+                }
+                else if(($planet == "Jupiter" || $planet == "Venus" ||
+                $planet == "Mercury" || $planet == "Moon") && $sign == $third)
+                {
+                    if($exal_sign[$sign] == $planet || $own_sign[$sign] == $planet ||
+                            (strpos($friendly[$planet], $sign) !== false))
+                    {
+                        $y          = $y + 1;
+                    }
+                }
+                else if(($planet == "Jupiter" || $planet == "Venus" ||
+                $planet == "Mercury" || $planet == "Moon") && $sign == $eleventh)
+                {
+                    if($exal_sign[$sign] == $planet || $own_sign[$sign] == $planet ||
+                            (strpos($friendly[$planet], $sign) !== false))
+                    {
+                        $y          = $y + 1;
+                    }
+                }
+             
+            }
+        }
+        if($y == "3")
+        {
+            $array              = array("kurma_yoga" => "There is <a href='https://www.astroisha.com/yogas/489-kurma-yoga' title='Kurma Yoga'>Kurma Yoga</a> formed in your horoscope.");
+        }
+        else
+        {
+            $array              = array("kurma_yoga"   => "No");
+        }
         return $array;
     }
 }
