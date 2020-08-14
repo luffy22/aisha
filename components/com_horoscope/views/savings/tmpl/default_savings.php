@@ -84,7 +84,7 @@ invest all your money in one place and invest for long-term only.</p>
 $lord_2             = $this->data['lord_pl_2'];
 if($this->data['total_pl_2'] > 0)
 {
-    $pl_strength_2      = round($this->data['pl_strength_2']/$this->data['total_pl_2'], 2);
+    $pl_strength_2      = $this->data['pl_strength_2']/$this->data['total_pl_2'];
 }
  else 
 {
@@ -92,21 +92,21 @@ if($this->data['total_pl_2'] > 0)
 }
 if($this->data['total_asp_2'] > 0)
 {
-    $asp_strength_2     = round($this->data['asp_strength_2']/$this->data['total_asp_2'],2);
+    $asp_strength_2     = $this->data['asp_strength_2']/$this->data['total_asp_2'];
 }
  else 
 {
     $asp_strength_2     = "zero";
 }
-if($pl_strength_2 == "zero")
+if(strval($pl_strength_2) == "zero" && strval($asp_strength_2) !== "zero")
 {
     $total_strength         = $lord_2 + 2 + $asp_strength_2;
 }
-else if($asp_strength_2 == "zero")
+else if(strval($pl_strength_2) !== "zero" && strval($asp_strength_2) == "zero")
 {
     $total_strength         = $lord_2 + $pl_strength_2 + 2;
 }
-else if($pl_strength_2 == "zero" && $asp_strength_2 == "zero")
+else if(strval($pl_strength_2) == "zero" && strval($asp_strength_2) == "zero")
 {
     $total_strength         = $lord_2 + 2 + 2;
 }
@@ -114,12 +114,13 @@ else
 {
     $total_strength         = $lord_2+$pl_strength_2+$asp_strength_2;
 }
-//echo $total_strength;exit;
+//echo $lord_2." ".$pl_strength_2." ".$asp_strength_2;exit;
 ?>
+
 <div class="row">
 <div class="col-md-3 col-sm-3 col-xs-4">
 <?php
-if($total_strength >= 5)
+if($total_strength > 5)
 {
 ?>
 <img src="images/bank_yes.jpg" class="rounded float-left img-fluid" alt="bank" />
@@ -193,7 +194,7 @@ else
     <li class="list-group-item list-group-item-danger"><i class="far fa-times-circle"></i> 2nd house has bad aspects.</li>
 <?php
    }
-   if($total_strength >= 5)
+   if($total_strength > 5)
 {
 ?>
     <li class="list-group-item list-group-item-success"><i class="far fa-check-circle"></i> <strong>According to horoscope bank is a safe place of investment for you.</strong></li>
@@ -230,15 +231,16 @@ if($this->data['total_asp_4'] > 0)
 {
     $asp_strength_4     = "zero";
 }
-if($pl_strength_4 == "zero")
+
+if(strval($pl_strength_4) == "zero" && strval($asp_strength_4) !== "zero")
 {
-    $total_strength         = $lord_4 + 0+$asp_strength_4;
+    $total_strength         = $lord_4 +  2 +$asp_strength_4;
 }
-else if($asp_strength_4 == "zero")
+else if(strval($pl_strength_4) !== "zero" && strval($asp_strength_4) == "zero")
 {
-    $total_strength         = $lord_4+$pl_strength_4+0;
+    $total_strength         = $lord_4+$pl_strength_4 +2;
 }
-else if($pl_strength_4 == "zero" && $asp_strength_4 == "zero")
+else if(strval($asp_strength_4) == "zero" && strval($asp_strength_4) == "zero")
 {
     $total_strength         = $lord_4 + 2 + 2;
 }
@@ -252,7 +254,7 @@ else
 <div class="row">
 <div class="col-md-3 col-sm-3 col-xs-4">
 <?php
-if($total_strength >= 5)
+if($total_strength > 5)
 {
 ?>
 <img src="images/home_yes.jpg" class="rounded float-left img-fluid" alt="home" />
@@ -326,7 +328,7 @@ immovable asset but is a wonderful investment for long term.</li>
     <li class="list-group-item list-group-item-danger"><i class="far fa-times-circle"></i> 4th house has bad aspects.</li>
 <?php
    }
-   if($total_strength >= 5)
+   if($total_strength > 5)
 {
 ?>
     <li class="list-group-item list-group-item-success"><i class="far fa-check-circle"></i> <strong>According to horoscope investing in land and real estate is good for you.</strong></li>
@@ -361,15 +363,15 @@ if($this->data['total_asp_5'] > 0)
 {
     $asp_strength_5     = "zero";
 }
-if($pl_strength_5 == "zero")
+if(strval($pl_strength_5) == "zero" && strval($asp_strength_5) !== "zero")
 {
     $total_strength         = $lord_5 + 2+$asp_strength_5;
 }
-else if($asp_strength_5 == "zero")
+else if(strval($pl_strength_5) !== "zero" && strval($asp_strength_5) == "zero")
 {
     $total_strength         = $lord_5+$pl_strength_5+2;
 }
-else if($pl_strength_5 == "zero" && $asp_strength_5 == "zero")
+else if(strval($pl_strength_5) == "zero" && strval($asp_strength_5) == "zero")
 {
     $total_strength         = $lord_5 + 2 + 2;
 }
@@ -383,7 +385,7 @@ else
 <div class="row">
 <div class="col-md-3 col-sm-3 col-xs-4">
 <?php
-if($total_strength >= 5)
+if($total_strength > 5)
 {
 ?>
 <img src="images/stock_yes.jpg" class="rounded float-left img-fluid" alt="stock" />
@@ -457,7 +459,7 @@ else
     <li class="list-group-item list-group-item-danger"><i class="far fa-times-circle"></i> 5th house has bad aspects.</li>
 <?php
    }
-    if($total_strength >= 5)
+    if($total_strength > 5)
 {
 ?>
     <li class="list-group-item list-group-item-success"><i class="far fa-check-circle"></i> <strong>According to horoscope investing in stock markets is good for you.</strong></li>
@@ -492,15 +494,15 @@ if($this->data['total_asp_8'] > 0)
 {
     $asp_strength_8     = "zero";
 }
-if($pl_strength_8 == "zero")
+if(strval($pl_strength_8) == "zero" && strval($asp_strength_8) !== "zero")
 {
     $total_strength         = $lord_8 + 0+$asp_strength_8;
 }
-else if($asp_strength_8 == "zero")
+else if(strval($pl_strength_8) !== "zero" && strval($asp_strength_8) == "zero")
 {
     $total_strength         = $lord_8+$pl_strength_8+0;
 }
-else if($pl_strength_8 == "zero" && $asp_strength_8 == "zero")
+else if(strval($pl_strength_8) == "zero" && strval($asp_strength_8) == "zero")
 {
     $total_strength         = $lord_8 + 2 + 2;
 }
@@ -514,7 +516,7 @@ else
 <div class="row">
 <div class="col-md-3 col-sm-3 col-xs-4">
 <?php
-if($total_strength >= 5)
+if($total_strength > 5)
 {
 ?>
 <img src="images/treasure_yes.jpg" class="rounded float-left img-fluid" alt="treasure" />
@@ -588,7 +590,7 @@ else
     <li class="list-group-item list-group-item-danger"><i class="far fa-times-circle"></i> 8th house has bad aspects.</li>
 <?php
    }
- if($total_strength >= 5)
+ if($total_strength > 5)
 {
 ?>
     <li class="list-group-item list-group-item-success"><i class="far fa-check-circle"></i> <strong>According to horoscope keeping hidden assets is good for you.</strong></li>
@@ -818,7 +820,7 @@ else
         else if($jup_2_conn <= 2 && $jup_2_conn != 0)
         {
     ?>
-    <li class="list-group-item list-group-item list-group"><i class="far fa-check-circle"></i> Jupiter has weakinfluences 2nd house.</li>
+    <li class="list-group-item list-group-item list-group"><i class="far fa-check-circle"></i> Jupiter has weak influence 2nd house.</li>
         <?php
         }
         else

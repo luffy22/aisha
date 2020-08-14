@@ -230,7 +230,17 @@ function main_chart(a)
         var ctx     = ctx3;
     }
     ctx.font    ='10px Arial';
-    var name    = "Name: "+document.getElementById("fname").getAttribute('value');
+    var fname   = document.getElementById("fname").getAttribute('value');
+    var n       = fname.search(" ");
+    var d 		= fname.includes(" ");
+    if(d == true)
+    {
+		var name    = "Name: "+ fname.substring(0, n);
+	}
+	else
+	{
+		var name    = "Name: "+ fname;
+	}
     var gender  = "Gender: "+document.getElementById("gender").getAttribute('value');
     var dob     = "Date: "+document.getElementById("dob").getAttribute('value');
     var tob     = "Time: "+document.getElementById("tob").getAttribute('value');

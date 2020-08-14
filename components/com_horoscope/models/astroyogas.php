@@ -167,6 +167,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $checkAmsavatara            = $this->checkAmsavatara($data);
         $checkKusuma                = $this->checkKusuma($data);
         $checkKurma                 = $this->checkKurma($planets);
+        $checkDevendra              = $this->checkDevendra($data);
         
         $array                      = array_merge($array, $user_data, $checkVish, $checkBudhAditya,
                                         $checkVipraChandal, $checkShrapit, $checkGrahan, $checkPitru,
@@ -178,7 +179,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                                         $checkVesi,$checkObyachari, $checkMahabhagya,$checkLaxmi, $checkGauri,
                                         $checkChapa,$checkSreenatha,$checkMallika,$checkSankha,$checkDaridra,
                                         $checkBheri,$checkMridanga,$checkGaja,$checkKalnidhi,
-                                        $checkAmsavatara,$checkKusuma,$checkKurma);
+                                        $checkAmsavatara,$checkKusuma,$checkKurma,$checkDevendra);
         return $array;
     }
     protected function removeRetro($planet)
@@ -1873,6 +1874,34 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         else
         {
             $array              = array("kurma_yoga"   => "No");
+        }
+        return $array;
+    }
+    protected function checkDevendra($data)
+    {
+        $own_sign               = array("Aries"=>"Mars", "Taurus"=>"Venus","Gemini"=>"Mercury",
+                                        "Cancer"=>"Moon","Leo"=>"Sun","Virgo"=>"Mercury",
+                                        "Libra"=>"Venus","Scorpio"=>"Mars","Sagittarius"=>"Jupiter",
+                                        "Capricorn"=>"Saturn","Aquarius"=>"Saturn","Pisces"=>"Jupiter");
+        $asc_sign               = $data['Ascendant'];
+        $sec_sign               = $this->getHouseSign($asc_sign, 2);
+        $ten_sign               = $this->getHouseSign($asc_sign, 10);
+        $elev_sign              = $this->getHouseSign($asc_sign, 11);
+        
+        $asc_lord               = $own_sign[$asc_sign];
+        $sec_lord               = $own_sign[$sec_sign];
+        $ten_lord               = $own_sign[$ten_sign];
+        $elev_lord              = $own_sign[$elev_sign];
+        //echo $data[$asc_lord]." ".$elev_sign." ".$data[$elev_lord]." ".$asc_sign;exit;
+        //echo $data[$ten_lord]." ".$sec_sign." ".$data[$sec_lord]." ".$ten_sign;exit;
+        if(($data[$asc_lord] == $elev_sign && $data[$elev_lord] == $asc_sign)&&
+            ($data[$ten_lord] == $sec_sign && $data[$sec_lord] == $ten_sign))
+        {
+            $array              = array("deven_yoga" => "There is <a href='https://www.astroisha.com/yogas/492-deven-yoga' title='Devendra Yoga'>Devendra Yoga</a> formed in your horoscope.");
+        }
+        else
+        {
+            $array              = array("deven_yoga" => "no");
         }
         return $array;
     }

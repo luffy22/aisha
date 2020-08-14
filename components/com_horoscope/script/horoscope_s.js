@@ -194,7 +194,18 @@ function main_chart()
 {
     get_canvas();
     ctx.font    ='10px Arial';
-    var name    = "Name: "+document.getElementById("fname").getAttribute('value');
+    var fname   = document.getElementById("fname_sign").value('value');
+    alert(fname);
+    var n       = fname.search(" ");
+    var d 		= fname.includes(" ");
+    if(d == true)
+    {
+		var name    = "Name: "+ fname.substring(0, n);
+	}
+	else
+	{
+		var name    = "Name: "+ fname;
+	}
     var gender  = "Gender: "+document.getElementById("gender").getAttribute('value');
     var dob     = "Date: "+document.getElementById("dob").getAttribute('value');
     var tob     = "Time: "+document.getElementById("tob").getAttribute('value');
@@ -212,7 +223,17 @@ function asc_chart()
     var url     = window.location.href;
     get_canvas();
     ctx.font    ='10px Arial';
-    var name    = "Name: "+document.getElementById("fname_sign").getAttribute('value');
+    var fname   = document.getElementById("fname_sign").getAttribute('value');
+    var n       = fname.search(" ");
+    var d 		= fname.includes(" ");
+    if(d == true)
+    {
+		var name    = "Name: "+ fname.substring(0, n);
+	}
+	else
+	{
+		var name    = "Name: "+ fname;
+	}
     var gender  = "Gender: "+document.getElementById("gender_sign").getAttribute('value');
     var dob_tob = document.getElementById("dob_tob_sign").getAttribute('value');
     var dob     = "Date: "+dob_tob.substring(0,10);

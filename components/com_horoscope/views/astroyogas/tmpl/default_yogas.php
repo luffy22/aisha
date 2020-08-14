@@ -136,6 +136,7 @@ $document->setTitle(strtolower($name[0]).' astro yogas');
     <li class="list-group-item"><strong>Amsavatara Yoga: </strong><?php echo $this->data['amsavatara_yoga']; ?></li>
     <li class="list-group-item"><strong>Kusuma Yoga: </strong><?php echo $this->data['kusuma_yoga']; ?></li>
     <li class="list-group-item"><strong>Kurma Yoga: </strong><?php echo $this->data['kurma_yoga']; ?></li>
+    <li class="list-group-item"><strong>Devendra Yoga: </strong><?php echo $this->data['deven_yoga']; ?></li>
 </ul>
 <div class="mb-3"></div>
 <?php unset($this->data); ?>
