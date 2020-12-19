@@ -6,6 +6,8 @@ $menualias = JFactory::getApplication()->getMenu()->getActive()->alias;
 $date       = new DateTime();
 $date_mar   = new Datetime("03/15/2020");
 $date_apr   = new DateTime("04/16/2020");
+$date_oct   = new Datetime("10/21/2020");
+$date_nov   = new DateTime("11/19/2020");
 ?>
 <?php
     if($current  == JUri::base())
@@ -16,6 +18,15 @@ $date_apr   = new DateTime("04/16/2020");
             <div class="p-1 row alert alert-dark">
                 <div class="col-4"><img src="<?php echo JUri::base().'images/astro_bday.png' ?>" align="right"  /></div>
                 <div class="col-8 pt-4 lead">Astro Isha turns 6 on April 4th. We are giving away 20% off on all <a href="<?php echo JUri::base(); ?>order-report">orders</a> and <a href="<?php echo JUri::base(); ?>ask-question">reports</a> until April 15th.</p></a></div>          
+            </div>
+<?php
+        }
+        else if($date > $date_oct && $date < $date_nov)
+        {
+?>
+            <div class="p-1 row alert alert-dark">
+                <div class="col-4"><img src="<?php echo JUri::base().'images/astro_diwali.png' ?>" align="right"  /></div>
+                <div class="col-8 pt-4 lead">Diwali Bonanza. We are giving away 20% off on all <a href="<?php echo JUri::base(); ?>ask-question">orders</a> and <a href="<?php echo JUri::base(); ?>order-report">reports</a>.</div>          
             </div>
 <?php
         }

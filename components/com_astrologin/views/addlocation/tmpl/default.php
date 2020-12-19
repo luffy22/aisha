@@ -1,3 +1,14 @@
+<!--<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong><i class="fas fa-exclamation-circle"></i> Location Closed!</strong> Add Location is currently disabled. Please use nearest location available.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span></button></div>-->
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Kindly Note!</strong> This feature is to add location not available in list of location. Do not add a location if it is already there. If there are concerns with location accuracy 
+  send them to our <a href="mailto:consult@stroisha.com">contact email</a> 
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 <?php
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
@@ -34,13 +45,6 @@ if(isset($_GET['redirect']) && $_GET['redirect'] == "investwhere")
     $redirect = "investwhere";
 }
 ?>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>Kindly Note!</strong> This feature is to add location not available in list of location. Do not add a location if it is already there. If there are concerns with location accuracy 
-  send them to our <a href="mailto:consult@stroisha.com">contact email</a> 
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
 <h3 class="lead alert alert-dark">Add Location</h3>
 <form role="form" enctype="application/x-www-form-urlencoded" method="post" 
       action="<?php echo JRoute::_('index.php?option=com_astrologin&task=addlocation.addDetails'); ?>">
@@ -81,9 +85,9 @@ if(isset($_GET['redirect']) && $_GET['redirect'] == "investwhere")
             <option>W</option>
         </select>
     </div>
-    <div class="form-group">
+    <!--<div class="form-group">
         <button type="submit" class="btn btn-primary btn-lg" name="loc_submit"><i class="fas fa-plus"></i> Add</button>
-    </div>
+    </div>-->
 </form>
 <link rel="stylesheet" href="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/jquery-ui.min.css' ?>" type="text/css" />
 <script type="text/javascript" src="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/jquery-ui.min.js' ?>"></script>

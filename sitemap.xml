@@ -665,15 +665,11 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/transits/422-rahu-gemini-transit</loc>
-	<changefreq>monthly</changefreq>
-</url>
-<url>
-	<loc>https://www.astroisha.com/transits/424-ketu-sagittarius-transit</loc>
-	<changefreq>monthly</changefreq>
-</url>
-<url>
 	<loc>https://www.astroisha.com/transits/471-saturn-capricorn</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/transits/495-rahu-taurus-transit</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
@@ -1456,6 +1452,10 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/planet-signs/493-sun-taurus</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
   <loc>https://www.astroisha.com/yearly</loc>
   <changefreq>monthly</changefreq>
 </url>
@@ -1464,51 +1464,51 @@
   <changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/454-aries-2020</loc>
+	<loc>https://www.astroisha.com/yearly/496-aries-2021</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/455-taurus-2020</loc>
+	<loc>https://www.astroisha.com/yearly/497-taurus-2021</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/456-gemini-2020</loc>
+	<loc>https://www.astroisha.com/yearly/498-gemini-2021</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/457-cancer-2020</loc>
+	<loc>https://www.astroisha.com/yearly/499-cancer-2021</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/458-leo-2020</loc>
+	<loc>https://www.astroisha.com/yearly/500-leo-2021</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/459-virgo-2020</loc>
+	<loc>https://www.astroisha.com/yearly/501-virgo-2021</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/460-liba-2020</loc>
+	<loc>https://www.astroisha.com/yearly/502-libra-2021</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/461-scorpio-2020</loc>
+	<loc>https://www.astroisha.com/yearly/503-scorpio-2021</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/462-sagittarius-2020</loc>
+	<loc>https://www.astroisha.com/yearly/504-sagittarius-2021</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/463-capricorn-2020</loc>
+	<loc>https://www.astroisha.com/yearly/505-capricorn-2021</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/464-aquarius-2020</loc>
+	<loc>https://www.astroisha.com/yearly/506-aquarius-2021</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/465-pisces-2020</loc>
+	<loc>https://www.astroisha.com/yearly/507-pisces-2021</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
@@ -1725,6 +1725,10 @@
 </url>
 <url>
 	<loc>https://www.astroisha.com/finance/450-property-astrology</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/finance/494-stock-astrology</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>

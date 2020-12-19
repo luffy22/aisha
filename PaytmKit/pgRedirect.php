@@ -4,28 +4,20 @@ header("Cache-Control: no-cache");
 header("Expires: 0");
 
 // following files need to be included
-require_once("./lib/config_paytm_test.php");
-require_once("./lib/encdec_paytm_test.php");
+require_once("./lib/config_paytm.php");
+require_once("./lib/encdec_paytm.php");
 
 $checkSum = "";
 $paramList = array();
 
-$ORDER_ID = $_POST["ORDER_ID"];      
+$ORDER_ID = $_POST["ORDER_ID"];         
 $CUST_ID = $_POST["CUST_ID"];
 $INDUSTRY_TYPE_ID = $_POST["INDUSTRY_TYPE_ID"];
 $CHANNEL_ID = $_POST["CHANNEL_ID"];
 $TXN_AMOUNT = $_POST["TXN_AMOUNT"];
 $CALLBACK_URL   = $_POST["CALLBACK_URL"];
-$mobile         = $_POST['TXN_MOBILE'];
-if($mobile  == "0")
-{
-    $mobile     = 7777777777;
-}
-else
-{
-    $mobile     = $mobile;
-}
-
+$mobile     = 7777777777;
+//echo PAYTM_TXN_URL;exit;
 //echo $CALLBACK_URL;EXIT;
 //echo $TXN_AMOUNT;exit;
 
@@ -41,8 +33,11 @@ $paramList["MSISDN"] = $mobile; //Mobile number of customer
 $paramList["EMAIL"] = $CUST_ID;  //Email ID of customer
 $paramList["CALLBACK_URL"]  = $CALLBACK_URL;
 
+$paytmChecksum = PaytmChecksum::generateSignature($paramList, PAYTM_MERCHANT_KEY);
+$verifySignature = PaytmChecksum::verifySignature($paramList, PAYTM_MERCHANT_KEY, $paytmChecksum);
 //print_r($paramList);exit;
-$checkSum = getChecksumFromArray($paramList,PAYTM_MERCHANT_KEY);
+//$checkSum = getChecksumFromArray($paramList,PAYTM_MERCHANT_KEY);
+//echo $paytmChecksum;exit;
 //print_r($checkSum);exit;
 /*
 $paramList["MSISDN"] = $MSISDN; //Mobile number of customer
@@ -72,7 +67,7 @@ $paramList["IS_USER_VERIFIED"] = "YES"; //
 				echo '<input type="hidden" name="' . $name .'" value="' . $value . '">';
 			}
 			?>
-			<input type="hidden" name="CHECKSUMHASH" value="<?php echo $checkSum ?>">
+			<input type="hidden" name="CHECKSUMHASH" value="<?php echo $paytmChecksum; ?>">
 			</tbody>
 		</table>
 		<script type="text/javascript">

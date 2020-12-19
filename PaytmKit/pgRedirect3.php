@@ -33,7 +33,8 @@ $paramList["MSISDN"] = $mobile; //Mobile number of customer
 $paramList["EMAIL"] = $CUST_ID;  //Email ID of customer
 $paramList["CALLBACK_URL"]  = $CALLBACK_URL;
 //print_r($paramList);exit;
-$checkSum = getChecksumFromArray($paramList,PAYTM_MERCHANT_KEY);
+$paytmChecksum = PaytmChecksum::generateSignature($paramList, PAYTM_MERCHANT_KEY);
+$verifySignature = PaytmChecksum::verifySignature($paramList, PAYTM_MERCHANT_KEY, $paytmChecksum);
 //print_r($checkSum);exit;
 /*
 $paramList["MSISDN"] = $MSISDN; //Mobile number of customer
@@ -63,7 +64,7 @@ $paramList["IS_USER_VERIFIED"] = "YES"; //
 				echo '<input type="hidden" name="' . $name .'" value="' . $value . '">';
 			}
 			?>
-			<input type="hidden" name="CHECKSUMHASH" value="<?php echo $checkSum ?>">
+			<input type="hidden" name="CHECKSUMHASH" value="<?php echo $paytmChecksum; ?>">
 			</tbody>
 		</table>
 		<script type="text/javascript">
