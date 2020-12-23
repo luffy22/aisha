@@ -65,13 +65,13 @@ $disc_fees                  = $fees - number_format((float)($fees*$disc)/100,2);
     if($disc_fees == $fees)
     {
 ?>
-<div class="form-control" id="fees_type"><label>Fees:</label> <div id='fees_id'><?php echo $details[1]['amount']."&nbsp;".$details[1]['currency']." only" ?></div></div>
+<div class="form-control" id="fees_type"><label>Fees:</label> <div id='fees_id'><?php echo $details[1]['amount']." ".$details[1]['currency']."(".$details[0]['curr_full'].") only"; ?></div></div>
 <?php
     }
     else
     {
 ?>
-<div class="form-control" id="fees_type"><label>Fees:</label> <div id='fees_id'><?php echo "<s>".$details[1]["amount"]."&nbsp;".$details[1]['currency']."</s><br/>".$disc_fees."&nbsp;".$details[1]['currency']." only" ?></div></div>
+<div class="form-control" id="fees_type"><label>Fees:</label> <div id='fees_id'><?php echo "<s>".$details[1]['amount']." ".$details[1]['currency']."(".$details[0]['curr_full'].") only</s><br/>".$disc_fees."&nbsp;".$details[1]['currency']."(".$details[0]['curr_full'].") only" ?></div></div>
 
 <?php
     }
@@ -81,7 +81,7 @@ $disc_fees                  = $fees - number_format((float)($fees*$disc)/100,2);
     <label for='expert_choice' class='control-label'>Payment Type: </label>
     <div id="payment_type">
  <?php
-if($details[0]['currency'] == 'INR')
+if($details[0]['currency'] == 'INR' && $details['country_full'] == 'India')
 {
 ?>
     <div class="form-check">
@@ -169,13 +169,13 @@ function changefees3()
     var curr_full       = document.getElementById("report_curr_full").value;
     if(fees == disc_fees)
     {
-        document.getElementById("fees_id").innerHTML    = fees+"&nbsp;"+currency+" only"
+        document.getElementById("fees_id").innerHTML    = fees+"&nbsp;"+currency+"("+curr_full+") only"
         document.getElementById("report_final_fees").value    = fees;
     }
     else
     {
-        document.getElementById("fees_id").innerHTML    = "<s>"+fees+"&nbsp;"+currency+"</s><br/>"+
-                disc_fees+"&nbsp;"+currency+" only"
+        document.getElementById("fees_id").innerHTML    = "<s>"+fees+"&nbsp;"+currency+"("+curr_full+")"+"</s><br/>"+
+                disc_fees+"&nbsp;"+currency+"("+curr_full+") only"
         document.getElementById("report_final_fees").value    = disc_fees;
     }
     

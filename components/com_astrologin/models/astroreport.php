@@ -6,17 +6,20 @@ class AstrologinModelAstroReport extends JModelItem
 {
     public function getData()
     {
-        include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
-        $geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
-        //$ip                           = '117.196.1.11';
+        //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
+        //$geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
+        $ip                           = '117.196.1.11';
+        //$ip                             = '140.120.6.207';
         //$ip                             = '157.55.39.123';  // ip address
-        $ip                             = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
-        //$info                         = geoip_country_code_by_name($ip);
-        //$country                      = geoip_country_name_by_name($ip);
+        //$ip 							= '1.10.128.129';  // thai address
+        //$ip 							= '175.157.193.156'; // srilanka ip address
+        //$ip                             = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
+        $info                         = geoip_country_code_by_name($ip);
+        $country                      = geoip_country_name_by_name($ip);
         
-        $location               	= $geoip->lookupLocation($ip);
-        $info                   	= $location->countryCode;
-        $country                	= $location->countryName;
+        //$location               	= $geoip->lookupLocation($ip);
+        //$info                   	= $location->countryCode;
+        //$country                	= $location->countryName;
         $u_id           = '222';
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
@@ -43,7 +46,7 @@ class AstrologinModelAstroReport extends JModelItem
         $service3       = 'career';
         $service4       = 'marriage';
         $service5       = 'finance';
-        $country_code       = array("IN","US","UK","NZ","AU","SG","CA","RU");
+        $country_code       = array("IN","US","UK","NZ","AU","SG","CA","RU","TH");
         if($info=='FR'||$info=='DE'||$info=='IE'||$info=='NL'||$info=='CR'||$info=='BE'
                 ||$info=='GR'||$info=='IT'||$info=='PT'||$info=='ES'||$info=='MT'||$info=='LV'||$info=='TR')
         {

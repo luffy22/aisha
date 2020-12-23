@@ -8,15 +8,14 @@ class AstrologinModelAstroask extends JModelItem
     {
         //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
         //$geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
-        $ip                           = '117.196.1.11';
+        //$ip                           = '117.196.1.11';
+        $ip								= '1.10.128.129';
         //$ip                             = '140.120.6.207';
         //$ip                             = '157.55.39.123';  // ip address
-        //$ip 							= '1.10.128.129';  // thai address
-        //	$ip 							= '175.157.193.156'; // srilanka ip address
         //$ip                       		= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
         $info                         = geoip_country_code_by_name($ip);
         $country                      = geoip_country_name_by_name($ip);
-        
+        //echo $info;exit;
         //$location               	= $geoip->lookupLocation($ip);
         //$info                   	= $location->countryCode;
         //$country                	= $location->countryName;
@@ -60,7 +59,6 @@ class AstrologinModelAstroask extends JModelItem
         {
             $info       = "ROW";
         }
-
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
         $query          ->select($db->quoteName(array('a.country','a.amount','a.disc_percent','b.currency','b.curr_code','b.curr_full')))

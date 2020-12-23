@@ -74,7 +74,7 @@ $disc_fees                  = $fees-$disc;
     if($disc_fees == $fees)
     {
 ?>
-<div class="form-control" id="fees_type"><label>Fees:</label> <div id='fees_id'><?php echo $details[0]["amount"]."&nbsp;".$details[0]['currency']." only"; ?></div></div>
+<div class="form-control" id="fees_type"><label>Fees:</label> <div id='fees_id'><?php echo $details[0]["amount"]."&nbsp;".$details[0]['currency']."(".$details[0]['curr_full'].") only"; ?></div></div>
 
 <?php
     }
@@ -91,7 +91,7 @@ $disc_fees                  = $fees-$disc;
     <label for='expert_choice' class='control-label'>Payment Type: </label>
     <div id="payment_type">
  <?php
-if($details[0]['currency'] == 'INR')
+if($details[0]['currency'] == 'INR' && $details['country_full'] == 'India')
 {
 ?>
     <div class="form-check">
@@ -152,17 +152,18 @@ function changefees2()
     }
     var no_of_ques      = document.getElementById("select_ques").value;
     var curr_code       = document.getElementById("expert_currency").value;
+    var curr_full		= document.getElementById("expert_curr_full").value;
     if(fees == disc_fees)
     {
         var new_fees        = parseFloat(fees)*parseFloat(no_of_ques);
-        document.getElementById("fees_id").innerHTML    = new_fees+"&nbsp;"+curr_code+" only"
+        document.getElementById("fees_id").innerHTML    = new_fees+"&nbsp;"+curr_code+"("+curr_full+") only"
         document.getElementById("expert_final_fees").value    = new_fees.toFixed(2);
     }
     else
     {
         var fees            = parseFloat(fees)*parseFloat(no_of_ques);
         var new_fees        = parseFloat(disc_fees)*parseFloat(no_of_ques);
-        document.getElementById("fees_id").innerHTML    = "<s>"+fees+"&nbsp;"+curr_code+"</s>"+"<br/>"+new_fees+"&nbsp;"+curr_code+" only"
+        document.getElementById("fees_id").innerHTML    = "<s>"+fees+"&nbsp;"+curr_code+"("+curr_full+")"+"</s>"+"<br/>"+new_fees+"&nbsp;"+curr_code+"("+curr_full+") only"
         document.getElementById("expert_final_fees").value    = new_fees.toFixed(2);
     }
 }    
