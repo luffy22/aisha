@@ -85,9 +85,9 @@ if(isset($_GET['redirect']) && $_GET['redirect'] == "investwhere")
             <option>W</option>
         </select>
     </div>
-    <!--<div class="form-group">
+    <div class="form-group">
         <button type="submit" class="btn btn-primary btn-lg" name="loc_submit"><i class="fas fa-plus"></i> Add</button>
-    </div>-->
+    </div>
 </form>
 <link rel="stylesheet" href="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/jquery-ui.min.css' ?>" type="text/css" />
 <script type="text/javascript" src="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/jquery-ui.min.js' ?>"></script>
