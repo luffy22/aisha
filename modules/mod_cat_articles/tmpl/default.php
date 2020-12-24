@@ -29,7 +29,7 @@ $images                 = json_decode($item->images);
 <div class="col">
 	<a href="<?php echo $item->link; ?>" title="<?php echo $item->title; ?>" class="content_links">
 		<span>
-			<img src="<?php echo htmlspecialchars($images->image_intro); ?>"  alt="<?php echo $item->title; ?>" height="50px" width="50px"/><br/><?php echo $item->title; ?>
+			<img src="<?php echo htmlspecialchars($images->image_intro); ?>"  alt="<?php echo $item->title; ?>" height="75px" width="75px" /><br/><?php echo $item->title; ?>
 		</span>
 	</a>
 </div>
