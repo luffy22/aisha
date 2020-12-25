@@ -13,9 +13,7 @@ JHtml::_('behavior.keepalive');
 JHtml::_('behavior.formvalidator');
 
 ?>
-Hell With Life
-
-<div class="reset-complete<?php echo $this->pageclass_sfx; ?>">
+<div class="reset<?php echo $this->pageclass_sfx; ?>">
 	<?php if ($this->params->get('show_page_heading')) : ?>
 		<div class="page-header">
 			<h1>
@@ -23,20 +21,17 @@ Hell With Life
 			</h1>
 		</div>
 	<?php endif; ?>
-	<form action="<?php echo JRoute::_('index.php?option=com_users&task=reset.complete'); ?>" method="post" class="form-validate form-horizontal well">
+	<p>Please enter the email address for your account. A verification code will be sent to you. Once you have received the verification code, you will be able to choose a new password for your account.</p>
+	<form id="user-registration" action="<?php echo JRoute::_('index.php?option=com_users&task=reset.request'); ?>" method="post" class="form-validate form-horizontal well">
 		<div class="form-group">
-		<label for"jform_username">Username*</label>
-		<input type="text" name="jform[username]" id="jform_username" value="" class="required form-text" size="30" required="" aria-required="true">
-		</div>
-		<div class="form-group">
-		<label for"jform_token">Verification Code*</label>
-		<input type="text" name="jform[token]" id="jform_token" value="" class="required form-text" size="32" required="" aria-required="true">
-		</div>
-		<div class="form-group">
+		<label for"jform_email">Email Address*</label>
+		<input type="text" name="jform[email]" id="jform_email" value="" class="validate-username form-control required" size="30" required="" aria-required="true">
+	</div>
+	<div class="form-group">	
 		<button type="submit" class="btn btn-primary validate">
 			<?php echo JText::_('JSUBMIT'); ?>
 		</button>
-		</div>
+	</div>
 		<?php echo JHtml::_('form.token'); ?>
 	</form>
 </div>
