@@ -57,7 +57,7 @@ else if(isset($_GET['payment']) && $_GET['payment']=="fail")
      ?>
     </li>
     <li class="list-group-item">Gender: <?php echo $this->order->gender; ?></li>
-    <li class="list-group-item">Date Of Birth: <?php echo $date->format('d-m-Y'); ?></li>
+    <li class="list-group-item">Date Of Birth: <?php echo $date->format('dS F Y'); ?></li>
     <li class="list-group-item">Time Of Birth: <?php echo $date->format('h:i:s a');?></li>
     <li class="list-group-item">Place Of Birth: <?php echo $this->order->pob; ?></li>
     <li class="list-group-item">Answer Type: <?php if($this->order->order_type=="short"){echo "Short Answer";}else{echo "Detailed Report";} ?></li>

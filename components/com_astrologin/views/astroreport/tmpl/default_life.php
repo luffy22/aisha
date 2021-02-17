@@ -76,7 +76,7 @@ $order_type             = $_GET['order_type'];
     <button class="btn btn-success" type="submit">Pay Now</button>
 </div>
 </form>
-<script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+<script src="https://cdn.tiny.cloud/1/rjxia1mcuetdoiri6l19shyroh2q8rjrz7hdwighah58zqgr/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
  <script>
    tinymce.init({
     selector: '#query_career, #query_marriage, #query_explain',

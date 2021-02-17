@@ -36,7 +36,7 @@ if(isset($_GET['payment']) && $_GET['payment']=="success")
      ?>
     </li>
     <li class="list-group-item">Gender: <?php echo $this->details->gender; ?></li>
-    <li class="list-group-item">Date Of Birth: <?php echo $date->format('d-m-Y'); ?></li>
+    <li class="list-group-item">Date Of Birth: <?php echo $date->format('dS F Y'); ?></li>
     <li class="list-group-item">Time Of Birth: <?php echo $date->format('h:i:s a');?></li>
     <li class="list-group-item">Place Of Birth: <?php echo $this->details->pob; ?></li>
     <li class="list-group-item">Order Type: <?php if($this->details->order_type=="career"){echo "Career Report";}
@@ -48,7 +48,14 @@ if(isset($_GET['payment']) && $_GET['payment']=="success")
   </ul>
   <div class="mb-4"></div>
 <div class="container"><div class="row">
+<?php
+if($this->details->order_type=="life")
+{
+?>
 <div class="col-4 text-left"><a href="<?php echo Juri::base().'readforecast?order='.$order.'&ref='.$refemail; ?>"><i class="fas fa-arrow-left"></i> Previous</a></div>
+<?php
+}
+?>
 <div class="col-4 text-center"><a href="<?php echo Juri::base().'read-report?order='.$order.'&ref='.$refemail; ?>"><i class="fas fa-home"></i> Report Home</a></div>
 <div class="col-4 text-right"><a href="<?php echo Juri::base().'astroqueries?order='.$order.'&ref='.$refemail; ?>"><i class="fas fa-arrow-right"></i> Next</a></div>
 </div></div>
