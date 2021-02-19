@@ -17,7 +17,7 @@ $date_nov   = new DateTime("11/19/2020");
 ?>
             <div class="p-1 row alert alert-dark">
                 <div class="col-4"><img src="<?php echo JUri::base().'images/astro_bday.png' ?>" align="right"  /></div>
-                <div class="col-8 pt-4 lead">Astro Isha turns 6 on April 4th. We are giving away 20% off on all <a href="<?php echo JUri::base(); ?>order-report">orders</a> and <a href="<?php echo JUri::base(); ?>ask-question">reports</a> until April 15th.</p></a></div>          
+                <div class="col-8 pt-4 lead">Astro Isha turns 7 on April 4th. We are giving away 15% off on all <a href="<?php echo JUri::base(); ?>order-report">orders</a> and <a href="<?php echo JUri::base(); ?>ask-question">reports</a> until April 15th.</p></a></div>          
             </div>
 <?php
         }

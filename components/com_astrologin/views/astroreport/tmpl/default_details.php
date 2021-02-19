@@ -8,7 +8,7 @@ function isMobileDevice() {
 }
 ?>
 <div class="progress" style="height:25px">
-  <div class="progress-bar bg-success" style="width:25%;height:25px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Choose</div>
+  <div class="progress-bar bg-success" style="width:25%;height:25px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Contents</div>
   <div class="progress-bar" style="width:25%;height:25px" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Details</div>
   <div class="progress-bar" style="width:25%;height:25px" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">Question(s)</div>
   <div class="progress-bar" style="width:25%;height:25px" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Pay</div>
@@ -40,13 +40,13 @@ function isMobileDevice() {
         if(isMobileDevice()){
             //Your content or code for mobile devices goes here
     ?>    
-        <input type="date" name="report_dob" class="form-control" placeholder="25/03/1984" min="1900-01-01" max="2030-12-31" />
+        <input type="date" name="report_dob" class="form-control" placeholder="25/03/1984" min="1900-01-01" max="2099-12-31" />
     <?php
         }
         else
         {
     ?>
-        <input type="date" id="report_dob" name="report_dob" class="form-control" placeholder="25/03/1984" min="1900-01-01" max="2030-12-31" />
+        <input type="date" id="report_dob" name="report_dob" class="form-control" placeholder="25/03/1984" min="1900-01-01" max="2099-12-31" />
     <?php
         }
     ?>
@@ -93,6 +93,7 @@ $(function()
         });
       },
       minLength: 3,
+     
       open: function() {
         $('#ques_pob').removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
          $(".ui-autocomplete").css("z-index", 1000);
@@ -103,4 +104,66 @@ $(function()
    })
    
 });
+function changefees2()
+{
+
+    var long_ans        = document.getElementById("long_ans_fees").value;
+    var short_ans        = document.getElementById("short_ans_fees").value;
+    if(document.getElementById("ques_type1").checked)
+    {
+        var fees        = long_ans;
+    }
+    else if(document.getElementById("ques_type2").checked)
+    {
+        var fees        = short_ans;
+    }
+    else
+    {
+        var fees        = document.getElementById("expert_fees").value;
+    }
+    var no_of_ques      = document.getElementById("select_ques").value;
+    var curr_code       = document.getElementById("expert_curr_code").value;
+    var currency        = document.getElementById("expert_currency").value;
+    var curr_full       = document.getElementById("expert_curr_full").value;
+    var new_fees        = parseFloat(fees)*parseFloat(no_of_ques);
+    document.getElementById("fees_id").innerHTML    = new_fees+"<html>&nbsp;</html>"+curr_code+"("+currency+"-"+curr_full+")"
+    document.getElementById("expert_final_fees").value    = new_fees.toFixed(2);
+}
+function changefees3()
+{
+    var yearly_fees     = document.getElementById("yearly_fees").value;
+    var life_fees       = document.getElementById("life_fees").value;
+    var career_fees     = document.getElementById("career_fees").value;
+    var marriage_fees   = document.getElementById("marriage_fees").value;
+    var sadesati_fees   = document.getElementById("sadesati_fees").value;
+    if(document.getElementById("select_report").value == "yearly")
+    {
+        var fees        = yearly_fees;
+    }
+    else if(document.getElementById("select_report").value == "life")
+    {
+        var fees        = life_fees;
+    }
+    else if(document.getElementById("select_report").value == "career")
+    {
+        var fees        = career_fees;
+    }
+    else if(document.getElementById("select_report").value == "sadesati")
+    {
+        var fees        = sadesati_fees;
+    }
+    else if(document.getElementById("select_report").value == "marriage")
+    {
+        var fees        = marriage_fees;
+    }
+    else
+    {
+        var fees        = document.getElementById("report_fees").value;
+    }
+    var curr_code       = document.getElementById("report_curr_code").value;
+    var currency        = document.getElementById("report_currency").value;
+    var curr_full       = document.getElementById("report_curr_full").value;
+    document.getElementById("fees_id").innerHTML    = fees+"<html>&nbsp;</html>"+curr_code+"("+currency+"-"+curr_full+")"
+    document.getElementById("report_final_fees").value    = fees;
+}
 </script>

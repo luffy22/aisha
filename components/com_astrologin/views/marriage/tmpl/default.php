@@ -33,23 +33,31 @@ $disc_fees                  = $fees - number_format((float)($fees*$disc)/100,2);
     <button type='button' class='btn btn-secondary btn-danger' data-dismiss='modal'>Close</button></div>
 </div></div></div>
 </div></div>
+<div class='card border-dark mb-3' id="card-duration">
+<div class='card-body'>
+	<strong>Order Processing Time</strong>- Minimum 5-6 working days(Monday-Friday). You will be notified via email if 
+	there is more delay likely. Max 30 days after which full refund provided.
+</div></div>
 <ul class="list-group">
-  <li class="list-group-item list-group-item-dark"><strong>Marriage Report Contents</strong></li>
-  <li class="list-group-item">Marriage House analysis with diagram of placements and aspects</li>
-  <li class="list-group-item">12th house(house of intimacy) analysis with diagram of placement and aspects</li>
-  <li class="list-group-item">Navamsha Chart(D-9) chart analysis with diagram</li>
-  <li class="list-group-item">Love or Arranged Marriage. What works in your favor</li>
-  <li class="list-group-item">Marriage Periods. Likely time when marriage can happen</li>
-  <li class="list-group-item">Physical Features. Only a rough idea.</li>
-  <li class="list-group-item">Spouse Family Background. Likely nature of in-laws</li>
-  <li class="list-group-item">Likely place of meeting. Only a rough idea</li>
-  <li class="list-group-item">What attracts spouse towards you. Based on placement of Jupiter/Venus</li>
-  <li class="list-group-item">Mangal Dosha if any</li>
-  <li class="list-group-item">Divorce Chances if any</li>
-  <li class="list-group-item">Marriage in various dasha periods</li>
-  <li class="list-group-item">Children if any</li>
-  <li class="list-group-item">Remedial Measures</li>
-  <li class="list-group-item">Answer to your query</li>
+	<li class="list-group-item list-group-item-dark"><strong>Marriage Report Contents</strong></li>
+	<li class="list-group-item">Marriage House analysis with diagram of placements and aspects</li>
+	<li class="list-group-item">12th house(house of intimacy) analysis with diagram of placement and aspects</li>
+	<li class="list-group-item">Navamsha Chart(D-9) chart analysis with diagram</li>
+	<li class="list-group-item">Mangal Dosha if any</li>
+	<li class="list-group-item">Divorce Chances if any</li>
+	<li class="list-group-item">Remedial Measures</li>
+	<li class="list-group-item">Answer to your query</li>
+	<li class="list-group-item list-group-item-dark">For married couples</li>
+	<li class="list-group-item">5th house(house of progeny) for analysis of children with diagram of placements and aspects</li>
+	<li class="list-group-item">Joint Finances</li>
+	<li class="list-group-item">Marriage in various dasha periods</li>
+	<li class="list-group-item list-group-item-dark">For singles</li>
+	<li class="list-group-item">Love or Arranged Marriage</li>
+	<li class="list-group-item">Likely Marriage Periods</li>
+	<li class="list-group-item">Physical Features. Rough idea</li>
+	<li class="list-group-item">Spouse Family Background. Likely nature of in-laws</li>
+	<li class="list-group-item">Likely place of meeting. Rough idea</li>
+	<li class="list-group-item">What attracts spouse towards you. Based on placement of Jupiter/Venus</li>
 </ul>
 <div class="mb-3"></div>
 <form name="get_report" method="post" enctype="application/x-www-form-urlencoded" action="<?php echo JRoute::_('?option=com_astrologin&task=astroreport.submitReport') ?>">

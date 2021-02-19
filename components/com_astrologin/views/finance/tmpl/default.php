@@ -18,7 +18,7 @@ $disc_fees                  = $fees - number_format((float)($fees*$disc)/100,2);
   <div class="progress-bar" style="width:25%;height:25px" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Pay</div>
 </div>
 <div class="mb-3"></div>
-<div class='card border-primary mb-3 text-center' id="info_expert">
+<div class='card border-dark mb-3 text-center' id="info_expert">
 <div class='card-block'>
 <h3><a title='Click to get more info' href='#' data-toggle='modal' data-target='#astroinfo'><img src=<?php echo JURi::base() ?>images/profiles/<?php echo $details['img_new_name'] ?> height='50px' width='50px' title="<?php echo $details['img_name'];?>" /><?php echo $details['name'] ?></a></h3>
 <div class='modal fade' id='astroinfo' tabindex='-1' role='dialog' aria-hidden='true' aria-labelledby='astrolabel'>
@@ -39,20 +39,20 @@ $disc_fees                  = $fees - number_format((float)($fees*$disc)/100,2);
 	there is more delay likely. Max 30 days after which full refund provided.
 </div></div>
 <ul class="list-group">
-  <li class="list-group-item list-group-item-dark"><strong>Career Report Contents</strong></li>
-  <li class="list-group-item">Career House in Main Chart(D-1 Chart). Analysis with diagram of placements and aspects</li>
-  <li class="list-group-item">Career via Dashamsha Chart(D-10 Chart). Analysis with diagram of placements and aspects</li>
-  <li class="list-group-item">Business or Job. What suits you better according to horoscope</li>
-  <li class="list-group-item">Income House in Main Chart. Analysis with diagram of placements and aspects</li>
-  <li class="list-group-item">Savings House in Main Chart. Analysis with diagram of placements and aspects</li>
-  <li class="list-group-item">Places for investment</li>
-  <li class="list-group-item">Career progression in various dasha periods</li>
+  <li class="list-group-item list-group-item-dark"><strong>Finance Report Contents</strong></li>
+  <li class="list-group-item">Income House(11th house) in Main Chart. Analysis with diagram of placements and aspects</li>
+  <li class="list-group-item">Savings House(2nd house) in Main Chart. Analysis with diagram of placements and aspects</li>
+  <li class="list-group-item">Land Assets(4th house) in Main Chart. Analysis with diagram of placements and aspects</li>
+  <li class="list-group-item">Stocks and Gambling(5th house) in Main Chart. Analysis with diagram of placements and aspects</li>
+  <li class="list-group-item">Hidden Assets(8th house) via Main Chart. Analysis with diagram of placements and aspects</li>
+  <li class="list-group-item">Short analysis of Hora Chart also known as Wealth Chart(D-2 Chart)</li>
+  <li class="list-group-item">Short analysis of vimshottari dasha period for finances</li>
   <li class="list-group-item">Answer to your query</li>
 </ul>
 <div class="mb-3"></div>
 <form name="get_report" method="post" enctype="application/x-www-form-urlencoded" action="<?php echo JRoute::_('?option=com_astrologin&task=astroreport.submitReport') ?>">
 <div class="mb-3"></div>
-<input type="hidden" name="select_report" id="select_report" value ="career" />
+<input type="hidden" name="select_report" id="select_report" value ="finance" />
 <input type="hidden" name="report_fees" id="report_fees" value="<?php echo $details[0]['amount'] ?>" />
 <input type="hidden" name="report_curr_code" id="report_curr_code" value="<?php echo $details[0]['curr_code'] ?>" />
 <input type="hidden" name="report_currency" id="report_currency" value="<?php echo $details[0]['currency']; ?>" />
