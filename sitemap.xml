@@ -657,11 +657,23 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/transits</loc>
+	<loc>https://www.astroisha.com/featured/486-eclipse-anarchy</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/transits/452-jupiter-sag</loc>
+	<loc>https://www.astroisha.com/featured/508-goodyogas-life</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/featured/511-astro-spirituality</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/featured/513-success-nakshatra</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/transits</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
@@ -670,6 +682,10 @@
 </url>
 <url>
 	<loc>https://www.astroisha.com/transits/495-rahu-taurus-transit</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/transits/509-jupiter-capricorn-transit</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
@@ -909,6 +925,10 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/yogas/512-makuta-yoga</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
 	<loc>https://www.astroisha.com/case</loc>
 	<changefreq>monthly</changefreq>
 </url>
@@ -978,6 +998,10 @@
 </url>
 <url>
 	<loc>https://www.astroisha.com/case/480-zuckerberg-horoscope</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/case/510-trump-loss</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
@@ -1456,6 +1480,10 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/planet-signs/516-sun-gemini</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
   <loc>https://www.astroisha.com/yearly</loc>
   <changefreq>monthly</changefreq>
 </url>
@@ -1648,6 +1676,10 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/relationship/515-twelfth-fiery</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
   <loc>https://www.astroisha.com/career</loc>
   <changefreq>monthly</changefreq>
 </url>
@@ -1729,6 +1761,10 @@
 </url>
 <url>
 	<loc>https://www.astroisha.com/finance/494-stock-astrology</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/finance/514-finance-remedies</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>

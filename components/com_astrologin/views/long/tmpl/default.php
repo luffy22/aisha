@@ -33,6 +33,11 @@ $disc_fees                  = $fees-$disc;
     <button type='button' class='btn btn-secondary btn-danger' data-dismiss='modal'>Close</button></div>
 </div></div></div>
 </div></div>
+<div class='card border-dark mb-3' id="card-duration">
+<div class='card-body'>
+	<strong>Order Processing Time</strong>- Minimum 5-6 working days(Monday-Friday). You will be notified via email if 
+	there is more delay likely. Max 30 days after which full refund provided.
+</div></div>
 <form name="ask_expert" method="post" enctype="application/x-www-form-urlencoded" action="<?php echo JRoute::_('?option=com_astrologin&task=astroask.askExpert') ?>">
 <input type="hidden" name="expert_uname" id="expert_uname" value="<?php echo $details['username'] ?>" /><div class="mb-2"></div>
 <div class="card">
