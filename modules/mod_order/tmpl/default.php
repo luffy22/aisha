@@ -38,7 +38,7 @@ $date_nov   = new DateTime("11/19/2020");
                 if($order[$i]['on_home'] == "yes" && ($order[$i]['service_for_charge'] == "long"||
                         $order[$i]['service_for_charge'] == "short"))
                 {
-                    $type       = $order[$i]['service_for_charge'].'_ans';
+                    $type       = $order[$i]['service_for_charge'];
                     $amount     = $order[$i]['amount'];
                     $discount   = round(($order[$i]['amount']*$order[$i]['disc_percent'])/100,2);
                     $disc_price = $order[$i]['amount'] - $discount;
@@ -49,7 +49,7 @@ $date_nov   = new DateTime("11/19/2020");
     ?>
                     <div class="p-1 row alert alert-dark">
                         <div class="col-4"><img src="<?php echo JUri::base().'images/'.$order[$i]['img_for_text'] ?>" align="right"  /></div>
-                        <div class="col-8 pt-4"><a href="<?php echo JUri::base().'ask-question?uname=luffy22&ques=1&type='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode; ?>"><p class="lead"> <?php echo $order[$i]['text_before']." ".$amount."&nbsp;".$currency; ?> only                </p></a></div>          
+                        <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-ans' ?>"><p class="lead"> <?php echo $order[$i]['text_before']." ".$amount."&nbsp;".$currency; ?> only                </p></a></div>          
                     </div>
     <?php
                     }
@@ -58,7 +58,7 @@ $date_nov   = new DateTime("11/19/2020");
      ?>
                     <div class="p-1 row alert alert-dark">
                         <div class="col-4"><img src="<?php echo JUri::base().'images/'.$order[$i]['img_for_text'] ?>" align="right"  /></div>
-                        <div class="col-8 pt-4"><a href="<?php echo JUri::base().'ask-question?uname=luffy22&ques=1&type='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode; ?>"><p class="lead"> <?php echo $order[$i]['text_before']." <s>".$order[$i]['amount']."&nbsp;".$currency."</s> "; ?>
+                        <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-ans' ?>"><p class="lead"> <?php echo $order[$i]['text_before']." <s>".$order[$i]['amount']."&nbsp;".$currency."</s> "; ?>
                         <br/><?php echo $disc_price." ".$currency; ?> only
                     </p></a></div>          
                     </div>
@@ -83,7 +83,7 @@ $date_nov   = new DateTime("11/19/2020");
     <div class="p-1 row alert alert-dark">
 
         <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[$i]['img_for_text'] ?>" align="right"  /></div>
-        <div class="col-8 pt-4"><a href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>"><p class="lead"><?php echo $order[$i]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only
+        <div class="col-8 pt-4"><a href="<?php echo JUri::base().$order[$i]['service_for_charge'].'-report' ?>"><p class="lead"><?php echo $order[$i]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only
             </p></a></div>          
     </div>
     <?php
@@ -94,7 +94,7 @@ $date_nov   = new DateTime("11/19/2020");
     <div class="p-1 row alert alert-dark">
 
         <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[$i]['img_for_text'] ?>" align="right"  /></div>
-        <div class="col-8 pt-4"><a href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>"><p class="lead"><?php echo $order[$i]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
+        <div class="col-8 pt-4"><a href="<?php echo JUri::base().$order[$i]['service_for_charge'].'-report' ?>"><p class="lead"><?php echo $order[$i]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
                 <br/><?php echo number_format((float)$disc_price,2)." ".$currency; ?> only
             </p></a></div>          
     </div>
@@ -149,7 +149,7 @@ $date_nov   = new DateTime("11/19/2020");
 ?>
             <div class="p-1 row alert alert-dark">
                 <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[5]['img_for_text'] ?>" align="right"  /></div>
-                <div class="col-8 pt-4"><a href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>"><p class="lead"><?php echo $order[5]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only
+                <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-report' ?>"><p class="lead"><?php echo $order[5]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only
                     </p></a></div>          
             </div>
 <?php
@@ -159,7 +159,7 @@ $date_nov   = new DateTime("11/19/2020");
  ?>
             <div class="p-1 row alert alert-dark">
                 <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[5]['img_for_text'] ?>" align="right"  /></div>
-                <div class="col-8 pt-4"><a href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>"><p class="lead"><?php echo $order[5]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
+                <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-report' ?>"><p class="lead"><?php echo $order[5]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
                     <br/><?php echo number_format((float)$disc_price,2)." ".$currency; ?> only
                     </p></a></div>          
     </div>
@@ -179,7 +179,7 @@ $date_nov   = new DateTime("11/19/2020");
 ?>
             <div class="p-1 row alert alert-dark">
                 <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[4]['img_for_text'] ?>" align="right"  /></div>
-                <div class="col-8 pt-4"><a href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>"><p class="lead"><?php echo $order[4]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only
+                <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-report' ?>"><p class="lead"><?php echo $order[4]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only
                     </p></a></div>          
             </div>
 <?php
@@ -189,7 +189,7 @@ $date_nov   = new DateTime("11/19/2020");
  ?>
             <div class="p-1 row alert alert-dark">
                 <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[4]['img_for_text'] ?>" align="right"  /></div>
-                <div class="col-8 pt-4"><a href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>"><p class="lead"><?php echo $order[4]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
+                <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-report' ?>"><p class="lead"><?php echo $order[4]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
                     <br/><?php echo number_format((float)$disc_price,2)." ".$currency; ?> only
                     </p></a></div>          
     </div>
@@ -197,7 +197,8 @@ $date_nov   = new DateTime("11/19/2020");
         }
     }
     else if($menualias == "horoscope" || $menualias == "mainchart" || $menualias == "astroyogas"
-            || $menualias == "yogas" || $menualias == "planet-bhavas" || $menualias == "transits")
+            || $menualias == "yogas" || $menualias == "planet-bhavas" || $menualias == "transits"||$menualias == "ascendant" || $menualias == "nakshatra" ||
+            $menualias == "planets")
     {
         $type       = $order[2]['service_for_charge'];
         $amount     = $order[2]['amount'];
@@ -210,7 +211,7 @@ $date_nov   = new DateTime("11/19/2020");
 ?>
             <div class="p-1 row alert alert-dark">
                 <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[2]['img_for_text'] ?>" align="right"  /></div>
-                <div class="col-8 pt-4"><a href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>"><p class="lead"><?php echo $order[2]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only
+                <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-report' ?>"><p class="lead"><?php echo $order[2]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only
                     </p></a></div>          
             </div>
 <?php
@@ -220,17 +221,16 @@ $date_nov   = new DateTime("11/19/2020");
  ?>
             <div class="p-1 row alert alert-dark">
                 <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[2]['img_for_text'] ?>" align="right"  /></div>
-                <div class="col-8 pt-4"><a href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>"><p class="lead"><?php echo $order[2]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
+                <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-report' ?>"><p class="lead"><?php echo $order[2]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
                     <br/><?php echo number_format((float)$disc_price,2)." ".$currency; ?> only
                     </p></a></div>          
     </div>
 <?php
         }
     }
-    else if($menualias == "ascendant" || $menualias == "nakshatra" ||
-            $menualias == "planets" || $menualias == "signs" || $menualias == "house")
+    else if($menualias == "signs" || $menualias == "house")
     {
-        $type       = $order[0]['service_for_charge']."_ans";
+        $type       = $order[0]['service_for_charge'];
         $amount     = $order[0]['amount'];
         $discount   = round(($order[0]['amount']*$order[0]['disc_percent'])/100,2);
         $disc_price = $amount - $discount;
@@ -241,7 +241,7 @@ $date_nov   = new DateTime("11/19/2020");
 ?>
         <div class="p-1 row alert alert-dark">
             <div class="col-4"><img src="<?php echo JUri::base().'images/'.$order[0]['img_for_text'] ?>" align="right"  /></div>
-            <div class="col-8 pt-4"><a href="<?php echo JUri::base().'ask-question?uname=luffy22&ques=1&type='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode; ?>"><p class="lead"> <?php echo $order[0]['text_before']." ".$amount."&nbsp;".$currency; ?> only                </p></a></div>          
+            <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-ans'; ?>"><p class="lead"> <?php echo $order[0]['text_before']." ".$amount."&nbsp;".$currency; ?> only                </p></a></div>          
         </div>
 <?php
         }
@@ -250,7 +250,7 @@ $date_nov   = new DateTime("11/19/2020");
 ?>
         <div class="p-1 row alert alert-dark">
             <div class="col-4"><img src="<?php echo JUri::base().'images/'.$order[0]['img_for_text'] ?>" align="right"  /></div>
-            <div class="col-8 pt-4"><a href="<?php echo JUri::base().'ask-question?uname=luffy22&ques=1&type='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode; ?>"><p class="lead"> <?php echo $order[0]['text_before']." <s>".$order[0]['amount']."&nbsp;".$currency."</s> "; ?>
+            <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-ans'; ?>"><p class="lead"> <?php echo $order[0]['text_before']." <s>".$order[0]['amount']."&nbsp;".$currency."</s> "; ?>
             <br/><?php echo $disc_price." ".$currency; ?> only
         </p></a></div>          
         </div>
@@ -270,7 +270,7 @@ $date_nov   = new DateTime("11/19/2020");
 ?>
             <div class="p-1 row alert alert-dark">
                 <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[6]['img_for_text'] ?>" align="right"  /></div>
-                <div class="col-8 pt-4"><a href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>"><p class="lead"><?php echo $order[6]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only
+                <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-report' ?>"><p class="lead"><?php echo $order[6]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only
                     </p></a></div>          
             </div>
 <?php
@@ -280,20 +280,21 @@ $date_nov   = new DateTime("11/19/2020");
  ?>
             <div class="p-1 row alert alert-dark">
                 <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[6]['img_for_text'] ?>" align="right"  /></div>
-                <div class="col-8 pt-4"><a href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>"><p class="lead"><?php echo $order[6]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
+                <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-report' ?>"><p class="lead"><?php echo $order[6]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
                     <br/><?php echo number_format((float)$disc_price,2)." ".$currency; ?> only
                     </p></a></div>          
     </div>
 <?php
         }
     }
-    else if($menualias == "ask-question" || $menualias == "order-report")
+    else if($menualias == "ask-question" || $menualias == "order-report" || $menualias =="marriage-report" || $menualias == "life-report" ||
+            $menualias == "career-report" || $menualias == "finance-report" || $menualias == "long-ans" || $menualias == "short-ans")
     {
         
     }
     else
     {
-        $type       = $order[1]['service_for_charge']."_ans";
+        $type       = $order[1]['service_for_charge'];
         $amount     = $order[1]['amount'];
         $discount   = round(($order[1]['amount']*$order[1]['disc_percent'])/100,2);
         $disc_price = $amount - $discount;
@@ -304,7 +305,7 @@ $date_nov   = new DateTime("11/19/2020");
 ?>
         <div class="p-1 row alert alert-dark">
             <div class="col-4"><img src="<?php echo JUri::base().'images/'.$order[1]['img_for_text'] ?>" align="right"  /></div>
-            <div class="col-8 pt-4"><a href="<?php echo JUri::base().'ask-question?uname=luffy22&ques=1&type='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode; ?>"><p class="lead"> <?php echo $order[1]['text_before']." ".$amount."&nbsp;".$currency; ?> only</p></a></div>          
+            <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-ans'; ?>"><p class="lead"> <?php echo $order[1]['text_before']." ".$amount."&nbsp;".$currency; ?> only</p></a></div>          
         </div>
 <?php
         }
@@ -313,7 +314,7 @@ $date_nov   = new DateTime("11/19/2020");
 ?>
         <div class="p-1 row alert alert-dark">
             <div class="col-4"><img src="<?php echo JUri::base().'images/'.$order[1]['img_for_text'] ?>" align="right"  /></div>
-            <div class="col-8 pt-4"><a href="<?php echo JUri::base().'ask-question?uname=luffy22&ques=1&type='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode; ?>"><p class="lead"> <?php echo $order[1]['text_before']." <s>".$order[1]['amount']."&nbsp;".$currency."</s> "; ?>
+            <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-ans' ?>"><p class="lead"> <?php echo $order[1]['text_before']." <s>".$order[1]['amount']."&nbsp;".$currency."</s> "; ?>
             <br/><?php echo $disc_price." ".$currency; ?> only
         </p></a></div>          
         </div>
