@@ -111,6 +111,10 @@ else
     <input class="form-check-input" type='radio' name='expert_choice' id='expert_choice7' value='paypal' checked />
     <label for="expert_choice7" class="form-check-label"> <i class='fab fa-paypal'></i> Paypal</label>
     </div>
+    <div class="form-check">
+    <input class="form-check-input" type='radio' name='expert_choice' id='expert_choice8' value='crypto' />
+    <label for="expert_choice7" class="form-check-label"> <i class="fab fa-bitcoin"></i> Crypto</label>
+    </div>
 <?php
 }
 ?>

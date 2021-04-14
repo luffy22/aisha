@@ -8,8 +8,8 @@ class AstrologinModelAstroask extends JModelItem
     {
         //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
         //$geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
-        $ip                           = '117.196.1.11';
-        //$ip                             = '140.120.6.207';
+        //$ip                           = '117.196.1.11';
+        $ip                             = '140.120.6.207';
         //$ip                             = '157.55.39.123';  // ip address
         //$ip 							= '1.10.128.129';  // thai address
         //	$ip 							= '175.157.193.156'; // srilanka ip address
@@ -92,7 +92,7 @@ class AstrologinModelAstroask extends JModelItem
         $no_of_ques         = $details['no_of_ques'];
         $ques_type         = $details['ques_type'];
         $pay_mode           = $details['pay_mode'];
-
+        //echo $pay_mode;exit;
         $date               = new DateTime($dob);
         $date               ->setTime($tob[0],$tob[1],"00");
         $dob_tob            = strtotime($date->format('Y-m-d H:i:s'));
@@ -202,20 +202,10 @@ class AstrologinModelAstroask extends JModelItem
 		{
 		   $app->redirect(JUri::base().'vendor/paypal.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees); 
 		}
-		else if($pay_mode=="phonepe"||$pay_mode=="bhim"||$pay_mode=="cheque"
-				||$pay_mode=="direct"||$pay_mode=="paypalme"||$pay_mode=="directint")
+		else if($pay_mode=="crypto")
 		{
-		   $query1           ->clear();
-		   $query1              ->select($db->quoteName(array('a.UniqueID','a.expert_id','a.no_of_ques','a.name','a.email',
-									'a.gender','a.dob_tob','a.pob','a.pay_mode','a.order_type','a.fees','a.currency','a.paid','c.username')))
-						 ->select($db->quoteName('c.name','expertname'))  
-						 ->select($db->quoteName('c.email','expertemail'))
-							->from($db->quoteName('#__question_details','a'))
-							->join('RIGHT', $db->quoteName('#__users', 'c').' ON ('.$db->quoteName('c.id').' = '.$db->quoteName('a.expert_id').')')
-							->where($db->quoteName('a.UniqueID').'='.$db->quote($token));
-			$db                  ->setQuery($query1);
-			$data                = $db->loadObject();
-			$this->sendMail($data);
+                    //echo "calls";exit;
+		   $app->redirect(JUri::base().'coinpayment/pay_coin2.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees); 
 		}
         
     }

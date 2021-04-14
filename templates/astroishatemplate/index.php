@@ -7,7 +7,17 @@ $user            = JFactory::getUser();
 $this->language  = $doc->language;
 $this->direction = $doc->direction;
 $title              = $doc->title;
-session_start();
+$var             = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong><i class="fas fa-exclamation-circle"></i> Delays Possible!</strong> Due to corona virus epidemic and lockdowns in place your orders can be delayed. We apologize 
+  for the inconvenience caused.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span></button></div>';
+/**if(!isset($_SESSION['var']))
+{
+    $_SESSION['var']    = $var;
+    echo $_SESSION['var'];
+}*/
+
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
@@ -53,6 +63,12 @@ window.cookieconsent.initialise({
   </script>
 </head>
 <body>
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Orders Closed!</strong> Due to unforseen circumstances all orders on this website are closed. We apologize for the inconvenience caused.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 <div id="fb-root"></div>
 <div class="container-fluid">
     <h3><a id="display-4" href="<?php echo JUri::base(); ?>" title="Navigate to Home Page"><img src="<?php echo JUri::base(); ?>/logo.png" title="Click to navigate to Home Page" class="img-fluid" />Astro Isha</a></h3>

@@ -77,8 +77,7 @@ $("#ques_dob").datepicker({yearRange: "1900:2050",changeMonth: true,
 });
 $(function() 
 {
-    alert("calls");
-   var result       = "";
+    var result       = "";
    $("#ques_pob").autocomplete({
       source: 
        function(request, response) {
