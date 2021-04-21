@@ -20,29 +20,29 @@ class ModOrderHelper
 {
     public function showOrder()
     {
-        //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
-        //$geoip              = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
-        $ip               = '117.196.1.11';
+        include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
+        $geoip              = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
+        //$ip               = '117.196.1.11';
         //$ip                 = '157.55.39.123';  // ip address
         //$ip                 = '180.215.160.173';
-        //$ip                 = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
+        $ip                 = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
 
-        $info               = geoip_country_code_by_name($ip);
-        $country            = geoip_country_name_by_name($ip);
-        //$location           = $geoip->lookupLocation($ip);
-        //$info               = $location->countryCode;
-        //$country            = $location->countryName;
+        //$info               = geoip_country_code_by_name($ip);
+        //$country            = geoip_country_name_by_name($ip);
+        $location           = $geoip->lookupLocation($ip);
+        $info               = $location->countryCode;
+        $country            = $location->countryName;
         $db                 = JFactory::getDbo();
         $query1             = $db->getQuery(true);
         $u_id               = '222';
         //echo $u_id;exit;
-        $service1           = 'long_ans_fees';
-        $service2           = 'short_ans_fees';
+        $service1           = 'long';
+        $service2           = 'short';
         $service3           = 'life';
         $service4           = 'yearly';
         $service5           = 'career';
         $service6           = 'marriage';
-        $service7           = 'sade-sati';
+        $service7           = 'finance';
         if($info == "US")
         {
             $query1          ->select($db->quoteName(array('a.country','a.amount','b.currency','b.curr_code','b.curr_full','a.service_for_charge','a.avail_disc','a.disc_percent','a.on_home','a.text_before','a.img_for_text')))
