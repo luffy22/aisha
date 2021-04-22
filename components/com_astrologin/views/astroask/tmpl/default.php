@@ -107,14 +107,55 @@ if($details[0]['currency'] == 'INR' && $details['country_full'] == 'India')
 else
 {
 ?>
-    <div class="form-check">
+    <div class="form-group">
+      <select id="inputState" name="expert_choice" id="expert_choice7" class="form-control">
+        <option value="paypal" selected>Paypal</option>
+        <option value="BTC">Bitcoin</option>
+        <option value="ETH">Ethereum</option>
+        <option value="DOGE">Dogecoin</option>
+        <option value="XRP">Ripple</option>
+        <option value="USDT">Tether</option>
+        <option value="ADA">Cardano</option>
+        <option value="LTC">Litecoin</option>
+        <option value="XMR">Monero</option>
+        <option value="DOT">Polkadot</option>
+        <option value="UNI">Uniswap</option>
+        <option value="XLM">Stellar</option>
+        <option value="TRX">Tron</option>
+        <option value="DASH">Dash</option>
+        <option value="DGB">DigiByte</option>
+        <option value="BCH">Bitcoin Cash</option>
+        <option value="ETC">Ethereum Classic</option>
+      </select>
+    </div>
+    <!--<div class="form-check form-check-inline">
     <input class="form-check-input" type='radio' name='expert_choice' id='expert_choice7' value='paypal' checked />
     <label for="expert_choice7" class="form-check-label"> <i class='fab fa-paypal'></i> Paypal</label>
     </div>
-    <div class="form-check">
-    <input class="form-check-input" type='radio' name='expert_choice' id='expert_choice8' value='crypto' />
-    <label for="expert_choice7" class="form-check-label"> <i class="fab fa-bitcoin"></i> Crypto</label>
+    <div class="form-check form-check-inline">
+    <input class="form-check-input" type='radio' name='expert_choice' id='expert_choice8' value='bitcoin' />
+    <label for="expert_choice7" class="form-check-label"> <i class="fab fa-bitcoin"></i> Bitcoin(BTC)</label>
     </div>
+    <div class="form-check form-check-inline">
+    <input class="form-check-input" type='radio' name='expert_choice' id='expert_choice9' value='ethereum' />
+    <label for="expert_choice7" class="form-check-label"> <i class="fab fa-ethereum"></i> Ethereum(ETH)</label>
+    </div>
+    <div class="form-check form-check-inline">
+    <input class="form-check-input" type='radio' name='expert_choice' id='expert_choice9' value='doge' />
+    <label for="expert_choice7" class="form-check-label"> Ripple(XRP)</label>
+    </div>
+    <div class="form-check form-check-inline">
+    <input class="form-check-input" type='radio' name='expert_choice' id='expert_choice9' value='doge' />
+    <label for="expert_choice7" class="form-check-label"> Ripple(XRP)</label>
+    </div>
+    <div class="form-check form-check-inline">
+    <input class="form-check-input" type='radio' name='expert_choice' id='expert_choice9' value='tether' />
+    <label for="expert_choice7" class="form-check-label"> Tether(USDT)</label>
+    </div>
+    <div class="form-check form-check-inlin">
+    <input class="form-check-input" type='radio' name='expert_choice' id='expert_choice9' value='cardano' />
+    <label for="expert_choice7" class="form-check-label"> Cardano(ADA)</label>
+    </div>-->
 <?php
 }
 ?>

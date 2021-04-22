@@ -118,6 +118,7 @@ class UsersViewProfile extends JViewLegacy
 		$app   = JFactory::getApplication();
 		$menus = $app->getMenu();
 		$user  = JFactory::getUser();
+      
 		$title = null;
 
 		// Because the application sets a default page title,

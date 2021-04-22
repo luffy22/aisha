@@ -63,12 +63,6 @@ window.cookieconsent.initialise({
   </script>
 </head>
 <body>
-		<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>Orders Closed!</strong> Due to unforseen circumstances all orders on this website are closed. We apologize for the inconvenience caused.
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
 <div id="fb-root"></div>
 <div class="container-fluid">
     <h3><a id="display-4" href="<?php echo JUri::base(); ?>" title="Navigate to Home Page"><img src="<?php echo JUri::base(); ?>/logo.png" title="Click to navigate to Home Page" class="img-fluid" />Astro Isha</a></h3>

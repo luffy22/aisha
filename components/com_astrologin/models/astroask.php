@@ -189,6 +189,7 @@ class AstrologinModelAstroask extends JModelItem
 		$currency            = $row['currency'];
 		$fees                = $row['fees'];
 		$pay_mode            = $row['pay_mode'];
+                //echo $pay_mode;exit;
 		//echo $pay_mode;exit;
 		if($pay_mode == "razorpay")
 		{
@@ -202,10 +203,13 @@ class AstrologinModelAstroask extends JModelItem
 		{
 		   $app->redirect(JUri::base().'vendor/paypal.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees); 
 		}
-		else if($pay_mode=="crypto")
+		else if($pay_mode=="BTC"||$pay_mode=="ETH"||$pay_mode=="DOGE"||$pay_mode=="XRP"||
+                        $pay_mode=="USDT"||$pay_mode=="ADA"||$pay_mode=="LTC"||
+                        $pay_mode=="DOT"||$pay_mode=="UNI"||$pay_mode=="XMR"||
+                        $pay_mode=="XLM"||$pay_mode=="TRX"||$pay_mode=="DASH"||
+                        $pay_mode=="DGB"||$pay_mode=="BCH"||$pay_mode=="ETC")
 		{
-                    //echo "calls";exit;
-		   $app->redirect(JUri::base().'coinpayment/pay_coin2.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees); 
+		   $app->redirect(JUri::base().'coinpayment/pay_coin2.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees.'&pay_mode='.$pay_mode); 
 		}
         
     }
