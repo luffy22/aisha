@@ -22,3 +22,7 @@
 2021-04-22T09:25:11+00:00	INFO ::1	joomlafailure	Username and password do not match or you do not have an account yet.
 2021-04-22T09:52:39+00:00	INFO ::1	joomlacanceled	
 2021-04-22T11:13:12+00:00	INFO ::1	joomlacanceled	
+2021-04-23T05:14:06+00:00	INFO ::1	joomlacanceled	
+2021-04-23T09:45:26+00:00	INFO ::1	cookiefailure	Empty password not allowed.
+2021-04-23T09:45:27+00:00	INFO ::1	cookiefailure	Empty password not allowed.
+2021-04-23T12:02:50+00:00	INFO ::1	cookiefailure	Empty password not allowed.
