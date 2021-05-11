@@ -414,7 +414,7 @@ class AstrologinModelAstroask extends JModelItem
         $body       .= "<p><strong>Details Of Your Order Are As Below: </strong></p>";
         $body       .= "<p>Order ID: ".$data->UniqueID."</p>";
 
-        if($data->order_type == "short_ans")
+        if($data->order_type == "short")
         {
                     $body 			.= "<p>Answer Type: Short Answer</p>";
         }
@@ -435,20 +435,18 @@ class AstrologinModelAstroask extends JModelItem
         $body           .= "<p>Fees: ".$data->fees."&nbsp;".$data->currency."</p>";
         $body           .= "<p>Payment Via: ".ucfirst($data->pay_mode)."</p>";
 
-       if($data->pay_mode=="paytm"||$data->pay_mode=="razorpay")
+       if(($data->pay_mode=="paytm"||$data->pay_mode=="razorpay")&&($data->order_type == "short"))
         {
             $body       .= "<p>Payment Status: Success</p>";
-            $body       .= "<p>Payment Id: ".$data->track_id."</p>";
-            $body       .= "<br/><p><strong>Please keep this email as reference. Alternatively you can also print this email for future reference.</strong></p>";
-            $body       .= "<p><strong>In case the order is not completed in ten working days you would be refunded full amount back into your bank account.</strong></p><br/>";
+            $body       .= "<br/><p>Please keep this email as reference. Alternatively you can also print this email for future reference.</p>";
+            $body       .= "<p>Your order will be completed in 3-5 working day(Monday-Friday).</p>";
+            $body       .= "<p>You will be notified via email if there is any more delay. And if order is not finished in 30 days your amount will be refunded back into your account.</p>";
         }
         else if($data->pay_mode=="paypal")
         {
-            $body       .= "<p>Payment Status: Success</p>";
-            $body       .= "<p>Payment Id: ".$data->paypal_id."</p>";
             $body       .= "<p>Payment Status: ".$data->status."</p>";
-            $body       .= "<br/><p><strong>Please keep this email as reference. Alternatively you can also print this email for future reference.</strong></p>";
-            $body       .= "<p><strong>In case the order is not completed in ten working days you would be refunded full amount back into your bank account.</strong></p><br/>";
+             $body       .= "<br/><p>Please keep this email as reference. Alternatively you can also print this email for future reference.</p>";
+            $body       .= "<p>Your order will be completed in 3-5 working day(Monday-Friday).</p>";
         }
         else
         {
