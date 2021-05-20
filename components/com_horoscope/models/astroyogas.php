@@ -79,14 +79,36 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         //print_r($user_data);exit;
         $fname          = $user_data['fname'];
         $gender         = $user_data['gender'];
+        $chart          = $user_data['chart_type'];
         $dob_tob        = $user_data['dob_tob'];
-        $pob            = $user_data['pob'];
-        $lat            = $user_data['lat'];
-        $lon            = $user_data['lon'];
-        $timezone       = $user_data['timezone'];
+        if(array_key_exists("timezone", $user_data))
+        {      
+            $pob            = $user_data['pob'];
+            $lat            = $user_data['lat'];
+            $lon            = $user_data['lon'];
+            $timezone       = $user_data['timezone'];
+        }
+        else
+        {
+            $lat            = $user_data['latitude'];
+            $lon            = $user_data['longitude'];
+            if($user_data['state'] == "" && $user_data['country'] == "")
+            {
+                $pob    = $user_data['city'];
+            }
+            else if($user_data['state'] == "" && $user_data['country'] != "")
+            {
+                $pob    = $user_data['city'].", ".$user_data['country'];
+            }
+            else
+            {
+                $pob    = $user_data['city'].", ".$user_data['state'].", ".$user_data['country'];
+            }
+            $timezone   = $user_data['tmz_words'];
+        }
         
         $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
-        
+        //print_r($date);exit;
         $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
         $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
         //echo $timestamp." ".$offset;exit;
@@ -113,6 +135,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $asc                        = $this->getAscendant($user_data);
         $planets                    = $this->getPlanets($output);
         $planets                    = array_merge($asc,$planets);
+        //print_r($planets);exit;
         $data                       = array();
         foreach($planets as $key => $planet)
         {
@@ -120,6 +143,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             $array                  = array($key => $planet_sign);
             $data                   = array_merge($data, $array);
         }
+        //print_r($data);exit;
         $checkVish                  = $this->checkVishYoga($planets['Moon'],$planets['Saturn']);
         $checkBudhAditya            = $this->checkBudhAditya($planets['Sun'],$planets['Mercury']);
         $checkVipraChandal          = $this->checkVipraChandal($data['Jupiter'],$data['Rahu']);
@@ -159,6 +183,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $checkSreenatha             = $this->checkSreenatha($data['Ascendant'], $data['Mercury']);
         $checkMallika               = $this->checkMallika($data);
         $checkSankha                = $this->checkSankha($data);
+                              
         $checkDaridra               = $this->checkDaridra($data);
         $checkBheri                 = $this->checkBheri($data);
         $checkMridanga              = $this->checkMridanga($planets);
@@ -168,7 +193,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $checkKusuma                = $this->checkKusuma($data);
         $checkKurma                 = $this->checkKurma($planets);
         $checkDevendra              = $this->checkDevendra($data);
-        
+
         $array                      = array_merge($array, $user_data, $checkVish, $checkBudhAditya,
                                         $checkVipraChandal, $checkShrapit, $checkGrahan, $checkPitru,
                                         $checkKaalSarpa,$checkNBRY, $checkAngaraka,$checkVRY, $checkParivartana, 
@@ -180,6 +205,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                                         $checkChapa,$checkSreenatha,$checkMallika,$checkSankha,$checkDaridra,
                                         $checkBheri,$checkMridanga,$checkGaja,$checkKalnidhi,
                                         $checkAmsavatara,$checkKusuma,$checkKurma,$checkDevendra);
+        //print_r($array);exit;
         return $array;
     }
     protected function removeRetro($planet)
@@ -1255,6 +1281,19 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
     }
     protected function checkMahabhagyaYoga($user_data, $data)
     {
+        if(array_key_exists("timezone", $user_data))
+        {    
+            $pob            = $user_data['pob'];
+            $lat            = $user_data['lat'];
+            $lon            = $user_data['lon'];
+            $timezone       = $user_data['timezone'];
+        }
+        else
+        {
+            $lat            = $user_data['latitude'];
+            $lon            = $user_data['longitude'];
+            $timezone       = $user_data['tmz_words'];
+        }
         $asc_sign           = $data['Ascendant'];
         $sun_sign           = $data['Sun'];
         $moon_sign          = $data['Moon'];
@@ -1264,9 +1303,8 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $dob                = new DateTime($user_data['dob_tob']);
         $date               = $dob->format('d.m.Y');
         $tob                = $dob->format('d-m-Y H:i:s');
-        $tmz                = $user_data['timezone'];
-        $lat                = $user_data['lat'];
-        $lon                = $user_data['lon'];
+        $tmz                = $timezone;
+        
         $checkSunTimes      = $this->getSunTimings($date, $tmz, $lat, $lon, 0, 3);
         $sun_rise           = $checkSunTimes['sun_rise_2'];
         $sun_set            = $checkSunTimes['sun_set_2'];
@@ -1292,6 +1330,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         {
             $array          = array("mahabhagya_yoga" => "No");
         }
+        //print_r($array);exit;
         return $array;
     }
     protected function checkLaxmi($data)

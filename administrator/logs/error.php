@@ -28,3 +28,4 @@
 2021-04-23T12:02:50+00:00	INFO ::1	cookiefailure	Empty password not allowed.
 2021-05-04T06:08:13+00:00	INFO ::1	joomlacanceled	
 2021-05-09T13:10:16+00:00	INFO ::1	joomlafailure	Username and password do not match or you do not have an account yet.
+2021-05-16T02:28:05+00:00	INFO ::1	cookiefailure	Empty password not allowed.

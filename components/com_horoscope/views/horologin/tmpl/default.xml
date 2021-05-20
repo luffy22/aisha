@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+        <layout title="Save Horoscope">
+                <message>
+                        Login Users can save horoscope data
+                </message>
+        </layout>
+</metadata>

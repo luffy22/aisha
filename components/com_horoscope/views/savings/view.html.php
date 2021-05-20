@@ -15,8 +15,8 @@ class HoroscopeViewSavings extends JViewLegacy
     {
         if (count($errors   = $this->get('Errors')))
         {
-			JError::raiseError(500, implode('<br />', $errors));
-			return false;
+            JError::raiseError(500, implode('<br />', $errors));
+            return false;
         }
         if(isset($_GET['chart']))
         {

@@ -79,14 +79,37 @@ class HoroscopeModelCareer extends HoroscopeModelMangalDosha
         //print_r($user_data);exit;
         $fname          = $user_data['fname'];
         $gender         = $user_data['gender'];
+        $chart          = $user_data['chart_type'];
         $dob_tob        = $user_data['dob_tob'];
-        $pob            = $user_data['pob'];
-        $lat            = $user_data['lat'];
-        $lon            = $user_data['lon'];
-        $timezone       = $user_data['timezone'];
+
+        if(array_key_exists("timezone", $user_data))
+        {    
+            $pob            = $user_data['pob'];
+            $lat            = $user_data['lat'];
+            $lon            = $user_data['lon'];
+            $timezone       = $user_data['timezone'];
+        }
+        else
+        {
+            $lat            = $user_data['latitude'];
+            $lon            = $user_data['longitude'];
+            if($user_data['state'] == "" && $user_data['country'] == "")
+            {
+                $pob    = $user_data['city'];
+            }
+            else if($user_data['state'] == "" && $user_data['country'] != "")
+            {
+                $pob    = $user_data['city'].", ".$user_data['country'];
+            }
+            else
+            {
+                $pob    = $user_data['city'].", ".$user_data['state'].", ".$user_data['country'];
+            }
+            $timezone   = $user_data['tmz_words'];
+        }
         
         $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
-        
+        //print_r($date);exit;
         $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
         $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
         //echo $timestamp." ".$offset;exit;
@@ -116,11 +139,12 @@ class HoroscopeModelCareer extends HoroscopeModelMangalDosha
         $tenth_house                = $this->checkPlanetsInHouse($data, 10);
         $tenth_asp                  = $this->checkAspectsOnHouse($data, 10);
         $asc_sign                   = strtolower($this->calcDetails($data["Ascendant"]))."-asc";
-        $tenth_sign                 = $this->getHouseSign($asc_sign, 10);
+        $asc_sign1                  = $this->calcDetails($data["Ascendant"]);
+        $tenth_sign                 = $this->getHouseSign($asc_sign1, 10);
         $career_sign                = $this->checkCareerViaTenthSign($asc_sign); // check career via 10th sign of an ascendant
         $career_planets             = $this->checkCareerViaPlanets($tenth_house);  // check career via planets in 10th house
         $array                      = array_merge($array, $user_data, $career_sign,$career_planets);
-        
+        //print_r($array);exit;
         return $array;
     }
     protected function checkCareerViaTenthSign($sign)

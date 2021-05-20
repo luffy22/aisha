@@ -15,16 +15,37 @@ class HoroscopeModelNakshatra extends HoroscopeModelLagna
         $chart_id       = $jinput->get('chart', 'default_value', 'filter');
         $chart_id       = str_replace("chart","horo", $chart_id);
         
-       
-        $result         = $this->getUserData($chart_id);
         
+        $result         = $this->getUserData($chart_id);
         $fname          = $result['fname'];
         $gender         = $result['gender'];
+        $chart          = $result['chart_type'];
         $dob_tob        = $result['dob_tob'];
-        $pob            = $result['pob'];
-        $lat            = $result['lat'];
-        $lon            = $result['lon'];
-        $timezone       = $result['timezone'];
+        if(array_key_exists("timezone", $result))
+        {       
+            $pob            = $result['pob'];
+            $lat            = $result['lat'];
+            $lon            = $result['lon'];
+            $timezone       = $result['timezone'];
+        }
+        else
+        {
+            $lat            = $result['latitude'];
+            $lon            = $result['longitude'];
+            if($result['state'] == "" && $result['country'] == "")
+            {
+                $pob    = $result['city'];
+            }
+            else if($result['state'] == "" && $result['country'] != "")
+            {
+                $pob    = $result['city'].", ".$result['country'];
+            }
+            else
+            {
+                $pob    = $result['city'].", ".$result['state'].", ".$result['country'];
+            }
+            $timezone   = $result['tmz_words'];
+        }
         
         $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
         
@@ -52,10 +73,11 @@ class HoroscopeModelNakshatra extends HoroscopeModelLagna
         $dist           = $data[1];
         $sign           = $this->calcDetails($dist);
         $dist2          = $this->convertDecimalToDegree($dist,"details");  
-        
+        $newdata        = array();
         $details        = $this->getPlanetaryDetails($planet, $sign, $dist2);
         $nakshatra      = $details[$planet.'_nakshatra'];
-        return $this->getArticle($nakshatra, "Nakshatra");
+        $newdata        = array_merge($newdata,$result,$this->getArticle($nakshatra, "Nakshatra"));
+        return $newdata;
     }
        
     protected function getMoonData($data)

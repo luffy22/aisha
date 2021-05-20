@@ -77,13 +77,38 @@ class HoroscopeModelFourStages extends HoroscopeModelLagna
         $chart_id       = str_replace("chart","horo", $chart_id);
         $array          = array();
         $user_data      = $this->getUserData($chart_id);
+        
+        $user           = JFactory::getUser();
+        $user_id        = $user->id;
         $fname          = $user_data['fname'];
         $gender         = $user_data['gender'];
+        $chart          = $user_data['chart_type'];
         $dob_tob        = $user_data['dob_tob'];
-        $pob            = $user_data['pob'];
-        $lat            = $user_data['lat'];
-        $lon            = $user_data['lon'];
-        $timezone       = $user_data['timezone'];
+        if(array_key_exists("timezone", $user_data))
+        {    
+            $pob            = $user_data['pob'];
+            $lat            = $user_data['lat'];
+            $lon            = $user_data['lon'];
+            $timezone       = $user_data['timezone'];
+        }
+        else
+        {
+            $lat            = $user_data['latitude'];
+            $lon            = $user_data['longitude'];
+            if($user_data['state'] == "" && $user_data['country'] == "")
+            {
+                $pob    = $user_data['city'];
+            }
+            else if($user_data['state'] == "" && $user_data['country'] != "")
+            {
+                $pob    = $user_data['city'].", ".$user_data['country'];
+            }
+            else
+            {
+                $pob    = $user_data['city'].", ".$user_data['state'].", ".$user_data['country'];
+            }
+            $timezone   = $user_data['tmz_words'];
+        }
         
         $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
         

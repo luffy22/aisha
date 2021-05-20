@@ -19,11 +19,34 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         
         $fname          = $result['fname'];
         $gender         = $result['gender'];
+        $chart          = $result['chart_type'];
         $dob_tob        = $result['dob_tob'];
-        $pob            = $result['pob'];
-        $lat            = $result['lat'];
-        $lon            = $result['lon'];
-        $timezone       = $result['timezone'];
+
+        if(array_key_exists("timezone", $result))
+        {    
+            $pob            = $result['pob'];
+            $lat            = $result['lat'];
+            $lon            = $result['lon'];
+            $timezone       = $result['timezone'];
+        }
+        else
+        {
+            $lat            = $result['latitude'];
+            $lon            = $result['longitude'];
+            if($result['state'] == "" && $result['country'] == "")
+            {
+                $pob    = $result['city'];
+            }
+            else if($result['state'] == "" && $result['country'] != "")
+            {
+                $pob    = $result['city'].", ".$result['country'];
+            }
+            else
+            {
+                $pob    = $result['city'].", ".$result['state'].", ".$result['country'];
+            }
+            $timezone   = $result['tmz_words'];
+        }
         
         $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
         
@@ -69,7 +92,7 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         $period_id          = $get_dasha['dob_period_id'];$dasha_end    = $get_dasha['dob_sub_end'];
         //$get_current        = $this->getCurrentPeriod($period_id, $dasha_end);
         $get_remain_dasha   = array("get_remain_dasha"=>$this->getRemainDasha($period_id, $dasha_end));
-        $data               = array_merge($data, $get_dasha,$get_remain_dasha);
+        $data               = array_merge($result,$data, $get_dasha,$get_remain_dasha);
         return $data;
         
     }

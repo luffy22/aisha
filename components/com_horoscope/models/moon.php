@@ -14,19 +14,43 @@ class HoroscopeModelMoon extends HoroscopeModelLagna
         $jinput         = JFactory::getApplication()->input;
         $chart_id       = $jinput->get('chart', 'default_value', 'filter');
         $chart_id       = str_replace("chart","horo", $chart_id);
-        
+        $result         = array();
         $userdata       = $this->getUserData($chart_id);
-        
+       
+        $user           = JFactory::getUser();
+        $user_id        = $user->id;
         $fname          = $userdata['fname'];
         $gender         = $userdata['gender'];
+        $chart          = $userdata['chart_type'];
         $dob_tob        = $userdata['dob_tob'];
-        $pob            = $userdata['pob'];
-        $lat            = $userdata['lat'];
-        $lon            = $userdata['lon'];
-        $timezone       = $userdata['timezone'];
+        if(array_key_exists("timezone", $userdata))
+        {  
+            $pob            = $userdata['pob'];
+            $lat            = $userdata['lat'];
+            $lon            = $userdata['lon'];
+            $timezone       = $userdata['timezone'];
+        }
+        else
+        {
+            $lat            = $userdata['latitude'];
+            $lon            = $userdata['longitude'];
+            if($userdata['state'] == "" && $userdata['country'] == "")
+            {
+                $pob    = $userdata['city'];
+            }
+            else if($userdata['state'] == "" && $userdata['country'] != "")
+            {
+                $pob    = $userdata['city'].", ".$userdata['country'];
+            }
+            else
+            {
+                $pob    = $userdata['city'].", ".$userdata['state'].", ".$userdata['country'];
+            }
+            $timezone   = $userdata['tmz_words'];
+        }
         
         $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
-        
+        //print_r($date);exit;
         $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
         $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
         //echo $timestamp." ".$offset;exit;
@@ -46,11 +70,12 @@ class HoroscopeModelMoon extends HoroscopeModelLagna
         // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
         exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p1042536789m -g, -head", $output);
         //print_r($output);exit;
-        $result         = array();
+        $data         = array();
         $planets        = $this->getPlanets($output);
-        
+        //print_r($planets);exit;
         foreach($planets as $planet=>$dist)
         {
+            //echo $planet;exit;
             $sign           = $this->calcDetails($dist);
             $details        = array($planet=>$sign);
             $result         = array_merge($result, $details);
@@ -60,6 +85,7 @@ class HoroscopeModelMoon extends HoroscopeModelLagna
         $moon_sign          = $result[$planet];
         $moon_details       = $this->getArticle($moon_sign, $planet);
         $result             = array_merge($userdata,$result, $moon_details);
+        //print_r($result);exit;
         return $result;
        //$ayanamsha           = $this->applyAyanamsha($dob, $horo); 
        //return $horo;

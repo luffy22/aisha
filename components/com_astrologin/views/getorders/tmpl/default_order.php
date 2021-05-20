@@ -59,11 +59,11 @@ foreach($this->order as $result)
 ?>
 <div class="mb-4"></div>
 <div class="pagination">
-	<p class="counter pull-right">
-		<?php echo $this->pagination->getPagesCounter(); ?>
-	</p>
-	<?php echo $this->pagination->getPagesLinks(); ?>
-	</div>
+    <p class="counter pull-right">
+        <?php echo $this->pagination->getPagesCounter(); ?>
+    </p>
+    <?php echo $this->pagination->getPagesLinks(); ?>
+</div>
 <?php
 unset($this->order);unset($this->pagination);
 ?>

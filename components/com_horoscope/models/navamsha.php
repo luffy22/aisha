@@ -16,18 +16,38 @@ class HoroscopeModelNavamsha extends HoroscopeModelLagna
         $navamsha       = str_replace("chart","horo", $navamsha);
         
         $result         = $this->getUserData($navamsha);
-        
         $fname          = $result['fname'];
         $gender         = $result['gender'];
         $chart          = $result['chart_type'];
         $dob_tob        = $result['dob_tob'];
-        $pob            = $result['pob'];
-        $lat            = $result['lat'];
-        $lon            = $result['lon'];
-        $timezone       = $result['timezone'];
-        
+
+        if(array_key_exists("timezone", $result))
+        {      
+            $pob            = $result['pob'];
+            $lat            = $result['lat'];
+            $lon            = $result['lon'];
+            $timezone       = $result['timezone'];
+        }
+        else
+        {
+            $lat            = $result['latitude'];
+            $lon            = $result['longitude'];
+            if($result['state'] == "" && $result['country'] == "")
+            {
+                $pob    = $result['city'];
+            }
+            else if($result['state'] == "" && $result['country'] != "")
+            {
+                $pob    = $result['city'].", ".$result['country'];
+            }
+            else
+            {
+                $pob    = $result['city'].", ".$result['state'].", ".$result['country'];
+            }
+            $timezone   = $result['tmz_words'];
+        }
+
         $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
-        
         $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
         $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
         //echo $timestamp." ".$offset;exit;
@@ -43,7 +63,7 @@ class HoroscopeModelNavamsha extends HoroscopeModelLagna
         $output = "";
         //echo $utcTimestamp;exit;
         //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
-
+        //exit;
         exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p0142536m789 -g, -head", $output);
         //print_r($output);exit;
 
@@ -53,6 +73,7 @@ class HoroscopeModelNavamsha extends HoroscopeModelLagna
         $planets        = $this->getPlanets($output);
         $asc            = $this->getAscendant($result);
         $planets        = array_merge($asc, $planets);
+        //print_r($planets);exit;
         $data           = array();
         foreach($planets as $planet=>$dist)
         {
@@ -63,8 +84,10 @@ class HoroscopeModelNavamsha extends HoroscopeModelLagna
             $data           = array_merge($data,$details,$navamsha);
             
         }
-        $data               = array("nav_data"=>$data, "main"=>$result);
-        return $data;
+        $nav_data           = array("nav_data"=>$data, "main"=>$result);
+        $nav_data               = array_merge($result, $nav_data);
+        //print_r($nav_data);exit;
+        return $nav_data;
     }
    
     

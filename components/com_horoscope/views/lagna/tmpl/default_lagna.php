@@ -7,9 +7,69 @@
 </head>
 <body>
 <?php 
-$chart_id = $_GET['chart']; 
-$type       = $this->data['chart_type'];
 //print_r($this->data);exit;
+$chart_id = $_GET['chart']; //echo $chart_id;exit;
+$type       = $this->data['chart_type'];//echo $type;exit;
+//print_r($this->data);exit;
+
+if(array_key_exists("timezone", $this->data))
+{
+    if(substr($this->data['lat'],0,1) == "-")
+    {
+        $this->data['lat'] = str_replace("-","",$this->data['lat']);
+        $lat    =  $this->data['lat']."&deg; S";
+    }
+    else
+    {
+        $lat    = $this->data['lat']."&deg; N"; 
+    }
+    if(substr($this->data['lon'],0,1) == "-")
+    {
+        $this->data['lon'] = str_replace("-","",$this->data['lon']);
+        $lon    = $this->data['lon']."&deg; W";
+    }
+    else
+    {
+        $lon    = $this->data['lon']."&deg; E"; 
+    }
+    $tmz    = $this->data['timezone'];
+    $pob    = $this->data['pob'];
+}
+else 
+{
+    if(substr($this->data['latitude'],0,1) == "-")
+    {
+        $this->data['latitude'] = str_replace("-","",$this->data['latitude']);
+        $lat    =  $this->data['latitude']."&deg; S";
+    }
+    else
+    {
+        $lat    = $this->data['latitude']."&deg; N"; 
+    }
+    if(substr($this->data['longitude'],0,1) == "-")
+    {
+        $this->data['longitude'] = str_replace("-","",$this->data['longitude']);
+        $lon    = $this->data['longitude']."&deg; W";
+    }
+    else
+    {
+        $lon    = $this->data['longitude']."&deg; E"; 
+    }
+    $tmz    = $this->data['tmz_words'];
+    
+    if($this->data['state'] == "" && $this->data['country'] == "")
+    {
+        $pob    = $this->data['city'];
+    }
+    else if($this->data['state'] == "" && $this->data['country'] != "")
+    {
+        $pob    = $this->data['city'].", ".$this->data['country'];
+    }
+    else
+    {
+        $pob    = $this->data['city'].", ".$this->data['state'].", ".$this->data['country'];
+    }
+}
 ?>
     <div class="mb-3"></div>
     <table class="table table-bordered table-hover table-striped">
@@ -23,7 +83,7 @@ $type       = $this->data['chart_type'];
         </tr>
         <tr>
             <th>Date Of Birth</th>
-            <?php $date   = new DateTime($this->data['dob_tob'], new DateTimeZone($this->data['timezone'])); ?>
+            <?php $date   = new DateTime($this->data['dob_tob'], new DateTimeZone($tmz)); ?>
             <td id="dob" value="<?php echo $date->format('d-m-Y'); ?>"><?php echo $date->format('dS F Y'); ?></td>
         </tr>
         <tr>
@@ -32,38 +92,15 @@ $type       = $this->data['chart_type'];
         </tr>
         <tr>
             <th>Place Of Birth</th>
-            <td id="pob" value="<?php echo $this->data['pob'] ?>"><?php echo $this->data['pob']; ?></td>
+            <td id="pob" value="<?php echo $pob; ?>"><?php echo $pob; ?></td>
         </tr>
         <tr>
             <th>Latitude</th>
-            <td><?php 
-                if(substr($this->data['lat'],0,1) == "-")
-                {
-                    $this->data['lat'] = str_replace("-","",$this->data['lat']);
-                    echo $this->data['lat']."&deg; S";
-                }
-                else
-                {
-                    echo $this->data['lat']."&deg; N"; 
-                }
-                ?>
-            </td>
+            <td><?php  echo $lat; ?></td>
         </tr>
         <tr>
             <th>Longitude</th>
-            <td>
-                <?php
-                if(substr($this->data['lon'],0,1) == "-")
-                {
-                    $this->data['lon'] = str_replace("-","",$this->data['lon']);
-                    echo $this->data['lon']."&deg; W";
-                }
-                else
-                {
-                    echo $this->data['lon']."&deg; E"; 
-                }
-                ?>
-            </td>
+            <td><?php  echo $lon; ?></td>
         </tr>
         <tr>
             <th>Timezone</th>

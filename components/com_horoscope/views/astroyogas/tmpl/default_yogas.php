@@ -8,6 +8,64 @@ $count       = count($this->data['nbry_yoga']);
 $name       = explode(' ', $this->data['fname']);
 $document = JFactory::getDocument(); 
 $document->setTitle(strtolower($name[0]).' astro yogas');
+if(array_key_exists("timezone", $this->data))
+{
+    if(substr($this->data['lat'],0,1) == "-")
+    {
+        $this->data['lat'] = str_replace("-","",$this->data['lat']);
+        $lat    =  $this->data['lat']."&deg; S";
+    }
+    else
+    {
+        $lat    = $this->data['lat']."&deg; N"; 
+    }
+    if(substr($this->data['lon'],0,1) == "-")
+    {
+        $this->data['lon'] = str_replace("-","",$this->data['lon']);
+        $lon    = $this->data['lon']."&deg; W";
+    }
+    else
+    {
+        $lon    = $this->data['lon']."&deg; E"; 
+    }
+    $tmz    = $this->data['timezone'];
+    $pob    = $this->data['pob'];
+}
+else 
+{
+    if(substr($this->data['latitude'],0,1) == "-")
+    {
+        $this->data['latitude'] = str_replace("-","",$this->data['latitude']);
+        $lat    =  $this->data['latitude']."&deg; S";
+    }
+    else
+    {
+        $lat    = $this->data['latitude']."&deg; N"; 
+    }
+    if(substr($this->data['longitude'],0,1) == "-")
+    {
+        $this->data['longitude'] = str_replace("-","",$this->data['longitude']);
+        $lon    = $this->data['longitude']."&deg; W";
+    }
+    else
+    {
+        $lon    = $this->data['longitude']."&deg; E"; 
+    }
+    $tmz    = $this->data['tmz_words'];
+    
+    if($this->data['state'] == "" && $this->data['country'] == "")
+    {
+        $pob    = $this->data['city'];
+    }
+    else if($this->data['state'] == "" && $this->data['country'] != "")
+    {
+        $pob    = $this->data['city'].", ".$this->data['country'];
+    }
+    else
+    {
+        $pob    = $this->data['city'].", ".$this->data['state'].", ".$this->data['country'];
+    }
+}
 ?>
 <div class="mb-3"></div>
 <div class="lead alert alert-dark">Astro Yogas in your chart</div>
@@ -23,7 +81,7 @@ $document->setTitle(strtolower($name[0]).' astro yogas');
     <tr>
         <th>Date Of Birth</th>
         <td><?php 
-                $date   = new DateTime($this->data['dob_tob'], new DateTimeZone($this->data['timezone']));
+                $date   = new DateTime($this->data['dob_tob'], new DateTimeZone($tmz));
                 echo $date->format('dS F Y'); ?></td>
     </tr>
     <tr>
@@ -32,38 +90,15 @@ $document->setTitle(strtolower($name[0]).' astro yogas');
     </tr>
     <tr>
         <th>Place Of Birth</th>
-        <td><?php echo $this->data['pob']; ?></td>
+        <td><?php echo $pob; ?></td>
     </tr>
     <tr>
         <th>Latitude</th>
-        <td><?php 
-            if(substr($this->data['lat'],0,1) == "-")
-            {
-                $this->data['lat'] = str_replace("-","",$this->data['lat']);
-                echo $this->data['lat']."&deg; S";
-            }
-            else
-            {
-                echo $this->data['lat']."&deg; N"; 
-            }
-            ?>
-        </td>
+        <td><?php echo $lat; ?></td>
     </tr>
     <tr>
         <th>Longitude</th>
-        <td>
-            <?php
-            if(substr($this->data['lon'],0,1) == "-")
-            {
-                $this->data['lon'] = str_replace("-","",$this->data['lon']);
-                echo $this->data['lon']."&deg; W";
-            }
-            else
-            {
-                echo $this->data['lon']."&deg; E"; 
-            }
-            ?>
-        </td>
+        <td><?php echo $lon; ?></td>
     </tr>
     <tr>
             <th>Timezone</th>

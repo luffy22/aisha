@@ -20,13 +20,35 @@ class HoroscopeModelMainChart extends HoroscopeModelLagna
         $gender         = $result['gender'];
         $chart          = $result['chart_type'];
         $dob_tob        = $result['dob_tob'];
-        $pob            = $result['pob'];
-        $lat            = $result['lat'];
-        $lon            = $result['lon'];
-        $timezone       = $result['timezone'];
-        
+        if(array_key_exists("timezone", $result))
+        {        
+            
+            $pob            = $result['pob'];
+            $lat            = $result['lat'];
+            $lon            = $result['lon'];
+            $timezone       = $result['timezone'];
+        }
+        else
+        {
+            $lat            = $result['latitude'];
+            $lon            = $result['longitude'];
+            if($result['state'] == "" && $result['country'] == "")
+            {
+                $pob    = $result['city'];
+            }
+            else if($result['state'] == "" && $result['country'] != "")
+            {
+                $pob    = $result['city'].", ".$result['country'];
+            }
+            else
+            {
+                $pob    = $result['city'].", ".$result['state'].", ".$result['country'];
+            }
+            $timezone   = $result['tmz_words'];
+        }
+        //echo $timezone;exit;
         $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
-        
+        //echo $date->format('d-m-Y');exit;
         $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
         $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
         /**
@@ -45,6 +67,7 @@ class HoroscopeModelMainChart extends HoroscopeModelLagna
         # OUTPUT ARRAY
         # Planet Name, Planet Degree, Planet Speed per day
         $asc            = $this->getAscendant($result);
+        //print_r($asc);exit;
         $planets        = $this->getPlanets($output);
         $data           = array_merge($asc,$planets);
         $details        = $this->getDetails($data);

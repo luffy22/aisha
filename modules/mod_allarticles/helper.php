@@ -13,9 +13,9 @@ class modAllarticlesHelper
 {
 	public function showArticles()
 	{
-			$mainframe		= JFactory::getApplication();
-			$limit			= $mainframe->getUserStateFromRequest("$option.limit", 'limit', 10, 'int');
-			$limitstart		= JRequest::getVar('limitstart', 0, '', 'int');
+            $mainframe		= JFactory::getApplication();
+            $limit			= $mainframe->getUserStateFromRequest("$option.limit", 'limit', 10, 'int');
+            $limitstart		= JRequest::getVar('limitstart', 0, '', 'int');
             $db             = JFactory::getDbo();  // Get db connection
             $query          = $db->getQuery(true);
             $query          = "SELECT jv_content.id AS article_id, jv_content.alias as article_alias,

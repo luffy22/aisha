@@ -10,6 +10,18 @@ putenv("PATH=$libPath");
 class HoroscopeModelLagna extends JModelItem
 {
     public $data;
+    public function getLogin()
+    {
+        $libPath        = JPATH_BASE.'/sweph/';
+        $jinput         = JFactory::getApplication()->input;
+        $chart_id       = $jinput->get('chart', 'default_value', 'filter');
+        $chart_id       = str_replace("chart","horo", $chart_id);
+        $array          = array();
+        //echo $chart_id;exit;
+        $user_data      = $this->getUserData($chart_id);
+        //print_r($user_data);exit;
+        return $user_data;
+    }
     public function getLagna($user_details)
     {
         //print_r($user_details);exit;
@@ -72,17 +84,42 @@ class HoroscopeModelLagna extends JModelItem
     }
     public function getAscendant($data)
     {
+        //print_r($data);exit;
         $libPath        = JPATH_BASE.'/sweph/';
+
         $fname          = $data['fname'];
         $gender         = $data['gender'];
+        $chart          = $data['chart_type'];
         $dob_tob        = $data['dob_tob'];
-        $pob            = $data['pob'];
-        $lat            = $data['lat'];
-        $lon            = $data['lon'];
-        $timezone       = $data['timezone'];
-        
+        if(array_key_exists("timezone", $data))
+        {      
+            $pob            = $data['pob'];
+            $lat            = $data['lat'];
+            $lon            = $data['lon'];
+            $timezone       = $data['timezone'];
+        }
+        else
+        {
+            $lat            = $data['latitude'];
+            $lon            = $data['longitude'];
+            if($data['state'] == "" && $data['country'] == "")
+            {
+                $pob    = $data['city'];
+            }
+            else if($data['state'] == "" && $data['country'] != "")
+            {
+                $pob    = $data['city'].", ".$data['country'];
+            }
+            else
+            {
+                $pob    = $data['city'].", ".$data['state'].", ".$data['country'];
+            }
+            $timezone   = $data['tmz_words'];
+        }
+        //echo $lat." ".$lon;exit;
+        //echo $timezone;exit;
         $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
-        
+        //echo $date->format('d-m-Y');exit;
         $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
         $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
         //echo $timestamp." ".$offset;exit;
@@ -138,6 +175,63 @@ class HoroscopeModelLagna extends JModelItem
     }
     protected function getUserData($horo_id)
     {
+        $user   = JFactory::getUser();
+        //echo $user->id;exit;
+        //echo $id;exit;
+        $db             = JFactory::getDbo();  // Get db connection
+        $query          = $db->getQuery(true);
+        if($user->id != "0")
+        {
+            $num        = $this->getHoroLoginRow($user->id, $horo_id);
+            if($num > 0)
+            {
+                $data   = $this->getHoroLoginData($user->id,$horo_id);
+            }
+            else
+            {
+                $data   = $this->getHoroQueryData($horo_id);
+            }
+            
+        }
+        else
+        {
+            $data   = $this->getHoroQueryData($horo_id);
+           
+        }
+        //print_r($data);exit;
+        return $data;
+    }
+    public function getHoroLoginRow($user_id, $horo_id)
+    {
+        $db             = JFactory::getDbo();  // Get db connection
+        $query          = $db->getQuery(true);
+        $query          ->select('COUNT(*)')
+                        ->from($db->quoteName('#__horo_login'))
+                        ->where($db->quoteName('user_id').' = '.$db->quote($user_id).' AND '.
+                                $db->quoteName('uniq_id').' = '.$db->quote($horo_id));
+        $db             ->setQuery($query);
+        $db->execute();
+        $result         = $db->loadResult();
+        //print_r($result);exit;
+        return $result;
+    }
+    public function getHoroLoginData($user_id, $horo_id)
+    {
+        $db             = JFactory::getDbo();  // Get db connection
+        $query          = $db->getQuery(true);
+        $query          ->select($db->quoteName(array('a.fname','a.gender','a.chart_type','a.dob_tob','b.country','b.state','b.city','b.latitude','b.longitude','c.tmz_words')))
+                        ->from($db->quoteName('#__horo_login','a'))
+                        ->join('RIGHT', $db->quoteName('#__location','b').' ON '.$db->quoteName('a.loc_id')." = ".$db->quoteName('b.id'))
+                        ->join('RIGHT', $db->quoteName('#__timezone','c').' ON '.$db->quoteName('c.tmz_id').' = '.$db->quoteName('b.timezone'))
+                        ->where($db->quoteName('a.user_id').' = '.$db->quote($user_id).' AND '.
+                                $db->quoteName('a.uniq_id').' = '.$db->quote($horo_id));
+        $db             ->setQuery($query);
+        $db->execute();
+        $result         = $db->loadAssoc();
+        return $result;
+    }
+    public function getHoroQueryData($horo_id)
+    {
         $db             = JFactory::getDbo();  // Get db connection
         $query          = $db->getQuery(true);
         $query          ->select($db->quoteName(array('fname','gender','chart_type','dob_tob','pob','lon','lat','timezone')));
@@ -150,7 +244,6 @@ class HoroscopeModelLagna extends JModelItem
     }
     public function getPlanets($data)
     {
-        //print_r($data);exit;
         $graha_12               = array("Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn","Uranus","Neptune","Pluto","mean Node");
         $planets                = array();
         for($i=0;$i<count($data);$i++)
@@ -635,6 +728,7 @@ class HoroscopeModelLagna extends JModelItem
     }
     protected function getHouseSign($asc, $num)
     {
+        //echo $asc." ".$num;exit;
         $signs              = array("Aries","Taurus","Gemini","Cancer",
                                     "Leo","Virgo","Libra","Scorpio",
                                     "Sagittarius","Capricorn","Aquarius","Pisces");
@@ -649,6 +743,7 @@ class HoroscopeModelLagna extends JModelItem
            $house             = ($key + $num)-12;
            
        }
+       //echo $signs[$house-1];exit;
        return $signs[$house-1];
     }
     public function getHouseDistance($asc, $planet)
