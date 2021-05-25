@@ -16,84 +16,90 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         $navamsha       = str_replace("chart","horo", $navamsha);
         
         $result         = $this->getUserData($navamsha);
-        
-        $fname          = $result['fname'];
-        $gender         = $result['gender'];
-        $chart          = $result['chart_type'];
-        $dob_tob        = $result['dob_tob'];
-
-        if(array_key_exists("timezone", $result))
-        {    
-            $pob            = $result['pob'];
-            $lat            = $result['lat'];
-            $lon            = $result['lon'];
-            $timezone       = $result['timezone'];
+        if(empty($result))
+        {
+            return;
         }
         else
         {
-            $lat            = $result['latitude'];
-            $lon            = $result['longitude'];
-            if($result['state'] == "" && $result['country'] == "")
-            {
-                $pob    = $result['city'];
-            }
-            else if($result['state'] == "" && $result['country'] != "")
-            {
-                $pob    = $result['city'].", ".$result['country'];
+            $fname          = $result['fname'];
+            $gender         = $result['gender'];
+            $chart          = $result['chart_type'];
+            $dob_tob        = $result['dob_tob'];
+
+            if(array_key_exists("timezone", $result))
+            {    
+                $pob            = $result['pob'];
+                $lat            = $result['lat'];
+                $lon            = $result['lon'];
+                $timezone       = $result['timezone'];
             }
             else
             {
-                $pob    = $result['city'].", ".$result['state'].", ".$result['country'];
+                $lat            = $result['latitude'];
+                $lon            = $result['longitude'];
+                if($result['state'] == "" && $result['country'] == "")
+                {
+                    $pob    = $result['city'];
+                }
+                else if($result['state'] == "" && $result['country'] != "")
+                {
+                    $pob    = $result['city'].", ".$result['country'];
+                }
+                else
+                {
+                    $pob    = $result['city'].", ".$result['state'].", ".$result['country'];
+                }
+                $timezone   = $result['tmz_words'];
             }
-            $timezone   = $result['tmz_words'];
-        }
-        
-        $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
-        
-        $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
-        $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
-        //echo $timestamp." ".$offset;exit;
-        // $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
-        /**
-         * Converting birth date/time to UTC
-         */
-        $utcTimestamp = $timestamp - $offset;
-        $date = date('d.m.Y', $utcTimestamp);
-        $time = date('H:i:s', $utcTimestamp);
-        //echo $date." ".$time;exit;
-        $h_sys = 'P';
-        $output = "";
-        //echo $utcTimestamp;exit;
-        //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
 
-        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p0142536m -g, -head", $output);
-        //print_r($output);exit;
+            $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
 
-        # OUTPUT ARRAY
-        # Planet Name, Planet Degree, Planet Speed per day
-        //$asc            = $this->getAscendant($result);
-        $planets        = $this->getPlanets($output);
-        $data           = array();
-        foreach($planets as $planet=>$dist)
-        {
-            $dist2          = $this->convertDecimalToDegree($dist, "details");
-            $sign           = $this->calcDetails($dist);
-            $navamsha       = $this->getNavamsha($planet,$sign,$dist2);
-            $dist           = array($planet."_dist"=>$dist2);
-            $details        = array($planet."_sign"=>$sign);
-            $data           = array_merge($data, $dist, $details, $navamsha);
+            $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
+            $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
+            //echo $timestamp." ".$offset;exit;
+            // $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
+            /**
+             * Converting birth date/time to UTC
+             */
+            $utcTimestamp = $timestamp - $offset;
+            $date = date('d.m.Y', $utcTimestamp);
+            $time = date('H:i:s', $utcTimestamp);
+            //echo $date." ".$time;exit;
+            $h_sys = 'P';
+            $output = "";
+            //echo $utcTimestamp;exit;
+            //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
+
+            exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p0142536m -g, -head", $output);
+            //print_r($output);exit;
+
+            # OUTPUT ARRAY
+            # Planet Name, Planet Degree, Planet Speed per day
+            //$asc            = $this->getAscendant($result);
+            $planets        = $this->getPlanets($output);
+            $data           = array();
+            foreach($planets as $planet=>$dist)
+            {
+                $dist2          = $this->convertDecimalToDegree($dist, "details");
+                $sign           = $this->calcDetails($dist);
+                $navamsha       = $this->getNavamsha($planet,$sign,$dist2);
+                $dist           = array($planet."_dist"=>$dist2);
+                $details        = array($planet."_sign"=>$sign);
+                $data           = array_merge($data, $dist, $details, $navamsha);
+            }
+            //print_r($data);exit;
+            $moon_sign          = $data['Moon_sign'];                  
+            $moon_dist          = $data['Moon_dist'];
+            $moon_nakshatra     = $this->getNakshatra($moon_sign, $moon_dist);
+            $nakshatra_deg      = $this->getNakshatraDeg($moon_sign, $moon_nakshatra, $moon_dist);
+            $get_dasha          = $this->getDashaPeriod($dob_tob, $nakshatra_deg);
+            $period_id          = $get_dasha['dob_period_id'];$dasha_end    = $get_dasha['dob_sub_end'];
+            //$get_current        = $this->getCurrentPeriod($period_id, $dasha_end);
+            $get_remain_dasha   = array("get_remain_dasha"=>$this->getRemainDasha($period_id, $dasha_end));
+            $data               = array_merge($result,$data, $get_dasha,$get_remain_dasha);
+            return $data;
         }
-        //print_r($data);exit;
-        $moon_sign          = $data['Moon_sign'];                  
-        $moon_dist          = $data['Moon_dist'];
-        $moon_nakshatra     = $this->getNakshatra($moon_sign, $moon_dist);
-        $nakshatra_deg      = $this->getNakshatraDeg($moon_sign, $moon_nakshatra, $moon_dist);
-        $get_dasha          = $this->getDashaPeriod($dob_tob, $nakshatra_deg);
-        $period_id          = $get_dasha['dob_period_id'];$dasha_end    = $get_dasha['dob_sub_end'];
-        //$get_current        = $this->getCurrentPeriod($period_id, $dasha_end);
-        $get_remain_dasha   = array("get_remain_dasha"=>$this->getRemainDasha($period_id, $dasha_end));
-        $data               = array_merge($result,$data, $get_dasha,$get_remain_dasha);
-        return $data;
         
     }
     protected function getNakshatra($moon_sign, $moon_dist)

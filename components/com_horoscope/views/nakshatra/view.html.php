@@ -13,19 +13,23 @@ class HoroscopeViewNakshatra extends JViewLegacy
     public $data;
     function display($tpl = null) 
     { 
+        $this->data		= $this->get('Data');
         if (count($errors   = $this->get('Errors')))
         {
-			JError::raiseError(500, implode('<br />', $errors));
-			return false;
+            JError::raiseError(500, implode('<br />', $errors));
+            return false;
         }
-        if(isset($_GET['chart']))
+        if(isset($_GET['chart']) && (empty($this->data)))
         {
-            $this->data		= $this->get('Data');
-            //echo "calls";exit;
+            $app            = JFactory::getApplication();
+            $link           = Juri::base().'horoscope?chart='.$_GET['chart'];
+            $app->redirect($link);
         }
-        $tpl 				= null;
-        //echo gettype($this->data);
-        parent::display($tpl);
+        else
+        {   
+            $tpl            = null;
+            parent::display($tpl);
+        }
         
     }
     
