@@ -13,21 +13,23 @@ class HoroscopeViewFindSpouse extends JViewLegacy
     public $data;
     function display($tpl = null) 
     {
+        $this->data         = $this->get('Data');
         if (count($errors   = $this->get('Errors')))
         {
 			JError::raiseError(500, implode('<br />', $errors));
 			return false;
         }
-        if(isset($_GET['chart']))
+        if(isset($_GET['chart']) && (!empty($this->data)))
         {
-            
-            $this->data         = $this->get('Data');
-            //print_r($this->data);exit;
-            $tpl    = 'spouse';
+            $tpl                = 'spouse';
+        }
+        else  if(isset($_GET['chart']) && (empty($this->data)))
+        {
+            $this->data         = array("no_data"=>"Horoscope deleted. Please re-enter details.");
+            $tpl                = null;
         }
         else
         {
-            
             $tpl        = null;
         }
         //echo gettype($this->data);

@@ -80,81 +80,88 @@ class HoroscopeModelFourStages extends HoroscopeModelLagna
         
         $user           = JFactory::getUser();
         $user_id        = $user->id;
-        $fname          = $user_data['fname'];
-        $gender         = $user_data['gender'];
-        $chart          = $user_data['chart_type'];
-        $dob_tob        = $user_data['dob_tob'];
-        if(array_key_exists("timezone", $user_data))
-        {    
-            $pob            = $user_data['pob'];
-            $lat            = $user_data['lat'];
-            $lon            = $user_data['lon'];
-            $timezone       = $user_data['timezone'];
-        }
-        else
+        if(empty($user_data))
         {
-            $lat            = $user_data['latitude'];
-            $lon            = $user_data['longitude'];
-            if($user_data['state'] == "" && $user_data['country'] == "")
-            {
-                $pob    = $user_data['city'];
-            }
-            else if($user_data['state'] == "" && $user_data['country'] != "")
-            {
-                $pob    = $user_data['city'].", ".$user_data['country'];
+            return;
+        }
+        else 
+        {
+            $fname          = $user_data['fname'];
+            $gender         = $user_data['gender'];
+            $chart          = $user_data['chart_type'];
+            $dob_tob        = $user_data['dob_tob'];
+            if(array_key_exists("timezone", $user_data))
+            {    
+                $pob            = $user_data['pob'];
+                $lat            = $user_data['lat'];
+                $lon            = $user_data['lon'];
+                $timezone       = $user_data['timezone'];
             }
             else
             {
-                $pob    = $user_data['city'].", ".$user_data['state'].", ".$user_data['country'];
+                $lat            = $user_data['latitude'];
+                $lon            = $user_data['longitude'];
+                if($user_data['state'] == "" && $user_data['country'] == "")
+                {
+                    $pob    = $user_data['city'];
+                }
+                else if($user_data['state'] == "" && $user_data['country'] != "")
+                {
+                    $pob    = $user_data['city'].", ".$user_data['country'];
+                }
+                else
+                {
+                    $pob    = $user_data['city'].", ".$user_data['state'].", ".$user_data['country'];
+                }
+                $timezone   = $user_data['tmz_words'];
             }
-            $timezone   = $user_data['tmz_words'];
+
+            $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
+
+            $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
+            $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
+            //echo $timestamp." ".$offset;exit;
+            // $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
+            /**
+             * Converting birth date/time to UTC
+             */
+            $utcTimestamp = $timestamp - $offset;
+
+            //echo $utcTimestamp;exit;
+            //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
+
+            $date = date('d.m.Y', $utcTimestamp);
+            $time = date('H:i:s', $utcTimestamp);
+            //echo $date." ".$time;exit;
+            $h_sys = 'P';
+            $output = "";
+
+            exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p0142536m789 -g, -head", $output);
+            //print_r($output);exit;
+
+            # OUTPUT ARRAY
+            # Planet Name, Planet Degree, Planet Speed per day
+            $asc                        = $this->getAscendant($user_data);
+            $planets                    = $this->getPlanets($output);
+            $planets                    = array_merge($asc,$planets);
+            $data                       = array();
+            foreach($planets as $key=>$planet)
+            {
+                $details                = $this->calcDetails($planet);
+                $pl_details             = array($key => $details);
+                $data                   = array_merge($data, $pl_details);
+            }
+            $asc                        = $planets['Ascendant'];
+            $asc_sign                   = $this->calcDetails($asc);
+            $stage1                     = $this->checkStage1($planets, $asc_sign);
+            $stage2                     = $this->checkStage2($planets, $asc_sign);
+            $stage3                     = $this->checkStage3($planets, $asc_sign);
+            $stage4                     = $this->checkStage4($planets, $asc_sign);
+
+            $array                      = array();
+            $array                      = array_merge($array,$user_data, $data, $stage1, $stage2, $stage3, $stage4);
+            return $array;
         }
-        
-        $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
-        
-        $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
-        $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
-        //echo $timestamp." ".$offset;exit;
-        // $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
-        /**
-         * Converting birth date/time to UTC
-         */
-        $utcTimestamp = $timestamp - $offset;
-
-        //echo $utcTimestamp;exit;
-        //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
-
-        $date = date('d.m.Y', $utcTimestamp);
-        $time = date('H:i:s', $utcTimestamp);
-        //echo $date." ".$time;exit;
-        $h_sys = 'P';
-        $output = "";
- 
-        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p0142536m789 -g, -head", $output);
-        //print_r($output);exit;
-
-        # OUTPUT ARRAY
-        # Planet Name, Planet Degree, Planet Speed per day
-        $asc                        = $this->getAscendant($user_data);
-        $planets                    = $this->getPlanets($output);
-        $planets                    = array_merge($asc,$planets);
-        $data                       = array();
-        foreach($planets as $key=>$planet)
-        {
-            $details                = $this->calcDetails($planet);
-            $pl_details             = array($key => $details);
-            $data                   = array_merge($data, $pl_details);
-        }
-        $asc                        = $planets['Ascendant'];
-        $asc_sign                   = $this->calcDetails($asc);
-        $stage1                     = $this->checkStage1($planets, $asc_sign);
-        $stage2                     = $this->checkStage2($planets, $asc_sign);
-        $stage3                     = $this->checkStage3($planets, $asc_sign);
-        $stage4                     = $this->checkStage4($planets, $asc_sign);
-        
-        $array                      = array();
-        $array                      = array_merge($array,$user_data, $data, $stage1, $stage2, $stage3, $stage4);
-        return $array;
     }
     // this function will check planets, aspects and strength on 1st house(childhood)
     protected function checkStage1($data, $sign)

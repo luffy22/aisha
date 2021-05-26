@@ -77,136 +77,143 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $array          = array();
         $user_data      = $this->getUserData($chart_id);
         //print_r($user_data);exit;
-        $fname          = $user_data['fname'];
-        $gender         = $user_data['gender'];
-        $chart          = $user_data['chart_type'];
-        $dob_tob        = $user_data['dob_tob'];
-        if(array_key_exists("timezone", $user_data))
-        {      
-            $pob            = $user_data['pob'];
-            $lat            = $user_data['lat'];
-            $lon            = $user_data['lon'];
-            $timezone       = $user_data['timezone'];
+        if(empty($user_data))
+        {
+            return;
         }
         else
         {
-            $lat            = $user_data['latitude'];
-            $lon            = $user_data['longitude'];
-            if($user_data['state'] == "" && $user_data['country'] == "")
-            {
-                $pob    = $user_data['city'];
-            }
-            else if($user_data['state'] == "" && $user_data['country'] != "")
-            {
-                $pob    = $user_data['city'].", ".$user_data['country'];
+            $fname          = $user_data['fname'];
+            $gender         = $user_data['gender'];
+            $chart          = $user_data['chart_type'];
+            $dob_tob        = $user_data['dob_tob'];
+            if(array_key_exists("timezone", $user_data))
+            {      
+                $pob            = $user_data['pob'];
+                $lat            = $user_data['lat'];
+                $lon            = $user_data['lon'];
+                $timezone       = $user_data['timezone'];
             }
             else
             {
-                $pob    = $user_data['city'].", ".$user_data['state'].", ".$user_data['country'];
+                $lat            = $user_data['latitude'];
+                $lon            = $user_data['longitude'];
+                if($user_data['state'] == "" && $user_data['country'] == "")
+                {
+                    $pob    = $user_data['city'];
+                }
+                else if($user_data['state'] == "" && $user_data['country'] != "")
+                {
+                    $pob    = $user_data['city'].", ".$user_data['country'];
+                }
+                else
+                {
+                    $pob    = $user_data['city'].", ".$user_data['state'].", ".$user_data['country'];
+                }
+                $timezone   = $user_data['tmz_words'];
             }
-            $timezone   = $user_data['tmz_words'];
+
+            $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
+            //print_r($date);exit;
+            $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
+            $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
+            //echo $timestamp." ".$offset;exit;
+            // $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
+            /**
+             * Converting birth date/time to UTC
+             */
+            $utcTimestamp = $timestamp - $offset;
+
+            //echo $utcTimestamp;exit;
+            //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
+
+            $date = date('d.m.Y', $utcTimestamp);
+            $time = date('H:i:s', $utcTimestamp);
+            //echo $date." ".$time;exit;
+            $h_sys = 'P';
+            $output = "";
+
+            exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p0142536m789 -g, -head", $output);
+            //print_r($output);exit;
+
+            # OUTPUT ARRAY
+            # Planet Name, Planet Degree, Planet Speed per day
+            $asc                        = $this->getAscendant($user_data);
+            $planets                    = $this->getPlanets($output);
+            $planets                    = array_merge($asc,$planets);
+            //print_r($planets);exit;
+            $data                       = array();
+            foreach($planets as $key => $planet)
+            {
+                $planet_sign            = $this->calcDetails($planet);
+                $array                  = array($key => $planet_sign);
+                $data                   = array_merge($data, $array);
+            }
+            //print_r($data);exit;
+            $checkVish                  = $this->checkVishYoga($planets['Moon'],$planets['Saturn']);
+            $checkBudhAditya            = $this->checkBudhAditya($planets['Sun'],$planets['Mercury']);
+            $checkVipraChandal          = $this->checkVipraChandal($data['Jupiter'],$data['Rahu']);
+            $checkShrapit               = $this->checkShrapit($data['Saturn'],$data['Rahu'],$data['Ketu']);
+            $checkGrahan                = $this->checkGrahan($data['Sun'],$data['Moon'],$data['Rahu'],$data['Ketu']);
+            $checkPitru                 = $this->checkPitru($planets['Sun'],$planets['Saturn']);
+            $checkKaalSarpa             = $this->checkKaalSarpa($data);
+            $checkNBRY                  = $this->checkNBRY($data);
+            $checkVRY                   = $this->checkVRY($data);
+            $checkAngaraka              = $this->checkAngaraka($data['Mars'],$data['Rahu']);
+            $checkParivartana           = $this->checkParivartana($data);
+            $checkChandraMangal         = $this->checkChandraMangal($planets['Moon'],$planets['Mars']);
+            $checkGajaKesari            = $this->checkGajaKesari($planets['Moon'], $planets['Jupiter']);
+            $checkSasha                 = $this->checkSashaYoga($data['Ascendant'],$data['Moon'],$data['Saturn']);
+            $checkHansa                 = $this->checkHansaYoga($data['Ascendant'],$data['Moon'],$data['Jupiter']);
+            $checkRuchaka               = $this->checkRuchakaYoga($data['Ascendant'], $data['Moon'], $data['Mars']);
+            $checkMalavya               = $this->checkMalavyaYoga($data['Ascendant'], $data['Moon'], $data['Venus']);
+            $checkBhadra                = $this->checkBhadraYoga($data['Ascendant'], $data['Moon'], $data['Mercury']);
+            $checkSunapha               = $this->checkSunapha($data);
+            $checkAnapha                = $this->checkAnapha($data);
+            $checkDhurdura              = $this->checkDhurdura($data);
+            $checkKemdruma              = $this->checkKemdruma($data);
+            $checkAdhiYoga              = $this->checkAdhiYoga($data['Moon'],$data['Mercury'],$data['Jupiter'],$data['Venus']);
+            $checkChatusagara           = $this->checkChatusagara($data);
+            $checkVasumati              = $this->checkVasumati($data);
+            $checkRajlakshana           = $this->checkRajlakshana($data['Ascendant'],$data["Moon"],$data['Mercury'],$data['Jupiter'],$data['Venus']);
+            $checkSakata                = $this->checkSakata($data['Moon'],$data['Jupiter']);
+            $checkAmala                 = $this->checkAmala($data['Ascendant'],$data['Moon'],$data['Mercury'],$data['Jupiter'],$data['Venus']);
+            $checkParvata               = $this->checkParvata($data);
+            $checkKahala                = $this->checkKahala($data);
+            $checkVesi                  = $this->checkVesi($data);
+            $checkObyachari             = $this->checkObyachari($data);
+            $checkMahabhagya            = $this->checkMahabhagyaYoga($user_data, $data);
+            $checkLaxmi                 = $this->checkLaxmi($data);
+            $checkGauri                 = $this->checkGauri($planets);
+            $checkChapa                 = $this->checkChapa($data);
+            $checkSreenatha             = $this->checkSreenatha($data['Ascendant'], $data['Mercury']);
+            $checkMallika               = $this->checkMallika($data);
+            $checkSankha                = $this->checkSankha($data);
+
+            $checkDaridra               = $this->checkDaridra($data);
+            $checkBheri                 = $this->checkBheri($data);
+            $checkMridanga              = $this->checkMridanga($planets);
+            $checkGaja                  = $this->checkGaja($planets);
+            $checkKalnidhi              = $this->checkKalnidhi($data['Ascendant'],$data['Mercury'],$data['Jupiter'],$data['Venus']);
+            $checkAmsavatara            = $this->checkAmsavatara($data);
+            $checkKusuma                = $this->checkKusuma($data);
+            $checkKurma                 = $this->checkKurma($planets);
+            $checkDevendra              = $this->checkDevendra($data);
+
+            $array                      = array_merge($array, $user_data, $checkVish, $checkBudhAditya,
+                                            $checkVipraChandal, $checkShrapit, $checkGrahan, $checkPitru,
+                                            $checkKaalSarpa,$checkNBRY, $checkAngaraka,$checkVRY, $checkParivartana, 
+                                            $checkChandraMangal,$checkGajaKesari,$checkSasha,$checkHansa,
+                                            $checkRuchaka,$checkMalavya,$checkBhadra,$checkSunapha,$checkAnapha,
+                                            $checkDhurdura,$checkKemdruma,$checkAdhiYoga, $checkChatusagara,$checkVasumati,
+                                            $checkRajlakshana,$checkSakata,$checkAmala,$checkParvata,$checkKahala,
+                                            $checkVesi,$checkObyachari, $checkMahabhagya,$checkLaxmi, $checkGauri,
+                                            $checkChapa,$checkSreenatha,$checkMallika,$checkSankha,$checkDaridra,
+                                            $checkBheri,$checkMridanga,$checkGaja,$checkKalnidhi,
+                                            $checkAmsavatara,$checkKusuma,$checkKurma,$checkDevendra);
+            //print_r($array);exit;
+            return $array;
         }
-        
-        $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
-        //print_r($date);exit;
-        $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
-        $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
-        //echo $timestamp." ".$offset;exit;
-        // $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
-        /**
-         * Converting birth date/time to UTC
-         */
-        $utcTimestamp = $timestamp - $offset;
-
-        //echo $utcTimestamp;exit;
-        //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
-
-        $date = date('d.m.Y', $utcTimestamp);
-        $time = date('H:i:s', $utcTimestamp);
-        //echo $date." ".$time;exit;
-        $h_sys = 'P';
-        $output = "";
- 
-        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p0142536m789 -g, -head", $output);
-        //print_r($output);exit;
-
-        # OUTPUT ARRAY
-        # Planet Name, Planet Degree, Planet Speed per day
-        $asc                        = $this->getAscendant($user_data);
-        $planets                    = $this->getPlanets($output);
-        $planets                    = array_merge($asc,$planets);
-        //print_r($planets);exit;
-        $data                       = array();
-        foreach($planets as $key => $planet)
-        {
-            $planet_sign            = $this->calcDetails($planet);
-            $array                  = array($key => $planet_sign);
-            $data                   = array_merge($data, $array);
-        }
-        //print_r($data);exit;
-        $checkVish                  = $this->checkVishYoga($planets['Moon'],$planets['Saturn']);
-        $checkBudhAditya            = $this->checkBudhAditya($planets['Sun'],$planets['Mercury']);
-        $checkVipraChandal          = $this->checkVipraChandal($data['Jupiter'],$data['Rahu']);
-        $checkShrapit               = $this->checkShrapit($data['Saturn'],$data['Rahu'],$data['Ketu']);
-        $checkGrahan                = $this->checkGrahan($data['Sun'],$data['Moon'],$data['Rahu'],$data['Ketu']);
-        $checkPitru                 = $this->checkPitru($planets['Sun'],$planets['Saturn']);
-        $checkKaalSarpa             = $this->checkKaalSarpa($data);
-        $checkNBRY                  = $this->checkNBRY($data);
-        $checkVRY                   = $this->checkVRY($data);
-        $checkAngaraka              = $this->checkAngaraka($data['Mars'],$data['Rahu']);
-        $checkParivartana           = $this->checkParivartana($data);
-        $checkChandraMangal         = $this->checkChandraMangal($planets['Moon'],$planets['Mars']);
-        $checkGajaKesari            = $this->checkGajaKesari($planets['Moon'], $planets['Jupiter']);
-        $checkSasha                 = $this->checkSashaYoga($data['Ascendant'],$data['Moon'],$data['Saturn']);
-        $checkHansa                 = $this->checkHansaYoga($data['Ascendant'],$data['Moon'],$data['Jupiter']);
-        $checkRuchaka               = $this->checkRuchakaYoga($data['Ascendant'], $data['Moon'], $data['Mars']);
-        $checkMalavya               = $this->checkMalavyaYoga($data['Ascendant'], $data['Moon'], $data['Venus']);
-        $checkBhadra                = $this->checkBhadraYoga($data['Ascendant'], $data['Moon'], $data['Mercury']);
-        $checkSunapha               = $this->checkSunapha($data);
-        $checkAnapha                = $this->checkAnapha($data);
-        $checkDhurdura              = $this->checkDhurdura($data);
-        $checkKemdruma              = $this->checkKemdruma($data);
-        $checkAdhiYoga              = $this->checkAdhiYoga($data['Moon'],$data['Mercury'],$data['Jupiter'],$data['Venus']);
-        $checkChatusagara           = $this->checkChatusagara($data);
-        $checkVasumati              = $this->checkVasumati($data);
-        $checkRajlakshana           = $this->checkRajlakshana($data['Ascendant'],$data["Moon"],$data['Mercury'],$data['Jupiter'],$data['Venus']);
-        $checkSakata                = $this->checkSakata($data['Moon'],$data['Jupiter']);
-        $checkAmala                 = $this->checkAmala($data['Ascendant'],$data['Moon'],$data['Mercury'],$data['Jupiter'],$data['Venus']);
-        $checkParvata               = $this->checkParvata($data);
-        $checkKahala                = $this->checkKahala($data);
-        $checkVesi                  = $this->checkVesi($data);
-        $checkObyachari             = $this->checkObyachari($data);
-        $checkMahabhagya            = $this->checkMahabhagyaYoga($user_data, $data);
-        $checkLaxmi                 = $this->checkLaxmi($data);
-        $checkGauri                 = $this->checkGauri($planets);
-        $checkChapa                 = $this->checkChapa($data);
-        $checkSreenatha             = $this->checkSreenatha($data['Ascendant'], $data['Mercury']);
-        $checkMallika               = $this->checkMallika($data);
-        $checkSankha                = $this->checkSankha($data);
-                              
-        $checkDaridra               = $this->checkDaridra($data);
-        $checkBheri                 = $this->checkBheri($data);
-        $checkMridanga              = $this->checkMridanga($planets);
-        $checkGaja                  = $this->checkGaja($planets);
-        $checkKalnidhi              = $this->checkKalnidhi($data['Ascendant'],$data['Mercury'],$data['Jupiter'],$data['Venus']);
-        $checkAmsavatara            = $this->checkAmsavatara($data);
-        $checkKusuma                = $this->checkKusuma($data);
-        $checkKurma                 = $this->checkKurma($planets);
-        $checkDevendra              = $this->checkDevendra($data);
-
-        $array                      = array_merge($array, $user_data, $checkVish, $checkBudhAditya,
-                                        $checkVipraChandal, $checkShrapit, $checkGrahan, $checkPitru,
-                                        $checkKaalSarpa,$checkNBRY, $checkAngaraka,$checkVRY, $checkParivartana, 
-                                        $checkChandraMangal,$checkGajaKesari,$checkSasha,$checkHansa,
-                                        $checkRuchaka,$checkMalavya,$checkBhadra,$checkSunapha,$checkAnapha,
-                                        $checkDhurdura,$checkKemdruma,$checkAdhiYoga, $checkChatusagara,$checkVasumati,
-                                        $checkRajlakshana,$checkSakata,$checkAmala,$checkParvata,$checkKahala,
-                                        $checkVesi,$checkObyachari, $checkMahabhagya,$checkLaxmi, $checkGauri,
-                                        $checkChapa,$checkSreenatha,$checkMallika,$checkSankha,$checkDaridra,
-                                        $checkBheri,$checkMridanga,$checkGaja,$checkKalnidhi,
-                                        $checkAmsavatara,$checkKusuma,$checkKurma,$checkDevendra);
-        //print_r($array);exit;
-        return $array;
     }
     protected function removeRetro($planet)
     {

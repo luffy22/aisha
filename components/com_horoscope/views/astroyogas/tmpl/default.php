@@ -11,6 +11,17 @@ function isMobileDevice() {
     return preg_match("/(android|iPhone|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
 }
 //echo $this->data;	
+if(array_key_exists("no_data", $this->data))
+{
+?>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong><?php echo $this->data['no_data']; ?></strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<?php
+}
 ?>
 <div class="alert alert-info alert-dismissible fade show" role="alert">
     If your location isn't available than add it: <a href="<?php echo JUri::base().'addlocation?redirect=astroyogas'; ?>"><i class="fas fa-plus"></i> Add Location</a>

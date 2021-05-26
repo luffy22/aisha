@@ -13,15 +13,20 @@ class HoroscopeViewSavings extends JViewLegacy
     public $data;
     function display($tpl = null) 
     {
+        $this->data         = $this->get('Data');
         if (count($errors   = $this->get('Errors')))
         {
             JError::raiseError(500, implode('<br />', $errors));
             return false;
         }
-        if(isset($_GET['chart']))
+        if(isset($_GET['chart']) && (!empty($this->data)))
         {
-            $this->data     = $this->get('Data');
             $tpl                = 'savings';
+        }
+        else  if(isset($_GET['chart']) && (empty($this->data)))
+        {
+            $this->data         = array("no_data"=>"Horoscope deleted. Please re-enter details.");
+            $tpl                = null;
         }
         else
         {

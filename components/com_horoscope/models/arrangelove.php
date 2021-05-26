@@ -76,68 +76,74 @@ class HoroscopeModelArrangeLove extends HoroscopeModelLagna
         $chart_id       = str_replace("chart","horo", $chart_id);
         $array          = array();
         $user_data      = $this->getUserData($chart_id);
-        //print_r($user_data);exit;
-        $fname          = $user_data['fname'];
-        $gender         = $user_data['gender'];
-        $chart          = $user_data['chart_type'];
-        $dob_tob        = $user_data['dob_tob'];
-        if(array_key_exists("timezone", $user_data))
-        {        
-            $pob            = $user_data['pob'];
-            $lat            = $user_data['lat'];
-            $lon            = $user_data['lon'];
-            $timezone       = $user_data['timezone'];
+        if(empty($user_data))
+        {
+            return;
         }
         else
         {
-            $lat            = $user_data['latitude'];
-            $lon            = $user_data['longitude'];
-            if($user_data['state'] == "" && $user_data['country'] == "")
-            {
-                $pob    = $user_data['city'];
-            }
-            else if($user_data['state'] == "" && $user_data['country'] != "")
-            {
-                $pob    = $user_data['city'].", ".$user_data['country'];
+            $fname          = $user_data['fname'];
+            $gender         = $user_data['gender'];
+            $chart          = $user_data['chart_type'];
+            $dob_tob        = $user_data['dob_tob'];
+            if(array_key_exists("timezone", $user_data))
+            {        
+                $pob            = $user_data['pob'];
+                $lat            = $user_data['lat'];
+                $lon            = $user_data['lon'];
+                $timezone       = $user_data['timezone'];
             }
             else
             {
-                $pob    = $user_data['city'].", ".$user_data['state'].", ".$user_data['country'];
+                $lat            = $user_data['latitude'];
+                $lon            = $user_data['longitude'];
+                if($user_data['state'] == "" && $user_data['country'] == "")
+                {
+                    $pob    = $user_data['city'];
+                }
+                else if($user_data['state'] == "" && $user_data['country'] != "")
+                {
+                    $pob    = $user_data['city'].", ".$user_data['country'];
+                }
+                else
+                {
+                    $pob    = $user_data['city'].", ".$user_data['state'].", ".$user_data['country'];
+                }
+                $timezone   = $user_data['tmz_words'];
             }
-            $timezone   = $user_data['tmz_words'];
+
+            $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
+
+            $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
+            $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
+            //echo $timestamp." ".$offset;exit;
+            // $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
+            /**
+             * Converting birth date/time to UTC
+             */
+            $utcTimestamp = $timestamp - $offset;
+
+            //echo $utcTimestamp;exit;
+            //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
+
+            $date = date('d.m.Y', $utcTimestamp);
+            $time = date('H:i:s', $utcTimestamp);
+            //echo $date." ".$time;exit;
+            $h_sys = 'P';
+            $output = "";
+
+            exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p0142536m789 -g, -head", $output);
+            //print_r($output);exit;
+
+            # OUTPUT ARRAY
+            # Planet Name, Planet Degree, Planet Speed per day
+            $asc                        = $this->getAscendant($user_data);
+            $planets                    = $this->getPlanets($output);
+            $data                       = array_merge($asc,$planets);
+            $checkLoveArranged          = $this->checkLoveOrArranged($data);
+            $love                       = array_merge($user_data,$checkLoveArranged);
+            return $love;
         }
-        
-        $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
-        
-        $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
-        $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
-        //echo $timestamp." ".$offset;exit;
-        // $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
-        /**
-         * Converting birth date/time to UTC
-         */
-        $utcTimestamp = $timestamp - $offset;
-
-        //echo $utcTimestamp;exit;
-        //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
-
-        $date = date('d.m.Y', $utcTimestamp);
-        $time = date('H:i:s', $utcTimestamp);
-        //echo $date." ".$time;exit;
-        $h_sys = 'P';
-        $output = "";
- 
-        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p0142536m789 -g, -head", $output);
-        //print_r($output);exit;
-
-        # OUTPUT ARRAY
-        # Planet Name, Planet Degree, Planet Speed per day
-        $asc                        = $this->getAscendant($user_data);
-        $planets                    = $this->getPlanets($output);
-        $data                       = array_merge($asc,$planets);
-        $checkLoveArranged          = $this->checkLoveOrArranged($data);
-        $love                       = array_merge($user_data,$checkLoveArranged);
-        return $love;
     }
     protected function checkLoveOrArranged($data)
     {

@@ -76,92 +76,98 @@ class HoroscopeModelFindSpouse extends HoroscopeModelLagna
         $chart_id       = str_replace("chart","horo", $chart_id);
         
         $result         = $this->getUserData($chart_id);
-        
-        $fname          = $result['fname'];
-        $gender         = $result['gender'];
-        $chart          = $result['chart_type'];
-        $dob_tob        = $result['dob_tob'];
-        if(array_key_exists("timezone", $result))
-        {      
-            
-            $pob            = $result['pob'];
-            $lat            = $result['lat'];
-            $lon            = $result['lon'];
-            $timezone       = $result['timezone'];
+        if(empty($result))
+        {
+            return;
         }
         else
         {
-            $lat            = $result['latitude'];
-            $lon            = $result['longitude'];
-            if($result['state'] == "" && $result['country'] == "")
-            {
-                $pob    = $result['city'];
-            }
-            else if($result['state'] == "" && $result['country'] != "")
-            {
-                $pob    = $result['city'].", ".$result['country'];
+            $fname          = $result['fname'];
+            $gender         = $result['gender'];
+            $chart          = $result['chart_type'];
+            $dob_tob        = $result['dob_tob'];
+            if(array_key_exists("timezone", $result))
+            {      
+
+                $pob            = $result['pob'];
+                $lat            = $result['lat'];
+                $lon            = $result['lon'];
+                $timezone       = $result['timezone'];
             }
             else
             {
-                $pob    = $result['city'].", ".$result['state'].", ".$result['country'];
+                $lat            = $result['latitude'];
+                $lon            = $result['longitude'];
+                if($result['state'] == "" && $result['country'] == "")
+                {
+                    $pob    = $result['city'];
+                }
+                else if($result['state'] == "" && $result['country'] != "")
+                {
+                    $pob    = $result['city'].", ".$result['country'];
+                }
+                else
+                {
+                    $pob    = $result['city'].", ".$result['state'].", ".$result['country'];
+                }
+                $timezone   = $result['tmz_words'];
             }
-            $timezone   = $result['tmz_words'];
-        }
-        
-        $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
-        
-        $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
-        $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
-        //echo $timestamp." ".$offset;exit;
-        // $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
-        /**
-         * Converting birth date/time to UTC
-         */
-        $utcTimestamp = $timestamp - $offset;
 
-        //echo $utcTimestamp;exit;
-        //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
+            $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
 
-        $date = date('d.m.Y', $utcTimestamp);
-        $time = date('H:i:s', $utcTimestamp);
-        //echo $date." ".$time;exit;
-        $h_sys = 'P';
-        $output = "";
-        if($gender == "female")
-        {
-            // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
-            exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p15 -g, -head", $output);
-        }
-        else
-        {
-            exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p13 -g, -head", $output);
-        }
-        //print_r($output);exit;
+            $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
+            $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
+            //echo $timestamp." ".$offset;exit;
+            // $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
+            /**
+             * Converting birth date/time to UTC
+             */
+            $utcTimestamp = $timestamp - $offset;
 
-        # OUTPUT ARRAY
-        # Planet Name, Planet Degree, Planet Speed per day
-        $asc            = $this->getAscendant($result);
-        $planets        = $this->getPlanets($output);
-        $data           = array_merge($asc,$planets);
-        //print_r($data);exit;
-        //$details        = $this->getDetails($data);
-        $newdata        = array();
-        foreach($data as $key=>$distance)
-        {
-            // this loop gets the horoscope sign of Ascendant, Moon & Jupiter or Venus
-            $dist           = str_replace(":r","",$distance);
-            $sign           = $this->calcDetails($dist);
-            $sign_num       = array($key."_num"=>$this->getSignNum($sign));
-            $getsign        = array($key."_sign"=>$sign);
-            $newdata        = array_merge($newdata,$getsign,$sign_num);
+            //echo $utcTimestamp;exit;
+            //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
+
+            $date = date('d.m.Y', $utcTimestamp);
+            $time = date('H:i:s', $utcTimestamp);
+            //echo $date." ".$time;exit;
+            $h_sys = 'P';
+            $output = "";
+            if($gender == "female")
+            {
+                // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
+                exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p15 -g, -head", $output);
+            }
+            else
+            {
+                exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p13 -g, -head", $output);
+            }
+            //print_r($output);exit;
+
+            # OUTPUT ARRAY
+            # Planet Name, Planet Degree, Planet Speed per day
+            $asc            = $this->getAscendant($result);
+            $planets        = $this->getPlanets($output);
+            $data           = array_merge($asc,$planets);
+            //print_r($data);exit;
+            //$details        = $this->getDetails($data);
+            $newdata        = array();
+            foreach($data as $key=>$distance)
+            {
+                // this loop gets the horoscope sign of Ascendant, Moon & Jupiter or Venus
+                $dist           = str_replace(":r","",$distance);
+                $sign           = $this->calcDetails($dist);
+                $sign_num       = array($key."_num"=>$this->getSignNum($sign));
+                $getsign        = array($key."_sign"=>$sign);
+                $newdata        = array_merge($newdata,$getsign,$sign_num);
+            }
+            $jup_ven_house      = $this->getHouse($gender, $newdata);
+            $house              = array("house"=>$jup_ven_house);
+            $details         = $this->getSpouseDetails($jup_ven_house);
+
+            $array              = array();
+            $array              = array_merge($array,$result,$house, $details);
+            return $array;
         }
-        $jup_ven_house      = $this->getHouse($gender, $newdata);
-        $house              = array("house"=>$jup_ven_house);
-        $details         = $this->getSpouseDetails($jup_ven_house);
-       
-        $array              = array();
-        $array              = array_merge($array,$result,$house, $details);
-        return $array;
     }
     protected function getSignNum($sign)
     {
