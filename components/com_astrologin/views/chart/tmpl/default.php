@@ -28,10 +28,12 @@ foreach($this->data as $user)
 ?>
 <tr>
     <td><?php echo $i; ?></td>
-    <td><a href="<?php echo JUri::base().'horoscope?chart='.$user->uniq_id ?>"><?php echo $user->fname; ?></a></td>
+    <td><a href="<?php echo JUri::base().'horoscope?chart='.$user->uniq_id; ?>"><?php echo $user->fname; ?></a></td>
     <td><?php echo $date->format('d-m-Y'); ?></td>
     <td><?php echo $date->format('h:i a'); ?></td>
     <td><?php echo $user->city; ?></td>
+    <td><a href="<?php echo JUri::base().'horologin?edituser='.$user->uniq_id; ?>" title="edit horoscope"><i class="fas fa-edit"></i></a></td>
+    <td><i class="fas fa-trash-alt"></i></td>
 </tr>
 <?php 
 $i      = $i+1;
