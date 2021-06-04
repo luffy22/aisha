@@ -8,27 +8,6 @@ $libPath = JPATH_BASE.'/sweph/';
 putenv("PATH=$libPath");
 class HoroscopeModelHoroLogin extends HoroscopeModelLagna
 {
-    public function getData()
-    {
-        $user           = JFactory::getUser();
-        $user_id        = $user->id;
-        $jinput         = JFactory::getApplication()->input;
-        $horo_id        = $jinput->get('edituser', 'default_value', 'filter');
-        $horo_id        = str_replace("chart","horo",$horo_id);
-        
-        $db             = JFactory::getDbo();  // Get db connection
-        $query          = $db->getQuery(true);
-        $query          ->select($db->quoteName(array('a.fname','a.gender','a.chart_type','a.dob_tob','b.country','b.state','b.city','a.loc_id')))
-                        ->from($db->quoteName('#__horo_login','a'))
-                        ->join('RIGHT', $db->quoteName('#__location','b').' ON '.$db->quoteName('a.loc_id')." = ".$db->quoteName('b.id'))
-                        ->where($db->quoteName('a.user_id').' = '.$db->quote($user_id).' AND '.
-                                $db->quoteName('a.uniq_id').' = '.$db->quote($horo_id));
-        $db             ->setQuery($query);
-        $db->execute();
-        $result         = $db->loadAssoc();
-        print_r($result);exit;
-        return $result;
-    }
     public function getTotal($user)
     {
         $db             = JFactory::getDbo();  // Get db connection

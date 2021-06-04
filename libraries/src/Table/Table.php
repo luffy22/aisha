@@ -2,7 +2,7 @@
 /**
  * Joomla! Content Management System
  *
- * @copyright  Copyright (C) 2005 - 2019 Open Source Matters, Inc. All rights reserved.
+ * @copyright  Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -594,18 +594,6 @@ abstract class Table extends \JObject implements \JObservableInterface, \JTableI
 	 */
 	public function bind($src, $ignore = array())
 	{
-		// JSON encode any fields required
-		if (!empty($this->_jsonEncode))
-		{
-			foreach ($this->_jsonEncode as $field)
-			{
-				if (isset($src[$field]) && is_array($src[$field]))
-				{
-					$src[$field] = json_encode($src[$field]);
-				}
-			}
-		}
-
 		// Check if the source value is an array or object
 		if (!is_object($src) && !is_array($src))
 		{
@@ -618,16 +606,28 @@ abstract class Table extends \JObject implements \JObservableInterface, \JTableI
 			);
 		}
 
+		// If the ignore value is a string, explode it over spaces.
+		if (!is_array($ignore))
+		{
+			$ignore = explode(' ', $ignore);
+		}
+
 		// If the source value is an object, get its accessible properties.
 		if (is_object($src))
 		{
 			$src = get_object_vars($src);
 		}
 
-		// If the ignore value is a string, explode it over spaces.
-		if (!is_array($ignore))
+		// JSON encode any fields required
+		if (!empty($this->_jsonEncode))
 		{
-			$ignore = explode(' ', $ignore);
+			foreach ($this->_jsonEncode as $field)
+			{
+				if (isset($src[$field]) && is_array($src[$field]))
+				{
+					$src[$field] = json_encode($src[$field]);
+				}
+			}
 		}
 
 		// Bind the source value, excluding the ignored fields.
@@ -1721,5 +1721,21 @@ abstract class Table extends \JObject implements \JObservableInterface, \JTableI
 		$this->_locked = false;
 
 		return true;
+	}
+
+	/**
+	 * Check if the record has a property (applying a column alias if it exists)
+	 *
+	 * @param   string  $key  key to be checked
+	 *
+	 * @return  boolean
+	 *
+	 * @since   3.9.11
+	 */
+	public function hasField($key)
+	{
+		$key = $this->getColumnAlias($key);
+
+		return property_exists($this, $key);
 	}
 }

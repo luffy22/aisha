@@ -3,7 +3,7 @@
  * @package     Joomla.Administrator
  * @subpackage  com_banners
  *
- * @copyright   Copyright (C) 2005 - 2019 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -53,6 +53,9 @@ class BannersControllerTracks extends JControllerLegacy
 	 */
 	public function display($cachable = false, $urlparams = array())
 	{
+		// Check for request forgeries.
+		$this->checkToken('GET');
+
 		// Get the document object.
 		$vName = 'tracks';
 

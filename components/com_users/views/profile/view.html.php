@@ -3,7 +3,7 @@
  * @package     Joomla.Site
  * @subpackage  com_users
  *
- * @copyright   Copyright (C) 2005 - 2019 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -118,7 +118,6 @@ class UsersViewProfile extends JViewLegacy
 		$app   = JFactory::getApplication();
 		$menus = $app->getMenu();
 		$user  = JFactory::getUser();
-      
 		$title = null;
 
 		// Because the application sets a default page title,

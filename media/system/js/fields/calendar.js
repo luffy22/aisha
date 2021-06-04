@@ -1,5 +1,5 @@
 /**
- * @copyright  Copyright (C) 2005 - 2019 Open Source Matters, Inc. All rights reserved.
+ * @copyright  Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 !(function(window, document){
@@ -234,13 +234,11 @@
 		}
 		this.inputField.value = this.date.print(this.params.dateFormat, this.params.dateType, true);
 
-		if (typeof this.inputField.onchange == "function") {
-			this.inputField.onchange();
-		}
-
 		if (this.dateClicked && typeof this.params.onUpdate === "function") {
 			this.params.onUpdate(this);
 		}
+
+		this.inputField.dispatchEvent(new Event('change', {bubbles: true, cancelable: true}));
 
 		if (this.dateClicked) {
 			this.close();
@@ -798,6 +796,7 @@
 				self.inputField.setAttribute('data-alt-value', "0000-00-00 00:00:00");
 				self.inputField.setAttribute('value', '');
 				self.inputField.value = '';
+				self.inputField.dispatchEvent(new Event('change', {bubbles: true, cancelable: true}));
 			});
 
 		if (this.params.showsTodayBtn) {
@@ -858,10 +857,10 @@
 
 		if (year < this.params.minYear) {                                                                   // Check min,max year
 			year = this.params.minYear;
-			date.getOtherFullYear(this.params.dateType, year);
+			date.setOtherFullYear(this.params.dateType, year);
 		} else if (year > this.params.maxYear) {
 			year = this.params.maxYear;
-			date.getOtherFullYear(this.params.dateType, year);
+			date.setOtherFullYear(this.params.dateType, year);
 		}
 
 		this.params.firstDayOfWeek = firstDayOfWeek;
@@ -960,13 +959,13 @@
 
 			/* remove the selected class  for the hours*/
 			this.resetSelected(hoursEl);
-			if (!this.params.time24) 
-			{ 
-				hoursEl.value = (hrs == "00") ? "12" : hrs; 
-			} 
-			else 
-			{ 
-				hoursEl.value = hrs; 
+			if (!this.params.time24)
+			{
+				hoursEl.value = (hrs == "00") ? "12" : hrs;
+			}
+			else
+			{
+				hoursEl.value = hrs;
 			}
 
 			/* remove the selected class  for the minutes*/

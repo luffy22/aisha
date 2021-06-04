@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+        <layout title="Edit Horoscope">
+                <message>
+                        Login Users can edit horoscope data
+                </message>
+        </layout>
+</metadata>

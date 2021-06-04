@@ -19,10 +19,6 @@ class HoroscopeViewHoroLogin extends JViewLegacy
             JError::raiseError(500, implode('<br />', $errors));
             return false;
         }
-        if(isset($_GET['edituser']))
-        {
-            $this->data         = $this->get('Data');
-        }
         $tpl        = null;
         
         //echo gettype($this->data);
