@@ -80,25 +80,6 @@ function isMobileDevice() {
     </div>
     <input type="hidden" name="horo_user_id" value="<?php echo $id; ?>" />
     <input type="hidden" id="horo_pl_id" name="horo_pl_id" value="0"  />
-    <div class="form-group">
-        <label for="latitude" class="control-label">Latitude</label><br/>
-        <input type="text" id="horo_lat_1" class="form-text1" name="lat_deg" placeholder="deg"  />
-        <input type="text" id="horo_lat_2" class="form-text1" name="lat_min" placeholder="min" />
-        <select class="select2" id="horo_lat_direction" name="lat_dir">
-            <option>N</option>
-            <option>S</option>
-        </select>
-        
-    </div>
-    <div class="form-group">
-        <label for="longitude" class="control-label">Longitude</label><br/>
-        <input type="text" id="horo_long_1" class="form-text1" name="lon_deg" placeholder="deg"  />
-        <input type="text" id="horo_long_2" class="form-text1" name="lon_min" placeholder="min" />
-        <select class="select2" id="horo_long_direction" name="lon_dir">
-            <option>E</option>
-            <option>W</option>
-        </select>
-    </div>
     <div class="btn-group btn-group-lg">
             <button type="submit" class="btn btn-primary btn-lg" name="horosubmit" onclick="javascript:getLagna();return false;">Get Horoscope</button>
             <button type="reset" class="btn btn-danger btn-lg">Reset Form</button>

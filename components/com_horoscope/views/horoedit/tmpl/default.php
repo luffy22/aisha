@@ -102,7 +102,7 @@ function isMobileDevice() {
 	</div>
     <div class="form-group" id="edit_grp_3">
         <label for="dob" class="control-label">Date Of Birth:</label>
-        <input type="text" id="edit_dob" name="edit_dob" class="form-control" placeholder="25/03/1984" min="1900-01-01" max="2030-12-31" value="<?php echo $date->format('d/m/Y'); ?>" />
+        <input type="date" id="edit_dob" name="edit_dob" class="form-control" placeholder="25/03/1984" min="1900-01-01" max="2030-12-31" value="<?php echo $date->format('Y-m-d'); ?>" />
     </div>
     <div class="form-group">
         <label for="dob" class="control-label">Time Of Birth(24 Hour Format):</label><br/>

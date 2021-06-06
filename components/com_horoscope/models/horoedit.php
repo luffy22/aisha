@@ -73,6 +73,33 @@ class HoroscopeModelHoroEdit extends HoroscopeModelLagna
         $app->enqueueMessage("Add location to database to save your chart.", 'warning');
         $app        ->redirect($link);
     }
-    
+    public function getDeletion()
+    {
+        $user           = JFactory::getUser();
+        $user_id        = $user->id;
+        
+        $jinput         = JFactory::getApplication()->input;
+        $horo_id        = $jinput->get('deluser', 'default_value', 'filter');
+        $horo_id        = str_replace("chart","horo",$horo_id);
+        
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+
+        // delete all custom keys for user 1001.
+        $conditions = array(
+                $db->quoteName('user_id') . ' = '.$db->quote($user_id), 
+                $db->quoteName('uniq_id') . ' = ' . $db->quote($horo_id)
+            );
+
+        $query->delete($db->quoteName('#__horo_login'));
+        $query->where($conditions);
+        $db->setQuery($query);
+        $result = $db->execute();
+        
+        $app        = JFactory::getApplication();
+        $link       = JURI::base().'charts';
+        $app->enqueueMessage('Profile deleted successfully.', 'success');
+        $app        ->redirect($link);
+    }
   }  
 ?>

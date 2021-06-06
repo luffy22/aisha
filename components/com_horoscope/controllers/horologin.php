@@ -19,9 +19,7 @@ class HoroscopeControllerHoroLogin extends HoroscopeController
             $chart      = $_POST['horo_chart'];$pob     = $_POST['horo_pob'];
             $dob_tob    = $_POST['horo_dob']." ".$_POST['horo_tob'];
             if($_POST['horo_pl_id'] == "0")
-            {
-              
-               
+            { 
                 //print_r($user_details);exit;
                 $model          = $this->getModel('horologin');  // Add the array to model
                 $data           = $model->notifyUser();

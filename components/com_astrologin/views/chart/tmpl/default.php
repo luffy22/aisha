@@ -33,7 +33,7 @@ foreach($this->data as $user)
     <td><?php echo $date->format('h:i a'); ?></td>
     <td><?php echo $user->city; ?></td>
     <td><a href="<?php echo JUri::base().'horoedit?edituser='.$user->uniq_id; ?>" title="edit horoscope"><i class="fas fa-edit"></i></a></td>
-    <td><i class="fas fa-trash-alt"></i></td>
+    <td><a href="<?php echo JUri::base().'horoedit?deluser='.$user->uniq_id; ?>" title="delete horoscope"><i class="fas fa-trash-alt"></i></a></td>
 </tr>
 <?php 
 $i      = $i+1;

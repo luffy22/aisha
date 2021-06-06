@@ -23,6 +23,10 @@ class HoroscopeViewHoroEdit extends JViewLegacy
         {
             $this->data         = $this->get('Data');
         }
+        if(isset($_GET['deluser']))
+        {
+            $this->get('Deletion');
+        }
         $tpl        = null;
         
         //echo gettype($this->data);
