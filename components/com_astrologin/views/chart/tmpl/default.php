@@ -11,7 +11,6 @@ defined('_JEXEC') or die('Restricted access');
 //print_r($this->pagination);exit;
 
 ?>
-<p class="text-right">Welcome <?php echo $this->usr['username']; ?></p>
 <a href="<?php echo Juri::base().'horologin' ?>"><button class="btn btn-primary btn-large"><i class="fas fa-user-plus"></i> Add</button></a>
 <div class="mb-3"></div>
 <table class="table table-bordered table-striped">

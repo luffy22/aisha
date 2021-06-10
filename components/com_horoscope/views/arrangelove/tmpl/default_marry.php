@@ -67,8 +67,13 @@ else
     }
 }
 ?>
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    <a href="<?php echo JUri::base().'register' ?>">Register</a> with us to save horoscope permanently
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark">Possibility Of Love Marriage</div>
 <table class="table table-bordered table-hover table-striped">
     <tr>
         <th>Name</th>
@@ -113,7 +118,7 @@ else
     </tr>
 </table>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark">Check List For Love Marriage</div>
+<div class="lead alert alert-dark">Possibility Of Love Marriage</div>
 <p><strong>Note: </strong>Most marriages today are done with approval of bride and groom. We recommend 
 you do not get too excited or too upset if your horoscope does not match the criteria provided.</p>
 <div class="mb-3"></div>

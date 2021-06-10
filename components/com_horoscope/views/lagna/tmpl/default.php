@@ -27,6 +27,13 @@ if(array_key_exists("no_data", $this->data))
     If your location isn't available than add it: <a href="<?php echo JUri::base().'addlocation?redirect=horoscope'; ?>"><i class="fas fa-plus"></i> Add Location</a>
 </div>
 <div class="mb-3"></div>
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    <a href="<?php echo JUri::base().'register' ?>">Register</a> with us to save horoscope permanently
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="mb-3"></div>
 <h2>Calculate Horoscope</h2>
 <form role="form" enctype="application/x-www-form-urlencoded" method="post" 
       action="<?php echo JRoute::_('index.php?option=com_horoscope&task=lagna.findlagna'); ?>">

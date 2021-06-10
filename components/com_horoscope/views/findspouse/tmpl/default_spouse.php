@@ -72,10 +72,14 @@ else
     }
 }
 ?>
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    <a href="<?php echo JUri::base().'register' ?>">Register</a> with us to save horoscope permanently
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark"><strong>How & Where To find Spouse</strong></div>
 <div class="container">
-    
 <table class="table table-bordered table-hover table-striped">
 
 	<tr>
@@ -121,6 +125,7 @@ else
 	</tr>
 </table>
 <div class="mb-3"></div>
+<div class="lead alert alert-dark"><strong>How & Where To find Spouse</strong></div>
     <p class="lead">For <?php echo $gender.'s' ?> position of <?php echo $planet ?> is used to know more about future <?php echo $spouse ?>. <?php echo $planet ?> is located in your <?php echo trim($house) ?> House counted from ascendant(First House).</p>
     <div class="mb-3"></div>  
     <?php echo str_replace("planet", $planet, $text); ?>

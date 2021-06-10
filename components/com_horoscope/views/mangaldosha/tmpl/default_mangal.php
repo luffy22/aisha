@@ -66,8 +66,12 @@ else
 }
 ?>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark"><strong>Mangal Dosha Calculator</strong></div>
-    
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    <a href="<?php echo JUri::base().'register' ?>">Register</a> with us to save horoscope permanently
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>  
 <table class="table table-bordered table-hover table-striped">
 
 	<tr>

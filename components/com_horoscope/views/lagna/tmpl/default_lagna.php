@@ -6,6 +6,12 @@
 </style>-->
 </head>
 <body>
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    <a href="<?php echo JUri::base().'register' ?>">Register</a> with us to save horoscope permanently
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 <?php 
 //print_r($this->data);exit;
 $chart_id = $_GET['chart']; //echo $chart_id;exit;
@@ -71,6 +77,7 @@ else
     }
 }
 ?>
+    
     <div class="mb-3"></div>
     <table class="table table-bordered table-hover table-striped">
         <tr>

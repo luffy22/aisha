@@ -21,11 +21,11 @@ class HoroscopeModelHoroLogin extends HoroscopeModelLagna
         $db                 ->setQuery($query);
         $db                 ->execute();
         $total              = $db->loadResult();
-        if($total >= 100)
+        if($total >= 50)
         {
             $app        = JFactory::getApplication();
             $link       = JURI::base().'charts';
-            $app->enqueueMessage('Maximum 100 charts can be added to account', 'warning');
+            $app->enqueueMessage('Maximum 50 charts can be added to account', 'warning');
             $app        ->redirect($link);
         }
         else

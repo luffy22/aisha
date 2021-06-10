@@ -3,6 +3,12 @@
      <title>Where To Invest</title>
 </head>
 <body>
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    <a href="<?php echo JUri::base().'register' ?>">Register</a> with us to save horoscope permanently
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>    
 <?php 
 $chart_id = $_GET['chart']; 
 if(array_key_exists("timezone", $this->data))

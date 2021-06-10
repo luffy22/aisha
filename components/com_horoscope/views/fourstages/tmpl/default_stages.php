@@ -74,9 +74,13 @@ else
     }
 }
 ?>
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    <a href="<?php echo JUri::base().'register' ?>">Register</a> with us to save horoscope permanently
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark"><strong>Four Stages Calculator</strong></div>
-    
 <table class="table table-bordered table-hover table-striped">
 
 	<tr>
@@ -136,6 +140,7 @@ Your browser does not support the HTML5 canvas tag.
         }
    ?>
 </form>
+<div class="mb-3"></div>
 <div class="lead alert alert-dark">Childhood</div>
 <ul class="list-group">
     <li class="list-group-item"><strong>First House/Ascendant controls your Childhood.</strong></li>

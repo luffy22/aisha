@@ -64,6 +64,12 @@ else
     }
 }
 ?>
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    <a href="<?php echo JUri::base().'register' ?>">Register</a> with us to save horoscope permanently
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 <div class="mb-3"></div>
 <div class="lead alert alert-dark">Career Finder</div>
 <table class="table table-bordered table-hover table-striped">
