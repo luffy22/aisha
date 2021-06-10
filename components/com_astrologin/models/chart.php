@@ -23,7 +23,7 @@ class AstrologinModelChart extends JModelItem
         $limitstart		= JRequest::getVar('limitstart', 0, '', 'int');
         $user   = JFactory::getUser();
         $id     = $user->id;
-
+        //echo $id;exit;
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
         $query          ->select($db->quoteName(array('a.uniq_id','a.fname','a.dob_tob','b.city','c.tmz_words')))
@@ -34,6 +34,7 @@ class AstrologinModelChart extends JModelItem
         $query          ->order('Horo_ID ASC');
         $db             ->setQuery($query,$limitstart, $limit);
         $result             = $db->loadObjectList();
+        //print_r($result);exit;
         return $result;
     }
     public function getTotal()

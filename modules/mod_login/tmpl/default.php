@@ -15,6 +15,14 @@ JHtml::_('behavior.keepalive');
 JHtml::_('bootstrap.tooltip');
 
 ?>
+<p class="text-right">
+    <?php
+        $usersConfig = JComponentHelper::getParams('com_users'); ?>
+        <?php if ($usersConfig->get('allowUserRegistration')) : ?>
+            <a href="<?php echo JRoute::_('index.php?option=com_users&view=registration'); ?>">
+            <?php echo JText::_('MOD_LOGIN_REGISTER'); ?> <span class="icon-arrow-right"></span></a>
+    <?php endif; ?>
+</p>
 <form action="<?php echo JRoute::_('index.php', true, $params->get('usesecure', 0)); ?>" method="post" id="login-form" class="form-inline">
 	<?php if ($params->get('pretext')) : ?>
 		<div class="pretext">

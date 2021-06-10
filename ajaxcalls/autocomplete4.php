@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: text/html;charset=utf-8');
-$host   = "localhost";$user = "root";
-$pwd    = "Desai_1985";$db   = "astroisha";
+$host   = "localhost";$user = "astroxou_admin";
+$pwd    = "*Jrp;F.=OKzG";$db   = "astroxou_jvidya";
 $mysqli = new mysqli($host, $user, $pwd, $db);
 $mysqli->set_charset("utf8");
 /* check connection */
