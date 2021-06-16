@@ -1,9 +1,9 @@
 <!--<div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <strong><i class="fas fa-exclamation-circle"></i> Location Closed!</strong> Add Location is currently disabled. Please use nearest location available.
+  <strong><i class="fas fa-exclamation-circle"></i> Location Closed!</strong> Due to misuse and entry of 
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span></button></div>-->
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>Kindly Note!</strong> This feature is to add location not available in list of location. Do not add a location if it is already there. If there are concerns with location accuracy 
+  <strong>Kindly Note!</strong> Do not add a location if it is already available. If there are concerns with location accuracy 
   send them to our <a href="mailto:consult@stroisha.com">contact email</a> 
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
