@@ -14,9 +14,9 @@ defined('_JEXEC') or die();
 $counter        = 0;
 ?>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark">Sun's Tranist</div>
+<div class="lead alert alert-dark">Mars Tranist</div>
 <?php
-for($i = 0; $i<12;$i++)
+for($i = 0; $i<(count($this->data)/3);$i++)
 {
     //echo $this->data["date_".$i];exit;
     $date   = new DateTime(str_replace(".","-",$this->data['date_'.$i])." ".$this->data['time_'.$i], new DateTimeZone('UTC'));

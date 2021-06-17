@@ -6,7 +6,7 @@ JModelLegacy::addIncludePath(JPATH_SITE.'/components/com_horoscope/models/');
 $model = JModelLegacy::getInstance('lagna', 'horoscopeModel');
 $libPath = JPATH_BASE.'/sweph/';
 putenv("PATH=$libPath");
-class HoroscopeModelSunTransit extends HoroscopeModelLagna
+class HoroscopeModelMarsTransit extends HoroscopeModelLagna
 {
     public function getData()
     {
@@ -34,9 +34,9 @@ class HoroscopeModelSunTransit extends HoroscopeModelLagna
         // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
         //swetest -p6 -DD -b1.12.1900 -n100 -s5 -fPTZ -head
         //exec ("swetest -edir$libPath -b1.1.2021 -sid1 -eswe -fPls -p0 -n$day -head", $output);
-        exec("swetest -edir$libPath -b1.1.$year -p0 -n$day -sid1 -eswe -fTPls, -head", $output); 
-        $sun_transit        = $this->getTransitChange($output);
-        return $sun_transit;
+        exec("swetest -edir$libPath -b1.1.$year -p4 -n$day -sid1 -eswe -fTPls, -head", $output); 
+        $mars_transit        = $this->getTransitChange($output);
+        return $mars_transit;
         //print_r($output);exit;
         
     }
@@ -46,21 +46,24 @@ class HoroscopeModelSunTransit extends HoroscopeModelLagna
         $i                  = 0;
         $y                  = 0;
         $array              = array();
-       
+        $round_last			= "";
+		//print_r($output[15]);exit;
         foreach($output as $data)
         {
            $sun                 = trim($data);
            $sun                 = explode(" ",$sun);
-           //print_r($sun[13]);exit;
+           //print_r($sun);exit;
            $date                = $sun[0];
            $planet              = $sun[1];
-           $deg                 = $sun[15];if(empty($deg)){$deg = $sun[16];}
-           $dist                = $sun[18];if(empty($dist)){$dist = $sun[19];}
+           $deg                 = $sun[15];if(empty($deg)){$deg = $sun[14];}
+           $dist                = $sun[18];if(empty($dist)){$dist = $sun[17];}
            $round               = round($deg);
-           //echo $planet." ".$deg." ".$round." ".$dist."<br/>";
+           
+           //echo $date." ".$planet." ".$deg." ".$round." ".$dist."<br/>";
            //echo $round."<br/>";
-           if($round % 30 == "0")
+           if($round % 30 == "0" && $round_last != $round)
            {
+			   $round_last 		= $round;
                if($round == "0"){$round = $round + 360;$deg = $deg + 360;}
                if($round > $deg)
                {
@@ -69,8 +72,8 @@ class HoroscopeModelSunTransit extends HoroscopeModelLagna
                     $sun1        = explode(" ",$sun1);
                     $date1       = $sun1[0];
                     $planet1     = $sun1[1];
-                    $deg1        = $sun1[15];if(empty($deg1)){$deg1 = $sun1[16];}
-                    $dist1       = $sun1[18];if(empty($dist1)){$dist1 = $sun1[19];}
+                    $deg1        = $sun1[15];if(empty($deg1)){$deg1 = $sun1[14];}
+                    $dist1       = $sun1[18];if(empty($dist1)){$dist1 = $sun1[17];}
                     //echo $date1." ".$planet1." ".$deg1." higher ".$dist1."<br/><br/>";
                     $details     = $this->calculateChange($date, $round, $deg, $dist, $y);
                     $array      = array_merge($array, $details);
@@ -82,8 +85,8 @@ class HoroscopeModelSunTransit extends HoroscopeModelLagna
                     $sun1        = explode(" ",$sun1);
                     $date1       = $sun1[0];
                     $planet1     = $sun1[1];
-                    $deg1        = $sun1[15];if(empty($deg1)){$deg1 = $sun1[16];}
-                    $dist1       = $sun1[18];if(empty($dist1)){$dist1 = $sun1[19];}
+                    $deg1        = $sun1[15];if(empty($deg1)){$deg1 = $sun1[14];}
+                    $dist1       = $sun1[18];if(empty($dist1)){$dist1 = $sun1[17];}
                     //echo $date1." ".$planet1." ".$deg1." lower ".$dist1."<br/><br/>";
                     $details     = $this->calculateChange($date1,$round, $deg1, $dist1, $y);
                     $array      = array_merge($array, $details);
@@ -93,6 +96,7 @@ class HoroscopeModelSunTransit extends HoroscopeModelLagna
            $i++;
            
         }
+        //exit;
         return $array;
         
     }

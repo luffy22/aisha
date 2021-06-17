@@ -35,3 +35,4 @@
 2021-06-14T11:17:08+00:00	INFO ::1	joomlafailure	Username and password do not match or you do not have an account yet.
 2021-06-14T11:17:10+00:00	INFO ::1	joomlafailure	Username and password do not match or you do not have an account yet.
 2021-06-14T11:17:18+00:00	INFO ::1	joomlafailure	Username and password do not match or you do not have an account yet.
+2021-06-17T11:34:10+00:00	INFO ::1	joomlacanceled	
