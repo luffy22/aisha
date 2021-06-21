@@ -49,13 +49,13 @@ class HoroscopeModelSunTransit extends HoroscopeModelLagna
        
         foreach($output as $data)
         {
-           $sun                 = trim($data);
+           $sun                 = trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $data)));
            $sun                 = explode(" ",$sun);
-           //print_r($sun[13]);exit;
+           //print_r($sun);exit;
            $date                = $sun[0];
            $planet              = $sun[1];
-           $deg                 = $sun[15];if(empty($deg)){$deg = $sun[16];}
-           $dist                = $sun[18];if(empty($dist)){$dist = $sun[19];}
+           $deg                 = $sun[2];
+           $dist                = $sun[3];
            $round               = round($deg);
            //echo $planet." ".$deg." ".$round." ".$dist."<br/>";
            //echo $round."<br/>";
@@ -65,12 +65,13 @@ class HoroscopeModelSunTransit extends HoroscopeModelLagna
                if($round > $deg)
                {
                     //echo $date." ".$planet." ".$deg." ".$round." ".$dist."<br/>";
-                    $sun1        = trim($output[$i+1]);
+                    $sun1        = trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $output[$i+1])));
                     $sun1        = explode(" ",$sun1);
+                    //print_r($sun1);exit;
                     $date1       = $sun1[0];
                     $planet1     = $sun1[1];
-                    $deg1        = $sun1[15];if(empty($deg1)){$deg1 = $sun1[16];}
-                    $dist1       = $sun1[18];if(empty($dist1)){$dist1 = $sun1[19];}
+                    $deg1        = $sun1[2];
+                    $dist1       = $sun1[3];
                     //echo $date1." ".$planet1." ".$deg1." higher ".$dist1."<br/><br/>";
                     $details     = $this->calculateChange($date, $round, $deg, $dist, $y);
                     $array      = array_merge($array, $details);
@@ -78,12 +79,13 @@ class HoroscopeModelSunTransit extends HoroscopeModelLagna
                 else
                 {
                     //echo $date." ".$planet." ".$deg." ".$round." ".$dist."<br/>";
-                    $sun1        = trim($output[$i-1]);
+                    $sun1        = trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $output[$i-1])));
                     $sun1        = explode(" ",$sun1);
+                    //print_r($sun1);exit;
                     $date1       = $sun1[0];
                     $planet1     = $sun1[1];
-                    $deg1        = $sun1[15];if(empty($deg1)){$deg1 = $sun1[16];}
-                    $dist1       = $sun1[18];if(empty($dist1)){$dist1 = $sun1[19];}
+                    $deg1        = $sun1[2];
+                    $dist1       = $sun1[3];
                     //echo $date1." ".$planet1." ".$deg1." lower ".$dist1."<br/><br/>";
                     $details     = $this->calculateChange($date1,$round, $deg1, $dist1, $y);
                     $array      = array_merge($array, $details);

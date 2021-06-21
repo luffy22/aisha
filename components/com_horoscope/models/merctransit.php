@@ -6,7 +6,7 @@ JModelLegacy::addIncludePath(JPATH_SITE.'/components/com_horoscope/models/');
 $model = JModelLegacy::getInstance('lagna', 'horoscopeModel');
 $libPath = JPATH_BASE.'/sweph/';
 putenv("PATH=$libPath");
-class HoroscopeModelMarsTransit extends HoroscopeModelLagna
+class HoroscopeModelMercTransit extends HoroscopeModelLagna
 {
     public function getData()
     {
@@ -34,9 +34,9 @@ class HoroscopeModelMarsTransit extends HoroscopeModelLagna
         // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
         //swetest -p6 -DD -b1.12.1900 -n100 -s5 -fPTZ -head
         //exec ("swetest -edir$libPath -b1.1.2021 -sid1 -eswe -fPls -p0 -n$day -head", $output);
-        exec("swetest -edir$libPath -b1.1.$year -p4 -n$day -sid1 -eswe -fTPls, -head", $output); 
-        $mars_transit        = $this->getTransitChange($output);
-        return $mars_transit;
+        exec("swetest -edir$libPath -b1.1.$year -p2 -n$day -sid1 -eswe -fTPls, -head", $output); 
+        $merc_transit        = $this->getTransitChange($output);
+        //return $merc_transit;
         //print_r($output);exit;
         
     }
@@ -47,7 +47,7 @@ class HoroscopeModelMarsTransit extends HoroscopeModelLagna
         $y                  = 0;
         $array              = array();
         $round_last			= "";
-        //print_r($output[303]);exit;
+        //print_r($output[38]);exit;
         foreach($output as $data)
         {
            $sun                 = trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $data)));
@@ -59,7 +59,7 @@ class HoroscopeModelMarsTransit extends HoroscopeModelLagna
            $dist                = $sun[3];
            $round               = round($deg);
            
-           //echo $date." ".$planet." ".$deg." ".$round." ".$dist."<br/>";
+           echo $date." ".$planet." ".$deg." ".$round." ".$dist."<br/>";
            //echo $round."<br/>";
            if($round % 30 == "0" && $round_last != $round)
            {
@@ -67,28 +67,27 @@ class HoroscopeModelMarsTransit extends HoroscopeModelLagna
                if($round == "0"){$round = $round + 360;$deg = $deg + 360;}
                if($round > $deg)
                {
-                    echo $date." ".$planet." ".$deg." ".$round." ".$dist."<br/>";
+                    //echo $date." ".$planet." ".$deg." ".$round." ".$dist."<br/>";
                     $sun1        = trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $output[$i+1])));
                     $sun1        = explode(" ",$sun1);
                     $date1       = $sun1[0];
                     $planet1     = $sun1[1];
                     $deg1        = $sun1[2];
                     $dist1       = $sun1[3];
-                    
-                    echo $date1." ".$planet1." ".$deg1." higher ".$dist1."<br/><br/>";
+                    //echo $date1." ".$planet1." ".$deg1." higher ".$dist1."<br/><br/>";
                     //$details     = $this->calculateChange($date, $round, $deg, $dist, $y);
                     //$array      = array_merge($array, $details);
                 }
                 else
                 {
-                    echo $date." ".$planet." ".$deg." ".$round." ".$dist."<br/>";
+                    //echo $date." ".$planet." ".$deg." ".$round." ".$dist."<br/>";
                     $sun1        = trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $output[$i-1])));
                     $sun1        = explode(" ",$sun1);
                     $date1       = $sun1[0];
                     $planet1     = $sun1[1];
                     $deg1        = $sun1[2];
                     $dist1       = $sun1[3];
-                    echo $date1." ".$planet1." ".$deg1." lower ".$dist1."<br/><br/>";
+                    //echo $date1." ".$planet1." ".$deg1." lower ".$dist1."<br/><br/>";
                     //$details     = $this->calculateChange($date1,$round, $deg1, $dist1, $y);
                     //$array      = array_merge($array, $details);
                 }
