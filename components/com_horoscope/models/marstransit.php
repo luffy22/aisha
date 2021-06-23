@@ -33,11 +33,11 @@ class HoroscopeModelMarsTransit extends HoroscopeModelLagna
         $output = "";
         // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
         //swetest -p6 -DD -b1.12.1900 -n100 -s5 -fPTZ -head
-        //exec ("swetest -edir$libPath -b1.1.2021 -sid1 -eswe -fPls -p0 -n$day -head", $output);
+        //exec("swetest -edir$libPath -b1.1.2021 -eswe -sid1 -g -fPTls -p0 -n365, -head", $output);
         exec("swetest -edir$libPath -b1.1.$year -p4 -n$day -sid1 -eswe -fTPls, -head", $output); 
-        $mars_transit        = $this->getTransitChange($output);
-        return $mars_transit;
-        //print_r($output);exit;
+        //$mars_transit        = $this->getTransitChange($output);
+        //return $mars_transit;
+        print_r($output);exit;
         
     }
     protected function getTransitChange($output)
@@ -61,13 +61,14 @@ class HoroscopeModelMarsTransit extends HoroscopeModelLagna
            
            //echo $date." ".$planet." ".$deg." ".$round." ".$dist."<br/>";
            //echo $round."<br/>";
-           if($round % 30 == "0" && $round_last != $round)
+           if($round % 30 == "0")
            {
-               $round_last 		= $round;
+               echo $date." ".$planet." ".$deg." ".$round." ".$dist."<br/>";
+               //$round_last 		= $round;
                if($round == "0"){$round = $round + 360;$deg = $deg + 360;}
-               if($round > $deg)
+               if($round > $deg && $dist > 0)
                {
-                    echo $date." ".$planet." ".$deg." ".$round." ".$dist."<br/>";
+                    //echo $date." ".$planet." ".$deg." ".$round." ".$dist." add"."<br/>";
                     $sun1        = trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $output[$i+1])));
                     $sun1        = explode(" ",$sun1);
                     $date1       = $sun1[0];
@@ -75,21 +76,47 @@ class HoroscopeModelMarsTransit extends HoroscopeModelLagna
                     $deg1        = $sun1[2];
                     $dist1       = $sun1[3];
                     
-                    echo $date1." ".$planet1." ".$deg1." higher ".$dist1."<br/><br/>";
-                    //$details     = $this->calculateChange($date, $round, $deg, $dist, $y);
+                    //echo $date1." ".$planet1." ".$deg1." higher ".$dist1." add"."<br/><br/>";
+                    //$details     = $this->calculateChange($date, $round, $deg, $dist, $y, "add");
                     //$array      = array_merge($array, $details);
                 }
-                else
+                else if($deg > $round && $dist > 0)
                 {
-                    echo $date." ".$planet." ".$deg." ".$round." ".$dist."<br/>";
+                    //echo $date." ".$planet." ".$deg." ".$round." ".$dist." add"."<br/>";
                     $sun1        = trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $output[$i-1])));
                     $sun1        = explode(" ",$sun1);
                     $date1       = $sun1[0];
                     $planet1     = $sun1[1];
                     $deg1        = $sun1[2];
                     $dist1       = $sun1[3];
-                    echo $date1." ".$planet1." ".$deg1." lower ".$dist1."<br/><br/>";
-                    //$details     = $this->calculateChange($date1,$round, $deg1, $dist1, $y);
+                    //echo $date1." ".$planet1." ".$deg1." lower ".$dist1." add"."<br/><br/>";
+                    //$details     = $this->calculateChange($date1,$round, $deg1, $dist1, $y, "add");
+                    //$array      = array_merge($array, $details);
+                }
+                else if($round > $deg && $dist < 0)
+                {
+                    //echo $date." ".$planet." ".$deg." ".$round." ".$dist." sub"."<br/>";
+                    $sun1        = trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $output[$i-1])));
+                    $sun1        = explode(" ",$sun1);
+                    $date1       = $sun1[0];
+                    $planet1     = $sun1[1];
+                    $deg1        = $sun1[2];
+                    $dist1       = $sun1[3];
+                    //echo $date1." ".$planet1." ".$deg1." lower ".$dist1." sub"."<br/><br/>";
+                    //$details     = $this->calculateChange($date, $round, $deg, $dist, $y, "sub");
+                    //$array      = array_merge($array, $details);
+                }
+                else
+                {
+                    //echo $date." ".$planet." ".$deg." ".$round." ".$dist." sub"."<br/>";
+                    $sun1        = trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $output[$i+1])));
+                    $sun1        = explode(" ",$sun1);
+                    $date1       = $sun1[0];
+                    $planet1     = $sun1[1];
+                    $deg1        = $sun1[2];
+                    $dist1       = $sun1[3];
+                    //echo $date1." ".$planet1." ".$deg1." higher ".$dist1." sub"."<br/><br/>";
+                    //$details     = $this->calculateChange($date1,$round, $deg1, $dist1, $y, "sub");
                     //$array      = array_merge($array, $details);
                 }
                 $y++;
@@ -101,7 +128,7 @@ class HoroscopeModelMarsTransit extends HoroscopeModelLagna
         //return $array;
         
     }
-    protected function calculateChange($date,$round, $deg, $dist, $y)
+    protected function calculateChange($date,$round, $deg, $dist, $y, $sign)
     {
         $diff               = $round - $deg;
         $get_dist           = (1440*round($diff,2))/round($dist,2);

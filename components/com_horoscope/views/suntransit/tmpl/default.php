@@ -20,9 +20,9 @@ for($i = 0; $i<12;$i++)
 {
     //echo $this->data["date_".$i];exit;
     $date   = new DateTime(str_replace(".","-",$this->data['date_'.$i])." ".$this->data['time_'.$i], new DateTimeZone('UTC'));
-    $date->setTimezone(new DateTimeZone('Asia/Kolkata'));
+    //$date->setTimezone(new DateTimeZone('Asia/Kolkata'));
     echo $date->format('d-m-Y')."  ";
-    echo $date->format('h:i:s a')." ";
+    echo $date->format('h:i a')." ";
     echo $this->data['sign_'.$i]."<br/>";
 }
 unset($this->data);
