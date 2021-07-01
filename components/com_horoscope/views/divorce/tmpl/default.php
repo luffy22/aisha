@@ -27,12 +27,20 @@ if(array_key_exists("no_data", $this->data))
     If your location isn't available than add it: <a href="<?php echo JUri::base().'addlocation?redirect=divorce'; ?>"><i class="fas fa-plus"></i> Add Location</a>
 </div>
 <div class="mb-3"></div>
+<?php
+$user =& JFactory::getUser();
+if($user->id == "0")
+{
+?>
 <div class="alert alert-info alert-dismissible fade show" role="alert">
-    <a href="<?php echo JUri::base().'register' ?>">Register</a> with us to save horoscope permanently
+    <a href="<?php echo JUri::base().'register' ?>">Register</a> with us to save upto fifty horoscopes
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
+<?php
+}
+?>
 <div class="mb-3"></div>
 <h3>Enter Your Birth Details</h3>
 <form role="form" enctype="application/x-www-form-urlencoded" method="post" 
