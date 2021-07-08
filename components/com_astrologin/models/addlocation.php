@@ -22,6 +22,7 @@ class AstroLoginModelAddlocation extends JModelItem
         $city               = $details['city'];
         $state              = $details['state'];
         $country 			= $details['country'];
+        
         //$country            = strtr($details['country'], $normalizeChars);;
         $lat                = $details['lat'];
         $lon                = $details['lon'];
