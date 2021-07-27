@@ -11,7 +11,9 @@ class AstrologinControllerAddlocation extends AstroLoginController
             $city       = $_POST['loc_city'];
             $state      = $_POST['loc_state'];
             $country    = $_POST['loc_country'];
-            $array 		= array("Mysore","Chembur","Mumbai","kolkata","Delhi");
+            $ip_addr 	= $_POST['ip_addr'];
+            $array 		= array("Mysore","Chembur","Mumbai","kolkata","Delhi","Coimbatore","New Delhi",
+                                        "Ahmedabad","Palakkad");
 			if(in_array($city, $array) || strpos($city, 'chembur')!== false)
 			{
 				$app = JFactory::getApplication();
@@ -41,7 +43,7 @@ class AstrologinControllerAddlocation extends AstroLoginController
             //echo $lat." ".$lon;exit;
             $details    = array(
                                 "city"=>$city,"state"=>$state,"country"=>$country,
-                                "lat"=>$lat,"lon"=>$lon,"redirect"=>$redirect
+                                "ip_addr"=>$ip_addr,"lat"=>$lat,"lon"=>$lon,"redirect"=>$redirect
                                 );
             //print_r($details);exit;
             $model          = $this->getModel('addlocation');  // Add the array to model

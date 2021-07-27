@@ -97,8 +97,8 @@ if($user->id == "0")
     <input type="hidden" id="fspouse_tmz" name="fspouse_tmz"  />
     <div class="form-group">
         <label for="latitude" class="control-label">Latitude</label><br/>
-        <input type="text" id="fspouse_lat_1" class="form-text1" name="fspouse_lat_deg" placeholder="deg"  />
-        <input type="text" id="fspouse_lat_2" class="form-text1" name="fspouse_lat_min" placeholder="min" />
+        <input type="text" id="fspouse_lat_1" class="form-text1" name="fspouse_lat_deg" maxlength="2" placeholder="deg"  />
+        <input type="text" id="fspouse_lat_2" class="form-text1" name="fspouse_lat_min" maxlength="2" placeholder="min" />
         <select class="select2" id="fspouse_lat_direction" name="fspouse_lat_dir">
             <option>N</option>
             <option>S</option>
@@ -107,8 +107,8 @@ if($user->id == "0")
     </div>
     <div class="form-group">
         <label for="longitude" class="control-label">Longitude</label><br/>
-        <input type="text" id="fspouse_long_1" class="form-text1" name="fspouse_lon_deg" placeholder="deg"  />
-        <input type="text" id="fspouse_long_2" class="form-text1" name="fspouse_lon_min" placeholder="min" />
+        <input type="text" id="fspouse_long_1" class="form-text1" name="fspouse_lon_deg" maxlength="3" placeholder="deg"  />
+        <input type="text" id="fspouse_long_2" class="form-text1" name="fspouse_lon_min" maxlength="2" placeholder="min" />
         <select class="select2" id="fspouse_long_direction" name="fspouse_lon_dir">
             <option>E</option>
             <option>W</option>

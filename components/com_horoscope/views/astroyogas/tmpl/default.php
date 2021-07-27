@@ -97,8 +97,8 @@ if($user->id == "0")
     <input type="hidden" id="yogas_tmz" name="yogas_tmz"  />
     <div class="form-group">
         <label for="latitude" class="control-label">Latitude</label><br/>
-        <input type="text" id="yogas_lat_1" class="form-text1" name="yogas_lat_deg"  />
-        <input type="text" id="yogas_lat_2" class="form-text1" name="yogas_lat_min" />
+        <input type="text" id="yogas_lat_1" class="form-text1" name="yogas_lat_deg" maxlength="2" placeholder="deg"  />
+        <input type="text" id="yogas_lat_2" class="form-text1" name="yogas_lat_min" maxlength="2" placeholder="min" />
         <select class="select2" id="yogas_lat_direction" name="yogas_lat_dir">
             <option>N</option>
             <option>S</option>
@@ -107,8 +107,8 @@ if($user->id == "0")
     </div>
     <div class="form-group">
         <label for="longitude" class="control-label">Longitude</label><br/>
-        <input type="text" id="yogas_long_1" class="form-text1" name="yogas_lon_deg"  />
-        <input type="text" id="yogas_long_2" class="form-text1" name="yogas_lon_min" />
+        <input type="text" id="yogas_long_1" class="form-text1" name="yogas_lon_deg" maxlength="3" placeholder="deg" />
+        <input type="text" id="yogas_long_2" class="form-text1" name="yogas_lon_min" maxlength="2" placeholder="min" />
         <select class="select2" id="yogas_long_direction" name="yogas_lon_dir">
             <option>E</option>
             <option>W</option>

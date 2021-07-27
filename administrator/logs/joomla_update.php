@@ -35,3 +35,11 @@
 2021-06-03T10:55:32+00:00	INFO ::1	update	Deleting removed files and folders.
 2021-06-03T10:55:34+00:00	INFO ::1	update	Cleaning up after installation.
 2021-06-03T10:55:34+00:00	INFO ::1	update	Update to version 3.9.27 is complete.
+2021-07-24T06:10:49+00:00	INFO ::1	update	Update started by user Astro Isha (222). Old version is 3.9.27.
+2021-07-24T06:10:53+00:00	INFO ::1	update	Downloading update file from https://downloads.joomla.org/cms/joomla3/3-9-28/Joomla_3.9.28-Stable-Update_Package.zip.
+2021-07-24T06:11:05+00:00	INFO ::1	update	File Joomla_3.9.28-Stable-Update_Package.zip downloaded.
+2021-07-24T06:11:06+00:00	INFO ::1	update	Starting installation of new version.
+2021-07-24T06:11:08+00:00	INFO ::1	update	Finalising installation.
+2021-07-24T06:11:09+00:00	INFO ::1	update	Deleting removed files and folders.
+2021-07-24T06:11:11+00:00	INFO ::1	update	Cleaning up after installation.
+2021-07-24T06:11:11+00:00	INFO ::1	update	Update to version 3.9.28 is complete.

@@ -22,18 +22,26 @@ class AstroLoginModelAddlocation extends JModelItem
         $city               = $details['city'];
         $state              = $details['state'];
         $country 			= $details['country'];
-        
+        if($country == "India" || $country == "india")
+        {
+            $tmz            = '251';
+        }
+        else 
+        {
+            $tmz            = '';
+        }
         //$country            = strtr($details['country'], $normalizeChars);;
         $lat                = $details['lat'];
         $lon                = $details['lon'];
+        $ip_addr 			= $details['ip_addr'];
         $redirect           = $details['redirect'];
         
         $db                 = JFactory::getDbo();  // Get db connection
         $query              = $db->getQuery(true);
-         $columns        = array('city','state','country','latitude','longitude');
+         $columns        = array('city','state','country','latitude','longitude','timezone','ip_addr');
         $values         = array(
                                 $db->quote($city),$db->quote($state),$db->quote($country),
-                                $db->quote($lat),$db->quote($lon));
+                                $db->quote($lat),$db->quote($lon),$db->quote($tmz),$db->quote($ip_addr));
         // Prepare the insert query
         $query          ->insert($db->quoteName('#__location'))
                         ->columns($db->quoteName($columns))
@@ -43,6 +51,55 @@ class AstroLoginModelAddlocation extends JModelItem
         $result          = $db->query();
         if($result)
         {
+			$query 			->clear();
+			$query          ->select($db->quoteName(array('ip_value','add_location')));
+			$query          ->from($db->quoteName('#__banned_ip'));
+			$query          ->where($db->quoteName('ip_value').' = '.$db->quote($ip_addr));
+			$db             ->setQuery($query);
+			$db->execute();
+
+			$num_rows = $db->getNumRows();
+			if($num_rows>0)
+			{
+				$row 			= $db->loadAssoc();
+				$loc_add 		= $row['add_location'];
+				$loc_add 		= $loc_add + 1;
+				$query->clear();
+				
+				// Fields to update.
+				$fields = array(
+					$db->quoteName('add_location') . ' = ' . $db->quote($loc_add));
+
+				// Conditions for which records should be updated.
+				$conditions = array(
+					$db->quoteName('ip_value'). ' = ' . $db->quote($ip_addr)
+				);
+
+				$query->update($db->quoteName('#__banned_ip'))->set($fields)->where($conditions);
+
+				$db->setQuery($query);
+
+				$result = $db->execute();
+			}
+			else
+			{
+				$query->clear();
+				// Insert columns.
+				$columns = array('ip_value','add_location');
+
+				// Insert values.
+				$values = array($db->quote($ip_addr), $db->quote('1'));
+
+				// Prepare the insert query.
+				$query
+					->insert($db->quoteName('#__banned_ip'))
+					->columns($db->quoteName($columns))
+					->values(implode(',', $values));
+
+				// Set the query using our newly populated query object and execute it.
+				$db->setQuery($query);
+				$db->execute();
+			}
             $mailer     = JFactory::getMailer();
             $config     = JFactory::getConfig();
             $app        = JFactory::getApplication(); 

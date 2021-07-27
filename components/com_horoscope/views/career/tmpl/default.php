@@ -96,8 +96,8 @@ if($user->id == "0")
     <input type="hidden" id="career_tmz" name="career_tmz"  />
     <div class="form-group">
         <label for="latitude" class="control-label">Latitude</label><br/>
-        <input type="text" id="career_lat_1" class="form-text1" name="career_lat_deg"  />
-        <input type="text" id="career_lat_2" class="form-text1" name="career_lat_min" />
+        <input type="text" id="career_lat_1" class="form-text1" name="career_lat_deg" maxlength="2" placeholder="deg" />
+        <input type="text" id="career_lat_2" class="form-text1" name="career_lat_min" maxlength="2" placeholder="min" />
         <select class="select2" id="career_lat_direction" name="career_lat_dir">
             <option>N</option>
             <option>S</option>
@@ -106,8 +106,8 @@ if($user->id == "0")
     </div>
     <div class="form-group">
         <label for="longitude" class="control-label">Longitude</label><br/>
-        <input type="text" id="career_long_1" class="form-text1" name="career_lon_deg"  />
-        <input type="text" id="career_long_2" class="form-text1" name="career_lon_min" />
+        <input type="text" id="career_long_1" class="form-text1" name="career_lon_deg" maxlength="3" placeholder="deg" />
+        <input type="text" id="career_long_2" class="form-text1" name="career_lon_min" maxlength="2" placeholder="min" />
         <select class="select2" id="career_long_direction" name="career_lon_dir">
             <option>E</option>
             <option>W</option>

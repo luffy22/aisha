@@ -89,6 +89,7 @@ if(isset($_GET['redirect']) && $_GET['redirect'] == "horologin")
             <option>W</option>
         </select>
     </div>
+    <input type="hidden" id="ip_addr" name="ip_addr" value="<?php echo $_SERVER['REMOTE_ADDR']; ?>" />
     <div class="form-group">
         <button type="submit" class="btn btn-primary btn-lg" name="loc_submit"><i class="fas fa-plus"></i> Add</button>
     </div>

@@ -97,8 +97,8 @@ if($user->id == "0")
     <input type="hidden" id="marry_tmz" name="marry_tmz"  />
     <div class="form-group">
         <label for="latitude" class="control-label">Latitude</label><br/>
-        <input type="text" id="marry_lat_1" class="form-text1" name="marry_lat_deg"  />
-        <input type="text" id="marry_lat_2" class="form-text1" name="marry_lat_min" />
+        <input type="text" id="marry_lat_1" class="form-text1" name="marry_lat_deg" maxlength="2" placeholder="deg" />
+        <input type="text" id="marry_lat_2" class="form-text1" name="marry_lat_min" maxlength="2" placeholder="min" />
         <select class="select2" id="marry_lat_direction" name="marry_lat_dir">
             <option>N</option>
             <option>S</option>
@@ -107,8 +107,8 @@ if($user->id == "0")
     </div>
     <div class="form-group">
         <label for="longitude" class="control-label">Longitude</label><br/>
-        <input type="text" id="marry_long_1" class="form-text1" name="marry_lon_deg"  />
-        <input type="text" id="marry_long_2" class="form-text1" name="marry_lon_min" />
+        <input type="text" id="marry_long_1" class="form-text1" name="marry_lon_deg" maxlength="3" placeholder="deg"  />
+        <input type="text" id="marry_long_2" class="form-text1" name="marry_lon_min" maxlength="2" placeholder="min" />
         <select class="select2" id="marry_long_direction" name="marry_lon_dir">
             <option>E</option>
             <option>W</option>
