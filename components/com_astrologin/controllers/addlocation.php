@@ -8,12 +8,12 @@ class AstrologinControllerAddlocation extends AstroLoginController
         if(isset($_POST['loc_submit']))
         {
             $redirect   = $_POST['loc_redirect'];
-            $city       = $_POST['loc_city'];
+            $city       = ucfirst($_POST['loc_city']);
             $state      = $_POST['loc_state'];
             $country    = $_POST['loc_country'];
             $ip_addr 	= $_POST['ip_addr'];
             $array 		= array("Mysore","Chembur","Mumbai","kolkata","Delhi","Coimbatore","New Delhi",
-                                        "Ahmedabad","Palakkad");
+                                        "Ahmedabad","Palakkad","Vadodara","Surat");
 			if(in_array($city, $array) || strpos($city, 'chembur')!== false)
 			{
 				$app = JFactory::getApplication();

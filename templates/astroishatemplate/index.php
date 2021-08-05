@@ -65,7 +65,9 @@ window.cookieconsent.initialise({
 <body>
 <div id="fb-root"></div>
 <div class="container-fluid">
+	<p>
     <jdoc:include type="modules" name="top" />
+    </p>
     <h3 class="display-4"><a id="display-2" href="<?php echo JUri::base(); ?>" title="Navigate to Home Page"><img src="<?php echo JUri::base(); ?>/logo.png" title="Click to navigate to Home Page" class="img-fluid" />Astro Isha</a></h3>
     <div class="row">
     <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12" id="main">

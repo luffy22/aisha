@@ -59,8 +59,9 @@ class HoroscopeModelSunTransit extends HoroscopeModelLagna
            $round               = round($deg);
            //echo $planet." ".$deg." ".$round." ".$dist."<br/>";
            //echo $round."<br/>";
-           if($round % 30 == "0")
+           if($round % 30 == "0" && $round_last = $round)
            {
+               $round           = $round;
                if($round == "0"){$round = $round + 360;$deg = $deg + 360;}
                if($round > $deg)
                {

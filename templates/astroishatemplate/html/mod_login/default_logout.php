@@ -10,7 +10,8 @@
 defined('_JEXEC') or die;
 JHtml::_('behavior.keepalive');
 ?>
-<div class="p-2">
+<div class="container-fluid">
+<div class="p-2 d-flex justify-content-end">
 <form action="<?php echo JRoute::_('index.php', true, $params->get('usesecure', 0)); ?>" method="post" id="login-form" class="form-vertical">
 <?php if ($params->get('greeting', 1)) : ?>
     <div class="float-right">
@@ -35,4 +36,5 @@ JHtml::_('behavior.keepalive');
 		<?php echo JHtml::_('form.token'); ?>
     </div>
 </form>
+</div>
 </div>
