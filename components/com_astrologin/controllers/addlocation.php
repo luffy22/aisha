@@ -13,32 +13,34 @@ class AstrologinControllerAddlocation extends AstroLoginController
             $country    = $_POST['loc_country'];
             $ip_addr 	= $_POST['ip_addr'];
             $array 		= array("Mysore","Chembur","Mumbai","kolkata","Delhi","Coimbatore","New Delhi",
-                                        "Ahmedabad","Palakkad","Vadodara","Surat");
-			if(in_array($city, $array) || strpos($city, 'chembur')!== false)
-			{
-				$app = JFactory::getApplication();
-				$link 	= JUri::base().'addlocation';
-				$msg    =  'You are not allowed to add this location';
-                $msgType    = "warning";
-                $app->redirect($redirect, $msg,$msgType);
-			}
-			
-			if($_POST['lat_dir'] == "N")
-			{
-				$lat    = $_POST['lat_deg'].".".$_POST['lat_min'];
-			}
-			else if($_POST['lat_dir'] == "S")
-			{
-				$lat    = "-".$_POST['lat_deg'].".".$_POST['lat_min'];
-			}
-			if($_POST['lon_dir'] == "E")
-			{
-				$lon    = $_POST['lon_deg'].".".$_POST['lon_min'];
-			}
-			else if($_POST['lon_dir'] == "W")
-			{
-				$lon    = "-".$_POST['lon_deg'].".".$_POST['lon_min'];
-			}
+                                        "Ahmedabad","Palakkad","Vadodara","Surat","Chandigarh","Amritsar","Sao Paulo",
+                                        "Patna");
+            if(in_array($city, $array) || strpos($city, 'chembur')!== false || 
+                    strpos($city, 'hospital')!== false || strpos($city, 'Hospital')!== false)
+            {
+                    $app = JFactory::getApplication();
+                    $link 	= JUri::base().'addlocation';
+                    $msg    =  'You are not allowed to add this location';
+                    $msgType    = "warning";
+                    $app->redirect($redirect, $msg,$msgType);
+            }
+
+            if($_POST['lat_dir'] == "N")
+            {
+                    $lat    = $_POST['lat_deg'].".".$_POST['lat_min'];
+            }
+            else if($_POST['lat_dir'] == "S")
+            {
+                    $lat    = "-".$_POST['lat_deg'].".".$_POST['lat_min'];
+            }
+            if($_POST['lon_dir'] == "E")
+            {
+                    $lon    = $_POST['lon_deg'].".".$_POST['lon_min'];
+            }
+            else if($_POST['lon_dir'] == "W")
+            {
+                    $lon    = "-".$_POST['lon_deg'].".".$_POST['lon_min'];
+            }
 		
             //echo $lat." ".$lon;exit;
             $details    = array(

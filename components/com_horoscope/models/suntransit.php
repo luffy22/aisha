@@ -57,12 +57,13 @@ class HoroscopeModelSunTransit extends HoroscopeModelLagna
            $deg                 = $sun[2];
            $dist                = $sun[3];
            $round               = round($deg);
-           //echo $planet." ".$deg." ".$round." ".$dist."<br/>";
+           //echo $date." ".$planet." ".$deg." ".$round." ".$dist."<br/>";
            //echo $round."<br/>";
+           if($round == "0"){$round = $round + 360;$deg = $deg + 360;}
            if($round % 30 == "0" && $round_last = $round)
            {
                $round           = $round;
-               if($round == "0"){$round = $round + 360;$deg = $deg + 360;}
+               
                if($round > $deg)
                {
                     //echo $date." ".$planet." ".$deg." ".$round." ".$dist."<br/>";
@@ -74,7 +75,7 @@ class HoroscopeModelSunTransit extends HoroscopeModelLagna
                     $deg1        = $sun1[2];
                     $dist1       = $sun1[3];
                     //echo $date1." ".$planet1." ".$deg1." higher ".$dist1."<br/><br/>";
-                    $details     = $this->calculateChange($date, $round, $deg, $dist, $y);
+                    $details     = $this->calculateChange($date, $round, $deg, $dist, $y, $tmz);
                     $array      = array_merge($array, $details);
                 }
                 else
@@ -88,7 +89,7 @@ class HoroscopeModelSunTransit extends HoroscopeModelLagna
                     $deg1        = $sun1[2];
                     $dist1       = $sun1[3];
                     //echo $date1." ".$planet1." ".$deg1." lower ".$dist1."<br/><br/>";
-                    $details     = $this->calculateChange($date1,$round, $deg1, $dist1, $y);
+                    $details     = $this->calculateChange($date1,$round, $deg1, $dist1, $y, $tmz);
                     $array      = array_merge($array, $details);
                 }
                 $y++;
@@ -99,7 +100,7 @@ class HoroscopeModelSunTransit extends HoroscopeModelLagna
         return $array;
         
     }
-    protected function calculateChange($date,$round, $deg, $dist, $y)
+    protected function calculateChange($date,$round, $deg, $dist, $y, $tmz)
     {
         $diff               = $round - $deg;
         $get_dist           = (1440*round($diff,2))/round($dist,2);
@@ -112,13 +113,22 @@ class HoroscopeModelSunTransit extends HoroscopeModelLagna
         $sec                = ".".$min[1];
         $get_sec            = ($sec*60)/1;
         $get_sec            = round($get_sec);
+        if($tmz == "")
+        {
+            $date           = new DateTime(str_replace(".","-",$date)." ".$hr[0].":".$min[0].":".$get_sec, new DateTimeZone('UTC'));
+            $date           ->setTimezone(new DateTimeZone('Asia/Kolkata'));
+        }
+        else
+        {
+            $date           = new DateTime(str_replace(".","-",$date)." ".$hr[0].":".$min[0].":".$get_sec, new DateTimeZone('UTC'));
+            $date           ->setTimezone(new DateTimeZone($tmz));
+        }
         $get_sign           = $this->getNextSign($deg);
-        $hr_min_sec         = array("date_".$y=>$date,"sign_".$y=>$get_sign,"time_".$y=>$hr[0].":".$min[0].":".$get_sec);
+        $hr_min_sec         = array("date_".$y=>$date->format('dS F Y'),"sign_".$y=>$get_sign,"time_".$y => $date->format('h:i a'),"day_".$y=>$date->format('l'));
         return $hr_min_sec;
     }
     protected function getNextSign($deg)
     {
-        $deg                = round($deg, 2);
         //echo $deg."<br/>";
         if($deg >= 0 && $deg < 30)
         {

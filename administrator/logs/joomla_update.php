@@ -43,3 +43,14 @@
 2021-07-24T06:11:09+00:00	INFO ::1	update	Deleting removed files and folders.
 2021-07-24T06:11:11+00:00	INFO ::1	update	Cleaning up after installation.
 2021-07-24T06:11:11+00:00	INFO ::1	update	Update to version 3.9.28 is complete.
+2021-08-23T05:23:57+00:00	INFO ::1	update	Update started by user Astro Isha (222). Old version is 3.9.28.
+2021-08-23T05:24:00+00:00	INFO ::1	update	Downloading update file from https://downloads.joomla.org/cms/joomla3/3-10-0/Joomla_3.10.0-Stable-Update_Package.zip.
+2021-08-23T05:24:11+00:00	INFO ::1	update	File Joomla_3.10.0-Stable-Update_Package.zip downloaded.
+2021-08-23T05:24:12+00:00	INFO ::1	update	Starting installation of new version.
+2021-08-23T05:24:14+00:00	INFO ::1	update	Finalising installation.
+2021-08-23T05:24:15+00:00	INFO ::1	update	Ran query from file 3.10.0-2020-08-10. Query text: ALTER TABLE `#__template_styles` ADD COLUMN `inheritable` tinyint NOT NULL DEFAU.
+2021-08-23T05:24:16+00:00	INFO ::1	update	Ran query from file 3.10.0-2020-08-10. Query text: ALTER TABLE `#__template_styles` ADD COLUMN `parent` varchar(50) DEFAULT '';.
+2021-08-23T05:24:16+00:00	INFO ::1	update	Ran query from file 3.10.0-2021-05-28. Query text: INSERT INTO `#__extensions` (`package_id`, `name`, `type`, `element`, `folder`, .
+2021-08-23T05:24:16+00:00	INFO ::1	update	Deleting removed files and folders.
+2021-08-23T05:24:32+00:00	INFO ::1	update	Cleaning up after installation.
+2021-08-23T05:24:32+00:00	INFO ::1	update	Update to version 3.10.0 is complete.

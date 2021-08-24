@@ -11,19 +11,40 @@ defined('_JEXEC') or die();
 //date_default_timezone_set("UTC");
 //$dasha_order         = array("ketu","venus","sun","moon","rahu","mars","jupiter","saturn","mercury");
 //$a = 0;
-$counter        = 0;
 ?>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark">Sun's Tranist</div>
+<div class="lead alert alert-dark">Sun's Transit</div>
 <?php
-for($i = 0; $i<12;$i++)
+for($i = 0; $i < count($this->data)/4;$i++)
 {
-    //echo $this->data["date_".$i];exit;
-    $date   = new DateTime(str_replace(".","-",$this->data['date_'.$i])." ".$this->data['time_'.$i], new DateTimeZone('UTC'));
-    $date->setTimezone(new DateTimeZone('Asia/Kolkata'));
-    echo $date->format('d-m-Y')."  ";
-    echo $date->format('h:i a')." ";
-    echo $this->data['sign_'.$i]."<br/>";
+    if($i % 2 == 0)
+    {
+?>
+<div class="row">
+<?php
+    }
+?>
+    <div class="col-6">
+        <div class="card">
+            <!--<img class="card-img-top" src="images/art_img/<?php //echo strtolower($this->data['sign_'.$i]) ?>.png" alt="Card image cap">-->
+            <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><img src="images/art_img/<?php echo strtolower($this->data['sign_'.$i]) ?>.png" hspace="10" align="left" width="50px" height="50px" /> <h3><?php echo $this->data['sign_'.$i]; ?></h3></li>
+                <li class="list-group-item"><?php echo $this->data['date_'.$i]; ?></li>
+                <li class="list-group-item"><?php echo $this->data['day_'.$i]; ?></li>
+                <li class="list-group-item"><?php echo $this->data['time_'.$i]; ?></li>
+            </ul>
+            </div>
+        </div>
+    </div>
+<?php
+    if($i % 2 !== 0)
+    {
+?>
+    </div><div class="mb-4"></div>
+<?php
+    }
 }
 unset($this->data);
 ?>
+
