@@ -29,7 +29,7 @@ for($i = 0; $i < count($this->data)/4;$i++)
             <!--<img class="card-img-top" src="images/art_img/<?php //echo strtolower($this->data['sign_'.$i]) ?>.png" alt="Card image cap">-->
             <div class="card-body">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><img src="images/art_img/<?php echo strtolower($this->data['sign_'.$i]) ?>.png" hspace="10" align="left" width="50px" height="50px" /> <h3><?php echo $this->data['sign_'.$i]; ?></h3></li>
+                <li class="list-group-item"><img src="images/art_img/<?php echo strtolower($this->data['sign_'.$i]) ?>.png" width="50px" height="50px" /> <p class="lead"> <?php echo $this->data['sign_'.$i]; ?></p></li>
                 <li class="list-group-item"><?php echo $this->data['date_'.$i]; ?></li>
                 <li class="list-group-item"><?php echo $this->data['day_'.$i]; ?></li>
                 <li class="list-group-item"><?php echo $this->data['time_'.$i]; ?></li>
