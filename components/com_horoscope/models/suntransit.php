@@ -35,12 +35,12 @@ class HoroscopeModelSunTransit extends HoroscopeModelLagna
         //swetest -p6 -DD -b1.12.1900 -n100 -s5 -fPTZ -head
         //exec ("swetest -edir$libPath -b1.1.2021 -sid1 -eswe -fPls -p0 -n$day -head", $output);
         exec("swetest -edir$libPath -b1.1.$year -p0 -n$day -sid1 -eswe -fTPls, -head", $output); 
-        $sun_transit        = $this->getTransitChange($output);
+        $sun_transit        = $this->getTransitChange($output, $year);
         return $sun_transit;
         //print_r($output);exit;
         
     }
-    protected function getTransitChange($output)
+    protected function getTransitChange($output, $year)
     {
         $change             = array();
         $i                  = 0;
@@ -60,10 +60,9 @@ class HoroscopeModelSunTransit extends HoroscopeModelLagna
            //echo $date." ".$planet." ".$deg." ".$round." ".$dist."<br/>";
            //echo $round."<br/>";
            if($round == "0"){$round = $round + 360;$deg = $deg + 360;}
-           if($round % 30 == "0" && $round_last = $round)
+           if($round % 30 == "0" && $round_last != $round)
            {
-               $round           = $round;
-               
+               $round_last      = $round;
                if($round > $deg)
                {
                     //echo $date." ".$planet." ".$deg." ".$round." ".$dist."<br/>";
@@ -97,6 +96,8 @@ class HoroscopeModelSunTransit extends HoroscopeModelLagna
            $i++;
            
         }
+        $curr_sign          = array("curr_sign" =>$this->getCurrTransit($year));
+        $array              = array_merge($array, $curr_sign);
         return $array;
         
     }
@@ -126,6 +127,84 @@ class HoroscopeModelSunTransit extends HoroscopeModelLagna
         $get_sign           = $this->getNextSign($deg);
         $hr_min_sec         = array("date_".$y=>$date->format('dS F Y'),"sign_".$y=>$get_sign,"time_".$y => $date->format('h:i a'),"day_".$y=>$date->format('l'));
         return $hr_min_sec;
+    }
+    protected function getCurrTransit($year)
+    {
+        //echo $year;exit;
+        $libPath        = JPATH_BASE.'/sweph/';
+        
+        $date               = date('d.m.Y');
+        $time               = date('H:i:s');
+        $curr_year          = date('Y');
+        if($year == $curr_year)
+        {
+            $h_sys              = 'P';
+            $output             = "";
+            // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
+            exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPl -p0 -g, -head", $output);
+            $sun                = trim(preg_replace('/\s\s+/', '', str_replace("\n", "", $output[0])));
+            $sun                = explode(", ",$sun);
+            $curr_deg           = $sun[1];
+            $get_sign           = $this->getCurrSign($curr_deg);
+            return $get_sign;
+        }
+        else
+        {
+            return "null";
+        }
+    }
+    protected function getCurrSign($deg)
+    {
+        //echo $deg."<br/>";
+        if($deg >= 0 && $deg < 30)
+        {
+            $sign           = "Aries";
+        }
+        else if($deg >= 30 && $deg < 60)
+        {
+            $sign           = "Taurus";
+        }
+        else if($deg >= 60 && $deg < 90)
+        {
+            $sign           = "Gemini";
+        }
+        else if($deg >= 90 && $deg < 120)
+        {
+            $sign           = "Cancer";
+        }
+        else if($deg >= 120 && $deg < 150)
+        {
+            $sign           = "Leo";
+        }
+        else if($deg >= 150 && $deg < 180)
+        {
+            $sign           = "Virgo";
+        }
+        else if($deg >= 180 && $deg < 210)
+        {
+            $sign           = "Libra";
+        }
+        else if($deg >= 210 && $deg < 240)
+        {
+            $sign           = "Scorpio";
+        }
+        else if($deg >= 240 && $deg < 270)
+        {
+            $sign           = "Sagittarius";
+        }
+        else if($deg >= 270 && $deg < 300)
+        {
+            $sign           = "Capricorn";
+        }
+        else if($deg >= 300 && $deg < 330)
+        {
+            $sign           = "Aquarius";
+        }
+        else if($deg >= 330 && $deg < 360)
+        {
+            $sign           = "Pisces";
+        }
+        return $sign;
     }
     protected function getNextSign($deg)
     {

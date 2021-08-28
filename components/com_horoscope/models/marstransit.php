@@ -3,10 +3,10 @@ defined('_JEXEC') or die;  // No direct Access
 // import Joomla modelitem library
 jimport('joomla.application.component.modelitem');
 JModelLegacy::addIncludePath(JPATH_SITE.'/components/com_horoscope/models/');
-$model = JModelLegacy::getInstance('lagna', 'horoscopeModel');
+$model = JModelLegacy::getInstance('suntransit', 'horoscopeModel');
 $libPath = JPATH_BASE.'/sweph/';
 putenv("PATH=$libPath");
-class HoroscopeModelMarsTransit extends HoroscopeModelLagna
+class HoroscopeModelMarsTransit extends HoroscopeModelSunTransit
 {
     public function getData()
     {
@@ -35,12 +35,12 @@ class HoroscopeModelMarsTransit extends HoroscopeModelLagna
         //swetest -p6 -DD -b1.12.1900 -n100 -s5 -fPTZ -head
         //exec("swetest -edir$libPath -b1.1.2021 -eswe -sid1 -g -fPTls -p0 -n365, -head", $output);
         exec("swetest -edir$libPath -b1.1.$year -p4 -n$day -sid1 -eswe -fTPls, -head", $output); 
-        $mars_transit        = $this->getTransitChange($output, $tmz);
+        $mars_transit        = $this->getTransitChange($output, $year);
         return $mars_transit;
         //print_r($output);exit;
         
     }
-    protected function getTransitChange($output)
+    protected function getTransitChange($output, $year)
     {
         $change             = array();
         $i                  = 0;
@@ -77,7 +77,7 @@ class HoroscopeModelMarsTransit extends HoroscopeModelLagna
                 if($round % 30 =="0" && $deg+$dist > $round && $deg < $round && $round_last != $round)
                 {
                     $round_last         = $round;
-                    $details     = $this->calculateChange($date, $round, $deg, $dist, $y);
+                    $details     = $this->calculateChange($date, $round, $deg, $dist, $y, $tmz);
                     $array      = array_merge($array, $details);
                     $y++;
                 }
@@ -93,7 +93,7 @@ class HoroscopeModelMarsTransit extends HoroscopeModelLagna
                     $deg1        = $sun1[2];
                     $dist1       = $sun1[3];
                     //echo $date1." ".$planet1." ".$deg1." lower ".$dist1."<br/><br/>";
-                    $details     = $this->calculateChange($date1,$round, $deg1, $dist1, $y);
+                    $details     = $this->calculateChange($date1,$round, $deg1, $dist1, $y, $tmz);
                     $array      = array_merge($array, $details);
                     $y++;
                 }
@@ -102,14 +102,13 @@ class HoroscopeModelMarsTransit extends HoroscopeModelLagna
            $i++;
             
         }
-        //exit;
-        print_r($array);exit;
+        $curr_sign          = array("curr_sign" =>$this->getCurrTransit($year));
+        $array              = array_merge($array, $curr_sign);
+       return $array;
         
     }
-    protected function calculateChange($date,$round, $deg, $dist, $y)
+    protected function calculateChange($date,$round, $deg, $dist, $y, $tmz)
     {
-        $date               = explode(".",$date);
-        $date               = new Datetime($date[2]."-".$date[1]."-".$date[0]);
         $diff               = $round - $deg;
         $get_dist           = (1440*round($diff,2))/round($dist,2);
         $get_dist           = round($get_dist, 2);
@@ -122,15 +121,21 @@ class HoroscopeModelMarsTransit extends HoroscopeModelLagna
         $get_sec            = ($sec*60)/1;
         $get_sec            = round($get_sec);
         $get_sign           = $this->getSign($deg,"next");
-        $date               ->add(new DateInterval('PT'.$hr[0].'H'.$min[0]."M".$get_sec."S"));
-        $hr_min_sec         = array("date_".$y=>$date->format('Y-m-d h:i:s'),"sign_".$y=>$get_sign);
+        if($tmz == "")
+        {
+            $date           = new DateTime(str_replace(".","-",$date)." ".$hr[0].":".$min[0].":".$get_sec, new DateTimeZone('UTC'));
+            $date           ->setTimezone(new DateTimeZone('Asia/Kolkata'));
+        }
+        else
+        {
+            $date           = new DateTime(str_replace(".","-",$date)." ".$hr[0].":".$min[0].":".$get_sec, new DateTimeZone('UTC'));
+            $date           ->setTimezone(new DateTimeZone($tmz));
+        }
+        $hr_min_sec         = array("date_".$y=>$date->format('dS F Y'),"sign_".$y=>$get_sign,"time_".$y => $date->format('h:i a'),"day_".$y=>$date->format('l'));
         return $hr_min_sec;
     }
     protected function calculateChange2($date,$round, $deg, $dist, $y)
     {
-        
-        $date               = explode(".",$date);
-        $date               = new Datetime($date[2]."-".$date[1]."-".$date[0]);
         //echo $deg." ".$round." ".$dist;exit;
         $diff               = $round- $deg;
         //echo $diff;exit;
@@ -146,13 +151,46 @@ class HoroscopeModelMarsTransit extends HoroscopeModelLagna
         $get_sec            = ($sec*60)/1;
         $get_sec            = round($get_sec);
         $get_sign           = $this->getSign($deg,"prev");
-        $date               ->add(new DateInterval('PT'.$hr[0].'H'.$min[0]."M".$get_sec."S"));
-        $hr_min_sec         = array("date_".$y=>$date->format('Y-m-d h:i:s'),"sign_".$y=>$get_sign);
+         if($tmz == "")
+        {
+            $date           = new DateTime(str_replace(".","-",$date)." ".$hr[0].":".$min[0].":".$get_sec, new DateTimeZone('UTC'));
+            $date           ->setTimezone(new DateTimeZone('Asia/Kolkata'));
+        }
+        else
+        {
+            $date           = new DateTime(str_replace(".","-",$date)." ".$hr[0].":".$min[0].":".$get_sec, new DateTimeZone('UTC'));
+            $date           ->setTimezone(new DateTimeZone($tmz));
+        }
+        $hr_min_sec         = array("date_".$y=>$date->format('dS F Y'),"sign_".$y=>$get_sign,"time_".$y => $date->format('h:i a'),"day_".$y=>$date->format('l'));
         return $hr_min_sec;
+    }
+    protected function getCurrTransit($year)
+    {
+        //echo $year;exit;
+        $libPath        = JPATH_BASE.'/sweph/';
+        
+        $date               = date('d.m.Y');
+        $time               = date('H:i:s');
+        $curr_year          = date('Y');
+        if($year == $curr_year)
+        {
+            $h_sys              = 'P';
+            $output             = "";
+            // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
+            exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPl -p4 -g, -head", $output);
+            $sun                = trim(preg_replace('/\s\s+/', '', str_replace("\n", "", $output[0])));
+            $sun                = explode(", ",$sun);
+            $curr_deg           = $sun[1];
+            $get_sign           = $this->getCurrSign($curr_deg);
+            return $get_sign;
+        }
+        else
+        {
+            return "null";
+        }
     }
     protected function getSign($deg, $oper)
     {
-        $deg                = round($deg, 2);
         //echo $deg."<br/>";
         if($deg >= 0 && $deg < 30)
         {
