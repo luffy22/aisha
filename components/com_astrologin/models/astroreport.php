@@ -449,7 +449,7 @@ class AstrologinModelAstroReport extends JModelItem
         $subject    = "AstroIsha ".ucfirst($data->order_type)." Report: ".$data->UniqueID;
         $mailer     ->setSubject($subject);
 
-        $body       .= "<p>Dear ".$data->name.",</p>";
+        $body       .= "<p>Hello ".$data->name.",</p>";
         if($data->paid =="yes")
         {
                 $body       .= "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your online payment to AstroIsha(https://www.astroisha.com) is successful. Your report would be completed and mailed to you in 15-20 working days.</p><br/>"; 

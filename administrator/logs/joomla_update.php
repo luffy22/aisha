@@ -65,3 +65,35 @@
 2021-08-25T04:44:13+00:00	INFO ::1	update	Deleting removed files and folders.
 2021-08-25T04:44:27+00:00	INFO ::1	update	Cleaning up after installation.
 2021-08-25T04:44:27+00:00	INFO ::1	update	Update to version 3.10.1 is complete.
+2021-09-14T10:28:50+00:00	INFO ::1	update	Update started by user Astro Isha (222). Old version is 3.10.1.
+2021-09-14T10:28:52+00:00	INFO ::1	update	Downloading update file from https://downloads.joomla.org/cms/joomla3/3-10-2/Joomla_3.10.2-Stable-Update_Package.zip.
+2021-09-14T10:29:04+00:00	INFO ::1	update	File Joomla_3.10.2-Stable-Update_Package.zip downloaded.
+2021-09-14T10:29:04+00:00	INFO ::1	update	Starting installation of new version.
+2021-09-14T10:29:08+00:00	INFO ::1	update	Finalising installation.
+2021-09-14T10:29:08+00:00	INFO ::1	update	Deleting removed files and folders.
+2021-09-14T10:29:10+00:00	INFO ::1	update	Cleaning up after installation.
+2021-09-14T10:29:10+00:00	INFO ::1	update	Update to version 3.10.2 is complete.
+2021-11-13T05:54:29+00:00	INFO ::1	update	Update started by user Astro Isha (222). Old version is 3.10.2.
+2021-11-13T05:54:31+00:00	INFO ::1	update	Downloading update file from https://downloads.joomla.org/cms/joomla3/3-10-3/Joomla_3.10.3-Stable-Update_Package.zip.
+2021-11-13T05:54:45+00:00	INFO ::1	update	File Joomla_3.10.3-Stable-Update_Package.zip downloaded.
+2021-11-13T05:54:45+00:00	INFO ::1	update	Starting installation of new version.
+2021-11-13T05:54:48+00:00	INFO ::1	update	Finalising installation.
+2021-11-13T05:54:48+00:00	INFO ::1	update	Deleting removed files and folders.
+2021-11-13T05:54:50+00:00	INFO ::1	update	Cleaning up after installation.
+2021-11-13T05:54:50+00:00	INFO ::1	update	Update to version 3.10.3 is complete.
+2021-12-14T10:21:12+00:00	INFO ::1	update	Update started by user Astro Isha (222). Old version is 3.10.3.
+2021-12-14T10:21:15+00:00	INFO ::1	update	Downloading update file from https://downloads.joomla.org/cms/joomla3/3-10-4/Joomla_3.10.4-Stable-Update_Package.zip.
+2021-12-14T10:21:27+00:00	INFO ::1	update	File Joomla_3.10.4-Stable-Update_Package.zip downloaded.
+2021-12-14T10:21:27+00:00	INFO ::1	update	Starting installation of new version.
+2021-12-14T10:21:29+00:00	INFO ::1	update	Finalising installation.
+2021-12-14T10:21:30+00:00	INFO ::1	update	Deleting removed files and folders.
+2021-12-14T10:21:32+00:00	INFO ::1	update	Cleaning up after installation.
+2021-12-14T10:21:32+00:00	INFO ::1	update	Update to version 3.10.4 is complete.
+2022-02-05T13:00:48+00:00	INFO ::1	update	Update started by user Astro Isha (222). Old version is 3.10.4.
+2022-02-05T13:00:50+00:00	INFO ::1	update	Downloading update file from https://downloads.joomla.org/cms/joomla3/3-10-5/Joomla_3.10.5-Stable-Update_Package.zip.
+2022-02-05T13:01:11+00:00	INFO ::1	update	File Joomla_3.10.5-Stable-Update_Package.zip downloaded.
+2022-02-05T13:01:11+00:00	INFO ::1	update	Starting installation of new version.
+2022-02-05T13:01:15+00:00	INFO ::1	update	Finalising installation.
+2022-02-05T13:01:16+00:00	INFO ::1	update	Deleting removed files and folders.
+2022-02-05T13:01:18+00:00	INFO ::1	update	Cleaning up after installation.
+2022-02-05T13:01:18+00:00	INFO ::1	update	Update to version 3.10.5 is complete.

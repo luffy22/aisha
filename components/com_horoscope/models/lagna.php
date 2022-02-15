@@ -119,7 +119,7 @@ class HoroscopeModelLagna extends JModelItem
         //echo $lat." ".$lon;exit;
         //echo $timezone;exit;
         $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
-        //echo $date->format('d-m-Y');exit;
+        //echo $date->format('d-m-Y H:i:s');exit;
         $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
         $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
         //echo $timestamp." ".$offset;exit;

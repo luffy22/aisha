@@ -7,17 +7,15 @@ $user            = JFactory::getUser();
 $this->language  = $doc->language;
 $this->direction = $doc->direction;
 $title              = $doc->title;
-/*$var             = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong><i class="fas fa-exclamation-circle"></i> Delays Possible!</strong> Due to corona virus epidemic and lockdowns in place your orders can be delayed. We apologize 
-  for the inconvenience caused.
+$var             = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong><i class="fas fa-exclamation-circle"></i> Reports Closed.</strong> Due to office refurbishment work in progress all reports are closed. Only short and detailed answer are open. We regret for the inconvenience.
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span></button></div>';
 if(!isset($_SESSION['var']))
 {
     $_SESSION['var']    = $var;
     echo $_SESSION['var'];
-}*/
-
+}
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
@@ -68,7 +66,7 @@ window.cookieconsent.initialise({
 	<p>
     <jdoc:include type="modules" name="top" />
     </p>
-    <h3 class="display-4"><a id="display-2" href="<?php echo JUri::base(); ?>" title="Navigate to Home Page"><img src="<?php echo JUri::base(); ?>/logo.png" title="Click to navigate to Home Page" class="img-fluid" />Astro Isha</a></h3>
+    <h1><a id="display-2" href="<?php echo JUri::base(); ?>" title="Navigate to Home Page"><img src="<?php echo JUri::base(); ?>/logo.png" title="Click to navigate to Home Page" class="img-fluid" />Astro Isha</a></h1>
     <div class="row">
     <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12" id="main">
         <jdoc:include type="message" />

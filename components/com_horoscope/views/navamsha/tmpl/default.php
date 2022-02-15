@@ -20,21 +20,6 @@ $a = 0;
 </style>
  </head>
  <body onload="javascript:draw_horoscope();getNavamsha();">
-<?php
-$user =& JFactory::getUser();
-if($user->id == "0")
-{
-?>
-<div class="alert alert-info alert-dismissible fade show" role="alert">
-    <a href="<?php echo JUri::base().'register' ?>">Register</a> with us to save upto fifty horoscopes
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<?php
-}
-?>
-</div>
  <?php 
     $chart_id = $_GET['chart']; 
     //print_r($this->data);exit;

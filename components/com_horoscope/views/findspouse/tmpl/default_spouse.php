@@ -62,7 +62,7 @@ else
     {
         $pob    = $this->data['city'];
     }
-    else if($this->data['state'] == "" && $this->data['country'] != "")
+    else if($this->data['state'] == "" && $this->data['country'] !== "")
     {
         $pob    = $this->data['city'].", ".$this->data['country'];
     }
@@ -70,20 +70,6 @@ else
     {
         $pob    = $this->data['city'].", ".$this->data['state'].", ".$this->data['country'];
     }
-}
-?>
-<?php
-$user =& JFactory::getUser();
-if($user->id == "0")
-{
-?>
-<div class="alert alert-info alert-dismissible fade show" role="alert">
-    <a href="<?php echo JUri::base().'register' ?>">Register</a> with us to save upto fifty horoscopes
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<?php
 }
 ?>
 <div class="mb-3"></div>

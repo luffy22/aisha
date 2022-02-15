@@ -139,12 +139,12 @@ class PlgContentAskExpert extends JPlugin
             if($details[0]['currency'] == 'INR')
             {
                 $content            .= "<div class='form-check'>";
-                $content            .= "<input class='form-check-input' type='radio' name='expert_choice' id='expert_choice1' value='razorpay' />";
+                $content            .= "<input class='form-check-input' type='radio' name='expert_choice' id='expert_choice1' value='razorpay' checked />";
                 $content            .= "<label class='form-check-label' for='expert_choice1'><i class='fa fa-credit-card'></i> Credit/Debit Card/Netbanking</label>";
                 $content            .= "</div>";
                 $content            .= "<div class='form-check'>";
                 $content            .= "<input class='form-check-input' type='radio' name='expert_choice' id='expert_choice4' value='paytm'  checked />";
-                $content            .= "<label class='form-check-label' for='expert_choice4'><img src='".JURi::base()."images/paytm.png' /></label>";
+                $content            .= "<label class='form-check-label' for='expert_choice4'><img src='".JURi::base()."images/paytm.png' /> UPI</label>";
                 $content            .= "</div>";
             }
             else

@@ -661,7 +661,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
             }
             else if(((int)$diff <= 12)&&($mars_sign !== "Leo" || $mars_sign !== "Aries" || $mars_sign !== "Scorpio" || $mars_sign !=="Sagittarius" || $mars_sign !=="Pisces"))
             {
-                $array              = array("chandra_mangal" => "There is strong <a href='https://www.astroisha.com/yogas/150-chandra-mangal' title='chandra mangal yoga'>chanra-mangala yoga</a> formed in your horoscope.");
+                $array              = array("chandra_mangal" => "There is strong <a href='https://www.astroisha.com/yogas/150-chandra-mangal' title='chandra mangal yoga'>chandra-mangala yoga</a> formed in your horoscope.");
             }
             else
             {
@@ -924,6 +924,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
         $moon_sign              = $data['Moon'];
         $get_prev_sign          = $this->getHouseSign($moon_sign,12);
         $get_next_sign          = $this->getHouseSign($moon_sign,2);
+        $sun                    = $data['Sun'];
         $mars                   = $data['Mars'];
         $mercury                = $data['Mercury'];
         $jupiter                = $data['Jupiter'];
@@ -954,6 +955,10 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                 $venus == $moon_sign || $saturn == $moon_sign)
         {
             $array              = array("kemdruma_yoga" => "<a href='https://www.astroisha.com/yogas/149-kemdruma-yoga' title='Kemdruma Yoga'>Kemdruma Yoga</a> gets cancelled in your horoscope due to a planet placed in same house as Moon.");
+        }
+         else if($sun == $get_next_sign || $sun == $get_prev_sign) 
+        {
+            $array              = array("kemdruma_yoga" => "No");
         }
         else
         {
@@ -1237,19 +1242,30 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
     protected function checkVesi($data)
     {
         $sun_sign           = $data['Sun'];
+        $rahu_sign          = $data['Rahu'];
+        $ketu_sign          = $data['Ketu'];
+        $moon_sign          = $data['Moon'];
         $get_next_sign      = $this->getHouseSign($sun_sign, 2);
         $planets            = array("Mars","Mercury","Jupiter","Venus","Saturn");
-        foreach($planets as $planet)
+        
+        if($get_next_sign == $rahu_sign || $get_next_sign == $ketu_sign || $get_next_sign == $moon_sign)
         {
-            $sign           = $data[$planet];
-            if($get_next_sign == $sign)
+            $array      = array("vesi_yoga" => "No");
+        }
+        else
+        {
+            foreach($planets as $planet)
             {
-                 $array      = array("vesi_yoga" => "There is <a href='https://www.astroisha.com/yogas/160-vesi-yoga' title='Vesi Yoga'>Vesi Yoga</a> formed in your horoscope.");
-                 break;
-            }
-            else
-            {
-                $array      = array("vesi_yoga" => "No");
+                $sign           = $data[$planet];
+                if($get_next_sign == $sign)
+                {
+                     $array      = array("vesi_yoga" => "There is <a href='https://www.astroisha.com/yogas/160-vesi-yoga' title='Vesi Yoga'>Vesi Yoga</a> formed in your horoscope.");
+                     break;
+                }
+                else
+                {
+                    $array      = array("vesi_yoga" => "No");
+                }
             }
         }
         //print_r($array);exit;
@@ -1464,32 +1480,43 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
     }
     protected function checkMallika($data)
     {
-        if($data['Sun'] == $data['Moon'] || $data['Sun'] == $data['Mercury'] ||
-            $data['Sun'] == $data['Venus'])
+        unset($data['Ascendant']);unset($data['Rahu']);unset($data['Ketu']);
+        unset($data['Uranus']);unset($data['Pluto']);unset($data['Neptune']);
+        $data       = array("Sun"=>"Aries","Moon"=>"Taurus","Mars"=>"Capricorn","Mercury"=>"Gemini",
+                            "Jupiter"=>"Cancer","Venus"=>"Pisces","Saturn"=>"Libra");
+        if(count($data) !== count(array_unique($data)))
         {
-            $array          = array("malika_yoga" => "No");
-        }
-        else if($data['Moon'] == $data['Saturn'] || $data['Moon'] == $data['Mars'] ||
-            $data['Moon'] == $data['Mercury'] || $data['Moon'] == $data['Venus'] ||
-                $data['Jupiter'] == $data['Moon'])
-        {
-            $array          = array("malika_yoga" => "No");
-        }
-        else if($data['Mars'] == $data['Mercury'] || $data['Mars'] == $data['Jupiter'] ||
-                $data['Mars'] == $data['Saturn'] || $data['Mars'] == $data['Venus'] ||
-                $data['Venus'] == $data['Saturn'])
-        {
-            $array          = array("malika_yoga" => "No");
-        }
-        else if($data['Jupiter'] == $data['Sun'] || $data['Jupiter'] == $data['Saturn'] ||
-                $data['Jupiter'] == $data['Venus'] || $data['Jupiter'] == $data['Mercury'])
-        {
-            $array          = array("malika_yoga" => "No");
+            $array           = array("malika_yoga" => "No");
         }
         else
         {
-            $array          = array("malika_yoga" => "There is <a href='https://www.astroisha.com/yogas/174-malika-yoga' title='Mallika Yoga'>Mallika Yoga</a> formed in your horoscope");
+            $i          = 0;
+            foreach($data as $key=>$value)
+            {
+                $prev_sign      = $this->getHouseSign($value, 12);
+                $next_sign      = $this->getHouseSign($value, 2);
+                
+                if(in_array($prev_sign, $data) || in_array($next_sign, $data))
+                {
+                    //echo $key." ".$value." ".$i."<br/>";
+                    $i++;
+                }
+                else
+                {
+                    $array           = array("malika_yoga" => "No");
+                }
+            }
+            if($i == "7")
+            {
+                $array           = array("malika_yoga" => "There is <a href='https://www.astroisha.com/yogas/174-malika-yoga'>Mallika Yoga</a> formed in horoscope.");
+            }
+            else
+            {
+                $array           = array("malika_yoga" => "No");
+            }
+
         }
+   
         return $array;
     }
     protected function checkSankha($data)
