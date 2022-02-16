@@ -58,7 +58,7 @@ class HoroscopeControllerArrangeLove extends HoroscopeController
                                     );
             //print_r($user_details);exit;
             $model          = $this->getModel('arrangelove');  // Add the array to model
-            $data           = $model->addUserDetails($user_details);
+            $data           = $model->addUser($user_details);
         }
     }
 }

@@ -24,17 +24,27 @@ class HoroscopeModelLagna extends JModelItem
     }
     public function getLagna($user_details)
     {
-        //print_r($user_details);exit;
+        $result         = $this->addUserDetails($user_details, "horo");
+        if(!empty($result))
+        {
+            $app        = JFactory::getApplication();
+            $link       = JURI::base().'horoscope?chart='.str_replace("horo","chart",$result);
+            $app        ->redirect($link);
+        }
+    }
+    public function addUserDetails($user, $cause)
+    {
+         //print_r($user_details);exit;
         // Assigning the variables
-        $fname          = $user_details['fname'];
-        $gender         = $user_details['gender'];
-        $chart          = $user_details['chart'];
-        $dob            = $user_details['dob'];
-        $tob            = $user_details['tob'];
-        $pob            = $user_details['pob'];
-        $lon            = $user_details['lon'];
-        $lat            = $user_details['lat'];
-        $tmz            = $user_details['tmz'];
+        $fname          = $user['fname'];
+        $gender         = $user['gender'];
+        $chart          = $user['chart'];
+        $dob            = $user['dob'];
+        $tob            = $user['tob'];
+        $pob            = $user['pob'];
+        $lon            = $user['lon'];
+        $lat            = $user['lat'];
+        $tmz            = $user['tmz'];
         
         if($tmz == "none")
         {
@@ -66,21 +76,16 @@ class HoroscopeModelLagna extends JModelItem
         $now            = date('Y-m-d H:i:s');
         $db             = JFactory::getDbo();  // Get db connection
         $query          = $db->getQuery(true);
-        $columns        = array('uniq_id','fname','gender','chart_type','dob_tob','pob','lon','lat','timezone','query_date');
+        $columns        = array('uniq_id','fname','gender','chart_type','dob_tob','pob','lon','lat','timezone','query_date','query_cause');
         $values         = array($db->quote($uniq_id),$db->quote($fname),$db->quote($gender),$db->quote($chart),$db->quote($dob_tob),
-                                $db->quote($pob),$db->quote($lon),$db->quote($lat),$db->quote($tmz),$db->quote($now));
+                                $db->quote($pob),$db->quote($lon),$db->quote($lat),$db->quote($tmz),$db->quote($now),$db->quote($cause));
         $query          ->insert($db->quoteName('#__horo_query'))
                         ->columns($db->quoteName($columns))
                         ->values(implode(',', $values));
         // Set the query using our newly populated query object and execute it
         $db             ->setQuery($query);
         $result          = $db->query();
-        if($result)
-        {
-            $app        = JFactory::getApplication();
-            $link       = JURI::base().'horoscope?chart='.str_replace("horo","chart",$uniq_id);
-            $app        ->redirect($link);
-        }
+        return $uniq_id;
     }
     public function getAscendant($data)
     {

@@ -58,7 +58,7 @@ class HoroscopeControllerAstroYogas extends HoroscopeController
                                     );
             //print_r($user_details);exit;
             $model          = $this->getModel('astroyogas');  // Add the array to model
-            $data           = $model->addUserDetails($user_details);
+            $data           = $model->addYogaDetails($user_details);
         }
     }
 }

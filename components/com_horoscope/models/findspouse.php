@@ -12,59 +12,13 @@ class HoroscopeModelFindSpouse extends HoroscopeModelLagna
  
     public function findspouse($details)
     {
-        //print_r($details);exit;
-        $fname          = $details['fname'];
-        $gender         = $details['gender'];
-        $dob            = $details['dob'];
-        $tob            = $details['tob'];
-        $pob            = $details['pob'];
-        $lon            = $details['lon'];
-        $lat            = $details['lat'];
-        $tmz            = $details['tmz'];
-        $chart          = $details['chart'];
-        if($tmz == "none")
-        {
-            if(strpos($pob, "India") == "true"||strpos($pob,"india") == true)
-            {
-                $tmz     = "Asia/Kolkata";
-            }
-            else
-            {
-                $date           = new DateTime($dob." ".$tob);
-                $timestamp      = $date->format('U');
-                $tmz            = $this->getTimeZone($lat, $lon, "rohdes");
-                if($tmz == "error")
-                {
-                    $tmz        = "UTC";        // if timezone not available use UTC(Universal Time Cooridnated)
-                }
-            }
-            $newdate        = new DateTime($dob." ".$tob, new DateTimeZone($tmz));
-            $dob_tob        = $newdate->format('Y-m-d H:i:s');
-        }
-        else
-        {
-            $date       = new DateTime($dob." ".$tob, new DateTimeZone($tmz));
-            $dob_tob    = $date->format('Y-m-d H:i:s');
-        }
-        $uniq_id        = uniqid('horo_');
-        
-        $now            = date('Y-m-d H:i:s');
-        $db             = JFactory::getDbo();  // Get db connection
-        $query          = $db->getQuery(true);
-        $columns        = array('uniq_id','fname','gender','dob_tob','pob','lon','lat','chart_type','timezone','query_date','query_cause');
-        $values         = array($db->quote($uniq_id),$db->quote($fname),$db->quote($gender),$db->quote($dob_tob),
-                                $db->quote($pob),$db->quote($lon),$db->quote($lat),$db->quote($chart),$db->quote($tmz),$db->quote($now),$db->quote('fspouse'));
-        $query          ->insert($db->quoteName('#__horo_query'))
-                        ->columns($db->quoteName($columns))
-                        ->values(implode(',', $values));
-        // Set the query using our newly populated query object and execute it
-        $db             ->setQuery($query);
-        $result          = $db->query();
-        if($result)
+        $result          = $this->addUserDetails($details, "fspouse");
+
+        if(!empty($result))
         {
             //echo "query inserted";exit;
             $app        = JFactory::getApplication();
-            $link       = JURI::base().'findspouse?chart='.str_replace("horo","chart",$uniq_id);
+            $link       = JURI::base().'findspouse?chart='.str_replace("horo","chart",$result);
             $app        ->redirect($link);
         }
     }
