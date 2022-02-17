@@ -87,6 +87,7 @@ class HoroscopeModelLagna extends JModelItem
         $result          = $db->query();
         return $uniq_id;
     }
+    
     public function getAscendant($data)
     {
         //print_r($data);exit;

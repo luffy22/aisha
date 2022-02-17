@@ -22,34 +22,13 @@ class HoroscopeModelVimshottari extends HoroscopeModelLagna
         }
         else
         {
-            $fname          = $result['fname'];
-            $gender         = $result['gender'];
-            $chart          = $result['chart_type'];
             $dob_tob        = $result['dob_tob'];
-
             if(array_key_exists("timezone", $result))
             {    
-                $pob            = $result['pob'];
-                $lat            = $result['lat'];
-                $lon            = $result['lon'];
                 $timezone       = $result['timezone'];
             }
             else
             {
-                $lat            = $result['latitude'];
-                $lon            = $result['longitude'];
-                if($result['state'] == "" && $result['country'] == "")
-                {
-                    $pob    = $result['city'];
-                }
-                else if($result['state'] == "" && $result['country'] != "")
-                {
-                    $pob    = $result['city'].", ".$result['country'];
-                }
-                else
-                {
-                    $pob    = $result['city'].", ".$result['state'].", ".$result['country'];
-                }
                 $timezone   = $result['tmz_words'];
             }
 

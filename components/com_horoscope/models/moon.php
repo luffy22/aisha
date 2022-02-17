@@ -25,33 +25,13 @@ class HoroscopeModelMoon extends HoroscopeModelLagna
         {
             $user           = JFactory::getUser();
             $user_id        = $user->id;
-            $fname          = $userdata['fname'];
-            $gender         = $userdata['gender'];
-            $chart          = $userdata['chart_type'];
             $dob_tob        = $userdata['dob_tob'];
             if(array_key_exists("timezone", $userdata))
             {  
-                $pob            = $userdata['pob'];
-                $lat            = $userdata['lat'];
-                $lon            = $userdata['lon'];
                 $timezone       = $userdata['timezone'];
             }
             else
             {
-                $lat            = $userdata['latitude'];
-                $lon            = $userdata['longitude'];
-                if($userdata['state'] == "" && $userdata['country'] == "")
-                {
-                    $pob    = $userdata['city'];
-                }
-                else if($userdata['state'] == "" && $userdata['country'] != "")
-                {
-                    $pob    = $userdata['city'].", ".$userdata['country'];
-                }
-                else
-                {
-                    $pob    = $userdata['city'].", ".$userdata['state'].", ".$userdata['country'];
-                }
                 $timezone   = $userdata['tmz_words'];
             }
 
