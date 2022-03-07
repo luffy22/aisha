@@ -10,10 +10,9 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
 {
     public $data;
  
-    public function addYogaDetails($details)
+    public function addUser($details)
     {
-        
-        $result          = $this->addUserDetails($details, "astroyogas");
+        $result         = $this->addUserDetails($details, "astroyogas");
         if(!empty($result))
         {
             //echo "query inserted";exit;

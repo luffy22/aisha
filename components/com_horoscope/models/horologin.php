@@ -21,6 +21,7 @@ class HoroscopeModelHoroLogin extends HoroscopeModelLagna
         $db                 ->setQuery($query);
         $db                 ->execute();
         $total              = $db->loadResult();
+        //echo $total;exit;
         if($total >= 50)
         {
             $app        = JFactory::getApplication();

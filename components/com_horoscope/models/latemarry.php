@@ -58,11 +58,22 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
             $output = "";
 
             // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
-            exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -house$lon,$lat,$h_sys -p -fPls -g, -head", $output);
-            //$planets        = $this->getPlanets($output);
-            $ascendant          = explode(",",$output[12]);
-            print_r($output);exit;
-            
+            exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p0142536m789 -g, -head", $output);
+            //print_r($output);exit;
+
+
+            $asc                        = $this->getAscendant($result);
+            $planets                    = $this->getPlanets($output);
+            $planets                    = array_merge($asc,$planets);
+            //print_r($planets);exit;
+            $data                       = array();
+            foreach($planets as $key => $planet)
+            {
+                $planet_sign            = $this->calcDetails($planet);
+                $array                  = array($key => $planet_sign);
+                $data                   = array_merge($data, $array);
+            }
+            $seventh                    = $this->seventhHouse($data);
             //return $all_details;
         }
     }
@@ -79,5 +90,9 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
             $app        ->redirect($link);
         }
     
+    }
+    public function seventhHouse($data)
+    {
+        print_r($data);exit;
     }
 }

@@ -13,7 +13,6 @@ class HoroscopeModelFourStages extends HoroscopeModelLagna
     public function addUser($details)
     {
         $result         = $this->addUserDetails($details, "stages");
-        //echo "calls";exit;
         if(!empty($result))
         {
             //echo "query inserted";exit;
