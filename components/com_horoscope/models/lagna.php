@@ -697,7 +697,7 @@ class HoroscopeModelLagna extends JModelItem
                     continue;
                 }
             }
-            else if($planet == "Jupiter" || $planet == "Rahu")
+            else if($planet == "Jupiter" || $planet == "Rahu" || $planet == "Ketu")
             {
                 $get_7th_sign   = $this->getHouseSign($planet_sign, 7);
                 $get_5th_sign   = $this->getHouseSign($planet_sign, 5);

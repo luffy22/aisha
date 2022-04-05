@@ -87,7 +87,6 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
                                                         $twelfth, $twelfth_moon, $twelfth_nav,
                                                         $second, $second_moon, $second_nav,
                                                         $eleventh, $eleventh_moon, $eleventh_nav);
-            //print_r($array);exit;
             return $array;
         }
     }

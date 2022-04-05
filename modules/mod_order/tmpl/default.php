@@ -4,8 +4,8 @@ defined('_JEXEC') or die;
 $current        = JUri::current();
 $menualias = JFactory::getApplication()->getMenu()->getActive()->alias;
 $date       = new DateTime();
-$date_mar   = new Datetime("03/15/2021");
-$date_apr   = new DateTime("04/16/2021");
+$date_mar   = new Datetime("03/15/2022");
+$date_apr   = new DateTime("04/05/2022");
 $date_oct   = new Datetime("10/21/2020");
 $date_nov   = new DateTime("11/19/2020");
 ?>
@@ -17,7 +17,7 @@ $date_nov   = new DateTime("11/19/2020");
 ?>
             <div class="p-1 row alert alert-dark">
                 <div class="col-4"><img src="<?php echo JUri::base().'images/astro_bday.png' ?>" align="right"  /></div>
-                <div class="col-8 pt-4 lead">Astro Isha turns 7 on April 4th. We are giving away 20% off on all orders and reports.</p></a></div>          
+                <div class="col-8 pt-4 lead">Astro Isha turns <?php echo date(Y)-2014 ?> on April 4th. We are giving away 20% off on all orders and reports.</p></a></div>          
             </div>
 <?php
         }

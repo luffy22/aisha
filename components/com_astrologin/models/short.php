@@ -22,9 +22,11 @@ class AstrologinModelShort extends JModelItem
         //$info                         = geoip_country_code_by_name($ip);
         //$country                      = geoip_country_name_by_name($ip);
         //echo $ip;exit;
+        
         $location               	= $geoip->lookupLocation($ip);
         $info                   	= $location->countryCode;
         $country                	= $location->countryName;
+
         $u_id           = '222';
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);

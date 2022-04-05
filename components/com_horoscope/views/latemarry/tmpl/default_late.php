@@ -5,9 +5,13 @@
 #horo_canvas{width: 100%;padding: 0 !important;margin: 0 !important;}@media (min-width: 768px) {#horo_canvas{width:65%}}
 </style>-->
 </head>
-<body>
-<?php 
+<body onload="callMe();">
+<?php
+$document = JFactory::getDocument(); 
+$str        = explode(" ",$this->data['fname']);
+$document->setTitle(strtolower($str[0]).' late marriage chances');
 //print_r($this->data);exit;
+$percent        = 0;
 $chart_id = $_GET['chart']; //echo $chart_id;exit;
 $type       = $this->data['chart_type'];//echo $type;exit;
 //print_r($this->data);exit;
@@ -116,46 +120,948 @@ else
         </tr>
     </table>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark">Horoscope</div>
-<div class="row">
-<div class="col-4"><a class="content_links" title="Main Chart" href="<?php echo Juri::base() ?>mainchart?chart=<?php echo $chart_id; ?>"><img src="images/mainchart.jpeg" width="75px" height="75px" alt="main"/><br/>Main Chart</a></div>
-<div class="col-4"><a class="content_links" title="Ascendant Chart" href="<?php echo Juri::base() ?>getasc?chart=<?php echo $chart_id; ?>"><img src="images/horo.jpeg" alt="ascendant" width="75px" height="75px"/><br/>Ascendant Chart</a></div>
-<div class="col-4"><a class="content_links" title="Moon Chart" href="<?php echo Juri::base() ?>getmoon?chart=<?php echo $chart_id; ?>"><img src="images/art_img/moon.png" alt="moon" width="75px" height="75px"/><br/>Moon Chart</a></div>
-</div>
-<div class="mb-3"></div>
-<div class="row">
-<div class="col-4"><a class="content_links" title="nakshatra finder" href="<?php echo Juri::base() ?>getnakshatra?chart=<?php echo $chart_id; ?>"><img src="images/nakshatra.jpeg" alt="nakshatra" width="75px" height="75px"/><br/>Nakshatra Finder </a></div>
-<div class="col-4"><a class="content_links" title="Navamsha Chart" href="<?php echo Juri::base() ?>getnavamsha?chart=<?php echo $chart_id; ?>"><img src="images/navamsha.jpeg" alt="navamsha" width="75px" height="75px"/><br/>Navamsha Chart</a></div>
-<div class="col-4"><a class="content_links" title="Vimhshottari Dasha" href="<?php echo Juri::base() ?>getvimshottari?chart=<?php echo $chart_id; ?>"><img src="images/vimshottari.jpeg" alt="vimshottari" width="75px" height="75px"/><br/>Vimshottari Dasha</a></div>
-</div>
-<div class="mb-3"></div>
-<div class="lead alert alert-dark">Career</div>
-<div class="row">
-  <div class="col-4"><a class="content_links" title="career finder" href="<?php echo Juri::base() ?>careerfind?chart=<?php echo $chart_id; ?>"><img src="images/art_img/career.jpg" alt="career" width="75px" height="75px"/><br/>Career Finder</a></div>
-</div>
-<div class="mb-3"></div>
-<div class="lead alert alert-dark">Finances</div>
-<div class="row">
-  <div class="col-4"><a class="content_links" title="where to invest" href="<?php echo Juri::base() ?>investwhere?chart=<?php echo $chart_id; ?>"><img src="images/money.jpg" alt="money" width="75px" height="75px"/><br/>Where To Invest</a></div>
+<div class="lead alert alert-dark">Chances Of Late Marriage</div>
+<div class="row justify-content-center">
+<div class="c100 big" id="late_checker">
+    <span id="late_value"></span>
+    <div class="slice">
+        <div class="bar"></div>
+        <div class="fill"></div>
+    </div>
+</div></div>
+<p><strong>Note: </strong>Main Chart, Moon Chart and Navamsha Chart are analyzed to check 
+possibility of late marriage.</p>
+<div class="lead alert alert-dark">Analysis Of 7th House</div>
+<p>7th house is known as marriage house. Bad influences on 7th house often lead to late marriage. Sometimes 
+even good influences on 7th house can delay marriage. Below are the placements and aspects on 7th house 
+in Main Chart, Moon Chart and Navamsha Chart. Sometimes bad 7th house leads to early divorce.</p>
+  <div class="mb-3"></div>
+  <table class="table table-bordered table-hover">
+    <tr>
+      <th>7th House</th><th>Placements</th><th>Aspects</th><th>Possibility Of Late Marriage</th>       
+    </tr>
+    <tr>
+        <td>Main Chart</td>
+        <td>
+        <?php 
+            $count  = count($this->data['house_7']);
+            if($count == "0")
+            {
+                $percent = $percent - 10;
+                echo "No Planets";
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['house_7'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['house_7'][$i]." ";
+                   }
+                }
+            }
+        ?>      
+        </td>
+        <td>
+         <?php 
+            $count  = count($this->data['aspect_7']);
+            if($count == "0")
+            {
+                echo "No Planets";
+                $percent    = $percent-10;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['aspect_7'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['aspect_7'][$i]." ";
+                   }
+                }
+            }
+        ?>         
+        </td>
+        <td>
+            <?php 
+                    if(in_array("Saturn",$this->data['house_7']) || in_array("Saturn", $this->data['aspect_7']))
+                    {
+                        echo "Yes";
+                        $percent    = $percent+5;
+                    }
+                    else if(in_array("Mars",$this->data['house_7']) || in_array("Mars", $this->data['aspect_7']))
+                    {
+                        echo "Yes";
+                        $percent    = $percent+5;
+                    }
+                    else if(in_array("Sun",$this->data['house_7']) || in_array("Sun", $this->data['aspect_7']))
+                    {
+                        echo "Yes";
+                        $percent    = $percent+5;
+                    }
+                    else if(in_array("Rahu",$this->data['house_7']) || in_array("Rahu", $this->data['aspect_7']))
+                    {
+                        echo "Yes";
+                        $percent    = $percent+5;
+                    }
+                    else if(in_array("Moon", $this->data['aspect_7']))
+                    {
+                        echo "Yes";
+                        $percent    = $percent+5;
+                    }
+                    else 
+                    {
+                        $percent    = $percent+0;
+                        echo "No";
+                    }
+            ?>
+        </td>
+    </tr>
+    <tr>
+        <td>Moon Chart</td>
+        <td>
+            <?php 
+            $count  = count($this->data['moon7']);
+            if($count == "0")
+            {
+                echo "No Planets";
+                $percent    = $percent - 3;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['moon7'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['moon7'][$i]." ";
+                   }
+                }
+            }
+        ?>      
+        </td>
+        <td>
+            <?php 
+            $count  = count($this->data['moon7_as']);
+            if($count == "0")
+            {
+                echo "No Aspects";
+                $percent    = $percent - 2;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['moon7_as'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['moon7_as'][$i]." ";
+                   }
+                }
+            }
+        ?>      
+        </td>
+        <td>
+            <?php 
+                    if(in_array("Saturn",$this->data['moon7']) || in_array("Saturn", $this->data['moon7_as']))
+                    {
+                        echo "Yes";
+                        $percent    = $percent+5;
+                    }
+                    else if(in_array("Mars",$this->data['moon7']) || in_array("Mars", $this->data['moon7_as']))
+                    {
+                        echo "Yes";
+                        $percent    = $percent+5;
+                    }
+                    else if(in_array("Sun",$this->data['moon7']) || in_array("Sun", $this->data['moon7_as']))
+                    {
+                        echo "Yes";
+                        $percent    = $percent+3;
+                    }
+                    else if(in_array("Rahu",$this->data['house_7']) || in_array("Rahu", $this->data['moon7_as']))
+                    {
+                        echo "Yes";
+                        $percent    = $percent+3;
+                    }
+                    else 
+                    {
+                        $percent    = $percent+0;
+                        echo "No";
+                    }
+            ?>
+        </td>
+    </tr>
+    <tr>
+        <td>Navamsha Chart</td>
+        <td>
+            <?php 
+            $count  = count($this->data['nav7']);
+            if($count == "0")
+            {
+                echo "No Planets";
+                $percent    = $percent - 3;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['nav7'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['nav7'][$i]." ";
+                   }
+                }
+            }
+        ?>      
+        </td>
+        <td>
+            <?php 
+            $count  = count($this->data['nav7_as']);
+            if($count == "0")
+            {
+                echo "No Aspects";
+                $percent    = $percent - 2;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['nav7_as'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['nav7_as'][$i]." ";
+                   }
+                }
+            }
+        ?>      
+        </td>
+        <td>
+            <?php 
+                    if(in_array("Saturn",$this->data['house_7']) || in_array("Saturn", $this->data['aspect_7']))
+                    {
+                        echo "Yes";
+                        $percent    = $percent+5;
+                    }
+                    else if(in_array("Mars",$this->data['house_7']) || in_array("Mars", $this->data['aspect_7']))
+                    {
+                        echo "Yes";
+                        $percent    = $percent+5;
+                    }
+                    else if(in_array("Sun",$this->data['house_7']) || in_array("Sun", $this->data['aspect_7']))
+                    {
+                        echo "Yes";
+                        $percent    = $percent+3;
+                    }
+                    else if(in_array("Rahu",$this->data['house_7']) || in_array("Rahu", $this->data['aspect_7']))
+                    {
+                        echo "Yes";
+                        $percent    = $percent+3;
+                    }
+                    else if(in_array("Moon", $this->data['aspect_7']))
+                    {
+                        echo "Yes";
+                        $percent    = $percent+5;
+                    }
+                    else 
+                    {
+                        $percent    = $percent+0;
+                        echo "No";
+                    }
+            ?>
+        </td>
+    </tr>
+  </table>
+  <div class="lead alert alert-dark">Analysis Of 12th House</div>
+<p>12th house deals with sex life. A bad 12th house means one cannot enjoy proper sex in life. A bad 12th house is 
+one of the foremost reasons for late marriage, no marriage or early divorce.</p>
+  <div class="mb-3"></div>
+  <table class="table table-bordered table-hover">
+    <tr>
+      <th>12th House</th><th>Placements</th><th>Aspects</th><th>Possibility Of Late Marriage</th>       
+    </tr>
+    <tr>
+        <td>Main Chart</td>
+        <td>
+        <?php 
+            $count  = count($this->data['house_12']);
+            if($count == "0")
+            {
+                echo "No Planets";
+                $percent    = $percent - 10;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['house_12'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['house_12'][$i]." ";
+                   }
+                }
+            }
+        ?>      
+        </td>
+        <td>
+         <?php 
+            $count  = count($this->data['aspect_12']);
+            if($count == "0")
+            {
+                echo "No Planets";
+                $percent    = $percent - 10;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['aspect_12'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['aspect_12'][$i]." ";
+                   }
+                }
+            }
+        ?>         
+        </td>
+        <td>
+            <?php 
+                    if(in_array("Sun",$this->data['house_12']) && in_array("Ketu", $this->data['house_12']) && in_array("Mars", $this->data['house_12']))
+                    {
+                        echo "Yes";
+                        $percent    = $percent+10;
+                    }
+                    else if(in_array("Mars",$this->data['aspect_7']) || in_array("Ketu", $this->data['aspect_7']))
+                    {
+                        echo "Yes";
+                        $percent    = $percent+5;
+                    }
+                    else if(in_array("Sun",$this->data['house_7']) || in_array("Sun", $this->data['aspect_7']))
+                    {
+                        echo "Yes";
+                        $percent    = $percent+5;
+                    }
+                    else if(in_array("Rahu",$this->data['house_7']) || in_array("Rahu", $this->data['aspect_7']))
+                    {
+                        echo "Yes";
+                        $percent    = $percent+5;
+                    }
+                    else if(in_array("Moon", $this->data['aspect_7']))
+                    {
+                        echo "Yes";
+                        $percent    = $percent+5;
+                    }
+                    else 
+                    {
+                        $percent    = $percent+0;
+                        echo "No";
+                    }
+            ?>
+        </td>
+    </tr>
+    <tr>
+        <td>Moon Chart</td>
+        <td>
+            <?php 
+            $count  = count($this->data['moon12']);
+            if($count == "0")
+            {
+                echo "No Planets";
+                $percent    = $percent - 3;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['moon12'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['moon12'][$i]." ";
+                   }
+                }
+            }
+        ?>      
+        </td>
+        <td>
+            <?php 
+            $count  = count($this->data['moon12_as']);
+            if($count == "0")
+            {
+                echo "No Aspects";
+                $percent    = $percent - 2;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['moon12_as'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['moon12_as'][$i]." ";
+                   }
+                }
+            }
+        ?>      
+        </td>
+        <td>
+            <?php 
+                    if(in_array("Saturn",$this->data['moon12']) || in_array("Saturn", $this->data['moon12_as'])
+                        || in_array("Mars", $this->data['moon12']) || in_array("Mars", $this->data['moon12_as'])
+                        || in_array("Jupiter", $this->data['moon12']) || in_array("Jupiter", $this->data['moon12_as']) ||
+                           in_array("Rahu",$this->data['moon12']) || in_array("Rahu", $this->data['moon12_as']) || 
+                            in_array("Ketu", $this->data['moon12_as']))
+                    {
+                        echo "Yes";
+                        $percent        = $percent+5;
+                    }
+                    else 
+                    {
+                        echo "No";
+                        $percent        = $percent+0;
+                    }
+            ?>
+        </td>
+    </tr>
+    <tr>
+        <td>Navamsha Chart</td>
+        <td>
+            <?php 
+            $count  = count($this->data['nav12']);
+            if($count == "0")
+            {
+                echo "No Planets";
+                $percent    = $percent - 3;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['nav12'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['nav12'][$i]." ";
+                   }
+                }
+            }
+        ?>      
+        </td>
+        <td>
+            <?php 
+            $count  = count($this->data['nav12_as']);
+            if($count == "0")
+            {
+                echo "No Aspects";
+                $percent    = $percent - 2;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['nav12_as'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['nav12_as'][$i]." ";
+                   }
+                }
+            }
+        ?>      
+        </td>
+        <td>
+            <?php 
+                    if(in_array("Saturn",$this->data['nav12']) || in_array("Saturn", $this->data['nav12_as'])
+                        || in_array("Mars", $this->data['nav12']) || in_array("Mars", $this->data['nav12_as'])
+                        || in_array("Jupiter", $this->data['nav12']) || in_array("Jupiter", $this->data['nav12_as'])||
+                           in_array("Rahu",$this->data['nav12']) || in_array("Rahu", $this->data['nav12_as']) ||
+                           in_array("Ketu",$this->data['nav12_as']))
+                    {
+                        echo "Yes";
+                        $percent        = $percent+10;
+                    }
+                    else 
+                    {
+                        echo "No";
+                        $percent        = $percent+0;
+                    }
+            ?>
+        </td>
+    </tr>
+  </table>  
+   <div class="lead alert alert-dark">Analysis Of 2nd House</div>
+<p>2nd house deals with family life. A bad 2nd house doesn't allow person to marry and start his own family.</p>
+  <div class="mb-3"></div>
+  <table class="table table-bordered table-hover">
+    <tr>
+      <th>2th House</th><th>Placements</th><th>Aspects</th><th>Possibility Of Late Marriage</th>       
+    </tr>
+    <tr>
+        <td>Main Chart</td>
+        <td>
+        <?php 
+            $count  = count($this->data['house_2']);
+            if($count == "0")
+            {
+                echo "No Planets";
+                $percent = $percent - 6;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['house_2'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['house_2'][$i]." ";
+                   }
+                }
+            }
+        ?>      
+        </td>
+        <td>
+         <?php 
+            $count  = count($this->data['aspect_2']);
+            if($count == "0")
+            {
+                echo "No Planets";
+                $percent    = $percent - 4;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['aspect_2'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['aspect_2'][$i]." ";
+                   }
+                }
+            }
+        ?>         
+        </td>
+        <td>
+            <?php 
+                    if(in_array("Saturn",$this->data['house_2']) || in_array("Saturn", $this->data['aspect_2'])
+                        || in_array("Mars", $this->data['house_2']) || in_array("Mars", $this->data['aspect_2'])
+                        || in_array("Jupiter", $this->data['house_2']) || in_array("Jupiter", $this->data['aspect_2']) ||
+                           in_array("Rahu",$this->data['house_2']) || in_array("Rahu", $this->data['aspect_2']) ||
+                           in_array("Ketu",$this->data['aspect_2']))
+                    {
+                        echo "Yes";
+                        $percent        = $percent+10;
+                    }
+                    else 
+                    {
+                        echo "No";
+                        $percent        = $percent+0;
+                    }
+            ?>
+        </td>
+    </tr>
+    <tr>
+        <td>Moon Chart</td>
+        <td>
+            <?php 
+            $count  = count($this->data['moon2']);
+            if($count == "0")
+            {
+                echo "No Planets";
+                $percent = $percent - 3;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['moon2'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['moon2'][$i]." ";
+                   }
+                }
+            }
+        ?>      
+        </td>
+        <td>
+            <?php 
+            $count  = count($this->data['moon2_as']);
+            if($count == "0")
+            {
+                echo "No Aspects";
+                $percent = $percent - 2;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['moon2_as'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['moon2_as'][$i]." ";
+                   }
+                }
+            }
+        ?>      
+        </td>
+        <td>
+            <?php 
+                    if(in_array("Saturn",$this->data['moon2']) || in_array("Saturn", $this->data['moon2_as'])
+                        || in_array("Mars", $this->data['moon2']) || in_array("Mars", $this->data['moon2_as'])
+                        || in_array("Jupiter", $this->data['moon2']) || in_array("Jupiter", $this->data['moon2_as']) ||
+                           in_array("Rahu",$this->data['moon2']) || in_array("Rahu", $this->data['moon2_as']) || 
+                            in_array("Ketu", $this->data['moon2_as']))
+                    {
+                        echo "Yes";
+                        $percent        = $percent+5;
+                    }
+                    else 
+                    {
+                        echo "No";
+                        $percent        = $percent+0;
+                    }
+            ?>
+        </td>
+    </tr>
+    <tr>
+        <td>Navamsha Chart</td>
+        <td>
+            <?php 
+            $count  = count($this->data['nav2']);
+            if($count == "0")
+            {
+                echo "No Planets";
+                $percent = $percent -3;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['nav2'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['nav2'][$i]." ";
+                   }
+                }
+            }
+        ?>      
+        </td>
+        <td>
+            <?php 
+            $count  = count($this->data['nav2_as']);
+            if($count == "0")
+            {
+                echo "No Aspects";
+                $percent = $percent - 2;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['nav2_as'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['nav2_as'][$i]." ";
+                   }
+                }
+            }
+        ?>      
+        </td>
+        <td>
+            <?php 
+                    if(in_array("Saturn",$this->data['nav2']) || in_array("Saturn", $this->data['nav2_as'])
+                        || in_array("Mars", $this->data['nav2']) || in_array("Mars", $this->data['nav2_as'])
+                        || in_array("Jupiter", $this->data['nav2']) || in_array("Jupiter", $this->data['nav2_as'])||
+                           in_array("Rahu",$this->data['nav2']) || in_array("Rahu", $this->data['nav2_as']) ||
+                           in_array("Ketu",$this->data['nav2_as']))
+                    {
+                        echo "Yes";
+                        $percent        = $percent+5;   
+                    }
+                    else 
+                    {
+                        echo "No";
+                        $percent        = $percent+0;
+                    }
+            ?>
+        </td>
+    </tr>
+  </table>
+   <div class="lead alert alert-dark">Analysis Of 11th House</div>
+<p>11th house is the house of gains, friendship and social contacts. Sometimes a bad 11th house doesn't allow native to 
+ gain a spouse or enjoy socializing with others due to single status.</p>
+  <div class="mb-3"></div>
+    <div class="mb-3"></div>
+  <table class="table table-bordered table-hover">
+    <tr>
+      <th>11th House</th><th>Placements</th><th>Aspects</th><th>Possibility Of Late Marriage</th>       
+    </tr>
+    <tr>
+        <td>Main Chart</td>
+        <td>
+        <?php 
+            $count  = count($this->data['house_11']);
+            if($count == "0")
+            {
+                echo "No Planets";
+                $percent    = $percent - 6;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['house_11'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['house_11'][$i]." ";
+                   }
+                }
+            }
+        ?>      
+        </td>
+        <td>
+         <?php 
+            $count  = count($this->data['aspect_11']);
+            if($count == "0")
+            {
+                echo "No Planets";
+                $percent    = $percent - 4;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['aspect_11'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['aspect_11'][$i]." ";
+                   }
+                }
+            }
+        ?>         
+        </td>
+        <td>
+            <?php 
+                    if(in_array("Saturn",$this->data['house_11']) || in_array("Saturn", $this->data['aspect_11'])
+                        || in_array("Mars", $this->data['house_11']) || in_array("Mars", $this->data['aspect_11'])
+                        || in_array("Jupiter", $this->data['house_11']) || in_array("Jupiter", $this->data['aspect_11']) ||
+                           in_array("Rahu",$this->data['house_11']) || in_array("Rahu", $this->data['aspect_11']) ||
+                           in_array("Ketu",$this->data['aspect_11']))
+                    {
+                        echo "Yes";
+                        $percent        = $percent+10;
+                    }
+                    else 
+                    {
+                        echo "No";
+                        $percent        = $percent+0;
+                    }
+            ?>
+        </td>
+    </tr>
+    <tr>
+        <td>Moon Chart</td>
+        <td>
+            <?php 
+            $count  = count($this->data['moon11']);
+            if($count == "0")
+            {
+                echo "No Planets";
+                $percent    = $percent - 3;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['moon11'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['moon11'][$i]." ";
+                   }
+                }
+            }
+        ?>      
+        </td>
+        <td>
+            <?php 
+            $count  = count($this->data['moon11_as']);
+            if($count == "0")
+            {
+                echo "No Aspects";
+                $percent    = $percent - 2;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['moon11_as'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['moon11_as'][$i]." ";
+                   }
+                }
+            }
+        ?>      
+        </td>
+        <td>
+            <?php 
+                    if(in_array("Saturn",$this->data['moon11']) || in_array("Saturn", $this->data['moon11_as'])
+                        || in_array("Mars", $this->data['moon11']) || in_array("Mars", $this->data['moon11_as'])
+                        || in_array("Jupiter", $this->data['moon11']) || in_array("Jupiter", $this->data['moon11_as']) ||
+                           in_array("Rahu",$this->data['moon11']) || in_array("Rahu", $this->data['moon11_as']) || 
+                            in_array("Ketu", $this->data['moon11_as']))
+                    {
+                        echo "Yes";
+                        $percent        = $percent+5;
+                    }
+                    else 
+                    {
+                        echo "No";
+                        $percent        = $percent+0;
+                    }
+            ?>
+        </td>
+    </tr>
+    <tr>
+        <td>Navamsha Chart</td>
+        <td>
+            <?php 
+            $count  = count($this->data['nav11']);
+            if($count == "0")
+            {
+                echo "No Planets";
+                $percent    = $percent - 3;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['nav11'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['nav11'][$i]." ";
+                   }
+                }
+            }
+        ?>      
+        </td>
+        <td>
+            <?php 
+            $count  = count($this->data['nav11_as']);
+            if($count == "0")
+            {
+                echo "No Aspects";
+                $percent        = $percent - 2;
+            }
+            else
+            {
+                for($i = 0; $i < $count;$i++)
+                {
+                   if($i < $count-1)
+                   {
+                       echo $this->data['nav11_as'][$i].", ";
+                   }
+                  else
+                   {
+                       echo $this->data['nav11_as'][$i]." ";
+                   }
+                }
+            }
+        ?>      
+        </td>
+        <td>
+            <?php 
+                    if(in_array("Saturn",$this->data['nav11']) || in_array("Saturn", $this->data['nav11_as'])
+                        || in_array("Mars", $this->data['nav11']) || in_array("Mars", $this->data['nav11_as'])
+                        || in_array("Jupiter", $this->data['nav11']) || in_array("Jupiter", $this->data['nav11_as'])||
+                           in_array("Rahu",$this->data['nav11']) || in_array("Rahu", $this->data['nav11_as']) ||
+                           in_array("Ketu",$this->data['nav11_as']))
+                    {
+                        echo "Yes";
+                        $percent        = $percent+5;
+                    }
+                    else 
+                    {
+                        echo "No";
+                        $percent        = $percent+0;
+                    }
+            ?>
+        </td>
+    </tr>
+  </table>
 
-</div>
+<form>
+    <input type="hidden" value="<?php echo $percent; ?>" id="late_rate" />
+</form>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark">Marriage</div>
-<div class="row">
-  <div class="col-4"><a class="content_links" title="Spouse Finder" href="<?php echo Juri::base() ?>findspouse?chart=<?php echo $chart_id; ?>"><img src="images/art_img/marriage.png" alt="marriage"  width="75px" height="75px"/><br/>Spouse Finder</a></div>
-  <div class="col-4"><a class="content_links" title="Chances of Love Marriage" href="<?php echo Juri::base() ?>lovemarry?chart=<?php echo $chart_id; ?>"><img src="images/art_img/love.png" alt="love"  width="70px" height="70px"/><br/>Chances of Love Marriage</a></div>
-</div>
-<div class="mb-3"></div>
-<div class="lead alert alert-dark">Divorce</div>
-<div class="row">
-    <div class="col-4"><a class="content_links" title="Mangal Dosha Calculator" href="<?php echo Juri::base() ?>mangaldosha?chart=<?php echo $chart_id; ?>"><img src="images/mars_dosha.png" alt="mdosha" width="75px" height="75px"/><br/>Mangal Dosha Calculator</a></div>
-  <div class="col-4"><a class="content_links" title="Chances of Divorce" href="<?php echo Juri::base() ?>divorce?chart=<?php echo $chart_id; ?>"><img src="images/divorce_clipart.jpeg" alt="divorce" width="75px" height="75px"/><br/>Divorce Chances</a></div>
-</div>
-<div class="mb-3"></div>
-<div class="lead alert alert-dark">Misc</div>
-<div class="row">
-    <div class="col-4"><a class="content_links" title="Astro Yogas" href="<?php echo Juri::base() ?>astroyogas?chart=<?php echo $chart_id; ?>"><img src="images/yogas.png" alt="yogas"  width="75px" height="75px"/><br/>Astro Yogas</a></div>
-    <div class="col-4"><a class="content_links" title="4 Stages" href="<?php echo Juri::base() ?>fourstage?chart=<?php echo $chart_id; ?>"><img src="images/four.png" alt="yogas"  width="75px" height="75px"/><br/>Stages Of Life</a></div>
-
-</div>
-<div class="mb-3"></div>
+<link rel="stylesheet" href="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/circle.css' ?>" type="text/css" />
+<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/latemarry.js' ?>">
+</script>
+<?php unset($this->data); ?>
+</body>

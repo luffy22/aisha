@@ -91,7 +91,7 @@ if($details[0]['currency'] == 'INR' && $details['country_full'] == 'India')
 {
 ?>
     <div class="form-check">
-    <input class="form-check-input" type='radio' name='expert_choice' id='expert_choice1' value='razorpay' checked />
+    <input class="form-check-input" type='radio' name='expert_choice' id='expert_choice1' value='razorpay' />
     <label for="expert_choice1" class="form-check-label"><i class='fa fa-credit-card'></i> Credit/Debit Card</label>
     </div>
     <div class="form-check">

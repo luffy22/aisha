@@ -48,6 +48,10 @@ if(isset($_GET['redirect']) && $_GET['redirect'] == "horologin")
 {
     $redirect = "charts";
 }
+if(isset($_GET['redirect']) && $_GET['redirect'] == "latemarry")
+{
+    $redirect = "latemarry";
+}
 ?>
 <h3 class="lead alert alert-dark">Add Location</h3>
 <form role="form" enctype="application/x-www-form-urlencoded" method="post" 

@@ -15,10 +15,10 @@ class PlgContentAskExpert extends JPlugin
             $path               = JPluginHelper::getLayoutPath('content', 'askexpert');
             $content            = "";
             //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
-            //$geoip              = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
-            $ip                         = '117.196.1.11';
+           // $geoip              = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
+            //$ip                         = '117.196.1.11';
             //$ip                         = '157.55.39.123';  // ip address
-            //$ip                 = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
+            $ip                 = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
             
             $info                       = geoip_country_code_by_name($ip);
             $country                    = geoip_country_name_by_name($ip);
@@ -138,14 +138,16 @@ class PlgContentAskExpert extends JPlugin
             $content        .= "<label for='expert_choice' class='control-label'>Payment Type: </label>";
             if($details[0]['currency'] == 'INR')
             {
-                $content            .= "<div class='form-check'>";
-                $content            .= "<input class='form-check-input' type='radio' name='expert_choice' id='expert_choice1' value='razorpay' checked />";
-                $content            .= "<label class='form-check-label' for='expert_choice1'><i class='fa fa-credit-card'></i> Credit/Debit Card/Netbanking</label>";
-                $content            .= "</div>";
-                $content            .= "<div class='form-check'>";
-                $content            .= "<input class='form-check-input' type='radio' name='expert_choice' id='expert_choice4' value='paytm'  checked />";
-                $content            .= "<label class='form-check-label' for='expert_choice4'><img src='".JURi::base()."images/paytm.png' /> UPI</label>";
-                $content            .= "</div>";
+				$content            .= "<div class='form-check'>";
+				$content            .= "<input class='form-check-input' type='radio' name='expert_choice' id='expert_choice1' value='razorpay' checked />";
+				$content            .= "<label class='form-check-label' for='expert_choice1'><i class='fa fa-credit-card'></i> Credit/Debit Card/Netbanking</label>";
+				$content            .= "</div>";
+				$content            .= "<div class='form-check'>";
+				$content            .= "<input class='form-check-input' type='radio' name='expert_choice' id='expert_choice4' value='paytm' />";
+				$content            .= "<label class='form-check-label' for='expert_choice4'><img src='".JURi::base()."images/paytm.png' /> UPI</label>";
+				$content            .= "</div>";
+				 
+                
             }
             else
             {

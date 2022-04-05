@@ -75,3 +75,11 @@ $(function()
       }   
     });
 });
+function callMe()
+{
+    var percent     = document.getElementById("late_rate").value;
+    var element = document.getElementById("late_checker");
+    element.classList.add("p"+percent);
+    document.getElementById("late_value").innerHTML = percent+"%";
+
+}
