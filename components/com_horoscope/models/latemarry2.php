@@ -137,8 +137,9 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
     }
     public function seventhHouse($data)
     {
-        //print_r($data);exit;
+        print_r($data);exit;
         $array                  = array();
+        //$asc                    
         $planet                 = $this->checkPlanetsInHouse($data, 7);
         $aspect                 = $this->checkAspectsOnHouse($data, 7);
         $array                  = array_merge($array,$planet, $aspect);

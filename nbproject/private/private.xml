@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/html/aisha/components/com_horoscope/views/lagna/tmpl/default_lagna.php</file>
-            <file>file:/var/www/html/aisha/components/com_horoscope/views/mainchart/tmpl/default.php</file>
+            <file>file:/var/www/html/aisha/components/com_horoscope/models/astroyogas.php</file>
             <file>file:/var/www/html/aisha/components/com_horoscope/views/latemarry/tmpl/default_late.php</file>
+            <file>file:/var/www/html/aisha/components/com_horoscope/models/lagna.php</file>
+            <file>file:/var/www/html/aisha/components/com_horoscope/models/latemarry.php</file>
         </group>
     </open-files>
 </project-private>

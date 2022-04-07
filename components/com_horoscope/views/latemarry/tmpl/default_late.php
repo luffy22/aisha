@@ -147,7 +147,6 @@ in Main Chart, Moon Chart and Navamsha Chart. Sometimes bad 7th house leads to e
             $count  = count($this->data['house_7']);
             if($count == "0")
             {
-                $percent = $percent - 10;
                 echo "No Planets";
             }
             else
@@ -172,7 +171,6 @@ in Main Chart, Moon Chart and Navamsha Chart. Sometimes bad 7th house leads to e
             if($count == "0")
             {
                 echo "No Planets";
-                $percent    = $percent-10;
             }
             else
             {
@@ -191,38 +189,7 @@ in Main Chart, Moon Chart and Navamsha Chart. Sometimes bad 7th house leads to e
         ?>         
         </td>
         <td>
-            <?php 
-                    if(in_array("Saturn",$this->data['house_7']) || in_array("Saturn", $this->data['aspect_7']))
-                    {
-                        echo "Yes";
-                        $percent    = $percent+5;
-                    }
-                    else if(in_array("Mars",$this->data['house_7']) || in_array("Mars", $this->data['aspect_7']))
-                    {
-                        echo "Yes";
-                        $percent    = $percent+5;
-                    }
-                    else if(in_array("Sun",$this->data['house_7']) || in_array("Sun", $this->data['aspect_7']))
-                    {
-                        echo "Yes";
-                        $percent    = $percent+5;
-                    }
-                    else if(in_array("Rahu",$this->data['house_7']) || in_array("Rahu", $this->data['aspect_7']))
-                    {
-                        echo "Yes";
-                        $percent    = $percent+5;
-                    }
-                    else if(in_array("Moon", $this->data['aspect_7']))
-                    {
-                        echo "Yes";
-                        $percent    = $percent+5;
-                    }
-                    else 
-                    {
-                        $percent    = $percent+0;
-                        echo "No";
-                    }
-            ?>
+                
         </td>
     </tr>
     <tr>
@@ -233,7 +200,6 @@ in Main Chart, Moon Chart and Navamsha Chart. Sometimes bad 7th house leads to e
             if($count == "0")
             {
                 echo "No Planets";
-                $percent    = $percent - 3;
             }
             else
             {
@@ -257,7 +223,6 @@ in Main Chart, Moon Chart and Navamsha Chart. Sometimes bad 7th house leads to e
             if($count == "0")
             {
                 echo "No Aspects";
-                $percent    = $percent - 2;
             }
             else
             {
@@ -276,33 +241,7 @@ in Main Chart, Moon Chart and Navamsha Chart. Sometimes bad 7th house leads to e
         ?>      
         </td>
         <td>
-            <?php 
-                    if(in_array("Saturn",$this->data['moon7']) || in_array("Saturn", $this->data['moon7_as']))
-                    {
-                        echo "Yes";
-                        $percent    = $percent+5;
-                    }
-                    else if(in_array("Mars",$this->data['moon7']) || in_array("Mars", $this->data['moon7_as']))
-                    {
-                        echo "Yes";
-                        $percent    = $percent+5;
-                    }
-                    else if(in_array("Sun",$this->data['moon7']) || in_array("Sun", $this->data['moon7_as']))
-                    {
-                        echo "Yes";
-                        $percent    = $percent+3;
-                    }
-                    else if(in_array("Rahu",$this->data['house_7']) || in_array("Rahu", $this->data['moon7_as']))
-                    {
-                        echo "Yes";
-                        $percent    = $percent+3;
-                    }
-                    else 
-                    {
-                        $percent    = $percent+0;
-                        echo "No";
-                    }
-            ?>
+            
         </td>
     </tr>
     <tr>
@@ -313,7 +252,6 @@ in Main Chart, Moon Chart and Navamsha Chart. Sometimes bad 7th house leads to e
             if($count == "0")
             {
                 echo "No Planets";
-                $percent    = $percent - 3;
             }
             else
             {
@@ -337,7 +275,6 @@ in Main Chart, Moon Chart and Navamsha Chart. Sometimes bad 7th house leads to e
             if($count == "0")
             {
                 echo "No Aspects";
-                $percent    = $percent - 2;
             }
             else
             {
@@ -356,38 +293,7 @@ in Main Chart, Moon Chart and Navamsha Chart. Sometimes bad 7th house leads to e
         ?>      
         </td>
         <td>
-            <?php 
-                    if(in_array("Saturn",$this->data['house_7']) || in_array("Saturn", $this->data['aspect_7']))
-                    {
-                        echo "Yes";
-                        $percent    = $percent+5;
-                    }
-                    else if(in_array("Mars",$this->data['house_7']) || in_array("Mars", $this->data['aspect_7']))
-                    {
-                        echo "Yes";
-                        $percent    = $percent+5;
-                    }
-                    else if(in_array("Sun",$this->data['house_7']) || in_array("Sun", $this->data['aspect_7']))
-                    {
-                        echo "Yes";
-                        $percent    = $percent+3;
-                    }
-                    else if(in_array("Rahu",$this->data['house_7']) || in_array("Rahu", $this->data['aspect_7']))
-                    {
-                        echo "Yes";
-                        $percent    = $percent+3;
-                    }
-                    else if(in_array("Moon", $this->data['aspect_7']))
-                    {
-                        echo "Yes";
-                        $percent    = $percent+5;
-                    }
-                    else 
-                    {
-                        $percent    = $percent+0;
-                        echo "No";
-                    }
-            ?>
+            
         </td>
     </tr>
   </table>
@@ -407,7 +313,6 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
             if($count == "0")
             {
                 echo "No Planets";
-                $percent    = $percent - 10;
             }
             else
             {
@@ -431,7 +336,6 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
             if($count == "0")
             {
                 echo "No Planets";
-                $percent    = $percent - 10;
             }
             else
             {
@@ -450,38 +354,7 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
         ?>         
         </td>
         <td>
-            <?php 
-                    if(in_array("Sun",$this->data['house_12']) && in_array("Ketu", $this->data['house_12']) && in_array("Mars", $this->data['house_12']))
-                    {
-                        echo "Yes";
-                        $percent    = $percent+10;
-                    }
-                    else if(in_array("Mars",$this->data['aspect_7']) || in_array("Ketu", $this->data['aspect_7']))
-                    {
-                        echo "Yes";
-                        $percent    = $percent+5;
-                    }
-                    else if(in_array("Sun",$this->data['house_7']) || in_array("Sun", $this->data['aspect_7']))
-                    {
-                        echo "Yes";
-                        $percent    = $percent+5;
-                    }
-                    else if(in_array("Rahu",$this->data['house_7']) || in_array("Rahu", $this->data['aspect_7']))
-                    {
-                        echo "Yes";
-                        $percent    = $percent+5;
-                    }
-                    else if(in_array("Moon", $this->data['aspect_7']))
-                    {
-                        echo "Yes";
-                        $percent    = $percent+5;
-                    }
-                    else 
-                    {
-                        $percent    = $percent+0;
-                        echo "No";
-                    }
-            ?>
+            
         </td>
     </tr>
     <tr>
@@ -492,7 +365,6 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
             if($count == "0")
             {
                 echo "No Planets";
-                $percent    = $percent - 3;
             }
             else
             {
@@ -516,7 +388,7 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
             if($count == "0")
             {
                 echo "No Aspects";
-                $percent    = $percent - 2;
+
             }
             else
             {
@@ -535,22 +407,6 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
         ?>      
         </td>
         <td>
-            <?php 
-                    if(in_array("Saturn",$this->data['moon12']) || in_array("Saturn", $this->data['moon12_as'])
-                        || in_array("Mars", $this->data['moon12']) || in_array("Mars", $this->data['moon12_as'])
-                        || in_array("Jupiter", $this->data['moon12']) || in_array("Jupiter", $this->data['moon12_as']) ||
-                           in_array("Rahu",$this->data['moon12']) || in_array("Rahu", $this->data['moon12_as']) || 
-                            in_array("Ketu", $this->data['moon12_as']))
-                    {
-                        echo "Yes";
-                        $percent        = $percent+5;
-                    }
-                    else 
-                    {
-                        echo "No";
-                        $percent        = $percent+0;
-                    }
-            ?>
         </td>
     </tr>
     <tr>
@@ -561,7 +417,6 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
             if($count == "0")
             {
                 echo "No Planets";
-                $percent    = $percent - 3;
             }
             else
             {
@@ -585,7 +440,6 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
             if($count == "0")
             {
                 echo "No Aspects";
-                $percent    = $percent - 2;
             }
             else
             {
@@ -604,22 +458,7 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
         ?>      
         </td>
         <td>
-            <?php 
-                    if(in_array("Saturn",$this->data['nav12']) || in_array("Saturn", $this->data['nav12_as'])
-                        || in_array("Mars", $this->data['nav12']) || in_array("Mars", $this->data['nav12_as'])
-                        || in_array("Jupiter", $this->data['nav12']) || in_array("Jupiter", $this->data['nav12_as'])||
-                           in_array("Rahu",$this->data['nav12']) || in_array("Rahu", $this->data['nav12_as']) ||
-                           in_array("Ketu",$this->data['nav12_as']))
-                    {
-                        echo "Yes";
-                        $percent        = $percent+10;
-                    }
-                    else 
-                    {
-                        echo "No";
-                        $percent        = $percent+0;
-                    }
-            ?>
+
         </td>
     </tr>
   </table>  
@@ -638,7 +477,6 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
             if($count == "0")
             {
                 echo "No Planets";
-                $percent = $percent - 6;
             }
             else
             {
@@ -662,7 +500,6 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
             if($count == "0")
             {
                 echo "No Planets";
-                $percent    = $percent - 4;
             }
             else
             {
@@ -681,22 +518,7 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
         ?>         
         </td>
         <td>
-            <?php 
-                    if(in_array("Saturn",$this->data['house_2']) || in_array("Saturn", $this->data['aspect_2'])
-                        || in_array("Mars", $this->data['house_2']) || in_array("Mars", $this->data['aspect_2'])
-                        || in_array("Jupiter", $this->data['house_2']) || in_array("Jupiter", $this->data['aspect_2']) ||
-                           in_array("Rahu",$this->data['house_2']) || in_array("Rahu", $this->data['aspect_2']) ||
-                           in_array("Ketu",$this->data['aspect_2']))
-                    {
-                        echo "Yes";
-                        $percent        = $percent+10;
-                    }
-                    else 
-                    {
-                        echo "No";
-                        $percent        = $percent+0;
-                    }
-            ?>
+           
         </td>
     </tr>
     <tr>
@@ -707,7 +529,6 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
             if($count == "0")
             {
                 echo "No Planets";
-                $percent = $percent - 3;
             }
             else
             {
@@ -731,7 +552,6 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
             if($count == "0")
             {
                 echo "No Aspects";
-                $percent = $percent - 2;
             }
             else
             {
@@ -750,22 +570,7 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
         ?>      
         </td>
         <td>
-            <?php 
-                    if(in_array("Saturn",$this->data['moon2']) || in_array("Saturn", $this->data['moon2_as'])
-                        || in_array("Mars", $this->data['moon2']) || in_array("Mars", $this->data['moon2_as'])
-                        || in_array("Jupiter", $this->data['moon2']) || in_array("Jupiter", $this->data['moon2_as']) ||
-                           in_array("Rahu",$this->data['moon2']) || in_array("Rahu", $this->data['moon2_as']) || 
-                            in_array("Ketu", $this->data['moon2_as']))
-                    {
-                        echo "Yes";
-                        $percent        = $percent+5;
-                    }
-                    else 
-                    {
-                        echo "No";
-                        $percent        = $percent+0;
-                    }
-            ?>
+
         </td>
     </tr>
     <tr>
@@ -776,7 +581,6 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
             if($count == "0")
             {
                 echo "No Planets";
-                $percent = $percent -3;
             }
             else
             {
@@ -800,7 +604,7 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
             if($count == "0")
             {
                 echo "No Aspects";
-                $percent = $percent - 2;
+
             }
             else
             {
@@ -819,22 +623,7 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
         ?>      
         </td>
         <td>
-            <?php 
-                    if(in_array("Saturn",$this->data['nav2']) || in_array("Saturn", $this->data['nav2_as'])
-                        || in_array("Mars", $this->data['nav2']) || in_array("Mars", $this->data['nav2_as'])
-                        || in_array("Jupiter", $this->data['nav2']) || in_array("Jupiter", $this->data['nav2_as'])||
-                           in_array("Rahu",$this->data['nav2']) || in_array("Rahu", $this->data['nav2_as']) ||
-                           in_array("Ketu",$this->data['nav2_as']))
-                    {
-                        echo "Yes";
-                        $percent        = $percent+5;   
-                    }
-                    else 
-                    {
-                        echo "No";
-                        $percent        = $percent+0;
-                    }
-            ?>
+            
         </td>
     </tr>
   </table>
@@ -855,7 +644,6 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
             if($count == "0")
             {
                 echo "No Planets";
-                $percent    = $percent - 6;
             }
             else
             {
@@ -879,7 +667,6 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
             if($count == "0")
             {
                 echo "No Planets";
-                $percent    = $percent - 4;
             }
             else
             {
@@ -898,22 +685,7 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
         ?>         
         </td>
         <td>
-            <?php 
-                    if(in_array("Saturn",$this->data['house_11']) || in_array("Saturn", $this->data['aspect_11'])
-                        || in_array("Mars", $this->data['house_11']) || in_array("Mars", $this->data['aspect_11'])
-                        || in_array("Jupiter", $this->data['house_11']) || in_array("Jupiter", $this->data['aspect_11']) ||
-                           in_array("Rahu",$this->data['house_11']) || in_array("Rahu", $this->data['aspect_11']) ||
-                           in_array("Ketu",$this->data['aspect_11']))
-                    {
-                        echo "Yes";
-                        $percent        = $percent+10;
-                    }
-                    else 
-                    {
-                        echo "No";
-                        $percent        = $percent+0;
-                    }
-            ?>
+            
         </td>
     </tr>
     <tr>
@@ -924,7 +696,6 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
             if($count == "0")
             {
                 echo "No Planets";
-                $percent    = $percent - 3;
             }
             else
             {
@@ -948,7 +719,7 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
             if($count == "0")
             {
                 echo "No Aspects";
-                $percent    = $percent - 2;
+
             }
             else
             {
@@ -967,22 +738,7 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
         ?>      
         </td>
         <td>
-            <?php 
-                    if(in_array("Saturn",$this->data['moon11']) || in_array("Saturn", $this->data['moon11_as'])
-                        || in_array("Mars", $this->data['moon11']) || in_array("Mars", $this->data['moon11_as'])
-                        || in_array("Jupiter", $this->data['moon11']) || in_array("Jupiter", $this->data['moon11_as']) ||
-                           in_array("Rahu",$this->data['moon11']) || in_array("Rahu", $this->data['moon11_as']) || 
-                            in_array("Ketu", $this->data['moon11_as']))
-                    {
-                        echo "Yes";
-                        $percent        = $percent+5;
-                    }
-                    else 
-                    {
-                        echo "No";
-                        $percent        = $percent+0;
-                    }
-            ?>
+           
         </td>
     </tr>
     <tr>
@@ -993,7 +749,6 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
             if($count == "0")
             {
                 echo "No Planets";
-                $percent    = $percent - 3;
             }
             else
             {
@@ -1017,7 +772,6 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
             if($count == "0")
             {
                 echo "No Aspects";
-                $percent        = $percent - 2;
             }
             else
             {
@@ -1036,26 +790,11 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
         ?>      
         </td>
         <td>
-            <?php 
-                    if(in_array("Saturn",$this->data['nav11']) || in_array("Saturn", $this->data['nav11_as'])
-                        || in_array("Mars", $this->data['nav11']) || in_array("Mars", $this->data['nav11_as'])
-                        || in_array("Jupiter", $this->data['nav11']) || in_array("Jupiter", $this->data['nav11_as'])||
-                           in_array("Rahu",$this->data['nav11']) || in_array("Rahu", $this->data['nav11_as']) ||
-                           in_array("Ketu",$this->data['nav11_as']))
-                    {
-                        echo "Yes";
-                        $percent        = $percent+5;
-                    }
-                    else 
-                    {
-                        echo "No";
-                        $percent        = $percent+0;
-                    }
-            ?>
+            
         </td>
     </tr>
   </table>
-
+<?php echo "<br/>".$percent; ?>
 <form>
     <input type="hidden" value="<?php echo $percent; ?>" id="late_rate" />
 </form>

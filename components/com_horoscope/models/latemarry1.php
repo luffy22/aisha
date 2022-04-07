@@ -83,13 +83,12 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
             $twelfth_nav                = $this->twelfthNavamsha($nav_sign);
             $second_nav                 = $this->secondNavamsha($nav_sign);
             $eleventh_nav               = $this->eleventhNavamsha($nav_sign);
-            
-            $seventh_late               = $this->checkLateChances($seventh,$seventh_moon, $seventh_nav, "7");
             $array                      = array_merge($array, $result, $seventh, $seventh_moon, $seventh_nav, 
                                                         $twelfth, $twelfth_moon, $twelfth_nav,
                                                         $second, $second_moon, $second_nav,
                                                         $eleventh, $eleventh_moon, $eleventh_nav);
             print_r($array);exit;
+            return $array;
         }
     }
         public $data;
@@ -139,39 +138,41 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
     }
     public function seventhHouse($data)
     {
-        $asc                    = $this->calcDetails($data["Ascendant"]);
-
+        //print_r($data);exit;
+        $asc                    = $this->calcDetails($data['Ascendant']);
+        $sign                   = $this->getHouseSign($asc, 7);
+        $sign                   = array("asc_sign_7"=>$sign);
         $array                  = array();
         $planet                 = $this->checkPlanetsInHouse($data, 7);
         $aspect                 = $this->checkAspectsOnHouse($data, 7);
-        $array                  = array_merge($array,$planet, $aspect);
+        $array                  = array_merge($array,$sign,$planet, $aspect);
         //print_r($array);exit;
         return $array;
     }
     public function seventhMoon($data)
     {
         //print_r($data);exit;
-        $asc                    = $this->calcDetails($data["Ascendant"]);
-
+        $asc                    = $this->calcDetails($data['Ascendant']);
+        $sign                   = $this->getHouseSign($asc, 7);
+        $sign                   = array("moon_sign_7"=>$sign);
         $array                  = array();
         $planet                 = $this->checkPlanetsInHouse($data, 7);
-        $planet["moon_7"]       = $planet["house_7"];   // replacing key "house_7" with "moon_" to signify 7th from Moon Sign
+        $planet["moon7"]       = $planet["house_7"];   // replacing key "house_7" with "moon_" to signify 7th from Moon Sign
         unset($planet["house_7"]);
         $aspect                 = $this->checkAspectsOnHouse($data, 7);
-        $aspect["moon_7_as"]     = $aspect["aspect_7"];   // replacing key "house_7" with "moon_" to signify 7th from Moon Sign
+        $aspect["moon7_as"]     = $aspect["aspect_7"];   // replacing key "house_7" with "moon_" to signify 7th from Moon Sign
         unset($aspect["aspect_7"]);
-        $array                  = array_merge($array,$planet, $aspect);
+        $array                  = array_merge($array,$sign,$planet, $aspect);
         //print_r($array);exit;
         return $array;
     }
     public function seventhNavamsha($data)
     {
-        //print_r($data);exit;
         $array                  = array();
         $placement              = array();
         $asc                    = $data['Ascendant_navamsha_sign'];
         $nav_sign               = $this->getHouseSign($asc, 7);  // seventh navamsha sign
-
+        $navsign                = array("nav_sign_7"=>$nav_sign);
         foreach($data as $planet=>$sign)
         {
             if($sign == $nav_sign)
@@ -185,19 +186,20 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
         $nav_as                 = array("nav7_as"=>$aspect);
         //print_r($nav_as);exit;
         //print_r($nav_pl);exit;
-        $array                  = array_merge($array,$nav_pl, $nav_as);
+        $array                  = array_merge($array,$navsign,$nav_pl, $nav_as);
         //print_r($array);exit;
         return $array;
     }
      public function twelfthHouse($data)
     {
         //print_r($data);exit;
-        $asc                    = $this->calcDetails($data["Ascendant"]);
-
+        $asc                    = $this->calcDetails($data['Ascendant']);
+        $sign                   = $this->getHouseSign($asc, 12);
+        $sign                   = array("asc_sign_12"=>$sign);
         $array                  = array();
         $planet                 = $this->checkPlanetsInHouse($data, 12);
         $aspect                 = $this->checkAspectsOnHouse($data, 12);
-        $array                  = array_merge($array,$planet, $aspect);
+        $array                  = array_merge($array,$sign,$planet, $aspect);
         //print_r($array);exit;
         return $array;
         
@@ -205,16 +207,17 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
     public function twelfthMoon($data)
     {
         //print_r($data);exit;
-        $asc                    = $this->calcDetails($data["Ascendant"]);
-
         $array                  = array();
+        $asc                    = $this->calcDetails($data['Ascendant']);
+        $sign                   = $this->getHouseSign($asc, 12);
+        $sign                   = array("moon_sign_12"=>$sign);
         $planet                 = $this->checkPlanetsInHouse($data, 12);
-        $planet["moon_12"]      = $planet["house_12"];   // replacing key "house_7" with "moon_" to signify 7th from Moon Sign
+        $planet["moon12"]       = $planet["house_12"];   // replacing key "house_7" with "moon_" to signify 7th from Moon Sign
         unset($planet["house_12"]);
         $aspect                 = $this->checkAspectsOnHouse($data, 12);
-        $aspect["moon_12_as"]   = $aspect["aspect_12"];   // replacing key "house_7" with "moon_" to signify 7th from Moon Sign
+        $aspect["moon12_as"]    = $aspect["aspect_12"];   // replacing key "house_7" with "moon_" to signify 7th from Moon Sign
         unset($aspect["aspect_12"]);
-        $array                  = array_merge($array,$planet, $aspect);
+        $array                  = array_merge($array,$sign,$planet, $aspect);
         //print_r($array);exit;
         return $array;
     }
@@ -223,7 +226,8 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
         $array                  = array();
         $placement              = array();
         $asc                    = $data['Ascendant_navamsha_sign'];
-        $nav_sign               = $this->getHouseSign($asc, 12);  // seventh navamsha sign
+        $nav_sign               = $this->getHouseSign($asc, 12);    // 12th navamsha sign
+        $navsign                = array("nav_sign_12"=>$nav_sign);
         foreach($data as $planet=>$sign)
         {
             if($sign == $nav_sign)
@@ -232,12 +236,12 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
                 array_push($placement, $value);
             }
         }
-        $nav_pl                 = array("nav_12"=>$placement);
+        $nav_pl                 = array("nav12"=>$placement);
         $aspect                 = $this->checkAspects($data,$nav_sign);
-        $nav_as                 = array("nav_12_as"=>$aspect);
+        $nav_as                 = array("nav12_as"=>$aspect);
         //print_r($nav_as);exit;
         //print_r($nav_pl);exit;
-        $array                  = array_merge($array,$nav_pl, $nav_as);
+        $array                  = array_merge($array,$navsign, $nav_pl, $nav_as);
         //print_r($array);exit;
         return $array;
         
@@ -245,12 +249,13 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
     public function secondHouse($data)
     {
         //print_r($data);exit;
-        $asc                    = $this->calcDetails($data["Ascendant"]);
-
+        $asc                    = $this->calcDetails($data['Ascendant']);
+        $sign                   = $this->getHouseSign($asc, 2);
+        $sign                   = array("asc_sign_2"=>$sign);
         $array                  = array();
         $planet                 = $this->checkPlanetsInHouse($data, 2);
         $aspect                 = $this->checkAspectsOnHouse($data, 2);
-        $array                  = array_merge($array,$planet, $aspect);
+        $array                  = array_merge($array,$sign,$planet, $aspect);
         //print_r($array);exit;
         return $array;
         
@@ -258,16 +263,17 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
     public function secondMoon($data)
     {
         //print_r($data);exit;
-        $asc                    = $this->calcDetails($data["Ascendant"]);
-
+        $asc                    = $this->calcDetails($data['Ascendant']);
+        $sign                   = $this->getHouseSign($asc, 2);
+        $sign                   = array("moon_sign_2"=>$sign);
         $array                      = array();
         $planet                     = $this->checkPlanetsInHouse($data, 2);
-        $planet["moon_2"]           = $planet["house_2"];   // replacing key "house_7" with "moon_" to signify 7th from Moon Sign
+        $planet["moon2"]            = $planet["house_2"];   // replacing key "house_7" with "moon_" to signify 7th from Moon Sign
         unset($planet["house_2"]);
         $aspect                     = $this->checkAspectsOnHouse($data, 2);
-        $aspect["moon_2_as"]        = $aspect["aspect_2"];   // replacing key "house_7" with "moon_" to signify 7th from Moon Sign
+        $aspect["moon2_as"]         = $aspect["aspect_2"];   // replacing key "house_7" with "moon_" to signify 7th from Moon Sign
         unset($aspect["aspect_2"]);
-        $array                      = array_merge($array,$planet, $aspect);
+        $array                      = array_merge($array,$sign,$planet, $aspect);
         //print_r($array);exit;
         return $array;
     }
@@ -276,8 +282,8 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
         $array                  = array();
         $placement              = array();
         $asc                    = $data['Ascendant_navamsha_sign'];
-        $nav_sign               = $this->getHouseSign($asc, 2);  // seventh navamsha sign
-        //echo $nav_sign;exit;
+        $nav_sign               = $this->getHouseSign($asc, 2);     // second navamsha sign
+        $navsign                = array("nav_sign_2"=>$nav_sign);
         foreach($data as $planet=>$sign)
         {
             if($sign == $nav_sign)
@@ -286,10 +292,10 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
                 array_push($placement, $value);
             }
         }
-        $nav_pl                 = array("nav_2"=>$placement);
+        $nav_pl                 = array("nav2"=>$placement);
         $aspect                 = $this->checkAspects($data,$nav_sign);
-        $nav_as                 = array("nav_2_as"=>$aspect);
-        $array                  = array_merge($array,$nav_pl, $nav_as);
+        $nav_as                 = array("nav2_as"=>$aspect);
+        $array                  = array_merge($array,$navsign, $nav_pl, $nav_as);
         //print_r($array);exit;
         return $array;
         
@@ -297,11 +303,13 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
     public function eleventhHouse($data)
     {
         //print_r($data);exit;
-        $asc                    = $this->calcDetails($data["Ascendant"]);
+        $asc                    = $this->calcDetails($data['Ascendant']);
+        $sign                   = $this->getHouseSign($asc, 11);
+        $sign                   = array("asc_sign_11"=>$sign);
         $array                  = array();
         $planet                 = $this->checkPlanetsInHouse($data, 11);
         $aspect                 = $this->checkAspectsOnHouse($data, 11);
-        $array                  = array_merge($array,$planet, $aspect);
+        $array                  = array_merge($array,$sign,$planet, $aspect);
         //print_r($array);exit;
         return $array;
         
@@ -309,15 +317,17 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
     public function eleventhMoon($data)
     {
         //print_r($data);exit;
-        $asc                    = $this->calcDetails($data["Ascendant"]);
+        $asc                    = $this->calcDetails($data['Ascendant']);
+        $sign                   = $this->getHouseSign($asc, 11);
+        $sign                   = array("moon_sign_11"=>$sign);
         $array                  = array();
         $planet                 = $this->checkPlanetsInHouse($data, 11);
-        $planet["moon_11"]       = $planet["house_11"];   // replacing key "house_7" with "moon_" to signify 7th from Moon Sign
+        $planet["moon11"]       = $planet["house_11"];   // replacing key "house_7" with "moon_" to signify 7th from Moon Sign
         unset($planet["house_11"]);
         $aspect                 = $this->checkAspectsOnHouse($data, 11);
-        $aspect["moon_11_as"]       = $aspect["aspect_11"];   // replacing key "house_7" with "moon_" to signify 7th from Moon Sign
+        $aspect["moon11_as"]       = $aspect["aspect_11"];   // replacing key "house_7" with "moon_" to signify 7th from Moon Sign
         unset($aspect["aspect_11"]);
-        $array                  = array_merge($array,$planet, $aspect);
+        $array                  = array_merge($array,$sign,$planet, $aspect);
         //print_r($array);exit;
         return $array;
     }
@@ -326,7 +336,8 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
         $array                  = array();
         $placement              = array();
         $asc                    = $data['Ascendant_navamsha_sign'];
-        $nav_sign               = $this->getHouseSign($asc, 11);  // seventh navamsha sign
+        $nav_sign               = $this->getHouseSign($asc, 11);        // eleventh navamsha sign
+        $navsign                = array("nav_sign_11"=>$nav_sign);
         foreach($data as $planet=>$sign)
         {
             if($sign == $nav_sign)
@@ -335,12 +346,12 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
                 array_push($placement, $value);
             }
         }
-        $nav_pl                 = array("nav_11"=>$placement);
+        $nav_pl                 = array("nav11"=>$placement);
         $aspect                 = $this->checkAspects($data,$nav_sign);
-        $nav_as                 = array("nav_11_as"=>$aspect);
+        $nav_as                 = array("nav11_as"=>$aspect);
         //print_r($nav_as);exit;
         //print_r($nav_pl);exit;
-        $array                  = array_merge($array,$nav_pl, $nav_as);
+        $array                  = array_merge($array,$navsign, $nav_pl, $nav_as);
         //print_r($array);exit;
         return $array;
         
@@ -415,66 +426,11 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
         return $aspect;
     }
     public function checkLateChances($asc, $moon, $nav, $num)
-    {  
-       //print_r($moon);exit;
-       $percent             = 25;
-       $array               = array();
-       if(count($asc['house_'.$num]) == "0" && count($asc['aspect_'.$num]) == "0")
-       {
-           $percent         = $percent-15;
-       }
-       else if(count($asc['house_'.$num]) !== "0" && count($asc['aspect_'.$num]) == "0")
-       {
-           $percent         = $percent-7;
-       }
-       else if(count($asc['house_7']) == "0" && count($asc['aspect_7']) !== "0")
-       {
-           $percent         = $percent-7;
-       }
-       else if(count($asc['house_7']) !== "0" && count($asc['aspect_7']) !== "0")
-       {
-           $percent         = $percent-0;
-       }
-       if(count($moon['moon_'.$num]) == "0" && count($moon['moon_'.$num."_as"]) == "0")
-       {
-           $percent         = $percent-5;
-       }
-       else if(count($moon['moon_'.$num]) !== "0" && count($asc['moon_'.$num."_as"]) == "0")
-       {
-           $percent         = $percent-2;
-       }
-       else if(count($moon['moon_'.$num]) == "0" && count($moon['moon_'].$num."_as") !== "0")
-       {
-           $percent         = $percent-2;
-       }
-       else if(count($moon['moon_'.$num]) !== "0" && count($moon['moon_'.$num."_as"]) !== "0")
-       {
-           $percent         = $percent-0;
-       }
-       else if(in_array("Saturn",$asc['aspect_7']) || in_array("Saturn", $asc['house_7']))
-       {
-           $percent         = $percent-0;
-       }
-       else if(in_array("Mars",$asc['aspect_7']) || in_array("Mars", $asc['house_7']))
-       {
-           $percent         = $percent-0;
-       }
-       else if(in_array("Jupiter", $asc['house_7']))
-       {
-           $percent         = $percent-0;
-       }
-       else if(in_array("Jupiter",$asc['aspect_7']))
-       {
-           $percent         = $percent-5;
-       }
-            
-       else if(in_array("Venus",$asc['aspect_7']) || in_array("Venus", $asc['house_7']))
-       {
-           $percent         = $percent-10;
-       }
-        else if(in_array("Moon", $asc['house_7']))
-       {
-           $percent         = $percent-10;
-       }
+    {
+        
+    }
+    public function checkStrength($sign, $data)
+    {
+        $aries_good             = array("Sun","Moon","Mars","Jupiter",);
     }
 }
