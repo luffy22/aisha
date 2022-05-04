@@ -7,7 +7,7 @@ $user            = JFactory::getUser();
 $this->language  = $doc->language;
 $this->direction = $doc->direction;
 $title              = $doc->title;
-$var             = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+/*$var             = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
   <strong><i class="fas fa-exclamation-circle"></i> Reports Closed.</strong> Due to office refurbishment work in progress all reports are closed. Only short and detailed answer are open. We regret for the inconvenience.
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span></button></div>';
@@ -15,13 +15,14 @@ if(!isset($_SESSION['var']))
 {
     $_SESSION['var']    = $var;
     echo $_SESSION['var'];
-}
+}*/
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
 <head>
 <title><?php echo $title; ?></title>
 <meta name="robots" content="index, follow" />
+<?php include_once (JPATH_ROOT.DS.'analyticstracking.php'); ?>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" href="<?php echo $this->baseurl ?>/favicon.ico" type="image/x-icon" />
@@ -84,8 +85,5 @@ window.cookieconsent.initialise({
 <jdoc:include type="modules" name="footer" />
 <script async src="//www.instagram.com/embed.js"></script>
 <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=1092479767598458&autoLogAppEvents=1"></script>
-<?php
-include_once (JPATH_ROOT.DS.'analyticstracking.php');
-?>
 </body>
 </html>

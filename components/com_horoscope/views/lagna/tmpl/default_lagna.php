@@ -7,6 +7,9 @@
 </head>
 <body>
 <?php 
+$document = JFactory::getDocument(); 
+$str        = explode(" ",$this->data['fname']);
+$document->setTitle(strtolower($str[0]).' main menu');
 //print_r($this->data);exit;
 $chart_id = $_GET['chart']; //echo $chart_id;exit;
 $type       = $this->data['chart_type'];//echo $type;exit;
@@ -144,6 +147,7 @@ else
 <div class="row">
   <div class="col-4"><a class="content_links" title="Spouse Finder" href="<?php echo Juri::base() ?>findspouse?chart=<?php echo $chart_id; ?>"><img src="images/art_img/marriage.png" alt="marriage"  width="75px" height="75px"/><br/>Spouse Finder</a></div>
   <div class="col-4"><a class="content_links" title="Chances of Love Marriage" href="<?php echo Juri::base() ?>lovemarry?chart=<?php echo $chart_id; ?>"><img src="images/art_img/love.png" alt="love"  width="70px" height="70px"/><br/>Chances of Love Marriage</a></div>
+  <div class="col-4"><a class="content_links" title="Late Marriage Chances" href="<?php echo Juri::base() ?>latemarry?chart=<?php echo $chart_id; ?>"><img src="images/late_marry.jpg" alt="love"  width="70px" height="70px"/><br/>Late Marriage Chances</a></div>
 </div>
 <div class="mb-3"></div>
 <div class="lead alert alert-dark">Divorce</div>

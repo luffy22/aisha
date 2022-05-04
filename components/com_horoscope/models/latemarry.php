@@ -58,7 +58,7 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
             $output = "";
 
             // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
-            exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p0142536m -g, -head", $output);
+            exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p0142536m789 -g, -head", $output);
             //print_r($output);exit;
 
             $array                      = array();
@@ -100,7 +100,7 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
             $elev_nav_strength         = $this->checkStrengthNav($eleventh_nav, "11", "nav");
             $array                      = array_merge($array, $result, $seventh, $sev_strength, 
                                                         $seventh_moon, $sev_moon_strength, $seventh_nav, $sev_nav_strength,
-                                                        $twelfth, $twel_strength, $twelfth_moon, $twel_moon_strength, $twelfth_nav,
+                                                        $twelfth, $twel_strength, $twelfth_moon, $twel_moon_strength, $twelfth_nav,$twel_nav_strength,
                                                         $second, $sec_strength, $second_moon, $sec_moon_strength, $second_nav, $sec_nav_strength,
                                                         $eleventh, $elev_strength, $eleventh_moon,$elev_moon_strength, $eleventh_nav, $elev_nav_strength);
             //print_r($array);exit;
@@ -129,7 +129,7 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
         $output = "";
 
             // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
-        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p0142536m -g, -head", $output);
+        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p0142536m789 -g, -head", $output);
         $asc                    = $output[1];
         $var                    = explode(",", $asc);
         $planet                 = trim($var[0]);
@@ -357,7 +357,8 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
         {
             $planet         = str_replace("_navamsha_sign","",$planet);
 
-            if($planet =="Sun"|| $planet =="Moon"|| $planet=="Mercury"||$planet =="Venus"||$planet=="Neptune"||$planet=="Uranus"||$planet=="Pluto")
+            if($planet =="Sun"|| $planet =="Moon"|| $planet=="Mercury"||$planet =="Venus"||$planet == "Uranus"||
+                $planet == "Neptune"||$planet == "Pluto")
             {
                 $get_7th_sign   = $this->getHouseSign($sign, 7);
                 if($get_7th_sign        == $nav_sign)
@@ -426,7 +427,7 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
         $percent                = 0;
         $num_planets            = 0;
  
-        $planets                = array("Saturn","Mars","Jupiter","Rahu","Ketu");
+        $planets                = array("Saturn","Mars","Jupiter","Rahu","Ketu","Pluto");
         
         foreach($planets as $planet)
         {
@@ -450,17 +451,17 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
         }
         else if($num_planets > 1)
         {
-            $percent            = $percent+12;
+            $percent            = $percent+10;
         }
         else if($num_planets > 0)
         {
-            $percent            = $percent+10;
+            $percent            = $percent+5;
         }  
         else
         {
             $percent            = $percent+0;
         }
-        if(count($asc['aspect_7']) < 2 && in_array("Moon",$asc['aspect_7']))
+        if(count($asc['aspect_7']) < 2 && count($asc['house_7'])< 1 && in_array("Moon",$asc['aspect_7']))
         {
             $percent            = $percent+15;
         }
@@ -470,24 +471,36 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
         }
         if(count($asc['house_7']) < 2 && in_array("Venus",$asc['house_7']))
         {
-            $percent            = $percent+10;
-        }
-        if(count($asc['aspect_7']) < 2 && in_array("Venus",$asc['aspect_7']))
-        {
-            $percent            = $percent+5;
-        }
-        if(count($asc['house_12']) < 3 && (in_array("Venus",$asc['house_12'])&&
-                in_array(("Sun"),$asc['house_12'])))
-        {
-            $percent            = $percent+15;
-        }
-        
-        if(in_array("Sun",$asc['house_'.$num]))
-        {
             $percent            = $percent+7;
         }
         
-        else if(in_array("Sun",$asc['aspect_'.$num]))
+        if((in_array("Venus",$asc['house_'.$num])&&
+                in_array(("Sun"),$asc['house_'.$num])))
+        {
+            if($num == "12")
+            {
+                $percent            = $percent+7;
+            }
+            else
+            {
+                $percent            = $percent+5;
+            }
+        }
+        
+        if((!in_array("Venus",$asc['house_'.$num])&&
+                in_array(("Sun"),$asc['house_'.$num])))
+        {
+            if($num == "12")
+            {
+                $percent            = $percent+5;
+            }
+            else
+            {
+                $percent            = $percent+3;
+            }
+        }
+        
+        if(in_array("Sun",$asc['aspect_'.$num]))
         {
             $percent            = $percent+5;
         }
@@ -504,6 +517,10 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
             {
                 $percent                = $percent - 5;
             }
+            else
+            {
+                $percent                = $percent;
+            }
             $array                  = array("house_".$num."_strength" => $percent);
         }
         //print_r($array);exit;
@@ -515,11 +532,11 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
         //print_r($asc);exit;
         $pl                 = $asc[$chart.$num];
         $asp                = $asc[$chart.$num."_as"];
-       
+        //print_r($asp);exit;
         $percent                = 0;
         $num_planets            = 0;
  
-        $planets                = array("Saturn","Mars","Jupiter","Rahu","Ketu");
+        $planets                = array("Saturn","Mars","Jupiter","Rahu","Ketu","Pluto");
         
         foreach($planets as $planet)
         {
@@ -553,63 +570,44 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
         {
             $percent            = $percent+0;
         }
-               
-        if(count($asc['nav7']) < 2 && in_array("Venus",$asc['nav7']))
-        {
-            $percent            = $percent+2;
-        }
-        if(count($asc['moon7']) < 2 && in_array("Venus",$asc['moon7']))
-        {
-            $percent            = $percent+2;
-        }
-        if(count($asc['moon7_as']) < 2 && in_array("Venus",$asc['moon7_as']))
+        
+        if(in_array("Venus",$asc['nav7']))
         {
             $percent            = $percent+1;
         }
-        if(count($asc['moon'.$num]) < 3 && (in_array("Venus",$asc['moon'.$num])&&
-                in_array("Saturn",$asc['moon'.$num])))
+        if(in_array("Venus",$asc['moon7']))
         {
-            $percent            = $percent+3;
+            $percent            = $percent+1;
         }
-        if(in_array("Venus",$asc['nav'.$num])&&
-                in_array("Saturn",$asc['nav'.$num]))
+        if(in_array("Venus",$asc['nav'.$num]) || in_array("Venus",$asc['nav'.$num.'_as']))
         {
-            $percent            = $percent+3;
+            $percent            = $percent+1;
         }
-        if(count($asc['moon12']) < 3 && (in_array("Venus",$asc['moon12'])&&
-                in_array(("Sun"),$asc['moon12'])))
+        if(in_array("Venus",$asc['moon'.$num]) || in_array("Venus",$asc['moon'.$num.'_as']))
         {
-            $percent            = $percent+3;
+            $percent            = $percent+1;
         }
-        if(count($asc['nav12']) < 3 && (in_array("Venus",$asc['nav12'])&&
-                in_array(("Sun"),$asc['nav12'])))
+        if(in_array("Sun",$asc['nav'.$num]))
         {
-            $percent            = $percent+3;
+            if($num == "12")
+            {
+                $percent        = $percent+2;
+            }
+            else
+            {
+                $percent            = $percent+1;
+            }
         }
-        if(count($asc['moon12']) > 1 && (in_array("Sun",$asc['moon12'])))
+        if(in_array("Sun",$asc['moon'.$num]))
         {
-            $percent            = $percent+2;
-        }
-        if(count($asc['nav12']) > 1 && (in_array("Sun",$asc['nav12'])))
-        {
-            $percent            = $percent+2;
-        }
-
-        if(count($asc['moon2']) > 0 && count($asc['moon2']) < 2  && (in_array("Sun",$asc['moon2'])))
-        {
-             $percent            = $percent+2;
-        }
-        else if(count($asc['moon2_as']) > 0  && (in_array("Sun",$asc['moon2_as'])))
-        {
-             $percent            = $percent+2;
-        }
-        if(count($asc['nav2']) > 0 && count($asc['moon2']) < 2  && (in_array("Sun",$asc['nav2'])))
-        {
-             $percent            = $percent+2;
-        }
-        else if(count($asc['nav2_as']) > 0  && (in_array("Sun",$asc['nav2_as'])))
-        {
-             $percent            = $percent+2;
+            if($num == "12")
+            {
+                $percent        = $percent+2;
+            }
+            else
+            {
+                $percent            = $percent+1;
+            }
         }
         if($chart == "moon")
         {
@@ -621,7 +619,7 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
         }
          // If 7th house or 12th house than percentage is 30
          
-        
+        //echo $percent;exit;
         //print_r($array);exit;
         return $array;
     }

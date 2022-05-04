@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="4.0" type="template">
+	<name>astroisha_4</name>
+	<creationDate>2022-04-2</creationDate>
+	<author>Rohan Desai</author>
+	<authorEmail>consult@astroisha.com</authorEmail>
+	<authorUrl>https://www.astroisha.com</authorUrl>
+	<copyright>Astro Isha 2022</copyright>
+	<license>GNU/GPL</license>
+	<version>1.0</version>
+	<description>New Joomla 4 Template</description>
+	<files>
+		<filename>index.php</filename>
+		<filename>templateDetails.xml</filename>
+		<folder>images</folder>
+		<folder>css</folder>
+	</files>
+	<positions>
+		<position>breadcrumb</position>
+		<position>left</position>
+		<position>right</position>
+		<position>top</position>
+		<position>middle</position>
+		<position>menu_1</position>
+		<position>menu_2</position>
+		<position>login</position>
+		<position>footer</position>
+	</positions>
+</extension>

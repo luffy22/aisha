@@ -1,13 +1,12 @@
 <?php
 defined('_JEXEC') or die;  // No direct Access
 // import Joomla modelitem library
-jimport('joomla.application.component.modelitem');
-require_once JPATH_COMPONENT.'/controller.php';
+use Joomla\CMS\MVC\Model\ListModel;
 //require_once JPATH;
 
 $libPath = JPATH_BASE.'/sweph/';
 putenv("PATH=$libPath");
-class HoroscopeModelLagna extends JModelItem
+class HoroscopeModelLagna extends ListModel
 {
     public $data;
     public function getLogin()

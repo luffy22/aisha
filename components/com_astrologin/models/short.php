@@ -1,31 +1,31 @@
 <?php
 defined('_JEXEC') or die;  // No direct Access
 // import Joomla modelitem library
-jimport('joomla.application.component.modelitem');
-class AstrologinModelShort extends JModelItem
+use Joomla\CMS\MVC\Model\ListModel;
+class AstrologinModelShort extends ListModel
 {
     function getData()
     {
-        include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
-        $geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
-        //$ip                           = '117.196.1.11';
+        //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
+        //$geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
+        $ip                           = '117.196.1.11';
         //$ip                             = '140.120.6.207';
         //$ip                             = '157.55.39.123';  // ip address
         //$ip 							= '1.10.128.129';  // thai address
         //	$ip 							= '175.157.193.156'; // srilanka ip address
-        $ip = getenv('HTTP_CLIENT_IP')?:
+        /*$ip = getenv('HTTP_CLIENT_IP')?:
         getenv('HTTP_X_FORWARDED_FOR')?:
         getenv('HTTP_X_FORWARDED')?:
         getenv('HTTP_FORWARDED_FOR')?:
         getenv('HTTP_FORWARDED')?:
-        getenv('REMOTE_ADDR');     // uncomment this ip on server
-        //$info                         = geoip_country_code_by_name($ip);
-        //$country                      = geoip_country_name_by_name($ip);
+        getenv('REMOTE_ADDR');  */   // uncomment this ip on server
+        $info                         = geoip_country_code_by_name($ip);
+        $country                      = geoip_country_name_by_name($ip);
         //echo $ip;exit;
         
-        $location               	= $geoip->lookupLocation($ip);
-        $info                   	= $location->countryCode;
-        $country                	= $location->countryName;
+        //$location               	= $geoip->lookupLocation($ip);
+        //$info                   	= $location->countryCode;
+        //$country                	= $location->countryName;
 
         $u_id           = '222';
         $db             = JFactory::getDbo();

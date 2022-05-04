@@ -1,5 +1,6 @@
 <?php
-class AstrologinModelCareer extends JModelItem
+use Joomla\CMS\MVC\Model\ListModel;
+class AstrologinModelCareer extends ListModel
 {
     public function getData()
     {

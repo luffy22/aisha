@@ -1,8 +1,8 @@
 <?php
 defined('_JEXEC') or die;  // No direct Access
 // import Joomla modelitem library
-jimport('joomla.application.component.modelitem');
-class AstrologinModelEditUser extends JModelItem
+use Joomla\CMS\MVC\Model\ListModel;
+class AstrologinModelEditUser extends ListModel
 {
     public function getData()
     {

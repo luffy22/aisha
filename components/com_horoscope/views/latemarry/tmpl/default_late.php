@@ -11,7 +11,13 @@ $document = JFactory::getDocument();
 $str        = explode(" ",$this->data['fname']);
 $document->setTitle(strtolower($str[0]).' late marriage chances');
 //print_r($this->data);exit;
-$percent        = 0;
+$percent        = $this->data['house_7_strength']+$this->data['moon_7_strength']+
+                    $this->data['nav_7_strength']+$this->data['house_12_strength']+
+                    $this->data['moon_12_strength']+$this->data['nav_12_strength']+
+                    $this->data['house_2_strength']+$this->data['moon_2_strength']+
+                    $this->data['nav_2_strength']+$this->data['house_11_strength']+
+                    $this->data['moon_11_strength']+$this->data['nav_11_strength'];
+//echo $percent;exit;
 $chart_id = $_GET['chart']; //echo $chart_id;exit;
 $type       = $this->data['chart_type'];//echo $type;exit;
 //print_r($this->data);exit;
@@ -129,12 +135,11 @@ else
         <div class="fill"></div>
     </div>
 </div></div>
-<p><strong>Note: </strong>Main Chart, Moon Chart and Navamsha Chart are analyzed to check 
-possibility of late marriage.</p>
+<p><strong>Note: </strong>This software is not 100% accurate and there is room for improvement. There are a lot of factors including vimshottari dasha 
+which need to be analyzed before late marriage is predicted in a chart.</p>
 <div class="lead alert alert-dark">Analysis Of 7th House</div>
-<p>7th house is known as marriage house. Bad influences on 7th house often lead to late marriage. Sometimes 
-even good influences on 7th house can delay marriage. Below are the placements and aspects on 7th house 
-in Main Chart, Moon Chart and Navamsha Chart. Sometimes bad 7th house leads to early divorce.</p>
+<p>7th house is known as marriage house. Bad influences on 7th house often lead to late marriage or early divorce. Sometimes 
+even good influences on 7th house can delay marriage.</p>
   <div class="mb-3"></div>
   <table class="table table-bordered table-hover">
     <tr>
@@ -189,7 +194,17 @@ in Main Chart, Moon Chart and Navamsha Chart. Sometimes bad 7th house leads to e
         ?>         
         </td>
         <td>
-                
+          <?php
+            if($this->data['house_7_strength'] >= 7)
+            {
+                echo "Yes";
+            }
+            else
+            {
+                echo "No";
+            }
+            
+          ?>
         </td>
     </tr>
     <tr>
@@ -241,7 +256,16 @@ in Main Chart, Moon Chart and Navamsha Chart. Sometimes bad 7th house leads to e
         ?>      
         </td>
         <td>
-            
+             <?php
+            if($this->data['moon_7_strength'] >= 3)
+            {
+                echo "Yes";
+            }
+            else
+            {
+                echo "No";
+            }
+          ?>
         </td>
     </tr>
     <tr>
@@ -293,12 +317,21 @@ in Main Chart, Moon Chart and Navamsha Chart. Sometimes bad 7th house leads to e
         ?>      
         </td>
         <td>
-            
+             <?php
+            if($this->data['nav_7_strength'] >= 3)
+            {
+                echo "Yes";
+            }
+            else
+            {
+                echo "No";
+            }
+          ?>
         </td>
     </tr>
   </table>
   <div class="lead alert alert-dark">Analysis Of 12th House</div>
-<p>12th house deals with sex life. A bad 12th house means one cannot enjoy proper sex in life. A bad 12th house is 
+<p>12th house deals with sex life of an individual. A bad 12th house is 
 one of the foremost reasons for late marriage, no marriage or early divorce.</p>
   <div class="mb-3"></div>
   <table class="table table-bordered table-hover">
@@ -354,7 +387,16 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
         ?>         
         </td>
         <td>
-            
+         <?php
+            if($this->data['house_12_strength'] >= 7)
+            {
+                echo "Yes";
+            }
+            else
+            {
+                echo "No";
+            }
+          ?>
         </td>
     </tr>
     <tr>
@@ -407,6 +449,16 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
         ?>      
         </td>
         <td>
+         <?php
+            if($this->data['moon_12_strength'] >= 3)
+            {
+                echo "Yes";
+            }
+            else
+            {
+                echo "No";
+            }
+          ?>
         </td>
     </tr>
     <tr>
@@ -458,7 +510,16 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
         ?>      
         </td>
         <td>
-
+         <?php
+            if($this->data['nav_12_strength'] >= 3)
+            {
+                echo "Yes";
+            }
+            else
+            {
+                echo "No";
+            }
+          ?>
         </td>
     </tr>
   </table>  
@@ -518,7 +579,16 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
         ?>         
         </td>
         <td>
-           
+         <?php
+            if($this->data['house_2_strength'] >= 7)
+            {
+                echo "Yes";
+            }
+            else
+            {
+                echo "No";
+            }
+          ?>
         </td>
     </tr>
     <tr>
@@ -570,7 +640,16 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
         ?>      
         </td>
         <td>
-
+         <?php
+            if($this->data['moon_2_strength'] >= 3)
+            {
+                echo "Yes";
+            }
+            else
+            {
+                echo "No";
+            }
+          ?>
         </td>
     </tr>
     <tr>
@@ -623,13 +702,22 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
         ?>      
         </td>
         <td>
-            
+        <?php
+            if($this->data['nav_2_strength'] >= 3)
+            {
+                echo "Yes";
+            }
+            else
+            {
+                echo "No";
+            }
+          ?>
         </td>
     </tr>
   </table>
    <div class="lead alert alert-dark">Analysis Of 11th House</div>
-<p>11th house is the house of gains, friendship and social contacts. Sometimes a bad 11th house doesn't allow native to 
- gain a spouse or enjoy socializing with others due to single status.</p>
+<p>11th house is the house of gains and friendship. A bad 11th house would 
+ensure native cannot gain a spouse at right time and enjoy socializing with others.</p>
   <div class="mb-3"></div>
     <div class="mb-3"></div>
   <table class="table table-bordered table-hover">
@@ -685,7 +773,16 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
         ?>         
         </td>
         <td>
-            
+        <?php
+            if($this->data['house_11_strength'] >= 7)
+            {
+                echo "Yes";
+            }
+            else
+            {
+                echo "No";
+            }
+          ?>
         </td>
     </tr>
     <tr>
@@ -738,7 +835,16 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
         ?>      
         </td>
         <td>
-           
+           <?php
+            if($this->data['moon_11_strength'] >= 3)
+            {
+                echo "Yes";
+            }
+            else
+            {
+                echo "No";
+            }
+          ?>
         </td>
     </tr>
     <tr>
@@ -790,11 +896,19 @@ one of the foremost reasons for late marriage, no marriage or early divorce.</p>
         ?>      
         </td>
         <td>
-            
+        <?php
+            if($this->data['nav_11_strength'] >= 3)
+            {
+                echo "Yes";
+            }
+            else
+            {
+                echo "No";
+            }
+          ?>
         </td>
     </tr>
   </table>
-<?php echo "<br/>".$percent; ?>
 <form>
     <input type="hidden" value="<?php echo $percent; ?>" id="late_rate" />
 </form>

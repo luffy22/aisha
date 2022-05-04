@@ -46,11 +46,11 @@ $current        = Juri::current();
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item <?php if($current == Juri::base().'lovemarry'){ echo "active";} ?>" href="<?php echo Juri::base().'lovemarry?chart='.$chart_id; ?>">Love Marriage</a>
                 <div class="dropdown-divider"></div>
+                <a class="dropdown-item <?php if($current == Juri::base().'latemarry'){ echo "active";} ?>" href="<?php echo Juri::base().'latemarry?chart='.$chart_id; ?>">Late Marriage</a>
+                <div class="dropdown-divider"></div>
                 <a class="dropdown-item <?php if($current == Juri::base().'mangaldosha'){ echo "active";} ?>" href="<?php echo Juri::base().'mangaldosha?chart='.$chart_id; ?>">Mangal Dosha</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item <?php if($current == Juri::base().'divorce'){ echo "active";} ?>" href="<?php echo Juri::base().'divorce?chart='.$chart_id; ?>">Divorce Chances</a>
-                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item <?php if($current == Juri::base().'latemarry'){ echo "active";} ?>" href="<?php echo Juri::base().'latemarry?chart='.$chart_id; ?>">Late Marriage</a>
             </div>
         </li>
         <li class="nav-item dropdown">

@@ -1,9 +1,8 @@
 <?php
-
 defined('_JEXEC') or die;  // No direct Access
 // import Joomla modelitem library
-jimport('joomla.application.component.modelitem');
-class AstrologinModelReadPanchang extends JModelItem
+use Joomla\CMS\MVC\Model\ListModel;
+class AstrologinModelReadPanchang extends ListModel
 {
     function getDetails()
     {

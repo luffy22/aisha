@@ -2,31 +2,35 @@
 defined('_JEXEC') or die;
 //print_r($order);exit;
 $current        = JUri::current();
+$year = date("Y"); 
 $menualias = JFactory::getApplication()->getMenu()->getActive()->alias;
 $date       = new DateTime();
-$date_mar   = new Datetime("03/15/2022");
-$date_apr   = new DateTime("04/05/2022");
-$date_oct   = new Datetime("10/21/2020");
-$date_nov   = new DateTime("11/19/2020");
+$date_mar   = new Datetime("03/15/".$year);
+$date_apr   = new DateTime("04/05/".$year);
+$date_oct   = new Datetime("09/26/".$year);
+$date_nov   = new DateTime("10/10/".$year);
 ?>
+
 <?php
     if($current  == JUri::base())
     {
         if($date > $date_mar && $date < $date_apr)
         {
-?>
-            <div class="p-1 row alert alert-dark">
-                <div class="col-4"><img src="<?php echo JUri::base().'images/astro_bday.png' ?>" align="right"  /></div>
-                <div class="col-8 pt-4 lead">Astro Isha turns <?php echo date(Y)-2014 ?> on April 4th. We are giving away 20% off on all orders and reports.</p></a></div>          
+?>          <div class="jumbotron jumbotron-fluid bg-light">
+                        <p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/astro_bday.png' ?>" align="left" hspace="10"  />Birthday Discount. We are giving away 20% off on all orders.</p>
+                        <a class="btn btn-primary" href="#" role="button"><i class="bi bi-card-text"></i> Learn More</a>
+		
             </div>
+            
 <?php
         }
         else if($date > $date_oct && $date < $date_nov)
         {
 ?>
-            <div class="p-1 row alert alert-dark">
-                <div class="col-4"><img src="<?php echo JUri::base().'images/astro_diwali.png' ?>" align="right"  /></div>
-                <div class="col-8 pt-4 lead">Diwali Bonanza. We are giving away 20% off on all orders and reports.</div>          
+            <div class="jumbotron jumbotron-fluid bg-light">
+                        <p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/astro_diwali.png' ?>" align="left" hspace="10"  />Diwali Bonanza. We are giving away 20% off on all orders</p>
+                        <a class="btn btn-primary" href="#" role="button"><i class="bi bi-card-text"></i> Learn More</a>
+		
             </div>
 <?php
         }
@@ -46,23 +50,24 @@ $date_nov   = new DateTime("11/19/2020");
                     if($currency == "INR"){$pay_mode = "paytm";}else{$pay_mode = "paypal";}
                     if($amount == $disc_price)
                     {
-    ?>
-                    <div class="p-1 row alert alert-dark">
-                        <div class="col-4"><img src="<?php echo JUri::base().'images/'.$order[$i]['img_for_text'] ?>" align="right"  /></div>
-                        <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-ans' ?>"><p class="lead"> <?php echo $order[$i]['text_before']." ".$amount."&nbsp;".$currency; ?> only                </p></a></div>          
+    ?>  
+                    <div class="jumbotron jumbotron-fluid bg-light">
+                        <p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[$i]['img_for_text'] ?>" align="left" hspace="10"  /><?php echo $order[$i]['text_before']." ".$amount."&nbsp;".$currency; ?> only</p>
+                        <a class="btn btn-primary" href="<?php echo JUri::base().$type.'-ans' ?>" role="button"><i class="bi bi-card-text"></i> Learn More</a>
+		
                     </div>
     <?php
                     }
                     else
                     {
      ?>
-                    <div class="p-1 row alert alert-dark">
-                        <div class="col-4"><img src="<?php echo JUri::base().'images/'.$order[$i]['img_for_text'] ?>" align="right"  /></div>
-                        <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-ans' ?>"><p class="lead"> <?php echo $order[$i]['text_before']." <s>".$order[$i]['amount']."&nbsp;".$currency."</s> "; ?>
-                        <br/><?php echo $disc_price." ".$currency; ?> only
-                    </p></a></div>          
+                    <div class="jumbotron jumbotron-fluid bg-light">
+                        <p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[$i]['img_for_text'] ?>" align="left" hspace="10"  /><?php echo $order[$i]['text_before']." <s>".$order[$i]['amount']."&nbsp;".$currency."</s> "; ?>
+                        <br/><?php echo $disc_price." ".$currency; ?> only</p>
+                        <a class="btn btn-primary" href="<?php echo JUri::base().$type.'-ans' ?>" role="button"><i class="bi bi-card-text"></i> Learn More</a>
+		
                     </div>
-     <?php            
+                    <?php            
                     }
                 }
                 else if($order[$i]['on_home'] == "yes" && ($order[$i]['service_for_charge'] == "life"||
@@ -80,24 +85,21 @@ $date_nov   = new DateTime("11/19/2020");
                     if($amount == $disc_price)
                     {
     ?>
-    <div class="p-1 row alert alert-dark">
-
-        <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[$i]['img_for_text'] ?>" align="right"  /></div>
-        <div class="col-8 pt-4"><a href="<?php echo JUri::base().$order[$i]['service_for_charge'].'-report' ?>"><p class="lead"><?php echo $order[$i]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only
-            </p></a></div>          
-    </div>
+        <div class="jumbotron jumbotron-fluid bg-light">
+		<p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[$i]['img_for_text'] ?>" align="left" hspace="10"  /><?php echo $order[$i]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only</p>
+		<a class="btn btn-primary" href="<?php echo JUri::base().$order[$i]['service_for_charge'].'-report' ?>" role="button"><i class="bi bi-card-text"></i> Learn More</a>
+		
+	</div>
     <?php
                     }
                     else
                     {
      ?>
-    <div class="p-1 row alert alert-dark">
-
-        <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[$i]['img_for_text'] ?>" align="right"  /></div>
-        <div class="col-8 pt-4"><a href="<?php echo JUri::base().$order[$i]['service_for_charge'].'-report' ?>"><p class="lead"><?php echo $order[$i]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
-                <br/><?php echo number_format((float)$disc_price,2)." ".$currency; ?> only
-            </p></a></div>          
-    </div>
+        <div class="jumbotron jumbotron-fluid bg-light">
+		<p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[$i]['img_for_text'] ?>" align="left" hspace="10"  /><?php echo $order[$i]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
+                <br/><?php echo number_format((float)$disc_price,2)." ".$currency; ?> only</p>
+		<a class="btn btn-primary" href="<?php echo JUri::base().$order[$i]['service_for_charge'].'-report' ?>" role="button"><i class="bi bi-card-text"></i> Learn More</a>
+	</div>
     <?php
                     }
                 }
@@ -116,27 +118,27 @@ $date_nov   = new DateTime("11/19/2020");
         if($amount == $disc_price)
         {
 ?>
-            <div class="p-1 row alert alert-dark">
-                <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[3]['img_for_text'] ?>" align="right"  /></div>
-                <div class="col-8 pt-4"><a href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>"><p class="lead"><?php echo $order[3]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only
-                    </p></a></div>          
+            <div class="jumbotron jumbotron-fluid bg-light">
+		<p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[3]['img_for_text'] ?>" align="left" hspace="10"  /><?php echo $order[3]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only</p>
+		<a class="btn btn-primary" href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>" role="button"><i class="bi bi-card-text"></i> Learn More</a>
+		
             </div>
 <?php
         }
         else
         {
  ?>
-            <div class="p-1 row alert alert-dark">
-                <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[3]['img_for_text'] ?>" align="right"  /></div>
-                <div class="col-8 pt-4"><a href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>"><p class="lead"><?php echo $order[3]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
-                    <br/><?php echo number_format((float)$disc_price,2)." ".$currency; ?> only
-                    </p></a></div>          
-    </div>
+            <div class="jumbotron jumbotron-fluid bg-light">
+		<p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[3]['img_for_text'] ?>" align="left" hspace="10"  /><?php echo $order[3]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
+                    <br/><?php echo number_format((float)$disc_price,2)." ".$currency; ?> only</p>
+		<a class="btn btn-primary" href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>" role="button"><i class="bi bi-card-text"></i> Learn More</a>
+		
+            </div>
 <?php
         }
     }
     else if($menualias == "relationship" || $menualias == "findspouse" || $menualias == "divorce"
-            || $menualias == "mangaldosha")
+            || $menualias == "mangaldosha" || $menualias == "latemarry")
     {
         $type       = $order[5]['service_for_charge'];
         $amount     = $order[5]['amount'];
@@ -146,23 +148,22 @@ $date_nov   = new DateTime("11/19/2020");
         if($currency == "INR"){$pay_mode = "paytm";}else{$pay_mode = "paypal";}
         if($amount == $disc_price)
         {
-?>
-            <div class="p-1 row alert alert-dark">
-                <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[5]['img_for_text'] ?>" align="right"  /></div>
-                <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-report' ?>"><p class="lead"><?php echo $order[5]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only
-                    </p></a></div>          
+?>           <div class="jumbotron jumbotron-fluid bg-light">
+		<p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[5]['img_for_text'] ?>" align="left" hspace="10"  /><?php echo $order[5]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only</p>
+		<a class="btn btn-primary" href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>" role="button"><i class="bi bi-card-text"></i> Learn More</a>
             </div>
+            
 <?php
         }
         else
         {
  ?>
-            <div class="p-1 row alert alert-dark">
-                <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[5]['img_for_text'] ?>" align="right"  /></div>
-                <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-report' ?>"><p class="lead"><?php echo $order[5]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
-                    <br/><?php echo number_format((float)$disc_price,2)." ".$currency; ?> only
-                    </p></a></div>          
-    </div>
+            <div class="jumbotron jumbotron-fluid bg-light">
+		<p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[5]['img_for_text'] ?>" align="left" hspace="10"  /><?php echo $order[5]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
+                    <br/><?php echo number_format((float)$disc_price,2)." ".$currency; ?> only</p>
+		<a class="btn btn-primary" href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>" role="button"><i class="bi bi-card-text"></i> Learn More</a>
+		
+            </div>
 <?php
         }
     }
@@ -177,22 +178,21 @@ $date_nov   = new DateTime("11/19/2020");
         if($amount == $disc_price)
         {
 ?>
-            <div class="p-1 row alert alert-dark">
-                <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[4]['img_for_text'] ?>" align="right"  /></div>
-                <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-report' ?>"><p class="lead"><?php echo $order[4]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only
-                    </p></a></div>          
+            <div class="jumbotron jumbotron-fluid bg-light">
+		<p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[4]['img_for_text'] ?>" align="left" hspace="10"  /><?php echo $order[4]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only</p>
+		<a class="btn btn-primary" href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>" role="button"><i class="bi bi-card-text"></i> Learn More</a>
             </div>
 <?php
         }
         else
         {
  ?>
-            <div class="p-1 row alert alert-dark">
-                <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[4]['img_for_text'] ?>" align="right"  /></div>
-                <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-report' ?>"><p class="lead"><?php echo $order[4]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
-                    <br/><?php echo number_format((float)$disc_price,2)." ".$currency; ?> only
-                    </p></a></div>          
-    </div>
+            <div class="jumbotron jumbotron-fluid bg-light">
+		<p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[4]['img_for_text'] ?>" align="left" hspace="10"  /><?php echo $order[4]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
+                    <br/><?php echo number_format((float)$disc_price,2)." ".$currency; ?> only</p>
+		<a class="btn btn-primary" href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>" role="button"><i class="bi bi-card-text"></i> Learn More</a>
+		
+            </div>
 <?php
         }
     }
@@ -209,21 +209,21 @@ $date_nov   = new DateTime("11/19/2020");
         if($amount == $disc_price)
         {
 ?>
-            <div class="p-1 row alert alert-dark">
-                <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[2]['img_for_text'] ?>" align="right"  /></div>
-                <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-report' ?>"><p class="lead"><?php echo $order[2]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only
-                    </p></a></div>          
+            <div class="jumbotron jumbotron-fluid bg-light">
+		<p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[2]['img_for_text'] ?>" align="left" hspace="10"  /><?php echo $order[2]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only</p>
+		<a class="btn btn-primary" href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>" role="button"><i class="bi bi-card-text"></i> Learn More</a>
             </div>
 <?php
         }
         else
         {
  ?>
-            <div class="p-1 row alert alert-dark">
-                <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[2]['img_for_text'] ?>" align="right"  /></div>
-                <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-report' ?>"><p class="lead"><?php echo $order[2]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
-                    <br/><?php echo number_format((float)$disc_price,2)." ".$currency; ?> only
-                    </p></a></div>          
+            <div class="jumbotron jumbotron-fluid bg-light">
+		<p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[2]['img_for_text'] ?>" align="left" hspace="10"  /><?php echo $order[2]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
+                    <br/><?php echo number_format((float)$disc_price,2)." ".$currency; ?> only</p>
+		<a class="btn btn-primary" href="<?php echo JUri::base().'order-report?report='.$type.'&fees='.$disc_price.'_'.$currency.'&pay_mode='.$pay_mode ?>" role="button"><i class="bi bi-card-text"></i> Learn More</a>
+		
+            </div>        
     </div>
 <?php
         }
@@ -239,21 +239,21 @@ $date_nov   = new DateTime("11/19/2020");
        if($amount == $disc_price)
         {
 ?>
-        <div class="p-1 row alert alert-dark">
-            <div class="col-4"><img src="<?php echo JUri::base().'images/'.$order[0]['img_for_text'] ?>" align="right"  /></div>
-            <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-ans'; ?>"><p class="lead"> <?php echo $order[0]['text_before']." ".$amount."&nbsp;".$currency; ?> only                </p></a></div>          
-        </div>
+            <div class="jumbotron jumbotron-fluid bg-light">
+                <p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[0]['img_for_text'] ?>" align="left" hspace="10"  /><?php echo $order[0]['text_before']." ".$amount."&nbsp;".$currency; ?> only</p>
+                <a class="btn btn-primary" href="<?php echo JUri::base().$type.'-ans' ?>" role="button"><i class="bi bi-card-text"></i> Learn More</a>
+		
+            </div>
 <?php
         }
         else
         {
-?>
-        <div class="p-1 row alert alert-dark">
-            <div class="col-4"><img src="<?php echo JUri::base().'images/'.$order[0]['img_for_text'] ?>" align="right"  /></div>
-            <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-ans'; ?>"><p class="lead"> <?php echo $order[0]['text_before']." <s>".$order[0]['amount']."&nbsp;".$currency."</s> "; ?>
-            <br/><?php echo $disc_price." ".$currency; ?> only
-        </p></a></div>          
-        </div>
+?>          <div class="jumbotron jumbotron-fluid bg-light">
+                <p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[0]['img_for_text'] ?>" align="left" hspace="10"  /><?php echo $order[0]['text_before']." <s>".$order[0]['amount']."&nbsp;".$currency."</s> "; ?>
+                <br/><?php echo $disc_price." ".$currency; ?> only</p>
+                <a class="btn btn-primary" href="<?php echo JUri::base().$type.'-ans' ?>" role="button"><i class="bi bi-card-text"></i> Learn More</a>
+		
+            </div>
 <?php
         }
     }
@@ -268,22 +268,22 @@ $date_nov   = new DateTime("11/19/2020");
         if($amount == $disc_price)
         {
 ?>
-            <div class="p-1 row alert alert-dark">
-                <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[6]['img_for_text'] ?>" align="right"  /></div>
-                <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-report' ?>"><p class="lead"><?php echo $order[6]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only
-                    </p></a></div>          
+            <div class="jumbotron jumbotron-fluid bg-light">
+                <p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[6]['img_for_text'] ?>" align="left" hspace="10"  /><?php echo $order[6]['text_before']." ".$amount."&nbsp;".$currency; ?> only</p>
+                <a class="btn btn-primary" href="<?php echo JUri::base().$type.'-ans' ?>" role="button"><i class="bi bi-card-text"></i> Learn More</a>
+		
             </div>
 <?php
         }
         else
         {
  ?>
-            <div class="p-1 row alert alert-dark">
-                <div class="col-4"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[6]['img_for_text'] ?>" align="right"  /></div>
-                <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-report' ?>"><p class="lead"><?php echo $order[6]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
-                    <br/><?php echo number_format((float)$disc_price,2)." ".$currency; ?> only
-                    </p></a></div>          
-    </div>
+            <div class="jumbotron jumbotron-fluid bg-light">
+                <p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[6]['img_for_text'] ?>" align="left" hspace="10"  /><?php echo $order[6]['text_before']." <s>".$order[6]['amount']."&nbsp;".$currency."</s> "; ?>
+                <br/><?php echo $disc_price." ".$currency; ?> only</p>
+                <a class="btn btn-primary" href="<?php echo JUri::base().$type.'-ans' ?>" role="button"><i class="bi bi-card-text"></i> Learn More</a>
+		
+            </div>
 <?php
         }
     }
@@ -303,21 +303,22 @@ $date_nov   = new DateTime("11/19/2020");
         if($amount == $disc_price)
         {
 ?>
-        <div class="p-1 row alert alert-dark">
-            <div class="col-4"><img src="<?php echo JUri::base().'images/'.$order[1]['img_for_text'] ?>" align="right"  /></div>
-            <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-ans'; ?>"><p class="lead"> <?php echo $order[1]['text_before']." ".$amount."&nbsp;".$currency; ?> only</p></a></div>          
-        </div>
+            <div class="jumbotron jumbotron-fluid bg-light">
+                <p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[1]['img_for_text'] ?>" align="left" hspace="10"  /><?php echo $order[1]['text_before']." ".$amount."&nbsp;".$currency; ?> only</p>
+                <a class="btn btn-primary" href="<?php echo JUri::base().$type.'-ans' ?>" role="button"><i class="bi bi-card-text"></i> Learn More</a>
+		
+            </div>
 <?php
         }
         else
         {
 ?>
-        <div class="p-1 row alert alert-dark">
-            <div class="col-4"><img src="<?php echo JUri::base().'images/'.$order[1]['img_for_text'] ?>" align="right"  /></div>
-            <div class="col-8 pt-4"><a href="<?php echo JUri::base().$type.'-ans' ?>"><p class="lead"> <?php echo $order[1]['text_before']." <s>".$order[1]['amount']."&nbsp;".$currency."</s> "; ?>
-            <br/><?php echo $disc_price." ".$currency; ?> only
-        </p></a></div>          
-        </div>
+            <div class="jumbotron jumbotron-fluid bg-light">
+                <p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[1]['img_for_text'] ?>" align="left" hspace="10"  /><?php echo $order[1]['text_before']." <s>".$order[1]['amount']."&nbsp;".$currency."</s> "; ?>
+                <br/><?php echo $disc_price." ".$currency; ?> only</p>
+                <a class="btn btn-primary" href="<?php echo JUri::base().$type.'-ans' ?>" role="button"><i class="bi bi-card-text"></i> Learn More</a>
+		
+            </div>
 <?php
         }
     }

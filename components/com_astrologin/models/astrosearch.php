@@ -2,8 +2,8 @@
 
 defined('_JEXEC') or die;  // No direct Access
 // import Joomla modelitem library
-jimport('joomla.application.component.modelitem');
-class AstrologinModelAstroSearch extends JModelItem
+use Joomla\CMS\MVC\Model\ListModel;
+class AstrologinModelAstroSearch extends ListModel
 {
    /* var $_total         = null;
     var $_data          = null;

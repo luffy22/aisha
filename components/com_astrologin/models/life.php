@@ -1,5 +1,9 @@
 <?php
-class AstrologinModelLife extends JModelItem
+defined('_JEXEC') or die;  // No direct Access
+// import Joomla modelitem library
+
+use Joomla\CMS\MVC\Model\ListModel;
+class AstrologinModelLife extends ListModel
 {
     public function getData()
     {
@@ -13,7 +17,7 @@ class AstrologinModelLife extends JModelItem
         //$ip                             = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
         $info                         = geoip_country_code_by_name($ip);
         $country                      = geoip_country_name_by_name($ip);
-        
+        //echo $country;exit;
         //$location               	= $geoip->lookupLocation($ip);
         //$info                   	= $location->countryCode;
         //$country                	= $location->countryName;
@@ -29,9 +33,11 @@ class AstrologinModelLife extends JModelItem
         $db             ->setQuery($query);
         $db->execute();
         $result         = $db->loadAssoc();
+        //print_r($result);exit;
         $result1        = $this->getCurrencyDetails($info, $u_id);
         //print_r($result1);exit;        
         $country            = array("country_full"=>$country);
+        
         $details            = array_merge($result1,$country);
         $full_details       = array_merge($result,$details);
         return $full_details;

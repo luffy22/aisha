@@ -41,10 +41,10 @@ foreach($allarticles as $data)
 <div class="mb-4"></div>
 <div class="pagination">
 	<p class="counter pull-right">
-		<?php echo $pagination->getPagesCounter(); ?>
+		<?php //echo $pagination->getPagesCounter(); ?>
 	</p>
 	<p>
-	<?php echo $pagination->getPagesLinks(); ?>
+	<?php //echo $pagination->getPagesLinks(); ?>
 	</p>
 	</div>
 <?php
