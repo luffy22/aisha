@@ -25,21 +25,21 @@ function isMobileDevice() {
 <input type="hidden" name="ques_fees" value="<?php echo $fees[0]; ?>" />
 <input type="hidden" name="ques_currency" value="<?php echo $fees[1]; ?>" />
 <input type="hidden" name="ques_pay_mode" value="<?php echo $pay_mode; ?>" />
-<div class="form-group" id="ques_grp_1">
-    <label for="ques_1">Name:</label>
+<div class="mb-3" id="ques_grp_1">
+    <label for="ques_1" class="form-label">Name:</label>
     <input type="text" name="ques_name" class="form-control" id="ques_1" placeholder="Enter your full name" required />
 </div>
-<div class="form-group" id="ques_grp_2">
-    <label for="ques_2">Email:</label>
+<div class="mb-3" id="ques_grp_2">
+    <label for="ques_2" class="form-label">Email:</label>
     <input type="email" name="ques_email" class="form-control" id="ques_2" placeholder="Enter your email" required />
 </div>
-<div class="form-group" id="ques_grp_3">
-    <label for="ques_gender">Gender:</label><br/>
+<div class="mb-3" id="ques_grp_3">
+    <label for="ques_gender" class="form-label">Gender:</label><br/>
     <input type="radio" name="ques_gender" value="male" id="ques_gender1" /> Male
     <input type="radio" name="ques_gender" value="female" id="ques_gender2" checked /> Female
 </div>
-<div class="form-group" id="ques_grp_4">
-    <label for="dob" >Date Of Birth:</label>
+<div class="mb-3" id="ques_grp_4">
+    <label for="dob" class="form-label">Date Of Birth:</label>
      <?php 
         if(isMobileDevice()){
             //Your content or code for mobile devices goes here
@@ -55,18 +55,19 @@ function isMobileDevice() {
         }
     ?>
 </div>
-<div class="form-group">
-    <label>Time Of Birth:</label><br/>
+<div class="mb-3">
+    <label class="form-label">Time Of Birth:</label><br/>
     <input type="time" name="ques_time"  id="ques_time" class="form-control" placeholder="Enter your Time of Birth"/>
 </div>
-<div class="form-group  ui-widget" id="ques_grp_5">
-    <label for="ques_pob">Place Of Birth</label>
+<div class="mb-3  ui-widget" id="ques_grp_5">
+    <label for="ques_pob" class="form-label">Place Of Birth</label>
     <input type="text" id="ques_pob" name="ques_pob" class="form-control" placeholder="Enter full name of city/town, state, country" />
 </div>
-<div class="form-group">
+<div class="btn btn-group btn-group-lg">
    <button type="reset" class="btn btn-danger">Reset</button>
         <button class="btn btn-primary" type="submit">Submit Details</button>
 </div>
+
 </form>
 <link rel="stylesheet" href="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/jquery-ui.min.css' ?>" type="text/css" />
 <script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/jquery-ui.min.js' ?>"></script>

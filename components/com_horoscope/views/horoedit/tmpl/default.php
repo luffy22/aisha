@@ -46,31 +46,49 @@ function isMobileDevice() {
 <h2>Edit Horoscope</h2>
 <form role="form" enctype="application/x-www-form-urlencoded" method="post" 
       action="<?php echo JRoute::_('index.php?option=com_horoscope&task=horoedit.edithoro'); ?>">
-    <div class="form-group" id="edit_grp_1">
-        <label for="inputName" class="control-label">Name:</label>
+    <div class="mb-3" id="edit_grp_1">
+        <label for="inputName" class="form-label">Name:</label>
         <input type="text" name="edit_fname" class="form-control" id="edit_1" placeholder="Enter your name..."  value="<?php echo $this->data->fname; ?>" required />
     </div>
-    <div class="form-group">
-        <label for="inputGender" class="control-label">Gender:</label>
+    <div class="mb-3">
+        <label for="inputGender" class="form-label">Gender:</label>
   <?php
         if($this->data->gender =="male")
         {
   ?>
-        <input type="radio" name="edit_gender" value="male" id="edit_gender1" checked> Male
-        <input type="radio" name="edit_gender" value="female" id="edit_gender2" > Female
+  <div class="mb-3">
+        <label for="inputChart" class="form-label">Gender:</label>
+	<div class="form-check form-check-inline">
+	  <input class="form-check-input" type="radio" name="edit_gender" id="edit_gender_male" value="male" checked>
+	  <label class="form-check-label" for="inlineRadio1">Male</label>
+	</div>
+	<div class="form-check form-check-inline">
+	  <input class="form-check-input" type="radio" name="edit_gender" id="edit_gender_female" value="female">
+	  <label class="form-check-label" for="inlineRadio2">Female</label>
+	</div>
+    </div>
 <?php
         }
         else 
         {
 ?>
-        <input type="radio" name="edit_gender" value="male" id="edit_gender1"> Male
-        <input type="radio" name="edit_gender" value="female" id="edit_gender2" checked> Female
+        <div class="mb-3">
+        <label for="inputChart" class="form-label">Gender:</label>
+	<div class="form-check form-check-inline">
+	  <input class="form-check-input" type="radio" name="edit_gender" id="edit_gender_male" value="male">
+	  <label class="form-check-label" for="inlineRadio1">Male</label>
+	</div>
+	<div class="form-check form-check-inline">
+	  <input class="form-check-input" type="radio" name="edit_gender" id="edit_gender_female" value="female" checked>
+	  <label class="form-check-label" for="inlineRadio2">Female</label>
+	</div>
+    </div>
 <?php     
         }
 ?>
     </div>
-    <div class="form-group">
-	<label for="inputChart" class="control-label">Chart Style:</label>
+    <div class="mb-3">
+	<label for="inputChart" class="form-label">Chart Style:</label>
 <?php
         if($this->data->chart_type =="north")
         {
@@ -100,16 +118,16 @@ function isMobileDevice() {
         }
 ?>
 	</div>
-    <div class="form-group" id="edit_grp_3">
-        <label for="dob" class="control-label">Date Of Birth:</label>
+    <div class="mb-3" id="edit_grp_3">
+        <label for="dob" class="form-label">Date Of Birth:</label>
         <input type="date" id="edit_dob" name="edit_dob" class="form-control" placeholder="25/03/1984" min="1900-01-01" max="2030-12-31" value="<?php echo $date->format('Y-m-d'); ?>" />
     </div>
-    <div class="form-group">
-        <label for="dob" class="control-label">Time Of Birth(24 Hour Format):</label><br/>
+    <div class="mb-3">
+        <label for="dob" class="form-label">Time Of Birth(24 Hour Format):</label><br/>
         <input type="time" name="edit_tob" id="time" class="form-control" placeholder="18:30:00" value="<?php echo $date->format('H:i'); ?>" />
     </div>
-    <div class="form-group" id="edit_grp_4">
-        <label for="dob" class="control-label">Place Of Birth</label>
+    <div class="mb-3" id="edit_grp_4">
+        <label for="dob" class="form-label">Place Of Birth</label>
         <div class="ui-widget">
         <input type="text" id="edit_pob" name="edit_pob" class="form-control ui-autocomplete-input" placeholder="Enter text for list of places" value="<?php echo $place; ?>" />
         </div>

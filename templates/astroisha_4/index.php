@@ -22,28 +22,36 @@ $title              = $doc->title;
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/template.css" type="text/css" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/bootstrap.min.css" type="text/css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"><link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+<script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/jquery.min.js"></script>
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/bootstrap.bundle.min.js"></script>
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/common.js" type="text/javascript" language="javascript"></script>
 </head>
 <body>
-	<div class="mb-3"></div>
+<div class="mb-3"></div>
 <div class="container-fluid">
 <div class="row">
+    <div class="col-2">
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+        <i class="bi bi-list"></i>
+    </button><div class="mb-3"></div>
+    </div>
 	<jdoc:include type="modules" name="top" /> 
 </div>	
 <div class="row">
-	<div class="col-lg-8" id="main">
+    	<div class="col-lg-8" id="main">
                 <jdoc:include type="message" />
+                <jdoc:include type="modules" name="left" /> 
 		<jdoc:include type="modules" name="breadcrumb" /> 
 		<jdoc:include type="component" />
 		<jdoc:include type="modules" name="menu_1" />
                 <jdoc:include type="modules" name="menu_2" />
-		<jdoc:include type="modules" name="footer" />
 	</div>
 	<div class="col-lg-4">
 		<jdoc:include type="modules" name="right" /> 
 	</div>
-</div>	
+</div>
+</div>
+<jdoc:include type="modules" name="footer" /> 
 <?php include_once (JPATH_ROOT.DS.'analyticstracking.php'); ?>
 </body>
 </html>

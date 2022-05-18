@@ -1,118 +1,96 @@
 <?php
+defined('_JEXEC') or die;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Multilanguage;
+use Joomla\CMS\Router\Route;
+
 class modTopMenuHelper
 {
-    /**
-     * Get base menu item.
-     *
-     * @param   JRegistry  &$params  The module options.
-     *
-     * @return   object
-     *
-     * @since	3.0.2
-     */
-    public function gettopmenu(&$params)
-    {
-	$app = JFactory::getApplication();
-        $menu = $app->getMenu();
-        $config = JFactory::getConfig();
-        $site = $config->get('sitename');
-        // Get active menu item
-        $base       = self::getBase($params);
-        $result     = $menu->getItems('menutype', $base->menutype);
-        return $result;
-        //print_r($result);exit;
-        
-?>
+   /**
+	 * Get a list of the menu items.
+	 *
+	 * @param   \Joomla\Registry\Registry  &$params  The module options.
+	 *
+	 * @return  array
+	 *
+	 * @since   1.5
+	 */
+	public static function getTopMenu(&$params)
+	{
+            $app        = JFactory::getApplication();
+            $menu       = $app->getMenu();
+            $config     = JFactory::getConfig();
+            $site       = $config->get('sitename');
+            // Get active menu item
+            $base       = self::getBase($params);
+            $result     = $menu->getItems('menutype', $base->menutype);
+            //$result     = $this->menu->getItem($this->getVar('Itemid')); 
+            return $result;
+            //print_r($result);exit;
+            //return $result;
+	}
 
-    <!--</div>-->
-<!--<div class="collapse navbar-toggleable-md" id="top-menu">
-<a href="<?php //echo JUri::base(); ?>" class="navbar-brand top-menu"><img src="<?php //echo JUri::base() ?>logo.png" height="30" width="30" /> <?php //echo $site; ?></a>
-  <ul class="nav navbar-nav">
-<?php
-/*
-        foreach($result as $items)
-        {
-            $url   = JRoute::_($items->link . "&Itemid=" . $items->id);
-            echo $url;exit;
-            if($items->level !== '1')
+	/**
+	 * Get base menu item.
+	 *
+	 * @param   \Joomla\Registry\Registry  &$params  The module options.
+	 *
+	 * @return  object
+	 *
+	 * @since	3.0.2
+	 */
+	public static function getBase(&$params)
+	{
+            // Get base menu item from parameters
+            if ($params->get('base'))
             {
-                continue;
+                    $base = Factory::getApplication()->getMenu()->getItem($params->get('base'));
             }
-       ?>
-            <li class="nav-item dropdown bg-primary">
-          <?php
-            if($items->level=="1")
+            else
             {
-                $children       = $menu->getItems('parent_id',$items->id, false);
-          ?>
-             <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="nav-link dropdown-toggle top-menu" href="<?php echo $url ?>"><?php echo $items->title ?><span class="caret"></span></a>
-             <div class="dropdown-menu bg-primary" aria-labelledby="supportedContentDropdown">
-             <?php
-                    foreach($children as $child)
-                    {
-                        if($child->type=="url")
-                        {
-                            $url    = JRoute::_($child->link);
-                        }
-                        else
-                        {
-                            $url   = JRoute::_($child->link . "&Itemid=" . $child->id);
-                        }
-                     ?>
-                         <a href="<?php echo $url; ?>" title="<?php echo $child->title; ?>" class="dropdown-item top-menu-link"><?php echo $child->title; ?></a>
-                 <?php
-                    }
-                    
-             ?>
-             </div>
-      <?php
+                    $base = false;
             }
-            
-      ?>
-            </li>
-            
-<?php
-      }
- * */
 
-?>
-    </ul>
-</div>-->
-<?php
-    }
-    public function getChildren($title, $link, $id)
-    {
-        $app        = JFactory::getApplication();
-        $menu       = $app->getMenu()->getItems('parent_id',$id, true);
-        $result     = array("title"=>$title, "link"=>$link,"id"=>$id,$menu);
-        return $result;      
-        
-    }
-    public static function getBase(&$params)
-    {
-        // Get base menu item from parameters
-        if ($params->get('base'))
-        {
-                $base = JFactory::getApplication()->getMenu()->getItem($params->get('base'));
-        }
-        else
-        {
-                $base = false;
+            // Use active menu item if no base found
+            if (!$base)
+            {
+                    $base = self::getActive($params);
+            }
+
+            return $base;
         }
 
-        // Use active menu item if no base found
-        if (!$base)
-        {
-                $base = self::getActive($params);
-        }
+	/**
+	 * Get active menu item.
+	 *
+	 * @param   \Joomla\Registry\Registry  &$params  The module options.
+	 *
+	 * @return  object
+	 *
+	 * @since	3.0.2
+	 */
+	public static function getActive(&$params)
+	{
+            $menu = Factory::getApplication()->getMenu();
+            return $menu->getActive() ?: self::getDefault();
+	}
 
-        return $base;
-    }
-    public static function getActive(&$params)
-    {
-        $menu = JFactory::getApplication()->getMenu();
+	/**
+	 * Get default menu item (home page) for current language.
+	 *
+	 * @return  object
+	 */
+	public static function getDefault()
+	{
+            $menu = Factory::getApplication()->getMenu();
 
-        return $menu->getActive() ? $menu->getActive() : $menu->getDefault();
-    }
-        
+            // Look for the home menu
+            if (Multilanguage::isEnabled())
+            {
+                    return $menu->getDefault(Factory::getLanguage()->getTag());
+            }
+
+            return $menu->getDefault();
+	}
 }
+?>

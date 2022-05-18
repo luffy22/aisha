@@ -15,12 +15,12 @@ foreach($allarticles as $data)
     if($counter % 2 == 0)
     {
 ?>
-<div class="card-deck-wrapper">
-    <div class="card-deck">
+<div class="row">
 <?php
     }
 ?>
-        <div class="card" id="panel_<?php echo $data->article_id; ?>">
+  <div class="col-sm-6">
+        <div class="card" id="panel_<?php echo $data->article_id; ?>" style="height:30rem">
             <div class="card-body">
                 <div class="card-title"><a class="content_links" href="<?php echo $data->link ?>" title="Click on link to read whole article"><?php echo $data->title; ?></a></div>
                 <div class="card-subtitle mb-2 text-muted">Views: <?php echo $data->hits; ?></div>
@@ -28,11 +28,12 @@ foreach($allarticles as $data)
             <p class="text-left">Category: <a class="content_links" href="<?php echo $data->catlink; ?>" title="Browse through Category: <?php echo $data->cat_title; ?> articles"><?php echo $data->cat_title; ?></a></p>
             </div>
         </div>
+        </div>
 <?php
     if($counter % 2 !== 0)
     {
 ?>
-    </div></div><div class="mb-4"></div>
+		</div><div class="mb-4"></div>
 <?php
     }
         $counter++;

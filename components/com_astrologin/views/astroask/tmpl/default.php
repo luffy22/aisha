@@ -48,7 +48,7 @@ $disc_fees                  = $fees-$disc;
 </div><div class="mb-3"></div>
 <div class="form-control" id="choose_ques">
 <label for="select_expert">Choose Number Of Questions</label>
-<select class="form-control" name="expert_max_ques" id="select_ques" onchange="javascript:changefees2();">
+<select class="form-select" name="expert_max_ques" id="select_ques" onchange="javascript:changefees2();">
 <?php
     for($i=1;$i<=$details['max_no_ques'];$i++)
     {

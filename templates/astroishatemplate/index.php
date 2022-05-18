@@ -84,6 +84,6 @@ window.cookieconsent.initialise({
 </div>
 <jdoc:include type="modules" name="footer" />
 <script async src="//www.instagram.com/embed.js"></script>
-<script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=1092479767598458&autoLogAppEvents=1"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v13.0&appId=1092479767598458&autoLogAppEvents=1" nonce="a9J9aZyn"></script>
 </body>
 </html>

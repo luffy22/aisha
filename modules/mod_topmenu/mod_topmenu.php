@@ -7,6 +7,7 @@ require_once( dirname(__FILE__) . '/helper.php' );
 //$toprated 	= modTopContentHelper::gettoprated();
 $topmenu	= modTopMenuHelper::gettopmenu($params);
 $base           = modTopMenuHelper::getBase($params);
+$active         = modTopMenuHelper::getActive($params);
 require( JModuleHelper::getLayoutPath('mod_topmenu'));
 
 ?>

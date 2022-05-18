@@ -29,28 +29,34 @@ if(array_key_exists("no_data", $this->data))
 <h3>Enter Your Birth Details</h3>
 <form role="form" enctype="application/x-www-form-urlencoded" method="post" 
       action="<?php echo JRoute::_('index.php?option=com_horoscope&task=career.checkcareer'); ?>">
-    <div class="form-group" id="lagna_grp_1">
-        <label for="inputName" class="control-label">Name:</label>
+    <div class="mb-3" id="lagna_grp_1">
+        <label for="inputName" class="form-label">Name:</label>
         <input type="text" name="career_fname" class="form-control" id="career_name" placeholder="Enter your name..." required />
     </div>
-    <div class="form-group">
-        <label for="inputGender" class="control-label">Gender:</label>
-         <input type="radio" name="career_gender" value="male" id="career_gender1"> Male
-        <input type="radio" name="career_gender" value="female" id="career_gender2" checked> Female
-    </div>
-     <div class="form-group">
-	<label for="inputChart" class="control-label">Chart Style:</label>
+    <div class="mb-3">
+        <label for="inputChart" class="form-label">Gender:</label>
 	<div class="form-check form-check-inline">
-	  <input class="form-check-input" type="radio" name="career_chart" id="lagna_chart_north" value="north" checked >
+	  <input class="form-check-input" type="radio" name="career_gender" id="career_gender_male" value="male">
+	  <label class="form-check-label" for="inlineRadio1">Male</label>
+	</div>
+	<div class="form-check form-check-inline">
+	  <input class="form-check-input" type="radio" name="career_gender" id="career_gender_female" value="female" checked>
+	  <label class="form-check-label" for="inlineRadio2">Female</label>
+	</div>
+    </div>
+     <div class="mb-3">
+	<label for="inputChart" class="form-label">Chart Style:</label>
+	<div class="form-check form-check-inline">
+	  <input class="form-check-input" type="radio" name="career_chart" id="career_chart_north" value="north" checked >
 	  <label class="form-check-label" for="inlineRadio1">North Indian</label>
 	</div>
 	<div class="form-check form-check-inline">
-	  <input class="form-check-input" type="radio" name="career_chart" id="lagna_chart_south" value="south">
+	  <input class="form-check-input" type="radio" name="career_chart" id="career_chart_south" value="south">
 	  <label class="form-check-label" for="inlineRadio2">South Indian</label>
 	</div>
     </div>
-    <div class="form-group" id="lagna_grp_3">
-        <label for="dob" class="control-label">Date Of Birth:</label>
+    <div class="mb-3" id="lagna_grp_3">
+        <label for="dob" class="form-label">Date Of Birth:</label>
      <?php 
         if(isMobileDevice()){
             //Your content or code for mobile devices goes here
@@ -66,12 +72,12 @@ if(array_key_exists("no_data", $this->data))
         }
     ?>
     </div>
-    <div class="form-group">
-        <label for="dob" class="control-label">Time Of Birth(24 Hour Format):</label><br/>
+    <div class="mb-3">
+        <label for="dob" class="form-label">Time Of Birth(24 Hour Format):</label><br/>
         <input type="time" name="career_tob" id="time" class="form-control" placeholder="18:30:00" />
     </div>
-    <div class="form-group" id="lagna_grp_4">
-        <label for="dob" class="control-label">Place Of Birth</label>
+    <div class="mb-3" id="lagna_grp_4">
+        <label for="dob" class="form-label">Place Of Birth</label>
         <div class="ui-widget">
         <input type="text" id="career_pob" name="career_pob" class="form-control ui-autocomplete-input" placeholder="Enter text for list of places" />
         </div>
@@ -79,8 +85,8 @@ if(array_key_exists("no_data", $this->data))
     <input type="hidden" id="career_lat" name="career_lat"  />
     <input type="hidden" id="career_lon" name="career_lon"  />
     <input type="hidden" id="career_tmz" name="career_tmz"  />
-    <div class="form-group">
-        <label for="latitude" class="control-label">Latitude</label><br/>
+    <div class="mb-3">
+        <label for="latitude" class="form-label">Latitude</label><br/>
         <input type="text" id="career_lat_1" class="form-text1" name="career_lat_deg" maxlength="2" placeholder="deg" />
         <input type="text" id="career_lat_2" class="form-text1" name="career_lat_min" maxlength="2" placeholder="min" />
         <select class="select2" id="career_lat_direction" name="career_lat_dir">
@@ -89,8 +95,8 @@ if(array_key_exists("no_data", $this->data))
         </select>
         
     </div>
-    <div class="form-group">
-        <label for="longitude" class="control-label">Longitude</label><br/>
+    <div class="mb-3">
+        <label for="longitude" class="form-label">Longitude</label><br/>
         <input type="text" id="career_long_1" class="form-text1" name="career_lon_deg" maxlength="3" placeholder="deg" />
         <input type="text" id="career_long_2" class="form-text1" name="career_lon_min" maxlength="2" placeholder="min" />
         <select class="select2" id="career_long_direction" name="career_lon_dir">

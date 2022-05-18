@@ -16,11 +16,6 @@ $list       = ModSubMenuHelper::getSideMenu($params);
 $base       = ModSubMenuHelper::getBase($params);
 $active     = ModSubMenuHelper::getActive($params);
 $default    = ModSubMenuHelper::getDefault();
-$active_id  = $active->id;
-$default_id = $default->id;
-$path       = $base->tree;
-$showAll    = $params->get('showAllChildren', 1);
-$class_sfx  = htmlspecialchars($params->get('class_sfx'), ENT_COMPAT, 'UTF-8');
 
 if (count($list))
 {
