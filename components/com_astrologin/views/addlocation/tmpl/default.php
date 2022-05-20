@@ -98,6 +98,6 @@ if(isset($_GET['redirect']) && $_GET['redirect'] == "latemarry")
         <button type="submit" class="btn btn-primary btn-lg" name="loc_submit"><i class="fas fa-plus"></i> Add</button>
     </div>
 </form>
-<link rel="stylesheet" href="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/jquery-ui.min.css' ?>" type="text/css" />
-<script type="text/javascript" src="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/jquery-ui.min.js' ?>"></script>
-<script type="text/javascript" src="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/autocomplete.js' ?>"></script>
+<link rel="stylesheet" href="<?php echo JUri::base().'components/com_astrologin/script/jquery-ui.min.css' ?>" type="text/css" />
+<script type="text/javascript" src="<?php echo JUri::base().'components/com_astrologin/script/jquery-ui.min.js' ?>"></script>
+<script type="text/javascript" src="<?php echo JUri::base().'components/com_astrologin/script/autocomplete.js' ?>"></script>

@@ -85,9 +85,9 @@ function isMobileDevice() {
             <button type="reset" class="btn btn-danger btn-lg">Reset Form</button>
     </div>
 </form>
-<link rel="stylesheet" href="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/jquery-ui.min.css' ?>" type="text/css" />
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/jquery-ui.min.js' ?>"></script>
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/horo.js' ?>">
+<link rel="stylesheet" href="<?php echo JUri::base().'components/com_astrologin/script/jquery-ui.min.css' ?>" type="text/css" />
+<script type="text/javascript"  src="<?php echo JUri::base().'components/com_astrologin/script/jquery-ui.min.js' ?>"></script>
+<script type="text/javascript"  src="<?php echo JUri::base().'components/com_horoscope/script/horo.js' ?>">
 </script>
 <div class="mb-3"></div>
 <?php

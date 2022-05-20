@@ -33,7 +33,7 @@ $lang = Factory::getLanguage(); ?>
 			<span class="visually-hidden">
 				<?php echo Text::sprintf('JNEXT_TITLE', htmlspecialchars($rows[$location+1]->title)); ?>
 			</span>
-			<i class="bi bi-arrow-right-circle-fill"></i>&nbsp;<?php echo $row->next_label; ?>
+			<?php echo $row->next_label; ?>&nbsp;<i class="bi bi-arrow-right-circle-fill"></i>
 			</a>
 		</div>
 	<?php endif; ?>

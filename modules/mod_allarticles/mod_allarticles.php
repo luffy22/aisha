@@ -13,6 +13,6 @@ defined('_JEXEC') or die;
 require_once __DIR__ . '/helper.php';
 
 $allarticles	= ModAllarticlesHelper::showArticles();
-//$pagination 	= ModAllarticlesHelper::getPagination();
+$pagination 	= ModAllarticlesHelper::getPagination();
 
 require JModuleHelper::getLayoutPath('mod_allarticles', $params->get('layout', 'default'));

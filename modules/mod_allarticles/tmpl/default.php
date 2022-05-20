@@ -40,14 +40,16 @@ foreach($allarticles as $data)
     }
 ?>
 <div class="mb-4"></div>
+<div class="pagination justify-content-end">
+    <p>
+        <?php echo $pagination->getPagesCounter(); ?>
+    </p>
+</div>
 <div class="pagination">
-	<p class="counter pull-right">
-		<?php //echo $pagination->getPagesCounter(); ?>
-	</p>
-	<p>
-	<?php //echo $pagination->getPagesLinks(); ?>
-	</p>
-	</div>
+    <p>
+        <?php echo $pagination->getPagesLinks(); ?>
+    </p>
+</div>
 <?php
     unset($allarticles);unset($pagination);
 ?>

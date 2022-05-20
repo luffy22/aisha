@@ -132,7 +132,7 @@ else
 }
 ?>
 <div class="mb-3"></div>
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/career.js' ?>">
+<script type="text/javascript"  src="<?php echo JUri::base().'components/com_horoscope/script/career.js' ?>">
 </script>
 <?php unset($this->data); ?>
 

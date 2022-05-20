@@ -107,6 +107,7 @@ class AstrologinModelAstroask extends ListModel
         $db                 ->setQuery($query);
         $row                = $db->loadAssoc();
         $expert_id          = $row['id'];   
+        $query->clear();
            //print_r($details);exit;
         //$query1         = $db->getQuery(true);
         $columns        = array('UniqueID','expert_id','no_of_ques','fees','currency','pay_mode','name','email','gender', 'dob_tob', 
@@ -133,7 +134,7 @@ class AstrologinModelAstroask extends ListModel
                                    VALUES ('".$token."')";
                 // Set the query using our newly populated query object and execute it
                 $db             ->setQuery($query1);
-                $result          = $db->query();
+                $result          = $db->execute();
             }
             $query          ->clear();
             $query          ->select($db->quoteName(array('UniqueID','no_of_ques')))

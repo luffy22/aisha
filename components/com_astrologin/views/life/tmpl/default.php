@@ -53,7 +53,7 @@ $disc_fees                  = $fees - number_format((float)($fees*$disc)/100,2);
 <div class="mb-3"></div>
 <form name="get_report" method="post" enctype="application/x-www-form-urlencoded" action="<?php echo JRoute::_('?option=com_astrologin&task=astroreport.submitReport') ?>">
 <div class="mb-3"></div>
-<input type="hidden" name="select_report" id="select_report" value ="finance" />
+<input type="hidden" name="select_report" id="select_report" value ="life" />
 <input type="hidden" name="report_fees" id="report_fees" value="<?php echo $details[0]['amount'] ?>" />
 <input type="hidden" name="report_curr_code" id="report_curr_code" value="<?php echo $details[0]['curr_code'] ?>" />
 <input type="hidden" name="report_currency" id="report_currency" value="<?php echo $details[0]['currency']; ?>" />
@@ -107,8 +107,8 @@ else
 </div>
 <div class="mb-3"></div>
 <div class="form-group" id="btn_grp">
-    <button type="submit" name="report_submit" id="report_submit" class="btn btn-primary" >Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
-    <button type="reset" name="ask_reset" id="ask_reset" class="btn btn-danger">Reset</button>
+    <button type="reset" name="ask_reset" id="ask_reset" class="btn btn-danger"><i class="bi bi-arrow-clockwise"></i> Reset</button>
+    <button type="submit" name="report_submit" id="report_submit" class="btn btn-primary" >Next <i class="bi bi-arrow-right-short"></i></button>
 </div>
 </form>
 <?php 

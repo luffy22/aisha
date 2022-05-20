@@ -20,7 +20,7 @@ switch ((string) $item->text)
 {
 	// Check for "Start" item
 	case Text::_('JLIB_HTML_START') :
-		$icon = '<i class="bi bi-skip-backward-fill"></i>';
+		$icon = '<span aria-hidden="true">&laquo;</span>';
 		$aria = Text::sprintf('JLIB_HTML_GOTO_POSITION', strtolower($item->text));
 		break;
 
@@ -39,7 +39,7 @@ switch ((string) $item->text)
 
 	// Check for "End" item
 	case Text::_('JLIB_HTML_END') :
-		$icon = '<i class="bi bi-skip-forward-fill"></i>';
+		$icon = '<span aria-hidden="true">&raquo;</span>';
 		$aria = Text::sprintf('JLIB_HTML_GOTO_POSITION', strtolower($item->text));
 		break;
 

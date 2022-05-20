@@ -116,8 +116,8 @@ else
 </div>
 <div class="mb-3"></div>
 <div class="form-group" id="btn_grp">
-    <button type="submit" name="report_submit" id="report_submit" class="btn btn-primary" >Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
-    <button type="reset" name="ask_reset" id="ask_reset" class="btn btn-danger">Reset</button>
+       <button type="reset" name="ask_reset" id="ask_reset" class="btn btn-danger"><i class="bi bi-arrow-clockwise"></i> Reset</button>
+    <button type="submit" name="report_submit" id="report_submit" class="btn btn-primary" >Next <i class="bi bi-arrow-right-short"></i></button>
 </div>
 </form>
 <?php 

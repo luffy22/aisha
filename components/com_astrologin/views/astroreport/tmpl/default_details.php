@@ -21,20 +21,25 @@ function isMobileDevice() {
 <input type="hidden" name="report_fees" value="<?php echo $fees[0]; ?>" />
 <input type="hidden" name="report_currency" value="<?php echo $fees[1]; ?>" />
 <input type="hidden" name="report_pay_mode" value="<?php echo $pay_mode; ?>" />
-<div class="form-group" id="report_grp_1">
+<div class="mb-3" id="report_grp_1">
     <label for="report_1">Name:</label>
     <input type="text" name="report_name" class="form-control" id="report_1" placeholder="Enter your full name" required />
 </div>
-<div class="form-group" id="report_grp_2">
+<div class="mb-3" id="report_grp_2">
     <label for="report_2">Email:</label>
     <input type="email" name="report_email" class="form-control" id="report_2" placeholder="Enter your email" required />
 </div>
-<div class="form-group" id="report_grp_3">
-    <label for="report_gender">Gender:</label><br/>
-    <input type="radio" name="report_gender" value="male" id="report_gender1" /> Male
-    <input type="radio" name="report_gender" value="female" id="report_gender2" checked /> Female
-</div>
-<div class="form-group" id="report_grp_4">
+<div class="mb-3" id="report_grp_3">
+    <label for="inputChart" class="form-label">Gender:</label>
+	<div class="form-check form-check-inline">
+	  <input class="form-check-input" type="radio" name="report_gender" id="report_gender1" value="male">
+	  <label class="form-check-label" for="inlineRadio1">Male</label>
+	</div>
+	<div class="form-check form-check-inline">
+	  <input class="form-check-input" type="radio" name="report_gender" id="report_gender2" value="female" checked>
+	  <label class="form-check-label" for="inlineRadio2">Female</label>
+	</div>
+<div class="mb-3" id="report_grp_4">
     <label for="dob" >Date Of Birth:</label>
      <?php 
         if(isMobileDevice()){
@@ -51,23 +56,23 @@ function isMobileDevice() {
         }
     ?>
     </div>
-<div class="form-group">
+<div class="mb-3">
     <label>Time Of Birth:</label><br/>
     <input type="time" name="report_time"  id="report_time" class="form-control" placeholder="Enter your Time of Birth"/>
 </div>
-<div class="form-group  ui-widget" id="report_grp_5">
+<div class="mb-3  ui-widget" id="report_grp_5">
     <label for="report_pob">Place Of Birth</label>
     <input type="text" id="report_pob" name="report_pob" class="form-control" placeholder="Enter full name of city/town, state, country" />
 </div>
-<div class="form-group">
-    <button type="reset" class="btn btn-danger">Reset</button>
+<div class="mb-3">
+    <button type="reset" class="btn btn-danger"><i class="bi bi-arrow-clockwise"></i> Reset</button>
         <button class="btn btn-primary" type="submit">Submit Details
             </button>
         
 </div>
 </form>
-<link rel="stylesheet" href="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/jquery-ui.min.css' ?>" type="text/css" />
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/jquery-ui.min.js' ?>"></script>
+<link rel="stylesheet" href="<?php echo JUri::base().'components/com_astrologin/script/jquery-ui.min.css' ?>" type="text/css" />
+<script type="text/javascript"  src="<?php echo JUri::base().'components/com_astrologin/script/jquery-ui.min.js' ?>"></script>
 <script>
 $(function() {
 $("#report_dob").datepicker({yearRange: "1900:2050",changeMonth: true,

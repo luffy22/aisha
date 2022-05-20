@@ -195,7 +195,7 @@ unset($date_start);unset($date_end);
 unset($this->data);
 ?>
 <div class="mb-1"></div>
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/muhurat.js' ?>">
+<script type="text/javascript"  src="<?php echo JUri::base().'components/com_horoscope/script/muhurat.js' ?>">
 </script>
 <script type="text/javascript">
 $(function() {

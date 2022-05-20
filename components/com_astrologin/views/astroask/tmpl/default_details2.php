@@ -21,40 +21,43 @@ $no_of_ques             = $_GET['no_of_ques'];
 <?php
 for($i=0;$i<$no_of_ques;$i++)
  {
+   
 ?>
 <h3>Question <?php echo $i+1; ?></h3>
 <div>
-<div class="form-group">
+<div class="mb-3">
     <label>Choose Subject:</label><br/>
-    <select name="ques_select_<?php echo $i+1; ?>" class="form-control">
+    <select name="ques_select_<?php echo $i+1; ?>" class="form-select">
         <option value="marriage">Marriage</option>
-        <option value="divorce">Divorce</option>
-        <option value="career">Career</option>
+        <option value="love">Love</option>
+        <option value="job">Job</option>
+        <option value="business">Business</option>
         <option value="education">Education</option>
         <option value="finance">Finance</option>
+        <option value="health">Health</option>
         <option value="other">Other</option>
     </select>
 </div>
-<div class="form-group">
+<div class="mb-3">
     <label for="ques_<?php echo $i+1; ?>">Question <?php echo $i+1; ?></label>
     <input type="text" name="ques_<?php echo $i+1;  ?>" id ="ques_<?php echo $i+1; ?>" class="form-control" placeholder="Enter Your Question" required />
     
 </div>
-<div class="form-group">
+<div class="mb-3">
     <label for="ques_details_<?php echo $i+1; ?>">Kindly Share Some Details:</label>
-    <textarea name="ques_details_<?php echo $i+1; ?>" id="ques_details_<?php echo $i+1 ?>" rows="10" class="form-control"></textarea>
+    <textarea name="ques_details_<?php echo $i+1; ?>" id="ques_details_<?php echo $i+1 ?>" rows="5" class="form-control"></textarea>
 </div>
 </div>
 <?php 
 }
 ?>
 <div class="mb-2"></div>
-<div class="form-group">
-    <button type="reset" class="btn btn-danger">Reset</button>
-    <button class="btn btn-success" type="submit">$ Pay Now</button>
+<div class="mb-3">
+    <button type="reset" class="btn btn-danger"><i class="bi bi-arrow-clockwise"></i> Reset</button>
+    <button class="btn btn-success" type="submit"><i class="bi bi-bank"></i> Pay Now</button>
 </div>
 </form>
-<script src="https://cdn.tiny.cloud/1/rjxia1mcuetdoiri6l19shyroh2q8rjrz7hdwighah58zqgr/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/rjxia1mcuetdoiri6l19shyroh2q8rjrz7hdwighah58zqgr/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
  <script>
   var no_of_ques    = document.getElementById("ques_no").value;
   for(var i=1;i<=no_of_ques;i++)

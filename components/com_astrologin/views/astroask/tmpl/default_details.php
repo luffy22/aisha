@@ -34,9 +34,15 @@ function isMobileDevice() {
     <input type="email" name="ques_email" class="form-control" id="ques_2" placeholder="Enter your email" required />
 </div>
 <div class="mb-3" id="ques_grp_3">
-    <label for="ques_gender" class="form-label">Gender:</label><br/>
-    <input type="radio" name="ques_gender" value="male" id="ques_gender1" /> Male
-    <input type="radio" name="ques_gender" value="female" id="ques_gender2" checked /> Female
+    <label for="inputChart" class="form-label">Gender:</label>
+	<div class="form-check form-check-inline">
+	  <input class="form-check-input" type="radio" name="ques_gender" id="ques_gender1" value="male">
+	  <label class="form-check-label" for="inlineRadio1">Male</label>
+	</div>
+	<div class="form-check form-check-inline">
+	  <input class="form-check-input" type="radio" name="ques_gender" id="ques_gender2" value="female" checked>
+	  <label class="form-check-label" for="inlineRadio2">Female</label>
+	</div>
 </div>
 <div class="mb-3" id="ques_grp_4">
     <label for="dob" class="form-label">Date Of Birth:</label>
@@ -64,13 +70,13 @@ function isMobileDevice() {
     <input type="text" id="ques_pob" name="ques_pob" class="form-control" placeholder="Enter full name of city/town, state, country" />
 </div>
 <div class="btn btn-group btn-group-lg">
-   <button type="reset" class="btn btn-danger">Reset</button>
+   <button type="reset" class="btn btn-danger"><i class="bi bi-arrow-clockwise"></i> Reset</button>
         <button class="btn btn-primary" type="submit">Submit Details</button>
 </div>
 
 </form>
-<link rel="stylesheet" href="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/jquery-ui.min.css' ?>" type="text/css" />
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_astrologin'.DS.'script/jquery-ui.min.js' ?>"></script>
+<link rel="stylesheet" href="<?php echo JUri::base().'components/com_astrologin/script/jquery-ui.min.css' ?>" type="text/css" />
+<script type="text/javascript"  src="<?php echo JUri::base().'components/com_astrologin/script/jquery-ui.min.js' ?>"></script>
 <script>
 $(function() {
 $("#ques_dob").datepicker({yearRange: "1900:2050",changeMonth: true,

@@ -474,8 +474,8 @@ gone up due to partners complaining of insufficient romance and sex in marriage 
     <input type="hidden" value="<?php echo $percent; ?>" id="divorce_rate" />
 </form>
 <div class="mb-3"></div>
-<link rel="stylesheet" href="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/circle.css' ?>" type="text/css" />
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/divorce.js' ?>">
+<link rel="stylesheet" href="<?php echo JUri::base().'components/com_horoscope/script/circle.css' ?>" type="text/css" />
+<script type="text/javascript"  src="<?php echo JUri::base().'components/com_horoscope/script/divorce.js' ?>">
 </script>
 <?php unset($this->data); ?>
 </body>

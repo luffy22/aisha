@@ -83,7 +83,7 @@ class HoroscopeModelLagna extends ListModel
                         ->values(implode(',', $values));
         // Set the query using our newly populated query object and execute it
         $db             ->setQuery($query);
-        $result          = $db->query();
+        $result          = $db->execute();
         return $uniq_id;
     }
     

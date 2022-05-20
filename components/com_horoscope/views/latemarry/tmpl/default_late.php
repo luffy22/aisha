@@ -913,8 +913,8 @@ ensure native cannot gain a spouse at right time and enjoy socializing with othe
     <input type="hidden" value="<?php echo $percent; ?>" id="late_rate" />
 </form>
 <div class="mb-3"></div>
-<link rel="stylesheet" href="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/circle.css' ?>" type="text/css" />
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/latemarry.js' ?>">
+<link rel="stylesheet" href="<?php echo JUri::base().'components/com_horoscope/script/circle.css' ?>" type="text/css" />
+<script type="text/javascript"  src="<?php echo JUri::base().'components/com_horoscope/script/latemarry.js' ?>">
 </script>
 <?php unset($this->data); ?>
 </body>

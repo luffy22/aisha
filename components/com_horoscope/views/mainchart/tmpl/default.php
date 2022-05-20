@@ -121,9 +121,9 @@ else
     </table>
 <div class="mb-3"></div>
 <ul class="nav nav-pills">
-<li class="nav-item"><a class="nav-link active" href="#asc" data-toggle="tab">Ascendant</a></li>
-<li class="nav-item"><a class="nav-link" href="#moon" data-toggle="tab">Moon</a></li>
-<li class="nav-item"><a class="nav-link" href="#navamsha" data-toggle="tab">Navamsha</a></li>
+<li class="nav-item"><button class="nav-link active" id="asc-tab" data-bs-toggle="tab" data-bs-target="#asc" type="button">Ascendant</button></li>
+<li class="nav-item"><button class="nav-link" id="moon-tab" data-bs-toggle="tab" data-bs-target="#moon" type="button">Moon</button></li>
+<li class="nav-item"><button class="nav-link" id="nav-tab" data-bs-toggle="tab" data-bs-target="#navamsha" type="button">Navamsha</button></li>
 </ul>
 <div class="tab-content">
 <div id="asc" class="tab-pane active">
@@ -220,14 +220,14 @@ if($this->data['chart_type'] == "north")
 if($this->data['chart_type'] == "north")
 {
 ?>
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/asc_n.js' ?>">
+<script type="text/javascript"  src="<?php echo JUri::base().'components/com_horoscope/script/asc_n.js' ?>">
 </script>
 <?php
 }
 else
 {
 ?>
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/asc_s.js' ?>">
+<script type="text/javascript"  src="<?php echo JUri::base().'components/com_horoscope/script/asc_s.js' ?>">
 </script>
 <?php 
 }

@@ -320,7 +320,7 @@ $currentDate = Factory::getDate()->format('Y-m-d H:i:s');
 			</tbody>
 		</table>
 	<?php endif; ?>
-
+   
 	<?php // Code to add a link to submit an article. ?>
 	<?php if ($this->category->getParams()->get('access-create')) : ?>
 		<?php echo HTMLHelper::_('contenticon.create', $this->category, $this->category->params); ?>

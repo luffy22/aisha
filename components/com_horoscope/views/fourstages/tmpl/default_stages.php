@@ -591,14 +591,14 @@ Your browser does not support the HTML5 canvas tag.
 if($this->data['chart_type'] == "north")
 {
 ?>
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/stage_n.js' ?>">
+<script type="text/javascript"  src="<?php echo JUri::base().'components/com_horoscope/script/stage_n.js' ?>">
 </script>
 <?php
 }
 else
 {
 ?>
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/stage_s.js' ?>">
+<script type="text/javascript"  src="<?php echo JUri::base().'components/com_horoscope/script/stage_s.js' ?>">
 </script>
 <?php 
 }

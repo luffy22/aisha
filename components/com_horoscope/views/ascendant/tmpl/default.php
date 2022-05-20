@@ -162,14 +162,14 @@ for($i=0;$i<3;$i++)  // remove the last 3 elements from the array to avoid confu
 if($this->data['chart_type'] == "north")
 {
 ?>
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/horoscope_n.js' ?>">
+<script type="text/javascript"  src="<?php echo JUri::base().'components/com_horoscope/script/horoscope_n.js' ?>">
 </script>
 <?php
 }
 else
 {
 ?>
-<script type="text/javascript"  src="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/horoscope_s.js' ?>">
+<script type="text/javascript"  src="<?php echo JUri::base().'components/com_horoscope/script/horoscope_s.js' ?>">
 </script>
 <?php 
 }

@@ -233,5 +233,5 @@ for($i=0;$i<$this->data['asp_count'];$i++)
 ?>
 <p><strong>Note: Only aspects of 9 planets in traditional Vedic Astrology are analyzed.</strong></p>
 <div class="mb-3"></div>
-<link rel="stylesheet" href="<?php echo JUri::base().'components'.DS.'com_horoscope'.DS.'script/circle.css' ?>" type="text/css" />
+<link rel="stylesheet" href="<?php echo JUri::base().'components/com_horoscope/script/circle.css' ?>" type="text/css" />
 <?php unset($this->data); ?>
