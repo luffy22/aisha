@@ -15,7 +15,7 @@ foreach($this->order as $result)
 			if($result->order_type == "long_ans" || $result->order_type == "short_ans")
 			{
 		?>
-		<a class="btn btn-link" href="<?php echo JUri::base().'getanswer?order='.$result->UniqueID.'&ref='.$result->email; ?>"><i class="far fa-eye"></i> View Order</a></li>
+		<a class="btn btn-link" href="<?php echo JUri::base().'getanswer?order='.$result->UniqueID.'&ref='.$result->email; ?>"><i class="bi bi-eye-fill"></i> View Order</a></li>
 		<?php
 		}
 		else if($result->order_type == "life" || $result->order_type == "marriage" || 
@@ -23,13 +23,13 @@ foreach($this->order as $result)
 				$result->order_type == "yearly")
 		{
 		?>
-		<a class="btn btn-link" href="<?php echo JUri::base().'read-report?order='.$result->UniqueID.'&ref='.$result->email; ?>"><i class="far fa-eye"></i> View Order</a></li>
+		<a class="btn btn-link" href="<?php echo JUri::base().'read-report?order='.$result->UniqueID.'&ref='.$result->email; ?>"><i class="bi bi-eye-fill"></i> View Order</a></li>
 		<?php
 		}
 		else
 		{
 		?>
-		<a class="btn btn-link" href="<?php echo JUri::base().'getanswer?order='.$result->UniqueID.'&ref='.$result->email; ?>"><i class="far fa-eye"></i> View Order</a></li>
+		<a class="btn btn-link" href="<?php echo JUri::base().'getanswer?order='.$result->UniqueID.'&ref='.$result->email; ?>"><i class="bi bi-eye-fill"></i> View Order</a></li>
 		<?php
 		}
 		?>
@@ -58,11 +58,15 @@ foreach($this->order as $result)
 }
 ?>
 <div class="mb-4"></div>
-<div class="pagination">
-    <p class="counter pull-right">
+<div class="pagination justify-content-end">
+    <p>
         <?php echo $this->pagination->getPagesCounter(); ?>
     </p>
-    <?php echo $this->pagination->getPagesLinks(); ?>
+</div>
+<div class="pagination">
+    <p>
+        <?php echo $this->pagination->getPagesLinks(); ?>
+    </p>
 </div>
 <?php
 unset($this->order);unset($this->pagination);

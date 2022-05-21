@@ -66,7 +66,7 @@ function getFirstDate($data, $day_in_num, $days_in_month, $month, $year)
             $guli_start     = new DateTime($data['guli_start_1']);
             $guli_end       = new DateTime($data['guli_end_1']);
         ?>
-        <td id="td_1" class="data-pop" data-toggle="popover" title="<?php echo $data[$key."_paksh"]." Paksha" ?>" data-content="<?php echo "Rahu Kaal: ".$rahu_start->format('h:i:s a')."-".$rahu_end->format('h:i:s a')."\n"; 
+        <td id="td_1" class="data-pop" data-bs-toggle="popover" title="<?php echo $data[$key."_paksh"]." Paksha" ?>" data-bs-content="<?php echo "Rahu Kaal: ".$rahu_start->format('h:i:s a')."-".$rahu_end->format('h:i:s a')."\n"; 
                                                                                                                                       echo "Yama Kaal: ".$yama_start->format('h:i:s a')."-".$yama_end->format('h:i:s a')."\n";
                                                                                                                                       echo "Guli Kaal: ".$guli_start->format('h:i:s a')."-".$guli_end->format('h:i:s a')."\n"; ?>">
             <h1 class="text-right"><?php  echo $z;?></h1><p class="text-left text-danger" title="tithi"><?php echo $data[$key] ?></p>
@@ -85,7 +85,7 @@ function getFirstDate($data, $day_in_num, $days_in_month, $month, $year)
             $guli_start     = new DateTime($data['guli_start_1']);
             $guli_end       = new DateTime($data['guli_end_1']);
         ?>
-         <td id="td_1" class="data-pop" data-toggle="popover" title="<?php echo $data[$key."_paksh"]." Paksha" ?>" data-content="<?php echo "Rahu Kaal: ".$rahu_start->format('h:i:s a')."-".$rahu_end->format('h:i:s a')."\n"; 
+         <td id="td_1" class="data-pop" data-bs-toggle="popover" title="<?php echo $data[$key."_paksh"]." Paksha" ?>" data-bs-content="<?php echo "Rahu Kaal: ".$rahu_start->format('h:i:s a')."-".$rahu_end->format('h:i:s a')."\n"; 
                                                                                                                                       echo "Yama Kaal: ".$yama_start->format('h:i:s a')."-".$yama_end->format('h:i:s a')."\n";
                                                                                                                                       echo "Guli Kaal: ".$guli_start->format('h:i:s a')."-".$guli_end->format('h:i:s a')."\n"; ?>">
             <h1 class="text-right"><?php  echo $z;?></h1><p class="text-left text-danger" title="tithi"><?php echo $data[$key] ?></p>
@@ -133,7 +133,7 @@ function getDatesInWeek($data,$counter,$day_in_num, $days_in_month, $month, $yea
                 $tithi          = $newdata["tithi_".$counter];
                 $paksh          = $newdata["paksh_".$counter];
         ?>
-         <td id="td_<?php echo trim($counter); ?>"  class="data-pop" data-toggle="popover" title="<?php echo $paksh." Paksha";; ?>" data-content="<?php echo "Rahu Kaal: ".$rahu_start->format('h:i:s a')."-".$rahu_end->format('h:i:s a')."\n"; 
+         <td id="td_<?php echo trim($counter); ?>"  class="data-pop" data-bs-toggle="popover" title="<?php echo $paksh." Paksha";; ?>" data-bs-content="<?php echo "Rahu Kaal: ".$rahu_start->format('h:i:s a')."-".$rahu_end->format('h:i:s a')."\n"; 
                                                                                                                                       echo "Yama Kaal: ".$yama_start->format('h:i:s a')."-".$yama_end->format('h:i:s a')."\n";
                                                                                                                                       echo "Guli Kaal: ".$guli_start->format('h:i:s a')."-".$guli_end->format('h:i:s a')."\n"; ?>">
          <h1 class="text-right"><?php echo $counter;?></h1><p class="text-left text-danger" title="tithi"><?php echo $tithi;$counter++;$day_in_num++;  ?></p>
@@ -157,7 +157,7 @@ function getDatesInWeek($data,$counter,$day_in_num, $days_in_month, $month, $yea
                 $tithi          = $newdata["tithi_".$counter];
                 $paksh          = $newdata["paksh_".$counter];
         ?>
-         <tr><td id="td_<?php echo trim($counter); ?>" class="data-pop" data-toggle="popover" title="<?php echo $paksh." Paksha"; ?>" data-content="<?php echo "Rahu Kaal: ".$rahu_start->format('h:i:s a')."-".$rahu_end->format('h:i:s a')."\n"; 
+         <tr><td id="td_<?php echo trim($counter); ?>" class="data-pop" data-bs-toggle="popover" title="<?php echo $paksh." Paksha"; ?>" data-bs-content="<?php echo "Rahu Kaal: ".$rahu_start->format('h:i:s a')."-".$rahu_end->format('h:i:s a')."\n"; 
                                                                                                                                       echo "Yama Kaal: ".$yama_start->format('h:i:s a')."-".$yama_end->format('h:i:s a')."\n";
                                                                                                                                       echo "Guli Kaal: ".$guli_start->format('h:i:s a')."-".$guli_end->format('h:i:s a')."\n"; ?>">
                  <h1 class="text-right"><?php echo $counter; ?></h1><p class="text-left text-danger" title="tithi"><?php echo $tithi;$counter++;$day_in_num++; ?></p>

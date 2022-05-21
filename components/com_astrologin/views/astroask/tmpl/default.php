@@ -20,8 +20,8 @@ $disc_fees                  = $fees-$disc;
 <div class="mb-3"></div>
 <div class='card border-primary mb-3 text-center' id="info_expert">
 <div class='card-block'>
-<h3><a title='Click to get more info' href='#' data-toggle='modal' data-target='#astroinfo'><img src=<?php echo JURi::base() ?>images/profiles/<?php echo $details['img_new_name'] ?> height='50px' width='50px' title="<?php echo $details['img_name'];?>" /><?php echo $details['name'] ?></a></h3>
-<div class='modal fade' id='astroinfo' tabindex='-1' role='dialog' aria-hidden='true' aria-labelledby='astrolabel'>
+<h3><button type="button" title='Click to get more info' data-bs-toggle='modal' data-bs-target='#astroinfo'><img src=<?php echo JURi::base() ?>images/profiles/<?php echo $details['img_new_name'] ?> height='50px' width='50px' title="<?php echo $details['img_name'];?>" /><?php echo $details['name'] ?></button></h3>
+<div class='modal fade' id='astroinfo' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1'>
 <div class='modal-dialog' role='document'>
 <div class='modal-content'>
     <div class='modal-header'>

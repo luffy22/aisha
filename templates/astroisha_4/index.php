@@ -52,6 +52,13 @@ $title              = $doc->title;
 </div>
 </div>
 <jdoc:include type="modules" name="footer" /> 
-<?php include_once (JPATH_ROOT.DS.'analyticstracking.php'); ?>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49809214-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-49809214-1');
+</script>
 </body>
 </html>

@@ -10,20 +10,9 @@ defined('_JEXEC') or die();
 function isMobileDevice() {
     return preg_match("/(android|iPhone|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
 }
-if(array_key_exists("no_data", $this->data))
-{
 ?>
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <strong><?php echo $this->data['no_data']; ?></strong>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<?php
-}
-?>
-<div class="alert alert-info alert-dismissible fade show" role="alert">
-    If your location isn't available than add it: <a href="<?php echo JUri::base().'addlocation?redirect=mangaldosha'; ?>"><i class="fas fa-plus"></i> Add Location</a>
+<div class="alert alert-primary alert-dismissible fade show" role="alert">
+    If your location isn't available than add it: <a href="<?php echo JUri::base().'addlocation?redirect=mangaldosha'; ?>"><i class="bi bi-plus-circle-fill"></i> Add Location</a>
 </div>
 <div class="mb-3"></div>
 <h3>Enter Your Birth Details</h3>

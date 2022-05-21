@@ -23,3 +23,11 @@ a {text-decoration: none !important;}
 .element-invisible{display: none;}.input-mini{float: right;padding: 5px;margin-bottom:10px;}
 .counter{margin-left:0.50em !important;}.link_2 a{text-decoration: none;color: #fff;}.dropdown-item{color: #fff !important;}.dropdown-item:hover{color:#000 !important;}
 .dropdown-divider{border: 3px;color: #fff !important}
+.closebtn {
+  position: absolute;
+  top: 1%;
+  right: 25px;
+  font-size: 30px;
+  margin-left: 20%;
+  color:#fff;
+}

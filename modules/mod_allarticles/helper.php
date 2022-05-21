@@ -12,7 +12,7 @@
 use Joomla\CMS\Pagination;
 class modAllarticlesHelper
 {
-	public function showArticles()
+	public static function showArticles()
 	{
             $app                = JFactory::getApplication();
             $limit              = $app->getUserStateFromRequest("$option.limit", 'limit',10, 'int');
@@ -30,7 +30,7 @@ class modAllarticlesHelper
            $results        = $db->loadObjectList();
            return $results;
 	}
-    public function getTotal()
+    public static function getTotal()
     {
         $db             	= JFactory::getDbo();  // Get db connection
         $query          	= $db->getQuery(true);
@@ -41,7 +41,7 @@ class modAllarticlesHelper
         $total      		= $db->loadResult();
         return $total;	
     }  
-    public function getPagination()
+    public static function getPagination()
     {
         $app                    = JFactory::getApplication();
         $total                  = self::getTotal();

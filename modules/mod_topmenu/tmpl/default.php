@@ -9,9 +9,6 @@ use Joomla\CMS\Router\Route;
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-      <div id="sidenav">    
-<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" title="close menu"><i class="far fa-times-circle"></i></a>
- 
         <!--<a class="navbar-brand"><img src="images/logo.png" alt="logo" /></a>
         <span class="navbar-text">Astro Isha</span>-->
     <div class="list-group">
@@ -44,7 +41,6 @@ foreach($topmenu as $item)
     }
 }
 ?>
-</div>
 </div>
   </div>
 </div>

@@ -1,7 +1,7 @@
-<!--<div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <strong><i class="fas fa-exclamation-circle"></i> Orders Closed!</strong> Orders are temporarily closed. We would begin taking orders from Friday 4th December 2020.
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span></button></div>-->
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong><i class="bi bi-exclamation-triangle-fill fs-1"></i> Orders Closed!</strong> Orders are temporarily closed. We apologize for the inconvenience caused.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+</div>
 <?php
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
@@ -18,21 +18,18 @@ $disc_fees                  = $fees - number_format((float)($fees*$disc)/100,2);
   <div class="progress-bar" style="width:25%;height:25px" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Pay</div>
 </div>
 <div class="mb-3"></div>
-<div class='card border-dark mb-3 text-center' id="info_expert">
-<div class='card-block'>
-<h3><a title='Click to get more info' href='#' data-toggle='modal' data-target='#astroinfo'><img src=<?php echo JURi::base() ?>images/profiles/<?php echo $details['img_new_name'] ?> height='50px' width='50px' title="<?php echo $details['img_name'];?>" /><?php echo $details['name'] ?></a></h3>
-<div class='modal fade' id='astroinfo' tabindex='-1' role='dialog' aria-hidden='true' aria-labelledby='astrolabel'>
+<h3 class="text-center"><button class="btn btn-outline-primary" type="button" title='Click to get more info' data-bs-toggle='modal' data-bs-target='#astroinfo'><img src=<?php echo JURi::base() ?>images/profiles/<?php echo $details['img_new_name'] ?> height='50px' width='50px' title="<?php echo $details['img_name'];?>" /><?php echo $details['name'] ?></button></h3>
+<div class='modal fade' id='astroinfo' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1'>
 <div class='modal-dialog' role='document'>
 <div class='modal-content'>
     <div class='modal-header'>
-    <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
     <div class='modal-body' id="modal_body">
     <?php echo $details['info']; ?>
     </div>
 <div class='modal-footer'>
-    <button type='button' class='btn btn-secondary btn-danger' data-dismiss='modal'>Close</button></div>
-</div></div></div>
-</div></div>
+    <button type='button' class='btn btn-secondary btn-danger' data-bs-dismiss='modal'>Close</button></div>
+</div></div></div><div class="mb-3"></div>
 <div class='card border-dark mb-3' id="card-duration">
 <div class='card-body'>
 	<strong>Order Processing Time</strong>- Minimum 18-20 working days(Monday-Friday). You will be notified via email if 
@@ -85,7 +82,7 @@ if($details[0]['currency'] == 'INR' && $details['country_full'] == 'India')
 ?>
     <div class="form-check">
     <input class="form-check-input" type='radio' name='report_choice' id='report_choice1' value='razorpay'  />
-    <label for="expert_choice1" class="form-check-label"><i class='fa fa-credit-card'></i> Credit/Debit Card</label>
+    <label for="expert_choice1" class="form-check-label"><i class="bi bi-credit-card fs-3"></i> Credit/Debit Card</label>
     </div>
     <div class="form-check">
     <input class="form-check-input" type='radio' name='report_choice' id='report_choice4' value='paytm' checked />
@@ -106,10 +103,10 @@ else
 </div>
 </div>
 <div class="mb-3"></div>
-<div class="form-group" id="btn_grp">
+<!--<div class="form-group" id="btn_grp">
     <button type="reset" name="ask_reset" id="ask_reset" class="btn btn-danger"><i class="bi bi-arrow-clockwise"></i> Reset</button>
     <button type="submit" name="report_submit" id="report_submit" class="btn btn-primary" >Next <i class="bi bi-arrow-right-short"></i></button>
-</div>
+</div>-->
 </form>
 <?php 
 unset($details);unset($this->msg);

@@ -10,6 +10,7 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
 {
     public function getData()
     {
+        session_start();
         $libPath        = JPATH_BASE.'/sweph/';
         $jinput         = JFactory::getApplication()->input;
         $date           = $jinput->get('date', 'default_value', 'filter');
@@ -17,19 +18,23 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
          {
             $date           = date('Y-m-d');
          }
-                 
-        if(!isset($_COOKIE["loc"]) && !isset($_COOKIE["lat"]) &&
-           !isset($_COOKIE["lon"]) && !isset($_COOKIE["tmz"])) {
+        if(!isset($loc) && !isset($lat) &&
+           !isset($lon) && !isset($tmz)) {
+            
+            //echo "calls1";exit;
             $loc            = "Ujjain, India";
             $timezone       = "Asia/Kolkata";
             $lon            = "75.78";  $lat            = "23.17";  $alt    = 0;
         } else {
+            //echo "calls2";exit;
            $loc         = $_COOKIE["loc"];
            $lat         = $_COOKIE["lat"];
            $lon         = $_COOKIE["lon"];
            $timezone    = $_COOKIE["tmz"];
+           echo $loc;exit;
            $alt         = 0;
         }
+        
         $location       = array("location"=>$loc);
         $sun_times      = $this->getSunTimings($date, $timezone,$lat,$lon,$alt,3);
         //print_r($sun_times);exit;
@@ -100,10 +105,11 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
         $lat            = $loc_details['lat'];
         $lon            = $loc_details['lon'];
         $tmz            = $loc_details['tmz'];
-        $date           = date($loc_details['date']);
+        $date           = $loc_details['date'];
         if($date == "default_value")
         {
-            $date           = date('d-m-Y');
+            $date           = date('Y-m-d');
+            //echo $date;exit;
         }
        
         if($tmz == "none")
@@ -122,11 +128,11 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
 
         // storing location, latitude, longitude & timezone 
         // in local cookies for 7 days
-        setcookie("loc", $location,time()+(86400*7));
+        setcookie("loc", $loc, time() + (86400 * 30), "/"); // 86400 = 1 day
         setcookie("lat", $lat, time() + (86400 * 7)); // 86400 = 1 day
         setcookie("lon", $lon, time() + (86400 * 7)); // 86400 = 1 day
         setcookie("tmz", $tmz, time() + (86400 * 7)); // 86400 = 1 day
-        
+        //echo $_COOKIE["loc"];exit;
         $query_date     = new DateTime(date('Y-m-d H:i:s'),new DateTimeZone('Asia/Kolkata'));
         $query_date     = $query_date->format('Y-m-d H:i:s');
         $db             = JFactory::getDbo();  // Get db connection
@@ -139,7 +145,7 @@ class HoroscopeModelMuhurat extends HoroscopeModelLagna
                         ->values(implode(',', $values));
         // Set the query using our newly populated query object and execute it
         $db             ->setQuery($query);
-        $result          = $db->query();
+        $result          = $db->execute();
         $app            = JFactory::getApplication();
         if($loc_details['date'] == "default_value")
         {

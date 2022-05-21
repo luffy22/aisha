@@ -18,7 +18,7 @@ defined('_JEXEC') or die;
  */
 class ModOrderHelper
 {
-    public function showOrder()
+    public static function showOrder()
     {
         //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
         //$geoip              = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");

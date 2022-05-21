@@ -14,7 +14,7 @@ class modTopContentHelper
      * @param array $params An object containing the module parameters
      * @access public
      */    
-    public function gettopview()
+    public static function gettopview()
     {
         $db             = JFactory::getDbo();  // Get db connection
         $query          = $db->getQuery(true);
@@ -32,7 +32,7 @@ class modTopContentHelper
         return $results;
     }
     
-    public function getRecentTop()
+    public static function getRecentTop()
     {
         $today         = new DateTime('NOW');
         $todate        = $today->format('Y-m-d H:i:s');

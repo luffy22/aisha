@@ -2,6 +2,7 @@
 defined('_JEXEC') or die;  // No direct Access
 // import Joomla modelitem library
 use Joomla\CMS\MVC\Model\ListModel;
+use Joomla\CMS\Pagination;
 class AstrologinModelGetOrders extends ListModel
 {
 	/**
@@ -23,7 +24,7 @@ class AstrologinModelGetOrders extends ListModel
         $order              = $jinput->get('order', 'default_value', 'string');
         
 		$limit				= $mainframe->getUserStateFromRequest("$option.limit", 'limit', 3, 'int');
-		$limitstart			= JRequest::getVar('limitstart', 0, '', 'int');
+		$limitstart			= $mainframe->input->get('limitstart', 0, '', 'uint');
 		
         $db             	= JFactory::getDbo();  // Get db connection
         if($email == 'default_value')
@@ -73,7 +74,7 @@ class AstrologinModelGetOrders extends ListModel
 		$total 				= $this->getTotal();
 		// Load the content if it doesn't already exist
 		$limit				= $mainframe->getUserStateFromRequest("$option.limit", 'limit', 3, 'int');
-		$limitstart			= JRequest::getVar('limitstart', 0, '', 'int');
+		$limitstart			= $mainframe->input->get('limitstart', 0, '', 'uint');
         jimport('joomla.html.pagination');
         $pagination = new JPagination($total, $limitstart, $limit);
 
