@@ -37,32 +37,11 @@ if(!isset($_SESSION['var']))
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/popper.min.js" type="text/javascript" language="javascript"></script>
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/bootstrap.min.js"></script>
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/common.js" type="text/javascript" language="javascript"></script>
-<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/cookieconsent.min.css" />
-<script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/cookieconsent.min.js"></script>
-<script>
-window.addEventListener("load", function(){
-window.cookieconsent.initialise({
-  "palette": {
-    "popup": {
-      "background": "#eaf7f7",
-      "text": "#5c7291"
-    },
-    "button": {
-      "background": "#56cbdb",
-      "text": "#ffffff"
-    }
-  },
-  "content": {
-    "href": "https://www.astroisha.com/cookies-policy"
-  }
-})});
-</script>
- <script
+<script
     src="https://www.paypal.com/sdk/js?client-id=AQTmuXv3b_AC_GBMrw7Mw53pWDUmpjbQI68g8ndsrxqXIFa4ORLQfj-5Pc0Vtko0tSBWUPpFuaG06m8J">
-  </script>
+</script>
 </head>
 <body>
-<div id="fb-root"></div>
 <div class="container-fluid">
 	<p>
     <jdoc:include type="modules" name="top" />
@@ -83,7 +62,28 @@ window.cookieconsent.initialise({
 </div>
 </div>
 <jdoc:include type="modules" name="footer" />
-<script async src="//www.instagram.com/embed.js"></script>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v13.0&appId=1092479767598458&autoLogAppEvents=1" nonce="a9J9aZyn"></script>
+<?php
+include_once (JPATH_ROOT.DS.'analyticstracking.php');
+?>
+<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/cookieconsent.min.css" />
+<script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/cookieconsent.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#eaf7f7",
+      "text": "#5c7291"
+    },
+    "button": {
+      "background": "#56cbdb",
+      "text": "#ffffff"
+    }
+  },
+  "content": {
+    "href": "https://www.astroisha.com/cookies-policy"
+  }
+})});
+</script>
 </body>
 </html>

@@ -25,6 +25,9 @@ $title              = $doc->title;
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/jquery.min.js"></script>
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/bootstrap.bundle.min.js"></script>
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/common.js" type="text/javascript" language="javascript"></script>
+<script
+    src="https://www.paypal.com/sdk/js?client-id=AQTmuXv3b_AC_GBMrw7Mw53pWDUmpjbQI68g8ndsrxqXIFa4ORLQfj-5Pc0Vtko0tSBWUPpFuaG06m8J">
+</script>
 </head>
 <body>
 <div class="mb-3"></div>
@@ -52,13 +55,28 @@ $title              = $doc->title;
 </div>
 </div>
 <jdoc:include type="modules" name="footer" /> 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49809214-1"></script>
+<?php
+include_once (JPATH_ROOT.DS.'analyticstracking.php');
+?>
+<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/cookieconsent.min.css" />
+<script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/cookieconsent.min.js"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-49809214-1');
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#eaf7f7",
+      "text": "#5c7291"
+    },
+    "button": {
+      "background": "#56cbdb",
+      "text": "#ffffff"
+    }
+  },
+  "content": {
+    "href": "https://www.astroisha.com/cookies-policy"
+  }
+})});
 </script>
 </body>
 </html>
