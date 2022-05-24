@@ -14,17 +14,17 @@ class PlgContentAskExpert extends JPlugin
             $view               = $app->input->get('view');
             $path               = JPluginHelper::getLayoutPath('content', 'askexpert');
             $content            = "";
-            //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
-           // $geoip              = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
+            include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
+            $geoip              = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
             //$ip                         = '117.196.1.11';
             //$ip                         = '157.55.39.123';  // ip address
             $ip                 = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
             
-            $info                       = geoip_country_code_by_name($ip);
-            $country                    = geoip_country_name_by_name($ip);
-            //$location           = $geoip->lookupLocation($ip);
-            //$info               = $location->countryCode;
-            //$country            = $location->countryName;
+            //$info                       = geoip_country_code_by_name($ip);
+            //$country                    = geoip_country_name_by_name($ip);
+            $location           = $geoip->lookupLocation($ip);
+            $info               = $location->countryCode;
+            $country            = $location->countryName;
             //echo $info;exit;
             if(($context === 'com_content.article')&&($view=='article'))
             {
@@ -80,7 +80,7 @@ class PlgContentAskExpert extends JPlugin
         $disc                       = number_format((float)($fees*$details[1]['disc_percent'])/100,2);
         $disc_fees                  = $fees-$disc;
         //print_r($details);exit;
-        $content            .=  "<div class='card border-primary'>";
+        $content            .=  "<div class='card border-primary mb-3'>";
         $content            .= "<div class='card-body'>";
         $content            .= "<div class='lead text-center'>Get Online Consultation</div>";
         $content            .= "<h3><a title='Click to get more info' href='#' data-toggle='modal' data-target='#astroinfo'><img src='".JURi::base()."images/profiles/".$result->img_new_name."' height='50px' width='50px' title='".$result->img_name."' />".$result->name."</a></h3>";
