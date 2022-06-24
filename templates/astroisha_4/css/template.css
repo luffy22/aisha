@@ -31,3 +31,11 @@ a {text-decoration: none !important;}
   margin-left: 20%;
   color:#fff;
 }
+img {
+	max-width: 100%;
+	width: auto \9;
+	height: auto;
+	vertical-align: middle;
+	border: 0;
+	-ms-interpolation-mode: bicubic;
+}

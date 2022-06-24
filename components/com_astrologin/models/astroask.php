@@ -204,14 +204,7 @@ class AstrologinModelAstroask extends ListModel
 		{
 		   $app->redirect(JUri::base().'vendor/paypal.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees); 
 		}
-		else if($pay_mode=="BTC"||$pay_mode=="ETH"||$pay_mode=="DOGE"||$pay_mode=="XRP"||
-                        $pay_mode=="USDT"||$pay_mode=="ADA"||$pay_mode=="LTC"||
-                        $pay_mode=="DOT"||$pay_mode=="UNI"||$pay_mode=="XMR"||
-                        $pay_mode=="XLM"||$pay_mode=="TRX"||$pay_mode=="DASH"||
-                        $pay_mode=="DGB"||$pay_mode=="BCH"||$pay_mode=="ETC")
-		{
-		   $app->redirect(JUri::base().'coinpayment/pay_coin2.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees.'&pay_mode='.$pay_mode); 
-		}
+		
         
     }
     public function getExpert()
@@ -228,7 +221,7 @@ class AstrologinModelAstroask extends ListModel
         $db                     ->setQuery($query);
         $id                     = $db->loadResult();
         $query                  ->clear();
-        $query              ->clear();
+
         $query                  =   "SELECT DISTINCT(main_expert) from jv_role_astro where astro_id ='".$id."'";
         $db                     ->setQuery($query);
         $main                    = $db->loadColumn();     
@@ -268,6 +261,7 @@ class AstrologinModelAstroask extends ListModel
     // paypal authorize Order
     public function authorizePayment($details)
     {
+		//print_r($details);exit;
         $paypal_id              = $details['paypal_id'];
         $auth_id                = $details['auth_id'];
         $token                  = $details['token'];
@@ -275,12 +269,17 @@ class AstrologinModelAstroask extends ListModel
         $db                     = JFactory::getDbo();
         $query                  = $db->getQuery(true);
         // Fields to update.
-        $object                 = new stdClass();
-        $object->paid           = "yes";
-        $object->UniqueId       = $token;
-        // Update their details in the users table using id as the primary key.
-        $result = JFactory::getDbo()->updateObject('#__question_details', $object, 'UniqueId');
+		$fields = array($db->quoteName('paid') . ' = ' . $db->quote('yes'));
 
+		// Conditions for which records should be updated.
+		$conditions = array(
+						$db->quoteName('UniqueID') . ' = '. $db->quote($token)
+						);
+
+		$query->update($db->quoteName('#__question_details'))->set($fields)->where($conditions);
+		$db->setQuery($query);
+		$result = $db->execute();
+		$query 	->clear();
         $columns        = array('paypal_id','authorize_id','status','UniqueID');
         // Conditions for which records should be updated.
         $values         = array($db->quote($paypal_id),$db->quote($auth_id),$db->quote('Authorized'),$db->quote($token));
@@ -290,10 +289,10 @@ class AstrologinModelAstroask extends ListModel
                             ->values(implode(',', $values));
         // Set the query using our newly populated query object and execute it
         $db                 ->setQuery($query);
-        $result             = $db->query();
+        $result             = $db->execute();
 
-        $query              ->clear();
-        $query              ->select($db->quoteName(array('a.UniqueID','a.expert_id','a.no_of_ques','a.name','a.email',
+		$query              ->clear();
+		$query              ->select($db->quoteName(array('a.UniqueID','a.expert_id','a.no_of_ques','a.name','a.email',
                                         'a.gender','a.dob_tob','a.pob','a.pay_mode','a.order_type','a.fees','a.currency','a.paid','b.paypal_id','b.status','c.username')))
                              ->select($db->quoteName('c.name','expertname'))  
                              ->select($db->quoteName('c.email','expertemail'))
@@ -302,10 +301,10 @@ class AstrologinModelAstroask extends ListModel
                                 ->join('RIGHT', $db->quoteName('#__users', 'c').' ON ('.$db->quoteName('c.id').' = '.$db->quoteName('a.expert_id').')')
                                 ->where($db->quoteName('b.paypal_id').'='.$db->quote($paypal_id),' AND '.
                                         $db->quoteName('a.UniqueID').' = '.$db->quote($token));
-           $db                  ->setQuery($query);
-           $data                = $db->loadObject();
-           //print_r($data);exit;
-           $this->sendMail($data);
+        $db                  ->setQuery($query);
+        $data                = $db->loadObject();
+        //print_r($data);exit;
+        $this->sendMail($data);
     }
     public function failPayment($details)
     {
@@ -330,27 +329,38 @@ class AstrologinModelAstroask extends ListModel
         $token              = $details['token'];
         $trackid            = $details['trackid'];
         $status             = $details['status'];
-        $db                 = JFactory::getDbo();
-        $query              = $db->getQuery(true);
-       
+        if(empty($bank_ref))
+        {
+			$bank_ref 		= NULL;
+		}
+		else
+		{
+			$bank_ref			= $details['bank_ref'];
+		}
+        $db                     = JFactory::getDbo();
+        $query                  = $db->getQuery(true);
         // Fields to update.
-        $object                 = new stdClass();
-        $object->paid           = "yes";
-        $object->UniqueId       = $token;
+		$fields = array($db->quoteName('paid') . ' = ' . $db->quote('yes'));
 
-        // Update their details in the users table using id as the primary key.
-        $result                 = JFactory::getDbo()->updateObject('#__question_details', $object, 'UniqueId');
+		// Conditions for which records should be updated.
+		$conditions = array(
+						$db->quoteName('UniqueID') . ' = '. $db->quote($token)
+						);
 
-        $query                  ->clear();
-        $columns                = array('pay_token','track_id','pay_status');
+		$query->update($db->quoteName('#__question_details'))->set($fields)->where($conditions);
+		$db->setQuery($query);
+		$result = $db->execute();
+		$query 	->clear();
+        $columns                = array('pay_token','track_id','bank_ref','pay_status');
         // Conditions for which records should be updated.
-        $values                 = array($db->quote($token),$db->quote($trackid),$db->quote($status));
+        $values                 = array($db->quote($token),$db->quote($trackid),
+										$db->quote($bank_ref),$db->quote($status));
 
         $query              ->insert($db->quoteName('#__ccavenue_paytm'))
                             ->columns($db->quoteName($columns))
                             ->values(implode(',', $values));  
         $db                 ->setQuery($query);
-        $result             = $db->query();
+        $result             = $db->execute();
         $query              ->clear();
         $query                  ->select($db->quoteName(array('a.UniqueID','a.expert_id','a.name','a.email',
                                     'a.gender','a.dob_tob','a.pob','a.pay_mode','a.order_type','a.fees','a.currency','a.paid','b.track_id',
@@ -417,11 +427,11 @@ class AstrologinModelAstroask extends ListModel
 
         if($data->order_type == "short")
         {
-                    $body 			.= "<p>Answer Type: Short Answer</p>";
+			$body 			.= "<p>Answer Type: Short Answer</p>";
         }
         else
         {
-                $body 			.= "<p>Answer Type: Detailed Report</p>";
+			$body 			.= "<p>Answer Type: Detailed Report</p>";
         }
         $order_link           = "https://www.astroisha.com/getanswer?order=".$data->UniqueID."&ref=".$data->email;
         $body               .= "<p>Once your report is finished you would be notified via email. You can view your report here: <a href='".$order_link."' title='Click to get report'>Click For Report</a></p><br/>";
@@ -461,16 +471,20 @@ class AstrologinModelAstroask extends ListModel
 
         $send = $mailer->Send();
         $link       = JUri::base().'getanswer?order='.$data->UniqueID.'&ref='.$data->email.'&payment=success';
+
         if ( $send !== true ) {
             $msg    = 'Error sending email: Try again and if problem continues contact admin@astroisha.com.';
             $msgType = "error";
-            $app->redirect($link, $msg,$msgType);
+            $app->enqueueMessage($msg, $msgType);
+            $app->redirect($link);
         } 
         else 
         {
+			
             $msg    =  'Payment to Astro Isha is successful. Please check your email to see payment details.';
             $msgType    = "success";
-            $app->redirect($link, $msg,$msgType);
+            $app->enqueueMessage($msg, $msgType);
+            $app->redirect($link);
         }        
     }
     protected function sendFailMail($data)
@@ -501,7 +515,7 @@ class AstrologinModelAstroask extends ListModel
         $mailer->isHtml(true);
         $mailer->Encoding = 'base64';
         $mailer->setBody($body);
-
+		
         $send = $mailer->Send();
         $link       = JUri::base().'getanswer?order='.$token.'&ref='.$data->email.'&payment=fail';
         if ( $send !== true ) {

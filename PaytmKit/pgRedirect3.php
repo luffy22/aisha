@@ -34,7 +34,7 @@ $paramList["EMAIL"] = $CUST_ID;  //Email ID of customer
 $paramList["CALLBACK_URL"]  = $CALLBACK_URL;
 //print_r($paramList);exit;
 $paytmChecksum = PaytmChecksum::generateSignature($paramList, PAYTM_MERCHANT_KEY);
-$verifySignature = PaytmChecksum::verifySignature($paramList, PAYTM_MERCHANT_KEY, $paytmChecksum);
+
 //print_r($checkSum);exit;
 /*
 $paramList["MSISDN"] = $MSISDN; //Mobile number of customer

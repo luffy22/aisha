@@ -21,9 +21,11 @@ class AstrologinModelChart extends ListModel
     }
     public function getData()
     {
-        $mainframe		= JFactory::getApplication();
-        $limit			= $mainframe->getUserStateFromRequest("$option.limit", 'limit', 10, 'int');
-        $limitstart		= JRequest::getVar('limitstart', 0, '', 'int');
+        $mainframe 			= JFactory::getApplication();
+        $jinput             = $mainframe->input;
+        
+        $limit				= $mainframe->getUserStateFromRequest("$option.limit", 'limit', 10, 'int');
+        $limitstart			= $mainframe->input->get('limitstart', 0, '', 'uint');
         $user   = JFactory::getUser();
         $id     = $user->id;
         //echo $id;exit;
@@ -44,8 +46,6 @@ class AstrologinModelChart extends ListModel
     {
         $user               = JFactory::getUser();
         $id                 = $user->id;
-        $jinput             = JFactory::getApplication()->input;
-        $email              = $jinput->get('ref','default_value','string');
 
         $db                 = JFactory::getDbo();  // Get db connection
         $query              = $db->getQuery(true);
@@ -60,11 +60,10 @@ class AstrologinModelChart extends ListModel
     public function getPagination()
     {
         $mainframe 			= JFactory::getApplication();
-        $total 				= self::getTotal();
-        //print_r($total);exit;
-		// Load the content if it doesn't already exist
-        $limit				= $mainframe->getUserStateFromRequest("$option.limit", 'limit',10, 'int');
-        $limitstart			= JRequest::getVar('limitstart', 0, '', 'int');
+        $total 				= $this->getTotal();
+        // Load the content if it doesn't already exist
+        $limit				= $mainframe->getUserStateFromRequest("$option.limit", 'limit', 10, 'int');
+        $limitstart			= $mainframe->input->get('limitstart', 0, '', 'uint');
         jimport('joomla.html.pagination');
         $pagination = new JPagination($total, $limitstart, $limit);
         //print_r($pagination);exit;

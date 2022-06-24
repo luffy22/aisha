@@ -319,11 +319,17 @@ class AstrologinModelAstroReport extends ListModel
         $db                     = JFactory::getDbo();
         $query                  = $db->getQuery(true);
         // Fields to update.
-        $object                 = new stdClass();
-        $object->paid           = "yes";
-        $object->UniqueId       = $token;
-        // Update their details in the users table using id as the primary key.
-        $result = JFactory::getDbo()->updateObject('#__question_details', $object, 'UniqueId');
+		$fields = array($db->quoteName('paid') . ' = ' . $db->quote('yes'));
+
+		// Conditions for which records should be updated.
+		$conditions = array(
+						$db->quoteName('UniqueID') . ' = '. $db->quote($token)
+						);
+
+		$query->update($db->quoteName('#__question_details'))->set($fields)->where($conditions);
+		$db->setQuery($query);
+		$result = $db->execute();
+		$query 	->clear();
 
         $columns        = array('paypal_id','authorize_id','status','UniqueID');
         // Conditions for which records should be updated.
@@ -334,7 +340,7 @@ class AstrologinModelAstroReport extends ListModel
                             ->values(implode(',', $values));
         // Set the query using our newly populated query object and execute it
         $db                 ->setQuery($query);
-        $result             = $db->query();
+        $result             = $db->execute();
 
         $query              ->clear();
         $query              ->select($db->quoteName(array('a.UniqueID','a.expert_id','a.no_of_ques','a.name','a.email',
@@ -359,6 +365,7 @@ class AstrologinModelAstroReport extends ListModel
                                 ->from($db->quoteName('#__question_details','a'))
                                 ->where($db->quoteName('a.UniqueID').'='.$db->quote($token));
         $db                  ->setQuery($query);
+        $db->execute();
         $data                = $db->loadObject();
         $this->sendFailMail($data);
     }
@@ -366,32 +373,45 @@ class AstrologinModelAstroReport extends ListModel
     public function confirmCCPayment($details)
     {
         //print_r($details);exit;
-        $token              = $details['token'];
+		$token              = $details['token'];
         $trackid            = $details['trackid'];
         $status             = $details['status'];
-        $db = JFactory::getDbo();
-        $query = $db->getQuery(true);
+        if(empty($bank_ref))
+        {
+			$bank_ref 		= NULL;
+		}
+		else
+		{
+			$bank_ref			= $details['bank_ref'];
+		}
+        $db 				= JFactory::getDbo();
+        $query 				= $db->getQuery(true);
         if($status      == 'Success'||$status =='TXN_SUCCESS'||$status="confirmed")
         {
             $status = "Success";
-            // Fields to update.
-            $object                 = new stdClass();
-            $object->paid           = "yes";
-            $object->UniqueId       = $token;
+		}
+        // Fields to update.
+		$fields = array($db->quoteName('paid') . ' = ' . $db->quote('yes'));
 
-            // Update their details in the users table using id as the primary key.
-            $result                 = JFactory::getDbo()->updateObject('#__question_details', $object, 'UniqueId');
-            
-            $query                  ->clear();
-            $columns                = array('pay_token','track_id','pay_status');
+		// Conditions for which records should be updated.
+		$conditions = array(
+						$db->quoteName('UniqueID') . ' = '. $db->quote($token)
+						);
+
+		$query->update($db->quoteName('#__question_details'))->set($fields)->where($conditions);
+		$db->setQuery($query);
+		$result = $db->execute();
+		$query 	->clear();
+		$columns                = array('pay_token','track_id','bank_ref','pay_status');
             // Conditions for which records should be updated.
-            $values                 = array($db->quote($token),$db->quote($trackid),$db->quote($status));
+            $values                 = array($db->quote($token),$db->quote($trackid),
+											$db->quote($bank_ref),$db->quote($status));
 
             $query              ->insert($db->quoteName('#__ccavenue_paytm'))
                                 ->columns($db->quoteName($columns))
                                 ->values(implode(',', $values));  
             $db                 ->setQuery($query);
-            $result             = $db->query();
+            $result             = $db->execute();
             $query              ->clear();
             $query                  ->select($db->quoteName(array('a.UniqueID','a.expert_id','a.name','a.email',
                                         'a.gender','a.dob_tob','a.pob','a.pay_mode','a.order_type','a.fees','a.currency','a.paid','b.track_id',
@@ -404,24 +424,9 @@ class AstrologinModelAstroReport extends ListModel
                                 ->where($db->quoteName('a.UniqueID').' = '.$db->quote($token));
             $db                     ->setQuery($query);
             $data                   = $db->loadObject();
-        }
-        else if($status == 'TXN_FAILURE'|| $status == "Failure")
-        {
-            $status     = "Failure";
-            $query              ->clear();
-            $query                  ->select($db->quoteName(array('a.UniqueID','a.expert_id','a.name','a.email',
-                                        'a.gender','a.dob_tob','a.pob','a.pay_mode','a.order_type','a.fees','a.currency','a.paid','c.username')))
-                                ->select($db->quoteName('c.name','expertname'))  
-                                ->select($db->quoteName('c.email','expertemail'))
-                                ->from($db->quoteName('#__question_details','a'))
-                                ->join('RIGHT', $db->quoteName('#__users', 'c').' ON ('.$db->quoteName('c.id').' = '.$db->quoteName('a.expert_id').')')
-                                ->where($db->quoteName('a.UniqueID').' = '.$db->quote($token));
-            $db                     ->setQuery($query);
-            $data                   = $db->loadObject();
-        }
-        
-        //print_r($data);exit;
-        $this->sendMail($data);
+              
+			//print_r($data);exit;
+			$this->sendMail($data);
     }
 
     protected function sendMail($data)
@@ -529,13 +534,15 @@ class AstrologinModelAstroReport extends ListModel
         if ( $send !== true ) {
             $msg    = 'Error sending email: Try again and if problem continues contact admin@astroisha.com.';
             $msgType = "warning";
-            $app->redirect($link, $msg,$msgType);
+            $app->enqueueMessage($msg, $msgType);
+            $app->redirect($link);
         } 
         else 
         {
             $msg    =  'Payment to Astro Isha is successful. Please check your email to see payment details.';
             $msgType    = "success";
-            $app->redirect($link, $msg,$msgType);
+            $app->enqueueMessage($msg, $msgType);
+            $app->redirect($link);
         }        
     }
     protected function sendFailMail($data)
@@ -560,7 +567,7 @@ class AstrologinModelAstroReport extends ListModel
         $subject    = "AstroIsha ".ucfirst($data->order_type)." Report: ".$data->UniqueID;
         $mailer     ->setSubject($subject);
         $body       = "";
-        $body       .= "<p>Dear ".$data->name.",</p>";
+        $body       .= "<p>Hello ".$data->name.",</p>";
         $body       .= "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your online payment to AstroIsha(https://www.astroisha.com) has failed. If you have cancelled the order than kindly ignore this email.</p>";
         $body           .= "<p>Admin At Astro Isha,<br/>Rohan Desai</p>";
         $mailer->isHtml(true);
@@ -572,13 +579,15 @@ class AstrologinModelAstroReport extends ListModel
         if ( $send !== true ) {
             $msg    = 'Error sending email: Try again and if problem continues contact admin@astroisha.com.';
             $msgType = "warning";
-            $app->redirect($link, $msg,$msgType);
+            $app->enqueueMessage($msg, $msgType);
+            $app->redirect($link);
         } 
         else 
         {
             $msg    =  'Payment has failed. Please check your email.';
             $msgType    = "warning";
-            $app->redirect($link, $msg,$msgType);
+            $app->enqueueMessage($msg, $msgType);
+            $app->redirect($link);
         }   
     }
 }

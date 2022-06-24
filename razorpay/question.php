@@ -21,7 +21,7 @@ $curr           = $_GET['curr'];
         </style>
     </head>
     <body>
-        <form action="http://localhost/aisha/razorpay/process_ques.php?token=<?php echo $token; ?>" method="POST"> 
+        <form action="https://www.astroisha.com/razorpay/process_ques.php?token=<?php echo $token; ?>" method="POST"> 
             <script    src="https://checkout.razorpay.com/v1/checkout.js"    
             data-key="<?php echo $razor_api_key; ?>" 
             data-amount="<?php echo $amount; ?>" 

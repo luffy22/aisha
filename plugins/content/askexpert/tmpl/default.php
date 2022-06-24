@@ -1,6 +1,11 @@
 <?php
 defined('_JEXEC') or die;
-$lang = JFactory::getLanguage(); ?>
+
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
+$lang = JFactory::getLanguage(); 
+?>
 <div class="row">
-<?php echo $info; ?>
+<?php echo $data;exit; ?>
 </div>

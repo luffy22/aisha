@@ -36,7 +36,7 @@ $item = new Item();
 $item->setName($name)
     ->setCurrency($currency)
     ->setQuantity($quantity)
-    ->setSku($token1)
+    ->setSku($token)
     ->setPrice($fees);
     
 $itemlist       = new ItemList();

@@ -4,8 +4,8 @@
 	header("Expires: 0");
 
 	// following files need to be included
-	require_once("./lib/config_paytm.php");
-	//require_once("./lib/encdec_paytm.php");
+	require_once("./lib/config_paytm_test.php");
+	require_once("./lib/encdec_paytm.php");
 
 	$ORDER_ID = "";
 	$requestParamList = array();

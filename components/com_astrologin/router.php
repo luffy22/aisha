@@ -37,7 +37,14 @@ class AstroLoginRouter extends RouterBase
         $db->setQuery($qry);
         $alias = $db->loadResult();
         //print_r($alias);exit;
-        $segments[] = $alias;
+        if($alias == "charts")
+        {
+            $segments[]  = '';
+        }
+        else 
+        {
+            $segments[] = $alias;
+        }
         //print_r($segments);exit;
         return $segments;
     }

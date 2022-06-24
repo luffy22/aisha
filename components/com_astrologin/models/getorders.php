@@ -18,13 +18,13 @@ class AstrologinModelGetOrders extends ListModel
 	var $_pagination = null;
      public function getOrder()
     {	
-		$mainframe 			= JFactory::getApplication();
+        $mainframe 			= JFactory::getApplication();
         $jinput             = $mainframe->input;
         $email              = $jinput->get('ref','default_value','string');
         $order              = $jinput->get('order', 'default_value', 'string');
         
-		$limit				= $mainframe->getUserStateFromRequest("$option.limit", 'limit', 3, 'int');
-		$limitstart			= $mainframe->input->get('limitstart', 0, '', 'uint');
+        $limit				= $mainframe->getUserStateFromRequest("$option.limit", 'limit', 3, 'int');
+        $limitstart			= $mainframe->input->get('limitstart', 0, '', 'uint');
 		
         $db             	= JFactory::getDbo();  // Get db connection
         if($email == 'default_value')
@@ -54,11 +54,11 @@ class AstrologinModelGetOrders extends ListModel
     }
     public function getTotal()
     {
-		$jinput             = JFactory::getApplication()->input;
+        $jinput             = JFactory::getApplication()->input;
         $email              = $jinput->get('ref','default_value','string');
 
-		$db             	= JFactory::getDbo();  // Get db connection
-		$query          	= $db->getQuery(true);
+        $db             	= JFactory::getDbo();  // Get db connection
+        $query          	= $db->getQuery(true);
         $query          	->select(array('COUNT(*)'))
 							->from($db->quoteName('#__question_details'))
 							->where($db->quoteName('email').' = '.$db->quote($email).' AND '.
@@ -70,11 +70,11 @@ class AstrologinModelGetOrders extends ListModel
 	}
     public function getPagination()
     {
-		$mainframe 			= JFactory::getApplication();
-		$total 				= $this->getTotal();
-		// Load the content if it doesn't already exist
-		$limit				= $mainframe->getUserStateFromRequest("$option.limit", 'limit', 3, 'int');
-		$limitstart			= $mainframe->input->get('limitstart', 0, '', 'uint');
+        $mainframe 			= JFactory::getApplication();
+        $total 				= $this->getTotal();
+        // Load the content if it doesn't already exist
+        $limit				= $mainframe->getUserStateFromRequest("$option.limit", 'limit', 3, 'int');
+        $limitstart			= $mainframe->input->get('limitstart', 0, '', 'uint');
         jimport('joomla.html.pagination');
         $pagination = new JPagination($total, $limitstart, $limit);
 

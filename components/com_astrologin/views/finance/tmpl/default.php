@@ -1,7 +1,7 @@
 <!--<div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <strong><i class="fas fa-exclamation-circle"></i> Orders Closed!</strong> Orders are temporarily closed. We would begin taking orders from Friday 4th December 2020.
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span></button></div>-->
+  <strong><i class="bi bi-exclamation-triangle-fill fs-1"></i> Orders Closed!</strong> Orders are temporarily closed. We apologize for the inconvenience caused.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+</div>-->
 <?php
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
@@ -103,7 +103,7 @@ else
 </div>
 <div class="mb-3"></div>
 <div class="form-group" id="btn_grp">
-       <button type="reset" name="ask_reset" id="ask_reset" class="btn btn-danger"><i class="bi bi-arrow-clockwise"></i> Reset</button>
+	<button type="reset" name="ask_reset" id="ask_reset" class="btn btn-danger"><i class="bi bi-arrow-clockwise"></i> Reset</button>
     <button type="submit" name="report_submit" id="report_submit" class="btn btn-primary" >Next <i class="bi bi-arrow-right-short"></i></button>
 </div>
 </form>

@@ -34,7 +34,7 @@ $paramList["EMAIL"] = $CUST_ID;  //Email ID of customer
 $paramList["CALLBACK_URL"]  = $CALLBACK_URL;
 
 $paytmChecksum = PaytmChecksum::generateSignature($paramList, PAYTM_MERCHANT_KEY);
-$verifySignature = PaytmChecksum::verifySignature($paramList, PAYTM_MERCHANT_KEY, $paytmChecksum);
+
 //print_r($paramList);exit;
 //$checkSum = getChecksumFromArray($paramList,PAYTM_MERCHANT_KEY);
 //echo $paytmChecksum;exit;

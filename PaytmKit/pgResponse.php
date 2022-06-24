@@ -15,8 +15,7 @@ $paramList = $_POST;
 $paytmChecksum = isset($_POST["CHECKSUMHASH"]) ? $_POST["CHECKSUMHASH"] : ""; //Sent by Paytm pg
 
 //Verify all parameters received from Paytm pg to your application. Like MID received from paytm pg is same as your application�s MID, TXN_AMOUNT and ORDER_ID are same as what was sent by you to Paytm PG for initiating transaction etc.
-$isValidChecksum = verifychecksum_e($paramList, PAYTM_MERCHANT_KEY, $paytmChecksum); //will return TRUE or FALSE string.
-
+$isValidChecksum = PaytmChecksum::verifySignature($paramList, PAYTM_MERCHANT_KEY, $paytmChecksum);
 
 if($isValidChecksum == "TRUE") {
 	echo "<b>Checksum matched and following are the transaction details:</b>" . "<br/>";
@@ -33,6 +32,7 @@ if($isValidChecksum == "TRUE") {
 		//Verify amount & order id received from Payment gateway with your application's order id and amount.
 	}
 	else {
+
             //echo $_POST['STATUS'];exit;
 		$txnid          = $_POST['TXNID'];
                 $order          = $_POST['ORDERID'];

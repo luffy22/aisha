@@ -21,7 +21,7 @@ class JConfig {
 	public $live_site = '';
 	public $secret = '2mF8NHoVoG5Dkxki';
 	public $gzip = false;
-	public $error_reporting = 'default';
+	public $error_reporting = 'none';
 	public $helpurl = 'https://help.joomla.org/proxy?keyref=Help{major}{minor}:{keyref}&lang={langcode}';
 	public $ftp_host = '127.0.0.1';
 	public $ftp_port = '21';
@@ -48,7 +48,7 @@ class JConfig {
 	public $MetaDesc = 'Comprehensive Website For Vedic Astrology';
 	public $MetaKeys = '';
 	public $MetaTitle = '1';
-	public $MetaAuthor = true;
+	public $MetaAuthor = false;
 	public $MetaVersion = false;
 	public $robots = '';
 	public $sef = true;
@@ -95,7 +95,7 @@ class JConfig {
 	public $session_redis_server_port = 6379;
 	public $session_redis_server_auth = '';
 	public $session_redis_server_db = 0;
-	public $frontediting = 1;
+	public $frontediting = 0;
 	public $cookie_domain = '';
 	public $cookie_path = '';
 	public $asset_id = '1';
