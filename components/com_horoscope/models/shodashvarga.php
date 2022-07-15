@@ -80,11 +80,15 @@ class HoroscopeModelShodashvarga extends HoroscopeModelLagna
             foreach($planets as $planet=>$dist)
             {
                 $dist2          = $this->convertDecimalToDegree($dist, "details");
+                //$dist1          = $this->convertDecimalToDegree($dist, "");
                 $sign           = $this->calcDetails($dist);
                 $details        = array($planet=>$sign);
-                $dashamsha      = $this->getDashamsha($planet, $sign, $dist2);
+                //$dashamsha      = $this->getDashamsha($planet, $sign, $dist2);
                 //$hora           = $this->getHora($planet,$sign, $dist2);
-                $data           = array_merge($data,$dashamsha);
+                //$drekana        = $this->getDrekana($planet, $sign, $dist2);
+                //$chatur         = $this->getChatur($planet, $sign, $dist2);
+                $sapt           = $this->getSapt($planet, $sign, $dist);
+                $data           = array_merge($data,$sapt);
 
             }
             print_r($data);exit;
@@ -115,6 +119,7 @@ class HoroscopeModelShodashvarga extends HoroscopeModelLagna
     }
     protected function getHora($planet,$sign,$dist)
     {
+
         //echo $planet." ".$sign." ".$dist;exit;
         $even_signs	= array("Taurus","Cancer","Virgo",
                                 "Scorpio","Capricorn","Pisces");
@@ -122,12 +127,11 @@ class HoroscopeModelShodashvarga extends HoroscopeModelLagna
         {
             if($dist >= 0 && $dist <=15)
             {
-                
                 $array      = array($planet."_hora"=>"Moon");
             }
             else
             {
-                $array      = array($planet."_hora"=>"Sun");
+                $array      = array($planet."_hora"=>"Sun");     
             }
         }
         else
@@ -138,11 +142,57 @@ class HoroscopeModelShodashvarga extends HoroscopeModelLagna
             }
             else
             {
-                $array      = array($planet."_hora"=>"Moon");
+                $array      = array($planet."_hora"=>"Moon");     
             }
         }
         
         return $array;
+    }
+    protected function getDrekana($planet,$sign,$dist)
+    {
+        //echo $planet." ".$sign." ".$dist;exit;
+        $chart                  = 'drekana';
+        $db                     = JFactory::getDbo();
+        $query                  = $db->getQuery(true);
+        $query                  ->select('shodas_sign');
+        $query                  ->from($db->quoteName('#__shodasha'));
+        $query                  ->where($db->quote($dist).' BETWEEN '.
+                                        $db->quoteName('low_deg').' AND '.
+                                        $db->quoteName('up_deg').' AND '.
+                                        $db->quoteName('moon_sign').' = '.$db->quote($sign).' AND '.
+                                        $db->quoteName('chart_type').' = '.$db->quote($chart)); 
+        $db                     ->setQuery($query);
+        $result                 = $db->loadAssoc();
+        //print_r($result);exit;
+        $array                  = array($planet."_drekan" => $result['shodas_sign']);
+        return $array; 
+    }
+    protected function getChatur($planet,$sign,$dist)
+    {
+        //echo $planet." ".$sign." ".$dist;exit;
+        $chart                  = 'chaturamsha';
+        $db                     = JFactory::getDbo();
+        $query                  = $db->getQuery(true);
+        $query                  ->select('shodas_sign');
+        $query                  ->from($db->quoteName('#__shodasha'));
+        $query                  ->where($db->quote($dist).' BETWEEN '.
+                                        $db->quoteName('low_deg').' AND '.
+                                        $db->quoteName('up_deg').' AND '.
+                                        $db->quoteName('moon_sign').' = '.$db->quote($sign).' AND '.
+                                        $db->quoteName('chart_type').' = '.$db->quote($chart)); 
+        $db                     ->setQuery($query);
+        $result                 = $db->loadAssoc();
+        //print_r($result);exit;
+        $array                  = array($planet."_chaturamsha" => $result['shodas_sign']);
+        return $array; 
+    }
+    protected function getSapt($planet,$sign,$dist)
+    {
+        $dist                   = explode(".",$dist);
+        $dist1                  = $dist[0] % 30;  // remaining value when divided by 30 eg. 295%30 = 25
+        $dist                   = number_format($dist1.".".$dist[1],4);
+        echo $dist;exit;
+        
     }
 }
 ?>

@@ -6,6 +6,7 @@ class AstroLoginModelAddlocation extends ListModel
 {
     public function insertDetails($details)
     {
+        //print_r($details);exit;
 		// normalize characters
 		/*$normalizeChars = array(
 			'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
@@ -22,7 +23,8 @@ class AstroLoginModelAddlocation extends ListModel
         $city               = $details['city'];
         $state              = $details['state'];
         $country 			= $details['country'];
-        if($country == "India" || $country == "india")
+        $link               = $details['redirect'];
+         if($country == "India" || $country == "india")
         {
             $tmz            = '251';
         }
@@ -38,68 +40,68 @@ class AstroLoginModelAddlocation extends ListModel
         
         $db                 = JFactory::getDbo();  // Get db connection
         $query              = $db->getQuery(true);
-         $columns        = array('city','state','country','latitude','longitude','timezone','ip_addr');
-        $values         = array(
-                                $db->quote($city),$db->quote($state),$db->quote($country),
-                                $db->quote($lat),$db->quote($lon),$db->quote($tmz),$db->quote($ip_addr));
+         $columns           = array('city','state','country','latitude','longitude','timezone','ip_addr');
+        $values             = array(
+                                    $db->quote($city),$db->quote($state),$db->quote($country),
+                                    $db->quote($lat),$db->quote($lon),$db->quote($tmz),$db->quote($ip_addr));
         // Prepare the insert query
         $query          ->insert($db->quoteName('#__location'))
                         ->columns($db->quoteName($columns))
                         ->values(implode(',', $values));
         // Set the query using our newly populated query object and execute it
         $db             ->setQuery($query);
-        $result          = $db->query();
+        $result          = $db->execute();
         if($result)
         {
-			$query 			->clear();
-			$query          ->select($db->quoteName(array('ip_value','add_location')));
-			$query          ->from($db->quoteName('#__banned_ip'));
-			$query          ->where($db->quoteName('ip_value').' = '.$db->quote($ip_addr));
-			$db             ->setQuery($query);
-			$db->execute();
+            $query 			->clear();
+            $query          ->select($db->quoteName(array('ip_value','add_location')));
+            $query          ->from($db->quoteName('#__banned_ip'));
+            $query          ->where($db->quoteName('ip_value').' = '.$db->quote($ip_addr));
+            $db             ->setQuery($query);
+            $db->execute();
 
-			$num_rows = $db->getNumRows();
-			if($num_rows>0)
-			{
-				$row 			= $db->loadAssoc();
-				$loc_add 		= $row['add_location'];
-				$loc_add 		= $loc_add + 1;
-				$query->clear();
-				
-				// Fields to update.
-				$fields = array(
-					$db->quoteName('add_location') . ' = ' . $db->quote($loc_add));
+            $num_rows = $db->getNumRows();
+            if($num_rows>0)
+            {
+                $row 			= $db->loadAssoc();
+                $loc_add 		= $row['add_location'];
+                $loc_add 		= $loc_add + 1;
+                $query->clear();
 
-				// Conditions for which records should be updated.
-				$conditions = array(
-					$db->quoteName('ip_value'). ' = ' . $db->quote($ip_addr)
-				);
+                // Fields to update.
+                $fields = array(
+                        $db->quoteName('add_location') . ' = ' . $db->quote($loc_add));
 
-				$query->update($db->quoteName('#__banned_ip'))->set($fields)->where($conditions);
+                // Conditions for which records should be updated.
+                $conditions = array(
+                        $db->quoteName('ip_value'). ' = ' . $db->quote($ip_addr)
+                );
 
-				$db->setQuery($query);
+                $query->update($db->quoteName('#__banned_ip'))->set($fields)->where($conditions);
 
-				$result = $db->execute();
-			}
-			else
-			{
-				$query->clear();
-				// Insert columns.
-				$columns = array('ip_value','add_location');
+                $db->setQuery($query);
 
-				// Insert values.
-				$values = array($db->quote($ip_addr), $db->quote('1'));
+                $result = $db->execute();
+            }
+            else
+            {
+                $query->clear();
+                // Insert columns.
+                $columns = array('ip_value','add_location');
 
-				// Prepare the insert query.
-				$query
-					->insert($db->quoteName('#__banned_ip'))
-					->columns($db->quoteName($columns))
-					->values(implode(',', $values));
+                // Insert values.
+                $values = array($db->quote($ip_addr), $db->quote('1'));
 
-				// Set the query using our newly populated query object and execute it.
-				$db->setQuery($query);
-				$db->execute();
-			}
+                // Prepare the insert query.
+                $query
+                        ->insert($db->quoteName('#__banned_ip'))
+                        ->columns($db->quoteName($columns))
+                        ->values(implode(',', $values));
+
+                // Set the query using our newly populated query object and execute it.
+                $db->setQuery($query);
+                $db->execute();
+            }
             $mailer     = JFactory::getMailer();
             $config     = JFactory::getConfig();
             $app        = JFactory::getApplication(); 
@@ -134,7 +136,9 @@ class AstroLoginModelAddlocation extends ListModel
             {
                 $msg    =  'Location added successfully';
                 $msgType    = "success";
-                $app->redirect($redirect, $msg,$msgType);
+                $app->enqueueMessage($msg, $msgType);
+                $app->redirect($link);
+                
             }        
 
         }
