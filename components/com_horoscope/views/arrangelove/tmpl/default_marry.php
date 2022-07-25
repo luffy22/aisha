@@ -4,7 +4,7 @@ defined('_JEXEC') or die();
 //print_r($this->data);exit;
 //$planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu","Uranus","Neptune","Pluto");
 $chart_id = $_GET['chart'];
-$count       = count($this->data['nbry_yoga']);
+
 $name       = explode(' ', $this->data['fname']);
 $document = JFactory::getDocument(); 
 $document->setTitle(strtolower($name[0]).' love marriage');

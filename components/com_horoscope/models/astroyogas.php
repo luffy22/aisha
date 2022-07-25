@@ -3,7 +3,7 @@ defined('_JEXEC') or die;  // No direct Access
 // import Joomla modelitem library
 jimport('joomla.application.component.modelitem');
 JModelLegacy::addIncludePath(JPATH_SITE.'/components/com_horoscope/models/');
-$model = JModelLegacy::getInstance('mangaldosha', 'horoscopeModel');
+$model = JModelLegacy::getInstance('lagna', 'horoscopeModel');
 $libPath = JPATH_BASE.'/sweph/';
 putenv("PATH=$libPath");
 class HoroscopeModelAstroYogas extends HoroscopeModelLagna

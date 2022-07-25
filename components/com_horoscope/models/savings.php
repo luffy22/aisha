@@ -3,7 +3,7 @@ defined('_JEXEC') or die;  // No direct Access
 // import Joomla modelitem library
 jimport('joomla.application.component.modelitem');
 JModelLegacy::addIncludePath(JPATH_SITE.'/components/com_horoscope/models/');
-$model = JModelLegacy::getInstance('mangaldosha', 'horoscopeModel');
+$model = JModelLegacy::getInstance('lagna', 'horoscopeModel');
 $libPath = JPATH_BASE.'/sweph/';
 putenv("PATH=$libPath");
 class HoroscopeModelSavings extends HoroscopeModelLagna
@@ -216,7 +216,7 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
                 {
                     $i              = $i + 3;
                 }
-                else if($strength == "neutral" && good_bad == "bad")
+                else if($strength == "neutral" && $good_bad == "bad")
                 {
                     $i              = $i + 2;
                 }
@@ -262,7 +262,7 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
                 {
                     $i              = $i + 3;
                 }
-                else if($strength == "neutral" && good_bad == "bad")
+                else if($strength == "neutral" && $good_bad == "bad")
                 {
                     $i              = $i + 2;
                 }
@@ -270,7 +270,7 @@ class HoroscopeModelSavings extends HoroscopeModelLagna
                 {
                     $i              = $i + 2;
                 }
-                else if($strength == "weak" && good_bad == "bad")
+                else if($strength == "weak" && $good_bad == "bad")
                 {
                     $i              = $i + 0;
                 }

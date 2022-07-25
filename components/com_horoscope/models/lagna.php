@@ -408,36 +408,13 @@ class HoroscopeModelLagna extends ListModel
     public function calcDetails($planet)
     {
         $details        = explode(".", $planet);
-        $sign_num       = intval($details[0]/30);
-        switch($sign_num)
-        {
-            case 0:
-            return "Aries";break;
-            case 1:
-            return "Taurus";break;
-            case 2:
-            return "Gemini";break;
-            case 3:
-            return "Cancer";break;
-            case 4:
-            return "Leo";break;
-            case 5:
-            return "Virgo";break;
-            case 6:
-            return "Libra";break;
-            case 7:
-            return "Scorpio";break;
-            case 8:
-            return "Sagittarius";break;
-            case 9:
-            return "Capricorn";break;
-            case 10:
-            return "Aquarius";break;
-            case 11:
-            return "Pisces";break;
-            default:
-            return "Aries";break;
-        }
+        $sign_num       = intval(intval($details[0])/30);
+        
+        $signs          = array("Aries","Taurus","Gemini","Cancer",
+                                "Leo","Virgo","Libra","Scorpio",
+                                "Sagittarius","Capricorn","Aquarius","Pisces");
+        
+        return $signs[$sign_num];       // return the horoscope sign. for example $signs[10] = Aquarius
     }
     // method to get planet details
     // planetary lord, nakshatra, nakshatra lord
