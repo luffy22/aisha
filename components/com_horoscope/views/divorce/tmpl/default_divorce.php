@@ -113,7 +113,7 @@ else
 <div class="mb-3"></div>
 <body onload="callMe();">
 <div class="lead alert alert-dark">Chances of divorce in your horoscope.</div>
-<div class="row justify-content-center">
+<div class="d-flex justify-content-center">
 <div class="c100 big" id="percent_checker">
     <span id="percent_value"></span>
     <div class="slice">

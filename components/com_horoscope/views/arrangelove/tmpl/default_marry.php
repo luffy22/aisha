@@ -124,19 +124,19 @@ you do not get too excited or too upset if your horoscope does not match the cri
 if($this->data['moon_ven'] == "yes")
 {    
 ?>
-    <li class="list-group-item list-group-item-success"><strong><i class="fas fa-check-circle"></i> Moon and Venus are in same house. There are high chances of love marriage in your life.</strong></li>
+    <li class="list-group-item list-group-item-success"><strong><i class="bi bi-check-circle-fill"></i> Moon and Venus are in same house. There are high chances of love marriage in your life.</strong></li>
 <?php
 }
 if($this->data['moon_ven_7'] == "yes")
 {    
 ?>
-    <li class="list-group-item list-group-item-success"><strong><i class="fas fa-check-circle"></i> Moon and Venus aspect each other in your chart. There are good chances of love marriage in your life.</strong></li>
+    <li class="list-group-item list-group-item-success"><strong><i class="bi bi-check-circle-fill"></i> Moon and Venus aspect each other in your chart. There are good chances of love marriage in your life.</strong></li>
 <?php
 }
  if($this->data['moon_ven'] == "no" && $this->data['moon_ven_7'] == "no")
 {    
 ?>
-    <li class="list-group-item list-group-item-danger"><strong><i class="fas fa-times-circle"></i> Moon and Venus are not associated in your chart.</strong></li>
+    <li class="list-group-item list-group-item-danger"><strong><i class="bi bi-x-circle-fill"></i> Moon and Venus are not associated in your chart.</strong></li>
 <?php
 }
 ?>
@@ -150,19 +150,19 @@ if($this->data['moon_ven_7'] == "yes")
 if($this->data['mars_ven'] == "yes")
 {    
 ?>
-    <li class="list-group-item list-group-item-success"><strong><i class="fas fa-check-circle"></i> Mars and Venus are in same house. There are high chances of love marriage in your life.</strong></li>
+    <li class="list-group-item list-group-item-success"><strong><i class="bi bi-check-circle-fill"></i> Mars and Venus are in same house. There are high chances of love marriage in your life.</strong></li>
 <?php
 }
 if($this->data['mars_ven_7'] == "yes")
 {    
 ?>
-    <li class="list-group-item list-group-item-success"><strong><i class="fas fa-check-circle"></i> Mars and Venus aspect each other in your chart. There are good chances of love marriage in your life.</strong></li>
+    <li class="list-group-item list-group-item-success"><strong><i class="bi bi-check-circle-fill"></i> Mars and Venus aspect each other in your chart. There are good chances of love marriage in your life.</strong></li>
 <?php
 }
  if($this->data['mars_ven'] == "no" && $this->data['mars_ven_7'] == "no")
 {    
 ?>
-    <li class="list-group-item list-group-item-danger"><strong><i class="fas fa-times-circle"></i> Mars and Venus are not associated in your chart.</strong></li>
+    <li class="list-group-item list-group-item-danger"><strong><i class="bi bi-x-circle-fill"></i> Mars and Venus are not associated in your chart.</strong></li>
 <?php
 }
 ?>
@@ -175,19 +175,19 @@ if($this->data['mars_ven_7'] == "yes")
 if($this->data['ven_rahu'] == "yes")
 {    
 ?>
-    <li class="list-group-item list-group-item-success"><strong><i class="fas fa-check-circle"></i> Venus and Rahu are in same house. There are high chances of love marriage in your life.</strong></li>
+    <li class="list-group-item list-group-item-success"><strong><i class="bi bi-check-circle-fill"></i> Venus and Rahu are in same house. There are high chances of love marriage in your life.</strong></li>
 <?php
 }
 if($this->data['rahu_ven_7'] == "yes")
 {    
 ?>
-    <li class="list-group-item list-group-item-success"><strong><i class="fas fa-check-circle"></i> Venus and Rahu aspect each other in your chart. There are chances of love marriage in your life.</strong></li>
+    <li class="list-group-item list-group-item-success"><strong><i class="bi bi-check-circle-fill"></i> Venus and Rahu aspect each other in your chart. There are chances of love marriage in your life.</strong></li>
 <?php
 }
 if($this->data['ven_rahu'] == "no" && $this->data['rahu_ven_7'] == "no")
 {    
 ?>
-    <li class="list-group-item list-group-item-danger"><strong><i class="fas fa-times-circle"></i> Venus and Rahu are not associated in your chart.</strong></li>
+    <li class="list-group-item list-group-item-danger"><strong><i class="bi bi-x-circle-fill"></i> Venus and Rahu are not associated in your chart.</strong></li>
 <?php
 }
 ?>
@@ -201,26 +201,26 @@ if($this->data['ven_rahu'] == "no" && $this->data['rahu_ven_7'] == "no")
 if($this->data['five_sev'] == "yes")
 {    
 ?>
-    <li class="list-group-item list-group-item-success"><strong><i class="fas fa-check-circle"></i> Fifth house lord and seventh house lord are in the same sign. There are high chances of love marriage in your life.</strong></li>
+    <li class="list-group-item list-group-item-success"><strong><i class="bi bi-check-circle-fill"></i> Fifth house lord and seventh house lord are in the same sign. There are high chances of love marriage in your life.</strong></li>
 <?php
 }
 if($this->data['fifth_seventh_exc'] == "yes")
 {    
 ?>
-    <li class="list-group-item list-group-item-success"><strong><i class="fas fa-check-circle"></i> There is <a href="https://www.astroisha.com/yogas/83-payo" target="_blank" title="Parivartan Yog">Parivartan Yog</a>(Exchange of Houses) between fifth house lord and seventh house lord. There are high chances of love marriage in your life.</strong></li>
+    <li class="list-group-item list-group-item-success"><strong><i class="bi bi-check-circle-fill"></i> There is <a href="https://www.astroisha.com/yogas/83-payo" target="_blank" title="Parivartan Yog">Parivartan Yog</a>(Exchange of Houses) between fifth house lord and seventh house lord. There are high chances of love marriage in your life.</strong></li>
 <?php
 }
 if($this->data['fifth_seventh_asp'] == "yes")
 {    
 ?>
-    <li class="list-group-item list-group-item-success"><strong><i class="fas fa-check-circle"></i> Fifth house lord and seventh house lord aspect each other. There are chances of love marriage in your life.</strong></li>
+    <li class="list-group-item list-group-item-success"><strong><i class="bi bi-check-circle-fill"></i> Fifth house lord and seventh house lord aspect each other. There are chances of love marriage in your life.</strong></li>
 <?php
 }
 if($this->data['five_sev'] == "no" && $this->data['fifth_seventh_exc'] == "no" 
     && $this->data['fifth_seventh_asp'] == "no")
 {    
 ?>
-    <li class="list-group-item list-group-item-danger"><strong><i class="fas fa-times-circle"></i> There is no association between fifth house and seventh house in your chart.</strong></li>
+    <li class="list-group-item list-group-item-danger"><strong><i class="bi bi-x-circle-fill"></i> There is no association between fifth house and seventh house in your chart.</strong></li>
 <?php
 }
 ?>
@@ -234,27 +234,27 @@ marriage partner himself/herself.</li>
 if($this->data['asc_sev'] == "yes")
 {    
 ?>
-    <li class="list-group-item list-group-item-success"><strong><i class="fas fa-check-circle"></i> First house(ascendant) lord and seventh house lord are in the same sign. You would give preference to your own choice as marriage partner.</strong></li>
+    <li class="list-group-item list-group-item-success"><strong><i class="bi bi-check-circle-fill"></i> First house(ascendant) lord and seventh house lord are in the same sign. You would give preference to your own choice as marriage partner.</strong></li>
 <?php
 }
 if($this->data['asc_seventh_exc'] == "yes")
 {    
 ?>
-    <li class="list-group-item list-group-item-success"><strong><i class="fas fa-check-circle"></i> There is Parivartan Yog(Exchange of Houses) between first house(ascendant) lord and seventh house lord. There are chances of love marriage in your life.</strong></li>
+    <li class="list-group-item list-group-item-success"><strong><i class="bi bi-check-circle-fill"></i> There is Parivartan Yog(Exchange of Houses) between first house(ascendant) lord and seventh house lord. There are chances of love marriage in your life.</strong></li>
 <?php
 }
 
 if($this->data['asc_seventh_asp'] == "yes")
 {    
 ?>
-    <li class="list-group-item list-group-item-success"><strong><i class="fas fa-check-circle"></i> First house(ascendant) lord and seventh house lord aspect each other. There are good chances of love marriage in your life.</strong></li>
+    <li class="list-group-item list-group-item-success"><strong><i class="bi bi-check-circle-fill"></i> First house(ascendant) lord and seventh house lord aspect each other. There are good chances of love marriage in your life.</strong></li>
 <?php
 }
 if($this->data['asc_sev'] == "no" && $this->data['asc_seventh_exc'] == "no" 
     && $this->data['asc_seventh_asp'] == "no")
 {    
 ?>
-    <li class="list-group-item list-group-item-danger"><strong><i class="fas fa-times-circle"></i> There is no association between first house and seventh house in your chart.</strong></li>
+    <li class="list-group-item list-group-item-danger"><strong><i class="bi bi-x-circle-fill"></i> There is no association between first house and seventh house in your chart.</strong></li>
 <?php
 }
 ?>

@@ -10,7 +10,7 @@
 $document = JFactory::getDocument(); 
 $str        = explode(" ",$this->data['fname']);
 $document->setTitle(strtolower($str[0]).' late marriage chances');
-print_r($this->data);exit;
+//print_r($this->data);exit;
 $percent        = $this->data['house_7_strength']+$this->data['moon_7_strength']+
                     $this->data['nav_7_strength']+$this->data['house_12_strength']+
                     $this->data['moon_12_strength']+$this->data['nav_12_strength']+
@@ -127,7 +127,7 @@ else
     </table>
 <div class="mb-3"></div>
 <div class="lead alert alert-dark">Chances Of Late Marriage</div>
-<div class="row justify-content-center">
+<div class="d-flex justify-content-center">
 <div class="c100 big" id="late_checker">
     <span id="late_value"></span>
     <div class="slice">

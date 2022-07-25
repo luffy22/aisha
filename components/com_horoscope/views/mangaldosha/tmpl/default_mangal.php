@@ -110,28 +110,9 @@ else
 	</tr>
 </table>
 <div class="mb-3"></div>
-<div class="lead alert alert-dark">Is there Mangal Dosha in your chart?</div>
-<table class="table table-bordered table-striped">
-    <tr>
-        <td>From Ascendant in Main Chart</td>
-        <td><?php echo ucfirst($this->data['asc_dosha']); ?></td>
-    </tr>
-    <tr>
-        <td>From Moon in Main Chart</td>
-        <td><?php echo ucfirst($this->data['moon_dosha']); ?></td>
-    </tr>
-    <tr>
-        <td>From Venus in Main Chart</td>
-        <td><?php echo ucfirst($this->data['ven_dosha']); ?></td>
-    </tr>
-    <tr>
-        <td>From Ascendant in Navamsha Chart</td>
-        <td><?php echo ucfirst($this->data['nav_dosha']); ?></td>
-    </tr>
-</table>
-<div class="mb-3"></div>
 <div class="lead alert alert-dark">Percentage of Mangal Dosha in your chart</div>
-<div class="row justify-content-center">
+
+<div class="d-flex justify-content-center">
 <div class="c100 p<?php echo $percent; ?> big">
     <span><?php echo $percent; ?>%</span>
     <div class="slice">
@@ -177,6 +158,26 @@ else if($percent == "100")
 }
 ?>
 </p>
+<div class="mb-3"></div>
+<div class="lead alert alert-dark">Is there Mangal Dosha in your chart?</div>
+<table class="table table-bordered table-striped">
+    <tr>
+        <td>From Ascendant in Main Chart</td>
+        <td><?php echo ucfirst($this->data['asc_dosha']); ?></td>
+    </tr>
+    <tr>
+        <td>From Moon in Main Chart</td>
+        <td><?php echo ucfirst($this->data['moon_dosha']); ?></td>
+    </tr>
+    <tr>
+        <td>From Venus in Main Chart</td>
+        <td><?php echo ucfirst($this->data['ven_dosha']); ?></td>
+    </tr>
+    <tr>
+        <td>From Ascendant in Navamsha Chart</td>
+        <td><?php echo ucfirst($this->data['nav_dosha']); ?></td>
+    </tr>
+</table>
 <div class="mb-3"></div>
 <div class="lead alert alert-dark">Co-tenants of Mars</div>
 <?php 

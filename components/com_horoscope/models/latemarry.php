@@ -17,8 +17,6 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
        
         $result         = $this->getUserData($asc);
         //print_r($result);exit;
-        echo "This feature is not working at present. We are working to fix it asap.<br/>";
-        echo "<button><a href='https://www.astroisha.com'>Go Back</a></button>";exit;
         if(empty($result))
         {
             return;
@@ -425,7 +423,6 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
     // twelfth house. Total percentage 20% 
     public function checkStrength($asc, $num)
     {
-        //echo $num;exit;
         //print_r($asc);exit;
         $percent                = 0;
         $num_planets            = 0;
@@ -464,19 +461,18 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
         {
             $percent            = $percent+0;
         }
-
-            if($num == "7" && count($asc['aspect_7']) < 2 && count($asc['house_7'])< 1 && in_array("Moon",$asc['aspect_7']))
-            {
-                $percent            = $percent+15;
-            }
-            if($num == "7" && count($asc['house_7']) < 2 && in_array("Moon",$asc['house_7']))
-            {
-                $percent            = $percent+5;
-            }
-            if($num == "7" && count($asc['house_7']) < 2 && in_array("Venus",$asc['house_7']))
-            {
-                $percent            = $percent+7;
-            }
+        if(count($asc['aspect_7']) < 2 && count($asc['house_7'])< 1 && in_array("Moon",$asc['aspect_7']))
+        {
+            $percent            = $percent+15;
+        }
+        if(count($asc['house_7']) < 2 && in_array("Moon",$asc['house_7']))
+        {
+            $percent            = $percent+5;
+        }
+        if(count($asc['house_7']) < 2 && in_array("Venus",$asc['house_7']))
+        {
+            $percent            = $percent+7;
+        }
         
         if((in_array("Venus",$asc['house_'.$num])&&
                 in_array(("Sun"),$asc['house_'.$num])))
@@ -533,7 +529,7 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
     }
     public function checkStrengthNav($asc, $num, $chart)
     {
-        print_r($asc);exit;
+        //print_r($asc);exit;
         $pl                 = $asc[$chart.$num];
         $asp                = $asc[$chart.$num."_as"];
         //print_r($asp);exit;
@@ -574,16 +570,14 @@ class HoroscopeModelLateMarry extends HoroscopeModelLagna
         {
             $percent            = $percent+0;
         }
-        if($num == "7")
+        
+        if(in_array("Venus",$asc['nav7']))
         {
-            if(in_array("Venus",$asc['nav7']))
-            {
-                $percent            = $percent+1;
-            }
-            if(in_array("Venus",$asc['moon7']))
-            {
-                $percent            = $percent+1;
-            }
+            $percent            = $percent+1;
+        }
+        if(in_array("Venus",$asc['moon7']))
+        {
+            $percent            = $percent+1;
         }
         if(in_array("Venus",$asc['nav'.$num]) || in_array("Venus",$asc['nav'.$num.'_as']))
         {

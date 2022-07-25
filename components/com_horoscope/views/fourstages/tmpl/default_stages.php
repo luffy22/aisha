@@ -220,7 +220,7 @@ Your browser does not support the HTML5 canvas tag.
         {
 ?>
         <li class="list-group-item list-group-item-success">
-            <i class="fas fa-smile"></i> Your childhood should generally be a happy affair.
+            <i class="bi bi-emoji-smile-fill"></i> Your childhood should generally be a happy affair.
         </li>
 <?php
         }
@@ -228,7 +228,7 @@ Your browser does not support the HTML5 canvas tag.
         {
 ?>
             <li class="list-group-item list-group-item-success">
-            <i class="fas fa-smile"></i> <i class="fas fa-thumbs-up"></i> Your childhood should be a very happy affair.
+            <i class="bi bi-emoji-smile-fill"></i> <i class="bi bi-emoji-smile-fill"></i></i></i> Your childhood should be a very happy affair.
             </li>
 <?php
         }
@@ -236,7 +236,7 @@ Your browser does not support the HTML5 canvas tag.
         {
 ?>
             <li class="list-group-item list-group-item-danger">
-            <i class="fas fa-frown"></i> Your childhood should be quite difficult.
+            <i class="bi bi-emoji-frown-fill"></i> Your childhood should be quite difficult.
             </li>
 <?php
         }
@@ -244,7 +244,7 @@ Your browser does not support the HTML5 canvas tag.
         {
 ?>
                 <li class="list-group-item list-group-item-danger">
-            <i class="fas fa-frown"></i> <i class="fas fa-thumbs-down"></i> Your childhood should be very difficult and full of problems.
+            <i class="bi bi-emoji-frown-fill"></i> <i class="bi bi-emoji-frown-fill"></i> Your childhood should be very difficult and full of problems.
                 </li>
 <?php
         }
@@ -333,7 +333,7 @@ Your browser does not support the HTML5 canvas tag.
         {
 ?>
         <li class="list-group-item list-group-item-success">
-            <i class="fas fa-smile"></i> Your youth years should generally be a happy affair.
+            <i class="bi bi-emoji-smile-fill"></i> Your youth years should generally be a happy affair.
         </li>
 <?php
         }
@@ -341,7 +341,7 @@ Your browser does not support the HTML5 canvas tag.
         {
 ?>
             <li class="list-group-item list-group-item-success">
-            <i class="fas fa-smile"></i> <i class="fas fa-thumbs-up"></i> Your youth years should be a very happy affair.
+            <i class="bi bi-emoji-smile-fill"></i> <i class="bi bi-emoji-smile-fill"></i></i></i> Your youth years should be a very happy affair.
             </li>
 <?php
         }
@@ -349,7 +349,7 @@ Your browser does not support the HTML5 canvas tag.
         {
 ?>
             <li class="list-group-item list-group-item-danger">
-            <i class="fas fa-frown"></i> Your youth years should be quite difficult.
+            <i class="bi bi-emoji-frown-fill"></i> Your youth years should be quite difficult.
             </li>
 <?php
         }
@@ -357,7 +357,7 @@ Your browser does not support the HTML5 canvas tag.
         {
 ?>
                 <li class="list-group-item list-group-item-danger">
-            <i class="fas fa-frown"></i> <i class="fas fa-thumbs-down"></i> Your youth years should be very difficult and full of problems.
+            <i class="bi bi-emoji-frown-fill"></i> <i class="bi bi-emoji-frown-fill"></i> Your youth years should be very difficult and full of problems.
                 </li>
 <?php
         }
@@ -446,7 +446,7 @@ Your browser does not support the HTML5 canvas tag.
         {
 ?>
         <li class="list-group-item list-group-item-success">
-            <i class="fas fa-smile"></i> Your mid-life should generally be a happy affair.
+            <i class="bi bi-emoji-smile-fill"></i> Your mid-life should generally be a happy affair.
         </li>
 <?php
         }
@@ -454,7 +454,7 @@ Your browser does not support the HTML5 canvas tag.
         {
 ?>
             <li class="list-group-item list-group-item-success">
-            <i class="fas fa-smile"></i> <i class="fas fa-thumbs-up"></i> Your mid-life should be a very happy affair.
+            <i class="bi bi-emoji-smile-fill"></i> <i class="bi bi-emoji-smile-fill"></i></i></i> Your mid-life should be a very happy affair.
             </li>
 <?php
         }
@@ -462,7 +462,7 @@ Your browser does not support the HTML5 canvas tag.
         {
 ?>
             <li class="list-group-item list-group-item-danger">
-            <i class="fas fa-frown"></i> Your mid-life should be quite difficult.
+            <i class="bi bi-emoji-frown-fill"></i> Your mid-life should be quite difficult.
             </li>
 <?php
         }
@@ -470,7 +470,7 @@ Your browser does not support the HTML5 canvas tag.
         {
 ?>
                 <li class="list-group-item list-group-item-danger">
-            <i class="fas fa-frown"></i> <i class="fas fa-thumbs-down"></i> Your mid-life should be very difficult and full of problems.
+            <i class="bi bi-emoji-frown-fill"></i> <i class="bi bi-emoji-frown-fill"></i> Your mid-life should be very difficult and full of problems.
                 </li>
 <?php
         }
@@ -558,7 +558,7 @@ Your browser does not support the HTML5 canvas tag.
         {
 ?>
         <li class="list-group-item list-group-item-success">
-            <i class="fas fa-smile"></i> Your old age should generally be a happy affair.
+            <i class="bi bi-emoji-smile-fill"></i> Your old age should generally be a happy affair.
         </li>
 <?php
         }
@@ -566,7 +566,7 @@ Your browser does not support the HTML5 canvas tag.
         {
 ?>
             <li class="list-group-item list-group-item-success">
-            <i class="fas fa-smile"></i> <i class="fas fa-thumbs-up"></i> Your old age should be a very happy affair.
+            <i class="bi bi-emoji-smile-fill"></i> <i class="bi bi-emoji-smile-fill"></i></i></i> Your old age should be a very happy affair.
             </li>
 <?php
         }
@@ -574,7 +574,7 @@ Your browser does not support the HTML5 canvas tag.
         {
 ?>
             <li class="list-group-item list-group-item-danger">
-            <i class="fas fa-frown"></i> Your old age should be quite difficult.
+            <i class="bi bi-emoji-frown-fill"></i> Your old age should be quite difficult.
             </li>
 <?php
         }
@@ -582,7 +582,7 @@ Your browser does not support the HTML5 canvas tag.
         {
 ?>
                 <li class="list-group-item list-group-item-danger">
-            <i class="fas fa-frown"></i> <i class="fas fa-thumbs-down"></i> Your old age should be very difficult and full of problems.             </li>
+            <i class="bi bi-emoji-frown-fill"></i> <i class="bi bi-emoji-frown-fill"></i> Your old age should be very difficult and full of problems.             </li>
 <?php
         }
 ?>
