@@ -87,8 +87,11 @@ class HoroscopeModelShodashvarga extends HoroscopeModelLagna
                 //$hora           = $this->getHora($planet,$sign, $dist2);
                 //$drekana        = $this->getDrekana($planet, $sign, $dist2);
                 //$chatur         = $this->getChatur($planet, $sign, $dist2);
-                $sapt           = $this->getSapt($planet, $sign, $dist);
-                $data           = array_merge($data,$sapt);
+                //$sapt           = $this->getSapt($planet, $sign, $dist);
+                //$dwad           = $this->getDwadamsha($planet, $sign, $dist2);
+                $shod           = $this->getShodamsha($planet, $sign, $dist, $dist);
+                $vim            = $this->getVimsamsa($planet, $sign, $dist2);
+                $data           = array_merge($data,$shod);
 
             }
             print_r($data);exit;
@@ -114,7 +117,7 @@ class HoroscopeModelShodashvarga extends HoroscopeModelLagna
         $db                     ->setQuery($query);
         $result                 = $db->loadAssoc();
         //print_r($result);exit;
-        $array                  = array($planet."_dashamsha" => $result['shodas_sign']);
+        $array                  = array($planet."_dash" => $result['shodas_sign']);
         return $array; 
     }
     protected function getHora($planet,$sign,$dist)
@@ -183,16 +186,92 @@ class HoroscopeModelShodashvarga extends HoroscopeModelLagna
         $db                     ->setQuery($query);
         $result                 = $db->loadAssoc();
         //print_r($result);exit;
-        $array                  = array($planet."_chaturamsha" => $result['shodas_sign']);
+        $array                  = array($planet."_chatur" => $result['shodas_sign']);
         return $array; 
     }
     protected function getSapt($planet,$sign,$dist)
     {
+        //echo $planet." ".$sign." ".$dist;exit;
+        $chart                  = 'saptamsha';
         $dist                   = explode(".",$dist);
         $dist1                  = $dist[0] % 30;  // remaining value when divided by 30 eg. 295%30 = 25
-        $dist                   = number_format($dist1.".".$dist[1],4);
-        echo $dist;exit;
+        $dist                   = number_format($dist1.".".$dist[1],4);  // just add the value after decimal point on right side
+        //echo $dist;exit;
+        $db                     = JFactory::getDbo();
+        $query                  = $db->getQuery(true);
+        $query                  ->select('shodas_sign');
+        $query                  ->from($db->quoteName('#__shodasha1'));
+        $query                  ->where($db->quote($dist).' BETWEEN '.
+                                        $db->quoteName('low_deg').' AND '.
+                                        $db->quoteName('up_deg').' AND '.
+                                        $db->quoteName('moon_sign').' = '.$db->quote($sign).' AND '.
+                                        $db->quoteName('chart_type').' = '.$db->quote($chart)); 
+        $db                     ->setQuery($query);
+        $result                 = $db->loadAssoc();
+        //print_r($result);exit;
+        $array                  = array($planet."_sapt" => $result['shodas_sign']);
+        return $array;
+    }
+    protected function getDwadamsha($planet,$sign,$dist)
+    {
+        //echo $planet." ".$sign." ".$dist."<br/>";
+        $chart                  = 'dwadamsha';
+        $db                     = JFactory::getDbo();
+        $query                  = $db->getQuery(true);
+        $query                  ->select('shodas_sign');
+        $query                  ->from($db->quoteName('#__shodasha'));
+        $query                  ->where($db->quote($dist).' BETWEEN '.
+                                        $db->quoteName('low_deg').' AND '.
+                                        $db->quoteName('up_deg').' AND '.
+                                        $db->quoteName('moon_sign').' = '.$db->quote($sign).' AND '.
+                                        $db->quoteName('chart_type').' = '.$db->quote($chart)); 
+        $db                     ->setQuery($query);
+        $result                 = $db->loadAssoc();
+        //print_r($result);exit;
+        $array                  = array($planet."_dwad" => $result['shodas_sign']);
+        return $array; 
+    }
+    protected function getShodamsha($planet,$sign,$dist)
+    {
         
+        $chart                  = 'shodamsha';
+        $dist                   = explode(".",$dist);
+        $dist1                  = $dist[0] % 30;  // remaining value when divided by 30 eg. 295%30 = 25
+        $dist                   = number_format($dist1.".".$dist[1],4);  // just add the value after decimal point on right side
+        //echo $planet." ".$sign." ".$dist." ".$dist2."<br/>";
+        $db                     = JFactory::getDbo();
+        $query                  = $db->getQuery(true);
+        $query                  ->select('shodas_sign');
+        $query                  ->from($db->quoteName('#__shodasha1'));
+        $query                  ->where($db->quote($dist).' BETWEEN '.
+                                        $db->quoteName('low_deg').' AND '.
+                                        $db->quoteName('up_deg').' AND '.
+                                        $db->quoteName('moon_sign').' = '.$db->quote($sign).' AND '.
+                                        $db->quoteName('chart_type').' = '.$db->quote($chart)); 
+        $db                     ->setQuery($query);
+        //$result                 = $db->loadAssoc();
+        //print_r($result);exit;
+        $array                  = array($planet."_shod" => $result['shodas_sign']);
+        return $array;
+    }
+    protected function getVimsamsa($planet,$sign,$dist)
+    {
+        //echo $planet." ".$sign." ".$dist."<br/>";
+        $chart                  = 'vimsamsa';
+        $db                     = JFactory::getDbo();
+        $query                  = $db->getQuery(true);
+        $query                  ->select('shodas_sign');
+        $query                  ->from($db->quoteName('#__shodasha'));
+        $query                  ->where($db->quote($dist).' BETWEEN '.
+                                        $db->quoteName('low_deg').' AND '.
+                                        $db->quoteName('up_deg').' AND '.
+                                        $db->quoteName('moon_sign').' = '.$db->quote($sign).' AND '.
+                                        $db->quoteName('chart_type').' = '.$db->quote($chart)); 
+        $db                     ->setQuery($query);
+        $result                 = $db->loadAssoc();
+        print_r($result);exit;
+        $array                  = array($planet."_vim" => $result['shodas_sign']);
+        return $array; 
     }
 }
 ?>
