@@ -94,7 +94,7 @@ function isMobileDevice() {
         </select>
     </div>
     <div class="btn btn-group btn-group-lg">
-            <button type="submit" class="btn btn-primary btn-lg" name="shodas_submit" onclick="javascript:getLagna();return false;">Check Dosha</button>
+            <button type="submit" class="btn btn-primary btn-lg" name="shodas_submit" onclick="javascript:getLagna();return false;">Get Charts</button>
             <button type="reset" class="btn btn-danger btn-lg">Reset Form</button>
     </div>
 </form>
