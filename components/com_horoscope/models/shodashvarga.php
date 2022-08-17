@@ -75,35 +75,38 @@ class HoroscopeModelShodashvarga extends HoroscopeModelLagna
             $planets        = $this->getPlanets($output);
             $asc            = $this->getAscendant($result);
             $planets        = array_merge($asc, $planets);
-            //print_r($planets);exit;
             $data           = array();
             foreach($planets as $planet=>$dist)
             {
                 $dist2          = $this->convertDecimalToDegree($dist, "details");
                 //$dist1          = $this->convertDecimalToDegree($dist, "");
                 $sign           = $this->calcDetails($dist);
-                $details        = array($planet=>$sign);
-                //$dashamsha      = $this->getDashamsha($planet, $sign, $dist2);
-                //$hora           = $this->getHora($planet,$sign, $dist2);
-                //$drekana        = $this->getDrekana($planet, $sign, $dist2);
-                //$chatur         = $this->getChatur($planet, $sign, $dist2);
-                //$sapt           = $this->getSapt($planet, $sign, $dist);
-                //$dwad           = $this->getDwadamsha($planet, $sign, $dist2);
-                //$shod           = $this->getShodamsha($planet, $sign, $dist);
-                //$vim            = $this->getVimsamsa($planet, $sign, $dist2);
-                //$chatur         = $this->getChaturvim($planet, $sign, $dist2);
-                //$saptvim        = $this->getSaptVim($planet,$sign,$dist);
-                //$trimsamsa      = $this->getTrimsamsa($planet,$sign,$dist2);
-                //$khedamsa       = $this->getKhedamsa($planet,$sign,$dist2);
-                //$akshved        = $this->getAkshved($planet,$sign,$dist2);
+                $lagna          = array($planet."_lagna"=>$sign);
+                $nav            = $this->getNavamsha($planet,$sign,$dist2);
+                $das            = $this->getDashamsha($planet, $sign, $dist2);
+                $hora           = $this->getHora($planet,$sign, $dist2);
+                $drekana        = $this->getDrekana($planet, $sign, $dist2);
+                $chatur         = $this->getChatur($planet, $sign, $dist2);
+                $sapt           = $this->getSapt($planet, $sign, $dist);
+                $dwad           = $this->getDwadamsha($planet, $sign, $dist2);
+                $shod           = $this->getShodamsha($planet, $sign, $dist);
+                $vim            = $this->getVimsamsa($planet, $sign, $dist2);
+                $chaturvim      = $this->getChaturvim($planet, $sign, $dist2);
+                $saptvim        = $this->getSaptVim($planet,$sign,$dist);
+                $trimsamsa      = $this->getTrimsamsa($planet,$sign,$dist2);
+                $khed           = $this->getKhedamsa($planet,$sign,$dist2);
+                $akshved        = $this->getAkshved($planet,$sign,$dist2);
                 $shast          = $this->getShastiamsa($planet,$sign,$dist2);
-                $data           = array_merge($data,$shast);
+                $data           = array_merge($data,$lagna,$nav,$das,
+                                              $hora, $drekana,$chatur,$sapt,
+                                               $dwad,$shod,$vim,$chaturvim,$saptvim,
+                                             $trimsamsa,$khed,$akshved,$shast);
 
             }
-            print_r($data);exit;
-            $nav_data           = array("main"=>$result,"vim"=>$data);
+            //print_r($data);exit;
+            $nav_data           = array("main"=>$result, "shodas"=>$data);
             //$nav_data               = array_merge($result, $nav_data);
-            //print_r($nav_data);exit;
+            return $nav_data;
         }
         
     }
@@ -136,22 +139,22 @@ class HoroscopeModelShodashvarga extends HoroscopeModelLagna
         {
             if($dist >= 0 && $dist <=15)
             {
-                $array      = array($planet."_hora"=>"Moon");
+                $array      = array($planet."_hora"=>"Cancer");
             }
             else
             {
-                $array      = array($planet."_hora"=>"Sun");     
+                $array      = array($planet."_hora"=>"Leo");     
             }
         }
         else
         {
             if($dist >= 0 && $dist <=15)
             {
-                $array      = array($planet."_hora"=>"Sun");
+                $array      = array($planet."_hora"=>"Leo");
             }
             else
             {
-                $array      = array($planet."_hora"=>"Moon");     
+                $array      = array($planet."_hora"=>"Cancer");     
             }
         }
         
@@ -199,7 +202,7 @@ class HoroscopeModelShodashvarga extends HoroscopeModelLagna
     {
         //echo $planet." ".$sign." ".$dist;exit;
         $chart                  = 'saptamsha';
-        $dist                   = explode(".",$dist);
+        $dist                   = explode(".",(float)$dist);
         $dist1                  = $dist[0] % 30;  // remaining value when divided by 30 eg. 295%30 = 25
         $dist                   = number_format($dist1.".".$dist[1],4);  // just add the value after decimal point on right side
         //echo $dist;exit;
@@ -220,7 +223,7 @@ class HoroscopeModelShodashvarga extends HoroscopeModelLagna
     }
     protected function getDwadamsha($planet,$sign,$dist)
     {
-        //echo $planet." ".$sign." ".$dist."<br/>";
+        //echo $planet." ".$sign." ".$dist;exit;
         $chart                  = 'dwadamsha';
         $db                     = JFactory::getDbo();
         $query                  = $db->getQuery(true);
@@ -240,7 +243,7 @@ class HoroscopeModelShodashvarga extends HoroscopeModelLagna
     protected function getShodamsha($planet,$sign,$dist)
     {
         $chart                  = 'shodamsha';
-        $dist                   = explode(".",$dist);
+        $dist                   = explode(".",(float)$dist);
         $dist1                  = $dist[0] % 30;  // remaining value when divided by 30 eg. 295%30 = 25
         $dist                   = number_format($dist1.".".$dist[1],4);  // just add the value after decimal point on right side
         //echo $planet." ".$sign." ".$dist." ".$dist2."<br/>";
@@ -302,7 +305,7 @@ class HoroscopeModelShodashvarga extends HoroscopeModelLagna
     {
         //echo $planet." ".$sign." ".$dist;exit;
         $chart                  = 'saptvim';
-        $dist                   = explode(".",$dist);
+        $dist                   = explode(".",(float)$dist);
         $dist1                  = $dist[0] % 30;  // remaining value when divided by 30 eg. 295%30 = 25
         $dist                   = number_format($dist1.".".$dist[1],4);  // just add the value after decimal point on right side
         //echo $planet." ".$sign." ".$dist." ".$dist2."<br/>";exit;
@@ -318,7 +321,7 @@ class HoroscopeModelShodashvarga extends HoroscopeModelLagna
         $db                     ->setQuery($query);
         $result                 = $db->loadAssoc();
         //print_r($result);exit;
-        $array                  = array($planet."_shod" => $result['shodas_sign']);
+        $array                  = array($planet."_saptvim" => $result['shodas_sign']);
         return $array;
     }
     protected function getTrimsamsa($planet,$sign,$dist)

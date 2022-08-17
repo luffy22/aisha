@@ -7,13 +7,13 @@ $current        = Juri::current();
 ?>
 <nav class="navbar navbar-dark bg-dark navbar-expand-md sticky-top">
     <a class="navbar-brand" href="<?php echo Juri::base().'horoscope?chart='.$chart_id; ?>">&nbsp;&nbsp;<i class="bi bi-house-fill"></i></a>
-    <button class="navbar-toggler" data-toggle="collapse" data-target="#horo_menu">
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#horo_menu">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="horo_menu">
     <ul class="navbar-nav me-auto mb-2">
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="horo_1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle p-2" href="#" id="horo_1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Horoscope
           </a>
             <ul class="dropdown-menu bg-dark" aria-labelledby="horo_1">
@@ -31,7 +31,7 @@ $current        = Juri::current();
              </ul>
         </li>
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="horo_3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle p-2" href="#" id="horo_3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Career
           </a>
             <ul class="dropdown-menu bg-dark" aria-labelledby="horo_3">
@@ -41,7 +41,7 @@ $current        = Juri::current();
             </ul>
         </li>
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="horo_2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle p-2" href="#" id="horo_2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Marriage
           </a>
             <ul class="dropdown-menu bg-dark" aria-labelledby="horo_2">
@@ -57,7 +57,7 @@ $current        = Juri::current();
             </ul>
         </li>
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="horo_4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle p-2" href="#" id="horo_4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Misc
           </a>
             <ul class="dropdown-menu bg-dark" aria-labelledby="horo_4">
