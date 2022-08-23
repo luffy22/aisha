@@ -26,7 +26,7 @@ $chart_id = $_GET['chart'];
 #shast_canvas{width: 100%;padding: 0 !important;margin: 0 !important;}@media (min-width: 768px) {#shast_canvas{width:65%}}
 </style>
 </head>
-<body onload="javascript:draw_horoscope();getAscendant();">
+<body onload="javascript:draw_horoscope();">
 <?php
 if(array_key_exists("timezone", $this->data['main']))
 {  
@@ -216,7 +216,7 @@ for($i =0;$i<13;$i++)  // 16 divisional charts
          $name          = $array[$i].$shodas[$k];
          $value         = $this->data['shodas'][$name];
 ?>
-    <input type="text" name="<?php echo $name;   ?>" id="<?php echo strtolower($name); ?>" value="<?php echo $value; ?>" />
+    <input type="hidden" name="<?php echo $name;   ?>" id="<?php echo strtolower($name); ?>" value="<?php echo $value; ?>" />
 <?php
     }
 }
