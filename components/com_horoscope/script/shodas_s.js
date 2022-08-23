@@ -168,7 +168,7 @@ function assign_planets(chart,sign,a,b)
         }
         if(len=="5")
         { 
-           ctx.fillText(y[0],a+15,b-15);
+           ctx.fillText(y[0],a+10,b-15);
             ctx.fillText(y[1],a-10,b-5);
             ctx.fillText(y[2],a-10,b+5);
             ctx.fillText(y[3],a-10,b+15);
@@ -176,7 +176,7 @@ function assign_planets(chart,sign,a,b)
         }
         if(len=="6")
         { 
-            ctx.fillText(y[0],a+25,b-15);
+            ctx.fillText(y[0],a+10,b-15);
             ctx.fillText(y[1],a-10,b-5);
             ctx.fillText(y[2],a-10,b+5);
             ctx.fillText(y[3],a-10,b+15);
@@ -185,7 +185,7 @@ function assign_planets(chart,sign,a,b)
         }
         if(len=="7")
         { 
-            ctx.fillText(y[0],a+25,b-17);
+            ctx.fillText(y[0],a+10,b-17);
             ctx.fillText(y[1],a-12,b-5);
             ctx.fillText(y[2],a-12,b+5);
             ctx.fillText(y[3],a-12,b+15);
@@ -195,7 +195,7 @@ function assign_planets(chart,sign,a,b)
         }
          if(len=="8")
         { 
-            ctx.fillText(y[0],a+25,b-15);
+            ctx.fillText(y[0],a+20,b-15);
             ctx.fillText(y[1],a-12,b-5);
             ctx.fillText(y[2],a-12,b+5);
             ctx.fillText(y[3],a-12,b+15);

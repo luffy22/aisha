@@ -5,6 +5,9 @@ defined('_JEXEC') or die();
 //echo $this->data['main']['timezone'];exit;
 //$planets        = array("Ascendant","Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu","Uranus","Neptune","Pluto");
 $chart_id = $_GET['chart'];
+$document = JFactory::getDocument(); 
+$str        = explode(" ",$this->data['main']['fname']);
+$document->setTitle(strtolower($str[0]).' shodasha');
 ?>
 <head>
 <style type="text/css">
@@ -153,7 +156,7 @@ Your browser does not support the HTML5 canvas tag.
 <canvas id="drek_canvas" height="260">
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-3"></div>
-<div class="lead alert alert-dark">Chaturthamsa D-4 Chart</div>
+<div class="lead alert alert-dark">Chaturthamsha D-4 Chart</div>
 <canvas id="chatur_canvas" height="260">
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-3"></div>
@@ -165,35 +168,35 @@ Your browser does not support the HTML5 canvas tag.
 <canvas id="dwad_canvas" height="260">
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-3"></div>
-<div class="lead alert alert-dark">Shodasamsa D-16 Chart</div>
+<div class="lead alert alert-dark">Shodasamsha D-16 Chart</div>
 <canvas id="shod_canvas" height="260">
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-3"></div>
-<div class="lead alert alert-dark">Vimsamsa D-20 Chart</div>
+<div class="lead alert alert-dark">Vimsamsha D-20 Chart</div>
 <canvas id="vim_canvas" height="260">
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-3"></div>
-<div class="lead alert alert-dark">ChaturVimsamsa D-24 Chart</div>
+<div class="lead alert alert-dark">Chaturvimsamsha D-24 Chart</div>
 <canvas id="chatvim_canvas" height="260">
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-3"></div>
-<div class="lead alert alert-dark">SaptaVimsamsa D-27 Chart</div>
+<div class="lead alert alert-dark">Saptavimsamsha D-27 Chart</div>
 <canvas id="saptvim_canvas" height="260">
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-3"></div>
-<div class="lead alert alert-dark">Trimsamsa D-30 Chart</div>
+<div class="lead alert alert-dark">Trimsamsha D-30 Chart</div>
 <canvas id="trim_canvas" height="260">
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-3"></div>
-<div class="lead alert alert-dark">Khavedamsa D-40 Chart</div>
+<div class="lead alert alert-dark">Khavedamsha D-40 Chart</div>
 <canvas id="khed_canvas" height="260">
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-3"></div>
-<div class="lead alert alert-dark">Akshavvedamsa D-45 Chart</div>
+<div class="lead alert alert-dark">Akshavedamsha D-45 Chart</div>
 <canvas id="aksh_canvas" height="260">
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-3"></div>
-<div class="lead alert alert-dark">Shastiamsa D-60 Chart</div>
+<div class="lead alert alert-dark">Shastiamsha D-60 Chart</div>
 <canvas id="shast_canvas" height="260">
 Your browser does not support the HTML5 canvas tag.
 </canvas><div class="mb-3"></div>
