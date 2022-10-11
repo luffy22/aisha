@@ -1,8 +1,12 @@
 <?php
 defined('_JEXEC') or die;
 //print_r($this->order);exit;
+//print_r($this->pagination);exit;
 ?>
 <div class="lead alert alert-dark">Your Orders</div>
+   <p class="d-flex justify-content-end">
+        <?php echo $this->pagination->getPagesCounter(); ?>
+    </p>
 <?php
 foreach($this->order as $result)
 {
@@ -10,7 +14,7 @@ foreach($this->order as $result)
     $dateasked = new DateTime($result->ques_ask_date);
 ?>
 <ul class="list-group">
-	<li class="list-group-item">
+	<li class="list-group-item list-group-item-primary">
 		<?php
 			if($result->order_type == "long_ans" || $result->order_type == "short_ans")
 			{
@@ -58,16 +62,12 @@ foreach($this->order as $result)
 }
 ?>
 <div class="mb-4"></div>
-<div class="pagination justify-content-end">
-    <p>
+    <p class="d-flex justify-content-end">
         <?php echo $this->pagination->getPagesCounter(); ?>
     </p>
-</div>
-<div class="pagination">
-    <p>
-        <?php echo $this->pagination->getPagesLinks(); ?>
+    <p class="d-flex justify-content-start">
+    <?php echo $this->pagination->getPagesLinks(); ?>
     </p>
-</div>
 <?php
 unset($this->order);unset($this->pagination);
 ?>

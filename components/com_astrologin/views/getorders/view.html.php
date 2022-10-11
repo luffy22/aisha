@@ -12,8 +12,8 @@ class AstroLoginViewGetOrders extends JViewLegacy
     {
         if(isset($_GET['ref'])|| isset($_GET['order']))
         {
-            $this->order 			= $this->get('Order');
-            $this->pagination 		= $this->get('Pagination');
+            $this->order            = $this->get('Order');
+            $this->pagination       = $this->get('Pagination');
         }
         if(empty($this->order) && empty($this->email))
         {

@@ -180,6 +180,31 @@
         "type": "module"
       },
       "version": "4efda122de260213f85aceee619bfc3ea5b4a0aa"
+    },
+    {
+      "name": "com_content.articles-status.es5",
+      "type": "script",
+      "uri": "com_content/articles-status-es5.min.js",
+      "dependencies": [
+        "core"
+      ],
+      "attributes": {
+        "nomodule": true,
+        "defer": true
+      },
+      "version": "ad26c4dfb965fad9cf0976bb5d6395808828d3a1"
+    },
+    {
+      "name": "com_content.articles-status",
+      "type": "script",
+      "uri": "com_content/articles-status.min.js",
+      "dependencies": [
+        "com_content.articles-status.es5"
+      ],
+      "attributes": {
+        "type": "module"
+      },
+      "version": "bab2dc69a310da654f103df16f52fbc062bac9c5"
     }
   ]
 }

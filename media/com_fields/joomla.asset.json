@@ -6,6 +6,31 @@
   "license": "GPL-2.0-or-later",
   "assets": [
     {
+      "name": "com_fields.admin-field-changecontext.es5",
+      "type": "script",
+      "uri": "com_fields/admin-field-changecontext-es5.min.js",
+      "dependencies": [
+        "core"
+      ],
+      "attributes": {
+        "nomodule": true,
+        "defer": true
+      },
+      "version": "5780779c6074b99b6fb29a4833c9309ebcd83609"
+    },
+    {
+      "name": "com_fields.admin-field-changecontext",
+      "type": "script",
+      "uri": "com_fields/admin-field-changecontext.min.js",
+      "dependencies": [
+        "com_fields.admin-field-changecontext.es5"
+      ],
+      "attributes": {
+        "type": "module"
+      },
+      "version": "65e13e836b42704a7893584291963600a20e5006"
+    },
+    {
       "name": "com_fields.admin-field-edit.es5",
       "type": "script",
       "uri": "com_fields/admin-field-edit-es5.min.js",
@@ -104,31 +129,6 @@
         "type": "module"
       },
       "version": "21cda0d5265712ca6fd9f6adb8c3fef71dec9cfe"
-    },
-    {
-      "name": "com_fields.admin-field-changecontext",
-      "type": "script",
-      "uri": "com_fields/admin-field-changecontext.min.js",
-      "dependencies": [
-        "com_fields.admin-field-changecontext.es5"
-      ],
-      "attributes": {
-        "type": "module"
-      },
-      "version": "65e13e836b42704a7893584291963600a20e5006"
-    },
-    {
-      "name": "com_fields.admin-field-changecontext.es5",
-      "type": "script",
-      "uri": "com_fields/admin-field-changecontext-es5.min.js",
-      "dependencies": [
-        "core"
-      ],
-      "attributes": {
-        "nomodule": true,
-        "defer": true
-      },
-      "version": "5780779c6074b99b6fb29a4833c9309ebcd83609"
     }
   ]
 }

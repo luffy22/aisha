@@ -21,7 +21,7 @@ foreach($this->data as $user)
 {
     //echo $user->dob_tob;exit;
     $date   = new DateTime($user->dob_tob);
-    $date   ->setTimeZone($user->timezone);
+    $date   ->setTimeZone(new DateTimeZone($user->tmz_words));
     //print_r($date);exit;
     
 ?>

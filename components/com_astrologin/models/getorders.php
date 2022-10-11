@@ -18,14 +18,14 @@ class AstrologinModelGetOrders extends ListModel
 	var $_pagination = null;
      public function getOrder()
     {	
-        $mainframe 			= JFactory::getApplication();
+        $mainframe          = JFactory::getApplication();
         $jinput             = $mainframe->input;
         $email              = $jinput->get('ref','default_value','string');
         $order              = $jinput->get('order', 'default_value', 'string');
         
-        $limit				= $mainframe->getUserStateFromRequest("$option.limit", 'limit', 3, 'int');
-        $limitstart			= $mainframe->input->get('limitstart', 0, '', 'uint');
-		
+        $limit              = $mainframe->getUserStateFromRequest("$option.limit", 'limit', 3, 'int');
+        $limitstart         = $mainframe->input->get('limitstart', 0, '', 'uint');
+	
         $db             	= JFactory::getDbo();  // Get db connection
         if($email == 'default_value')
         {
@@ -46,9 +46,10 @@ class AstrologinModelGetOrders extends ListModel
                                         ->from($db->quoteName('#__question_details'))
                                         ->where($db->quoteName('email').' = '.$db->quote($email).' AND '.
                                                 $db->quoteName('paid').' = '.$db->quote('yes'));
-		$query->order('ques_ask_date DESC');
-		$db             ->setQuery($query,$limitstart, $limit);
-		$result         = $db->loadObjectList();
+        $query->order('ques_ask_date DESC');
+        $db             ->setQuery($query,$limitstart, $limit);
+        $result         = $db->loadObjectList();
+        //print_r($result);exit;
         return $result;
         
     }
@@ -56,29 +57,32 @@ class AstrologinModelGetOrders extends ListModel
     {
         $jinput             = JFactory::getApplication()->input;
         $email              = $jinput->get('ref','default_value','string');
-
+        //echo $email;exit;
         $db             	= JFactory::getDbo();  // Get db connection
         $query          	= $db->getQuery(true);
         $query          	->select(array('COUNT(*)'))
-							->from($db->quoteName('#__question_details'))
-							->where($db->quoteName('email').' = '.$db->quote($email).' AND '.
-									$db->quoteName('paid').' = '.$db->quote('yes'));
-		$db             	->setQuery($query);
-		$total      = $db->loadResult();
-		return $total;
+                                            ->from($db->quoteName('#__question_details'))
+                                            ->where($db->quoteName('email').' = '.$db->quote($email).' AND '.
+                                            $db->quoteName('paid').' = '.$db->quote('yes'));
+        $db             	->setQuery($query);
+        $total      = $db->loadResult();
+        //print_r($total);exit;
+        return $total;
 		
-	}
+    }
     public function getPagination()
     {
         $mainframe 			= JFactory::getApplication();
         $total 				= $this->getTotal();
+        //echo $total;exit;
         // Load the content if it doesn't already exist
         $limit				= $mainframe->getUserStateFromRequest("$option.limit", 'limit', 3, 'int');
         $limitstart			= $mainframe->input->get('limitstart', 0, '', 'uint');
+        //echo $limitstart;exit;
         jimport('joomla.html.pagination');
         $pagination = new JPagination($total, $limitstart, $limit);
-
+        //print_r($pagination);exit;
         return $pagination;
-	}
+    }
    
 }

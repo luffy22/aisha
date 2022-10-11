@@ -66,7 +66,7 @@
         "nomodule": true,
         "defer": true
       },
-      "version": "4cae1f21b7eda76e8739682c21e3c97a9554d3f2"
+      "version": "4c2161a61fbfcd4827164c740d3dd8003bc97300"
     },
     {
       "name": "com_cpanel.admin-system-loader",
@@ -79,7 +79,7 @@
         "type": "module",
         "defer": true
       },
-      "version": "674df5978cceeebbbd1385cb7bea84288afdca13"
+      "version": "a21ca1e60b6547cdd2335229558a46b3cd535b7f"
     }
   ]
 }
