@@ -1,4 +1,5 @@
 <?php
+
 defined('_JEXEC') or die();
 $uname                  = $_GET['uname'];
 $ques                   = $_GET['ques'];

@@ -118,4 +118,5 @@ class JConfig {
 	public $log_priorities = array('0' => 'all');
 	public $log_categories = '';
 	public $log_category_mode = 0;
+	public $session_metadata_for_guest = true;
 }

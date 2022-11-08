@@ -102,7 +102,7 @@ class AstrologinModelAstroReport extends ListModel
         $date               ->setTime($tob[0],$tob[1],"00");
         $dob_tob            = strtotime($date->format('Y-m-d H:i:s'));
         $date1              = new DateTime('now');
-        $date1              ->setTimezone('Asia/Kolkata');
+        $date1              ->setTimezone(new DateTimeZone('Asia/Kolkata'));
         $ques_ask_date      = $date1->format('Y-m-d H:i:s');
         $db                 = JFactory::getDbo();  // Get db connection
         $query              = $db->getQuery(true);
@@ -213,7 +213,7 @@ class AstrologinModelAstroReport extends ListModel
            $fees                = $row['fees'];
            $pay_mode            = $row['pay_mode'];
            //echo $pay_mode;exit;
-           if($pay_mode == "razorpay")
+           if($pay_mode == "razorpay" || $pay_mode == "paypal")
            {
                 $app->redirect(JUri::base().'razorpay/order.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
            }
@@ -221,10 +221,7 @@ class AstrologinModelAstroReport extends ListModel
            {
                 $app->redirect(JUri::base().'PaytmKit/TxnTest2.php?token='.$token.'&email='.$email.'&fees='.$fees); 
            }
-           else if($pay_mode=="paypal")
-           {
-               $app->redirect(JUri::base().'vendor/paypal2.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees); 
-           }
+          
         }
     }
     public function insertDetails3($details)
@@ -294,7 +291,7 @@ class AstrologinModelAstroReport extends ListModel
            $fees                = $row['fees'];
            $pay_mode            = $row['pay_mode'];
            //echo $pay_mode;exit;
-           if($pay_mode == "razorpay")
+           if($pay_mode == "razorpay" || $pay_mode == "paypal")
            {
                 $app->redirect(JUri::base().'razorpay/order.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
            }
@@ -302,10 +299,7 @@ class AstrologinModelAstroReport extends ListModel
            {
                 $app->redirect(JUri::base().'PaytmKit/TxnTest2.php?token='.$token.'&email='.$email.'&fees='.$fees); 
            }
-           else if($pay_mode=="paypal")
-           {
-               $app->redirect(JUri::base().'vendor/paypal2.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees); 
-           }
+           
         }
     }
     // paypal authorize Order

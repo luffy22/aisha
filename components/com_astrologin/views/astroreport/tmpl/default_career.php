@@ -21,7 +21,7 @@ $order_type             = $_GET['order_type'];
 <div class="mb-3"></div>
 <div class="mb-3">
     <label for="query_about">Where are you employed?</label>
-    <select name="query_about" id="query_about" class="form-control">
+    <select name="query_about" id="query_about" class="form-select">
         <option value="unemployed">Unemployed</option>
         <option value="private">Private Sector</option>
         <option value="govt">Government Sector</option>
@@ -43,7 +43,7 @@ $order_type             = $_GET['order_type'];
  <script>
    tinymce.init({
     selector: '#query_explain',
-    plugins: "wordcount autolink",
-    menubar: true
+    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+     toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
   });
   </script>

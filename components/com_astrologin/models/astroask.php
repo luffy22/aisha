@@ -97,7 +97,7 @@ class AstrologinModelAstroask extends ListModel
         $date               ->setTime($tob[0],$tob[1],"00");
         $dob_tob            = strtotime($date->format('Y-m-d H:i:s'));
         $date1              = new DateTime('now');
-        $date1              ->setTimezone('Asia/Kolkata');
+        $date1              ->setTimezone(new DateTimeZone('Asia/Kolkata'));
         $ques_ask_date      = $date1->format('Y-m-d H:i:s');
         $db                 = JFactory::getDbo();  // Get db connection
         $query              = $db->getQuery(true);
@@ -203,8 +203,7 @@ class AstrologinModelAstroask extends ListModel
 		else if($pay_mode=="paypal")
 		{
 		   $app->redirect(JUri::base().'vendor/paypal.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees); 
-		}
-		
+		}		
         
     }
     public function getExpert()
@@ -321,7 +320,8 @@ class AstrologinModelAstroask extends ListModel
                                 ->where($db->quoteName('a.UniqueID').'='.$db->quote($token));
            $db                  ->setQuery($query);
            $data                = $db->loadObject();
-        $this->sendFailMail($data);
+           //print_r($data);exit;
+		  $this->sendFailMail($data);
     }
     public function confirmCCPayment($details)
     {
@@ -505,8 +505,8 @@ class AstrologinModelAstroask extends ListModel
         $recepient  = array($data->email);
         $mailer     ->addRecipient($recepient);
         $mailer     ->addBcc('kopnite@gmail.com');
-        $mailer     ->addBcc('consult@astroisha.com');
-        $subject    = "AstroIsha ".ucfirst($data->order_type)." Report: ".$data->UniqueID;
+        $mailer 	->addBcc('consult@astroisha.com');
+        $subject    = "AstroIsha Order: ".$data->UniqueID;
         $mailer     ->setSubject($subject);
         $body       = "";
         $body       .= "<p>Dear ".$data->name.",</p>";
@@ -521,13 +521,15 @@ class AstrologinModelAstroask extends ListModel
         if ( $send !== true ) {
             $msg    = 'Error sending email: Try again and if problem continues contact admin@astroisha.com.';
             $msgType = "warning";
-            $app->redirect($link, $msg,$msgType);
+            $app->enqueueMessage($msg, $msgType);
+            $app->redirect($link);
         } 
         else 
         {
             $msg    =  'Payment has failed. Please check your email.';
             $msgType    = "warning";
-            $app->redirect($link, $msg,$msgType);
+            $app->enqueueMessage($msg, $msgType);
+            $app->redirect($link);
         }
         
     }
