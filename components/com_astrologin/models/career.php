@@ -1,23 +1,28 @@
 <?php
+defined('_JEXEC') or die;  // No direct Access
+// import Joomla modelitem library
 use Joomla\CMS\MVC\Model\ListModel;
+require_once(JPATH_BASE.'/geoip/autoload.php');
+use GeoIp2\Database\Reader;
 class AstrologinModelCareer extends ListModel
 {
     public function getData()
     {
-        //include_once "/home/astroxou/php/Net/GeoIP/GeoIP.php";
-        //$geoip                          = Net_GeoIP::getInstance("/home/astroxou/php/Net/GeoIP/GeoLiteCity.dat");
-        $ip                           = '117.196.1.11';
+        $reader = new Reader('/usr/local/share/GeoIP/GeoIP2-City.mmdb');  // local file
+       // $reader         = new Reader(JPATH_BASE.'/geoip/GeoIP2-City.mmdb'); // server file
+        //$ip                           = '117.196.1.11';
         //$ip                             = '140.120.6.207';
         //$ip                             = '157.55.39.123';  // ip address
         //$ip 							= '1.10.128.129';  // thai address
-        //$ip 							= '175.157.193.156'; // srilanka ip address
-        //$ip                             = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
-        $info                         = geoip_country_code_by_name($ip);
-        $country                      = geoip_country_name_by_name($ip);
+        //	$ip 							= '175.157.193.156'; // srilanka ip address
+        $ip                 = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
+        $record             = $reader->city($ip);
+        $info               = $record->country->isoCode;
+        $country            = $record->country->name;
+        $state              = $record->mostSpecificSubdivision->name;
+        $state_code         = $record->mostSpecificSubdivision->isoCode;
+        $city               = $record->city->name;
         
-        //$location               	= $geoip->lookupLocation($ip);
-        //$info                   	= $location->countryCode;
-        //$country                	= $location->countryName;
         $u_id           = '222';
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
