@@ -9,8 +9,8 @@ class AstrologinModelAstroReport extends ListModel
     public function getData()
     {
         //$reader = new Reader('/usr/local/share/GeoIP/GeoIP2-City.mmdb');  // local file
-        $reader         = new Reader(JPATH_BASE.'/geoip/GeoIP2-City.mmdb'); // server file
-        //$ip                           = '117.196.1.11';
+        $reader             = new Reader('/home3/astroxou/usr/share/GeoIP2-City.mmdb'); // server file
+        //$ip               = '117.196.1.11';
         //$ip                             = '140.120.6.207';
         //$ip                             = '157.55.39.123';  // ip address
         //$ip 							= '1.10.128.129';  // thai address
@@ -167,6 +167,10 @@ class AstrologinModelAstroReport extends ListModel
         else if($order_type == "finance")
         {
             $order_branch   = "finance_report";
+        }
+        else if($order_type == "education")
+        {
+            $order_branch   = "education_report";
         }
         else
         {       
@@ -458,7 +462,8 @@ class AstrologinModelAstroReport extends ListModel
         $mailer     ->addBcc('consult@astroisha.com');
         $subject    = "AstroIsha ".ucfirst($data->order_type)." Report: ".$data->UniqueID;
         $mailer     ->setSubject($subject);
-
+		
+		$body 		.= "<p><strong>This is an automated response from server. No need to reply to this email.</strong></p>";
         $body       .= "<p>Hello ".$data->name.",</p>";
         if($data->paid =="yes")
         {
@@ -490,6 +495,10 @@ class AstrologinModelAstroReport extends ListModel
         else if($data->order_type == "finance")
         {
                 $body 			.= "<p>Order Type: Financial Report</p>";
+        }
+        else if($data->order_type == "education")
+        {
+                $body 			.= "<p>Order Type: Education Report</p>";
         }
         else
         {

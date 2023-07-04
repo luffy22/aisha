@@ -65,7 +65,8 @@
   opacity: 1;
 }
 .choices[data-type*=select-one] .choices__button:focus {
-  box-shadow: 0 0 0 2px #00bcd4;
+  -webkit-box-shadow: 0 0 0 2px #00bcd4;
+          box-shadow: 0 0 0 2px #00bcd4;
 }
 .choices[data-type*=select-one] .choices__item[data-value=""] .choices__button {
   display: none;
@@ -182,7 +183,8 @@
   border: 1px solid #00a5bb;
   color: #fff;
   word-break: break-all;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .choices__list--multiple .choices__item[data-deletable] {
   padding-right: 5px;
@@ -339,14 +341,13 @@
 
 /* =====  End of Choices  ====== */
 .choices {
-  border: 0;
+  border: 1px solid var(--template-bg-dark-20);
   border-radius: 0.25rem;
 }
-.choices:hover {
-  cursor: pointer;
-}
 .choices.is-focused {
-  box-shadow: 0 0 0 0.2rem #eaeaea;
+  border-color: var(--focus);
+  -webkit-box-shadow: 0 0 0 0.2rem var(--focus-shadow);
+          box-shadow: 0 0 0 0.2rem var(--focus-shadow);
 }
 
 .choices__inner {
@@ -354,11 +355,8 @@
   padding: 0.1rem 1rem;
   margin-bottom: 0;
   font-size: 1rem;
-  border: solid 1px var(--template-bg-dark-20);
-  border-radius: 0.25rem;
-}
-.is-focused .choices__inner {
-  border-color: #39f;
+  border: none;
+  border-radius: 0;
 }
 
 .choices__input {
@@ -367,11 +365,23 @@
   font-size: 1rem;
   background-color: transparent;
 }
+.choices__input::-webkit-input-placeholder {
+  color: #495057;
+  opacity: 1;
+}
 .choices__input::-moz-placeholder {
   color: #495057;
   opacity: 1;
 }
-.choices__input::-webkit-input-placeholder {
+.choices__input:-ms-input-placeholder {
+  color: #495057;
+  opacity: 1;
+}
+.choices__input::-ms-input-placeholder {
+  color: #495057;
+  opacity: 1;
+}
+.choices__input::placeholder {
   color: #495057;
   opacity: 1;
 }
@@ -452,8 +462,12 @@
 }
 
 .choices[data-type*=select-one] .choices__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 .choices[data-type*=select-one] .choices__button_joomla {
   position: absolute;
@@ -473,7 +487,8 @@
   opacity: 1;
 }
 .choices[data-type*=select-one] .choices__button_joomla:focus {
-  box-shadow: 0 0 0 2px #00bcd4;
+  -webkit-box-shadow: 0 0 0 2px #00bcd4;
+          box-shadow: 0 0 0 2px #00bcd4;
 }
 .choices[data-type*=select-one]::after {
   display: none;

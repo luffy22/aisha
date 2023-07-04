@@ -192,14 +192,16 @@ class plgEditorJCE extends CMSPlugin
             return $html;
         }
 
-        if (!$editor->hasPlugin('joomla')) {
-            $html .= $this->displayButtons($id, $buttons, $asset, $author);
+        if (!$editor->hasPlugin('joomla')) {            
+            if ((bool) $editor->getParam('editor.xtd_buttons', 1)) {                
+                $html .= $this->displayButtons($id, $buttons, $asset, $author);
+            }
         } else {
             $list = $this->getXtdButtonsList($id, $buttons, $asset, $author);
 
             if (!empty($list)) {
                 $options = array(
-                    'joomla_xtd_buttons' => $list,
+                    'joomla_xtd_buttons' => array_values($list)
                 );
 
                 Factory::getDocument()->addScriptOptions('plg_editor_jce', $options, true);
@@ -234,10 +236,11 @@ class plgEditorJCE extends CMSPlugin
             foreach ($buttons as $i => $button) {
                 if ($button->get('name')) {
                     // Set some vars
+                    $icon = 'none icon-' . $button->get('icon', $button->get('name'));
+
                     $name = 'button-' . $i . '-' . str_replace(' ', '-', $button->get('text'));
                     $title = $button->get('text');
-                    $onclick = $button->get('onclick') ?: '';
-                    $icon = $button->get('name');
+                    $onclick = $button->get('onclick', '');
 
                     if ($button->get('link') !== '#') {
                         $href = JUri::base() . $button->get('link');
@@ -245,18 +248,21 @@ class plgEditorJCE extends CMSPlugin
                         $href = '';
                     }
 
-                    $icon = 'none icon-' . $icon;
+                    $id = $button->get('name');
 
-                    $list[] = array(
+                    $list[$id] = array(
                         'name' => $name,
                         'title' => $title,
                         'icon' => $icon,
                         'href' => $href,
                         'onclick' => $onclick,
+                        'svg' => $button->get('iconSVG'),
+                        'options' => $button->get('options', array())
                     );
                 }
             }
         }
+
         return $list;
     }
 

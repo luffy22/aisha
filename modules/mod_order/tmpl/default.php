@@ -5,8 +5,8 @@ $current        = JUri::current();
 $year = date("Y"); 
 $menualias = JFactory::getApplication()->getMenu()->getActive()->alias;
 $date       = new DateTime();
-$date_mar   = new Datetime("03/15/".$year);
-$date_apr   = new DateTime("04/05/".$year);
+$date_mar   = new Datetime("03/11/".$year);
+$date_apr   = new DateTime("04/10/".$year);
 $date_oct   = new Datetime("09/26/".$year);
 $date_nov   = new DateTime("10/10/".$year);
 ?>
@@ -74,6 +74,7 @@ $date_nov   = new DateTime("10/10/".$year);
                         $order[$i]['service_for_charge'] == "marriage" ||
                         $order[$i]['service_for_charge'] == "career" ||
                         $order[$i]['service_for_charge'] == "finance"||
+                        $order[$i]['service_for_charge'] == "education"||
                         $order[$i]['service_for_charge'] == "yearly"))
                 {
                     $type       = $order[$i]['service_for_charge'];
@@ -193,6 +194,36 @@ $date_nov   = new DateTime("10/10/".$year);
 <?php
         }
     }
+    else if($menualias == "study")
+    {
+		//print_r($order);exit;
+        $type       = $order[7]['service_for_charge'];
+        $amount     = $order[7]['amount'];
+        $discount   = round(($order[7]['amount']*$order[4]['disc_percent'])/100,2);
+        $disc_price = $amount - $discount;
+        $currency   = $order[7]['currency'];
+        if($currency == "INR"){$pay_mode = "paytm";}else{$pay_mode = "paypal";}
+        if($amount == $disc_price)
+        {
+?>
+            <div class="jumbotron jumbotron-fluid bg-light p-3">
+		<p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[7]['img_for_text'] ?>" align="left" hspace="10"  /><?php echo $order[7]['text_before']." ".number_format((float)$amount,2)."&nbsp;".$currency; ?> only</p>
+		<a class="btn btn-primary" href="<?php echo JUri::base().$order[7]['service_for_charge'].'-report' ?>" role="button"><i class="bi bi-card-text"></i> Learn More</a>
+            </div>
+<?php
+        }
+        else
+        {
+ ?>
+            <div class="jumbotron jumbotron-fluid bg-light p-3">
+		<p class="h2"><img class="img-fluid" src="<?php echo JUri::base().'images/'.$order[7]['img_for_text'] ?>" align="left" hspace="10"  /><?php echo $order[7]['text_before']." <s>".number_format((float)$amount,2)."&nbsp;".$currency."</s> "; ?>
+                    <br/><?php echo number_format((float)$disc_price,2)." ".$currency; ?> only</p>
+		<a class="btn btn-primary" href="<?php echo JUri::base().$order[7]['service_for_charge'].'-report' ?>" role="button"><i class="bi bi-card-text"></i> Learn More</a>
+		
+            </div>
+<?php
+        }
+    }
     else if($menualias == "horoscope" || $menualias == "mainchart" || $menualias == "astroyogas"
             || $menualias == "yogas" || $menualias == "planet-bhavas" || $menualias == "transits"||$menualias == "ascendant" || $menualias == "nakshatra" ||
             $menualias == "planets")
@@ -220,7 +251,6 @@ $date_nov   = new DateTime("10/10/".$year);
                     <br/><?php echo number_format((float)$disc_price,2)." ".$currency; ?> only</p>
 		<a class="btn btn-primary" href="<?php echo JUri::base().$order[2]['service_for_charge'].'-report' ?>" role="button"><i class="bi bi-card-text"></i> Learn More</a>
             </div>        
-    </div>
 <?php
         }
     }

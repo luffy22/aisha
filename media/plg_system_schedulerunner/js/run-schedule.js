@@ -16,17 +16,20 @@
 if (!window.Joomla) {
   throw new Error('Joomla API was not properly initialised');
 }
-
 const initScheduler = () => {
   const options = Joomla.getOptions('plg_system_schedulerunner');
   const paths = Joomla.getOptions('system.paths');
   const interval = (options && options.interval ? parseInt(options.interval, 10) : 300) * 1000;
   const uri = `${paths ? `${paths.root}/index.php` : window.location.pathname}?option=com_ajax&format=raw&plugin=RunSchedulerLazy&group=system`;
-  setInterval(() => navigator.sendBeacon(uri), interval); // Run it at the beginning at least once
+  setInterval(() => fetch(uri, {
+    method: 'GET'
+  }), interval);
 
-  navigator.sendBeacon(uri);
+  // Run it at the beginning at least once
+  fetch(uri, {
+    method: 'GET'
+  });
 };
-
 (document => {
   document.addEventListener('DOMContentLoaded', () => {
     initScheduler();

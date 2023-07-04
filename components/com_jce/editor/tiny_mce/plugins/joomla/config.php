@@ -67,10 +67,11 @@ class WFJoomlaPluginConfig
             }
 
             // Set some vars
+            $icon = 'none icon-' . $button->get('icon', $button->get('name'));
+
             $name = 'button-' . $i . '-' . str_replace(' ', '-', $button->get('text'));
             $title = $button->get('text');
             $onclick = $button->get('onclick', '');
-            $icon = $button->get('name');
 
             if ($button->get('link') !== '#') {
                 $href = JUri::base() . $button->get('link');
@@ -78,19 +79,21 @@ class WFJoomlaPluginConfig
                 $href = '';
             }
 
-            $icon = 'none icon-' . $icon;
+            $id = $button->get('name');
 
-            $list[] = array(
+            $list[$id] = array(
                 'name' => $name,
                 'title' => $title,
                 'icon' => $icon,
                 'href' => $href,
                 'onclick' => $onclick,
+                'svg' => $button->get('iconSVG'),
+                'options' => $button->get('options', array())
             );
 
             $i++;
         }
 
-        $settings['joomla_xtd_buttons'] = json_encode($list);
+        $settings['joomla_xtd_buttons'] = json_encode(array_values($list));
     }
 }

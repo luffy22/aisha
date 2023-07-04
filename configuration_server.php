@@ -56,9 +56,9 @@ class JConfig {
 	public $unicodeslugs = '1';
 	public $feed_limit = '10';
 	public $feed_email = 'none';
-	public $log_path = '/var/www/html/aisha2017/logs';
-	public $tmp_path = '/var/www/html/aisha2017/tmp';
-	public $lifetime = '15';
+	public $log_path = '/public_html/administrator/logs';
+	public $tmp_path = '/public_html/tmp';
+	public $lifetime = '30';
 	public $session_handler = 'database';
 	public $memcache_persist = '1';
 	public $memcache_compress = '0';
@@ -79,7 +79,7 @@ class JConfig {
 	public $proxy_user = '';
 	public $proxy_pass = '';
 	public $massmailoff = '0';
-	public $MetaRights = '2017 All Rights Reserved';
+	public $MetaRights = '2022 All Rights Reserved';
 	public $sitename_pagetitles = '1';
 	public $force_ssl = '0';
 	public $session_memcache_server_host = 'localhost';

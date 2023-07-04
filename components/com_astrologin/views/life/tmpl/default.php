@@ -95,7 +95,7 @@ else
 ?>
     <div class="form-check">
     <input class="form-check-input" type='radio' name='report_choice' id='report_choice7' value='paypal' checked />
-    <label for="report_choice7" class="form-check-label"> <i class='fab fa-paypal'></i> Paypal</label>
+    <label for="report_choice7" class="form-check-label"> <i class='bi bi-paypal'></i> Paypal</label>
     </div>
 <?php
 }

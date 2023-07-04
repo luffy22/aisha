@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);       // uncomment on server 
+//error_reporting(0);       // uncomment on server 
 defined( '_JEXEC' ) or die( 'Restricted access' );
 $app             = JFactory::getApplication();
 $doc             = JFactory::getDocument();
@@ -7,7 +7,7 @@ $user            = JFactory::getUser();
 $this->language  = $doc->language;
 $this->direction = $doc->direction;
 $title              = $doc->title;
-/*$var             = '	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+/*$var             = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
 					<strong><i class="bi bi-exclamation-triangle-fill fs-1"></i> Orders Closed.</strong> Due to unavoidable travel plans all orders are closed. In case of emergency please use <a href="https://api.whatsapp.com/send?phone=919870036765&text=Hello%20AstroIsha"><i class="bi bi-whatsapp"></i> whatsapp</a> to contact us.
 					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
 if(!isset($_SESSION['var']))
@@ -39,8 +39,17 @@ if(!isset($_SESSION['var']))
 </head>
 <body>
 <div class="container-fluid">
-<div class="row">
-	<h1><a id="display-2" href="<?php echo JUri::base(); ?>" title="Navigate to Home Page"><img src="<?php echo JUri::base(); ?>/logo.png" title="Click to navigate to Home Page" class="img-fluid" />Astro Isha</a></h1>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+					<strong><i class="bi bi-exclamation-triangle-fill fs-1"></i> Orders Closed.</strong> Orders are closed until Thursday 27th June 2023. In case of emergency please use <a href="https://api.whatsapp.com/send?phone=919870036765&text=Hello%20AstroIsha"><i class="bi bi-whatsapp"></i> whatsapp</a> to contact us.
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
+<div class="d-flex flex-row mb-3">
+	<div class="p-2"><a href="<?php echo JUri::base(); ?>"><img src="<?php echo JUri::base(); ?>/logo.png" title="Click to navigate to Home Page" class="img-fluid" /></a></div>
+	<div class="pt-2">
+		<h1 class="display-3"><a id="display-2" href="<?php echo JUri::base(); ?>" title="Navigate to Home Page">Astro Isha</a></h1>
+		<p class="lead">Site on Vedic Astrology</p>
+	</div>
+</div>
+<div class="row">   
     <div class="col-2">
     <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
         <i class="bi bi-list"></i>
@@ -63,13 +72,13 @@ if(!isset($_SESSION['var']))
 </div>
 </div>
 <jdoc:include type="modules" name="footer" /> 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49809214-1"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JRYDTR6DD6"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'UA-49809214-1');
+
+  gtag('config', 'G-JRYDTR6DD6');
 </script>
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/cookieconsent.min.css" />
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/cookieconsent.min.js"></script>

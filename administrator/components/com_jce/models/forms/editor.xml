@@ -32,11 +32,19 @@
                 <option value="1">JYES</option>
                 <option value="0">JNO</option>
             </field>
+            <field name="wordcount" type="yesno" default="1" label="WF_PARAM_EDITOR_WORDCOUNT" description="WF_PARAM_EDITOR_WORDCOUNT_DESC" showon="statusbar_location:top[OR]statusbar_location:bottom">
+                <option value="1">JYES</option>
+                <option value="0">JNO</option>
+            </field>
             <field name="resizing" type="list" default="1" label="WF_PARAM_EDITOR_RESIZING" description="WF_PARAM_EDITOR_RESIZING_DESC" showon="statusbar_location:top[OR]statusbar_location:bottom">
                 <option value="1">JYES</option>
                 <option value="0">JNO</option>
             </field>
             <field name="resize_horizontal" type="yesno" default="1" label="WF_PARAM_EDITOR_RESIZE_HORIZONTAL" description="WF_PARAM_EDITOR_RESIZE_HORIZONTAL_DESC" showon="resizing:1">
+                <option value="1">JYES</option>
+                <option value="0">JNO</option>
+            </field>
+            <field name="xtd_buttons" type="yesno" default="1" label="WF_PARAM_EDITOR_XTD_BUTTONS" description="WF_PARAM_EDITOR_XTD_BUTTONS_DESC">
                 <option value="1">JYES</option>
                 <option value="0">JNO</option>
             </field>
@@ -147,7 +155,6 @@
             <field name="total_files" type="number" default="" class="input-small" step="1" label="WF_PARAM_TOTAL_FILES_LIMIT" description="WF_PARAM_TOTAL_FILES_LIMIT_DESC" />
             <field name="total_size" type="number" default="" class="input-small" step="1" label="WF_PARAM_TOTAL_FILES_SIZE_LIMIT" description="WF_PARAM_TOTAL_FILES_SIZE_LIMIT_DESC" />
         </fieldset>
-
         <fieldset name="editor.advanced">
             <field type="container" label="WF_PARAM_STARTUP_CONTENT" description="WF_PARAM_STARTUP_CONTENT_DESC">
 				<field type="mediajce" name="startup_content_url" size="30" mediatype="html,htm,txt,md" default="" label="WF_PARAM_STARTUP_CONTENT_URL" description="WF_PARAM_STARTUP_CONTENT_URL_DESC" />
@@ -207,18 +214,36 @@
                 <option value="0">JNO</option>
             </field>
 
-            <field type="spacer" hr="true" />
-            <field name="wordcount_limit" type="number" default="0" label="WF_PARAM_WORDCOUNT_LIMIT" description="WF_PARAM_WORDCOUNT_LIMIT_DESC" class="input-small" />
-            <field name="wordcount_alert" type="yesno" default="0" label="WF_PARAM_WORDCOUNT_ALERT" description="WF_PARAM_WORDCOUNT_ALERT_DESC">
+             <field name="object_resizing" type="yesno" default="1" label="WF_PARAM_OBJECT_RESIZING" description="WF_PARAM_OBJECT_RESIZING_DESC">
                 <option value="1">JYES</option>
                 <option value="0">JNO</option>
             </field>
 
             <field type="spacer" hr="true" />
-            <field name="object_resizing" type="yesno" default="1" label="WF_PARAM_OBJECT_RESIZING" description="WF_PARAM_OBJECT_RESIZING_DESC">
+
+            <field type="container" showon="wordcount:1" label="WF_PARAM_EDITOR_WORDCOUNT" description="">
+
+                <field name="wordcount_limit" type="number" default="0" hint="0" label="WF_PARAM_WORDCOUNT_LIMIT" description="WF_PARAM_WORDCOUNT_LIMIT_DESC" class="input-small" />
+                <field name="wordcount_alert" type="yesno" default="0" label="WF_PARAM_WORDCOUNT_ALERT" description="WF_PARAM_WORDCOUNT_ALERT_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+            </field>
+
+            <field type="spacer" hr="true" />
+           
+            <field type="container" label="WF_NONEDITABLE_TITLE" description="WF_NONEDITABLE_DESC">
+
+                <field name="noneditable_class" type="text" default="" hint="mceNonEditable" label="WF_NONEDITABLE_NONEDITABLE_CLASS" description="WF_NONEDITABLE_NONEDITABLE_CLASS_DESC" />
+			    <field name="editable_class" type="text" default="" hint="mceEditable" label="WF_NONEDITABLE_EDITABLE_CLASS" description="WF_NONEDITABLE_EDITABLE_CLASS_DESC" />
+
+            </field>
+
+            <!--field name="figure_tag_style" type="yesno" default="1" label="WF_PARAM_FIGURE_TAG_STYLE" description="WF_PARAM_FIGURE_TAG_STYLE_DESC">
                 <option value="1">JYES</option>
                 <option value="0">JNO</option>
-            </field>
+            </field-->
         </fieldset>
     </fields>
 </form>

@@ -63,6 +63,15 @@ class AstroLoginViewAstroReport extends JViewLegacy
         {
             $tpl                = 'finance';
         }
+        else if((!empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['order_type'])) && $_GET['order_type'] == 'education')
+        {
+            $tpl                = 'education';
+        }
+       
+        else if((empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['order_type'])) && $_GET['order_type'] == 'education')
+        {
+            $tpl                = 'education';
+        }
         else if((!empty($this->msg))&&(isset($_GET['uniq_id']))&&(isset($_GET['order_type'])) && $_GET['order_type'] == 'life')
         {
             $tpl                = 'life';

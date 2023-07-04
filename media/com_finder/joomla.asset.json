@@ -6,12 +6,6 @@
   "license": "GPL-2.0-or-later",
   "assets": [
     {
-      "name": "com_finder.dates",
-      "type": "style",
-      "uri": "com_finder/dates.min.css",
-      "version": "fc897d21d472058f83345bcf1c7b1b8a8a4b3063"
-    },
-    {
       "name": "com_finder.filters.es5",
       "type": "script",
       "uri": "com_finder/filters-es5.min.js",
@@ -37,10 +31,16 @@
       "version": "db387bd9ba17068d590c9475b667efbec597c6ef"
     },
     {
+      "name": "com_finder.dates",
+      "type": "style",
+      "uri": "com_finder/dates.min.css",
+      "version": "229ab888450c27ab52a44882abe084a5155620b6"
+    },
+    {
       "name": "com_finder.finder",
       "type": "style",
       "uri": "com_finder/finder.min.css",
-      "version": "ddd7f5365193e6ba6a39de7712d72dee3a9cef3f"
+      "version": "0cfab6c5b1b1dfdb57201f4ae49d5bc8afdc5223"
     },
     {
       "name": "com_finder.finder",
@@ -52,7 +52,7 @@
       "attributes": {
         "type": "module"
       },
-      "version": "29fe670bb180ec95c613a0e6aa6df738d9de97d4"
+      "version": "c8b55661ed62db937b8d6856090adf9258c4a0fc"
     },
     {
       "name": "com_finder.finder-edit.es5",
@@ -90,13 +90,7 @@
         "nomodule": true,
         "defer": true
       },
-      "version": "bad573eb3c559a3e1070529bf0ccb8d8745ba5f3"
-    },
-    {
-      "name": "com_finder.indexer",
-      "type": "style",
-      "uri": "com_finder/indexer.min.css",
-      "version": "ba73d85fa3f70dcee5085a1c8ae477bd42d03b33"
+      "version": "14e4c7fdce4ca11c6d12b74bad128529a294b183"
     },
     {
       "name": "com_finder.indexer.es5",
@@ -109,19 +103,7 @@
         "nomodule": true,
         "defer": true
       },
-      "version": "5ad72d9f2f580a5d4916967fcfbdb0410e666897"
-    },
-    {
-      "name": "com_finder.maps",
-      "type": "script",
-      "uri": "com_finder/maps.min.js",
-      "dependencies": [
-        "com_finder.maps.es5"
-      ],
-      "attributes": {
-        "type": "module"
-      },
-      "version": "ff16598c533e0a598992c5ad8386c4715d82723d"
+      "version": "b92c2f809492e12e3526fa70bc120a504f85d48f"
     },
     {
       "name": "com_finder.indexer",
@@ -133,7 +115,13 @@
       "attributes": {
         "type": "module"
       },
-      "version": "07f0dd3a1d5c597c7a8a685ef5cd03638967032a"
+      "version": "bf613c5984500d1cfa88ffddb9be8bfd6073e7dd"
+    },
+    {
+      "name": "com_finder.indexer",
+      "type": "style",
+      "uri": "com_finder/indexer.min.css",
+      "version": "ba73d85fa3f70dcee5085a1c8ae477bd42d03b33"
     },
     {
       "name": "com_finder.maps.es5",
@@ -147,6 +135,18 @@
         "defer": true
       },
       "version": "9e2e80806f92fcb24918eebf6211bcc55e104c2e"
+    },
+    {
+      "name": "com_finder.maps",
+      "type": "script",
+      "uri": "com_finder/maps.min.js",
+      "dependencies": [
+        "com_finder.maps.es5"
+      ],
+      "attributes": {
+        "type": "module"
+      },
+      "version": "ff16598c533e0a598992c5ad8386c4715d82723d"
     }
   ]
 }

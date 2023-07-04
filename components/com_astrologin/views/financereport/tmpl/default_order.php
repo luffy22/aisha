@@ -40,6 +40,8 @@ if(isset($_GET['payment']) && $_GET['payment']=="success")
     <li class="list-group-item">Time Of Birth: <?php echo $date->format('h:i:s a');?></li>
     <li class="list-group-item">Place Of Birth: <?php echo $this->details->pob; ?></li>
     <li class="list-group-item">Order Type: <?php if($this->details->order_type=="career"){echo "Career Report";}
+												  else if($this->details->order_type=="education"){echo "Education Report";}
+												  else if($this->details->order_type=="finance"){echo "Finance Report";}
                                                   else if($this->details->order_type=="marriage"){echo "Marriage Report";}
                                                   else if($this->details->order_type=="life"){echo "Life Report"; }
                                                   else if($this->details->order_type=="yearly"){echo "Yearly Report"; }

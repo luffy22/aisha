@@ -14,8 +14,8 @@ class JConfig {
 	public $dbtype = 'mysqli';
 	public $host = 'localhost';
 	public $user = 'root';
-	public $password = 'Desai_1985';
-	public $db = 'astroisha';
+	public $password = 'desai1985';
+	public $db = 'astroisha2017';
 	public $dbprefix = 'jv_';
 	public $live_site = '';
 	public $secret = '8tl5YmMMy0oD02Vk';
@@ -56,8 +56,8 @@ class JConfig {
 	public $unicodeslugs = '1';
 	public $feed_limit = '10';
 	public $feed_email = 'site';
-	public $log_path = '/var/www/html/aisha/logs';
-	public $tmp_path = '/var/www/html/aisha/tmp';
+	public $log_path = '/var/www/html/aisha2017/logs';
+	public $tmp_path = '/var/www/html/aisha2017/tmp';
 	public $lifetime = '15';
 	public $session_handler = 'database';
 	public $memcache_persist = '1';
@@ -79,7 +79,7 @@ class JConfig {
 	public $proxy_user = '';
 	public $proxy_pass = '';
 	public $massmailoff = '0';
-	public $MetaRights = '2018 All Rights Reserved';
+	public $MetaRights = '2017 All Rights Reserved';
 	public $sitename_pagetitles = '1';
 	public $force_ssl = '0';
 	public $session_memcache_server_host = 'localhost';

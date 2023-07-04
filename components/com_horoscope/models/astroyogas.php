@@ -240,7 +240,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
     { 
         if($sun == $rahu)
         {
-            $array                  = array("grahan_yoga" => "There is <a href='https://www.astroisha.com/yogas/447-grahan-yoga' title='grahan yoga' >grahan yoga</a> formed in your horoscope due to Sun and Rahu joining in same sign.");
+            $array                  = array("grahan_yoga" => "There is <a href='https://www.astroisha.com/yogas/447-grahan-yoga' title='grahan yoga' >Grahan yoga</a> formed in your horoscope due to Sun and Rahu joining in same sign.");
         }
         else if($sun == $ketu)
         {
@@ -367,6 +367,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
            }
         }
         $nbry_planets               = array();
+        //print_r($array);exit;
         foreach($array as $planet)
         {
             $planet_sign            = $data[$planet];
@@ -399,6 +400,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                 {
                     $check5         = "fail";
                 }
+ 
                 // check2 sees if there is exalted or own-sign planet as co-tenant
                 if($deb_sign == $ex_pl_sign || $deb_sign == $own_pl_sign)
                 {
@@ -408,6 +410,7 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                 {
                     $check2         = "fail";
                 }
+                
                  // check3 sees if signs ruled by debilitated planet have an exalted planet in them
                 $pair              = array_keys($own_sign, $planet);
                 for($i=0; $i < count($pair);$i++)
@@ -423,10 +426,12 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                         $check3     = "fail";
                     }
                 }
+
                 // check4 checks if planetary lord is exalted in one of the quadrants from ascendant
                 //print_r($array);exit;
                 $ex_sign            = array_search($own_planet, $exal_sign);        // checks the exalted sign of planetary lord
                 $pl_from_asc        = $this->getHouseDistance($asc_sign, $own_pl_sign);     // gets distance from ascendant
+                
                 
                 if(($pl_from_asc == "1" || $pl_from_asc == "4" || 
                     $pl_from_asc == "7" || $pl_from_asc == "10")&&($own_pl_sign == $ex_sign))
@@ -437,7 +442,21 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                 {
                     $check4         = "fail";
                 }
-                //echo $check4;exit;
+                
+                // check6 checks if planetary lord is exalted in one of the quadrants from Moon
+
+                $pl_from_moon		= $this->getHouseDistance($moon_sign,$own_pl_sign); // get distance from moon
+                //echo $pl_from_moon;exit;
+                if(($pl_from_moon == "1" || $pl_from_moon == "4" || 
+                    $pl_from_moon == "7" || $pl_from_moon == "10")&&($own_pl_sign == $ex_sign))
+                {
+                    $check6         = "pass";
+                }
+                else
+                {
+                    $check6         = "fail";
+                }
+                //echo $check6;exit;
                  // check5 checks if planet is retrograde in a quadrant from ascendant
                 
                 if($check1 == "pass" && $check2 == "pass")
@@ -450,17 +469,13 @@ class HoroscopeModelAstroYogas extends HoroscopeModelLagna
                 }
                 else if($check1 == "pass" && $check3 == "pass")
                 {
-                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> in Main Chart in your horoscope.";
-                }
-                else  if($check5 == "pass" && $check2 == "pass")
-                {
-                    $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> in Moon Chart in your horoscope.";
+                    $nbry_planets[]         = "Neecha debility reduced but full <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> does not happen";
                 }
                 else if($check1 == "pass" && $check4 == "pass")
                 {
                     $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> in Main Chart in your horoscope.";
                 }
-                else  if($check5 == "pass" && $check2 == "pass")
+                else  if($check6 == "pass" && $check5 == "pass")
                 {
                     $nbry_planets[]         = $planet." does <a href='https://www.astroisha.com/yogas/75-nbry' title='NBRY'>NBRY</a> in Moon Chart in your horoscope.";
                 }

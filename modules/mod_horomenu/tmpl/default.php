@@ -28,6 +28,8 @@ $current        = Juri::current();
                 <li><a class="dropdown-item <?php if($current == Juri::base().'getnavamsha'){ echo "active";} ?>" href="<?php echo Juri::base().'getnavamsha?chart='.$chart_id; ?>">Navamsha Chart</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item <?php if($current == Juri::base().'getvimshottari'){ echo "active";} ?>" href="<?php echo Juri::base().'getvimshottari?chart='.$chart_id; ?>">Vimshottari Dasha</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item <?php if($current == Juri::base().'shodasha'){ echo "active";} ?>" href="<?php echo Juri::base().'shodasha?chart='.$chart_id; ?>">Shodashvarga Charts</a></li>
              </ul>
         </li>
         <li class="nav-item dropdown">

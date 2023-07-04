@@ -1,16 +1,16 @@
 <?php
-
 /**
- * @package     JCE - System Plugin
- * @subpackage  Fields
- * 
- * @copyright  (C) 2017 Open Source Matters, Inc. <https://www.joomla.org>
- * @copyright  (C) 2017 - 2022 Ryan Demmer. All rights reserved.
- * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     JCE
+ * @subpackage  Fields.MediaJce
+ *
+ * @copyright   Copyright (C) 2005 - 2023 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2020 - 2023 Ryan Demmer. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('JPATH_PLATFORM') or die;
 
+use Joomla\CMS\Form\Form;
 use Joomla\CMS\Form\Field\MediaField;
 use Joomla\CMS\Helper\MediaHelper;
 use Joomla\CMS\Component\ComponentHelper;
@@ -37,6 +37,14 @@ class JFormFieldMediaJce extends MediaField
      * @since  3.5
      */
     protected $layout = 'joomla.form.field.media';
+
+     /**
+     * The mediatype for the form field.
+     *
+     * @var    string
+     * @since  2.9.37
+     */
+    protected $mediatype = 'images';
 
     /**
      * Method to attach a JForm object to the field.
@@ -69,7 +77,7 @@ class JFormFieldMediaJce extends MediaField
         if ($result === true) {
             $this->mediatype = isset($this->element['mediatype']) ? (string) $this->element['mediatype'] : 'images';
 
-            if (isset($this->types)) {
+            if (isset($this->types) && (bool) $this->element['converted'] === false) {
                 $this->value = MediaHelper::getCleanMediaFieldValue($this->value);
             }
         }
@@ -109,13 +117,23 @@ class JFormFieldMediaJce extends MediaField
             return $data;
         }
 
+        if ($this->element['media_folder']) {
+            $this->link .= '&mediafolder=' . rawurlencode($this->element['media_folder']);
+        }
+
         $extraData = array(
             'link'      => $this->link,
             'class'     => $this->element['class'] . ' input-medium wf-media-input wf-media-input-active'
         );
-
-        if ($options['upload'] == 1) {
+        
+        if ($options['upload']) {
             $extraData['class'] .= ' wf-media-input-upload';
+        }
+
+        if ($config['converted']) {
+            $extraData['class'] .= ' wf-media-input-converted';
+        } else {
+            $extraData['class'] .= ' wf-media-input-core';
         }
 
         // Joomla 4
@@ -127,7 +145,7 @@ class JFormFieldMediaJce extends MediaField
                 'documentsAllowedExt' => ''
             );
 
-            $allowable = array('jpg,jpeg,png,gif', 'mp3,m4a,mp4a,ogg', 'mp4,mp4v,mpeg,mov,webm', 'doc,docx,odg,odp,ods,odt,pdf,ppt,pptx,txt,xcf,xls,xlsx,csv', 'zip,tar,gz');
+            $allowable = array('jpg,jpeg,png,apng,gif,webp', 'mp3,m4a,mp4a,ogg', 'mp4,mp4v,mpeg,mov,webm', 'doc,docx,odg,odp,ods,odt,pdf,ppt,pptx,txt,xcf,xls,xlsx,csv', 'zip,tar,gz');
 
             if (!empty($options['accept'])) {
                 $accept = explode(',', $options['accept']);
@@ -225,24 +243,10 @@ class JFormFieldMediaJce extends MediaField
      */
     public function postProcess($value, $group = null, Registry $input = null)
     {        
-        $value = MediaHelper::getCleanMediaFieldValue($value);
+        if ((bool) $this->element['converted'] === false) {
+            $value = MediaHelper::getCleanMediaFieldValue($value);
+        }
 
         return $value;
-    }
-
-    /**
-     * Allow to override renderer include paths in child fields
-     *
-     * @return  array
-     *
-     * @since   3.5
-     */
-    protected function getLayoutPaths()
-    {
-        if (isset($this->types)) {
-            return array(JPATH_SITE . '/layouts', JPATH_PLUGINS . '/fields/mediajce/layouts');
-        }
-        
-        return parent::getLayoutPaths();
     }
 }

@@ -2,7 +2,9 @@
   padding: 10px 20px;
 }
 .js-stools-container-bar .btn-toolbar {
-  justify-content: flex-end;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 .js-stools-container-bar .btn-toolbar > * {
   margin: 4px 0;
@@ -10,10 +12,12 @@
           margin-inline-end: 8px;
 }
 .js-stools-container-bar .btn-toolbar .js-stools-btn-clear {
-  background-color: #30638d;
+  background-color: hsl(207, 49%, 37%);
   border: 0;
 }
 .js-stools-container-bar .ordering-select {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
@@ -27,7 +31,7 @@
   grid-gap: 8px;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   padding: 10px;
-  background-color: white;
+  background-color: hsl(0, 0%, 100%);
 }
 .js-stools-container-filters > * {
   margin: 4px 0;

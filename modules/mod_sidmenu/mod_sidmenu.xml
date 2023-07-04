@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" version="3.1" client="site" method="upgrade">
-	<name>mod_sidmenu</name>
+	<name>mod_sidemenu</name>
 	<author>Joomla! Project</author>
 	<creationDate>July 2004</creationDate>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
@@ -9,7 +9,7 @@
 	<version>1.0.0</version>
 	<description>Sidemenu for Astro Isha</description>
 	<files>
-		<filename module="mod_sidmenu">mod_sidmenu.php</filename>
+		<filename module="mod_sidemenu">Side Menu</filename>
 		<folder>tmpl</folder>
 		<filename>helper.php</filename>
 	</files>

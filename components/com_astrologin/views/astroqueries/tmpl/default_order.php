@@ -61,7 +61,7 @@ else
 {
 ?>
 <div class="container"><div class="row">
-<div class="col-4 text-left"><a href="<?php echo Juri::base().'read-report?order='.$order.'&ref='.$refemail; ?>"><i class="fas fa-home"></i> Report Home</a></div>
+<div class="col-4 text-left"><a href="<?php echo Juri::base().'read-report?order='.$order.'&ref='.$refemail; ?>"><i class="bi bi-house-fill fs-2"></i> Report Home</a></div>
 </div></div>  
 <?php    
 }

@@ -2,7 +2,6 @@
 defined('_JEXEC') or die;  // No direct Access
 // import Joomla modelitem library
 use Joomla\CMS\MVC\Model\ListModel;
-require_once(JPATH_BASE.'/geoip/autoload.php');
 use GeoIp2\Database\Reader;
 class PlgContentAskExpert extends JPlugin
 {
@@ -14,17 +13,19 @@ class PlgContentAskExpert extends JPlugin
 	}
 	public function getExpertInfo($context, $article, $params)
 	{
+            require_once(JPATH_BASE.'/geoip/autoload.php');
             $app                = JFactory::getApplication();
             $view               = $app->input->get('view');
             $path               = JPluginHelper::getLayoutPath('content', 'askexpert');
             $content            = "";
-            $reader         = new Reader(JPATH_BASE.'/geoip/GeoIP2-City.mmdb'); // server file
+            //$reader = new Reader('/usr/local/share/GeoIP/GeoIP2-City.mmdb');  // local file
+            $reader             = new Reader('/home3/astroxou/usr/share/GeoIP2-City.mmdb'); // server file
             //$ip               = '117.196.1.11';
             //$ip                             = '140.120.6.207';
             //$ip                             = '157.55.39.123';  // ip address
             //$ip 							= '1.10.128.129';  // thai address
             //	$ip 							= '175.157.193.156'; // srilanka ip address
-            $ip                       		= $_SERVER['REMOTE_ADDR'];   // ip address. uncomment on server
+            $ip                 = $_SERVER['REMOTE_ADDR'];   // ip address. uncomment on server
             $record             = $reader->city($ip);
             $info               = $record->country->isoCode;
             $country            = $record->country->name;
@@ -146,7 +147,7 @@ class PlgContentAskExpert extends JPlugin
             {
 				$content            .= "<div class='form-check'>";
 				$content            .= "<input class='form-check-input' type='radio' name='expert_choice' id='expert_choice1' value='razorpay' checked />";
-				$content            .= "<label class='form-check-label' for='expert_choice1'><i class='fa fa-credit-card'></i> Credit/Debit Card/Netbanking</label>";
+				$content            .= "<label class='form-check-label' for='expert_choice1'><i class='bi bi-credit-card'></i> Credit/Debit Card/Netbanking</label>";
 				$content            .= "</div>";
 				$content            .= "<div class='form-check'>";
 				$content            .= "<input class='form-check-input' type='radio' name='expert_choice' id='expert_choice4' value='paytm' />";
@@ -159,7 +160,7 @@ class PlgContentAskExpert extends JPlugin
             {
                 $content            .= "<div class='form-check'>";
                 $content            .= "&nbsp;<input class='form-check-input' type='radio' name='expert_choice' id='expert_choice7' value='paypal' checked />";
-                $content            .= "<label class='form-check-label' for='expert_choice7'><i class='fab fa-paypal'></i> Paypal</label>";
+                $content            .= "<label class='form-check-label' for='expert_choice7'><i class='bi bi-paypal'></i> Paypal</label>";
                 $content            .= "</div>";
 
             }

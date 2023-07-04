@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @package     Joomla.Plugin
+ * @package     JCE
  * @subpackage  Fields.MediaJce
  *
- * @copyright   Copyright (C) 2005 - 2019 Open Source Matters, Inc. All rights reserved.
- * @copyright   Copyright (C) 2020 Ryan Demmer. All rights reserved.
+ * @copyright   Copyright (C) 2005 - 2023 Open Source Matters, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2020 - 2023 Ryan Demmer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die;
@@ -20,15 +20,23 @@ if (empty($field->value) || empty($field->value['media_src']))
 	return;
 }
 
-$data = array_merge(array(
+$data = array(
     'media_src'         => '',
-    'media_text'        => '',
+    'media_text'        => (string) $fieldParams->get('media_description', ''),
     'media_type'        => (string) $fieldParams->get('mediatype', 'embed'),
     'media_target'      => (string) $fieldParams->get('media_target', ''),
     'media_class'       => (string) $fieldParams->get('media_class', ''),
     'media_caption'     => '',
     'media_supported'   => array('img', 'video', 'audio', 'iframe', 'a')
-), $field->value);
+);
+
+foreach($field->value as $key => $value) {
+	if (empty($value)) {
+		continue;
+	}
+	
+	$data[$key] = $value;
+}
 
 // convert to object
 $data = (object) $data;
@@ -75,7 +83,7 @@ if ($data->media_type == 'link') {
 $attribs = array();
 
 if ($data->media_class) {
-    $data->media_class = preg_replace('/[^A-Z0-9_- ]/i', '', $data->media_class);
+    $data->media_class = preg_replace('#[^-\w ]#i', '', $data->media_class);
     $attribs['class'] = trim($data->media_class);
 }
 
@@ -138,7 +146,7 @@ if ($data->media_type == 'embed' && $data->media_caption) {
     $caption_class = (string) $fieldParams->get('media_caption_class', '');
 
     if ($caption_class) {
-        $caption_class = preg_replace('/[^A-Z0-9_- ]/i', '', $caption_class);
+        $caption_class = preg_replace('#[^ \w-]#i', '', $caption_class);
         $fig_attribs = ' class="' . $caption_class . '"';
     }
 
@@ -147,8 +155,8 @@ if ($data->media_type == 'embed' && $data->media_caption) {
 
 $buffer = '';
 
-// remove some common characters
-$path = preg_replace('#[\+\\\?\#%&<>"\'=\[\]\{\},;@\^\(\)£€$]#', '', $data->media_src);
+// perform pcre replacement of common invalid characters
+$path = preg_replace('#[\+\\\?\#%&<>"\'=\[\]\{\},;@\^\(\)£€$]#u', '', $data->media_src);
 
 // trim
 $path = trim($path);

@@ -6,3 +6,18 @@ function openNav() {
 function closeNav() {
   document.getElementById("sidenav").style.width = "0";
 }
+function changeText()
+{
+	//var txt 		= "Yay... Change text works.";
+	//document.getElementById("demo").innerHTML = txt;
+	 $.ajax({
+          url: 'index.php?option=com_ajax&module=navtara&method=getIP&format=raw',
+          type: "post",
+          success: function(data) {
+          alert(data);
+          
+          }
+        
+        });
+      
+}

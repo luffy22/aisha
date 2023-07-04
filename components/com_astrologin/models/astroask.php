@@ -9,8 +9,8 @@ class AstrologinModelAstroask extends ListModel
     function getData()
     {
         //$reader = new Reader('/usr/local/share/GeoIP/GeoIP2-City.mmdb');  // local file
-       $reader         = new Reader(JPATH_BASE.'/geoip/GeoIP2-City.mmdb'); // server file
-        //$ip                           = '117.196.1.11';
+        $reader             = new Reader('/home3/astroxou/usr/share/GeoIP2-City.mmdb'); // server file
+        //$ip               = '117.196.1.11';
         //$ip                             = '140.120.6.207';
         //$ip                             = '157.55.39.123';  // ip address
         //$ip 							= '1.10.128.129';  // thai address
@@ -428,7 +428,7 @@ class AstrologinModelAstroask extends ListModel
         $body       .= "<p><strong>Details Of Your Order Are As Below: </strong></p>";
         $body       .= "<p>Order ID: ".$data->UniqueID."</p>";
 
-        if($data->order_type == "short")
+        if($data->order_type == "short_ans")
         {
 			$body 			.= "<p>Answer Type: Short Answer</p>";
         }
@@ -449,7 +449,7 @@ class AstrologinModelAstroask extends ListModel
         $body           .= "<p>Fees: ".$data->fees."&nbsp;".$data->currency."</p>";
         $body           .= "<p>Payment Via: ".ucfirst($data->pay_mode)."</p>";
 
-       if(($data->pay_mode=="paytm"||$data->pay_mode=="razorpay")&&($data->order_type == "short"))
+       if(($data->pay_mode=="paytm"||$data->pay_mode=="razorpay"))
         {
             $body       .= "<p>Payment Status: Success</p>";
             $body       .= "<br/><p>Please keep this email as reference. Alternatively you can also print this email for future reference.</p>";
@@ -462,10 +462,7 @@ class AstrologinModelAstroask extends ListModel
              $body       .= "<br/><p>Please keep this email as reference. Alternatively you can also print this email for future reference.</p>";
             $body       .= "<p>Your order will be completed in 3-5 working day(Monday-Friday).</p>";
         }
-        else
-        {
-            $body       .= "<p>Something went wrong with the payment. Please reply back to this email.</p>";
-        }
+        
 
         $body           .= "<p>Admin At Astro Isha,<br/>Rohan Desai</p>";
         $mailer->isHtml(true);

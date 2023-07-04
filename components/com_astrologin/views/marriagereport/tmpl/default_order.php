@@ -48,7 +48,7 @@ if(isset($_GET['payment']) && $_GET['payment']=="success")
   </ul>
   <div class="mb-4"></div>
 <div class="container"><div class="row">
-<div class="col-4"><a href="<?php echo Juri::base().'read-report?order='.$order.'&ref='.$refemail; ?>"><i class="fas fa-home"></i> Report Home</a></div>
+<div class="col-4"><a href="<?php echo Juri::base().'read-report?order='.$order.'&ref='.$refemail; ?>"><i class="bi bi-house-fill fs-2"></i> Report Home</a></div>
 </div></div>
 <div class="mb-4"></div>
 <?php

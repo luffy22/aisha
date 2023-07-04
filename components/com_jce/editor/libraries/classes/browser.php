@@ -690,7 +690,7 @@ class WFFileBrowser extends JObject
      *
      * @return Tree node array
      */
-    public function getTreeItem($path)
+    public function getTreeItem($path = "")
     {
         $filesystem = $this->getFileSystem();
         $path = rawurldecode($path);
@@ -801,7 +801,7 @@ class WFFileBrowser extends JObject
             foreach ($folders as $folder) {
                 $name = ltrim($folder['id'], '/');
 
-                $open = preg_match('#' . $name . '\b#', $treedir);
+                $open = preg_match('#' . preg_quote($name) . '\b#', $treedir);
 
                 $result .= '<li data-id="' . $this->escape($name) . '" class="' . ($open ? 'uk-tree-open' : '') . '">'
                     . ' <div class="uk-tree-row">'
@@ -811,9 +811,9 @@ class WFFileBrowser extends JObject
                     . '   </a>'
                     . ' </div>';
 
-                /*if ($open) {
-                $result .= $this->getTreeItems($folder['id'], false, false);
-                }*/
+                if ($open) {
+                    $result .= $this->getTreeItems($folder['id'], false, false);
+                }
 
                 $result .= '</li>';
             }

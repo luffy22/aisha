@@ -6,25 +6,37 @@
 
 #system-message-container joomla-alert {
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
   min-width: 16rem;
   padding: 0;
   margin-bottom: 0;
   color: var(--gray-dark);
-  background-color: white;
+  background-color: hsl(0, 0%, 100%);
   border: 1px solid var(--alert-accent-color, transparent);
   border-radius: 0.25rem;
+  -webkit-transition: opacity 0.15s linear;
+  -o-transition: opacity 0.15s linear;
   transition: opacity 0.15s linear;
 }
 #system-message-container joomla-alert + * {
   margin-top: 1rem;
 }
 #system-message-container joomla-alert .alert-heading {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
   padding: 0.8rem;
   color: var(--alert-heading-text);
   background: var(--alert-accent-color, transparent);
@@ -74,25 +86,25 @@
   --alert-accent-color: var(--success);
   --alert-heading-text: hsla(0, 0%, 100%, .95);
   --alert-close-button: var(--success);
-  background-color: white;
+  background-color: hsl(0, 0%, 100%);
 }
 #system-message-container joomla-alert[type=info], #system-message-container joomla-alert[type=notice] {
   --alert-accent-color: var(--info);
   --alert-heading-text: hsla(0, 0%, 100%, .95);
   --alert-close-button: var(--info);
-  background-color: white;
+  background-color: hsl(0, 0%, 100%);
 }
 #system-message-container joomla-alert[type=warning] {
   --alert-accent-color: var(--warning);
   --alert-heading-text: hsla(0, 0%, 100%, .95);
   --alert-close-button: var(--warning);
-  background-color: white;
+  background-color: hsl(0, 0%, 100%);
 }
 #system-message-container joomla-alert[type=error], #system-message-container joomla-alert[type=danger] {
   --alert-accent-color: var(--danger);
   --alert-heading-text: hsla(0, 0%, 100%, .95);
   --alert-close-button: var(--danger);
-  background-color: white;
+  background-color: hsl(0, 0%, 100%);
 }
 #system-message-container joomla-alert .joomla-alert--close,
 #system-message-container joomla-alert .joomla-alert-button--close {

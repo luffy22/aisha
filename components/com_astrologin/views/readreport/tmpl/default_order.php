@@ -35,7 +35,7 @@ else if(isset($_GET['payment']) && $_GET['payment']=="fail")
 //print_r($this->order);
 //print_r($this->details);exit;
 ?>
-<p class="d-flex justify-content-end"><a href="<?php echo JUri::base(); ?>getorder?order=<?php echo $this->details->UniqueID ?>&ref=<?php echo $this->details->email; ?>"><i class="bi bi-cart3 fs-2"></i> Your Orders</a></p>
+<p class="d-flex justify-content-end"><a href="<?php echo JUri::base(); ?>getorder?order=<?php echo $this->details->UniqueID ?>&ref=<?php echo $this->details->email; ?>"><i class="bi bi-cart fs-2"></i> Your Orders</a></p>
 <div class="mb-3"></div>
     <div class="lead alert alert-dark">Order Details</div>
    <ul class="list-group">
@@ -61,6 +61,8 @@ else if(isset($_GET['payment']) && $_GET['payment']=="fail")
     <li class="list-group-item">Place Of Birth: <?php echo $this->details->pob; ?></li>
     <li class="list-group-item">Order Type: <?php if($this->details->order_type=="career"){echo "Career Report";}
                                                   else if($this->details->order_type=="marriage"){echo "Marriage Report";}
+                                                  else if($this->details->order_type=="finance"){echo "Finance Report";}
+                                                  else if($this->details->order_type=="education"){echo "Education Report";}
                                                   else if($this->details->order_type=="life"){echo "Life Report"; }
                                                   else if($this->details->order_type=="yearly"){echo "Yearly Report"; }
                                                   else if($this->details->order_type=="sadesati"){echo "Sade-Sati Report"; }
@@ -113,6 +115,15 @@ else if($this->details->order_type=="finance")
 </ul>
 <?php
 }
+else if($this->details->order_type=="education")
+{
+?>
+<ul class="list-group">
+    <li class="list-group-item"><a href="<?php echo Juri::base().'educationreport?order='.$order.'&ref='.$refemail; ?>">Education Report</a></li>
+    <li class="list-group-item"><a href="<?php echo Juri::base().'astroqueries?order='.$order.'&ref='.$refemail; ?>">Query Answer</a></li>
+</ul>
+<?php
+}
 else if($this->details->order_type=="yearly")
 {
 ?>
@@ -127,7 +138,7 @@ else
     echo "Not yet answered";    
 }
 ?>
-<div clas="mb-4"></div>
+<div class="mb-4"></div>
 <?php
 unset($this->order);unset($this->details);
 ?>
