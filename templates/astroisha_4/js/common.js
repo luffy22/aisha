@@ -14,7 +14,7 @@ function changeText()
           url: 'index.php?option=com_ajax&module=navtara&method=getIP&format=raw',
           type: "post",
           success: function(data) {
-          alert(data);
+          document.getElementById("demo").innerHTML = data;
           
           }
         
