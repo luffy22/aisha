@@ -11,6 +11,8 @@
 require_once(JPATH_BASE.'/geoip/autoload.php');
 //echo JPATH_BASE;exit;
 use GeoIp2\Database\Reader;
+$libPath = JPATH_BASE.'/sweph/';
+putenv("PATH=$libPath");
 /**
  * Helper for mod_articles_archive
  *
@@ -36,5 +38,20 @@ class ModNavtaraHelper
         $state_code         = $record->mostSpecificSubdivision->isoCode;
         $city               = $record->city->name;
         return $city." ".$state." ".$country;
+    }
+    public static function getNakshatraAjax()
+    {
+        $libPath        = JPATH_BASE.'/sweph/';
+    }
+    public static function getNakshatra()
+    {
+        $db             = JFactory::getDbo();
+        $query          = $db->getQuery(true);
+        $query          ->select('DISTINCT nakshatra');
+        $query          ->from($db->quoteName('#__nakshatras'));
+        $db             ->setQuery($query);
+        $result          = $db->loadColumn();
+        return $result;
+        //$query          ->clear;
     }
 }
