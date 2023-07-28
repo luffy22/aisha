@@ -1,7 +1,6 @@
 <?php 
 defined('_JEXEC') or die;
-//print_r($order);exit;
-//print_r($nakshatra);exit;
+print_r($current);exit;
 ?>
 <div class="card">
 <div class="card-header lead alert alert-dark">Daily Fortune using Navtara</div>
@@ -16,7 +15,7 @@ defined('_JEXEC') or die;
   </div>
     <div class="col-md">
         <div class="form-floating">
-        <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+        <select class="form-select form-select-lg" id="nakshatra_sel" aria-label="Selection Birth-Time Nakshatra">
         <?php
         foreach($nakshatra as $value)
         {
@@ -31,9 +30,10 @@ defined('_JEXEC') or die;
     </div>
     <div class="mb-3"></div>
     <div class="col-md">
-    <a href="#" class="btn btn-primary">Get Forecast</a>
+    <button class="btn btn-primary" onclick="javascript:getForecast();">Get Forecast</button>
     </div>
     
   </div>
 </div>
 <div class="mb-3"></div>
+<p id="demo">Change Text</p>

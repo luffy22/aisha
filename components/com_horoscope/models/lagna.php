@@ -152,7 +152,7 @@ class HoroscopeModelLagna extends ListModel
         //print_r($asc);exit;
         return $asc;
     }
-    protected function getTimeZone($lat, $lon, $username)
+    public function getTimeZone($lat, $lon, $username)
     {
        	//error checking
 	if (!is_numeric($lat)) { custom_die('A numeric latitude is required.'); }
@@ -178,7 +178,7 @@ class HoroscopeModelLagna extends ListModel
 	else { return "error"; }
 
     }
-    protected function getUserData($horo_id)
+    public function getUserData($horo_id)
     {
         $user   = JFactory::getUser();
         //echo $user->id;exit;
@@ -437,7 +437,7 @@ class HoroscopeModelLagna extends ListModel
         
         return $data;
     }
-    protected function getNavamsha($planet,$sign,$dist)
+    public function getNavamsha($planet,$sign,$dist)
     {
         //echo $planet." ".$sign." ".$dist;exit;
         $db                     = JFactory::getDbo();
@@ -455,7 +455,7 @@ class HoroscopeModelLagna extends ListModel
         $navamsha           = array($planet."_navamsha_sign"=>$navamsha_sign);
         return $navamsha;
     }
-    protected function getDetails($data)
+    public function getDetails($data)
     {
         //print_r($data);exit;
         
@@ -600,7 +600,7 @@ class HoroscopeModelLagna extends ListModel
         $array              = array($planet."_rise_".$num=>$date->format('d-m-Y H:i:s'),$planet."_set_".$num=>$date1->format('d-m-Y H:i:s'));
         return $array;
     }
-    protected function checkPlanetsInHouse($data, $num)
+    public function checkPlanetsInHouse($data, $num)
     {
         //print_r($num);exit;
         $asc                    = $this->calcDetails($data["Ascendant"]);
@@ -628,7 +628,7 @@ class HoroscopeModelLagna extends ListModel
         }
        return array("house_".$num => $planets_in_house);
     }
-    protected function checkAspectsOnHouse($data, $num)
+    public function checkAspectsOnHouse($data, $num)
     {
         $aspect                 = array();
         $asc                    = $this->calcDetails($data["Ascendant"]);
@@ -708,7 +708,7 @@ class HoroscopeModelLagna extends ListModel
         }
         return array("aspect_".$num =>$aspect);
     }
-    protected function getHouseSign($asc, $num)
+    public function getHouseSign($asc, $num)
     {
         //echo $asc." ".$num;exit;
         $signs              = array("Aries","Taurus","Gemini","Cancer",

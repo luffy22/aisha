@@ -14,5 +14,6 @@ require_once __DIR__ . '/helper.php';
 
 $navtara	= ModNavtaraHelper::getIPAjax();
 $nakshatra      = ModNavtaraHelper::getNakshatra();
+$current        = ModNavtaraHelper::getCurrentNakshatra();
 
 require JModuleHelper::getLayoutPath('mod_navtara', $params->get('layout', 'default'));

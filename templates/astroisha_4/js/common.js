@@ -8,16 +8,28 @@ function closeNav() {
 }
 function getIPLocation()
 {
-	//var txt 		= "Yay... Change text works.";
-	//document.getElementById("demo").innerHTML = txt;
-	 $.ajax({
-          url: 'index.php?option=com_ajax&module=navtara&method=getIP&format=raw',
-          type: "post",
-          success: function(data) {
-          document.getElementById("demo").innerHTML = data;
-          
-          }
-        
-        });
+    //var txt 		= "Yay... Change text works.";
+    //document.getElementById("demo").innerHTML = txt;
+     $.ajax({
+            url: 'index.php?option=com_ajax&module=navtara&method=getIP&format=raw',
+            type: "post",
+            success: function(data) {
+            document.getElementById("demo").innerHTML = data;
+      }
+
+    });
       
+}
+function getForecast()
+{
+    var nakshatra   = document.getElementById("nakshatra_sel").value;
+
+    $.ajax({
+            url: 'index.php?option=com_ajax&module=navtara&method=getForecast&format=raw',
+            type: "post",
+            data: {'nakshatra': nakshatra},
+            success: function(data) {
+            document.getElementById("demo").innerHTML = data;
+        }
+    });
 }
