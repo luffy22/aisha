@@ -11,8 +11,9 @@
 require_once(JPATH_BASE.'/geoip/autoload.php');
 //echo JPATH_BASE;exit;
 use GeoIp2\Database\Reader;
-use Joomla\CMS\MVC\Model\ListModel;
-
+jimport('joomla.application.component.modelitem');
+JModelLegacy::addIncludePath(JPATH_SITE.'/components/com_horoscope/models/');
+$model = JModelLegacy::getInstance('navtara', 'horoscopeModel');
 /**
  * Helper for mod_articles_archive
  *
@@ -20,7 +21,7 @@ use Joomla\CMS\MVC\Model\ListModel;
  * @subpackage  mod_articles_archive
  * @since       1.5
  */
-class ModNavtaraHelper extends HoroscopeModelNakshatra
+class ModNavtaraHelper extends HoroscopeModelNavtara
 {
     public static function getIPAjax()
     {
@@ -41,50 +42,28 @@ class ModNavtaraHelper extends HoroscopeModelNakshatra
     }
     public static function getForecastAjax()
     {
-        $nakshatras     = self::getNakshatra();
         $nakshatra      = $_POST['nakshatra'];
-        $key            = array_search($nakshatra, $nakshatras);
+        $navtara        = self::getCurrNavtara($nakshatra);
+        return $navtara;
         
     }
-    public static function getNakshatra()
+    public static function getNakshatraList()
     {
-        $db             = JFactory::getDbo();
-        $query          = $db->getQuery(true);
-        $query          ->select('DISTINCT nakshatra');
-        $query          ->from($db->quoteName('#__nakshatras'));
-        $db             ->setQuery($query);
-        $result          = $db->loadColumn();
-        return $result;
-        //$query          ->clear;
+        $class          = new HoroscopeModelNavtara();
+        $list           = $class->getNakshatras();
+        return $list;
     }
-    public static function getCurrentNakshatra()
+    /*
+     * Method to get the navtara
+     * @param nakshatra The birth time nakshatra of the individual
+     */
+    public static function getCurrNavtara($nakshatra)
     {
-        ///$current        = $this->get
-        /*$libPath        = JPATH_BASE.'/sweph/';
         $dob_tob        = date('Y-m-d H:i:s');
-        $timezone       = 'Asia/kolkata';
-        $date           = new DateTime($dob_tob, new DateTimeZone($timezone));
-        //print_r($date);exit;
-        $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
-        $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
-        //echo $timestamp." ".$offset;exit;
-        // $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
-        /**
-         * Converting birth date/time to UTC
-         */
-        //$utcTimestamp = $timestamp - $offset;
-
-        //echo $utcTimestamp;exit;
-        //echo date('Y-m-d H:i:s', $utcTimestamp); echo '<br>';
-
-        /*$date = date('d.m.Y', $utcTimestamp);
-        $time = date('H:i:s', $utcTimestamp);
-        //echo $date." ".$time;exit;
-        $h_sys = 'P';
-        $output = "";
-
-        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p1 -g, -head", $output);
-        
-        print_r($output);exit;*/
+        $tmz            = 'Asia/kolkata';
+       
+        $class          = new HoroscopeModelNavtara();
+        $sign           = $class->getNavtara($dob_tob, $tmz, $nakshatra);
+        return $sign;
     }
 }

@@ -1,6 +1,6 @@
 <?php 
 defined('_JEXEC') or die;
-print_r($current);exit;
+//print_r($current);exit;
 ?>
 <div class="card">
 <div class="card-header lead alert alert-dark">Daily Fortune using Navtara</div>

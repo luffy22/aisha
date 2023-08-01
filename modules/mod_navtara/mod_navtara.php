@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 require_once __DIR__ . '/helper.php';
 
 $navtara	= ModNavtaraHelper::getIPAjax();
-$nakshatra      = ModNavtaraHelper::getNakshatra();
-$current        = ModNavtaraHelper::getCurrentNakshatra();
+$nakshatra      = ModNavtaraHelper::getNakshatraList();
+$current        = ModNavtaraHelper::getForecastAjax();
 
 require JModuleHelper::getLayoutPath('mod_navtara', $params->get('layout', 'default'));
