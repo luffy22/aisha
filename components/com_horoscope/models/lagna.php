@@ -142,7 +142,7 @@ class HoroscopeModelLagna extends ListModel
         //echo $date." ".$time;exit;
         $h_sys = 'P';
         $output = "";
-        // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
+// More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
         exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -house$lon,$lat,$h_sys -fPls -p -g, -head", $output);
         //print_r($output);exit;
         $val            = explode(",",$output[12]);
@@ -152,7 +152,7 @@ class HoroscopeModelLagna extends ListModel
         //print_r($asc);exit;
         return $asc;
     }
-    public function getTimeZone($lat, $lon, $username)
+    protected function getTimeZone($lat, $lon, $username)
     {
        	//error checking
 	if (!is_numeric($lat)) { custom_die('A numeric latitude is required.'); }
@@ -178,7 +178,7 @@ class HoroscopeModelLagna extends ListModel
 	else { return "error"; }
 
     }
-    public function getUserData($horo_id)
+    protected function getUserData($horo_id)
     {
         $user   = JFactory::getUser();
         //echo $user->id;exit;
@@ -437,7 +437,29 @@ class HoroscopeModelLagna extends ListModel
         
         return $data;
     }
-    public function getNavamsha($planet,$sign,$dist)
+    /*
+     * This function gets the nakshatra as well as
+     * upper degree and lower degree of nakshatra
+     * to determine duration planet will stay in that nakshatra
+     * @param planet The planet whose nakshatra needs to be calculated
+     * @param dist The distance planet has travelled in the nakshatra
+     * @return low_deg The absolute lower degree of planet
+     * @return up_deg The absolute up_degree of planet
+     */
+    public function getNakshatraDeg($planet,$dist)
+    {
+        $db                     = JFactory::getDbo();
+        $query                  = $db->getQuery(true);
+        $query                  ->select($db->quoteName(array('nakshatra','abs_down_deg','abs_up_deg')));
+        $query                  ->from($db->quoteName('#__nakshatras'));
+        $query                  ->where($db->quote($dist).' BETWEEN '.
+                                        $db->quoteName('abs_down_deg').' AND '.
+                                        $db->quoteName('abs_up_deg')); 
+        $db                     ->setQuery($query);
+        $result                 = $db->loadAssoc();
+        return $result;
+    }
+    protected function getNavamsha($planet,$sign,$dist)
     {
         //echo $planet." ".$sign." ".$dist;exit;
         $db                     = JFactory::getDbo();
@@ -455,7 +477,7 @@ class HoroscopeModelLagna extends ListModel
         $navamsha           = array($planet."_navamsha_sign"=>$navamsha_sign);
         return $navamsha;
     }
-    public function getDetails($data)
+    protected function getDetails($data)
     {
         //print_r($data);exit;
         
@@ -600,7 +622,7 @@ class HoroscopeModelLagna extends ListModel
         $array              = array($planet."_rise_".$num=>$date->format('d-m-Y H:i:s'),$planet."_set_".$num=>$date1->format('d-m-Y H:i:s'));
         return $array;
     }
-    public function checkPlanetsInHouse($data, $num)
+    protected function checkPlanetsInHouse($data, $num)
     {
         //print_r($num);exit;
         $asc                    = $this->calcDetails($data["Ascendant"]);
@@ -628,7 +650,7 @@ class HoroscopeModelLagna extends ListModel
         }
        return array("house_".$num => $planets_in_house);
     }
-    public function checkAspectsOnHouse($data, $num)
+    protected function checkAspectsOnHouse($data, $num)
     {
         $aspect                 = array();
         $asc                    = $this->calcDetails($data["Ascendant"]);
@@ -708,7 +730,7 @@ class HoroscopeModelLagna extends ListModel
         }
         return array("aspect_".$num =>$aspect);
     }
-    public function getHouseSign($asc, $num)
+    protected function getHouseSign($asc, $num)
     {
         //echo $asc." ".$num;exit;
         $signs              = array("Aries","Taurus","Gemini","Cancer",

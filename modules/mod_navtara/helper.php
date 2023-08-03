@@ -49,9 +49,14 @@ class ModNavtaraHelper extends HoroscopeModelNavtara
     }
     public static function getNakshatraList()
     {
-        $class          = new HoroscopeModelNavtara();
-        $list           = $class->getNakshatras();
-        return $list;
+        $db             = JFactory::getDbo();
+        $query          = $db->getQuery(true);
+        $query          ->select('DISTINCT nakshatra');
+        $query          ->from($db->quoteName('#__nakshatras'));
+        $db             ->setQuery($query);
+        $result          = $db->loadColumn();
+        $query->clear();
+        return $result;
     }
     /*
      * Method to get the navtara

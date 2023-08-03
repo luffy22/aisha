@@ -6,6 +6,7 @@
             <file>file:/var/www/html/aisha/modules/mod_navtara/mod_navtara.php</file>
             <file>file:/var/www/html/aisha/components/com_horoscope/models/navtara.php</file>
             <file>file:/var/www/html/aisha/templates/astroisha_4/js/common.js</file>
+            <file>file:/var/www/html/aisha/components/com_horoscope/models/panchang.php</file>
             <file>file:/var/www/html/aisha/modules/mod_navtara/helper.php</file>
         </group>
     </open-files>

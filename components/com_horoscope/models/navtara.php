@@ -48,22 +48,39 @@ class HoroscopeModelNavtara extends HoroscopeModelPanchang
         $output = "";
         // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
         exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p1 -g, -head", $output);
-        $data           = explode(",",$output[0]);
-        $planet         = $data[0];
-        $dist           = $data[1];
-        $sign           = $this->calcDetails($dist);
-        $dist2          = $this->convertDecimalToDegree($dist,"details");  
-        $newdata        = array();
-        $details        = $this->getPlanetaryDetails($planet, $sign, $dist2);
-        $curr_nak       = $details[$planet.'_nakshatra'];  // current nakshatra
-        return $curr_nak;
+        $data                   = explode(",",$output[0]);
+        $planet                 = $data[0];
+        $dist                   = number_format($data[1],2);
+        //echo $dist;exit;
+        $curr_nak_details       = $this->getNakshatraDeg($planet,$dist);
+        $curr_nak               = $curr_nak_details['nakshatra'];
+        $curr_nak_down          = $curr_nak_details['abs_down_deg'];  // absolute upper degree of nakshatra
+        $curr_nak_up            = $curr_nak_details['abs_up_deg'];      // absolute lower degree of nakshatra
         $dist           = $this->getNakshatraDist($birth_nak, $curr_nak);
+        return $dist;
         
     }
+   
     public function getNakshatraDist($birth_nak, $curr_nak)
     {
-        $naksatras      = $this->getNakshatras();
+        //return $curr_nak;
+        //$curr_nak       = "Shravana";
+        $nakshatras     = $this->getNakshatras();
+        $birth_key      = array_search($birth_nak, $nakshatras);
+        $curr_key       = array_search($curr_nak, $nakshatras);
         
+        if($birth_key > $curr_key)
+        {
+            $diff       = 27 - $birth_key;
+            $diff       = $diff + $curr_key;
+            $diff       = $diff + 1;
+        }
+        else
+        {
+            $diff       = $curr_key - $birth_key;
+            $diff       = $diff + 1;
+        }
+        return $diff;
     }
     
     
