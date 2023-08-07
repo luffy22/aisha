@@ -29,8 +29,11 @@ class HoroscopeModelNavtara extends HoroscopeModelPanchang
      */
     public function getNavtara($dob_tob, $tmz, $birth_nak)
     {
+        //print_r($tmz);exit;
         $libPath        = JPATH_BASE.'/sweph/';
         $date           = new DateTime($dob_tob, new DateTimeZone($tmz));
+        $lat            = '23.02';
+        $lon            = '72.57';
         //print_r($date);exit;
         $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
         $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
@@ -43,11 +46,12 @@ class HoroscopeModelNavtara extends HoroscopeModelPanchang
          
         $date = date('d.m.Y', $utcTimestamp);
         $time = date('H:i:s', $utcTimestamp);
-
-
+        
+        $h_sys = 'P';
         $output = "";
         // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
-        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p1 -g, -head", $output);
+        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -house$lon,$lat,$h_sys -fPls -p1 -g, -head", $output);
+        //print_r($output);exit;
         $data                   = explode(",",$output[0]);
         $planet                 = $data[0];
         $dist                   = number_format($data[1],2);
@@ -68,7 +72,7 @@ class HoroscopeModelNavtara extends HoroscopeModelPanchang
         $nakshatras     = $this->getNakshatras();
         $birth_key      = array_search($birth_nak, $nakshatras);
         $curr_key       = array_search($curr_nak, $nakshatras);
-        
+        $diff           = 0;
         if($birth_key > $curr_key)
         {
             $diff       = 27 - $birth_key;
@@ -80,7 +84,20 @@ class HoroscopeModelNavtara extends HoroscopeModelPanchang
             $diff       = $curr_key - $birth_key;
             $diff       = $diff + 1;
         }
-        return $diff;
+        //return $diff;
+        $db             = JFactory::getDbo();
+        $query          = $db->getQuery(true);
+        $query          ->select('description');
+        $query          ->from($db->quoteName('#__navtara'));
+        $query          ->where($db->quoteName('val_1').' = '.$db->quote($diff).
+                            ' OR '.$db->quoteName('val_2').' = '.$db->quote($diff).
+                            ' OR '.$db->quoteName('val_3').' = '.$db->quote($diff));
+        $db             ->setQuery($query);
+        $result         = $db->loadAssoc();
+        $desc           = str_replace('nakshatra',$curr_nak,$result['description']);
+        $result         = array("birth_nak"=>$birth_nak,"curr_nak"=>$curr_nak,
+                                "description" => $desc);
+        return json_encode($result);
     }
     
     

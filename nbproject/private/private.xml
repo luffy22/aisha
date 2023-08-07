@@ -8,6 +8,7 @@
             <file>file:/var/www/html/aisha/templates/astroisha_4/js/common.js</file>
             <file>file:/var/www/html/aisha/components/com_horoscope/models/panchang.php</file>
             <file>file:/var/www/html/aisha/modules/mod_navtara/helper.php</file>
+            <file>file:/var/www/html/aisha/components/com_horoscope/models/lagna.php</file>
         </group>
     </open-files>
 </project-private>

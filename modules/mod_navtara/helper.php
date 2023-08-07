@@ -23,22 +23,25 @@ $model = JModelLegacy::getInstance('navtara', 'horoscopeModel');
  */
 class ModNavtaraHelper extends HoroscopeModelNavtara
 {
-    public static function getIPAjax()
+    public static function getLocation()
     {
 		
         $reader = new Reader('/usr/local/share/GeoIP/GeoIP2-City.mmdb');  // local file
         //$reader             = new Reader('/home3/astroxou/usr/share/GeoIP2-City.mmdb'); // server file
-        //$ip               = '117.196.1.11';
-        $ip                 = '157.55.39.123';  // ip address
+        $ip               = '117.196.1.11';
+        //$ip                 = '157.55.39.123';  // ip address
         //$ip                 = '180.215.160.173';
         //$ip                 = $_SERVER['REMOTE_ADDR'];   // ip address. uncomment on server
         $record             = $reader->city($ip);
-        $info               = $record->country->isoCode;
         $country            = $record->country->name;
-        $state              = $record->mostSpecificSubdivision->name;
-        $state_code         = $record->mostSpecificSubdivision->isoCode;
         $city               = $record->city->name;
-        return $city." ".$state." ".$country;
+        $lat                = $record->location->latitude;
+        $lon                = $record->location->longitude;
+        
+        $location           = array("city"=>$city,"country"=>$country,
+                                    "lat"=>$lat,"lon"=>$lon);
+        return $location;
+        
     }
     public static function getForecastAjax()
     {
@@ -64,11 +67,12 @@ class ModNavtaraHelper extends HoroscopeModelNavtara
      */
     public static function getCurrNavtara($nakshatra)
     {
+         
         $dob_tob        = date('Y-m-d H:i:s');
         $tmz            = 'Asia/kolkata';
        
         $class          = new HoroscopeModelNavtara();
-        $sign           = $class->getNavtara($dob_tob, $tmz, $nakshatra);
+        $sign           = $class->getNavtara($dob_tob,$tmz, $nakshatra);
         return $sign;
     }
 }

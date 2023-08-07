@@ -14,7 +14,7 @@ function getIPLocation()
             url: 'index.php?option=com_ajax&module=navtara&method=getIP&format=raw',
             type: "post",
             success: function(data) {
-            document.getElementById("demo").innerHTML = data;
+            document.getElementById("navtara").innerHTML = data;
       }
 
     });
@@ -29,7 +29,12 @@ function getForecast()
             type: "post",
             data: {'nakshatra': nakshatra},
             success: function(data) {
-            document.getElementById("demo").innerHTML = data;
+            const obj = JSON.parse(data);
+            document.getElementById("navtara_form").style.display = 'none';
+            $('#navtara_form').hide();
+            document.getElementById("birth_nak").innerHTML = "<strong>Birth Time Nakshatra</strong>: "+ obj.birth_nak;
+            document.getElementById("curr_nak").innerHTML = "<strong>Current Nakshatra Transit: </strong>"+obj.curr_nak;
+            document.getElementById("demo").innerHTML = obj.description;
         }
     });
 }

@@ -1,11 +1,12 @@
 <?php 
 defined('_JEXEC') or die;
 //print_r($current);exit;
+//print_r($location);exit;
 ?>
 <div class="card">
 <div class="card-header lead alert alert-dark">Daily Fortune using Navtara</div>
-  <div class="card-body">
-    <p class="text-end">Location: <a href="#" class="btn btn-primary btn-small"><i class="bi bi-pencil"></i></a></p>
+<p class="text-end">Location: <?php echo $location['city'].", ".$location['country']; ?>&nbsp;<a href="#" class="btn btn-primary btn-small"><i class="bi bi-pencil"></i></a></p>
+  <div class="card-body" id="navtara_form">
     <div class="row g-2">
   <div class="col-md">
     <div class="form-floating">
@@ -34,6 +35,10 @@ defined('_JEXEC') or die;
     </div>
     
   </div>
+<p id="birth_nak"></p><p id="curr_nak"></p>
+<p id="demo">Change Text</p>
 </div>
 <div class="mb-3"></div>
-<p id="demo">Change Text</p>
+
+
+
