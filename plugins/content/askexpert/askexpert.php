@@ -18,14 +18,14 @@ class PlgContentAskExpert extends JPlugin
             $view               = $app->input->get('view');
             $path               = JPluginHelper::getLayoutPath('content', 'askexpert');
             $content            = "";
-            //$reader = new Reader('/usr/local/share/GeoIP/GeoIP2-City.mmdb');  // local file
-            $reader             = new Reader('/home3/astroxou/usr/share/GeoIP2-City.mmdb'); // server file
-            //$ip               = '117.196.1.11';
+            $reader = new Reader('/usr/local/share/GeoIP/GeoIP2-City.mmdb');  // local file
+            //$reader             = new Reader('/home3/astroxou/usr/share/GeoIP2-City.mmdb'); // server file
+            $ip               = '117.196.1.11';
             //$ip                             = '140.120.6.207';
             //$ip                             = '157.55.39.123';  // ip address
             //$ip 							= '1.10.128.129';  // thai address
             //	$ip 							= '175.157.193.156'; // srilanka ip address
-            $ip                 = $_SERVER['REMOTE_ADDR'];   // ip address. uncomment on server
+            //$ip                 = $_SERVER['REMOTE_ADDR'];   // ip address. uncomment on server
             $record             = $reader->city($ip);
             $info               = $record->country->isoCode;
             $country            = $record->country->name;
@@ -89,7 +89,8 @@ class PlgContentAskExpert extends JPlugin
         //print_r($details);exit;
         $content            .=  "<div class='card border-primary mb-3'>";
         $content            .= "<div class='card-body'>";
-        $content            .= "<div class='lead text-center'>Get Online Consultation</div>";
+        $content 			.= "<p><strong>Order Processing Time: </strong>Minimum 2-3 working days(Monday-Friday).</p>";
+	    $content            .= "<div class='lead text-center'>Get Online Consultation</div>";
         $content            .= "<h3><a title='Click to get more info' href='#' data-toggle='modal' data-target='#astroinfo'><img src='".JURi::base()."images/profiles/".$result->img_new_name."' height='50px' width='50px' title='".$result->img_name."' />".$result->name."</a></h3>";
         $content            .= "<div class='modal fade' id='astroinfo' tabindex='-1' role='dialog' aria-hidden='true' aria-labelledby='astrolabel'>";
         $content            .= "<div class='modal-dialog' role='document'>";

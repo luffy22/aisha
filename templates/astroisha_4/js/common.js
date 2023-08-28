@@ -31,6 +31,7 @@ function getForecast()
             success: function(data) {
             const obj = JSON.parse(data);
             document.getElementById("navtara_form").style.display = 'none';
+            document.getElementById("navtara_body").style.visibility = 'visible';
             $('#navtara_form').hide();
             document.getElementById("birth_nak").innerHTML = "<strong>Birth Time Nakshatra</strong>: "+ obj.birth_nak;
             document.getElementById("curr_nak").innerHTML = "<strong>Current Nakshatra Transit: </strong>"+obj.curr_nak;

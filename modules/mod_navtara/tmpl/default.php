@@ -35,8 +35,11 @@ defined('_JEXEC') or die;
     </div>
     
   </div>
-<p id="birth_nak"></p><p id="curr_nak"></p>
-<p id="demo">Change Text</p>
+<ul class="list-group list-group-flush" id="navtara_body">
+    <li class="list-group-item" id="birth_nak"></li>
+    <li class="list-group-item" id="curr_nak"></li>
+    <li class="list-group-item" id="demo"> </li>
+</ul>
 </div>
 <div class="mb-3"></div>
 

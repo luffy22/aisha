@@ -1,6 +1,7 @@
 <?php
 defined('_JEXEC') or die;
 return [
+	'AlterBrains\\Plugin\\System\\Directalias\\' => [JPATH_PLUGINS . '/system/directalias/src'],
 	'Joomla\\Component\\Actionlogs\\Administrator\\' => [JPATH_ADMINISTRATOR . '/components/com_actionlogs/src'],
 	'Joomla\\Component\\Admin\\Administrator\\' => [JPATH_ADMINISTRATOR . '/components/com_admin/src'],
 	'Joomla\\Component\\Associations\\Administrator\\' => [JPATH_ADMINISTRATOR . '/components/com_associations/src'],

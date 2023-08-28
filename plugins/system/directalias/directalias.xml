@@ -1,45 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.9" type="plugin" group="system" method="upgrade">
+<extension version="4.3" type="plugin" group="system" method="upgrade">
 	<name>plg_system_directalias</name>
 	<description>PLG_SYSTEM_DIRECTALIAS_XML_DESCRIPTION</description>
-	
+
 	<author>AlterBrains</author>
-	<copyright>(C) 2013-2020 AlterBrains. All rights reserved.</copyright>
+	<copyright>(C) 2013-2023 AlterBrains. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>alterbrains@gmail.com</authorEmail>
-	<authorUrl>http://alterbrains.com</authorUrl>
-	<client>0</client>
+	<authorUrl>https://alterbrains.com</authorUrl>
 
-	<version>2.1.0</version>
-	<creationDate>09/10/2020</creationDate>
-	
+	<version>3.0.1</version>
+	<creationDate>08/17/2023</creationDate>
+
+	<namespace path="src">AlterBrains\Plugin\System\Directalias</namespace>
+
 	<files>
-		<filename plugin="directalias">directalias.php</filename>
-		<filename>directaliasfield.php</filename>
+		<folder plugin="directalias">services</folder>
+		<folder>src</folder>
 		<folder>language</folder>
 	</files>
 
 	<scriptfile>directalias.script.php</scriptfile>
-	
-	<!--<languages>
-		<language tag="en-GB">en-GB.plg_system_directalias.ini</language>
-		<language tag="en-GB">en-GB.plg_system_directalias.sys.ini</language>
-	</languages>-->
 
 	<updateservers>
-		<server type="collection" priority="1" name="AlterBrains Updates">http://www.alterbrains.com/update.xml</server>
+		<server type="collection" priority="1" name="AlterBrains Updates">https://alterbrains.com/update.xml</server>
 	</updateservers>
 
 	<config>
+		<inlinehelp button="show"/>
+
 		<fields name="params">
 			<fieldset name="basic">
-			
-				<field name="shorten_all" type="radio" class="btn-group btn-group-yesno" default="0"
-					label="PLG_SYSTEM_DIRECT_ALIAS_SHORTEN_ALL" description="PLG_SYSTEM_DIRECT_ALIAS_SHORTEN_ALL_DESC">
-						<option value="1">JYES</option>
-						<option value="0">JNO</option>
+
+				<field name="shorten_all" type="radio" filter="integer" default="0"
+					   layout="joomla.form.field.radio.switcher"
+					   label="PLG_SYSTEM_DIRECT_ALIAS_SHORTEN_ALL" description="PLG_SYSTEM_DIRECT_ALIAS_SHORTEN_ALL_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
 				</field>
-				
+
 			</fieldset>
 		</fields>
 	</config>

@@ -35,13 +35,16 @@ $disc_fees                  = $fees - number_format((float)($fees*$disc)/100,2);
 	<strong>Order Processing Time</strong>- Minimum 5-6 working days(Monday-Friday). You will be notified via email if 
 	there is more delay likely. Max 30 days after which full refund provided.
 </div></div>
+<div class="alert alert-dark" role="alert">
+  Provide appropriate details of your career so we avoid guess work.
+</div>
 <ul class="list-group">
   <li class="list-group-item list-group-item-dark"><strong>Career Report Contents</strong></li>
-  <li class="list-group-item">Career House in Main Chart(D-1 Chart). Analysis with diagram of placements and aspects</li>
+  <li class="list-group-item">Career House(10th House) in Main Chart(D-1 Chart). Analysis with diagram of placements and aspects</li>
+  <li class="list-group-item">Service House(6th House) in Main Chart(D-1 Chart). Analysis with diagram of placements and aspects</li>
+  <li class="list-group-item">Business House(7th House) in Main Chart(D-1 Chart). Analysis with diagram of placements and aspects</li>
   <li class="list-group-item">Career via Dashamsha Chart(D-10 Chart). Analysis with diagram of placements and aspects</li>
-  <li class="list-group-item">Business or Job. What suits you better according to horoscope</li>
   <li class="list-group-item">Income House in Main Chart. Analysis with diagram of placements and aspects</li>
-  <li class="list-group-item">Savings House in Main Chart. Analysis with diagram of placements and aspects</li>
   <li class="list-group-item">Places for investment</li>
   <li class="list-group-item">Career progression in various dasha periods</li>
   <li class="list-group-item">Answer to your query</li>

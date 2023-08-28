@@ -31,7 +31,9 @@ class HoroscopeModelNavtara extends HoroscopeModelPanchang
     {
         //print_r($tmz);exit;
         $libPath        = JPATH_BASE.'/sweph/';
-        $date           = new DateTime($dob_tob, new DateTimeZone($tmz));
+        $date           = new DateTime($dob_tob);
+        $date           ->setTimeZone(new DateTimeZone($tmz));
+        //echo $date->format('d-m-Y H:i:s');exit;
         $lat            = '23.02';
         $lon            = '72.57';
         //print_r($date);exit;
@@ -47,10 +49,9 @@ class HoroscopeModelNavtara extends HoroscopeModelPanchang
         $date = date('d.m.Y', $utcTimestamp);
         $time = date('H:i:s', $utcTimestamp);
         
-        $h_sys = 'P';
         $output = "";
         // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
-        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -house$lon,$lat,$h_sys -fPls -p1 -g, -head", $output);
+        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p1 -g, -head", $output);
         //print_r($output);exit;
         $data                   = explode(",",$output[0]);
         $planet                 = $data[0];
