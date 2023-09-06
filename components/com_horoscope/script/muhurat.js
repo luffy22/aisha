@@ -21,7 +21,7 @@ $(function()
       source: 
        function(request, response) {
         $.ajax({
-          url: "ajaxcalls/autocomplete.php",
+          url: "ajaxcalls/autocomplete_loc.php",
           dataType: "json",
           data: {
             term: request.term

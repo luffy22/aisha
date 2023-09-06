@@ -36,6 +36,7 @@ class HoroscopeModelNavtara extends HoroscopeModelPanchang
         //echo $date->format('d-m-Y H:i:s');exit;
         $lat            = '23.02';
         $lon            = '72.57';
+        $alt            = '0';
         //print_r($date);exit;
         $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
         $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
@@ -51,17 +52,22 @@ class HoroscopeModelNavtara extends HoroscopeModelPanchang
         
         $output = "";
         // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
-        exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -fPls -p1 -g, -head", $output);
+        exec ("swetest -edir$libPath -b$date -ut$time -geopos$lon,$lat,$alt -sid1  -eswe -fPls -p1 -g, -head", $output);
         //print_r($output);exit;
         $data                   = explode(",",$output[0]);
         $planet                 = $data[0];
         $dist                   = number_format($data[1],2);
+        $hr_24                  = number_format($data[2],2);        // distance covered in 24 hours
+        //echo $hr_24;exit;
         //echo $dist;exit;
-        $curr_nak_details       = $this->getNakshatraDeg($planet,$dist);
+        $curr_nak_details       = $this->getAbsNakshatraDeg($planet,$dist);
+        //print_r($curr_nak_details);exit;
         $curr_nak               = $curr_nak_details['nakshatra'];
         $curr_nak_down          = $curr_nak_details['abs_down_deg'];  // absolute upper degree of nakshatra
         $curr_nak_up            = $curr_nak_details['abs_up_deg'];      // absolute lower degree of nakshatra
-        $dist           = $this->getNakshatraDist($birth_nak, $curr_nak);
+        //$change_time            = $this->getChangeTime($dist, $curr_nak_up, $hr_24);           // function to get change times
+        $dist                   = $this->getNakshatraDist($birth_nak, $curr_nak);
+        
         return $dist;
         
     }
@@ -101,6 +107,19 @@ class HoroscopeModelNavtara extends HoroscopeModelPanchang
         return json_encode($result);
     }
     
-    
+    /*
+     * This function calculates the approx time 
+     * when nakshatra changes
+     * @param curr_dist The current distance nakshatra has travelled in decimals
+     * @param nak_end The end distance in decimal after which another nakshatra starts
+     * @param tot_dist The total distance Moon travels in 24 hours 
+     */
+    public function getChangeTime($curr_dist, $nak_end, $hr_24)
+    {
+        $dist_left      = $nak_end - $curr_dist;
+        $dist_left      = number_format($dist_left, 2);
+        
+        echo $curr_dist." ".$nak_end." ".$hr_24;exit;
+    }
 }
 ?>

@@ -2,10 +2,18 @@
 defined('_JEXEC') or die;
 //print_r($current);exit;
 //print_r($location);exit;
+if(isset($_COOKIE['location']))
+{
+	$location 		= $_COOKIE['location'];
+}
+else
+{
+	$location 		= $location['city'].", ".$location['country'];
+}
 ?>
 <div class="card">
 <div class="card-header lead alert alert-dark">Daily Fortune using Navtara</div>
-<p class="text-end">Location: <?php echo $location['city'].", ".$location['country']; ?>&nbsp;<a href="#" class="btn btn-primary btn-small"><i class="bi bi-pencil"></i></a></p>
+<p class="text-end">Location: <?php echo $location; ?>&nbsp;<a href="<?php echo JURI::base().'default-loc?location=navtara' ?>" class="btn btn-primary btn-small"><i class="bi bi-pencil"></i></a></p>
   <div class="card-body" id="navtara_form">
     <div class="row g-2">
   <div class="col-md">
@@ -42,6 +50,8 @@ defined('_JEXEC') or die;
 </ul>
 </div>
 <div class="mb-3"></div>
-
+<?php
+unset($nakshatra);
+?>
 
 

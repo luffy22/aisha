@@ -439,14 +439,15 @@ class HoroscopeModelLagna extends ListModel
     }
     /*
      * This function gets the nakshatra as well as
-     * upper degree and lower degree of nakshatra
+     * absolute upper degree and absolute lower degree of nakshatra
      * to determine duration planet will stay in that nakshatra
+     * For example 
      * @param planet The planet whose nakshatra needs to be calculated
      * @param dist The distance planet has travelled in the nakshatra
      * @return low_deg The absolute lower degree of planet
      * @return up_deg The absolute up_degree of planet
      */
-    public function getNakshatraDeg($planet,$dist)
+    public function getAbsNakshatraDeg($planet,$dist)
     {
         $db                     = JFactory::getDbo();
         $query                  = $db->getQuery(true);

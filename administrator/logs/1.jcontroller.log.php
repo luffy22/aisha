@@ -79,3 +79,5 @@
 2023-08-27T11:12:13+00:00	INFO ::1	controller	Holding edit ID com_modules.edit.module.142 Array (     [0] => 142 ) 
 2023-08-27T11:12:14+00:00	INFO ::1	controller	Checking edit ID com_modules.edit.module.142: 1 Array (     [0] => 142 ) 
 2023-08-27T11:12:19+00:00	INFO ::1	controller	Releasing edit ID com_modules.edit.module.142 Array ( ) 
+2023-08-31T12:37:45+00:00	INFO ::1	controller	Holding edit ID com_menus.edit.item.311 Array (     [0] => 311 ) 
+2023-08-31T12:38:01+00:00	INFO ::1	controller	Releasing edit ID com_menus.edit.item.311 Array ( ) 
