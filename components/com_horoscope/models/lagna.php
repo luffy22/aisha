@@ -142,7 +142,7 @@ class HoroscopeModelLagna extends ListModel
         //echo $date." ".$time;exit;
         $h_sys = 'P';
         $output = "";
-// More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
+		// More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
         exec ("swetest -edir$libPath -b$date -ut$time -sid1 -eswe -house$lon,$lat,$h_sys -fPls -p -g, -head", $output);
         //print_r($output);exit;
         $val            = explode(",",$output[12]);

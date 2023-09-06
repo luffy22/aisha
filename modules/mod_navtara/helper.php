@@ -67,12 +67,23 @@ class ModNavtaraHelper extends HoroscopeModelNavtara
      */
     public static function getCurrNavtara($nakshatra)
     {
-         
+        $loc				= self::getLocation();
         $dob_tob        = date('Y-m-d H:i:s');
-        $tmz            = 'Asia/kolkata';
-       
+        if(isset($_COOKIE['lat']) && isset($_COOKIE['lon']) && isset($_COOKIE['tmz']))
+		{
+			$lat            = $_COOKIE['lat'];
+			$lon            = $_COOKIE['lon'];
+			$tmz			= $_COOKIE['tmz'];
+		}
+		else
+		{
+			$lat            = $loc['lat'];
+			$lon            = $loc['lon'];
+			$tmz            = $this->getTimeZone($lat, $lon, "rohdes");
+		}
+		
         $class          = new HoroscopeModelNavtara();
-        $sign           = $class->getNavtara($dob_tob,$tmz, $nakshatra);
+        $sign           = $class->getNavtara($dob_tob,$lat, $lon,$tmz, $nakshatra);
         return $sign;
     }
 }

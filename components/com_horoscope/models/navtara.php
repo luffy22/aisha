@@ -27,32 +27,31 @@ class HoroscopeModelNavtara extends HoroscopeModelPanchang
      * @param tmz The timezone of particular place (example: 'Asia/Kolkata')
      * @param birth_nak The birth time nakshatra of an individual
      */
-    public function getNavtara($dob_tob, $tmz, $birth_nak)
+    public function getNavtara($dob_tob,$lat,$lon, $tmz, $birth_nak)
     {
+		//echo $lat." ".$lon." ".$tmz;
         //print_r($tmz);exit;
         $libPath        = JPATH_BASE.'/sweph/';
         $date           = new DateTime($dob_tob);
         $date           ->setTimeZone(new DateTimeZone($tmz));
-        //echo $date->format('d-m-Y H:i:s');exit;
-        $lat            = '23.02';
-        $lon            = '72.57';
+        //echo $time;exit;
+       
         $alt            = '0';
         //print_r($date);exit;
-        $timestamp      = strtotime($date->format('Y-m-d H:i:s'));       // date & time in unix timestamp;
-        $offset         = $date->format('Z');       // time difference for timezone in unix timestamp
+       
             //echo $timestamp." ".$offset;exit;
             // $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
             /**
              * Converting birth date/time to UTC
              */
-        $utcTimestamp = $timestamp - $offset;
-         
-        $date = date('d.m.Y', $utcTimestamp);
-        $time = date('H:i:s', $utcTimestamp);
         
+         
+        $day 			= $date->format('d.m.Y');
+        $time 			= $date->format('H:i:s');
+        //echo $day." ".$time;exit;
         $output = "";
         // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
-        exec ("swetest -edir$libPath -b$date -ut$time -geopos$lon,$lat,$alt -sid1  -eswe -fPls -p1 -g, -head", $output);
+        exec ("swetest -edir$libPath -b$day -ut$time -geopos$lon,$lat,$alt -sid1  -eswe -fPls -p1 -g, -head", $output);
         //print_r($output);exit;
         $data                   = explode(",",$output[0]);
         $planet                 = $data[0];
@@ -63,6 +62,7 @@ class HoroscopeModelNavtara extends HoroscopeModelPanchang
         $curr_nak_details       = $this->getAbsNakshatraDeg($planet,$dist);
         //print_r($curr_nak_details);exit;
         $curr_nak               = $curr_nak_details['nakshatra'];
+        //echo $curr_nak." ".$dist;exit;
         $curr_nak_down          = $curr_nak_details['abs_down_deg'];  // absolute upper degree of nakshatra
         $curr_nak_up            = $curr_nak_details['abs_up_deg'];      // absolute lower degree of nakshatra
         //$change_time            = $this->getChangeTime($dist, $curr_nak_up, $hr_24);           // function to get change times
