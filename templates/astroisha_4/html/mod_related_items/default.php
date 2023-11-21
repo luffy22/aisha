@@ -11,8 +11,17 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
+$input = $app->getInput();
 
+if ($input->get('option') !== 'com_content' || $input->get('view') !== 'article')
+{
+    // Not on article view, return early.
+    return;
+}
+else
+{
 ?>
+
 <div class="lead alert alert-dark">Related Articles</div>
 <ul class="list-group">
 <?php foreach ($list as $item) : ?>
@@ -24,3 +33,6 @@ use Joomla\CMS\Language\Text;
 <?php endforeach; ?>
 </ul>
 <div class="mb-3"></div>
+<?php
+}
+?>

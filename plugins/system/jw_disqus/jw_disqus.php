@@ -44,13 +44,14 @@ class plgSystemJw_disqus extends JPlugin
         $siteUrl = JURI::root(true);
 
         // Requests
-        $option = JRequest::getCmd('option');
-        $view = JRequest::getCmd('view');
-        $layout = JRequest::getCmd('layout');
-        $page = JRequest::getCmd('page');
-        $secid = JRequest::getInt('secid');
-        $catid = JRequest::getInt('catid');
-        $itemid = JRequest::getInt('Itemid');
+        $jinput = JFactory::getApplication()->input;
+        $option = $jinput->get('option');;
+        $view = $jinput->get('view');;
+        $layout = $jinput->get('layout');;
+        $page = $jinput->get('page');;
+        $secid = $jinput->get('secid');;
+        $catid = $jinput->get('catid');;
+        $itemid = $jinput->get('Itemid');;
         if (!$itemid) {
             $itemid = 999999;
         }

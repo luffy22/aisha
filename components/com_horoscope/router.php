@@ -26,7 +26,13 @@ class HoroscopeRouter extends RouterBase
             //echo "calls";exit;
             $item_id    = $query['id'];
             unset($query['id']);
+            unset($query['view']); 
+        }
+         else if(isset($query['Itemid']) && !(isset($query['view'])))
+        {
             unset($query['view']);
+            unset($query['Itemid']);
+            unset($query['id']);
         }
         //print_r($query);exit;
         $db = JFactory::getDbo();

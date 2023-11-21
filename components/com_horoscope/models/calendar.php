@@ -85,6 +85,7 @@ class HoroscopeModelCalendar extends HoroscopeModelMuhurat
         }
         return $array;
     }
+    
     public function getTithiWords($moon_status, $tithi)
     {
         //echo $tithi." ".$moon_status;exit;

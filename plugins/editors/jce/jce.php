@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright     Copyright (c) 2009-2022 Ryan Demmer. All rights reserved
+ * @copyright     Copyright (c) 2009 - 2023 Ryan Demmer. All rights reserved
  * @license       GNU/GPL 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * JCE is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
@@ -16,6 +16,8 @@ use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\Layout\LayoutHelper;
+use Joomla\CMS\Uri\Uri;
+use Joomla\CMS\Editor\Editor;
 
 /**
  * JCE WYSIWYG Editor Plugin.
@@ -85,8 +87,8 @@ class plgEditorJCE extends CMSPlugin
         $editor = $this->getEditorInstance();
         $editor->init();
 
-        foreach ($editor->getScripts() as $script) {
-            $document->addScript($script);
+        foreach ($editor->getScripts() as $script => $type) {
+            $document->addScript($script, array(), array('type' => $type));
         }
 
         foreach ($editor->getStyleSheets() as $style) {
@@ -173,10 +175,10 @@ class plgEditorJCE extends CMSPlugin
         $textarea->height = $height;
         $textarea->content = $content;
 
-        $classes = version_compare(JVERSION, '4', 'ge') ? ' mb-2 joomla4' : '';
+        $classes = version_compare(JVERSION, '4', 'lt') ? 'joomla3' : 'mb-2';
 
         // Render Editor markup
-        $html = '<div class="editor wf-editor-container' . $classes . '">';
+        $html = '<div class="editor wf-editor-container ' . $classes . '">';
         $html .= '<div class="wf-editor-header"></div>';
         $html .= LayoutHelper::render('editor.textarea', $textarea, __DIR__ . '/layouts');
         $html .= '</div>';
@@ -230,7 +232,8 @@ class plgEditorJCE extends CMSPlugin
             $buttons = array_merge($buttons, $excluded);
         }
 
-        $buttons = $this->getXtdButtons($name, $buttons, $asset, $author);
+        // easiest way to get buttons across versions
+        $buttons = Editor::getInstance('jce')->getButtons($name, $buttons);
 
         if (!empty($buttons)) {
             foreach ($buttons as $i => $button) {
@@ -243,7 +246,7 @@ class plgEditorJCE extends CMSPlugin
                     $onclick = $button->get('onclick', '');
 
                     if ($button->get('link') !== '#') {
-                        $href = JUri::base() . $button->get('link');
+                        $href = Uri::base() . $button->get('link');
                     } else {
                         $href = '';
                     }
@@ -266,35 +269,16 @@ class plgEditorJCE extends CMSPlugin
         return $list;
     }
 
-    private function getXtdButtons($name, $buttons, $asset, $author)
-    {
-        $xtdbuttons = array();
-        if (is_array($buttons) || (is_bool($buttons) && $buttons)) {
-            $buttonsEvent = new Joomla\Event\Event(
-                'getButtons',
-                [
-                    'editor' => $name,
-                    'buttons' => $buttons,
-                ]
-            );
-            if (method_exists($this, 'getDispatcher')) {
-                $buttonsResult = $this->getDispatcher()->dispatch('getButtons', $buttonsEvent);
-                $xtdbuttons = $buttonsResult['result'];
-            } else {
-                $xtdbuttons = $this->_subject->getButtons($name, $buttons, $asset, $author);
-            }
-        }
-        return $xtdbuttons;
-    }
-
     private function displayButtons($name, $buttons, $asset, $author)
     {
-        $buttons = $this->getXtdButtons($name, $buttons, $asset, $author);
+        // easiest way to get buttons across versions
+        $buttons = Editor::getInstance('jce')->getButtons($name, $buttons);
 
         if (!empty($buttons)) {
             // fix some legacy buttons
             array_walk($buttons, function ($button) {
                 $cls = $button->get('class', '');
+                
                 if (empty($cls) || strpos($cls, 'btn') === false) {
                     $cls .= ' btn';
                     $button->set('class', trim($cls));

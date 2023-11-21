@@ -8,8 +8,8 @@ $this->language  = $doc->language;
 $this->direction = $doc->direction;
 $title              = $doc->title;
 /*$var             = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-					<strong><i class="bi bi-exclamation-triangle-fill fs-1"></i> Orders Closed.</strong> Due to unavoidable travel plans all orders are closed. In case of emergency please use <a href="https://api.whatsapp.com/send?phone=919870036765&text=Hello%20AstroIsha"><i class="bi bi-whatsapp"></i> whatsapp</a> to contact us.
-					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+	<strong><i class="bi bi-exclamation-triangle-fill fs-1"></i> Orders Closed.</strong> Orders are temporarily closed until 18th September 2023. We apologize for any inconvenience caused.
+	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
 if(!isset($_SESSION['var']))
 {
     $_SESSION['var']    = $var;
@@ -36,6 +36,10 @@ if(!isset($_SESSION['var']))
 </head>
 <body>
 <div class="container-fluid">
+<!--<div class="alert alert-warning alert-dismissible fade show" role="alert">
+<strong><i class="bi bi-exclamation-triangle-fill fs-1"></i> Orders Closed.</strong> Orders are temporarily closed until 25th September 2023. We apologize for any inconvenience caused.
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>-->
 <div class="d-flex flex-row mb-3">
 	<div class="p-2"><a href="<?php echo JUri::base(); ?>"><img src="<?php echo JUri::base(); ?>/logo.png" title="Click to navigate to Home Page" class="img-fluid" /></a></div>
 	<div class="pt-2">
@@ -43,6 +47,7 @@ if(!isset($_SESSION['var']))
 		<p class="lead">Site on Vedic Astrology</p>
 	</div>
 </div>
+
 <div class="row">   
     <div class="col-2">
     <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">

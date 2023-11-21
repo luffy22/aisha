@@ -545,6 +545,10 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/main/607-navtara-fortune</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
   <loc>https://www.astroisha.com/featured</loc>
   <changefreq>monthly</changefreq>
 </url>
@@ -697,6 +701,10 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/featured/584-astro-paradox</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
 	<loc>https://www.astroisha.com/transits</loc>
 	<changefreq>monthly</changefreq>
 </url>
@@ -705,11 +713,11 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/transits/553-rahu-aries-transit</loc>
+	<loc>https://www.astroisha.com/transits/594-jupiter-aries</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/transits/554-jupiter-pisces</loc>
+	<loc>https://www.astroisha.com/transits/609-rahu-pisces</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
@@ -1001,6 +1009,22 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/yogas/591-paap-kartari</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/yogas/593-shubh-kartari</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/yogas/596-nav-yoga</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/yogas/600-kuta-yoga</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
 	<loc>https://www.astroisha.com/case</loc>
 	<changefreq>monthly</changefreq>
 </url>
@@ -1090,6 +1114,10 @@
 </url>
 <url>
 	<loc>https://www.astroisha.com/case/563-modi-2024</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/case/589-adani-horoscope</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
@@ -1612,6 +1640,11 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/planet-signs/606-moon-taurus</loc>
+	<changefreq>monthly</changefreq>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
   <loc>https://www.astroisha.com/yearly</loc>
   <changefreq>monthly</changefreq>
 </url>
@@ -1620,51 +1653,51 @@
   <changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/570-aries-2023</loc>
+	<loc>https://www.astroisha.com/yearly/610-aries-2024</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/571-taurus-2023</loc>
+	<loc>https://www.astroisha.com/yearly/611-taurus-2024</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/572-gemini-2023</loc>
+	<loc>https://www.astroisha.com/yearly/612-gemini-2024</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/573-cancer-2023</loc>
+	<loc>https://www.astroisha.com/yearly/613-cancer-2024</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/574-leo-2023</loc>
+	<loc>https://www.astroisha.com/yearly/614-leo-2024</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/575-virgo-2023</loc>
+	<loc>https://www.astroisha.com/yearly/615-virgo-2024</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/576-libra-2023</loc>
+	<loc>https://www.astroisha.com/yearly/616-libra-2024</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/577-scorpio-2023</loc>
+	<loc>https://www.astroisha.com/yearly/617-scorpio-2024</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/578-sagittarius-2023</loc>
+	<loc>https://www.astroisha.com/yearly/618-sagittarius-2024</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/579-capricorn-2023</loc>
+	<loc>https://www.astroisha.com/yearly/619-capricorn-2024</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/580-aquarius-2023</loc>
+	<loc>https://www.astroisha.com/yearly/620-aquarius-2024</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
-	<loc>https://www.astroisha.com/yearly/581-pisces-2023</loc>
+	<loc>https://www.astroisha.com/yearly/621-pisces-2024</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
@@ -1824,6 +1857,46 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/relationship/588-struggle-partner</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/relationship/590-marry-type</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/relationship/592-moon-late</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/relationship/602-rahu-cheating</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/relationship/604-mars-ven-irony</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/relationship/622-aries-marry</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/family</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/family/601-friends-planets</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/family/603-father-house</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/family/605-friends-signs</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
   <loc>https://www.astroisha.com/career</loc>
   <changefreq>monthly</changefreq>
 </url>
@@ -1876,6 +1949,18 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/career/583-wfm</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/career/587-career-mantras</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/career/595-abroad-astro</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
 	<loc>https://www.astroisha.com/finance</loc>
 	<changefreq>monthly</changefreq>
 </url>
@@ -1924,6 +2009,14 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/finance/582-eleven-enterpreneur</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/finance/597-finance-boom</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
 	<loc>https://www.astroisha.com/study</loc>
 	<changefreq>monthly</changefreq>
 </url>
@@ -1933,6 +2026,14 @@
 </url>
 <url>
 	<loc>https://www.astroisha.com/study/431-low-education</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/study/585-upsc-astro</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/study/599-cancer-education</loc>
 	<changefreq>monthly</changefreq>
 </url>
 <url>
@@ -2008,6 +2109,10 @@
 	<changefreq>monthly</changefreq>
 </url>
 <url>
+	<loc>https://www.astroisha.com/health/608-lbp-astro</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
 	<loc>https://www.astroisha.com/yogasana</loc>
 	<changefreq>monthly</changefreq>
 </url>
@@ -2062,6 +2167,14 @@
 <url>
   <loc>https://www.astroisha.com/remedies/199-ketu-remedies</loc>
   <changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/remedies/357-navratri-nineplanets</loc>
+	<changefreq>monthly</changefreq>
+</url>
+<url>
+	<loc>https://www.astroisha.com/remedies/598-edu-remedies</loc>
+	<changefreq>monthly</changefreq>
 </url>
 <url>
   <loc>https://www.astroisha.com/gemstones</loc>

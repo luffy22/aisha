@@ -10,7 +10,7 @@
 // no direct access
 defined('_JEXEC') or die ;
 
-class DisqusHelper
+/*class DisqusHelper
 {
     // Path overrides for MVC templating
     public static function getTemplatePath($pluginName, $file)

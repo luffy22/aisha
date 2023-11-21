@@ -10,6 +10,7 @@ $details                    = $this->msg;
 $fees                       = $details[0]['amount'];
 $disc                       = number_format((float)($fees*$details[0]['disc_percent'])/100,2);
 $disc_fees                  = $fees-$disc;
+
 ?>
 <div class="progress" style="height:25px">
   <div class="progress-bar" style="width:25%;height:25px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Choose</div>

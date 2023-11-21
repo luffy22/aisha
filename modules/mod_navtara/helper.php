@@ -26,21 +26,27 @@ class ModNavtaraHelper extends HoroscopeModelNavtara
     public static function getLocation()
     {
 		
-        $reader = new Reader('/usr/local/share/GeoIP/GeoIP2-City.mmdb');  // local file
-        //$reader             = new Reader('/home3/astroxou/usr/share/GeoIP2-City.mmdb'); // server file
-        $ip               = '117.196.1.11';
-        //$ip                 = '157.55.39.123';  // ip address
-        //$ip                 = '180.215.160.173';
-        //$ip                 = $_SERVER['REMOTE_ADDR'];   // ip address. uncomment on server
-        $record             = $reader->city($ip);
-        $country            = $record->country->name;
-        $city               = $record->city->name;
-        $lat                = $record->location->latitude;
-        $lon                = $record->location->longitude;
-        
-        $location           = array("city"=>$city,"country"=>$country,
-                                    "lat"=>$lat,"lon"=>$lon);
-        return $location;
+        if(!isset($_COOKIE["location"]) && !isset($_COOKIE["lat"]) &&
+           !isset($_COOKIE["lon"]) && !isset($_COOKIE["tmz"])) {
+			   //echo "calls1";exit;
+            $loc            = "Ujjain, India";
+            $tmz       		= "Asia/Kolkata";
+            $lon            = "75.78";  $lat            = "23.17";  $alt    = 0;
+        } else {
+			//echo "calls2";exit;
+           $loc         = $_COOKIE["location"];
+           $lat         = $_COOKIE["lat"];
+           $lon         = $_COOKIE["lon"];
+           $tmz    		= $_COOKIE["tmz"];
+           if($tmz == ""|| $tmz == "none")
+           {
+			   $tmz 	= "UTC";
+		   }
+           $alt         = 0;
+        }
+        $location 		= array("loc"=>$loc,"lat" => $lat, "lon"=>$lon,
+								"tmz"=>$tmz,"alt"=>$alt);
+		return $location;
         
     }
     public static function getForecastAjax()
@@ -69,18 +75,9 @@ class ModNavtaraHelper extends HoroscopeModelNavtara
     {
         $loc				= self::getLocation();
         $dob_tob        = date('Y-m-d H:i:s');
-        if(isset($_COOKIE['lat']) && isset($_COOKIE['lon']) && isset($_COOKIE['tmz']))
-		{
-			$lat            = $_COOKIE['lat'];
-			$lon            = $_COOKIE['lon'];
-			$tmz			= $_COOKIE['tmz'];
-		}
-		else
-		{
-			$lat            = $loc['lat'];
-			$lon            = $loc['lon'];
-			$tmz            = $this->getTimeZone($lat, $lon, "rohdes");
-		}
+        $lat            = $loc['lat'];
+        $lon            = $loc['lon'];
+        $tmz            = $loc['tmz'];
 		
         $class          = new HoroscopeModelNavtara();
         $sign           = $class->getNavtara($dob_tob,$lat, $lon,$tmz, $nakshatra);

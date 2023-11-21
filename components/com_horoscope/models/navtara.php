@@ -29,7 +29,13 @@ class HoroscopeModelNavtara extends HoroscopeModelPanchang
      */
     public function getNavtara($dob_tob,$lat,$lon, $tmz, $birth_nak)
     {
-		//echo $lat." ".$lon." ".$tmz;
+		
+        if($tmz == "none")
+        {
+                $tmz            = $this->getTimeZone($lat, $lon, "rohdes");
+                setcookie ('tmz', $tmz, time() + 60 * 60 * 24 * 30, '/', '', 0);
+        }
+		//echo $lat." ".$lon." ".$tmz;exit;
         //print_r($tmz);exit;
         $libPath        = JPATH_BASE.'/sweph/';
         $date           = new DateTime($dob_tob);
@@ -75,7 +81,7 @@ class HoroscopeModelNavtara extends HoroscopeModelPanchang
     public function getNakshatraDist($birth_nak, $curr_nak)
     {
         //return $curr_nak;
-        //$curr_nak       = "Shravana";
+        //$curr_nak       = "Shatabhisha";
         $nakshatras     = $this->getNakshatras();
         $birth_key      = array_search($birth_nak, $nakshatras);
         $curr_key       = array_search($curr_nak, $nakshatras);
@@ -91,6 +97,7 @@ class HoroscopeModelNavtara extends HoroscopeModelPanchang
             $diff       = $curr_key - $birth_key;
             $diff       = $diff + 1;
         }
+        //echo $diff;exit;
         //return $diff;
         $db             = JFactory::getDbo();
         $query          = $db->getQuery(true);
@@ -101,6 +108,7 @@ class HoroscopeModelNavtara extends HoroscopeModelPanchang
                             ' OR '.$db->quoteName('val_3').' = '.$db->quote($diff));
         $db             ->setQuery($query);
         $result         = $db->loadAssoc();
+        //print_r($result);
         $desc           = str_replace('nakshatra',$curr_nak,$result['description']);
         $result         = array("birth_nak"=>$birth_nak,"curr_nak"=>$curr_nak,
                                 "description" => $desc);

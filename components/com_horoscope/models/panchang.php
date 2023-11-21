@@ -35,9 +35,36 @@ class HoroscopeModelPanchang extends HoroscopeModelCalendar
         //print_r($output);exit;
         //$tithi          = $this->getTithiToday($today,$tmz, $output);
         $tithi_today    = $this->getTithi($today, $output);
-        
+        return $tithi_today;
     }
     
+    public function getCurrTithi($date_time, $lat,$lon,$tmz)
+    {
+        $libPath        = JPATH_BASE.'/sweph/';
+        $date           = new DateTime($date_time);
+        $date           ->setTimeZone(new DateTimeZone($tmz));
+        //echo $time;exit;
+       
+        $alt            = '0';
+        //print_r($date);exit;
+       
+        //echo $timestamp." ".$offset;exit;
+        // $tmz            = $tmz[0].".".(($tmz[1]*100)/60); 
+        /**
+         * Converting birth date/time to UTC
+         */
+
+        $day 			= $date->format('d.m.Y');
+        $time 			= $date->format('H:i:s');
+        //echo $day." ".$time;exit;
+        $output = "";
+        // More about command line options: https://www.astro.com/cgi/swetest.cgi?arg=-h&p=0
+        //exec ("swetest -edir$libPath -b$day -ut$time -geopos$lon,$lat,$alt -sid1  -eswe -fPls -p1 -g, -head", $output);
+        exec ("swetest -edir$libPath -p1 -d0 -b$day -ut$time -geopos$lon,$lat,$alt -n1 -fl -head", $output);
+        //print_r($output);exit;
+        $tithi_today    = $this->getTithi($day, $output);
+        return $tithi_today;
+    }
     public function getTithiToday($today,$tmz,$output)
     {
         //print_r($output);exit;
