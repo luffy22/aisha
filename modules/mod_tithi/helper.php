@@ -62,8 +62,25 @@ class modTithiHelper extends HoroscopeModelPanchang
 		
         $class          = new HoroscopeModelPanchang();
         $tithi          = $class->getCurrTithi($date_time,$lat,$lon,$tmz);
-        print_r($tithi);exit;
+        //print_r($tithi);exit;
+        $details		= self::getTithiDetails($tithi);
+        return $details;
     }
+    public static function getTithiDetails($tithi)
+    {
+		$curr_tithi		= $tithi['tithi'];
+		$db             = JFactory::getDbo();  // Get db connection
+        $query          = $db->getQuery(true);
+        $query          ->select(array('tithi_type','description'))
+                        ->from($db->quoteName('#__tithi'))
+						->where($db->quoteName('tithi')." = ".$db->quote($curr_tithi));
+        $db             ->setQuery($query);
+        $db->execute();
+        $result         = $db->loadAssoc();
+        
+        $array 			= array_merge($tithi, $result);
+        return $array;
+	}
 }
 
 ?>

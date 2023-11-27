@@ -63,7 +63,11 @@ class HoroscopeModelPanchang extends HoroscopeModelCalendar
         exec ("swetest -edir$libPath -p1 -d0 -b$day -ut$time -geopos$lon,$lat,$alt -n1 -fl -head", $output);
         //print_r($output);exit;
         $tithi_today    = $this->getTithi($day, $output);
-        return $tithi_today;
+        //print_r($tithi_today);exit;
+		$day 			= str_replace(".","-",$day);
+		$array 			= array("tithi"=>$tithi_today[$day], 
+								"paksh" => $tithi_today[$day."_paksh"]);
+		return $array;
     }
     public function getTithiToday($today,$tmz,$output)
     {

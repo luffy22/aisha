@@ -99,11 +99,11 @@ class HoroscopeModelCalendar extends HoroscopeModelMuhurat
         }
         else if($tithi >= 0 && $tithi < 12 && ($moon_status == "krishna"|| $moon_status=="shukla"))
         {
-            return "Prathama";
+            return "Pratipada";
         }
         else if($tithi >= 12 && $tithi < 24 && ($moon_status == "krishna"|| $moon_status=="shukla"))
         {
-            return "Dvitiya";
+            return "Dwitiya";
         }
         else if($tithi >= 24 && $tithi < 36 && ($moon_status == "krishna"|| $moon_status=="shukla"))
         {
@@ -119,7 +119,7 @@ class HoroscopeModelCalendar extends HoroscopeModelMuhurat
         }
         else if($tithi >= 60 && $tithi < 72 && ($moon_status == "krishna"|| $moon_status=="shukla"))
         {
-            return "Shasti";
+            return "Shashti";
         }
         else if($tithi >= 72 && $tithi < 84 && ($moon_status == "krishna"|| $moon_status=="shukla"))
         {

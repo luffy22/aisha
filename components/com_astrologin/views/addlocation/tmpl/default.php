@@ -1,12 +1,12 @@
-<!--<div class="alert alert-danger alert-dismissible fade show" role="alert">
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
   <strong><i class="fas fa-exclamation-circle"></i> Adding Location Closed!</strong> Use the nearest location available.
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>-->
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
+</div>
+<!--<div class="alert alert-warning alert-dismissible fade show" role="alert">
   <strong>Kindly Note!</strong> Do not add a location if it is already available. If there are concerns with location accuracy 
   send them to our <a href="mailto:consult@stroisha.com">contact email</a> 
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+</div>-->
 <?php
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
@@ -93,9 +93,9 @@ if(isset($_GET['redirect']) && $_GET['redirect'] == "latemarry")
     </div>
     <input type="hidden" id="ip_addr" name="ip_addr" value="<?php echo $_SERVER['REMOTE_ADDR']; ?>" />
     <div class="mb-3"></div>
-    <div class="form-group">
+    <!--<div class="form-group">
         <button type="submit" class="btn btn-primary btn-lg" name="loc_submit"><i class="fas fa-plus"></i> Add</button>
-    </div>
+    </div>-->
 </form>
 <link rel="stylesheet" href="<?php echo JUri::base().'components/com_astrologin/script/jquery-ui.min.css' ?>" type="text/css" />
 <script type="text/javascript" src="<?php echo JUri::base().'components/com_astrologin/script/jquery-ui.min.js' ?>"></script>

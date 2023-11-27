@@ -36,10 +36,10 @@ if(!isset($_SESSION['var']))
 </head>
 <body>
 <div class="container-fluid">
-<!--<div class="alert alert-warning alert-dismissible fade show" role="alert">
-<strong><i class="bi bi-exclamation-triangle-fill fs-1"></i> Orders Closed.</strong> Orders are temporarily closed until 25th September 2023. We apologize for any inconvenience caused.
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+<strong><i class="bi bi-exclamation-triangle-fill fs-1"></i> Orders Closed.</strong> Orders are temporarily closed until 5th December 2023. We apologize for any inconvenience caused. In case of emergency please get in touch via <a href="https://wa.me/9870036765">whatsapp <i class="bi bi-whatsapp"></i></a>
 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>-->
+</div>
 <div class="d-flex flex-row mb-3">
 	<div class="p-2"><a href="<?php echo JUri::base(); ?>"><img src="<?php echo JUri::base(); ?>/logo.png" title="Click to navigate to Home Page" class="img-fluid" /></a></div>
 	<div class="pt-2">
@@ -71,6 +71,7 @@ if(!isset($_SESSION['var']))
 </div>
 </div>
 <jdoc:include type="modules" name="footer" /> 
+<script async src="https://cse.google.com/cse.js?cx=006812877761787834600:wz19pryi_e0"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JRYDTR6DD6"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
