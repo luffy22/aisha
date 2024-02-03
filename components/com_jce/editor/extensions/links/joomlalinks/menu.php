@@ -4,7 +4,7 @@
  * @subpackage  Editor
  *
  * @copyright   Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.
- * @copyright   Copyright (c) 2009-2023 Ryan Demmer. All rights reserved
+ * @copyright   Copyright (c) 2009-2024 Ryan Demmer. All rights reserved
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -14,6 +14,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Object\CMSObject;
 use Joomla\Registry\Registry;
+use Joomla\CMS\Uri\Uri;
 
 class JoomlalinksMenu extends CMSObject
 {
@@ -174,7 +175,7 @@ class JoomlalinksMenu extends CMSObject
     private static function toSSL($link)
     {
         if (strcasecmp(substr($link, 0, 4), 'http') && (strpos($link, 'index.php?') !== false)) {
-            $uri = JURI::getInstance();
+            $uri = Uri::getInstance();
 
             // Get prefix
             $prefix = $uri->toString(array('host', 'port'));

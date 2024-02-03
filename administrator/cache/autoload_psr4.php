@@ -140,6 +140,7 @@ return [
 	'Joomla\\Plugin\\EditorsXtd\\PageBreak\\' => [JPATH_PLUGINS . '/editors-xtd/pagebreak/src'],
 	'Joomla\\Plugin\\EditorsXtd\\ReadMore\\' => [JPATH_PLUGINS . '/editors-xtd/readmore/src'],
 	'Joomla\\Plugin\\Editors\\CodeMirror\\' => [JPATH_PLUGINS . '/editors/codemirror/src'],
+	'Joomla\\Plugin\\Editors\\Jce\\' => [JPATH_PLUGINS . '/editors/jce/src'],
 	'Joomla\\Plugin\\Editors\\None\\' => [JPATH_PLUGINS . '/editors/none/src'],
 	'Joomla\\Plugin\\Editors\\TinyMCE\\' => [JPATH_PLUGINS . '/editors/tinymce/src'],
 	'Joomla\\Plugin\\Extension\\Finder\\' => [JPATH_PLUGINS . '/extension/finder/src'],

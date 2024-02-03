@@ -22,5 +22,7 @@ defined('_JEXEC') or die('Restricted access');
     <div class="col"><p class="lead"><a href="https://twitter.com/astroishaweb"><i class="bi bi-twitter"></i> Twitter</a></p></div>
     <div class="col"><p class="lead"><a href="https://www.youtube.com/@astroisha"><i class="bi bi-youtube"></i> YouTube</a></p></div>
 </div>
-
-
+<div class="row">
+    <div class="col"><p class="lead"><a href="https://www.threads.net/@astroisha"><i class="bi bi-threads"></i> Threads</a></p></div>
+    <div class="col"><p class="lead"><a href="https://www.quora.com/profile/Astro-Isha-1"><i class="bi bi-quora"></i> Quora</a></p></div>
+</div>

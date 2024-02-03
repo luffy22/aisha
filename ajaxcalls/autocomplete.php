@@ -30,12 +30,13 @@ else
         $lat            = $row['latitude'];
         $lon            = $row['longitude']; 
         $tmz            = $row['tmz_words'];
+        $loc_id         = $row['id'];
         if(empty($tmz))
         {
             $tmz        = "none";
         }
-        $json[]             = array('label'=>$city, 'lat'=>$lat, 'lon'=>$lon, 'tmz'=>$tmz);
- 
+        $json[]             = array('label'=>$city, 'lat'=>$lat, 'lon'=>$lon, 'tmz'=>$tmz,'loc_id'=>$loc_id);
+        
    }
     $data       = json_encode($json);
     echo $data; 

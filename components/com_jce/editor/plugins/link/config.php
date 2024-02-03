@@ -3,7 +3,7 @@
  * @package     JCE
  * @subpackage  Editor
  *
- * @copyright   Copyright (c) 2009-2023 Ryan Demmer. All rights reserved
+ * @copyright   Copyright (c) 2009-2024 Ryan Demmer. All rights reserved
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -36,6 +36,9 @@ class WFLinkPluginConfig
         if ($plugin->getParam('link.basic_dialog', 0) == 1) {
             $config['basic_dialog'] = true;
             $config['file_browser'] = $plugin->getParam('file_browser', 1);
+
+            $config['target_ctrl']  = $plugin->getParam('attributes_target', 1, 1, 'boolean');
+            $config['title_ctrl']   = $plugin->getParam('attributes_title', 1, 1, 'boolean');
         }
 
         $settings['link'] = $config;

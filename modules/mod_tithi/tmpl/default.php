@@ -5,10 +5,12 @@ defined('_JEXEC') or die;
 <div class="card">
 <div class="card-header lead alert alert-dark">Daily Fortune using Tithi</div>
 <div class="card-body" id="tithi_form">
-	<h3 class="card-title text-center"><strong>Current Tithi: </strong><?php echo $tithi['tithi']; ?></h5>
-	<p><strong>Paksha: </strong><?php echo $tithi['paksh']; ?></p>
-	<p><strong>Tithi Type: </strong><?php echo $tithi['tithi_type']; ?></p>
-	<p><?php echo $tithi['description']; ?></p>
+<ul class="list-group list-group-flush" id="tithi_body">
+    <li class="list-group-item" id="curr_tithi"><strong>Current Tithi: </strong><?php echo $tithi['tithi']; ?></li>
+    <li class="list-group-item" id="curr_paksh"><strong>Paksha: </strong><?php echo $tithi['paksh']; ?></li>
+    <li class="list-group-item" id="tithi_type"><strong>Tithi Type: </strong><?php echo $tithi['tithi_type']; ?></li>
+    <li class="list-group-item" id="tithi_desc"><?php echo $tithi['description']; ?></li>
+</ul>
 </div>
 </div>
 <div class="mb-3"></div>

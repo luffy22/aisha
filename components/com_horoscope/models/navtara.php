@@ -81,7 +81,7 @@ class HoroscopeModelNavtara extends HoroscopeModelPanchang
     public function getNakshatraDist($birth_nak, $curr_nak)
     {
         //return $curr_nak;
-        //$curr_nak       = "Shatabhisha";
+        //$curr_nak       = "Chitra";
         $nakshatras     = $this->getNakshatras();
         $birth_key      = array_search($birth_nak, $nakshatras);
         $curr_key       = array_search($curr_nak, $nakshatras);

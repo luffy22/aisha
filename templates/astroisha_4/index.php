@@ -29,17 +29,18 @@ if(!isset($_SESSION['var']))
 <jdoc:include type="head" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/template.css" type="text/css" />
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/bootstrap.min.css" type="text/css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"><link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet" />
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/jquery.min.js"></script>
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/bootstrap.bundle.min.js"></script>
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/js/common.js" type="text/javascript" language="javascript"></script>
 </head>
 <body>
 <div class="container-fluid">
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
+<!--<div class="alert alert-warning alert-dismissible fade show" role="alert">
 <strong><i class="bi bi-exclamation-triangle-fill fs-1"></i> Orders Closed.</strong> Orders are temporarily closed until 5th December 2023. We apologize for any inconvenience caused. In case of emergency please get in touch via <a href="https://wa.me/9870036765">whatsapp <i class="bi bi-whatsapp"></i></a>
 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+</div>-->
 <div class="d-flex flex-row mb-3">
 	<div class="p-2"><a href="<?php echo JUri::base(); ?>"><img src="<?php echo JUri::base(); ?>/logo.png" title="Click to navigate to Home Page" class="img-fluid" /></a></div>
 	<div class="pt-2">
@@ -77,7 +78,6 @@ if(!isset($_SESSION['var']))
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-JRYDTR6DD6');
 </script>
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/cookieconsent.min.css" />

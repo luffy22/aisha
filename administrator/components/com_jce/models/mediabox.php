@@ -4,7 +4,7 @@
  * @subpackage  Admin
  *
  * @copyright   Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.
- * @copyright   Copyright (c) 2009-2023 Ryan Demmer. All rights reserved
+ * @copyright   Copyright (c) 2009-2024 Ryan Demmer. All rights reserved
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -48,8 +48,8 @@ class JceModelMediabox extends FormModel
     {
         JForm::addFormPath(JPATH_PLUGINS . '/system/jcemediabox');
 
-        Factory::getLanguage()->load('plg_system_jcemediabox', JPATH_ADMINISTRATOR);
         Factory::getLanguage()->load('plg_system_jcemediabox', JPATH_PLUGINS . '/system/jcemediabox');
+        Factory::getLanguage()->load('plg_system_jcemediabox', JPATH_ADMINISTRATOR);
 
         // Get the form.
         $form = $this->loadForm('com_jce.mediabox', 'jcemediabox', array('control' => 'jform', 'load_data' => $loadData), true, '//config');

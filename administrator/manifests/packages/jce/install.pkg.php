@@ -4,7 +4,7 @@
  * @subpackage  Admin
  *
  * @copyright   Copyright (C) 2005 - 2023 Open Source Matters, Inc. All rights reserved.
- * @copyright   Copyright (c) 2009-2023 Ryan Demmer. All rights reserved
+ * @copyright   Copyright (c) 2009-2024 Ryan Demmer. All rights reserved
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('JPATH_PLATFORM') or die('RESTRICTED');
@@ -22,6 +22,19 @@ use Joomla\CMS\Table\Table;
 
 class pkg_jceInstallerScript
 {
+    /**
+     * The current installed version
+     * @var string
+     */
+    private static $current_version;
+
+    /**
+     * The current installed variant, eg: core, pro
+     *
+     * @var string
+     */
+    private static $current_variant = 'core';
+    
     private function addIndexfiles($paths)
     {
         // get the base file
@@ -95,7 +108,7 @@ class pkg_jceInstallerScript
         } else {
             // show core to pro upgrade message
             if ($parent->isUpgrade()) {
-                $variant = (string) $parent->get('current_variant', 'core');
+                $variant = (string) self::$current_variant; //$parent->get('current_variant', 'core');
 
                 if ($variant == 'core') {
                     $message .= LayoutHelper::render('message.welcome');
@@ -210,10 +223,10 @@ class pkg_jceInstallerScript
         list($version, $variant) = $this->getCurrentVersion();
 
         // set current version
-        $parent->set('current_version', $version);
+        self::$current_version = $version;
 
         // set current variant
-        $parent->set('current_variant', $variant);
+        self::$current_variant = $variant;
 
         // core cannot be installed over pro
         if ($variant === "pro" && (string) $parent->manifest->variant === "core") {
@@ -316,7 +329,7 @@ class pkg_jceInstallerScript
 
         if ($route == 'update') {
             $version = (string) $parent->manifest->version;
-            $current_version = (string) $parent->get('current_version');
+            $current_version = (string) self::$current_version; //$parent->get('current_version');
 
             // process core to pro upgrade - remove branding plugin
             if ((string) $parent->manifest->variant === "pro") {
@@ -451,7 +464,7 @@ class pkg_jceInstallerScript
     protected static function cleanupInstall($installer)
     {
         $parent = $installer->getParent();
-        $current_version = $parent->get('current_version');
+        $current_version = self::$current_version; //$parent->get('current_version');
 
         $admin = JPATH_ADMINISTRATOR . '/components/com_jce';
         $site = JPATH_SITE . '/components/com_jce';
@@ -522,6 +535,15 @@ class pkg_jceInstallerScript
             $media . '/js'
         );
 
+        // clean up editor folder
+        $folders['2.9.60'] = array(
+            JPATH_PLUGINS . '/editors/jce/src/Provider'
+        );
+        // remove old layout file
+        $files['2.9.60'] = array(
+            JPATH_PLUGINS . '/editors/jce/layouts/editor/textarea.php'
+        );
+
         $files['2.6.38'] = array(
             $admin . '/install.php',
             $admin . '/install.script.php',
@@ -577,7 +599,7 @@ class pkg_jceInstallerScript
 
         foreach ($folders as $version => $list) {
             // version check
-            if (version_compare($version, $current_version, 'lt')) {
+            if (version_compare($version, $current_version, 'gt')) {
                 continue;
             }
 

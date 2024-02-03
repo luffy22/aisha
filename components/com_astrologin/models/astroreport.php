@@ -8,14 +8,14 @@ class AstrologinModelAstroReport extends ListModel
 {
     public function getData()
     {
-        //$reader = new Reader('/usr/local/share/GeoIP/GeoIP2-City.mmdb');  // local file
-        $reader             = new Reader('/home3/astroxou/usr/share/GeoIP2-City.mmdb'); // server file
-        //$ip               = '117.196.1.11';
+        $reader = new Reader('/usr/local/share/GeoIP/GeoIP2-City.mmdb');  // local file
+        //$reader             = new Reader('/home3/astroxou/usr/share/GeoIP2-City.mmdb'); // server file
+        $ip               = '117.196.1.11';
         //$ip                             = '140.120.6.207';
         //$ip                             = '157.55.39.123';  // ip address
         //$ip 							= '1.10.128.129';  // thai address
         //	$ip 							= '175.157.193.156'; // srilanka ip address
-        $ip                       		= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
+        //$ip                       		= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
         $record             = $reader->city($ip);
         $info               = $record->country->isoCode;
         $country            = $record->country->name;
@@ -98,6 +98,17 @@ class AstrologinModelAstroReport extends ListModel
         $fees               = $details['fees'];
         $currency           = $details['currency'];
         $pay_mode           = $details['pay_mode'];
+        $loc_id             = $details['loc_id'];
+        //echo $loc_id;exit;
+        // Check if location exists in database
+        if($loc_id == "0")
+        {
+            $loc            = $pob;
+        }
+        else 
+        {
+            $loc            = $loc_id;
+        }
         $expert_id          = '222';
         $no_of_ques         = '0';
         
@@ -116,7 +127,7 @@ class AstrologinModelAstroReport extends ListModel
                                 $db->quote($token),$db->quote($expert_id),$db->quote($no_of_ques),
                                 $db->quote($fees),$db->quote($currency),$db->quote($pay_mode),
                                 $db->quote($name), $db->quote($email),$db->quote($gender), 
-                                $db->quote($dob_tob),$db->quote($pob),$db->quote($ques_type),$db->quote($ques_ask_date)
+                                $db->quote($dob_tob),$db->quote($loc),$db->quote($ques_type),$db->quote($ques_ask_date)
                                 );
         // Prepare the insert query
         $query          ->insert($db->quoteName('#__question_details'))
@@ -152,6 +163,7 @@ class AstrologinModelAstroReport extends ListModel
         $order_id           = $details['order_id'];
         $order_type         = $details['order_type'];
         $query_about        = $details['query_about'];
+        
         if($order_type == "career")
         {
             $order_branch   = "career_report";
@@ -181,60 +193,82 @@ class AstrologinModelAstroReport extends ListModel
         $app                = JFactory::getApplication();
         $db                 = JFactory::getDbo();  // Get db connection
         $query              = $db->getQuery(true);
-        $columns            = array('order_id','order_type','query_about','query_explain'
-                            );
-        $values             = array(
-                                    $db->quote($order_id),$db->quote($order_type),$db->quote($query_about),
-                                    $db->quote($query_explain)
-                                );
-        // Prepare the insert query
-        $query          ->insert($db->quoteName('#__order_queries'))
-                        ->columns($db->quoteName($columns))
-                        ->values(implode(',', $values));
-        // Set the query using our newly populated query object and execute it
-        $db             ->setQuery($query);
-        $result          = $db->execute();unset($result);
-        $query           ->clear();
-        $columns            = array('order_id','order_branch');
-        $values             = array($db->quote($order_id), $db->quote($order_branch));
-        // Prepare the insert query
-        $query          ->insert($db->quoteName('#__order_reports'))
-                        ->columns($db->quoteName($columns))
-                        ->values(implode(',', $values));
-        // Set the query using our newly populated query object and execute it
-        $db             ->setQuery($query);
-        if($result          = $db->execute())
+        $query              ->select('COUNT(*)')
+                            ->from($db->quoteName('#__order_queries'))
+                            ->where($db->quoteName('order_id').' = '.$db->quote($order_id));
+        $db                 ->setQuery($query);
+        $count = $db->loadResult();
+        if($count > 0)
         {
-            $query              ->clear();
-            $query              ->select($db->quoteName(array('UniqueID','name','email',
-                                        'pay_mode','fees','currency')))
-                                ->from($db->quoteName('#__question_details'))
-                                ->where($db->quoteName('UniqueID').'='.$db->quote($order_id));
-           $db                  ->setQuery($query);
-           $row                 = $db->loadAssoc();
-           //print_r($row);exit;
-           $token               = $row['UniqueID'];
-           $name                = str_replace(" ","_",$row['name']);
-           $email               = $row['email'];
-           $currency            = $row['currency'];
-           $fees                = $row['fees'];
-           $pay_mode            = $row['pay_mode'];
-           //echo $pay_mode;exit;
-           
-           if($pay_mode == "razorpay")
-           {
-                $app->redirect(JUri::base().'razorpay/order.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
-           }
-           else if($pay_mode == "paytm")
-           {
-                $app->redirect(JUri::base().'PaytmKit/TxnTest2.php?token='.$token.'&email='.$email.'&fees='.$fees); 
-           }
-           else if($pay_mode=="paypal")
-            {
-               $app->redirect(JUri::base().'vendor/paypal2.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees); 
-            }
+			$fields            	= array(
+											$db->quoteName('order_type').' = '.$db->quote($order_type),
+											$db->quoteName('query_about').' = '.$db->quote($query_about),
+											$db->quoteName('query_explain').' = '.$db->quote($query_explain));
+			$conditions			= array(
+											$db->quoteName('order_id').' = '.$db->quote($order_id)
+										);
+			$query->clear();
+			$query->update($db->quoteName('#__order_queries'))->set($fields)->where($conditions);
+			$db->setQuery($query);
+			$result = $db->execute();			
+		}
+		else
+		{
+			$columns            = array('order_id','order_type','query_about','query_explain'
+								);
+			$values             = array(
+										$db->quote($order_id),$db->quote($order_type),$db->quote($query_about),
+										$db->quote($query_explain)
+									);
+			// Prepare the insert query
+			$query 			->clear();
+			$query          ->insert($db->quoteName('#__order_queries'))
+							->columns($db->quoteName($columns))
+							->values(implode(',', $values));
+			// Set the query using our newly populated query object and execute it
+			$db             ->setQuery($query);
+			$result          = $db->execute();unset($result);
+		
+			$query           ->clear();
+			$columns            = array('order_id','order_branch');
+			$values             = array($db->quote($order_id), $db->quote($order_branch));
+			// Prepare the insert query
+			$query          ->insert($db->quoteName('#__order_reports'))
+							->columns($db->quoteName($columns))
+							->values(implode(',', $values));
+        // Set the query using our newly populated query object and execute it
+			$db             ->setQuery($query);
+			$result 		= $db->execute();
+		}
+		$query              ->clear();
+		$query              ->select($db->quoteName(array('UniqueID','name','email',
+									'pay_mode','fees','currency')))
+							->from($db->quoteName('#__question_details'))
+							->where($db->quoteName('UniqueID').'='.$db->quote($order_id));
+		$db                  ->setQuery($query);
+		$row                 = $db->loadAssoc();
+		//print_r($row);exit;
+		$token               = $row['UniqueID'];
+		$name                = str_replace(" ","_",$row['name']);
+		$email               = $row['email'];
+		$currency            = $row['currency'];
+		$fees                = $row['fees'];
+		$pay_mode            = $row['pay_mode'];
+	   //echo $pay_mode;exit;
+	   
+		if($pay_mode == "razorpay")
+		{
+			$app->redirect(JUri::base().'razorpay/order.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
+		}
+	   else if($pay_mode == "paytm")
+		{
+			$app->redirect(JUri::base().'PaytmKit/TxnTest2.php?token='.$token.'&email='.$email.'&fees='.$fees); 
+		}
+	   else if($pay_mode=="paypal")
+		{
+		   $app->redirect(JUri::base().'vendor/paypal2.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees); 
+		}
           
-        }
     }
     public function insertDetails3($details)
     {
@@ -245,77 +279,133 @@ class AstrologinModelAstroReport extends ListModel
         $query_explain_2        = $details['marriage_explain'];
         $query_about_3          = $details['other_about'];
         $query_explain_3        = $details['other_explain'];
+        $order_id               = $details['order_id'];
+        $order_type             = $details['order_type'];
         $app                    = JFactory::getApplication();
         $db                     = JFactory::getDbo();  // Get db connection
         $query                  = $db->getQuery(true);
-
-        for($i=1;$i<4;$i++)
+        $query              ->select('COUNT(*)')
+                            ->from($db->quoteName('#__order_queries'))
+                            ->where($db->quoteName('order_id').' = '.$db->quote($order_id));
+        $db                 ->setQuery($query);
+        $count = $db->loadResult();
+        //echo $count;exit;
+        if($count > 0)
         {
-			$query 				->clear();
-            $order_id           = $details['order_id'];
-            $order_type         = $details['order_type'];
-            $query_about        = ${"query_about_".$i};
-            $query_explain      = ${"query_explain_".$i};
-            $columns                = array('order_id','order_type','query_about','query_explain'
-                                    );
-            $values                 = array(
-                                        $db->quote($order_id),$db->quote($order_type),$db->quote($query_about),
-                                        $db->quote($query_explain)
-                                    );
-             // Prepare the insert query
-            $query              ->insert($db->quoteName('#__order_queries'))
-                                ->columns($db->quoteName($columns))
-                                ->values(implode(',', $values));
-            // Set the query using our newly populated query object and execute it
-            $db             ->setQuery($query);
-            $db->execute();
-            
+			
+            for($i=1;$i<4;$i++)
+            {
+                $query 				->clear();
+                $query_no			= $i;
+                $query_about        = ${"query_about_".$i};
+                $query_explain      = ${"query_explain_".$i};
+                $fields            	= array(
+                                                $db->quoteName('order_type').' = '.$db->quote($order_type),
+                                                $db->quoteName('query_about').' = '.$db->quote($query_about),
+                                                                                $db->quoteName('query_explain').' = '.$db->quote($query_explain)
+                                                );
+                $conditions		= array(
+                                                $db->quoteName('order_id').' = '.$db->quote($order_id).' AND '.
+                                                $db->quoteName('query_no').' = '.$db->quote($query_no)
+                                                );
+                $query->update($db->quoteName('#__order_queries'))->set($fields)->where($conditions);
+                $db->setQuery($query);
+                $result = $db->execute();
+                $query->clear();
+               
+            }		
+			
+        }
+        else
+        {
+            for($i=1;$i<4;$i++)
+            {
+                $query 				->clear();
+                $order_id           = $details['order_id'];
+                $order_type         = $details['order_type'];
+                $query_no			= $i;
+                $query_about        = ${"query_about_".$i};
+                $query_explain      = ${"query_explain_".$i};
+                $columns                = array(
+                                                'order_id','order_type','query_no','query_about','query_explain'
+                                                );
+                $values                 = array(
+                                                    $db->quote($order_id),$db->quote($order_type),$db->quote($query_no),$db->quote($query_about),
+                                                    $db->quote($query_explain)
+                                                );
+
+                // Prepare the insert query
+                $query              ->insert($db->quoteName('#__order_queries'))
+                                                    ->columns($db->quoteName($columns))
+                                                    ->values(implode(',', $values));
+                // Set the query using our newly populated query object and execute it
+                $db             ->setQuery($query);
+                $db->execute();
+                $query->clear();
+            }
+            $array1     = array('life_main','life_planets','life_houses','life_dasha','life_basics','life_yogas','life_sadesati');	
+            $array2     = array(
+                                array('main_chart','moon_chart','nav_chart','das_chart','tithi','nakshatra','rashi','yoga','karana'),
+                                array('sun','moon','mars','mercury','jupiter','venus','saturn','rahu','ketu'),
+                                array('house_1','house_2','house_3','house_4','house_5','house_6',
+                                        'house_7','house_8','house_9','house_10','house_11','house_12'),
+                                array('dasha_1','dasha_2','dasha_3','dasha_4','dasha_5','dasha_6','dasha_7'),
+                                array('education','career','marriage','health','finance','children'),
+                                array('good_yogas','bad_yogas','other_yogas'),
+                                array('sadesati_1','sade_sati2','sade_sati3')
+                                );
+            $k  = 0;
+            for($i=0;$i<7;$i++)
+            {
+                $order_branch      = $array1[$i];
+                //echo count($arechoray2[$i]);exit;
+                for($j=0;$j<count($array2[$i]);$j++)
+                {
+
+                    $order_sub      = $array2[$i][$j];
+                    $columns        = array('order_id','order_branch','order_sub');
+                    $values         = array(
+                                            $db->quote($order_id),$db->quote($order_branch),
+                                            $db->quote($order_sub));
+                    $query          ->insert($db->quoteName('#__order_reports'))
+                                    ->columns($db->quoteName($columns))
+                                    ->values(implode(',', $values));
+                            // Set the query using our newly populated query object and execute it
+                    $db             ->setQuery($query);
+                    $result         = $db->execute();
+                    $query->clear();
+                }
+            }
+				
         }
         $query 				->clear();
-        $array              = array('life_report','life_planets','life_houses','life_dasha','life_basics','life_yogas','sadesati_report');
-
-        for($i=0; $i < 7; $i++)
-        {
-            $columns            = array('order_id','order_branch');
-            $values             = array($db->quote($order_id),$db->quote($array[$i]));
-            // Prepare the insert query
-            $query              ->insert($db->quoteName('#__order_reports'))
-                                ->columns($db->quoteName($columns))
-                                ->values(implode(',', $values));
-            // Set the query using our newly populated query object and execute it
-            $db                 ->setQuery($query);
-			$result             = $db->execute();$query              ->clear();
-        }
-        if($result)
-        {
-			$query 				->clear();
-            $query              ->select($db->quoteName(array('UniqueID','name','email',
+        $query              ->select($db->quoteName(array('UniqueID','name','email',
                                         'pay_mode','fees','currency')))
-                                ->from($db->quoteName('#__question_details'))
-                                ->where($db->quoteName('UniqueID').'='.$db->quote($order_id));
-           $db                  ->setQuery($query);
-           $row                 = $db->loadAssoc();
-           //print_r($row);exit;
-           $token               = $row['UniqueID'];
-           $name                = str_replace(" ","_",$row['name']);
-           $email               = $row['email'];
-           $currency            = $row['currency'];
-           $fees                = $row['fees'];
-           $pay_mode            = $row['pay_mode'];
-           //echo $pay_mode;exit;
-           if($pay_mode == "razorpay")
-           {
-                $app->redirect(JUri::base().'razorpay/order.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
-           }
-           else if($pay_mode == "paytm")
-           {
-                $app->redirect(JUri::base().'PaytmKit/TxnTest2.php?token='.$token.'&email='.$email.'&fees='.$fees); 
-           }
-           else if($pay_mode=="paypal")
-            {
-               $app->redirect(JUri::base().'vendor/paypal2.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees); 
-            }
+                            ->from($db->quoteName('#__question_details'))
+                            ->where($db->quoteName('UniqueID').'='.$db->quote($order_id));
+        $db                 ->setQuery($query);
+        $row                = $db->loadAssoc();
+        //print_r($row);exit;
+        $token               = $row['UniqueID'];
+        $name                = str_replace(" ","_",$row['name']);
+        $email               = $row['email'];
+        $currency            = $row['currency'];
+        $fees                = $row['fees'];
+        $pay_mode            = $row['pay_mode'];
+       //echo $pay_mode;exit;
+        if($pay_mode == "razorpay")
+        {
+            $app->redirect(JUri::base().'razorpay/order.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees);
         }
+       else if($pay_mode == "paytm")
+        {
+            $app->redirect(JUri::base().'PaytmKit/TxnTest2.php?token='.$token.'&email='.$email.'&fees='.$fees); 
+        }
+       else if($pay_mode=="paypal")
+        {
+           $app->redirect(JUri::base().'vendor/paypal2.php?token='.$token.'&name='.$name.'&email='.$email.'&curr='.$currency.'&fees='.$fees); 
+        }
+
     }
     // paypal authorize Order
     public function authorizePayment($details)

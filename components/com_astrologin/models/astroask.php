@@ -8,14 +8,14 @@ class AstrologinModelAstroask extends ListModel
 {
     function getData()
     {
-        //$reader = new Reader('/usr/local/share/GeoIP/GeoIP2-City.mmdb');  // local file
-        $reader             = new Reader('/home3/astroxou/usr/share/GeoIP2-City.mmdb'); // server file
-        //$ip               = '117.196.1.11';
+        $reader = new Reader('/usr/local/share/GeoIP/GeoIP2-City.mmdb');  // local file
+        //$reader             = new Reader('/home3/astroxou/usr/share/GeoIP2-City.mmdb'); // server file
+        $ip               = '117.196.1.11';
         //$ip                             = '140.120.6.207';
         //$ip                             = '157.55.39.123';  // ip address
         //$ip 							= '1.10.128.129';  // thai address
         //	$ip 							= '175.157.193.156'; // srilanka ip address
-        $ip                       		= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
+        //$ip                 = $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
         $record             = $reader->city($ip);
         $info               = $record->country->isoCode;
         $country            = $record->country->name;
@@ -88,12 +88,12 @@ class AstrologinModelAstroask extends ListModel
         $gender             = ucfirst($details['gender']);
         $dob                = $details['dob'];
         $tob                = explode(":",$details['tob']);
-        $fees               = $details['fees'];
+        $fees               = floatval($details['fees']);
         $currency           = $details['currency'];
         $pob                = $details['pob'];
         $expert             = $details['expert'];
-        $no_of_ques         = $details['no_of_ques'];
-        $ques_type         = $details['ques_type'];
+        $no_of_ques         = intval($details['no_of_ques']);
+        $ques_type         	= $details['ques_type'];
         $pay_mode           = $details['pay_mode'];
         //echo $pay_mode;exit;
         $date               = new DateTime($dob);
@@ -131,10 +131,10 @@ class AstrologinModelAstroask extends ListModel
 
         if($result = $db->execute())
         {
-            if($ques_type == "long_ans")
+           if($ques_type == "long_ans")
             {
                 $query1          = "INSERT INTO jv_question_summary(order_id) 
-                                   VALUES ('".$token."')";
+                                   VALUES ('".$db->escape($token)."')";
                 // Set the query using our newly populated query object and execute it
                 $db             ->setQuery($query1);
                 $result          = $db->execute();
@@ -166,18 +166,43 @@ class AstrologinModelAstroask extends ListModel
         $query              = $db->getQuery(true);
         $query1             = $db->getQuery(true);
         $token              = $details['uniq_id'];
-        $no_of_ques         = $details['ques_no'];
-        //echo $no_of_ques;exit;
-        for($i=1;$i<=$no_of_ques;$i++)
+        $no_of_ques         = intval($details['ques_no']);
+        $query              ->select('COUNT(*)')
+                            ->from($db->quoteName('#__question'))
+                            ->where($db->quoteName('order_id').' = '.$db->quote($token));
+        $db                 ->setQuery($query);
+        $count = $db->loadResult();
+        //echo $count;exit;
+        if($count > 0)
         {
-            ${"select_".$i}                     = $details['select_'.$i];
-            ${"ask_".$i}                        = addslashes($details['ask_'.$i]);
-            ${"ques_details_".$i}               = addslashes($details['details_'.$i]);
-            $query                              = "INSERT INTO jv_question (order_id,ques_topic,ques_ask,ques_details) 
-                                                    VALUES ('".$token."','".${"select_".$i}."','".${"ask_".$i}."','".${"ques_details_".$i}."')";
-            // Set the query using our newly populated query object and execute it
-            $db                                 ->setQuery($query);
-            $result                             = $db->execute();
+            for($i=1;$i<=$no_of_ques;$i++)
+            {
+                ${"select_".$i}                     = $db->escape($details['select_'.$i]);
+                ${"ask_".$i}                        = $db->escape(($details['ask_'.$i]));
+                ${"ques_details_".$i}               = $db->escape($details['details_'.$i]);
+                
+                $query                              = "UPDATE jv_question SET ques_topic='".${"select_".$i}."',
+                                                        ques_ask='".${"ask_".$i}."',ques_details='".${"ques_details_".$i}."'  
+                                                        WHERE order_id = '".$token."' AND ques_no='".$i."'";
+                // Set the query using our newly populated query object and execute it
+                $db                                 ->setQuery($query);
+                $result                             = $db->execute();
+            }
+        }
+        else
+        {
+            //echo $no_of_ques;exit;
+            for($i=1;$i<=$no_of_ques;$i++)
+            {
+                ${"select_".$i}                     = $db->escape($details['select_'.$i]);
+                ${"ask_".$i}                        = $db->escape(($details['ask_'.$i]));
+                ${"ques_details_".$i}               = $db->escape($details['details_'.$i]);
+                $query                              = "INSERT INTO jv_question (order_id,ques_no,ques_topic,ques_ask,ques_details) 
+                                                        VALUES ('".$token."','".$i."','".${"select_".$i}."','".${"ask_".$i}."','".${"ques_details_".$i}."')";
+                // Set the query using our newly populated query object and execute it
+                $db                                 ->setQuery($query);
+                $result                             = $db->execute();
+            }
         }
 
 		$query1              ->select($db->quoteName(array('UniqueID','name','email',
@@ -224,7 +249,7 @@ class AstrologinModelAstroask extends ListModel
         $id                     = $db->loadResult();
         $query                  ->clear();
 
-        $query                  =   "SELECT DISTINCT(main_expert) from jv_role_astro where astro_id ='".$id."'";
+        $query                  =   "SELECT DISTINCT(main_expert) from jv_role_astro where astro_id ='".$db->quote($id)."'";
         $db                     ->setQuery($query);
         $main                    = $db->loadColumn();     
         $main_exp               = array();

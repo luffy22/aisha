@@ -1,7 +1,7 @@
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
+<!--<div class="alert alert-danger alert-dismissible fade show" role="alert">
   <strong><i class="bi bi-exclamation-triangle-fill fs-1"></i> Orders Closed!</strong> Life Reports are temporarily closed for scheduled maintenance. We apologize for inconvenience caused.
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-</div>
+</div>-->
 <?php
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
@@ -103,10 +103,10 @@ else
 </div>
 </div>
 <div class="mb-3"></div>
-<!--<div class="form-group" id="btn_grp">
+<div class="form-group" id="btn_grp">
     <button type="reset" name="ask_reset" id="ask_reset" class="btn btn-danger"><i class="bi bi-arrow-clockwise"></i> Reset</button>
     <button type="submit" name="report_submit" id="report_submit" class="btn btn-primary" >Next <i class="bi bi-arrow-right-short"></i></button>
-</div>-->
+</div>
 </form>
 <?php 
 unset($details);unset($this->msg);

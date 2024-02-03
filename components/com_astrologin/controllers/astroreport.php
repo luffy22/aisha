@@ -29,12 +29,13 @@ class AstrologinControllerAstroReport extends AstroLoginController
             $dob            = $_POST['report_dob'];
             $pob            = $_POST['report_pob'];
             $tob            = $_POST['report_time'];
+            $loc_id         = $_POST['report_loc_id'];
                        
             $details    = array(
                                 "type"=>$report_type,"fees"=>$fees,
                                 "currency"=>$currency,"pay_mode"=>$pay_mode,
                                 "name"=>$name,"email"=>$email,"gender"=>$gender,
-                                "dob"=>$dob,"pob"=>$pob, "tob"=>$tob
+                                "dob"=>$dob,"pob"=>$pob, "tob"=>$tob,"loc_id"=>$loc_id
                                 );
             //print_r($details);exit;
             $model          = $this->getModel('astroreport');  // Add the array to model

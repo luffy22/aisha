@@ -40,7 +40,7 @@ for($i=0;$i<$no_of_ques;$i++)
 </div>
 <div class="mb-3">
     <label for="ques_<?php echo $i+1; ?>">Question <?php echo $i+1; ?></label>
-    <input type="text" name="ques_<?php echo $i+1;  ?>" id ="ques_<?php echo $i+1; ?>" class="form-control" placeholder="Enter Your Question" required />
+    <input type="text" name="ques_<?php echo $i+1;  ?>" id ="ques_<?php echo $i+1; ?>" maxlength="75" class="form-control" placeholder="Enter Your Question" required />
     
 </div>
 <div class="mb-3">
@@ -65,8 +65,8 @@ for($i=0;$i<$no_of_ques;$i++)
    
   tinymce.init({
     selector: '#ques_details_'+i,
-    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-     toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+    plugins: "wordcount autolink",
+    menubar: false
   });
 }
   </script>

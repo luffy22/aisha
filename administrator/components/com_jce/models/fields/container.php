@@ -4,7 +4,7 @@
  * @subpackage  Admin
  *
  * @copyright   Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.
- * @copyright   Copyright (c) 2009-2023 Ryan Demmer. All rights reserved
+ * @copyright   Copyright (c) 2009-2024 Ryan Demmer. All rights reserved
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -161,8 +161,11 @@ class JFormFieldContainer extends FormField
 
                 // escape values
                 if (is_array($value)) {
-                    array_walk($value, function(&$item) {
-                        $item = htmlspecialchars($item, ENT_COMPAT, 'UTF-8');
+                    // handle nested arrays
+                    array_walk_recursive($value, function(&$item) {
+                        if (is_string($item)) {
+                            $item = htmlspecialchars($item, ENT_COMPAT, 'UTF-8');
+                        }
                     });
                 } else {
                     $value = htmlspecialchars($value, ENT_COMPAT, 'UTF-8');

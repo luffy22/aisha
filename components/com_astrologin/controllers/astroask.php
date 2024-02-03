@@ -98,6 +98,23 @@ class AstrologinControllerAstroask extends AstroLoginController
             $uname              = $_POST['expert_uname'];
             $ques               = $_POST['expert_max_ques'];
             $ques_type          = $_POST['ques_type'];
+            //echo $ques_type;exit;
+            if($ques > 3 && $ques_type == "short_ans")
+            {
+				$app            = JFactory::getApplication();
+				$msg            = "Maximum three queries allowed at a time.";
+				$type           = "error";
+				$app			->enqueueMessage($msg, $msgType);
+				$app            ->redirect(Juri::base().'short-ans');
+			}
+			if($ques > 3 && $ques_type == "long_ans")
+            {
+				$app            = JFactory::getApplication();
+				$msg            = "Maximum three queries allowed at a time.";
+				$type           = "error";
+				$app			->enqueueMessage($msg, $msgType);
+				$app            ->redirect(Juri::base().'long-ans');
+			}
             $fees               = $_POST['expert_final_fees'];
             $currency           = $_POST['expert_currency'];
             $pay_mode           = $_POST['expert_choice'];

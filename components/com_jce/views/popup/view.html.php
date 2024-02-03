@@ -4,7 +4,7 @@
  * @subpackage  Editor
  *
  * @copyright   Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.
- * @copyright   Copyright (c) 2009-2023 Ryan Demmer. All rights reserved
+ * @copyright   Copyright (c) 2009-2024 Ryan Demmer. All rights reserved
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -56,7 +56,7 @@ class JceViewPopup extends AbstractView
         // img src must be passed
         if ($img) {
             $features = array(
-                'img' => str_replace(JURI::root(), '', $img),
+                'img' => str_replace(Uri::root(), '', $img),
                 'title' => $title,
                 'alt' => $title,
                 'mode' => $mode,

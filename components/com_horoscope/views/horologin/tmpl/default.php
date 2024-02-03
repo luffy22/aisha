@@ -31,16 +31,22 @@ function isMobileDevice() {
 <h2>Add Horoscope</h2>
 <form role="form" enctype="application/x-www-form-urlencoded" method="post" 
       action="<?php echo JRoute::_('index.php?option=com_horoscope&task=horologin.savehoro'); ?>">
-    <div class="form-group" id="horo_grp_1">
+    <div class="mb-3" id="horo_grp_1">
         <label for="inputName" class="control-label">Name:</label>
         <input type="text" name="horo_fname" class="form-control" id="horo_1" placeholder="Enter your name..." required />
     </div>
-    <div class="form-group">
+    <div class="mb-3">
         <label for="inputGender" class="control-label">Gender:</label>
-         <input type="radio" name="horo_gender" value="male" id="horo_gender1"> Male
-        <input type="radio" name="horo_gender" value="female" id="horo_gender2" checked> Female
+        <div class="form-check form-check-inline">
+         <input class="form-check-input" type="radio" name="horo_gender" value="male" id="horo_gender1">
+         <label class="form-check-label" for="inlineRadio2">Male</label>
+         </div>
+          <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="horo_gender" value="female" id="horo_gender2" checked>
+        <label class="form-check-label" for="inlineRadio3">Female</label>
+        </div>
     </div>
-    <div class="form-group">
+    <div class="mb-3">
 	<label for="inputChart" class="control-label">Chart Style:</label>
 	<div class="form-check form-check-inline">
 	  <input class="form-check-input" type="radio" name="horo_chart" id="horo_chart_north" value="north" checked >
@@ -51,7 +57,7 @@ function isMobileDevice() {
 	  <label class="form-check-label" for="inlineRadio2">South Indian</label>
 	</div>
 	</div>
-    <div class="form-group" id="horo_grp_3">
+    <div class="mb-3" id="horo_grp_3">
         <label for="dob" class="control-label">Date Of Birth:</label>
     <?php 
         if(isMobileDevice()){
@@ -68,11 +74,11 @@ function isMobileDevice() {
         }
     ?>
     </div>
-    <div class="form-group">
+    <div class="mb-3">
         <label for="dob" class="control-label">Time Of Birth(24 Hour Format):</label><br/>
         <input type="time" name="horo_tob" id="time" class="form-control" placeholder="18:30:00" />
     </div>
-    <div class="form-group" id="horo_grp_4">
+    <div class="mb-3" id="horo_grp_4">
         <label for="dob" class="control-label">Place Of Birth</label>
         <div class="ui-widget">
         <input type="text" id="horo_pob" name="horo_pob" class="form-control ui-autocomplete-input" placeholder="Enter text for list of places" />

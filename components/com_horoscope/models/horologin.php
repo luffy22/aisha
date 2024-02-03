@@ -8,7 +8,7 @@ $libPath = JPATH_BASE.'/sweph/';
 putenv("PATH=$libPath");
 class HoroscopeModelHoroLogin extends HoroscopeModelLagna
 {
-    public function getTotal($user)
+    public function getUserTotal($user)
     {
         $db             = JFactory::getDbo();  // Get db connection
         $query          = $db->getQuery(true);
@@ -56,7 +56,7 @@ class HoroscopeModelHoroLogin extends HoroscopeModelLagna
                         ->values(implode(',', $values));
         // Set the query using our newly populated query object and execute it
         $db             ->setQuery($query);
-        $result          = $db->query();
+        $result          = $db->execute();
         if($result)
         {
             $app        = JFactory::getApplication();

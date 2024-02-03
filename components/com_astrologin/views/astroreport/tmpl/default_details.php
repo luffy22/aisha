@@ -21,6 +21,7 @@ function isMobileDevice() {
 <input type="hidden" name="report_fees" value="<?php echo $fees[0]; ?>" />
 <input type="hidden" name="report_currency" value="<?php echo $fees[1]; ?>" />
 <input type="hidden" name="report_pay_mode" value="<?php echo $pay_mode; ?>" />
+<input type="hidden" name="report_loc_id" id="loc_id" value="0" />
 <div class="mb-3" id="report_grp_1">
     <label for="report_1">Name:</label>
     <input type="text" name="report_name" class="form-control" id="report_1" placeholder="Enter your full name" required />
@@ -62,7 +63,7 @@ function isMobileDevice() {
 </div>
 <div class="mb-3  ui-widget" id="report_grp_5">
     <label for="report_pob">Place Of Birth</label>
-    <input type="text" id="report_pob" name="report_pob" class="form-control" placeholder="Enter full name of city/town, state, country" />
+    <input type="text" id="report_pob" name="report_pob" class="form-control" placeholder="Enter your Place of Birth" />
 </div>
 <div class="mb-3">
     <button type="reset" class="btn btn-danger"><i class="bi bi-arrow-clockwise"></i> Reset</button>
@@ -98,13 +99,17 @@ $(function()
         });
       },
       minLength: 3,
-     
+     select: function(request, response)
+      {
+          var loc_id           = response.item.loc_id;
+          document.getElementById("loc_id").value = loc_id;
+      },
       open: function() {
-        $('#ques_pob').removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+        $('#report_pob').removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
          $(".ui-autocomplete").css("z-index", 1000);
       },
       close: function() {
-        $('#ques_pob').removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+        $('#report_pob').removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
       }
    })
    

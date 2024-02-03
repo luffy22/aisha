@@ -4,7 +4,7 @@
  * @subpackage  Editor
  *
  * @copyright   Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.
- * @copyright   Copyright (c) 2009-2023 Ryan Demmer. All rights reserved
+ * @copyright   Copyright (c) 2009-2024 Ryan Demmer. All rights reserved
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -202,6 +202,11 @@ class WFApplication extends CMSObject
 
         // get the profile variables for the current context
         $options = $this->getProfileVars();
+
+        // installed plugins will have a name prefixed with "editor-", so remove to validate
+        if (preg_match('/^editor[-_]/', $plugin)) {
+            $plugin = preg_replace('/^editor[-_]/', '', $plugin);
+        }
 
         // add plugin to options array
         $options['plugin'] = $plugin;

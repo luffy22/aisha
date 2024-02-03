@@ -8,14 +8,14 @@ class AstrologinModelMarriage extends ListModel
 {
     public function getData()
     {
-       //$reader = new Reader('/usr/local/share/GeoIP/GeoIP2-City.mmdb');  // local file
-        $reader             = new Reader('/home3/astroxou/usr/share/GeoIP2-City.mmdb'); // server file
-        //$ip               = '117.196.1.11';
+		$reader = new Reader('/usr/local/share/GeoIP/GeoIP2-City.mmdb');  // local file
+        //$reader             = new Reader('/home3/astroxou/usr/share/GeoIP2-City.mmdb'); // server file
+        $ip               = '117.196.1.11';
         //$ip                             = '140.120.6.207';
         //$ip                             = '157.55.39.123';  // ip address
         //$ip 							= '1.10.128.129';  // thai address
         //	$ip 							= '175.157.193.156'; // srilanka ip address
-        $ip                       		= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
+        //$ip                       		= $_SERVER['REMOTE_ADDR'];        // uncomment this ip on server
         $record             = $reader->city($ip);
         $info               = $record->country->isoCode;
         $country            = $record->country->name;

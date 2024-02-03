@@ -24,7 +24,7 @@ foreach($this->order as $result)
 		}
 		else if($result->order_type == "life" || $result->order_type == "marriage" || 
 				$result->order_type == "career" || $result->order_type == "sadesati" || 
-				$result->order_type == "yearly")
+				$result->order_type == "yearly" || $result->order_type == "education")
 		{
 		?>
 		<a class="btn btn-link" href="<?php echo JUri::base().'read-report?order='.$result->UniqueID.'&ref='.$result->email; ?>"><i class="bi bi-eye-fill"></i> View Order</a></li>
@@ -43,6 +43,7 @@ foreach($this->order as $result)
     else if($result->order_type == "long_ans"){echo "Detailed Report";}
     else if($result->order_type == "life"){echo "Life Report";} 
     else if($result->order_type == "marriage"){echo "Marriage Report"; }
+    else if($result->order_type == "education"){echo "Education Report";} 
     else if($result->order_type == "career"){echo "Career Report"; }
     else if($result->order_type == "yearly"){echo "Yearly Report"; }
     else if($result->order_type == "sadesati"){echo "Sade-Sati Report"; }

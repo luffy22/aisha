@@ -4,7 +4,7 @@
  * @subpackage  Editor
  *
  * @copyright   Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.
- * @copyright   Copyright (c) 2009-2023 Ryan Demmer. All rights reserved
+ * @copyright   Copyright (c) 2009-2024 Ryan Demmer. All rights reserved
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -79,9 +79,8 @@ use Joomla\CMS\Session\Session;
               <label id="sort-size-label" for="sort-size">&nbsp;<?php echo Text::_('WF_LABEL_SIZE'); ?></label>
             </button>
 
-            <div class="uk-navbar uk-padding-remove uk-text-right uk-position-top-right">
-              <!-- Toggle Mode -->
-              <button class="uk-button view-mode" id="view-mode" aria-label="View Mode"><i class="uk-icon-list"></i><i class="uk-icon-grid"></i></button>
+             <!-- Toggle Mode -->
+             <button class="uk-button view-mode" id="view-mode" aria-label="View Mode"><i class="uk-icon-list"></i><i class="uk-icon-grid"></i></button>
               <!-- Toggle Details -->
               <button class="uk-button uk-active" id="show-details" aria-label="Toggle Details">
                 <i class="uk-icon-columns details"></i>
@@ -90,7 +89,6 @@ use Joomla\CMS\Session\Session;
               <button class="uk-button" id="show-search" aria-label="Search">
                 <i class="uk-icon-search"></i>
               </button>
-            </div>
 
             <div id="searchbox" class="uk-form-icon uk-form-icon-flip uk-hidden uk-flex-item-auto uk-position-absolute uk-position-top" role="popup">
               <input type="search" id="search" class="uk-width-1-1" autocomplete="off" spellcheck="false" autocapitalize="off" />
