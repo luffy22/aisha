@@ -30,13 +30,39 @@ class AstrologinModelReadPlanet extends ListModel
         $type 				= 'life_planets';
         $db                 = JFactory::getDbo();  // Get db connection
         $query              = $db->getQuery(true);
-        $query              ->select($db->quoteName(array('order_full_text')));
+        $query              ->select('COUNT(*)');
         $query              ->from($db->quoteName('#__order_reports'));
         $query              ->where($db->quoteName('order_id').' = '.$db->quote($order).' AND '.
 									$db->quoteName('order_branch').' = '.$db->quote($type));
         $db                  ->setQuery($query);
-        $result         = $db->loadObjectList();
-        //print_r($result);exit;
-        return $result;
+        $count 				= $db->loadResult();
+        //echo $count;exit;
+        if($count == "1")
+        {
+			$query 				->clear();      
+			$query              ->select($db->quoteName(array('order_full_text')));
+			$query              ->from($db->quoteName('#__order_reports'));
+			$query              ->where($db->quoteName('order_id').' = '.$db->quote($order).' AND '.
+										$db->quoteName('order_branch').' = '.$db->quote($type));
+			$db                  ->setQuery($query);
+			$result         = $db->loadAssoc();
+			//print_r($result);exit;
+			
+		}
+		else
+		{
+			//echo "calls2";exit;
+			$query 			->clear();
+			$query              ->select($db->quoteName(array('order_sub')));
+			$query              ->from($db->quoteName('#__order_reports'));
+			$query              ->where($db->quoteName('order_id').' = '.$db->quote($order).' AND '.
+										$db->quoteName('order_branch').' = '.$db->quote($type));
+			$db                  ->setQuery($query);
+			$result         = $db->loadColumn();
+			//print_r($result);exit;
+			
+		}
+		//print_r($result);exit;
+		return $result;
     }
 }

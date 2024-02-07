@@ -13,7 +13,9 @@ if(isset($_GET['payment']) && $_GET['payment']=="success")
 ?>
 <?php
 }
-//print_r($this->order);
+$text 			= array("Main Chart","Moon Chart","Navamsha Chart","Dashamsha Chart",
+						"Birth Tithi","Birth Nakshatra","Moon Sign","Yoga At Birth Time","Karan At Birth Time");
+//print_r($this->order);exit;
 //print_r($this->details);exit;
 ?>
 <div class="mb-3"></div>
@@ -47,23 +49,53 @@ if(isset($_GET['payment']) && $_GET['payment']=="success")
                                                   else{echo "Detailed Report";} ?></li>
   </ul>
 <div class="mb-4"></div>
-<div class="container"><div class="row">
-<div class="col-6 text-right"><a href="<?php echo Juri::base().'read-report?order='.$order.'&ref='.$refemail; ?>"><i class="fas fa-home"></i> Report Home</a></div>
-<div class="col-6 text-right"><a href="<?php echo Juri::base().'readplanet?order='.$order.'&ref='.$refemail; ?>"><i class="fas fa-arrow-right"></i> Next</a></div>
-</div></div>
+<div class="d-flex justify-content-between">
+<div>
+	<i class="bi bi-arrow-left-circle-fill"></i> Prev
+</div>
+<div>
+	<a href="<?php echo Juri::base().'read-report?order='.$order.'&ref='.$refemail; ?>"><i class="bi bi-house-door-fill"></i> Report Home</a>
+</div>
+<div>
+	<a href="<?php echo Juri::base().'readplanet?order='.$order.'&ref='.$refemail; ?>">Next <i class="bi bi-arrow-right-circle-fill"></i></a>
+</div>
+</div>
 <div class="mb-4"></div>
 <?php
-if(empty($this->order[0]->order_full_text))
+if(array_key_exists("order_full_text",$this->order))
 {
-    echo "Not yet answered<br/><br/>";
+
+	// For old orders before introduction of different segments(Prior to 2024)
+	if(empty($this->order['order_full_text']))
+	{
+		echo "Not yet answered<br/><br/>";
+	}
+	else
+	{
+		echo $this->order['order_full_text'];
+	}
 }
 else
 {
-    echo $this->order[0]->order_full_text;
+?>
+<ul class="list-group">
+<?php 
+	for($i=0,$j=0;$i<count($this->order),$j<count($text);$i++,$j++)
+	{
+?>
+		<li class="list-group-item"><a href="<?php echo Juri::base().'read-report?order='.$order.'&view='.$this->order[$i]; ?>">
+		<?php echo $text[$j]; ?></a>
+		</li>
+<?php
+	}
+?>
+</ul>
+
+<?php	
 }
 ?>
-<div clas="mb-4"></div>
+<div class="mb-4"></div>
 <?php
-unset($this->order);unset($this->details);
+unset($this->order);unset($this->details);unset($text);
 ?>
 

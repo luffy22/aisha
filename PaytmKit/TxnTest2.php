@@ -7,8 +7,28 @@
 		$order_id		= $_GET['token'];		// token is taken as unique order 
 		$price 			= $_GET['fees'];									// fees
 		$email			= $_GET['email'];
-                $mobile                 = '9999999999'; // email is used as unique customer id
+		$mobile         = '9999999999'; // email is used as unique customer id
 	}
+	   
+	if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+    $url = "https://";
+	else
+	$url = "http://";
+     
+     
+	// Append the host(domain name, ip) to the URL.
+	$url .= $_SERVER['HTTP_HOST'];
+
+	if(str_contains($url, "localhost"))
+	{
+		$callback_url	= $url."/aisha/PaytmKit/pgResponse2.php";
+	}
+	else
+	{
+		$callback_url	= $url."/PaytmKit/pgResponse2.php";
+	}
+	//echo $callback_url;exit;
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -66,7 +86,7 @@
                                     <td><label>Mobile:</label></td>
                                     <td><input type="text" title="TXN_MOBILE" name="TXN_MOBILE" value ="<?php echo $mobile; ?>"/></td>
                                 </tr>
-                                <input type="hidden" name="CALLBACK_URL" value="https://www.astroisha.com/PaytmKit/pgResponse2.php" />
+                                <input type="hidden" name="CALLBACK_URL" value="<?php echo $callback_url; ?>" />
 				<tr>
 					<td></td>
 					<td></td>

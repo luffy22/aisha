@@ -6,7 +6,24 @@ ob_start();
 // following files need to be included
 require_once("./lib/config_paytm.php");
 require_once("./lib/encdec_paytm.php");
+if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+    $url = "https://";
+	else
+	$url = "http://";
+     
+     
+	// Append the host(domain name, ip) to the URL.
+	$url .= $_SERVER['HTTP_HOST'];
 
+	if(str_contains($url, "localhost"))
+	{
+		$callback_url	= $url."/aisha";
+	}
+	else
+	{
+		$callback_url	= $url;
+	}
+	//echo $callback_url;exit;
 $paytmChecksum = "";
 $paramList = array();
 $isValidChecksum = "FALSE";
@@ -23,11 +40,11 @@ if($isValidChecksum == "TRUE") {
 	if ($_POST["STATUS"] == "TXN_SUCCESS") {
             //echo $_POST['STATUS'];exit;
 		$txnid          = $_POST['TXNID'];
-                $order          = $_POST['ORDERID'];
-                $bank_ref       = $_POST['BANKTXNID'];
-                $status         = $_POST['STATUS'];
-                header("Location: https://www.astroisha.com/index.php?option=com_astrologin&task=astroreport.confirmCCPayment&track_id=".$txnid.
-                        "&token=".$order."&bank_ref=".$bank_ref."&status=".$status);
+		$order          = $_POST['ORDERID'];
+		$bank_ref       = $_POST['BANKTXNID'];
+		$status         = $_POST['STATUS'];
+		header("Location: ".$callback_url."/index.php?option=com_astrologin&task=astroreport.confirmCCPayment&track_id=".$txnid.
+				"&token=".$order."&bank_ref=".$bank_ref."&status=".$status);
 		//Process your transaction here as success transaction.
 		//Verify amount & order id received from Payment gateway with your application's order id and amount.
 	}
@@ -37,7 +54,7 @@ if($isValidChecksum == "TRUE") {
                 $order          = $_POST['ORDERID'];
                 $bank_ref       = $_POST['BANKTXNID'];
                 $status         = $_POST['STATUS'];
-                header("Location: https://www.astroisha.com/index.php?option=com_astrologin&task=astroreport.failPayment&track_id=".$txnid.
+                header("Location:".$callback_url."/index.php?option=com_astrologin&task=astroreport.failPayment&track_id=".$txnid.
                         "&token=".$order."&status=".$status);
 	}
 

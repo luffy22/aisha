@@ -7,7 +7,7 @@
             $order_id		=       $_GET['token'];		// token is taken as unique order 
             $price 			= $_GET['fees'];									// fees
             $email			= $_GET['email'];
-            $mobile                 = $_GET['mobile']; // email is used as unique customer id
+            $mobile         = $_GET['mobile']; // email is used as unique customer id
             
     }
 ?>
